@@ -1,0 +1,100 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { ROOM_PRESETS } from "../data/rooms";
+import { validateUpload } from "../lib/imageLoader";
+import type { RoomSource } from "../types";
+import styles from "./PaintVisualizer.module.css";
+
+interface RoomPickerProps {
+  activeRoomId: string;
+  onSelect: (room: RoomSource) => void;
+  onError: (message: string) => void;
+}
+
+/** Preset rooms plus "use my own photo". */
+export default function RoomPicker({
+  activeRoomId,
+  onSelect,
+  onError,
+}: RoomPickerProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const objectUrlRef = useRef<string | null>(null);
+  const [uploadName, setUploadName] = useState<string | null>(null);
+
+  const handleFile = (file: File | undefined) => {
+    if (!file) return;
+
+    const validation = validateUpload(file);
+    if (!validation.ok) {
+      onError(validation.error ?? "That file could not be used.");
+      return;
+    }
+
+    // Release the previous upload so repeated uploads do not leak memory.
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+    const url = URL.createObjectURL(file);
+    objectUrlRef.current = url;
+    setUploadName(file.name);
+
+    onSelect({
+      id: "upload",
+      name: "Your photo",
+      src: url,
+      description: file.name,
+      origin: "upload",
+    });
+  };
+
+  return (
+    <section className={styles.panel} aria-labelledby="room-heading">
+      <h3 id="room-heading" className={styles.panelTitle}>
+        Pick a room
+      </h3>
+
+      <ul className={styles.roomGrid}>
+        {ROOM_PRESETS.map((preset) => (
+          <li key={preset.id}>
+            <button
+              type="button"
+              className={styles.roomCard}
+              data-active={activeRoomId === preset.id}
+              aria-pressed={activeRoomId === preset.id}
+              onClick={() => onSelect(preset)}
+            >
+              {/* Thumbnails are decorative; the button text carries the name. */}
+              <img src={preset.src} alt="" className={styles.roomThumb} loading="lazy" />
+              <span className={styles.roomName}>{preset.name}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <div className={styles.uploadRow}>
+        <button
+          type="button"
+          className={styles.secondaryButton}
+          onClick={() => inputRef.current?.click()}
+          data-active={activeRoomId === "upload"}
+        >
+          Upload your own photo
+        </button>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          className={styles.visuallyHidden}
+          onChange={(event) => {
+            handleFile(event.target.files?.[0]);
+            event.target.value = "";
+          }}
+        />
+        <p className={styles.panelHint}>
+          {uploadName
+            ? `Using ${uploadName}. Your photo stays on your device — nothing is uploaded to a server.`
+            : "JPG, PNG or WebP up to 12 MB. Processed entirely in your browser."}
+        </p>
+      </div>
+    </section>
+  );
+}

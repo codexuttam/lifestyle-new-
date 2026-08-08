@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import HeroSequence from "@/components/HeroSequence";
 import RevealAnimations from "@/components/RevealAnimations";
@@ -75,6 +76,14 @@ const TESTIMONIALS = [
     name: "Vikram Nair",
     loc: "Sector 43, Gurugram",
   },
+];
+
+/** A taste of the catalogue, shown on the homepage teaser. */
+const TEASER_SWATCHES = [
+  { name: "SAGE", hex: "#a8b5a0", ink: "#1a1613" },
+  { name: "TERRACOTTA", hex: "#b5603f", ink: "#ffffff" },
+  { name: "INDIGO", hex: "#31415e", ink: "#ffffff" },
+  { name: "LINEN", hex: "#ece5d8", ink: "#1a1613" },
 ];
 
 const BRANDS = [
@@ -260,6 +269,36 @@ export default function Home() {
 
       {/* SECTION 5: PHOTO GALLERY + LIGHTBOX */}
       <Gallery />
+
+      {/* SECTION 5b: PAINT VISUALIZER TEASER */}
+      <section className="section visualizer-teaser reveal-section">
+        <div className="container teaser-inner">
+          <div>
+            <h3 className="small-caps">Free Tool</h3>
+            <h2 className="hero-text">Try The Colour On Your Wall First</h2>
+            <p className="body-text">
+              Click a wall, pick a shade, and see the room repainted instantly —
+              shadows, texture and all. Upload your own photo or start from one
+              of our finished homes, then copy the exact HEX, RGB and HSL codes
+              for your painter.
+            </p>
+            <Link href="/paint-visualizer" className="cta-button solid">
+              Open Paint Visualizer
+            </Link>
+          </div>
+          <div className="teaser-swatches" aria-hidden="true">
+            {TEASER_SWATCHES.map((swatch) => (
+              <div
+                className="teaser-swatch"
+                key={swatch.hex}
+                style={{ background: swatch.hex, color: swatch.ink }}
+              >
+                {swatch.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* SECTION 6: CLIENT TESTIMONIALS */}
       <section id="testimonials" className="section testimonials reveal-section">

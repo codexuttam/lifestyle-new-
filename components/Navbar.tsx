@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -14,11 +15,14 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
-      <div className="logo">BUILD CONSTRUCTIONS</div>
+      <Link href="/" className="logo">
+        BUILD CONSTRUCTIONS
+      </Link>
       <div className="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#process">Process</a>
-        <a href="#contact">Contact</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#process">Process</a>
+        <Link href="/paint-visualizer">Paint Visualizer</Link>
+        <a href="/#contact">Contact</a>
       </div>
     </nav>
   );
