@@ -19,6 +19,13 @@ export const metadata = {
     "BUILD CONSTRUCTIONS transforms empty plots into architectural masterpieces. Watch our build process and discover our premium luxury homes.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#faf8f5",
+  colorScheme: "light",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>

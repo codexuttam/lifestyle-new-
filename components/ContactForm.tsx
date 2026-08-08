@@ -71,10 +71,7 @@ export default function ContactForm() {
         Book Free Site Visit
       </button>
       {submitted && (
-        <p
-          id="form-success"
-          style={{ color: "#c9a84c", marginTop: 15, textAlign: "center" }}
-        >
+        <p id="form-success" className="form-success" role="status" aria-live="polite">
           Thank you! Our team will contact you within 24 hours to schedule your
           free site visit.
         </p>
