@@ -9,6 +9,7 @@ import {
 } from "../constants";
 import { DEFAULT_COLOR } from "../data/palette";
 import { DEFAULT_ROOM } from "../data/rooms";
+import { buildBlankRoom, type BlankSurface } from "../lib/blankRoom";
 import { floodFillMask } from "../lib/floodFill";
 import { analyzeImage, type ImageAnalysis } from "../lib/imageAnalysis";
 import { loadImageData } from "../lib/imageLoader";
@@ -37,6 +38,8 @@ export function usePaintVisualizer() {
   const analysisRef = useRef<ImageAnalysis | null>(null);
   const scratchRef = useRef<ImageData | null>(null);
   const layerCounterRef = useRef(0);
+  /** Exact per-surface masks; only populated when the room is generated. */
+  const blankSurfacesRef = useRef<BlankSurface[] | null>(null);
 
   const [room, setRoom] = useState<RoomSource>(DEFAULT_ROOM);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -59,38 +62,60 @@ export function usePaintVisualizer() {
     setStatus("loading");
     setError(null);
 
+    /** Shared tail of the intake: pixels are in hand, wire up the canvases. */
+    const install = (imageData: ImageData, width: number, height: number) => {
+      originalImageRef.current = imageData;
+      setDimensions({ width, height });
+
+      const originalCanvas = originalCanvasRef.current;
+      if (originalCanvas) {
+        originalCanvas.width = width;
+        originalCanvas.height = height;
+        originalCanvas.getContext("2d")?.putImageData(imageData, 0, 0);
+      }
+
+      const paintedCanvas = paintedCanvasRef.current;
+      if (paintedCanvas) {
+        paintedCanvas.width = width;
+        paintedCanvas.height = height;
+        const context = paintedCanvas.getContext("2d", { willReadFrequently: true });
+        if (context) {
+          context.putImageData(imageData, 0, 0);
+          scratchRef.current = context.createImageData(width, height);
+        }
+      }
+
+      history.reset([]);
+      setActiveLayerId(null);
+      layerCounterRef.current = 0;
+      setStatus("ready");
+    };
+
+    if (room.origin === "blank") {
+      // Generated room: pixels and surface masks are drawn synchronously,
+      // and selection is a mask lookup — no image analysis needed.
+      try {
+        const build = buildBlankRoom();
+        analysisRef.current = null;
+        blankSurfacesRef.current = build.surfaces;
+        install(build.imageData, build.width, build.height);
+      } catch (cause: unknown) {
+        setError(
+          cause instanceof Error ? cause.message : "Could not build the blank room."
+        );
+        setStatus("error");
+      }
+      return;
+    }
+
+    blankSurfacesRef.current = null;
     loadImageData(room.src)
       .then(({ imageData, width, height }) => {
         if (cancelled) return;
-
-        originalImageRef.current = imageData;
         // Luminance / chromaticity / edge maps, computed once per photo so
         // each click only pays for the fill itself.
         analysisRef.current = analyzeImage(imageData);
-        setDimensions({ width, height });
-
-        const originalCanvas = originalCanvasRef.current;
-        if (originalCanvas) {
-          originalCanvas.width = width;
-          originalCanvas.height = height;
-          originalCanvas.getContext("2d")?.putImageData(imageData, 0, 0);
-        }
-
-        const paintedCanvas = paintedCanvasRef.current;
-        if (paintedCanvas) {
-          paintedCanvas.width = width;
-          paintedCanvas.height = height;
-          const context = paintedCanvas.getContext("2d", { willReadFrequently: true });
-          if (context) {
-            context.putImageData(imageData, 0, 0);
-            scratchRef.current = context.createImageData(width, height);
-          }
-        }
-
-        history.reset([]);
-        setActiveLayerId(null);
-        layerCounterRef.current = 0;
-        setStatus("ready");
+        install(imageData, width, height);
       })
       .catch((cause: unknown) => {
         if (cancelled) return;
@@ -103,7 +128,7 @@ export function usePaintVisualizer() {
     };
     // `history.reset` is referentially stable; room change is the real trigger.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [room.src]);
+  }, [room.src, room.origin]);
 
   /* ---------------------------------------------------------------- render */
 
@@ -140,11 +165,55 @@ export function usePaintVisualizer() {
     []
   );
 
+  /**
+   * Fills a generated-room surface with the active colour in one step —
+   * the mask is exact, so there is nothing to detect. Repainting an
+   * already-covered surface swaps its colour instead of stacking a layer.
+   */
+  const paintSurface = useCallback(
+    (surfaceId: string) => {
+      const original = originalImageRef.current;
+      const surface = blankSurfacesRef.current?.find((s) => s.id === surfaceId);
+      if (!original || !surface || status !== "ready") return;
+
+      setError(null);
+      const layerId = `blank-${surface.id}`;
+      const existing = layers.find((layer) => layer.id === layerId);
+
+      if (existing) {
+        if (existing.hex !== activeColor.hex || existing.finish !== finish) {
+          history.commit(
+            layers.map((layer) =>
+              layer.id === layerId
+                ? { ...layer, hex: activeColor.hex, colorName: activeColor.name, finish }
+                : layer
+            )
+          );
+        }
+        setActiveLayerId(layerId);
+        return;
+      }
+
+      const layer: PaintLayer = {
+        id: layerId,
+        label: surface.label,
+        hex: activeColor.hex,
+        colorName: activeColor.name,
+        finish,
+        opacity: DEFAULT_LAYER_OPACITY,
+        mask: surface.mask,
+        meanLuma: meanLumaInMask(original, surface.mask),
+      };
+      history.commit([...layers, layer]);
+      setActiveLayerId(layerId);
+    },
+    [activeColor, finish, history, layers, status]
+  );
+
   const selectAt = useCallback(
     ({ x, y }: Selection) => {
       const original = originalImageRef.current;
-      const analysis = analysisRef.current;
-      if (!original || !analysis || status !== "ready") return;
+      if (!original || status !== "ready") return;
 
       const totalPixels = original.width * original.height;
       const pixelIndex = Math.round(y) * original.width + Math.round(x);
@@ -163,6 +232,30 @@ export function usePaintVisualizer() {
         }
         return;
       }
+
+      if (room.origin === "blank") {
+        // Generated room: resolve the click against the exact surface masks.
+        // Antialiased seam pixels belong to two surfaces; highest coverage wins.
+        const surfaces = blankSurfacesRef.current ?? [];
+        let best: BlankSurface | null = null;
+        let bestCoverage = 0;
+        for (const surface of surfaces) {
+          const coverage = surface.mask.data[pixelIndex];
+          if (coverage > bestCoverage) {
+            best = surface;
+            bestCoverage = coverage;
+          }
+        }
+        if (!best || bestCoverage < 32) {
+          setError("The floor keeps its finish — click one of the walls or the ceiling.");
+          return;
+        }
+        paintSurface(best.id);
+        return;
+      }
+
+      const analysis = analysisRef.current;
+      if (!analysis) return;
 
       const raw = floodFillMask(analysis, x, y, { tolerance });
       if (!raw || !isMeaningfulSelection(raw, totalPixels)) {
@@ -191,7 +284,19 @@ export function usePaintVisualizer() {
       history.commit([...layers, layer]);
       setActiveLayerId(layer.id);
     },
-    [activeColor, finish, history, labelFor, layers, status, tolerance, tool, activeLayerId]
+    [
+      activeColor,
+      finish,
+      history,
+      labelFor,
+      layers,
+      status,
+      tolerance,
+      tool,
+      activeLayerId,
+      room.origin,
+      paintSurface,
+    ]
   );
 
   /* ---------------------------------------------------------- layer edits */
@@ -262,6 +367,15 @@ export function usePaintVisualizer() {
     [activeLayerId, layers]
   );
 
+  const isBlankRoom = room.origin === "blank";
+
+  // The ref is filled synchronously before status flips to "ready", so
+  // gating on status is enough to re-derive this after a room switch.
+  const blankSurfaces = useMemo<BlankSurface[]>(
+    () => (isBlankRoom && status === "ready" ? blankSurfacesRef.current ?? [] : []),
+    [isBlankRoom, status]
+  );
+
   return {
     // refs
     paintedCanvasRef,
@@ -274,6 +388,11 @@ export function usePaintVisualizer() {
     status,
     error,
     setError,
+
+    // generated blank room
+    isBlankRoom,
+    blankSurfaces,
+    paintSurface,
 
     // tools
     tool,

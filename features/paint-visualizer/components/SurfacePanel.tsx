@@ -18,6 +18,8 @@ interface SurfacePanelProps {
   onToleranceChange: (tolerance: number) => void;
   tool: ToolMode;
   onToolChange: (tool: ToolMode) => void;
+  /** Generated blank room: selection is exact, so tolerance is irrelevant. */
+  blankMode?: boolean;
 }
 
 /** Selection settings plus the list of painted surfaces. */
@@ -33,6 +35,7 @@ export default function SurfacePanel({
   onToleranceChange,
   tool,
   onToolChange,
+  blankMode = false,
 }: SurfacePanelProps) {
   const activeLayer = layers.find((layer) => layer.id === activeLayerId) ?? null;
 
@@ -63,26 +66,28 @@ export default function SurfacePanel({
         </button>
       </div>
 
-      <div className={styles.field}>
-        <label htmlFor="tolerance" className={styles.fieldLabel}>
-          Selection spread
-        </label>
-        <input
-          id="tolerance"
-          type="range"
-          min={TOLERANCE_MIN}
-          max={TOLERANCE_MAX}
-          value={tolerance}
-          onChange={(event) => onToleranceChange(Number(event.target.value))}
-          className={styles.slider}
-        />
-        <p className={styles.panelHint}>
-          Lower keeps the fill tight to one flat wall. Raise it if the colour
-          stops short of a shadow or a textured patch. If a corner of the wall
-          is left unpainted, just click it — it joins as another surface in the
-          same colour.
-        </p>
-      </div>
+      {!blankMode && (
+        <div className={styles.field}>
+          <label htmlFor="tolerance" className={styles.fieldLabel}>
+            Selection spread
+          </label>
+          <input
+            id="tolerance"
+            type="range"
+            min={TOLERANCE_MIN}
+            max={TOLERANCE_MAX}
+            value={tolerance}
+            onChange={(event) => onToleranceChange(Number(event.target.value))}
+            className={styles.slider}
+          />
+          <p className={styles.panelHint}>
+            Lower keeps the fill tight to one flat wall. Raise it if the colour
+            stops short of a shadow or a textured patch. If a corner of the wall
+            is left unpainted, just click it — it joins as another surface in the
+            same colour.
+          </p>
+        </div>
+      )}
 
       <div className={styles.field}>
         <span className={styles.fieldLabel} id="finish-label">
@@ -106,8 +111,9 @@ export default function SurfacePanel({
 
       {layers.length === 0 ? (
         <p className={styles.emptyState}>
-          No surfaces painted yet. Click any wall in the photo to fill it with
-          the selected colour.
+          {blankMode
+            ? "Nothing painted yet. Pick a surface above — it fills with the selected colour instantly."
+            : "No surfaces painted yet. Click any wall in the photo to fill it with the selected colour."}
         </p>
       ) : (
         <ul className={styles.layerList}>

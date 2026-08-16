@@ -11,6 +11,7 @@ import RoomCanvas from "./RoomCanvas";
 import RoomPicker from "./RoomPicker";
 import ShortlistBar from "./ShortlistBar";
 import SurfacePanel from "./SurfacePanel";
+import WallSelector from "./WallSelector";
 import styles from "./PaintVisualizer.module.css";
 
 /**
@@ -82,6 +83,15 @@ export default function PaintVisualizer() {
       </div>
 
       <aside className={styles.sidebar} aria-label="Paint controls">
+        {editor.isBlankRoom && (
+          <WallSelector
+            surfaces={editor.blankSurfaces}
+            layers={editor.layers}
+            activeLayerId={editor.activeLayerId}
+            onPick={editor.paintSurface}
+          />
+        )}
+
         <ColorPalette
           activeHex={displayHex}
           onSelect={editor.applyColor}
@@ -110,6 +120,7 @@ export default function PaintVisualizer() {
           onToleranceChange={editor.setTolerance}
           tool={editor.tool}
           onToolChange={editor.setTool}
+          blankMode={editor.isBlankRoom}
         />
 
         <RoomPicker

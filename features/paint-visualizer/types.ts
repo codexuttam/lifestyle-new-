@@ -38,14 +38,14 @@ export interface PaintCollection {
   colors: PaintColor[];
 }
 
-/** A room the user can paint — either shipped with the site or uploaded. */
+/** A room the user can paint — shipped with the site, uploaded, or generated. */
 export interface RoomSource {
   id: string;
   name: string;
-  /** Object URL for uploads, public path for presets. */
+  /** Object URL for uploads, public path for presets, empty for generated rooms. */
   src: string;
   description: string;
-  origin: "preset" | "upload";
+  origin: "preset" | "upload" | "blank";
 }
 
 export interface MaskBounds {

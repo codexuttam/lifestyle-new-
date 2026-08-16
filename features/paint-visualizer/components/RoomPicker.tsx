@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ROOM_PRESETS } from "../data/rooms";
+import { BLANK_ROOM, ROOM_PRESETS } from "../data/rooms";
 import { validateUpload } from "../lib/imageLoader";
 import type { RoomSource } from "../types";
 import styles from "./PaintVisualizer.module.css";
@@ -53,6 +53,30 @@ export default function RoomPicker({
       </h3>
 
       <ul className={styles.roomGrid}>
+        <li>
+          <button
+            type="button"
+            className={styles.roomCard}
+            data-active={activeRoomId === BLANK_ROOM.id}
+            aria-pressed={activeRoomId === BLANK_ROOM.id}
+            onClick={() => onSelect(BLANK_ROOM)}
+          >
+            {/* Miniature of the generated room, matching lib/blankRoom.ts. */}
+            <svg
+              className={styles.roomThumb}
+              viewBox="0 0 150 100"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <polygon points="0,100 40,77 110,77 150,100" fill="#cfc9bd" />
+              <polygon points="0,0 150,0 110,23 40,23" fill="#f0ede7" />
+              <polygon points="0,0 40,23 40,77 0,100" fill="#e3dfd6" />
+              <polygon points="150,0 110,23 110,77 150,100" fill="#e9e5dc" />
+              <rect x="40" y="23" width="70" height="54" fill="#f5f3ee" />
+            </svg>
+            <span className={styles.roomName}>{BLANK_ROOM.name}</span>
+          </button>
+        </li>
         {ROOM_PRESETS.map((preset) => (
           <li key={preset.id}>
             <button

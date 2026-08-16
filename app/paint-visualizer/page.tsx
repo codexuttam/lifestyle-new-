@@ -25,10 +25,12 @@ export default function PaintVisualizerPage() {
             <h1 className="small-caps">Paint Visualizer</h1>
             <h2 className="hero-text">See The Colour Before You Buy It</h2>
             <p className="body-text">
-              Click any wall to paint it. Try a shade on one of our finished
-              rooms or upload a photo of your own — everything runs in your
-              browser, and your photo never leaves your device. When you find
-              the one, copy the exact colour code and send it to your painter.
+              Start with a bare white room — pick a wall or the ceiling, pick a
+              colour, and it fills instantly. Prefer something real? Switch to
+              one of our finished rooms or upload a photo of your own —
+              everything runs in your browser, and your photo never leaves your
+              device. When you find the one, copy the exact colour code and
+              send it to your painter.
             </p>
           </div>
 
