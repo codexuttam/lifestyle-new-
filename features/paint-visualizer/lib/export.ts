@@ -37,7 +37,7 @@ export function buildSchemeSummary(layers: PaintLayer[], roomName: string): stri
 
   return [
     `Paint scheme — ${roomName}`,
-    "Created with the Build Constructions paint visualizer",
+    "Created with The Premium Construction paint visualizer",
     "",
     ...lines,
   ].join("\n");

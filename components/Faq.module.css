@@ -1,0 +1,231 @@
+/* ============ FAQ SECTION ============ */
+
+.section {
+  width: 100%;
+  background: #fff;
+  padding: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.badgeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #afe37e;
+}
+
+.badgeText {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #282424;
+  font-size: 18px;
+  letter-spacing: -0.54px;
+  line-height: normal;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 768px;
+}
+
+.title {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  color: #161915;
+  font-size: 72px;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+
+/* --- Accordion --- */
+.list {
+  width: 100%;
+  max-width: 1152px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.item {
+  width: 100%;
+  background: #f6f6f6;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.item:hover {
+  background: #f0f0f0;
+  border-color: rgba(229, 229, 229, 0.5);
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  background: transparent;
+  border: none;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid #afe37e;
+  outline-offset: -4px;
+}
+
+.question {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  color: #161915;
+  font-size: 30px;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.chevron {
+  color: #161915;
+  flex-shrink: 0;
+  margin-left: 16px;
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Animating grid rows from 0fr to 1fr expands to the content's natural
+   height without needing to measure it in JS. */
+.animator {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+}
+
+.animatorOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.animatorInner {
+  overflow: hidden;
+}
+
+.answerWrapper {
+  padding: 0 20px 20px;
+}
+
+.answerInner {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.answerText {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #555;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: -0.3px;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1279px) {
+  .section {
+    padding: 120px 64px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding: 80px 40px;
+  }
+
+  .title {
+    font-size: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 64px 24px;
+  }
+
+  .container {
+    gap: 32px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .list {
+    gap: 16px;
+  }
+
+  .trigger {
+    padding: 20px;
+  }
+
+  .question {
+    font-size: 20px;
+  }
+
+  .answerWrapper {
+    padding: 0 16px 16px;
+  }
+
+  .answerInner {
+    padding: 16px;
+  }
+
+  .answerText {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animator,
+  .chevron {
+    transition: none;
+  }
+}

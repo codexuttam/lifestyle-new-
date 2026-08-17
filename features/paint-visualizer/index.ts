@@ -6,7 +6,7 @@
  */
 export { default as PaintVisualizer } from "./components/PaintVisualizer";
 export { PAINT_COLLECTIONS, PAINT_COLORS_BY_ID, findColorByHex } from "./data/palette";
-export { BLANK_ROOM, ROOM_PRESETS } from "./data/rooms";
+export { BLANK_ROOM } from "./data/rooms";
 export type {
   PaintColor,
   PaintCollection,

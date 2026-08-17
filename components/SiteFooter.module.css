@@ -1,0 +1,402 @@
+/* ============ SITE FOOTER ============ */
+
+.footer {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 96px 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  position: relative;
+  z-index: 10;
+}
+
+/* --- Top grid --- */
+.topGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.col {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImg {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  display: block;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.contactLabel {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #7a7a7a;
+  font-size: 17px;
+  letter-spacing: -0.025em;
+}
+
+.emailLink {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  margin-top: 2px;
+  transition: color 0.3s ease;
+}
+
+.emailLink:hover {
+  color: #afe37e;
+}
+
+.colLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #afe37e;
+}
+
+.colLabelText {
+  font-family: var(--font-inter), sans-serif;
+  color: #7a7a7a;
+  font-size: 16px;
+  letter-spacing: -0.025em;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.bigLink {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  color: #fff;
+  font-size: 42px;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.bigLink:hover {
+  color: #afe37e;
+}
+
+/* --- Newsletter --- */
+.newsletterRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.newsletterText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.newsletterCopy {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #9a9a9a;
+  font-size: 17px;
+  letter-spacing: -0.025em;
+}
+
+.form {
+  flex: 1;
+  max-width: 576px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.inputBox {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.inputBox:focus-within {
+  border-bottom-color: #fff;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  border: none;
+  padding: 6px 8px 6px 0;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.subscribeBtn {
+  width: auto;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 9999px;
+  padding: 14px 32px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subscribeBtn:hover {
+  background: #afe37e;
+}
+
+.subscribeBtn:active {
+  transform: scale(0.95);
+}
+
+.formNote {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  color: #afe37e;
+  flex: 1;
+  max-width: 576px;
+}
+
+/* --- Giant wordmark panel --- */
+.brandingPanel {
+  width: 100%;
+  position: relative;
+  padding: 80px 0;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+
+.cornerTl {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cornerTr {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cornerBl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cornerBr {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.giantTitle {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 700;
+  /* Sized so the seven-letter wordmark stays inside the panel at any width. */
+  font-size: min(24vw, 340px);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6),
+    #fff
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* --- Bottom bar --- */
+.bottomBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #7a7a7a;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.bottomItem {
+  font-size: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+a.bottomItem:hover {
+  color: #fff;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1279px) {
+  .footer {
+    padding: 96px 64px;
+  }
+
+  .container {
+    gap: 64px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .newsletterRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .form {
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding: 64px 24px;
+  }
+
+  .topGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .col {
+    grid-column: auto;
+  }
+
+  .bigLink {
+    font-size: 32px;
+  }
+
+  .newsletterText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subscribeBtn {
+    width: 100%;
+  }
+
+  .brandingPanel {
+    padding: 48px 0;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { BLANK_ROOM, ROOM_PRESETS } from "../data/rooms";
+import { BLANK_ROOM } from "../data/rooms";
 import { validateUpload } from "../lib/imageLoader";
 import type { RoomSource } from "../types";
 import styles from "./PaintVisualizer.module.css";
@@ -12,7 +12,7 @@ interface RoomPickerProps {
   onError: (message: string) => void;
 }
 
-/** Preset rooms plus "use my own photo". */
+/** The generated blank room plus "use my own photo". */
 export default function RoomPicker({
   activeRoomId,
   onSelect,
@@ -49,7 +49,7 @@ export default function RoomPicker({
   return (
     <section className={styles.panel} aria-labelledby="room-heading">
       <h3 id="room-heading" className={styles.panelTitle}>
-        Pick a room
+        Start from
       </h3>
 
       <ul className={styles.roomGrid}>
@@ -77,21 +77,6 @@ export default function RoomPicker({
             <span className={styles.roomName}>{BLANK_ROOM.name}</span>
           </button>
         </li>
-        {ROOM_PRESETS.map((preset) => (
-          <li key={preset.id}>
-            <button
-              type="button"
-              className={styles.roomCard}
-              data-active={activeRoomId === preset.id}
-              aria-pressed={activeRoomId === preset.id}
-              onClick={() => onSelect(preset)}
-            >
-              {/* Thumbnails are decorative; the button text carries the name. */}
-              <img src={preset.src} alt="" className={styles.roomThumb} loading="lazy" />
-              <span className={styles.roomName}>{preset.name}</span>
-            </button>
-          </li>
-        ))}
       </ul>
 
       <div className={styles.uploadRow}>

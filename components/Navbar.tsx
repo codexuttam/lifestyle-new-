@@ -19,10 +19,10 @@ export default function Navbar() {
         BUILD CONSTRUCTIONS
       </Link>
       <div className="nav-links">
-        <a href="/#projects">Projects</a>
-        <a href="/#process">Process</a>
+        <a href="/#properties-section">Projects</a>
+        <a href="/#services-section">Services</a>
         <Link href="/paint-visualizer">Paint Visualizer</Link>
-        <a href="/#contact">Contact</a>
+        <a href="https://wa.me/916398792951">Contact</a>
       </div>
     </nav>
   );

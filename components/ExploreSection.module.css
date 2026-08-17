@@ -1,0 +1,288 @@
+/* ============ EXPLORE MORE SECTION ============ */
+
+.explore {
+  width: 100%;
+  background: #fff;
+  padding: 120px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* --- "Explore more" tag --- */
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #afe37e;
+}
+
+.tagText {
+  font-family: var(--font-inter), sans-serif;
+  color: #282424;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.54px;
+  text-align: center;
+}
+
+/* --- Word-by-word headline --- */
+.headingContainer {
+  width: 100%;
+  max-width: 1313px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  color: #161915;
+  font-size: 90px;
+  line-height: 1.15;
+  letter-spacing: -0.9px;
+  text-transform: capitalize;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.word {
+  display: inline-block;
+  margin-right: 0.25em;
+  /* Raised to full opacity on scroll; this is the unread resting state. */
+  opacity: 0.15;
+}
+
+/* --- Video panel --- */
+.mediaPanel {
+  width: 100%;
+  max-width: 1600px;
+  margin: 60px auto 0;
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.mediaPanel:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Frosted progress card --- */
+.cardWrapper {
+  position: relative;
+  z-index: 10;
+  padding: 16px;
+}
+
+.card {
+  width: 600px;
+  max-width: 100%;
+  height: 450px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+}
+
+.cardTopRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.iconWrapper {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.cardLabel {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.cardMiddleRow {
+  margin: 24px 0;
+  text-align: center;
+}
+
+.cardPercentage {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 62px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sliderWrapper {
+  width: 100%;
+  padding: 0 4px;
+}
+
+.sliderTrack {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.sliderFill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 9999px;
+}
+
+.cardBottomRow {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.cardSublabel {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1023px) {
+  .explore {
+    padding: 100px 48px;
+  }
+
+  .heading {
+    font-size: 80px;
+  }
+
+  .mediaPanel {
+    height: 750px;
+  }
+}
+
+@media (max-width: 767px) {
+  .explore {
+    padding: 80px 24px;
+  }
+
+  .heading {
+    font-size: 60px;
+  }
+
+  .mediaPanel {
+    height: 550px;
+    border-radius: 30px;
+  }
+
+  .card {
+    height: 450px;
+    padding: 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  .heading {
+    font-size: 40px;
+  }
+
+  /* The panel stays taller than the card so the video still frames it. */
+  .mediaPanel {
+    height: 480px;
+  }
+
+  .cardWrapper {
+    padding: 24px;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    padding: 24px;
+  }
+
+  .cardTitle {
+    font-size: 16px;
+  }
+
+  .cardPercentage {
+    font-size: 48px;
+  }
+
+  .cardMiddleRow {
+    margin: 16px 0;
+  }
+
+  .cardSublabel {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    opacity: 1;
+  }
+}
