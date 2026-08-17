@@ -21,6 +21,7 @@
 .logo {
   display: flex;
   align-items: center;
+  gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -30,6 +31,31 @@
   height: 48px;
   object-fit: contain;
   display: block;
+}
+
+.logoLockup {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logoName {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #161915;
+}
+
+.logoSub {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+  margin-top: 3px;
 }
 
 .menuCapsule {

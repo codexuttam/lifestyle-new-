@@ -56,11 +56,17 @@ export default function Hero() {
         <Link href="/" className={styles.logo} aria-label="The Premium Construction — home">
           <img
             src="/logo/logo-transparent.png"
-            alt="The Premium Construction"
+            alt=""
             width={52}
             height={52}
             className={styles.logoImg}
           />
+          {/* The badge's own lettering is unreadable at nav size, so the name
+              is set alongside it as type. */}
+          <span className={styles.logoLockup}>
+            <span className={styles.logoName}>The Premium</span>
+            <span className={styles.logoSub}>Construction</span>
+          </span>
         </Link>
 
         <div className={styles.menuCapsule}>

@@ -23,11 +23,15 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         <Link href="/" className={styles.logo} aria-label="The Premium Construction — home">
           <img
             src="/logo/logo-transparent.png"
-            alt="The Premium Construction"
+            alt=""
             width={48}
             height={48}
             className={styles.logoImg}
           />
+          <span className={styles.logoLockup}>
+            <span className={styles.logoName}>The Premium</span>
+            <span className={styles.logoSub}>Construction</span>
+          </span>
         </Link>
 
         <div className={styles.menuCapsule}>
