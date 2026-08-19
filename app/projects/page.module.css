@@ -1,0 +1,372 @@
+/* ============ PROJECTS PAGE ============ */
+
+.page {
+  width: 100%;
+  background: #fff;
+  color: #161915;
+  padding: 140px 120px 96px;
+  min-height: 100vh;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header --- */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 40px;
+  max-width: 900px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badgeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #afe37e;
+}
+
+.badgeText {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #282424;
+  font-size: 18px;
+  letter-spacing: -0.54px;
+  line-height: normal;
+}
+
+.title {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  color: #161915;
+  font-size: 64px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.intro {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #555;
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.6px;
+}
+
+/* --- Category filters --- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  background: #f2f2f2;
+  border-radius: 9999px;
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: #161915;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.45px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.filter:hover {
+  background: rgba(22, 25, 21, 0.07);
+}
+
+.filterActive,
+.filterActive:hover {
+  background: #161915;
+  color: #fff;
+}
+
+.filterCount {
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 9999px;
+  background: rgba(22, 25, 21, 0.08);
+  color: #555;
+}
+
+.filterActive .filterCount {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.resultCount {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  color: #7a7a7a;
+  letter-spacing: -0.45px;
+  margin: 20px 0 32px;
+}
+
+/* --- Card grid --- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #f4f4f4;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.07) 0 20px 40px -15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: rgba(0, 0, 0, 0.12) 0 28px 50px -18px;
+}
+
+.thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .thumbImg {
+  transform: scale(1.04);
+}
+
+.categoryPill,
+.statusPill {
+  position: absolute;
+  top: 16px;
+  z-index: 2;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  line-height: 1;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.categoryPill {
+  left: 16px;
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.statusPill {
+  right: 16px;
+  background: #afe37e;
+  color: #161915;
+}
+
+.statusOngoing {
+  background: #f2e07e;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  flex: 1;
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardTitle {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #161915;
+}
+
+.cardMeta {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  color: #7a7a7a;
+  letter-spacing: -0.42px;
+}
+
+.summary {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  letter-spacing: -0.45px;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(22, 25, 21, 0.1);
+  border-bottom: 1px solid rgba(22, 25, 21, 0.1);
+  margin-top: auto;
+}
+
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.specLabel {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  color: #7a7a7a;
+  letter-spacing: -0.39px;
+}
+
+.specValue {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #161915;
+  letter-spacing: -0.48px;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.priceLabel {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  color: #7a7a7a;
+  letter-spacing: -0.39px;
+}
+
+.price {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #161915;
+  letter-spacing: -0.6px;
+}
+
+.tourBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  background: #161915;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  letter-spacing: -0.42px;
+  white-space: nowrap;
+  transition: background 0.25s ease;
+}
+
+.tourBtn:hover {
+  background: #2c312a;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1279px) {
+  .page {
+    padding: 120px 64px 80px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .page {
+    padding: 110px 40px 64px;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .intro {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 100px 20px 64px;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .filters {
+    border-radius: 24px;
+    align-self: stretch;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

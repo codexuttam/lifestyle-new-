@@ -1,3 +1,8 @@
+import Link from "next/link";
+import { getListingProjects } from "@/lib/content/projects";
+import { getSettings } from "@/lib/content/settings";
+import type { HomeRecord } from "@/lib/schemas/home";
+import { whatsappHref } from "@/lib/schemas/settings";
 import styles from "./AllProperties.module.css";
 
 const ICON_PROPS = {
@@ -63,55 +68,32 @@ function CalendarIcon() {
   );
 }
 
-const LISTINGS = [
-  {
-    id: "casa-meridian",
-    title: "Casa Meridian",
-    status: "Delivered",
-    img: "/images/project_1_1779380254029.png",
-    beds: "4",
-    baths: "3",
-    area: "3,400 sqft",
-    price: "₹2.8 Cr",
-  },
-  {
-    id: "ivory-residence",
-    title: "The Ivory Residence",
-    status: "Delivered",
-    img: "/images/project_2_1779380272507.png",
-    beds: "5",
-    baths: "4",
-    area: "4,800 sqft",
-    price: "₹4.2 Cr",
-  },
-  {
-    id: "arken-house",
-    title: "Arken House",
-    status: "Delivered",
-    img: "/images/project_3_1779380290833.png",
-    beds: "3",
-    baths: "3",
-    area: "2,600 sqft",
-    price: "₹1.95 Cr",
-  },
-];
+export default async function AllProperties({
+  content,
+}: {
+  content: HomeRecord["allProperties"];
+}) {
+  const [listings, settings] = await Promise.all([
+    getListingProjects(),
+    getSettings(),
+  ]);
 
-export default function AllProperties() {
   return (
     <section className={styles.section} id="properties-all-show-section">
       <div className={styles.grid}>
         <div className={styles.leftCol}>
           <div className={styles.label}>
             <span className={styles.dot} aria-hidden="true" />
-            <span className={styles.labelText}>All Properties</span>
+            <span className={styles.labelText}>{content.label}</span>
           </div>
-          <h2 className={styles.heading}>
-            Check On All Properties We Have Available
-          </h2>
+          <h2 className={styles.heading}>{content.heading}</h2>
+          <Link href="/projects" className={styles.viewAll}>
+            {content.ctaLabel}
+          </Link>
         </div>
 
         <div className={styles.cardsStack}>
-          {LISTINGS.map((listing, i) => (
+          {listings.map((listing, i) => (
             <div
               className={styles.card}
               key={listing.id}
@@ -126,7 +108,10 @@ export default function AllProperties() {
                   />
                 </div>
                 <div className={styles.headerText}>
-                  <span className={styles.badge}>{listing.status}</span>
+                  <div className={styles.badgeRow}>
+                    <span className={styles.categoryBadge}>{listing.category}</span>
+                    <span className={styles.badge}>{listing.status}</span>
+                  </div>
                   <h3 className={styles.cardTitle}>{listing.title}</h3>
                 </div>
               </div>
@@ -164,7 +149,7 @@ export default function AllProperties() {
                   <span className={styles.priceLabel}>Price</span>
                   <span className={styles.price}>{listing.price}</span>
                 </div>
-                <a href="https://wa.me/916398792951" className={styles.tourBtn}>
+                <a href={whatsappHref(settings)} className={styles.tourBtn}>
                   <CalendarIcon />
                   <span className={styles.tourText}>Schedule Tour</span>
                 </a>
@@ -183,10 +168,7 @@ export default function AllProperties() {
           className={styles.bannerVideo}
           aria-hidden="true"
         >
-          <source
-            src="https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/4th%20box%20video.mp4"
-            type="video/mp4"
-          />
+          <source src={content.bannerVideo} type="video/mp4" />
         </video>
       </div>
     </section>

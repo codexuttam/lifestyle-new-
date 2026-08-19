@@ -17,7 +17,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 64px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .headingWrapper {
@@ -60,6 +60,30 @@
 }
 
 /* --- Service cards --- */
+.ctaRow {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  background: #161915;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  letter-spacing: -0.45px;
+  transition: background 0.25s ease;
+}
+
+.viewAll:hover {
+  background: #2c312a;
+}
+
 .grid {
   width: 100%;
   display: grid;
@@ -100,6 +124,19 @@
   width: 56px;
   height: 56px;
   color: #161915;
+}
+
+.categoryChip {
+  padding: 7px 14px;
+  border-radius: 9999px;
+  background: #f4f4f4;
+  color: #555;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .cardBody {
@@ -150,7 +187,7 @@
   .headerRow {
     flex-direction: column;
     gap: 32px;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
   }
 
   .grid {

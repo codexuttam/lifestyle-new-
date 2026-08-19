@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import type { HomeRecord } from "@/lib/schemas/home";
 import styles from "./Hero.module.css";
 
 const MENU_ITEMS = [
   { label: "Home", href: "/", active: true },
-  { label: "About", href: "/#about-us-section", active: false },
-  { label: "Properties", href: "/#properties-section", active: false },
-  { label: "Services", href: "/#services-section", active: false },
+  { label: "About", href: "/about", active: false },
+  { label: "Projects", href: "/projects", active: false },
+  { label: "Services", href: "/services", active: false },
   { label: "Review", href: "/#testimonial-section", active: false },
   { label: "Paint Visualizer", href: "/paint-visualizer", active: false },
 ];
@@ -29,7 +30,7 @@ function SparkleIcon() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ content }: { content: HomeRecord["hero"] }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -44,10 +45,7 @@ export default function Hero() {
           className={styles.skyVideo}
           aria-hidden="true"
         >
-          <source
-            src="https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/Header%20Bg%20Video%20Final.mp4"
-            type="video/mp4"
-          />
+          <source src={content.backgroundVideo} type="video/mp4" />
         </video>
       </div>
 
@@ -85,9 +83,9 @@ export default function Hero() {
           })}
         </div>
 
-        <a href="https://wa.me/916398792951" className={styles.btnContact}>
+        <Link href="/contact" className={styles.btnContact}>
           Contact us
-        </a>
+        </Link>
 
         <button
           className={styles.mobileToggle}
@@ -127,21 +125,21 @@ export default function Hero() {
               </Link>
             )
           )}
-          <a href="https://wa.me/916398792951" onClick={() => setMenuOpen(false)}>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>
             Contact us
-          </a>
+          </Link>
         </div>
       )}
 
       {/* Giant gradient headline */}
       <div className={styles.headlineContainer}>
-        <h1 className={styles.headline}>Dream Home</h1>
+        <h1 className={styles.headline}>{content.headline}</h1>
       </div>
 
       {/* Building image overlay */}
       <div className={styles.buildingContainer}>
         <img
-          src="https://cdn.jiro.build/Real%20Estate%20-%20Ospey/Imges/Front%20Image.png"
+          src={content.buildingImage}
           alt="Premium residential building"
           className={styles.buildingImage}
           referrerPolicy="no-referrer"
@@ -153,29 +151,24 @@ export default function Hero() {
         <div className={styles.sparkle} aria-hidden="true">
           <SparkleIcon />
         </div>
-        <p className={styles.leftDescription}>
-          Delivering excellence with every project, ensuring trust and
-          satisfaction.
-        </p>
-        <a href="/#about-us-section" className={styles.btnMore}>
-          More About Us
-        </a>
+        <p className={styles.leftDescription}>{content.description}</p>
+        <Link href="/about" className={styles.btnMore}>
+          {content.ctaLabel}
+        </Link>
       </div>
 
       {/* Bottom-right glass info box */}
       <div className={styles.rightWrapper}>
         <div className={styles.infoBox}>
           <img
-            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=310&h=300&q=80"
+            src={content.infoImage}
             alt="Luxury estate close up"
             className={styles.infoImage}
             referrerPolicy="no-referrer"
           />
           <div className={styles.infoText}>
-            <h2 className={styles.infoPrice}>&#8377;1.95 Cr</h2>
-            <p className={styles.infoDescription}>
-              Signature homes starting here — built across Delhi NCR.
-            </p>
+            <h2 className={styles.infoPrice}>{content.infoPrice}</h2>
+            <p className={styles.infoDescription}>{content.infoCaption}</p>
           </div>
         </div>
       </div>

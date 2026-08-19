@@ -1,0 +1,269 @@
+/* ============ CONTACT PAGE ============ */
+
+.page {
+  width: 100%;
+  background: #fff;
+  color: #161915;
+  padding: 140px 120px 96px;
+  min-height: 100vh;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header --- */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 48px;
+  max-width: 900px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badgeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #afe37e;
+}
+
+.badgeText {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  color: #282424;
+  font-size: 18px;
+  letter-spacing: -0.54px;
+}
+
+.title {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  color: #161915;
+  font-size: 64px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.intro {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+  color: #555;
+  letter-spacing: -0.6px;
+}
+
+/* --- Layout --- */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.formPanel {
+  background: #f4f4f4;
+  border-radius: 30px;
+  padding: 40px;
+}
+
+/* The form markup is global (from globals.css), so its fields are styled here
+   by element rather than by module class. */
+.formPanel :global(.form-row) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.formPanel :global(.form-group) {
+  margin-bottom: 16px;
+}
+
+.formPanel :global(input),
+.formPanel :global(select),
+.formPanel :global(textarea) {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(22, 25, 21, 0.14);
+  border-radius: 12px;
+  background: #fff;
+  color: #161915;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  letter-spacing: -0.45px;
+}
+
+.formPanel :global(textarea) {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.formPanel :global(input:focus),
+.formPanel :global(select:focus),
+.formPanel :global(textarea:focus) {
+  outline: 2px solid #161915;
+  outline-offset: -1px;
+  border-color: #161915;
+}
+
+.formPanel :global(.cta-button) {
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 9999px;
+  background: #161915;
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.48px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.formPanel :global(.cta-button:hover:not(:disabled)) {
+  background: #2c312a;
+}
+
+.formPanel :global(.cta-button:disabled) {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.formPanel :global(.form-success) {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #2f5d17;
+  background: #eef7e3;
+  border: 1px solid #cfe6b4;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.formPanel :global(.form-error) {
+  margin-top: 14px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  color: #8c231a;
+  background: #fdecea;
+  border: 1px solid #f3c2bd;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+/* --- Contact details --- */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 32px;
+  border: 1px solid rgba(22, 25, 21, 0.12);
+  border-radius: 30px;
+  position: sticky;
+  top: 120px;
+}
+
+.detailsTitle {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.detailRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(22, 25, 21, 0.1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.detailRow:first-of-type {
+  border-top: none;
+}
+
+.detailLabel {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  color: #7a7a7a;
+  letter-spacing: -0.39px;
+}
+
+.detailValue {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 17px;
+  color: #161915;
+  letter-spacing: -0.51px;
+}
+
+a.detailRow:hover .detailValue {
+  text-decoration: underline;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1279px) {
+  .page {
+    padding: 120px 64px 80px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .page {
+    padding: 110px 40px 64px;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .intro {
+    font-size: 18px;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .details {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 100px 20px 64px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .formPanel {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .formPanel :global(.form-row) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

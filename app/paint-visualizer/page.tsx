@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
+import { getSettings } from "@/lib/content/settings";
 import SiteFooter from "@/components/SiteFooter";
 import { PaintVisualizer } from "@/features/paint-visualizer";
 import styles from "./page.module.css";
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PaintVisualizerPage() {
+export default async function PaintVisualizerPage() {
+  const settings = await getSettings();
+
   return (
     <>
       <SiteNav activeHref="/paint-visualizer" />
@@ -43,7 +46,7 @@ export default function PaintVisualizerPage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <SiteFooter settings={settings} />
     </>
   );
 }

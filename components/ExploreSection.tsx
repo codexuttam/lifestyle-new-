@@ -1,20 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { HomeRecord } from "@/lib/schemas/home";
 import styles from "./ExploreSection.module.css";
 
-const HEADLINE =
-  "Building Exceptional Residential Communities Designed To Elevate Everyday Living And Create Lasting Value For Generations.";
-
-const PROJECT = {
-  label: "Project 01",
-  title: "Casa Meridian, Gurugram",
-  sublabel: "Interior Finishing",
-  /** Completion the progress bar and counter climb to. */
-  progress: 85,
-};
 
 function SofaIcon() {
   return (
@@ -39,7 +30,24 @@ function SofaIcon() {
   );
 }
 
-export default function ExploreSection() {
+export default function ExploreSection({
+  content,
+  projectTitle,
+}: {
+  content: HomeRecord["explore"];
+  /** Title of the project named in the overlay, resolved from the CMS. */
+  projectTitle: string;
+}) {
+  const HEADLINE = content.headline;
+  const PROJECT = useMemo(
+    () => ({
+      label: content.overlayLabel,
+      title: projectTitle,
+      sublabel: content.overlaySublabel,
+      progress: content.progress,
+    }),
+    [content.overlayLabel, content.overlaySublabel, content.progress, projectTitle]
+  );
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -115,7 +123,7 @@ export default function ExploreSection() {
     <section className={styles.explore} id="explore-site-section" ref={sectionRef}>
       <div className={styles.tag}>
         <span className={styles.dot} aria-hidden="true" />
-        <span className={styles.tagText}>Explore more</span>
+        <span className={styles.tagText}>{content.tag}</span>
       </div>
 
       <div className={styles.headingContainer}>
@@ -138,7 +146,7 @@ export default function ExploreSection() {
           aria-hidden="true"
         >
           <source
-            src="https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/Explore%20Video.mp4"
+            src={content.video}
             type="video/mp4"
           />
         </video>

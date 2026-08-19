@@ -13,22 +13,13 @@ import Gallery from "@/components/Gallery";
 import ContactForm from "@/components/ContactForm";
 import CustomCursor from "@/components/CustomCursor";
 import PricingFlipCard from "@/components/PricingFlipCard";
-
-const STATS = [
-  { target: 12, suffix: "+", label: "Years of Experience" },
-  { target: 340, suffix: "+", label: "Homes Built" },
-  { target: 98, suffix: "%", label: "Client Satisfaction" },
-  { target: 18, suffix: "", label: "Cities Across India" },
-];
-
-const PROCESS_STEPS = [
-  { title: "Site Visit & Assessment", text: "We visit your plot, study orientation, soil, and surroundings." },
-  { title: "Design & Planning", text: "Architectural drawings, structural design, and 3D visualization delivered." },
-  { title: "Contract & Approval", text: "Transparent fixed-price contract. Municipal approvals handled by us." },
-  { title: "Foundation & Structure", text: "RCC framework built to IS code with premium TMT steel and M25 concrete." },
-  { title: "Finishing & Interiors", text: "Plaster, flooring, electrical, plumbing, tiling, paint — all coordinated." },
-  { title: "Handover & Warranty", text: "Final walkthrough, snagging list cleared, keys handed over with warranty documents." },
-];
+import { getFaqs } from "@/lib/content/faqs";
+import { getHome } from "@/lib/content/home";
+import { getSettings } from "@/lib/content/settings";
+import { telHref, whatsappHref } from "@/lib/schemas/settings";
+import { getExploreProject, getFeaturedProjects } from "@/lib/content/projects";
+import { getFeaturedServices } from "@/lib/content/services";
+import { getTestimonials } from "@/lib/content/testimonials";
 
 const TESTIMONIALS = [
   {
@@ -71,19 +62,6 @@ const TEASER_SWATCHES = [
   { name: "LINEN", hex: "#ece5d8", ink: "#1a1613" },
 ];
 
-const BRANDS = [
-  "UltraTech Cement",
-  "Tata Steel",
-  "Havells",
-  "Kohler",
-  "Asian Paints",
-  "Kajaria",
-  "Legrand",
-  "Jaquar",
-  "Saint-Gobain",
-  "Somany",
-];
-
 function TestimonialCard({
   quote,
   name,
@@ -108,47 +86,73 @@ function TestimonialCard({
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  // Client components below cannot fetch, so the page reads once and passes down.
+  const [
+    home,
+    settings,
+    featuredProjects,
+    featuredServices,
+    exploreProject,
+    testimonials,
+    faqs,
+  ] = await Promise.all([
+    getHome(),
+    getSettings(),
+    getFeaturedProjects(),
+    getFeaturedServices(),
+    getExploreProject(),
+    getTestimonials(),
+    getFaqs(),
+  ]);
+
   return (
     <>
       <RevealAnimations />
-      <Hero />
+      <Hero content={home.hero} />
 
       {/* SECTION 1: ABOUT US */}
-      <About />
+      <About content={home.about} />
 
       {/* SECTION 1b: EXPLORE MORE */}
-      <ExploreSection />
+      <ExploreSection
+        content={home.explore}
+        projectTitle={
+          exploreProject
+            ? `${exploreProject.title}, ${exploreProject.location}`
+            : ""
+        }
+      />
 
       {/* SECTION 1c: PROPERTIES */}
-      <Properties />
+      <Properties projects={featuredProjects} content={home.properties} />
 
       {/* SECTION 1d: SERVICES */}
-      <Services />
+      <Services services={featuredServices} content={home.services} />
 
       {/* SECTION 1e: ALL PROPERTIES */}
-      <AllProperties />
+      <AllProperties content={home.allProperties} />
 
       {/* SECTION 1f: TESTIMONIALS */}
-      <Testimonials />
+      <Testimonials testimonials={testimonials} badge={home.testimonials.badge} />
 
       {/* SECTION 1g: FAQ */}
-      <Faq />
+      <Faq faqs={faqs} content={home.faq} />
 
       {/* SECTION 1h: FOOTER */}
-      <SiteFooter />
+      <SiteFooter settings={settings} />
 
       {/* Sticky Floating Button */}
-      <a href="https://wa.me/916398792951" className="floating-wa">
+      <a href={whatsappHref(settings)} className="floating-wa">
         <i className="fa-brands fa-whatsapp" />
       </a>
 
       {/* Mobile Sticky Bar */}
       <div className="mobile-sticky-bar">
-        <a href="tel:+916398792951" className="call-btn">
+        <a href={telHref(settings)} className="call-btn">
           <i className="fa-solid fa-phone" /> Call Now
         </a>
-        <a href="https://wa.me/916398792951" className="wa-btn">
+        <a href={whatsappHref(settings)} className="wa-btn">
           <i className="fa-brands fa-whatsapp" /> WhatsApp
         </a>
       </div>

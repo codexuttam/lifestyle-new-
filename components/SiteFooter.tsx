@@ -2,24 +2,26 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import {
+  mailtoHref,
+  type SettingsRecord,
+} from "@/lib/schemas/settings";
 import styles from "./SiteFooter.module.css";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "#about-us-section" },
-  { label: "Properties", href: "#properties-section" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/services" },
   { label: "Review", href: "#testimonial-section" },
   { label: "FAQ", href: "#faq-section" },
   { label: "Paint Visualizer", href: "/paint-visualizer" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Linkedin", href: "https://linkedin.com" },
-  { label: "Facebook", href: "https://facebook.com" },
-];
 
-export default function SiteFooter() {
+export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
+  const SOCIAL_LINKS = settings.social;
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -57,11 +59,8 @@ export default function SiteFooter() {
             </Link>
             <div className={styles.contactInfo}>
               <span className={styles.contactLabel}>Get in touch with us</span>
-              <a
-                href="mailto:hello@thepremiumconstruction.in"
-                className={styles.emailLink}
-              >
-                hello@thepremiumconstruction.in
+              <a href={mailtoHref(settings)} className={styles.emailLink}>
+                {settings.email}
               </a>
             </div>
           </div>
@@ -158,14 +157,12 @@ export default function SiteFooter() {
 
         <div className={styles.bottomBar}>
           <span className={styles.bottomItem}>
-            © 2026 The Premium Construction Pvt. Ltd. All rights reserved.
+            {settings.copyright} All rights reserved.
           </span>
           <a href="#privacy" className={styles.bottomItem}>
             Privacy Policy
           </a>
-          <span className={styles.bottomItem}>
-            412, Suncity Business Tower, Gurugram
-          </span>
+          <span className={styles.bottomItem}>{settings.address}</span>
         </div>
       </div>
     </footer>

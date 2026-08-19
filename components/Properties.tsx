@@ -1,31 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
+import type { HomeRecord } from "@/lib/schemas/home";
+import type { ProjectRecord } from "@/lib/schemas/project";
 import styles from "./Properties.module.css";
-
-const PROPERTIES = [
-  {
-    id: "casa-meridian",
-    title: "Casa Meridian",
-    category: "Residential",
-    price: "₹2.8 Cr",
-    video: "https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/Video%2001.mp4",
-  },
-  {
-    id: "ivory-residence",
-    title: "The Ivory Residence",
-    category: "Residential",
-    price: "₹4.2 Cr",
-    video: "https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/Video%2002.mp4",
-  },
-  {
-    id: "arken-house",
-    title: "Arken House",
-    category: "Residential",
-    price: "₹1.95 Cr",
-    video: "https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/Video%2003.mp4",
-  },
-];
 
 function ChevronLeft() {
   return (
@@ -65,32 +44,39 @@ function ChevronRight() {
   );
 }
 
-export default function Properties() {
+export default function Properties({
+  projects,
+  content,
+}: {
+  projects: ProjectRecord[];
+  content: HomeRecord["properties"];
+}) {
   const [index, setIndex] = useState(0);
 
-  const total = PROPERTIES.length;
-  const feature = PROPERTIES[index];
-  const secondary = [
-    PROPERTIES[(index + 1) % total],
-    PROPERTIES[(index + 2) % total],
-  ];
+  const total = projects.length;
 
   const step = (delta: number) =>
     setIndex((current) => (current + delta + total) % total);
+
+  // The layout needs a feature card plus two supporting cards.
+  if (total < 3) return null;
+
+  const feature = projects[index % total];
+  const secondary = [
+    projects[(index + 1) % total],
+    projects[(index + 2) % total],
+  ];
 
   return (
     <section className={styles.properties} id="properties-section">
       <div className={styles.grid}>
         <div className={styles.tag}>
           <span className={styles.dot} aria-hidden="true" />
-          <span className={styles.tagText}>Properties</span>
+          <span className={styles.tagText}>{content.tag}</span>
         </div>
 
         <div className={styles.headingWrapper}>
-          <h2 className={styles.heading}>
-            Explore signature homes built across Delhi NCR, each one designed
-            around the way its owners actually live.
-          </h2>
+          <h2 className={styles.heading}>{content.heading}</h2>
         </div>
 
         <div className={styles.largeWrapper}>
@@ -132,6 +118,7 @@ export default function Properties() {
                   aria-label={`${property.title} walkthrough`}
                 />
                 <div className={styles.smallScrim} />
+                <span className={styles.smallPill}>{property.category}</span>
                 <div className={styles.smallTitleRow}>
                   <h3 className={styles.smallTitle}>{property.title}</h3>
                 </div>
@@ -140,10 +127,12 @@ export default function Properties() {
           </div>
 
           <div className={styles.bottomRow}>
-            <p className={styles.desc}>
-              Every home here was built turnkey — design, approvals, structure
-              and finishing handled end to end by one team.
-            </p>
+            <div className={styles.descBlock}>
+              <p className={styles.desc}>{content.description}</p>
+              <Link href="/projects" className={styles.viewAll}>
+                {content.ctaLabel}
+              </Link>
+            </div>
             <div className={styles.navButtons}>
               <button
                 type="button"

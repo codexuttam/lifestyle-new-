@@ -6,9 +6,9 @@ import styles from "./SiteNav.module.css";
 
 const MENU_ITEMS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/#about-us-section" },
-  { label: "Properties", href: "/#properties-section" },
-  { label: "Services", href: "/#services-section" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/services" },
   { label: "Review", href: "/#testimonial-section" },
   { label: "Paint Visualizer", href: "/paint-visualizer" },
 ];
@@ -51,9 +51,9 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           })}
         </div>
 
-        <a href="https://wa.me/916398792951" className={styles.btnContact}>
+        <Link href="/contact" className={styles.btnContact}>
           Contact us
-        </a>
+        </Link>
 
         <button
           className={styles.mobileToggle}
@@ -93,9 +93,9 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               </Link>
             )
           )}
-          <a href="https://wa.me/916398792951" onClick={() => setMenuOpen(false)}>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>
             Contact us
-          </a>
+          </Link>
         </div>
       )}
     </>

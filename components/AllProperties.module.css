@@ -54,6 +54,26 @@
   letter-spacing: -0.54px;
 }
 
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  background: #161915;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  letter-spacing: -0.45px;
+  transition: background 0.25s ease;
+}
+
+.viewAll:hover {
+  background: #2c312a;
+}
+
 .heading {
   font-family: var(--font-big-shoulders), sans-serif;
   font-weight: 500;
@@ -127,6 +147,26 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categoryBadge {
+  padding: 4px 14px;
+  background: #161915;
+  color: #fff;
+  border: 1px solid #161915;
+  border-radius: 9999px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .badge {
