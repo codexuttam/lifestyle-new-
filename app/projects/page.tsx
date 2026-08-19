@@ -2,25 +2,31 @@ import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
 import { getSettings } from "@/lib/content/settings";
 import SiteFooter from "@/components/SiteFooter";
+import { getPages } from "@/lib/content/pages";
 import { getProjects } from "@/lib/content/projects";
 import ProjectsExplorer from "./ProjectsExplorer";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Projects | The Premium Construction",
-  description:
-    "Browse every home, villa, office and renovation we have delivered across Delhi NCR — filter by category to find work closest to your own plot.",
-  alternates: { canonical: "/projects" },
-  openGraph: {
-    title: "Projects | The Premium Construction",
-    description:
-      "Every residential, commercial, interior and renovation project we have delivered across Delhi NCR.",
-    type: "website",
-  },
-};
-
+export async function generateMetadata(): Promise<Metadata> {
+  const { projects } = await getPages();
+  return {
+    title: projects.metaTitle,
+    description: projects.metaDescription,
+    alternates: { canonical: "/projects" },
+    openGraph: {
+      title: projects.metaTitle,
+      description: projects.metaDescription,
+      type: "website",
+    },
+  };
+}
 export default async function ProjectsPage() {
-  const [projects, settings] = await Promise.all([getProjects(), getSettings()]);
+  const [projects, settings, pages] = await Promise.all([
+    getProjects(),
+    getSettings(),
+    getPages(),
+  ]);
+  const copy = pages.projects;
 
   return (
     <>
@@ -31,15 +37,10 @@ export default async function ProjectsPage() {
           <header className={styles.header}>
             <div className={styles.badge}>
               <span className={styles.badgeDot} aria-hidden="true" />
-              <span className={styles.badgeText}>Projects</span>
+              <span className={styles.badgeText}>{copy.badge}</span>
             </div>
-            <h1 className={styles.title}>Everything We Have Built</h1>
-            <p className={styles.intro}>
-              Homes, villas, offices, interiors and full renovations — every
-              project below was handled turnkey by one team, from the first site
-              visit to handover. Filter by category to see the work closest to
-              what you have in mind.
-            </p>
+            <h1 className={styles.title}>{copy.title}</h1>
+            <p className={styles.intro}>{copy.intro}</p>
           </header>
 
           <ProjectsExplorer projects={projects} settings={settings} />

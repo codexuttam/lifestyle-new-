@@ -6,21 +6,22 @@ import { whatsappHref } from "@/lib/schemas/settings";
 import SiteFooter from "@/components/SiteFooter";
 import RevealAnimations from "@/components/RevealAnimations";
 import { getCompany } from "@/lib/content/company";
+import { getPages } from "@/lib/content/pages";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "About Us | The Premium Construction",
-  description:
-    "Who we are: a turnkey residential builder working across Delhi NCR since 2012 — 340+ homes delivered on fixed-price contracts, with design, approvals, structure and finishing handled by one team.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About Us | The Premium Construction",
-    description:
-      "A turnkey residential builder working across Delhi NCR since 2012, with design, approvals, structure and finishing handled by one team.",
-    type: "website",
-  },
-};
-
+export async function generateMetadata(): Promise<Metadata> {
+  const { about } = await getPages();
+  return {
+    title: about.metaTitle,
+    description: about.metaDescription,
+    alternates: { canonical: "/about" },
+    openGraph: {
+      title: about.metaTitle,
+      description: about.metaDescription,
+      type: "website",
+    },
+  };
+}
 const STORY_IMAGES = [
   {
     src: "/images/project_1_1779380254029.png",
@@ -37,7 +38,12 @@ const STORY_IMAGES = [
 ];
 
 export default async function AboutPage() {
-  const [company, settings] = await Promise.all([getCompany(), getSettings()]);
+  const [company, settings, pages] = await Promise.all([
+    getCompany(),
+    getSettings(),
+    getPages(),
+  ]);
+  const copy = pages.about;
   const { stats, milestones, processSteps, values, brands } = company;
 
   return (
@@ -50,15 +56,10 @@ export default async function AboutPage() {
           <header className={styles.header}>
             <div className={styles.badge}>
               <span className={styles.badgeDot} aria-hidden="true" />
-              <span className={styles.badgeText}>About us</span>
+              <span className={styles.badgeText}>{copy.badge}</span>
             </div>
-            <h1 className={styles.title}>We Build Homes People Stay In</h1>
-            <p className={styles.intro}>
-              The Premium Construction is a turnkey residential builder working
-              across Delhi NCR. We combine engineering rigour with expert
-              industry knowledge to simplify designing, building and owning a
-              home — one team, one contract, from bare plot to handover.
-            </p>
+            <h1 className={styles.title}>{copy.title}</h1>
+            <p className={styles.intro}>{copy.intro}</p>
           </header>
 
           {/* --- Stats --- */}
@@ -79,27 +80,18 @@ export default async function AboutPage() {
           {/* --- Story --- */}
           <section className={styles.story}>
             <div className={styles.storyText}>
-              <h2 className={styles.sectionTitle}>How we got here</h2>
-              <p className={styles.body}>
-                We started in 2012 with a three-person site team and a single
-                plot in Gurugram. What we kept running into was the same thing
-                every owner complains about — an architect blaming the
-                contractor, a contractor blaming the drawings, and a budget that
-                drifted every month.
-              </p>
-              <p className={styles.body}>
-                So we built the firm to remove that gap. Architecture,
-                structural design, approvals, construction and finishing all sit
-                with us, on one fixed-price contract, with a dedicated site
-                manager you can call directly. Twelve years and 340 homes later,
-                that is still the whole idea.
-              </p>
+              <h2 className={styles.sectionTitle}>{copy.storyTitle}</h2>
+              {copy.storyParagraphs.map((paragraph) => (
+                <p className={styles.body} key={paragraph.slice(0, 40)}>
+                  {paragraph}
+                </p>
+              ))}
               <div className={styles.storyLinks}>
                 <Link href="/projects" className={styles.primaryBtn}>
-                  See our projects
+                  {copy.projectsCtaLabel}
                 </Link>
                 <Link href="/services" className={styles.secondaryBtn}>
-                  Browse services
+                  {copy.servicesCtaLabel}
                 </Link>
               </div>
             </div>
@@ -119,7 +111,7 @@ export default async function AboutPage() {
 
           {/* --- Values --- */}
           <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>What we hold ourselves to</h2>
+            <h2 className={styles.sectionTitle}>{copy.valuesTitle}</h2>
             <div className={styles.valueGrid}>
               {values.map((value) => (
                 <article className={styles.valueCard} key={value.title}>
@@ -132,7 +124,7 @@ export default async function AboutPage() {
 
           {/* --- Milestones --- */}
           <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>Milestones</h2>
+            <h2 className={styles.sectionTitle}>{copy.milestonesTitle}</h2>
             <ol className={styles.timeline}>
               {milestones.map((milestone) => (
                 <li className={styles.milestone} key={milestone.year}>
@@ -148,7 +140,7 @@ export default async function AboutPage() {
 
           {/* --- Process --- */}
           <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>How a build runs</h2>
+            <h2 className={styles.sectionTitle}>{copy.processTitle}</h2>
             <div className={styles.processGrid}>
               {processSteps.map((step, i) => (
                 <article className={styles.processCard} key={step.title}>
@@ -164,11 +156,8 @@ export default async function AboutPage() {
 
           {/* --- Brands --- */}
           <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>Materials we build with</h2>
-            <p className={styles.body}>
-              The bill of materials is published in your contract, and these are
-              the names on it. No substitutions without your sign-off.
-            </p>
+            <h2 className={styles.sectionTitle}>{copy.brandsTitle}</h2>
+            <p className={styles.body}>{copy.brandsIntro}</p>
             <ul className={styles.brandList}>
               {brands.map((brand) => (
                 <li className={styles.brand} key={brand}>
@@ -180,14 +169,10 @@ export default async function AboutPage() {
 
           {/* --- Closing CTA --- */}
           <section className={styles.cta}>
-            <h2 className={styles.ctaTitle}>Have a plot in mind?</h2>
-            <p className={styles.ctaText}>
-              Send us the location and plot size — we will come back with a
-              feasibility read and an honest cost range before you commit to
-              anything.
-            </p>
+            <h2 className={styles.ctaTitle}>{copy.ctaTitle}</h2>
+            <p className={styles.ctaText}>{copy.ctaText}</p>
             <a href={whatsappHref(settings)} className={styles.primaryBtn}>
-              Talk to us on WhatsApp
+              {copy.ctaLabel}
             </a>
           </section>
         </div>

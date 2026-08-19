@@ -4,6 +4,7 @@ import { z } from "zod";
 import { hasFirebaseAdminEnv } from "@/lib/env.server";
 import { adminAuth } from "@/lib/firebase/admin";
 import { SESSION_COOKIE, SESSION_MAX_AGE_SECONDS } from "@/lib/auth/session";
+import { clientIp, rateLimit } from "@/lib/api/rateLimit";
 
 const bodySchema = z.object({ idToken: z.string().min(1) });
 
@@ -14,6 +15,20 @@ const bodySchema = z.object({ idToken: z.string().min(1) });
  * without it is rejected here, so signing up cannot grant CMS access.
  */
 export async function POST(request: Request) {
+  // Slows credential stuffing against the one admin account.
+  const limit = rateLimit({
+    key: `session:${clientIp(request)}`,
+    limit: 10,
+    windowMs: 60_000,
+  });
+
+  if (!limit.allowed) {
+    return Response.json(
+      { error: "Too many sign-in attempts. Try again shortly." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
+    );
+  }
+
   if (!hasFirebaseAdminEnv()) {
     return Response.json(
       { error: "Server is not configured for authentication." },

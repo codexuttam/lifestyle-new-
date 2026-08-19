@@ -7,6 +7,7 @@ import { CONTENT_TAGS, type ContentTag } from "@/lib/content/repository";
 import { adminDb } from "@/lib/firebase/admin";
 import { companySchema } from "@/lib/schemas/company";
 import { homeSchema } from "@/lib/schemas/home";
+import { pagesSchema } from "@/lib/schemas/pages";
 import { settingsSchema } from "@/lib/schemas/settings";
 
 type Entry = { tag: ContentTag; schema: ZodType<object> };
@@ -16,6 +17,7 @@ const SINGLETONS: Record<string, Entry> = {
   company: { tag: CONTENT_TAGS.company, schema: companySchema },
   settings: { tag: CONTENT_TAGS.settings, schema: settingsSchema },
   home: { tag: CONTENT_TAGS.home, schema: homeSchema },
+  pages: { tag: CONTENT_TAGS.pages, schema: pagesSchema },
 };
 
 type Context = { params: Promise<{ doc: string }> };

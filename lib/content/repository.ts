@@ -17,6 +17,7 @@ export const CONTENT_TAGS = {
   media: "media",
   settings: "settings",
   home: "home",
+  pages: "pages",
 } as const;
 
 export type ContentTag = (typeof CONTENT_TAGS)[keyof typeof CONTENT_TAGS];

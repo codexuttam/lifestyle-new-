@@ -11,6 +11,9 @@
 import { FieldValue } from "firebase-admin/firestore";
 
 import { BRANDS, MILESTONES, PROCESS_STEPS, STATS, VALUES } from "@/data/company";
+import { HOME_CONTENT } from "@/data/home";
+import { PAGES_CONTENT } from "@/data/pages";
+import { SITE_SETTINGS } from "@/data/settings";
 import { FAQS } from "@/data/faqs";
 import { GALLERY_ITEMS } from "@/data/gallery";
 import { PROJECTS } from "@/data/projects";
@@ -76,6 +79,19 @@ async function seedCompany() {
   console.log("siteContent/company: written");
 }
 
+async function seedSingleton(name: string, payload: object, summary: string) {
+  if (dryRun) {
+    console.log(`[dry] siteContent/${name}: ${summary}`);
+    return;
+  }
+
+  await adminDb()
+    .collection("siteContent")
+    .doc(name)
+    .set({ ...payload, updatedAt: FieldValue.serverTimestamp() });
+  console.log(`siteContent/${name}: written`);
+}
+
 async function main() {
   if (dryRun) console.log("Dry run — nothing will be written.\n");
 
@@ -85,6 +101,9 @@ async function main() {
   await seedCollection("faqs", FAQS);
   await seedCollection("gallery", GALLERY_ITEMS);
   await seedCompany();
+  await seedSingleton("settings", SITE_SETTINGS, "contact details and socials");
+  await seedSingleton("home", HOME_CONTENT, "landing page copy and composition");
+  await seedSingleton("pages", PAGES_CONTENT, "per-route copy and metadata");
 
   console.log(
     dryRun

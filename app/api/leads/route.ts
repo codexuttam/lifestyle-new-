@@ -1,5 +1,6 @@
 import { FieldValue } from "firebase-admin/firestore";
 
+import { clientIp, rateLimit } from "@/lib/api/rateLimit";
 import { hasFirebaseAdminEnv } from "@/lib/env.server";
 import { adminDb } from "@/lib/firebase/admin";
 import { leadInputSchema } from "@/lib/schemas/lead";
@@ -12,31 +13,17 @@ import { leadInputSchema } from "@/lib/schemas/lead";
  * collection cannot be flooded.
  */
 
-/** Naive per-instance throttle. Enough for a brochure site; not a WAF. */
-const WINDOW_MS = 60_000;
-const MAX_PER_WINDOW = 5;
-const hits = new Map<string, number[]>();
-
-function rateLimited(ip: string) {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((at) => now - at < WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-
-  // Keep the map from growing without bound on a long-lived instance.
-  if (hits.size > 5000) hits.clear();
-
-  return recent.length > MAX_PER_WINDOW;
-}
-
 export async function POST(request: Request) {
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const limit = rateLimit({
+    key: `leads:${clientIp(request)}`,
+    limit: 5,
+    windowMs: 60_000,
+  });
 
-  if (rateLimited(ip)) {
+  if (!limit.allowed) {
     return Response.json(
       { error: "Too many submissions. Please try again shortly." },
-      { status: 429 }
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
     );
   }
 

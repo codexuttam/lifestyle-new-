@@ -29,6 +29,7 @@ const PAGES = [
   "/admin/settings",
   "/admin/media",
   "/admin/leads",
+  "/admin/pages",
 ];
 
 const PUBLIC_PAGES = [

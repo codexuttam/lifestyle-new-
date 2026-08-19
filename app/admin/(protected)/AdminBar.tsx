@@ -15,6 +15,7 @@ const LINKS = [
   { label: "FAQs", href: "/admin/faqs" },
   { label: "Gallery", href: "/admin/gallery" },
   { label: "About", href: "/admin/company" },
+  { label: "Page copy", href: "/admin/pages" },
   { label: "Settings", href: "/admin/settings" },
   { label: "Media", href: "/admin/media" },
 ];
