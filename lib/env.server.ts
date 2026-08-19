@@ -7,11 +7,15 @@ const firebaseAdminSchema = z.object({
   privateKey: z.string().min(1),
 });
 
-/** Bunny Storage credentials. Server-only. */
-const bunnySchema = z.object({
+/** Credentials for reading and writing objects. Server-only. */
+const bunnyStorageSchema = z.object({
   zone: z.string().min(1),
   password: z.string().min(1),
   s3Endpoint: z.string().url(),
+});
+
+/** Storage plus the public hostname objects are served from. */
+const bunnySchema = bunnyStorageSchema.extend({
   // A bare hostname, e.g. thepremiumconstruction.b-cdn.net. Validated so a
   // stray label or a pasted URL fails loudly instead of silently producing
   // broken image links.
@@ -35,13 +39,21 @@ function readFirebaseAdminEnv() {
   });
 }
 
-function readBunnyEnv() {
-  return bunnySchema.safeParse({
+function bunnyValues() {
+  return {
     zone: process.env.BUNNY_STORAGE_ZONE,
     password: process.env.BUNNY_STORAGE_PASSWORD,
     s3Endpoint: process.env.BUNNY_S3_ENDPOINT,
     cdnHost: process.env.NEXT_PUBLIC_BUNNY_CDN_HOST,
-  });
+  };
+}
+
+function readBunnyEnv() {
+  return bunnySchema.safeParse(bunnyValues());
+}
+
+function readBunnyStorageEnv() {
+  return bunnyStorageSchema.safeParse(bunnyValues());
 }
 
 /**
@@ -84,3 +96,22 @@ export function bunnyEnv(): BunnyEnv {
   return parsed.data;
 }
 
+
+export type BunnyStorageEnv = z.infer<typeof bunnyStorageSchema>;
+
+/** Whether objects can be read and written, regardless of the pull zone. */
+export function hasBunnyStorageEnv(): boolean {
+  return readBunnyStorageEnv().success;
+}
+
+export function bunnyStorageEnv(): BunnyStorageEnv {
+  const parsed = readBunnyStorageEnv();
+  if (!parsed.success) {
+    throw new Error(
+      `Missing Bunny Storage credentials: ${parsed.error.issues
+        .map((issue) => issue.path.join(".") + " (" + issue.message + ")")
+        .join(", ")}.`
+    );
+  }
+  return parsed.data;
+}

@@ -1,7 +1,7 @@
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-import { bunnyEnv } from "@/lib/env.server";
+import { bunnyEnv, bunnyStorageEnv } from "@/lib/env.server";
 
 /**
  * Bunny Storage speaks S3, which is what makes direct browser uploads possible:
@@ -10,7 +10,7 @@ import { bunnyEnv } from "@/lib/env.server";
  * site deals in).
  */
 function client() {
-  const env = bunnyEnv();
+  const env = bunnyStorageEnv();
   return new S3Client({
     endpoint: env.s3Endpoint,
     region: process.env.BUNNY_S3_REGION ?? "de",
@@ -31,7 +31,7 @@ export function cdnUrl(path: string) {
 
 /** A URL the browser can PUT the file to directly. Expires in five minutes. */
 export async function presignUpload(path: string, contentType: string) {
-  const env = bunnyEnv();
+  const env = bunnyStorageEnv();
   const url = await getSignedUrl(
     client(),
     new PutObjectCommand({
@@ -46,7 +46,7 @@ export async function presignUpload(path: string, contentType: string) {
 }
 
 export async function deleteObject(path: string) {
-  const env = bunnyEnv();
+  const env = bunnyStorageEnv();
   await client().send(
     new DeleteObjectCommand({
       Bucket: env.zone,

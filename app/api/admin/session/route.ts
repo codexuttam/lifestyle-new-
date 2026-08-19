@@ -15,6 +15,22 @@ const bodySchema = z.object({ idToken: z.string().min(1) });
  * without it is rejected here, so signing up cannot grant CMS access.
  */
 export async function POST(request: Request) {
+  // Nothing should escape as an opaque 500 with no clue what failed.
+  try {
+    return await handleSignIn(request);
+  } catch (error) {
+    console.error("[admin/session] unhandled", error);
+    return Response.json(
+      {
+        error: "Sign-in failed unexpectedly.",
+        code: error instanceof Error ? error.message : "unknown",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+async function handleSignIn(request: Request) {
   // Slows credential stuffing against the one admin account.
   const limit = rateLimit({
     key: `session:${clientIp(request)}`,
@@ -64,8 +80,36 @@ export async function POST(request: Request) {
 
     return Response.json({ ok: true });
   } catch (error) {
-    console.error("[admin/session]", error);
-    return Response.json({ error: "Could not verify sign-in." }, { status: 401 });
+    const code =
+      typeof error === "object" && error !== null && "code" in error
+        ? String((error as { code: unknown }).code)
+        : "";
+
+    // A bad or expired token is the caller's problem; anything else — a
+    // malformed service-account key, a project mismatch — is ours, and the
+    // code is what makes it diagnosable from a deployed environment.
+    const isTokenProblem =
+      code.startsWith("auth/") &&
+      !code.includes("internal-error") &&
+      !code.includes("configuration");
+
+    console.error("[admin/session]", code || "unknown", error);
+
+    if (isTokenProblem) {
+      return Response.json(
+        { error: "Could not verify sign-in.", code },
+        { status: 401 }
+      );
+    }
+
+    return Response.json(
+      {
+        error:
+          "The server could not complete sign-in. Check the Firebase Admin credentials.",
+        code: code || (error instanceof Error ? error.message : "unknown"),
+      },
+      { status: 500 }
+    );
   }
 }
 
