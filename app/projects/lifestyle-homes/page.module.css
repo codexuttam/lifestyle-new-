@@ -759,14 +759,68 @@
 /* ============ RESPONSIVE BREAKPOINTS ============ */
 @media (max-width: 1024px) {
   .hero {
-    height: 85vh;
-    min-height: 600px;
+    height: 100vh;
+    min-height: 720px;
+  }
+
+  .heroOverlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(4, 6, 10, 0.88) 0%,
+      rgba(4, 6, 10, 0.52) 22%,
+      rgba(4, 6, 10, 0.76) 55%,
+      rgba(3, 4, 7, 0.98) 88%,
+      #06090e 100%
+    );
+  }
+
+  .headlineContainer {
+    top: 60px;
+  }
+
+  .headline {
+    font-size: min(22vw, 140px);
+    padding-top: 30px;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f5d77f 55%,
+      #c01853 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
   }
 
   .leftBox {
-    left: 32px;
-    bottom: 40px;
-    width: calc(100% - 64px);
+    left: 16px;
+    right: 16px;
+    bottom: 84px;
+    width: auto;
+    max-width: none;
+    background: rgba(8, 11, 18, 0.86);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 22px;
+    padding: 22px 20px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(192, 24, 83, 0.25);
+    gap: 14px;
+  }
+
+  .leftDescription {
+    color: #ffffff;
+    font-size: 15.5px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: -0.2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+  }
+
+  .btnRow {
+    width: 100%;
+    gap: 10px;
   }
 
   .commercialGrid,
@@ -785,24 +839,36 @@
 }
 
 @media (max-width: 768px) {
-  .hero {
-    height: 80vh;
-    min-height: 520px;
-  }
-
   .headline {
-    font-size: min(22vw, 180px);
-    padding-top: 35px;
+    font-size: min(22vw, 110px);
   }
 
   .leftBox {
-    left: 20px;
-    bottom: 24px;
-    width: calc(100% - 40px);
+    left: 12px;
+    right: 12px;
+    bottom: 76px;
+    padding: 18px 16px;
+    border-radius: 18px;
+    gap: 12px;
   }
 
   .leftDescription {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .btnRow {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .btnMore,
+  .btnOtherProject {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 18px;
+    font-size: 14px;
   }
 
   .specsGrid {

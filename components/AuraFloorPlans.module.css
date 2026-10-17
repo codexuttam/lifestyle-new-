@@ -65,7 +65,7 @@
 .subtitle {
   font-family: var(--font-inter), sans-serif;
   font-size: 17px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #e2e8f0;
   max-width: 680px;
   line-height: 1.6;
   margin-bottom: 36px;
@@ -95,7 +95,7 @@
   font-family: var(--font-inter), sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  color: #e2e8f0;
   cursor: pointer;
   transition: all 0.25s ease;
 }
@@ -390,7 +390,7 @@
 .locationDesc {
   font-family: var(--font-inter), sans-serif;
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.75);
+  color: #e2e8f0;
   line-height: 1.6;
   margin-bottom: 22px;
 }
@@ -404,8 +404,8 @@
 .chip {
   padding: 6px 14px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.25);
   font-family: var(--font-inter), sans-serif;
   font-size: 13px;
   color: #f5e6c8;
@@ -445,10 +445,22 @@
     padding: 60px 16px;
   }
 
+  .subtitle {
+    color: #e2e8f0;
+    font-size: 14.5px;
+  }
+
+  .locationDesc {
+    color: #e2e8f0;
+    font-size: 14px;
+  }
+
   .displayCard,
   .locationBanner {
     padding: 20px;
     border-radius: 18px;
+    background: rgba(14, 17, 24, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.35);
   }
 
   .specsGrid {
@@ -460,5 +472,6 @@
     font-size: 13px;
     width: 100%;
     justify-content: space-between;
+    color: #ffffff;
   }
 }

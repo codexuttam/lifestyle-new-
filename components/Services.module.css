@@ -50,7 +50,7 @@
 .intro {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: rgba(235, 240, 245, 0.72);
+  color: #e2e8f0;
   font-size: 18px;
   line-height: 1.6;
   letter-spacing: -0.2px;
@@ -171,7 +171,7 @@
 .cardText {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: rgba(235, 240, 245, 0.65);
+  color: #e2e8f0;
   font-size: 15px;
   line-height: 1.6;
   letter-spacing: -0.2px;
@@ -216,9 +216,28 @@
 
   .heading {
     font-size: 34px;
+    color: #ffffff;
+  }
+
+  .intro {
+    font-size: 15px;
+    color: #e2e8f0;
   }
 
   .card {
-    padding: 28px;
+    padding: 24px;
+    background: rgba(14, 18, 26, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .cardTitle {
+    font-size: 24px;
+    color: #ffffff;
+  }
+
+  .cardText {
+    font-size: 14px;
+    color: #e2e8f0;
+    line-height: 1.55;
   }
 }

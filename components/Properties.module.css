@@ -284,7 +284,7 @@
 .desc {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: rgba(235, 240, 245, 0.72);
+  color: #e2e8f0;
   width: 100%;
   max-width: 430px;
   font-size: 17px;
@@ -376,6 +376,30 @@
 
   .heading {
     font-size: 28px;
+    color: #ffffff;
+  }
+
+  .largeScrim,
+  .smallScrim {
+    background: linear-gradient(
+      to top,
+      rgba(6, 9, 14, 0.98) 0%,
+      rgba(6, 9, 14, 0.6) 45%,
+      rgba(6, 9, 14, 0.2) 75%,
+      transparent 100%
+    );
+  }
+
+  .largeTitle,
+  .smallTitle {
+    color: #ffffff;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+  }
+
+  .desc {
+    color: #e2e8f0;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
   .smallRow {

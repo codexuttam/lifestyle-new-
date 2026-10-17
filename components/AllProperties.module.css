@@ -229,7 +229,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #8e9aa8;
+  color: #cbd5e1;
   font-family: var(--font-inter), sans-serif;
   font-size: 13px;
   text-transform: uppercase;
@@ -266,7 +266,7 @@
 }
 
 .priceLabel {
-  color: #8e9aa8;
+  color: #cbd5e1;
   font-family: var(--font-inter), sans-serif;
   font-size: 12px;
   text-transform: uppercase;
@@ -389,10 +389,24 @@
 
   .heading {
     font-size: 32px;
+    color: #ffffff;
   }
 
   .card {
     padding: 24px;
+    background: rgba(14, 18, 26, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .cardTitle {
+    color: #ffffff;
+    font-size: 26px;
+  }
+
+  .cardDesc {
+    color: #e2e8f0;
+    font-size: 14px;
+    line-height: 1.55;
   }
 
   .cardHeader {
@@ -407,6 +421,16 @@
   .specs {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .specLabel {
+    color: #cbd5e1;
+    font-size: 12.5px;
+  }
+
+  .specValue {
+    color: #f5d77f;
+    font-size: 16px;
   }
 
   .actionRow {

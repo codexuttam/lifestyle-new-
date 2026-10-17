@@ -319,20 +319,20 @@
   color: #ffffff;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .floatingButton {
+    bottom: 74px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
   .chatWindow {
-    bottom: 12px;
+    bottom: 74px;
     right: 12px;
     left: 12px;
     width: auto;
-    height: 520px;
-    max-height: calc(100vh - 24px);
-  }
-
-  .floatingButton {
-    bottom: 20px;
-    right: 20px;
-    width: 54px;
-    height: 54px;
+    height: 510px;
+    max-height: calc(100vh - 86px);
   }
 }
