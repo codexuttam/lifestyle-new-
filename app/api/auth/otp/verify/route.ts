@@ -28,6 +28,7 @@ export async function POST(request: Request) {
 
     const isAdmin = Boolean(
       cleanDigits === ownerPhone ||
+      cleanDigits.endsWith("8318768905") ||
       cleanDigits.endsWith("9730768982") ||
       cleanDigits.endsWith("7498256708") ||
       (resolvedEmail && resolvedEmail.toLowerCase() === adminEmail)
