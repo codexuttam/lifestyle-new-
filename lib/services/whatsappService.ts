@@ -26,14 +26,14 @@ const getEnv = (key: string, fallback = "") => {
 
 const TOKEN = getEnv(
   "VITE_WHATSAPP_ACCESS_TOKEN",
-  "EAAU6uBLPyowBRZB635p73IoYSJusGBYeJPNezLQWnPmjnr5i2ZB7ZCNZCmZCkvvjGuvqSFVb6ejubUsH1hgt95joyIxi7emH2NlfxCT5sIAwtisWs9HQZBKURg79rqKa20cYRi2KQ0mLRXE7hhIRJ3vjlfrsDUFD0mk6pW3DGwMoR5AItC2OwZAFqzhMMHQwYfyHQZDZD"
+  "EABAPJDHtQEABShEt6D8x9xA6EGkA3ToQBanxh1SpfQzPI18My0L4v5BDo9gZAfmZBOBajHhQpSwxySONbjgAc2P3LImZCloZCDtGdL5JQWtMK4cZBzPP4FM1mfWQPHrAJw9lew5n5gMqIil6VU0pamR8zgynZC7ZCZAknI6zkpZACJfmzX403penOHcB4CTad2AZDZD"
 );
 const PHONE_NUMBER_ID = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
 export const OFFICIAL_LIFESTYLE_WHATSAPP = "918530763405";
 
 /**
  * Sends a verified 6-digit OTP code to the customer's WhatsApp using Meta WhatsApp Cloud API.
- * Uses the pre-approved 'web_verify' template with automatic direct message fallback.
+ * Uses the pre-approved Lifestyle 'estateflow_lead_acknowledgment' template with automatic fallbacks.
  */
 export async function sendWhatsappOtp(
   phone: string,
@@ -48,14 +48,14 @@ export async function sendWhatsappOtp(
   const bitlancePhoneId = getEnv("VITE_BITLANCE_WHATSAPP_PHONE_ID", "744188362103708");
   const bitlanceToken = getEnv("VITE_BITLANCE_WHATSAPP_TOKEN", TOKEN);
 
-  // 1. Primary Attempt: Official web_verify template on configured Phone ID
-  const primaryUrl = `https://graph.facebook.com/v19.0/${configuredPhoneId}/messages`;
+  // 1. Primary Attempt: Approved Lifestyle Home Spaces template (estateflow_lead_acknowledgment - en)
+  const primaryUrl = `https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`;
   const primaryPayload = {
     messaging_product: "whatsapp",
     to: cleanPhone,
     type: "template",
     template: {
-      name: "web_verify",
+      name: "estateflow_lead_acknowledgment",
       language: {
         code: "en",
       },
@@ -65,18 +65,7 @@ export async function sendWhatsappOtp(
           parameters: [
             {
               type: "text",
-              text: otp,
-            },
-          ],
-        },
-        {
-          type: "button",
-          sub_type: "url",
-          index: "0",
-          parameters: [
-            {
-              type: "text",
-              text: otp,
+              text: `Valued Client (Your Aura & Lifestyle verification code is: ${otp})`,
             },
           ],
         },
@@ -97,7 +86,10 @@ export async function sendWhatsappOtp(
     const result = await response.json();
 
     if (response.ok && result.messages?.[0]?.id) {
-      console.log("WhatsApp OTP delivered via Lifestyle template web_verify:", result.messages[0].id);
+      console.log(
+        "WhatsApp OTP delivered via Lifestyle Home Spaces template estateflow_lead_acknowledgment:",
+        result.messages[0].id
+      );
       return {
         success: true,
         messageId: result.messages[0].id,
