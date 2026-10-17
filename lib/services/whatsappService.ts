@@ -350,3 +350,91 @@ export function getLifestyleConciergeWhatsAppUrl(customMessage?: string): string
   const text = encodeURIComponent(customMessage || defaultText);
   return `https://wa.me/${OFFICIAL_LIFESTYLE_WHATSAPP}?text=${text}`;
 }
+
+export const AURA_BROCHURE_URL =
+  "https://scymbepzlkfqtkkwnxne.supabase.co/storage/v1/object/public/brochures/Aura-by-Lifestyle-Brochure.pdf";
+export const AURA_BROCHURE_MEDIA_ID = "1607495040856667";
+
+/**
+ * Sends the official Aura by Lifestyle PDF brochure directly to the customer's WhatsApp
+ * upon login, sign-up, or enquiry submission.
+ */
+export async function sendAuraBrochureOnWhatsApp(
+  userPhone: string,
+  customerName?: string
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  let cleanPhone = userPhone.replace(/\D/g, "");
+  if (!cleanPhone) return { success: false, error: "Invalid phone number" };
+  if (cleanPhone.length === 10) {
+    cleanPhone = "91" + cleanPhone;
+  }
+
+  const configuredPhoneId = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
+  const greeting = customerName?.trim() ? `Dear ${customerName.trim()}` : "Hello";
+  const caption = `🏛️ *Welcome to Aura by Lifestyle!*\n\n${greeting}, here is your official architectural brochure featuring 2 & 3 BHK luxury residences, rooftop sky pool, multi-sports turf, and verified floor plans at Camp, Amravati.\n\n_Lifestyle Home Spaces · MahaRERA Reg. No. P5030002502915_`;
+
+  try {
+    // 1. Primary Attempt: Send document via public high-speed CDN URL
+    const docPayload = {
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      to: cleanPhone,
+      type: "document",
+      document: {
+        link: AURA_BROCHURE_URL,
+        filename: "Aura_by_Lifestyle_Brochure.pdf",
+        caption,
+      },
+    };
+
+    const res = await fetch(`https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(docPayload),
+    });
+
+    const data = await res.json();
+    if (res.ok && data.messages?.[0]?.id) {
+      console.log(`Brochure PDF delivered to ${cleanPhone} via link:`, data.messages[0].id);
+      return { success: true, messageId: data.messages[0].id };
+    }
+
+    console.warn("Direct link brochure delivery returned non-OK, trying uploaded Media ID:", data);
+
+    // 2. Secondary Attempt: Send using pre-uploaded Meta Media ID
+    const mediaPayload = {
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      to: cleanPhone,
+      type: "document",
+      document: {
+        id: AURA_BROCHURE_MEDIA_ID,
+        filename: "Aura_by_Lifestyle_Brochure.pdf",
+        caption,
+      },
+    };
+
+    const mediaRes = await fetch(`https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mediaPayload),
+    });
+
+    const mData = await mediaRes.json();
+    if (mediaRes.ok && mData.messages?.[0]?.id) {
+      console.log(`Brochure PDF delivered to ${cleanPhone} via media ID:`, mData.messages[0].id);
+      return { success: true, messageId: mData.messages[0].id };
+    }
+
+    return { success: false, error: mData?.error?.message || "Delivery failed" };
+  } catch (err: any) {
+    console.error("Failed to dispatch WhatsApp brochure PDF:", err);
+    return { success: false, error: err?.message };
+  }
+}

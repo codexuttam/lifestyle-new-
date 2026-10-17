@@ -5,7 +5,7 @@ import { hasFirebaseAdminEnv } from "@/lib/env.server";
 import { adminDb } from "@/lib/firebase/admin";
 import { leadInputSchema } from "@/lib/schemas/lead";
 import { captureLeadInCRM } from "@/lib/services/crmLeadService";
-import { notifyOwnerOnWhatsApp } from "@/lib/services/whatsappService";
+import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp } from "@/lib/services/whatsappService";
 
 /**
  * Public endpoint for short enquiry submissions:
@@ -64,6 +64,11 @@ export async function POST(request: Request) {
     preference: preference || "Luxury Residence",
     referenceId: crmResult.referenceId,
   }).catch((err) => console.warn("[leads] Owner WhatsApp alert:", err));
+
+  // 3. Deliver official Aura by Lifestyle PDF brochure directly to the customer on WhatsApp (non-blocking)
+  sendAuraBrochureOnWhatsApp(phone, name).catch((err) =>
+    console.warn("[leads] User brochure delivery:", err)
+  );
 
   // 3. Optional Firestore archive if configured
   if (hasFirebaseAdminEnv()) {

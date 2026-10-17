@@ -1,6 +1,6 @@
 import { verifyStoredOtp } from "@/lib/auth/otpStore";
 import { captureLeadInCRM, normalizePhone } from "@/lib/services/crmLeadService";
-import { notifyOwnerOnWhatsApp } from "@/lib/services/whatsappService";
+import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp } from "@/lib/services/whatsappService";
 
 export async function POST(request: Request) {
   try {
@@ -56,6 +56,11 @@ export async function POST(request: Request) {
       email: resolvedEmail,
       referenceId: crmResult.referenceId,
     }).catch((e) => console.warn("Owner alert error:", e));
+
+    // 3. Deliver official Aura by Lifestyle PDF brochure directly to the customer on WhatsApp
+    sendAuraBrochureOnWhatsApp(normPhone, resolvedName).catch((e) =>
+      console.warn("User brochure WhatsApp delivery error:", e)
+    );
 
     return Response.json({
       ok: true,
