@@ -49,6 +49,32 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
             </Link>
             <div className={styles.contactInfo}>
               <span className={styles.contactLabel}>Site & Booking Enquiries</span>
+              <button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("lifestyle_open_enquiry"));
+                }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                  padding: "7px 16px",
+                  borderRadius: "9999px",
+                  background: "linear-gradient(135deg, #c01853 0%, #d4af37 100%)",
+                  border: "1px solid rgba(212, 175, 55, 0.45)",
+                  color: "#ffffff",
+                  fontSize: "12.5px",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  letterSpacing: "0.02em",
+                  boxShadow: "0 2px 12px rgba(192, 24, 83, 0.4)",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                📝 Submit Online Enquiry
+              </button>
               <a href={telHref(settings)} className={styles.emailLink} style={{ color: "#d4af37", fontWeight: 600 }}>
                 📞 +91 8530763405
               </a>

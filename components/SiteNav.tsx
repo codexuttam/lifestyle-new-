@@ -60,7 +60,16 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
 
     checkAuth();
     window.addEventListener("lifestyle_auth_changed", checkAuth);
-    return () => window.removeEventListener("lifestyle_auth_changed", checkAuth);
+
+    const handleOpenEnquiry = () => {
+      setIsEnquiryOpen(true);
+    };
+    window.addEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
+
+    return () => {
+      window.removeEventListener("lifestyle_auth_changed", checkAuth);
+      window.removeEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
+    };
   }, []);
 
   // Handle smooth scroll on cross-page and in-page navigation

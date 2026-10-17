@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Chatbot.module.css";
+import EnquiryModal from "@/components/EnquiryModal";
 
 const WHATSAPP_NUMBER = "918530763405";
 const PHONE_NUMBER = "+918530763405";
@@ -10,6 +11,7 @@ interface Option {
   label: string;
   action: () => void;
   isWhatsApp?: boolean;
+  isEnquiry?: boolean;
 }
 
 interface Message {
@@ -22,7 +24,21 @@ interface Message {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [enquiryProject, setEnquiryProject] = useState("Aura by Lifestyle");
+  const [enquiryPreference, setEnquiryPreference] = useState("2 & 3 BHK Luxury Residences");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const openEnquiry = (project = "Aura by Lifestyle", preference = "2 & 3 BHK Luxury Residences") => {
+    setEnquiryProject(project);
+    setEnquiryPreference(preference);
+    setIsEnquiryOpen(true);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("lifestyle_open_enquiry", { detail: { project, preference } })
+      );
+    }
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -37,6 +53,11 @@ export default function Chatbot() {
             sender: "bot",
             text: "Namaste! Welcome to Lifestyle Home Spaces.\n\nI am your digital portfolio concierge. Which landmark development in Amravati would you like to explore today?",
             options: [
+              {
+                label: "📝 Submit Online Enquiry Form",
+                action: () => openEnquiry("Aura by Lifestyle", "General Concierge Enquiry"),
+                isEnquiry: true,
+              },
               { label: "✨ Aura by Lifestyle (Skyline Highrise)", action: () => handleOptionClick("Aura Details") },
               { label: "🏛️ Lifestyle Homes (Delivered Landmark)", action: () => handleOptionClick("Lifestyle Homes Details") },
               { label: "⚖️ Compare Both Projects", action: () => handleOptionClick("Compare Projects") },
@@ -70,11 +91,39 @@ export default function Chatbot() {
       let botResponse: Omit<Message, "id"> = { sender: "bot", text: "" };
 
       switch (optionLabel) {
+        case "Submit Online Enquiry Form":
+        case "Submit Enquiry Form":
+        case "Enquire Now":
+          openEnquiry("Aura by Lifestyle", "Concierge Chat Enquiry");
+          botResponse = {
+            sender: "bot",
+            text: "Opening our official VIP Enquiry Form for you.\n\nPlease enter your name and phone number in the form to register your enquiry directly in our Real Estate CRM.",
+            options: [
+              {
+                label: "📝 Reopen Enquiry Form",
+                action: () => openEnquiry("Aura by Lifestyle", "Concierge Chat Enquiry"),
+                isEnquiry: true,
+              },
+              {
+                label: "💬 Talk to Sales on WhatsApp",
+                action: () => handleOptionClick("Contact Sales"),
+                isWhatsApp: true,
+              },
+              { label: "↩ Main Menu", action: () => handleOptionClick("Main Menu") },
+            ],
+          };
+          break;
+
         case "Aura Details":
           botResponse = {
             sender: "bot",
             text: "🌟 Aura by Lifestyle — 'Life Beyond Imagination'\n\n• Concept: Skyline Highrise luxury with rooftop sky deck amenities.\n• Configuration: 2 & 3 BHK luxury residences + 3 levels of high-street commercial retail & offices.\n• Rooftop Sky Deck: Rooftop swimming pool & kids pool, multi-sports turf with box cricket, viewing deck & party terrace.\n• Location: Congress Nagar Road, Next to Dreamz Signature, Amravati.\n• MahaRERA: P5030002502915.\n• Elevators: 4 elevators (2 regular, 1 stretcher, 1 service) with 100% generator backup.",
             options: [
+              {
+                label: "📝 Submit Aura Enquiry Form",
+                action: () => openEnquiry("Aura by Lifestyle", "2 & 3 BHK Luxury Residences"),
+                isEnquiry: true,
+              },
               { label: "📐 Aura Floor Plans", action: () => handleOptionClick("Aura Floor Plans") },
               { label: "🛍️ Aura Retail & Offices", action: () => handleOptionClick("Commercial Retail") },
               { label: "📍 Aura Location Map", action: () => handleOptionClick("Locations") },
@@ -93,6 +142,11 @@ export default function Chatbot() {
             sender: "bot",
             text: "🏛️ Lifestyle Homes — 'Where Space Meets The Way You Live'\n\n• Status: 100% Delivered & Ready for Immediate Possession!\n• Configuration: 12 Units of 3 BHK suites, 18 Units of 2 BHK residences, and 24 integrated ground/1st floor retail shops.\n• Highlights: 100% Vastu compliance, cross-ventilation, covered parking, and 24/7 security.\n• Location: DPS Road, Parvati Nagar, Near Avinashe Avenue, Amravati.\n• MahaRERA: P50300054447.",
             options: [
+              {
+                label: "📝 Submit Lifestyle Homes Enquiry",
+                action: () => openEnquiry("Lifestyle Homes", "Ready Possession 2 & 3 BHK"),
+                isEnquiry: true,
+              },
               { label: "📐 Lifestyle Plans", action: () => handleOptionClick("Lifestyle Plans") },
               { label: "📍 View on Google Maps", action: () => handleOptionClick("Locations") },
               {
@@ -110,6 +164,11 @@ export default function Chatbot() {
             sender: "bot",
             text: "📊 Project Comparison Summary:\n\n1. AURA BY LIFESTYLE\n• Skyline 15-storey architectural highrise\n• Rooftop sky deck, rooftop swimming pool, box cricket turf & gym\n• Congress Nagar prime commercial corridor\n• Ideal for skyline luxury living & prime retail investment\n\n2. LIFESTYLE HOMES\n• 100% Ready for immediate possession\n• Exclusive community of 30 residences on DPS Road\n• Ground & first floor retail arcade\n• Ideal for immediate move-in & peaceful family living",
             options: [
+              {
+                label: "📝 Submit Project Enquiry Form",
+                action: () => openEnquiry("Aura & Lifestyle Homes", "Comparison & Booking Enquiry"),
+                isEnquiry: true,
+              },
               { label: "Explore Aura Details", action: () => handleOptionClick("Aura Details") },
               { label: "Explore Lifestyle Homes", action: () => handleOptionClick("Lifestyle Homes Details") },
               {
@@ -128,6 +187,11 @@ export default function Chatbot() {
             text: "📐 Aura Floor Plans & Dimensions:\n\n• 2 BHK Luxury:\n  - Master Bed: 11’0” × 12’0”\n  - Kids Bedroom: 11’0” × 12’0”\n  - Living & Dining: 11’0” × 17’0”\n  - Private Balcony: 10’6” × 6’0”\n\n• 3 BHK Grand Suite:\n  - Master Suite: 11’0” × 15’0” with dressing area\n  - Guest Bedroom: 11’0” × 12’0”\n  - Children's Suite: 11’0” × 12’0”\n  - 3 Panoramic Viewing Balconies\n\n• Levels: Typical floors 3rd through 13th.",
             options: [
               {
+                label: "📝 Request Floor Plans (Enquiry Form)",
+                action: () => openEnquiry("Aura by Lifestyle", "Floor Plans & Cut-Sections"),
+                isEnquiry: true,
+              },
+              {
                 label: "💬 Request PDF Floor Plans via WhatsApp",
                 action: () => handleOptionClick("Contact Sales"),
                 isWhatsApp: true,
@@ -144,6 +208,11 @@ export default function Chatbot() {
             text: "📐 Lifestyle Homes Ready Layouts (DPS Road):\n\n• 2 BHK (Type A & B): 675 – 745 sq.ft carpet area, Vastu-compliant north/east entrances, dual attached balconies.\n• 3 BHK Royal Suites: 940 – 1025 sq.ft carpet area, three wide balconies, large modular kitchen layout, separate dry terrace.\n• All units ready for key handover.",
             options: [
               {
+                label: "📝 Enquire for Ready Flat Walkthrough",
+                action: () => openEnquiry("Lifestyle Homes", "Ready Possession Walkthrough"),
+                isEnquiry: true,
+              },
+              {
                 label: "💬 Book Finished Flat Walkthrough",
                 action: () => handleOptionClick("Contact Sales"),
                 isWhatsApp: true,
@@ -159,7 +228,12 @@ export default function Chatbot() {
             text: "🛍️ Commercial & Corporate Retail at Lifestyle:\n\n1. Aura by Lifestyle (Congress Nagar Road):\n• Lower Ground: 24 Shops (G-01 to G-24) with dedicated customer parking.\n• Upper Ground: Retail Showrooms (U-01 to U-22) & Offices (OU-01 to OU-19) with 3.3m wide corridors.\n• First Floor: Showrooms (F-01 to F-21) and executive corporate suites.\n\n2. Lifestyle Homes (DPS Road):\n• 24 Road-facing retail shops with active footfall (Dee Bakers and commercial brands).",
             options: [
               {
-                label: "💬 Enquire for Retail Showroom",
+                label: "📝 Submit Commercial Enquiry Form",
+                action: () => openEnquiry("Aura Commercial & Retail", "Retail Showroom / Office"),
+                isEnquiry: true,
+              },
+              {
+                label: "💬 Enquire for Retail Showroom (WhatsApp)",
                 action: () => handleOptionClick("Contact Sales"),
                 isWhatsApp: true,
               },
@@ -173,6 +247,11 @@ export default function Chatbot() {
             sender: "bot",
             text: "📍 Prime Amravati Addresses:\n\n1. Aura by Lifestyle: Congress Nagar Road, Next to Dreamz Signature, Amravati.\n(5 min to Super Speciality Hospital, D-Mart, ST Bus Stand)\n\n2. Lifestyle Homes: DPS Road, Parvati Nagar, Near Avinashe Avenue, Amravati.\n(2 min to Delhi Public School, instant Ring Road access)\n\n3. Corporate Headquarters: Shop No. 104, 1st Floor, Next Level Mall, Camp, Amravati.",
             options: [
+              {
+                label: "📝 Submit Site Visit Booking Form",
+                action: () => openEnquiry("Aura by Lifestyle", "Site Visit Booking"),
+                isEnquiry: true,
+              },
               {
                 label: "🗺️ Aura on Google Maps",
                 action: () =>
@@ -207,8 +286,13 @@ export default function Chatbot() {
         case "Contact Sales":
           botResponse = {
             sender: "bot",
-            text: `Our official sales desk is available on WhatsApp & Phone at +91 ${WHATSAPP_NUMBER}.\n\nClick below to open WhatsApp with your chosen inquiry.`,
+            text: `Our official sales desk is available via Online Enquiry, WhatsApp & Direct Phone at +91 ${WHATSAPP_NUMBER}.\n\nChoose an option below to connect with our senior property advisory team:`,
             options: [
+              {
+                label: "📝 Submit Online Enquiry Form",
+                action: () => openEnquiry("Aura by Lifestyle", "Sales Desk Enquiry"),
+                isEnquiry: true,
+              },
               {
                 label: "💬 Open WhatsApp Concierge",
                 action: () => {
@@ -236,6 +320,11 @@ export default function Chatbot() {
             sender: "bot",
             text: "How can I assist you further with Lifestyle Home Spaces portfolio?",
             options: [
+              {
+                label: "📝 Submit Online Enquiry Form",
+                action: () => openEnquiry("Aura by Lifestyle", "General Concierge Enquiry"),
+                isEnquiry: true,
+              },
               { label: "✨ Aura by Lifestyle", action: () => handleOptionClick("Aura Details") },
               { label: "🏛️ Lifestyle Homes", action: () => handleOptionClick("Lifestyle Homes Details") },
               { label: "⚖️ Compare Both Projects", action: () => handleOptionClick("Compare Projects") },
@@ -336,7 +425,11 @@ export default function Chatbot() {
                         type="button"
                         onClick={opt.action}
                         className={`${styles.optionPill} ${
-                          opt.isWhatsApp ? styles.optionPillWhatsApp : ""
+                          opt.isWhatsApp
+                            ? styles.optionPillWhatsApp
+                            : opt.isEnquiry
+                            ? styles.optionPillEnquiry
+                            : ""
                         }`}
                       >
                         {opt.label}
@@ -358,6 +451,14 @@ export default function Chatbot() {
           </div>
         </div>
       )}
+
+      {/* Instant VIP CRM Enquiry Modal */}
+      <EnquiryModal
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        projectTitle={enquiryProject}
+        defaultPreference={enquiryPreference}
+      />
     </>
   );
 }
