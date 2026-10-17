@@ -83,17 +83,18 @@
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(212, 175, 55, 0.28);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  padding: 5px;
+  padding: 4px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  max-width: calc(100vw - 420px);
 }
 
 .menuItem {
   font-family: var(--font-inter), sans-serif;
-  padding: 8px 18px;
+  padding: 7px 14px;
   border-radius: 9999px;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.2px;
   color: rgba(255, 255, 255, 0.85);
@@ -124,6 +125,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+  z-index: 20;
 }
 
 .btnContact {
@@ -319,7 +322,18 @@
   font-weight: 600;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
+  .nav {
+    padding: 12px 32px;
+  }
+
+  .menuItem {
+    padding: 6px 11px;
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 1080px) {
   .nav {
     padding: 12px 20px;
   }

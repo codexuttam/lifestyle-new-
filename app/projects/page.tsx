@@ -35,8 +35,14 @@ export default async function ProjectsPage() {
       <main className={styles.page}>
         <div className={styles.inner}>
           <header className={styles.header}>
-            <h1 className={styles.title}>{copy.title}</h1>
-            <p className={styles.intro}>{copy.intro}</p>
+            <span className={styles.badge}>
+              <span className={styles.badgeDot} />
+              <span className={styles.badgeText}>Landmark Portfolio · Amravati Collection</span>
+            </span>
+            <h1 className={styles.title}>Signature Developments &amp; Commercial Arcades</h1>
+            <p className={styles.intro}>
+              From our iconic 15-storey highrise tower Aura by Lifestyle in Congress Nagar to 100% delivered ready-to-move Lifestyle Home Spaces on DPS Road — discover benchmark luxury residences and prime commercial showrooms.
+            </p>
           </header>
 
           <ProjectsExplorer projects={projects} settings={settings} />

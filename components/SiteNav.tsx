@@ -16,7 +16,6 @@ const LIFESTYLE_MENU_ITEMS = [
   { label: "All Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
   { label: "About", href: "/projects/lifestyle-homes#about-lifestyle-section" },
-  { label: "Aura Flagship ↗", href: "/" },
 ];
 
 const DEFAULT_MENU_ITEMS = [
@@ -27,7 +26,6 @@ const DEFAULT_MENU_ITEMS = [
   { label: "All Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
   { label: "About", href: "/about" },
-  { label: "Lifestyle Homes ↗", href: "/projects/lifestyle-homes" },
 ];
 
 /** Luxury Dark Glassmorphism Nav with Smooth Scroll Interception, WhatsApp OTP Auth & Short CRM Enquiry */
