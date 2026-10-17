@@ -1,19 +1,20 @@
-/* ============ ALL PROPERTIES (STICKY STACK) SECTION ============ */
+/* ============ ALL PROPERTIES (STICKY STACK) SECTION (LUXURY DARK THEME) ============ */
 
 .section {
   width: 100%;
-  background: #fff;
+  background: #06090e;
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
-  color: #171717;
+  color: #f5f6f8;
+  position: relative;
 }
 
 .grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 30px;
+  gap: 36px;
   align-items: start;
 }
 
@@ -23,7 +24,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 20px;
   position: sticky;
   top: 120px;
   align-self: flex-start;
@@ -31,56 +32,65 @@
 }
 
 .label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   margin-top: 8px;
   flex-shrink: 0;
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 9999px;
-  background: #afe37e;
+  background: #d4af37;
+  box-shadow: 0 0 10px #d4af37;
 }
 
 .labelText {
   font-family: var(--font-inter), sans-serif;
-  color: #282424;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.54px;
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .viewAll {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 8px;
-  padding: 12px 22px;
+  margin-top: 12px;
+  padding: 13px 26px;
   border-radius: 9999px;
-  background: #161915;
-  color: #fff;
+  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
+  color: #06090e;
   text-decoration: none;
   font-family: var(--font-inter), sans-serif;
-  font-size: 15px;
-  letter-spacing: -0.45px;
-  transition: background 0.25s ease;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+  transition: all 0.3s ease;
 }
 
 .viewAll:hover {
-  background: #2c312a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.45);
 }
 
 .heading {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 500;
-  color: #161915;
+  font-weight: 700;
+  color: #ffffff;
   font-size: 64px;
   line-height: 1.05;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   align-self: stretch;
 }
@@ -95,22 +105,24 @@
   padding-bottom: 80px;
 }
 
-/* Each card pins a little lower than the one before, so they stack up as
-   the column scrolls past. The offsets come from inline style per index. */
 .card {
   position: sticky;
-  background: #f4f4f4;
-  border-radius: 30px;
-  padding: 32px;
+  background: rgba(14, 18, 26, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 28px;
+  padding: 34px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: rgba(0, 0, 0, 0.07) 0 20px 40px -15px;
-  transition: box-shadow 0.3s ease;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .card:hover {
-  box-shadow: rgba(0, 0, 0, 0.14) 0 24px 48px -12px;
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.12);
 }
 
 .cardHeader {
@@ -122,13 +134,13 @@
 }
 
 .thumb {
-  width: 112px;
-  height: 112px;
-  border-radius: 16px;
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
   overflow: hidden;
   flex-shrink: 0;
-  background: #e5e5e5;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  background: #090c12;
+  border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .thumbImg {
@@ -139,7 +151,7 @@
 }
 
 .card:hover .thumbImg {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .headerText {
@@ -157,27 +169,27 @@
 }
 
 .categoryBadge {
-  padding: 4px 14px;
-  background: #161915;
-  color: #fff;
-  border: 1px solid #161915;
+  padding: 5px 14px;
+  background: rgba(6, 9, 14, 0.8);
+  color: #f0d886;
+  border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: 9999px;
   font-family: var(--font-inter), sans-serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .badge {
-  padding: 4px 14px;
-  background: #fff;
-  color: #161915;
-  border: 1px solid #d4d4d4;
+  padding: 5px 14px;
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.4);
   border-radius: 9999px;
   font-family: var(--font-inter), sans-serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -185,17 +197,18 @@
 .cardTitle {
   font-family: var(--font-big-shoulders), sans-serif;
   font-weight: 700;
-  color: #161915;
+  color: #ffffff;
   font-size: 34px;
-  line-height: 1;
-  letter-spacing: -0.025em;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .divider {
   width: 100%;
   height: 1px;
-  background: rgba(229, 229, 229, 0.8);
-  margin: 20px 0;
+  background: rgba(212, 175, 55, 0.15);
+  margin: 22px 0;
 }
 
 /* --- Spec row --- */
@@ -216,21 +229,23 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #737373;
+  color: #8e9aa8;
   font-family: var(--font-inter), sans-serif;
-  font-size: 16px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .specIcon {
-  color: #a3a3a3;
+  color: #d4af37;
   flex-shrink: 0;
 }
 
 .specValue {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 700;
-  color: #262626;
-  font-size: 20px;
+  font-weight: 600;
+  color: #f0d886;
+  font-size: 18px;
   white-space: nowrap;
 }
 
@@ -241,6 +256,7 @@
   justify-content: space-between;
   gap: 16px;
   width: 100%;
+  padding-top: 4px;
 }
 
 .priceBlock {
@@ -250,43 +266,49 @@
 }
 
 .priceLabel {
-  color: #737373;
+  color: #8e9aa8;
   font-family: var(--font-inter), sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .price {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 700;
-  color: #161915;
-  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 36px;
   line-height: 1;
 }
 
 .tourBtn {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 9999px;
-  background: #afe37e;
-  padding: 14px 24px;
+  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
+  padding: 13px 24px;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  color: #161915;
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+  color: #06090e;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
 }
 
 .tourBtn:hover {
-  background: #9cd16b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.45);
 }
 
 .tourBtn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 .tourIcon {
@@ -300,8 +322,8 @@
 
 .tourText {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 13px;
   line-height: 1;
   text-align: center;
 }
@@ -309,11 +331,12 @@
 /* --- Bottom video banner --- */
 .banner {
   width: 100%;
-  background: #f4f4f4;
+  background: #090c12;
   border-radius: 30px;
-  margin-top: 30px;
+  margin-top: 40px;
   overflow: hidden;
-  height: 450px;
+  height: 480px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .bannerVideo {
@@ -326,11 +349,11 @@
 
 @media (max-width: 1279px) {
   .section {
-    padding: 96px 64px;
+    padding: 80px 64px;
   }
 
   .heading {
-    font-size: 56px;
+    font-size: 52px;
   }
 }
 
@@ -343,36 +366,28 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  /* Sticky stacking is a desktop affordance; on narrow screens the cards
-     simply flow so they never cover each other. */
   .leftCol,
   .cardsStack {
     grid-column: auto;
+  }
+
+  .leftCol {
     position: static;
-    padding-bottom: 0;
+    padding-bottom: 32px;
   }
 
-  .cardsStack {
-    gap: 24px;
-    margin-top: 40px;
-  }
-
-  .card {
-    position: static;
-  }
-
-  .banner {
-    height: 350px;
+  .heading {
+    font-size: 40px;
   }
 }
 
 @media (max-width: 767px) {
   .section {
-    padding: 64px 24px;
+    padding: 64px 20px;
   }
 
   .heading {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .card {
@@ -381,46 +396,25 @@
 
   .cardHeader {
     flex-direction: column;
-    gap: 20px;
   }
 
   .thumb {
-    width: 96px;
-    height: 96px;
-  }
-
-  .cardTitle {
-    font-size: 28px;
-  }
-
-  .price {
-    font-size: 32px;
-  }
-
-  .tourBtn {
-    padding: 12px 20px;
-  }
-
-  .tourText {
-    font-size: 14px;
-  }
-
-  .banner {
-    height: 250px;
-  }
-}
-
-@media (max-width: 479px) {
-  .actionRow {
-    flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    height: 180px;
   }
 
   .specs {
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  .specValue {
-    font-size: 18px;
+  .actionRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .tourBtn {
+    width: 100%;
   }
 }

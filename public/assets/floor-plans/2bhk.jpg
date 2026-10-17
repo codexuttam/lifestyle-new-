@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%" className="bg-[#FAF8F5]">
+  <defs>
+    <pattern id="grid2" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E5DEC9" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+  </defs>
+  
+  <rect width="800" height="600" fill="#FAF8F5"/>
+  <rect width="800" height="600" fill="url(#grid2)"/>
+  
+  <!-- Outer Walls -->
+  <rect x="80" y="60" width="640" height="480" fill="none" stroke="#1A1A1A" stroke-width="5"/>
+  
+  <!-- Living & Dining -->
+  <rect x="80" y="60" width="340" height="300" fill="#FFFFFF" fill-opacity="0.8" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="250" y="190" font-family="'Cormorant Garamond', serif" font-size="22" font-weight="600" fill="#0A0A0A" text-anchor="middle">LIVING &amp; DINING</text>
+  <text x="250" y="215" font-family="'Inter', sans-serif" font-size="13" fill="#D4AF37" font-weight="600" text-anchor="middle">18'0" × 12'6"</text>
+  <text x="250" y="235" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle">Vitrified Marble Finish Flooring</text>
+  
+  <!-- Terrace Balcony -->
+  <rect x="80" y="360" width="340" height="120" fill="#F4EFE6" stroke="#D4AF37" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="250" y="420" font-family="'Cormorant Garamond', serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="middle">SUNLIT BALCONY</text>
+  <text x="250" y="440" font-family="'Inter', sans-serif" font-size="12" fill="#D4AF37" text-anchor="middle">12'0" × 5'0"</text>
+
+  <!-- Master Bedroom -->
+  <rect x="420" y="60" width="300" height="260" fill="#FFFFFF" fill-opacity="0.8" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="570" y="160" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#0A0A0A" text-anchor="middle">MASTER BEDROOM</text>
+  <text x="570" y="185" font-family="'Inter', sans-serif" font-size="13" fill="#D4AF37" font-weight="600" text-anchor="middle">14'0" × 12'0"</text>
+  <text x="570" y="205" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle">Attached Bath &amp; Wardrobe Niche</text>
+
+  <!-- Attached Toilet -->
+  <rect x="580" y="220" width="140" height="100" fill="#F8F6F0" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="650" y="270" font-family="'Inter', sans-serif" font-size="11" fill="#555" text-anchor="middle">BATH 7'×4'6"</text>
+
+  <!-- Bedroom 2 -->
+  <rect x="420" y="320" width="300" height="220" fill="#FFFFFF" fill-opacity="0.8" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="570" y="420" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#0A0A0A" text-anchor="middle">BEDROOM 2</text>
+  <text x="570" y="445" font-family="'Inter', sans-serif" font-size="13" fill="#D4AF37" font-weight="600" text-anchor="middle">12'0" × 11'0"</text>
+  <text x="570" y="465" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle">Cross Ventilated Window</text>
+
+  <!-- Kitchen & Utility -->
+  <rect x="80" y="480" width="340" height="60" fill="#FFFFFF" fill-opacity="0.8" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="250" y="515" font-family="'Cormorant Garamond', serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="middle">KITCHEN &amp; UTILITY 10'0" × 8'0"</text>
+
+  <!-- Entrance Indicator -->
+  <path d="M 50 150 L 80 150 M 70 142 L 80 150 L 70 158" stroke="#D4AF37" stroke-width="3" fill="none"/>
+  <text x="45" y="145" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#D4AF37" text-anchor="end">MAIN ENTRY</text>
+
+  <!-- North Symbol -->
+  <circle cx="730" cy="100" r="22" fill="#FAF8F5" stroke="#D4AF37" stroke-width="1.5"/>
+  <path d="M 730 83 L 736 100 L 730 96 L 724 100 Z" fill="#D4AF37"/>
+  <text x="730" y="117" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0A0A0A" text-anchor="middle">N</text>
+
+  <!-- Footer Info -->
+  <text x="80" y="570" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0A0A0A">LIFESTYLE HOMES · 2 BHK ARCHITECTURAL SPECIFICATION</text>
+  <text x="720" y="570" font-family="'Inter', sans-serif" font-size="11" fill="#888" text-anchor="end">ALL DIMENSIONS IN FEET &amp; INCHES · VASTU COMPLIANT</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 640" width="100%" height="100%" className="bg-[#FAF8F5]">
+  <defs>
+    <pattern id="grid3" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E5DEC9" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+  </defs>
+  
+  <rect width="880" height="640" fill="#FAF8F5"/>
+  <rect width="880" height="640" fill="url(#grid3)"/>
+  
+  <!-- Outer Walls -->
+  <rect x="60" y="50" width="760" height="520" fill="none" stroke="#1A1A1A" stroke-width="5"/>
+  
+  <!-- Grand Living & Dining -->
+  <rect x="60" y="50" width="400" height="340" fill="#FFFFFF" fill-opacity="0.85" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="260" y="190" font-family="'Cormorant Garamond', serif" font-size="24" font-weight="600" fill="#0A0A0A" text-anchor="middle">GRAND LIVING &amp; FORMAL DINING</text>
+  <text x="260" y="215" font-family="'Inter', sans-serif" font-size="14" fill="#D4AF37" font-weight="600" text-anchor="middle">22'6" × 14'0"</text>
+  <text x="260" y="235" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle">Italian Vitrified Flooring · False Ceiling Concealed Lighting</text>
+  
+  <!-- Master Suite with Walk-in & Dresser -->
+  <rect x="460" y="50" width="360" height="280" fill="#FFFFFF" fill-opacity="0.85" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="640" y="150" font-family="'Cormorant Garamond', serif" font-size="22" font-weight="600" fill="#0A0A0A" text-anchor="middle">MASTER SUITE</text>
+  <text x="640" y="175" font-family="'Inter', sans-serif" font-size="14" fill="#D4AF37" font-weight="600" text-anchor="middle">16'0" × 13'6"</text>
+  <text x="640" y="195" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle">Walk-in Dresser &amp; Designer En-suite Bathroom</text>
+
+  <!-- Attached Master Bath -->
+  <rect x="660" y="220" width="160" height="110" fill="#F8F6F0" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="740" y="275" font-family="'Inter', sans-serif" font-size="12" fill="#555" text-anchor="middle">MASTER BATH 8'×5'6"</text>
+
+  <!-- Bedroom 2 (Parent's Room) -->
+  <rect x="460" y="330" width="360" height="240" fill="#FFFFFF" fill-opacity="0.85" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="640" y="420" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#0A0A0A" text-anchor="middle">BEDROOM 2 (SUITE)</text>
+  <text x="640" y="445" font-family="'Inter', sans-serif" font-size="13" fill="#D4AF37" font-weight="600" text-anchor="middle">14'0" × 12'0"</text>
+  <text x="640" y="465" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle">Attached Bath &amp; Private Garden View</text>
+
+  <!-- Bedroom 3 (Children / Study) -->
+  <rect x="60" y="390" width="220" height="180" fill="#FFFFFF" fill-opacity="0.85" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="170" y="470" font-family="'Cormorant Garamond', serif" font-size="19" font-weight="600" fill="#0A0A0A" text-anchor="middle">BEDROOM 3</text>
+  <text x="170" y="495" font-family="'Inter', sans-serif" font-size="13" fill="#D4AF37" font-weight="600" text-anchor="middle">12'6" × 11'0"</text>
+
+  <!-- Modular Kitchen & Utility -->
+  <rect x="280" y="390" width="180" height="180" fill="#FFFFFF" fill-opacity="0.85" stroke="#1A1A1A" stroke-width="3"/>
+  <text x="370" y="470" font-family="'Cormorant Garamond', serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="middle">MODULAR KITCHEN</text>
+  <text x="370" y="495" font-family="'Inter', sans-serif" font-size="12" fill="#D4AF37" text-anchor="middle">11'0" × 9'0" + DRY AREA</text>
+
+  <!-- Balcony -->
+  <rect x="60" y="50" width="120" height="340" fill="#F4EFE6" stroke="#D4AF37" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="120" y="210" font-family="'Cormorant Garamond', serif" font-size="17" font-weight="600" fill="#0A0A0A" text-anchor="middle" transform="rotate(-90 120 210)">EXPANSIVE DECK BALCONY 18' × 5'</text>
+
+  <!-- North Symbol -->
+  <circle cx="810" cy="95" r="22" fill="#FAF8F5" stroke="#D4AF37" stroke-width="1.5"/>
+  <path d="M 810 78 L 816 95 L 810 91 L 804 95 Z" fill="#D4AF37"/>
+  <text x="810" y="112" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#0A0A0A" text-anchor="middle">N</text>
+
+  <!-- Footer Info -->
+  <text x="60" y="605" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#0A0A0A">LIFESTYLE HOMES · 3 BHK LUXURY SIGNATURE SUITE</text>
+  <text x="820" y="605" font-family="'Inter', sans-serif" font-size="11" fill="#888" text-anchor="end">VASTU COMPLIANT · DUAL BALCONIES · OPTIMUM NATURAL AIRFLOW</text>
+</svg>

@@ -52,6 +52,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
 body, html {
     width: 100%;
     min-height: 100vh;

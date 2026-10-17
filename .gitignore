@@ -4,3 +4,9 @@ out/
 .env*
 *.log
 !.env.example
+.DS_Store
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+*.pdf
+brochure_ocr_results.txt
+scratch_brochure_text.txt

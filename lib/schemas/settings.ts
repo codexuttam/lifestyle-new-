@@ -6,6 +6,9 @@ export const settingsSchema = z.object({
   phone: z.string().min(1),
   email: z.string().email(),
   address: z.string().min(1),
+  brandName: z.string().optional(),
+  bookingContact: z.string().optional(),
+  reraNumber: z.string().optional(),
   copyright: z.string().min(1),
   social: z.array(
     z.object({ label: z.string().min(1), href: z.string().url() })

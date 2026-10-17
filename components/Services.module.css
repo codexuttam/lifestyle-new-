@@ -1,12 +1,13 @@
-/* ============ SERVICES SECTION ============ */
+/* ============ SERVICES SECTION (LUXURY DARK THEME) ============ */
 
 .services {
   width: 100%;
-  background: #f4f4f4;
+  background: #06090e;
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 /* --- Heading row --- */
@@ -31,12 +32,12 @@
 
 .heading {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 500;
-  color: #161915;
+  font-weight: 700;
+  color: #ffffff;
   font-size: 64px;
-  line-height: 1.1;
-  letter-spacing: -1.28px;
-  text-transform: capitalize;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .introWrapper {
@@ -49,14 +50,15 @@
 .intro {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #161915;
-  font-size: 20px;
+  color: rgba(235, 240, 245, 0.72);
+  font-size: 18px;
   line-height: 1.6;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.2px;
 }
 
 .introStrong {
   font-weight: 600;
+  color: #f0d886;
 }
 
 /* --- Service cards --- */
@@ -69,42 +71,51 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 22px;
+  padding: 13px 26px;
   border-radius: 9999px;
-  background: #161915;
-  color: #fff;
+  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
+  color: #06090e;
   text-decoration: none;
   font-family: var(--font-inter), sans-serif;
-  font-size: 15px;
-  letter-spacing: -0.45px;
-  transition: background 0.25s ease;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+  transition: all 0.3s ease;
 }
 
 .viewAll:hover {
-  background: #2c312a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.45);
 }
 
 .grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 28px;
 }
 
 .card {
-  background: #fff;
+  background: rgba(14, 18, 26, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   padding: 40px;
-  border-radius: 30px;
+  border-radius: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 280px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.15);
 }
 
 .cardTop {
@@ -112,7 +123,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .iconBadge {
@@ -120,19 +131,21 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: #afe37e;
-  width: 56px;
-  height: 56px;
-  color: #161915;
+  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
+  width: 58px;
+  height: 58px;
+  color: #06090e;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
 }
 
 .categoryChip {
-  padding: 7px 14px;
+  padding: 6px 14px;
   border-radius: 9999px;
-  background: #f4f4f4;
-  color: #555;
+  background: rgba(6, 9, 14, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #f0d886;
   font-family: var(--font-inter), sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
@@ -146,28 +159,29 @@
 }
 
 .cardTitle {
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
-  color: #161915;
-  font-size: 24px;
-  line-height: normal;
-  letter-spacing: -0.72px;
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .cardText {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #6b7280;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: -0.48px;
+  color: rgba(235, 240, 245, 0.65);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
 }
 
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 1279px) {
   .services {
-    padding: 96px 64px;
+    padding: 80px 64px;
   }
 
   .headerRow {
@@ -175,7 +189,7 @@
   }
 
   .heading {
-    font-size: 48px;
+    font-size: 52px;
   }
 }
 
@@ -197,14 +211,14 @@
 
 @media (max-width: 767px) {
   .services {
-    padding: 64px 24px;
+    padding: 64px 20px;
   }
 
   .heading {
-    font-size: 36px;
+    font-size: 34px;
   }
 
   .card {
-    padding: 32px;
+    padding: 28px;
   }
 }

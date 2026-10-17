@@ -1,37 +1,38 @@
-/* ============ PAINT VISUALIZER PAGE ============ */
+/* ============ PAINT VISUALIZER PAGE (LUXURY DARK THEME) ============ */
 
 /* The visualizer's own styles are written against the global design tokens,
    so remapping the tokens here retextures the whole tool to the site's
    current palette without touching its 900-line stylesheet. */
 .page {
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-alt: #f4f4f4;
-  --surface-sunk: #ececec;
+  --bg: #06090e;
+  --surface: #0e121a;
+  --surface-alt: #141924;
+  --surface-sunk: #090c12;
 
-  --text: #161915;
-  --text-secondary: #555555;
-  --text-muted: #7a7a7a;
+  --text: #ffffff;
+  --text-secondary: rgba(235, 240, 245, 0.72);
+  --text-muted: #8e9aa8;
 
-  /* Ink-on-light states (active toggles, focus rings) go near-black, matching
-     the black pills used across the site; green stays for the fill CTAs. */
-  --accent-ink: #161915;
-  --accent: #afe37e;
-  --accent-strong: #9cd16b;
-  --accent-soft: rgba(175, 227, 126, 0.4);
-  --accent-wash: rgba(175, 227, 126, 0.16);
+  /* Ink states (active toggles, focus rings) go gold, matching the dark luxury palette */
+  --accent-ink: #d4af37;
+  --accent: #d4af37;
+  --accent-strong: #f0d886;
+  --accent-soft: rgba(212, 175, 55, 0.4);
+  --accent-wash: rgba(212, 175, 55, 0.14);
 
-  --border: rgba(22, 25, 21, 0.1);
-  --border-strong: rgba(22, 25, 21, 0.22);
+  --border: rgba(212, 175, 55, 0.2);
+  --border-strong: rgba(212, 175, 55, 0.4);
 
-  --radius: 12px;
-  --radius-lg: 24px;
+  --radius: 14px;
+  --radius-lg: 26px;
 
   /* Panel headings inside the tool pick this up in place of the serif. */
   --font-playfair: var(--font-big-shoulders);
 
   width: 100%;
-  background: #fff;
+  background: #06090e;
+  background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+  color: #f5f6f8;
   padding: 140px 120px 96px;
   min-height: 100vh;
 }
@@ -55,43 +56,49 @@
 }
 
 .badge {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .badgeDot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 9999px;
-  background: #afe37e;
+  background: #d4af37;
+  box-shadow: 0 0 10px #d4af37;
 }
 
 .badgeText {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 400;
-  color: #282424;
-  font-size: 18px;
-  letter-spacing: -0.54px;
-  line-height: normal;
+  font-weight: 500;
+  color: #d4af37;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .title {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 500;
-  color: #161915;
-  font-size: 64px;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 68px;
   line-height: 1.05;
   text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .intro {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #555;
+  color: rgba(235, 240, 245, 0.72);
   font-size: 20px;
   line-height: 1.6;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.3px;
 }
 
 /* ============ RESPONSIVE ============ */

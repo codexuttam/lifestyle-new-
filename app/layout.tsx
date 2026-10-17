@@ -21,16 +21,16 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "The Premium Construction | We Build Your Dreams",
+  title: "Aura by Lifestyle | 15-Storey Ultra-Luxury Landmark, Amravati",
   description:
-    "The Premium Construction transforms empty plots into architectural masterpieces. Turnkey residential building across Delhi NCR — design, approvals, structure and finishing from one accountable team.",
+    "Aura by Lifestyle — Amravati's premier 15-storey architectural highrise in Congress Nagar featuring 2 & 3 BHK luxury residences, rooftop infinity pool, 40+ sky thrills, and high-street commercial arcade. MahaRERA: P5030002502915.",
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#faf8f5",
-  colorScheme: "light",
+  themeColor: "#06090e",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

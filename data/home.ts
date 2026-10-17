@@ -1,159 +1,101 @@
 /**
- * Landing page content.
- *
- * The homepage was previously assembled from copy hardcoded across six
- * components, and which records it showed was implicit — a project appeared in
- * the carousel only as a side effect of having a walkthrough video. Both the
- * copy and the composition now live here, and in the CMS.
+ * Landing page content for Aura by Lifestyle.
  */
 
-export type HomeContent = {
-  hero: {
-    headline: string;
-    description: string;
-    ctaLabel: string;
-    backgroundVideo: string;
-    buildingImage: string;
-    infoImage: string;
-    infoPrice: string;
-    infoCaption: string;
-  };
-  about: {
-    label: string;
-    statement: string;
-    ctaLabel: string;
-    cards: {
-      img: string;
-      alt: string;
-      prefix: string;
-      target: number;
-      suffix: string;
-      label: string;
-      desc: string;
-    }[];
-  };
-  explore: {
-    tag: string;
-    headline: string;
-    video: string;
-    overlayLabel: string;
-    overlaySublabel: string;
-    progress: number;
-  };
-  properties: {
-    tag: string;
-    heading: string;
-    description: string;
-    ctaLabel: string;
-  };
-  services: { heading: string; intro: string; ctaLabel: string };
-  allProperties: {
-    label: string;
-    heading: string;
-    ctaLabel: string;
-    bannerVideo: string;
-  };
-  testimonials: { badge: string };
-  faq: { badge: string; title: string };
-  /** Which records appear, and in what order. */
-  composition: {
-    featuredProjectIds: string[];
-    listingProjectIds: string[];
-    featuredServiceIds: string[];
-    exploreProjectId: string;
-  };
-};
+import type { HomeContent } from "@/lib/schemas/home";
 
 const CDN = "https://cdn.jiro.build/Real%20Estate%20-%20Ospey";
 
 export const HOME_CONTENT: HomeContent = {
   hero: {
-    headline: "Dream Home",
+    headline: "AURA",
     description:
-      "Delivering excellence with every project, ensuring trust and satisfaction.",
-    ctaLabel: "More About Us",
-    backgroundVideo: `${CDN}/video/Header%20Bg%20Video%20Final.mp4`,
-    buildingImage: `${CDN}/Imges/Front%20Image.png`,
-    infoImage:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=310&h=300&q=80",
-    infoPrice: "₹1.95 Cr",
-    infoCaption: "Signature homes starting here — built across Delhi NCR.",
+      "Life Beyond Imagination. 15-storey highrise tower featuring 2 & 3 BHK luxury residences, rooftop sky pool, multi-sports turf, and panoramic sky horizons at Camp, Amravati.",
+    ctaLabel: "Explore Aura Residences",
+    backgroundVideo: "/videos/aura-building-clip-1.mp4",
+    buildingImage: "/aura/real-aura.png",
+    infoImage: "/aura/luxury-master-bedroom.jpg",
+    infoPrice: "₹65 L - 1.45 Cr",
+    infoCaption: "2 & 3 BHK Lux Residences · Camp, Amravati · MahaRERA: P5030002502915",
   },
   about: {
-    label: "About us",
+    label: "Aura by Lifestyle",
     statement:
-      "The Premium Construction is a turnkey residential builder dedicated to connecting people with homes that truly fit their lifestyle and goals. We combine engineering rigour with expert industry knowledge to simplify the process of designing, building and owning.",
+      "Lifestyle Homes brings a new dimension of living to the people of Amravati by offering premium, elite-class residences that redefine your identity and status. Delivering landmark projects is the vision and mission of Lifestyle Homes, built on the pillars of trust and transparency.",
     ctaLabel: "More About Us",
     cards: [
       {
-        img: "/images/project_1_1779380254029.png",
-        alt: "Casa Meridian, a completed The Premium Construction project",
-        prefix: "+",
-        target: 340,
-        suffix: "",
-        label: "Projects Completed",
-        desc: "Delivering excellence with every project, ensuring trust and satisfaction.",
-      },
-      {
-        img: "/images/project_2_1779380272507.png",
-        alt: "The Ivory Residence, a completed The Premium Construction project",
+        img: "/aura/real-aura.png",
+        alt: "Aura 15-Storey Tower 4K Elevation at Camp Amravati",
         prefix: "",
-        target: 98,
-        suffix: "%",
-        label: "Satisfied Clients",
-        desc: "Our clients trust us to guide them through their build from plot to possession.",
+        target: 15,
+        suffix: " Storeys",
+        label: "Skyline Highrise",
+        desc: "Amravati's landmark residential tower with 360-degree unobstructed sky views.",
       },
       {
-        img: "/images/project_3_1779380290833.png",
-        alt: "Arken House, a completed The Premium Construction project",
+        img: "/aura/rooftop-amenities-3d.jpg",
+        alt: "Aura Rooftop Sky Oasis, Pool & Multi-Sports Turf",
         prefix: "+",
-        target: 12,
+        target: 20,
         suffix: "",
-        label: "Years Experience",
-        desc: "Providing expert construction insight and dedication since 2012.",
+        label: "Lifestyle Amenities",
+        desc: "Rooftop swimming pool, kids pool, multi-sports turf, viewing deck, gym, and party area.",
+      },
+      {
+        img: "/aura/aura-brand-showcase.jpg",
+        alt: "Aura by Lifestyle MahaRERA Registered Development",
+        prefix: "",
+        target: 100,
+        suffix: "%",
+        label: "MahaRERA Registered",
+        desc: "Official MahaRERA Reg. P5030002502915 with transparent documentation and bank approvals.",
       },
     ],
   },
   explore: {
-    tag: "Explore more",
+    tag: "Thrills in the Sky",
     headline:
-      "Building Exceptional Residential Communities Designed To Elevate Everyday Living And Create Lasting Value For Generations.",
-    video: `${CDN}/video/Explore%20Video.mp4`,
-    overlayLabel: "Project 01",
-    overlaySublabel: "Interior Finishing",
-    progress: 85,
+      "Experience Life In The Sky — With A Rooftop Crafted For Adventure, Wellness, And Unrivalled Horizons Over Amravati.",
+    video: "/videos/aura-building-clip-1.mp4",
+    overlayLabel: "Aura Sky Oasis",
+    overlaySublabel: "Rooftop Pool & Sports Turf",
+    progress: 95,
   },
   properties: {
-    tag: "Properties",
+    tag: "Residences & Penthouses",
     heading:
-      "Explore signature homes built across Delhi NCR, each one designed around the way its owners actually live.",
+      "Crafted for those who seek identity and distinction. 2 & 3 BHK luxury residences.",
     description:
-      "Every home here was built turnkey — design, approvals, structure and finishing handled end to end by one team.",
-    ctaLabel: "View all projects by category",
+      "Each apartment is planned with dedicated ventilation, private balconies, 800x1600 vitrified tiles, Jaquar fittings, and 4 high-speed elevators with generator backup.",
+    ctaLabel: "View all projects and floor plans",
   },
   services: {
-    heading: "What Services We Provide?",
+    heading: "What We Offer At Lifestyle Home Spaces",
     intro:
-      "our services cover every stage — design, approvals, construction and handover — with transparent pricing, a dedicated site manager, and solutions tailored to how you want to live.",
-    ctaLabel: "See all services by category",
+      "From architectural design and structural engineering to luxury turnkey highrise construction, Lifestyle delivers excellence with transparency.",
+    ctaLabel: "Explore our capabilities",
   },
   allProperties: {
-    label: "All Properties",
-    heading: "Check On All Properties We Have Available",
-    ctaLabel: "Browse all projects by category",
-    bannerVideo: `${CDN}/video/4th%20box%20video.mp4`,
+    label: "Lifestyle Portfolio",
+    heading: "Explore Our Landmark Developments In Amravati",
+    ctaLabel: "Browse all projects & floor plans",
+    bannerVideo: "/videos/aura-building-clip-1.mp4",
   },
   testimonials: { badge: "Testimonial" },
-  faq: { badge: "FAQ", title: "Frequently Asked Questions" },
+  faq: {
+    badge: "Aura FAQ",
+    title: "Frequently Asked Questions About Aura by Lifestyle",
+  },
   composition: {
-    featuredProjectIds: ["casa-meridian", "ivory-residence", "arken-house"],
-    listingProjectIds: ["casa-meridian", "ivory-residence", "arken-house"],
+    featuredProjectIds: ["aura", "lifestyle-homes", "aura-sky-suites"],
+    listingProjectIds: ["aura", "lifestyle-homes", "aura-sky-suites"],
     featuredServiceIds: [
       "new-home-construction",
       "turnkey-handover",
       "warranty-maintenance",
       "design-consulting",
     ],
-    exploreProjectId: "casa-meridian",
+    exploreProjectId: "aura",
   },
 };

@@ -1,11 +1,12 @@
-/* ============ ABOUT US SECTION ============ */
+/* ============ ABOUT US SECTION (LUXURY DARK THEME) ============ */
 
 .about {
   width: 100%;
-  background: #f4f4f4;
+  background: #06090e;
   padding: 120px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* --- Header row: label on the left, statement + CTA on the right --- */
@@ -19,27 +20,32 @@
 }
 
 .label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   margin-top: 8px;
   flex-shrink: 0;
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 9999px;
-  background: #afe37e;
+  background: #d4af37;
+  box-shadow: 0 0 10px #d4af37;
 }
 
 .labelText {
   font-family: var(--font-inter), sans-serif;
-  color: #282424;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.54px;
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .statement {
@@ -52,12 +58,12 @@
 
 .heading {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 500;
-  color: #161915;
-  font-size: 40px;
-  line-height: normal;
-  letter-spacing: normal;
-  text-transform: capitalize;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 46px;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   align-self: stretch;
 }
 
@@ -66,27 +72,28 @@
   justify-content: center;
   align-items: center;
   border-radius: 9999px;
-  background: #afe37e;
-  padding: 12px 18px;
+  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
+  padding: 13px 26px;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   font-family: var(--font-inter), sans-serif;
-  color: #161915;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.54px;
-  transition: all 0.2s ease;
+  color: #06090e;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+  transition: all 0.3s ease;
 }
 
 .btnMore:hover {
-  background: #9cd16b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.45);
 }
 
 .btnMore:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 /* --- Stat cards --- */
@@ -94,17 +101,28 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 100px;
+  gap: 28px;
+  margin-top: 80px;
 }
 
 .card {
-  background: #fff;
-  padding: 32px;
-  border-radius: 30px;
+  background: rgba(14, 18, 26, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 34px;
+  border-radius: 28px;
   display: flex;
   flex-direction: column;
   min-height: 380px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.15);
 }
 
 .cardTop {
@@ -118,8 +136,9 @@
 .cardImage {
   width: 115px;
   height: 115px;
-  border-radius: 16px;
+  border-radius: 20px;
   object-fit: cover;
+  border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .cardStat {
@@ -131,50 +150,49 @@
 
 .cardNumber {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 500;
-  color: #afe37e;
-  font-size: 48px;
-  line-height: normal;
-  text-transform: capitalize;
+  font-weight: 800;
+  color: #d4af37;
+  font-size: 52px;
+  line-height: 1;
+  text-transform: uppercase;
   text-align: right;
+  letter-spacing: 0.02em;
 }
 
 .cardLabel {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 400;
-  color: #161915;
-  font-size: 16px;
-  line-height: normal;
-  letter-spacing: -0.48px;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 15px;
+  letter-spacing: -0.2px;
   text-align: right;
+  margin-top: 4px;
 }
 
 .divider {
   width: 100%;
   height: 1px;
-  background: #e5e5e5;
+  background: rgba(212, 175, 55, 0.15);
   margin: 24px 0;
 }
 
-/* Pins the description to the card floor so the dividers line up across the
-   row even when the copy runs to a different number of lines. */
 .cardDesc {
   margin-top: auto;
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #161915;
+  color: rgba(235, 240, 245, 0.72);
   width: 100%;
   max-width: 430px;
-  font-size: 20px;
-  line-height: normal;
-  letter-spacing: -0.6px;
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
 }
 
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 1279px) {
   .about {
-    padding: 120px 64px;
+    padding: 100px 64px;
   }
 
   .headerRow {
@@ -198,13 +216,13 @@
   }
 
   .heading {
-    font-size: 32px;
+    font-size: 34px;
   }
 }
 
 @media (max-width: 767px) {
   .about {
-    padding: 64px 24px;
+    padding: 64px 20px;
   }
 
   .grid {
@@ -213,9 +231,10 @@
 
   .card {
     min-height: 0;
+    padding: 26px;
   }
 
   .heading {
-    font-size: 26px;
+    font-size: 28px;
   }
 }

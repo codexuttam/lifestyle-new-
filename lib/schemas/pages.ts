@@ -33,4 +33,5 @@ export const pagesSchema = z.object({
 });
 
 export type PagesRecord = z.infer<typeof pagesSchema>;
+export type PagesContent = PagesRecord;
 export type PageCopyRecord = z.infer<typeof pageCopySchema>;

@@ -4,28 +4,28 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import {
   mailtoHref,
+  telHref,
+  whatsappHref,
   type SettingsRecord,
 } from "@/lib/schemas/settings";
 import styles from "./SiteFooter.module.css";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
+  { label: "Aura by Lifestyle (Flagship)", href: "/" },
+  { label: "Lifestyle Home Spaces (DPS Rd)", href: "/projects/lifestyle-homes" },
+  { label: "All Projects", href: "/projects" },
+  { label: "About Lifestyle", href: "/about" },
+  { label: "Amenities & Specs", href: "/services" },
   { label: "Review", href: "#testimonial-section" },
-  { label: "FAQ", href: "#faq-section" },
-  { label: "Paint Visualizer", href: "/paint-visualizer" },
-  { label: "Contact", href: "/contact" },
+  { label: "Aura FAQ", href: "#faq-section" },
+  { label: "Contact Site Office", href: "/contact" },
 ];
-
 
 export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
   const SOCIAL_LINKS = settings.social;
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  // No mailing-list backend is wired up yet, so this just acknowledges locally.
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setSubscribed(true);
@@ -34,41 +34,36 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
 
   return (
     <footer className={styles.footer} id="footer-section">
-      <video
-        src="https://cdn.jiro.build/Real%20Estate%20-%20Ospey/video/Header%20Bg%20Video%20Final.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className={styles.bgVideo}
-        aria-hidden="true"
-      />
-      <div className={styles.videoOverlay} />
-
       <div className={styles.container}>
         <div className={styles.topGrid}>
           <div className={styles.col}>
-            <Link href="/" className={styles.logo} aria-label="The Premium Construction — home">
+            <Link href="/" className={styles.logo} aria-label="Aura by Lifestyle — home">
               <img
-                src="/logo/logo-transparent.png"
-                alt="The Premium Construction"
-                width={104}
-                height={104}
+                src="/aura/aura-logo-official.png"
+                alt="Aura by Lifestyle"
+                width={78}
+                height={78}
                 className={styles.logoImg}
               />
             </Link>
             <div className={styles.contactInfo}>
-              <span className={styles.contactLabel}>Get in touch with us</span>
-              <a href={mailtoHref(settings)} className={styles.emailLink}>
+              <span className={styles.contactLabel}>Site & Booking Enquiries</span>
+              <a href={telHref(settings)} className={styles.emailLink} style={{ color: "#d4af37", fontWeight: 600 }}>
+                📞 +91 9730768982 / 777-0000-750
+              </a>
+              <a href={mailtoHref(settings)} className={styles.emailLink} style={{ marginTop: "4px" }}>
                 {settings.email}
               </a>
+              <div style={{ marginTop: "10px", fontSize: "12px", color: "#d4af37" }}>
+                MahaRERA: P5030002502915
+              </div>
             </div>
           </div>
 
           <div className={styles.col}>
             <div className={styles.colLabel}>
               <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Navigation</span>
+              <span className={styles.colLabelText}>Projects & Navigation</span>
             </div>
             <div className={styles.linkList}>
               {NAV_LINKS.map((link) =>
@@ -92,9 +87,18 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
           <div className={styles.col}>
             <div className={styles.colLabel}>
               <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Social</span>
+              <span className={styles.colLabelText}>Connect & Direct Help</span>
             </div>
             <div className={styles.linkList}>
+              <a
+                href={whatsappHref(settings)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.bigLink}
+                style={{ color: "#25D366" }}
+              >
+                Chat on WhatsApp
+              </a>
               {SOCIAL_LINKS.map((link) => (
                 <a
                   key={link.label}
@@ -114,16 +118,16 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
           <div className={styles.newsletterText}>
             <div className={styles.colLabel}>
               <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Newsletter</span>
+              <span className={styles.colLabelText}>Brochure & Pricing Request</span>
             </div>
             <p className={styles.newsletterCopy}>
-              Get updates on new builds and construction insights.
+              Get official cut sections, unit availability, and pricing sheets directly in your inbox.
             </p>
           </div>
 
           {subscribed ? (
             <p className={styles.formNote} role="status">
-              Thanks — we will be in touch at the address you gave us.
+              Thank you — our sales executive will share the brochure & pricing kit shortly.
             </p>
           ) : (
             <form className={styles.form} onSubmit={onSubmit}>
@@ -139,7 +143,7 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
                 />
               </div>
               <button type="submit" className={styles.subscribeBtn}>
-                Subscribe
+                Request Kit
               </button>
             </form>
           )}
@@ -151,16 +155,16 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
           <div className={`${styles.corner} ${styles.cornerBl}`} />
           <div className={`${styles.corner} ${styles.cornerBr}`} />
           <p className={styles.giantTitle} aria-hidden="true">
-            Premium
+            AURA
           </p>
         </div>
 
         <div className={styles.bottomBar}>
           <span className={styles.bottomItem}>
-            {settings.copyright} All rights reserved.
+            {settings.copyright}
           </span>
           <a href="#privacy" className={styles.bottomItem}>
-            Privacy Policy
+            Privacy & Disclaimer
           </a>
           <span className={styles.bottomItem}>{settings.address}</span>
         </div>

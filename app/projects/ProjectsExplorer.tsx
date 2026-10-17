@@ -90,63 +90,90 @@ export default function ProjectsExplorer({
       </p>
 
       <div className={styles.cards}>
-        {visible.map((project) => (
-          <article className={styles.card} key={project.id}>
-            <div className={styles.thumb}>
-              <img
-                src={project.img}
-                alt={project.title}
-                className={styles.thumbImg}
-                loading="lazy"
-              />
-              <span className={styles.categoryPill}>{project.category}</span>
-              <span
-                className={`${styles.statusPill}${
-                  project.status === "In Progress" ? ` ${styles.statusOngoing}` : ""
-                }`}
-              >
-                {project.status}
-              </span>
-            </div>
+        {visible.map((project) => {
+          const detailHref =
+            project.id === "lifestyle-homes"
+              ? "/projects/lifestyle-homes"
+              : project.id === "aura"
+              ? "/"
+              : `/projects/${project.id}`;
 
-            <div className={styles.cardBody}>
-              <div className={styles.cardHead}>
-                <h2 className={styles.cardTitle}>{project.title}</h2>
-                <p className={styles.cardMeta}>
-                  {project.location} · {project.year}
-                </p>
+          return (
+            <article className={styles.card} key={project.id}>
+              <a href={detailHref} className={styles.thumb}>
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  className={styles.thumbImg}
+                  loading="lazy"
+                />
+                <span className={styles.categoryPill}>{project.category}</span>
+                <span
+                  className={`${styles.statusPill}${
+                    project.status === "In Progress" ? ` ${styles.statusOngoing}` : ""
+                  }`}
+                >
+                  {project.status}
+                </span>
+              </a>
+
+              <div className={styles.cardBody}>
+                <div className={styles.cardHead}>
+                  <a
+                    href={detailHref}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <h2 className={styles.cardTitle}>{project.title}</h2>
+                  </a>
+                  <p className={styles.cardMeta}>
+                    {project.location} · {project.year}
+                  </p>
+                </div>
+
+                <p className={styles.summary}>{project.summary}</p>
+
+                <div className={styles.specs}>
+                  <div className={styles.spec}>
+                    <span className={styles.specLabel}>Beds</span>
+                    <span className={styles.specValue}>{project.beds}</span>
+                  </div>
+                  <div className={styles.spec}>
+                    <span className={styles.specLabel}>Baths</span>
+                    <span className={styles.specValue}>{project.baths}</span>
+                  </div>
+                  <div className={styles.spec}>
+                    <span className={styles.specLabel}>Area</span>
+                    <span className={styles.specValue}>{project.area}</span>
+                  </div>
+                </div>
+
+                <div className={styles.actionRow}>
+                  <div className={styles.priceBlock}>
+                    <span className={styles.priceLabel}>Price</span>
+                    <span className={styles.price}>{project.price}</span>
+                  </div>
+                  <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+                    <a
+                      href={detailHref}
+                      className={styles.tourBtn}
+                      style={{
+                        background: "rgba(212, 175, 55, 0.15)",
+                        borderColor: "rgba(212, 175, 55, 0.4)",
+                        color: "#d4af37",
+                      }}
+                    >
+                      <span>Explore Details →</span>
+                    </a>
+                    <a href={whatsappHref(settings)} className={styles.tourBtn}>
+                      <CalendarIcon />
+                      <span>Tour</span>
+                    </a>
+                  </div>
+                </div>
               </div>
-
-              <p className={styles.summary}>{project.summary}</p>
-
-              <div className={styles.specs}>
-                <div className={styles.spec}>
-                  <span className={styles.specLabel}>Beds</span>
-                  <span className={styles.specValue}>{project.beds}</span>
-                </div>
-                <div className={styles.spec}>
-                  <span className={styles.specLabel}>Baths</span>
-                  <span className={styles.specValue}>{project.baths}</span>
-                </div>
-                <div className={styles.spec}>
-                  <span className={styles.specLabel}>Area</span>
-                  <span className={styles.specValue}>{project.area}</span>
-                </div>
-              </div>
-
-              <div className={styles.actionRow}>
-                <div className={styles.priceBlock}>
-                  <span className={styles.priceLabel}>Price</span>
-                  <span className={styles.price}>{project.price}</span>
-                </div>
-                <a href={whatsappHref(settings)} className={styles.tourBtn}>
-                  <CalendarIcon />
-                  <span>Schedule Tour</span>
-                </a>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </>
   );

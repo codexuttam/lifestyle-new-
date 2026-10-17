@@ -81,16 +81,11 @@ export default function Properties({
 
         <div className={styles.largeWrapper}>
           <div className={styles.largeCard}>
-            <video
+            <img
               key={feature.id}
-              src={feature.video}
-              loop
-              muted
-              playsInline
-              autoPlay
-              preload="auto"
+              src={feature.img}
+              alt={feature.title}
               className={styles.media}
-              aria-label={`${feature.title} walkthrough`}
             />
             <div className={styles.largeScrim} />
             <div className={styles.pills}>
@@ -99,6 +94,27 @@ export default function Properties({
             </div>
             <div className={styles.largeTitleRow}>
               <h3 className={styles.largeTitle}>{feature.title}</h3>
+              <Link
+                href={
+                  feature.id === "lifestyle-homes"
+                    ? "/projects/lifestyle-homes"
+                    : feature.id === "aura"
+                    ? "#floor-plans"
+                    : "/projects"
+                }
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  fontSize: "0.85rem",
+                  color: "#d4af37",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  marginTop: "0.35rem",
+                }}
+              >
+                View Project Details →
+              </Link>
             </div>
           </div>
         </div>
@@ -107,20 +123,35 @@ export default function Properties({
           <div className={styles.smallRow}>
             {secondary.map((property) => (
               <div className={styles.smallCard} key={property.id}>
-                <video
+                <img
                   key={property.id}
-                  src={property.video}
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
+                  src={property.img}
+                  alt={property.title}
                   className={styles.media}
-                  aria-label={`${property.title} walkthrough`}
                 />
                 <div className={styles.smallScrim} />
                 <span className={styles.smallPill}>{property.category}</span>
                 <div className={styles.smallTitleRow}>
                   <h3 className={styles.smallTitle}>{property.title}</h3>
+                  <Link
+                    href={
+                      property.id === "lifestyle-homes"
+                        ? "/projects/lifestyle-homes"
+                        : property.id === "aura"
+                        ? "#floor-plans"
+                        : "/projects"
+                    }
+                    style={{
+                      display: "inline-block",
+                      fontSize: "0.75rem",
+                      color: "#d4af37",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                      marginTop: "0.2rem",
+                    }}
+                  >
+                    Explore →
+                  </Link>
                 </div>
               </div>
             ))}

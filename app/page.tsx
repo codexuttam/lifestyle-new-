@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import ExploreSection from "@/components/ExploreSection";
+import AuraFloorPlans from "@/components/AuraFloorPlans";
 import Properties from "@/components/Properties";
 import Services from "@/components/Services";
 import AllProperties from "@/components/AllProperties";
@@ -54,6 +55,9 @@ export default async function Home() {
             : ""
         }
       />
+
+      {/* SECTION 1bb: AURA ARCHITECTURAL PLANS, 3D CUT-SECTIONS & CONNECTIVITY */}
+      <AuraFloorPlans />
 
       {/* SECTION 1c: PROPERTIES */}
       <Properties projects={featuredProjects} content={home.properties} />

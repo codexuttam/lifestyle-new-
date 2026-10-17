@@ -24,16 +24,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 const STORY_IMAGES = [
   {
-    src: "/images/project_1_1779380254029.png",
-    alt: "Casa Meridian, a completed The Premium Construction home",
+    src: "/aura/hero-building-4k.jpg",
+    alt: "Aura by Lifestyle 15-Storey Tower in Congress Nagar, Amravati",
   },
   {
-    src: "/images/gallery_2_1779379510372.png",
-    alt: "A site under construction by The Premium Construction",
+    src: "/assets/projects/lifestyle-homes/building/building-hero-polished.jpg",
+    alt: "Lifestyle Home Spaces, ready-for-possession landmark on DPS Road, Amravati",
   },
   {
-    src: "/images/project_3_1779380290833.png",
-    alt: "Arken House, a completed The Premium Construction home",
+    src: "/aura/rooftop-amenities-3d.jpg",
+    alt: "Aura Sky Oasis rooftop amenities deck and sports arena",
   },
 ];
 

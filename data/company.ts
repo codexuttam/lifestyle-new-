@@ -1,98 +1,90 @@
-/** Company facts shared by the homepage and the dedicated /about page. */
+/** Company facts for Lifestyle Homes Spaces & Aura by Lifestyle. */
 
 export const STATS = [
-  { target: 12, suffix: "+", label: "Years of Experience" },
-  { target: 340, suffix: "+", label: "Homes Built" },
-  { target: 98, suffix: "%", label: "Client Satisfaction" },
-  { target: 18, suffix: "", label: "Cities Across India" },
+  { target: 15, suffix: " Storeys", label: "Skyline Benchmark" },
+  { target: 100, suffix: "%", label: "Vastu Compliant" },
+  { target: 100, suffix: "%", label: "MahaRERA Registered" },
+  { target: 2, suffix: " Landmarks", label: "Projects In Amravati" },
 ];
 
-/** How the company got here, oldest first. */
+/** How Lifestyle Homes Spaces evolved. */
 export const MILESTONES = [
   {
-    year: "2012",
-    title: "First plot, first slab",
-    text: "Started as a three-person site team in Gurugram taking on single-plot residential builds.",
+    year: "2021",
+    title: "Vision & Foundations",
+    text: "Founded with a mission to bring world-class architecture, elite residences, and transparency to Amravati.",
   },
   {
-    year: "2016",
-    title: "In-house design studio",
-    text: "Brought architecture and structural design under the same roof, so drawings and site stopped disagreeing.",
-  },
-  {
-    year: "2019",
-    title: "Fixed-price contracts",
-    text: "Moved every project onto a fixed-price contract with a published bill of materials — no mid-build surprises.",
-  },
-  {
-    year: "2022",
-    title: "100th handover",
-    text: "Crossed a hundred completed homes across Delhi NCR and opened a dedicated aftercare desk.",
+    year: "2023",
+    title: "Lifestyle Home Spaces Launch",
+    text: "Commenced Lifestyle Home Spaces on DPS Road, Parvati Nagar, creating 30 spacious suites and 24 integrated high-street shops.",
   },
   {
     year: "2025",
-    title: "Interiors and renovation",
-    text: "Added full interior fit-out and structural renovation, so a house can be taken on at any stage of its life.",
+    title: "Handover & Immediate Possession",
+    text: "Completed Lifestyle Home Spaces with verified occupancy and immediate possession for discerning homeowners.",
+  },
+  {
+    year: "2026",
+    title: "Aura by Lifestyle Unveiled",
+    text: "Unveiled Aura on Congress Nagar Road — Amravati's premier 15-storey highrise tower with rooftop sky pool, sports turf, and commercial promenade.",
   },
 ];
 
-/** The build process, start to handover. */
+/** The build process for Lifestyle landmarks. */
 export const PROCESS_STEPS = [
   {
-    title: "Site Visit & Assessment",
-    text: "We visit your plot, study orientation, soil, and surroundings.",
+    title: "Architectural Genius & Vastu",
+    text: "Crafted by cape design studio (Ar. Rohit Punshi) and Suhas Junankar & Associates with 100% Vastu compliance.",
   },
   {
-    title: "Design & Planning",
-    text: "Architectural drawings, structural design, and 3D visualization delivered.",
+    title: "Structural Engineering & RCC",
+    text: "Engineered by Patankar Consultants with heavy-duty RCC frame structure and earthquake-resistant standards.",
   },
   {
-    title: "Contract & Approval",
-    text: "Transparent fixed-price contract. Municipal approvals handled by us.",
+    title: "High-Specification Materials",
+    text: "800x1600 vitrified flooring, three-track UPVC/aluminium windows, concealed CPVC/UPVC plumbing with Jaquar fittings.",
   },
   {
-    title: "Foundation & Structure",
-    text: "RCC framework built to IS code with premium TMT steel and M25 concrete.",
+    title: "Elevator & Safety Infrastructure",
+    text: "Four elevators (2 regular, 1 stretcher, 1 service) with full generator backup and 24x7 CCTV coverage.",
   },
   {
-    title: "Finishing & Interiors",
-    text: "Plaster, flooring, electrical, plumbing, tiling, paint — all coordinated.",
+    title: "Rooftop Sky Amenities",
+    text: "Rooftop swimming pool, kids pool, multi-sports turf, jogging track, viewing deck, and solar power integration.",
   },
   {
-    title: "Handover & Warranty",
-    text: "Final walkthrough, snagging list cleared, keys handed over with warranty documents.",
+    title: "MahaRERA Handover & Warranty",
+    text: "Complete legal compliance under MahaRERA (P5030002502915), clear titles, and structured handover.",
   },
 ];
 
-/** What we hold ourselves to, stated plainly enough to be checked. */
 export const VALUES = [
   {
-    title: "One accountable team",
-    text: "Design, approvals, structure and finishing sit with the same firm, so nobody can point at somebody else when something slips.",
+    title: "Trust and Transparency",
+    text: "Every square foot is accounted for. Full transparency on carpet areas, materials, and approvals from day one.",
   },
   {
-    title: "Priced before we start",
-    text: "A fixed-price contract with a published bill of materials. If the scope does not change, the number does not change.",
+    title: "Life Beyond Imagination",
+    text: "We believe homes should not merely be shelters; they must be spaces that elevate identity, health, and family happiness.",
   },
   {
-    title: "Tested, not assumed",
-    text: "Cube tests on every concrete pour and mill certificates on every steel batch, with the reports shared with you.",
+    title: "Engineered For Longevity",
+    text: "Tested materials, structural safety audits by licensed engineers, and robust backup systems ensuring lifelong peace of mind.",
   },
   {
-    title: "Answerable after handover",
-    text: "A 30-month structural warranty and a maintenance desk that still picks up the phone years later.",
+    title: "Prime Strategic Locations",
+    text: "Congress Nagar Road and DPS Road — positioning you at the epicenter of Amravati's growth, schools, and conveniences.",
   },
 ];
 
 export const BRANDS = [
+  "Jaquar",
+  "Asian Paints",
   "UltraTech Cement",
   "Tata Steel",
   "Havells",
-  "Kohler",
-  "Asian Paints",
+  "Saint-Gobain",
   "Kajaria",
   "Legrand",
-  "Jaquar",
-  "Saint-Gobain",
-  "Somany",
 ];

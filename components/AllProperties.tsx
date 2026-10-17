@@ -112,7 +112,18 @@ export default async function AllProperties({
                     <span className={styles.categoryBadge}>{listing.category}</span>
                     <span className={styles.badge}>{listing.status}</span>
                   </div>
-                  <h3 className={styles.cardTitle}>{listing.title}</h3>
+                  <Link
+                    href={
+                      listing.id === "lifestyle-homes"
+                        ? "/projects/lifestyle-homes"
+                        : listing.id === "aura"
+                        ? "#floor-plans"
+                        : "/projects"
+                    }
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <h3 className={styles.cardTitle}>{listing.title}</h3>
+                  </Link>
                 </div>
               </div>
 
@@ -160,16 +171,11 @@ export default async function AllProperties({
       </div>
 
       <div className={styles.banner}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <img
+          src="/aura/aura-hero-clean-4k.jpg"
+          alt="Aura by Lifestyle 15-Storey Tower Showcase"
           className={styles.bannerVideo}
-          aria-hidden="true"
-        >
-          <source src={content.bannerVideo} type="video/mp4" />
-        </video>
+        />
       </div>
     </section>
   );

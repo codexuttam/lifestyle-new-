@@ -76,3 +76,4 @@ export const homeSchema = z.object({
 });
 
 export type HomeRecord = z.infer<typeof homeSchema>;
+export type HomeContent = HomeRecord;

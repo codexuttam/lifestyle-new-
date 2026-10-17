@@ -1,102 +1,71 @@
 /**
- * Per-route page copy, including the SEO metadata block.
- *
- * Keeping these here means headings and search-result text can be reworded
- * from the CMS without a deploy. Records (projects, services, testimonials)
- * live in their own collections; this is only the surrounding chrome.
+ * Per-route page copy, including the SEO metadata block for Lifestyle Home Spaces & Aura.
  */
 
-export type PageCopy = {
-  metaTitle: string;
-  metaDescription: string;
-  badge: string;
-  title: string;
-  intro: string;
-};
-
-export type PagesContent = {
-  about: PageCopy & {
-    storyTitle: string;
-    storyParagraphs: string[];
-    projectsCtaLabel: string;
-    servicesCtaLabel: string;
-    valuesTitle: string;
-    milestonesTitle: string;
-    processTitle: string;
-    brandsTitle: string;
-    brandsIntro: string;
-    ctaTitle: string;
-    ctaText: string;
-    ctaLabel: string;
-  };
-  projects: PageCopy;
-  services: PageCopy;
-  contact: PageCopy & { sidebarTitle: string };
-  paintVisualizer: PageCopy;
-};
+import type { PagesContent } from "@/lib/schemas/pages";
 
 export const PAGES_CONTENT: PagesContent = {
   about: {
-    metaTitle: "About Us | The Premium Construction",
+    metaTitle: "About Us | Lifestyle Homes Spaces & Aura Amravati",
     metaDescription:
-      "Who we are: a turnkey residential builder working across Delhi NCR since 2012 — 340+ homes delivered on fixed-price contracts, with design, approvals, structure and finishing handled by one team.",
-    badge: "About us",
-    title: "We Build Homes People Stay In",
+      "Lifestyle Homes Spaces brings a new dimension of living to Amravati with Aura by Lifestyle (Congress Nagar Road) and Lifestyle Home Spaces (DPS Road).",
+    badge: "About Lifestyle",
+    title: "Redefining Urban Living In Amravati",
     intro:
-      "The Premium Construction is a turnkey residential builder working across Delhi NCR. We combine engineering rigour with expert industry knowledge to simplify designing, building and owning a home — one team, one contract, from bare plot to handover.",
-    storyTitle: "How we got here",
+      "Lifestyle Homes Spaces brings a new dimension of living to Amravati by offering premium, elite-class residences that redefine your identity and status. Built on the pillars of trust and transparency, our landmark projects elevate life to benchmark standards.",
+    storyTitle: "Our Journey In Amravati",
     storyParagraphs: [
-      "We started in 2012 with a three-person site team and a single plot in Gurugram. What we kept running into was the same thing every owner complains about — an architect blaming the contractor, a contractor blaming the drawings, and a budget that drifted every month.",
-      "So we built the firm to remove that gap. Architecture, structural design, approvals, construction and finishing all sit with us, on one fixed-price contract, with a dedicated site manager you can call directly. Twelve years and 340 homes later, that is still the whole idea.",
+      "Delivering landmark projects is the vision and mission of Lifestyle Homes Spaces. We recognized that homebuyers in Amravati aspire to world-class architecture, uninterrupted sky views, modern fitness amenities, and transparent agreements.",
+      "With Lifestyle Home Spaces on DPS Road delivered and ready for immediate possession, and our flagship 15-storey highrise Aura by Lifestyle rising in Congress Nagar, we continue to establish new milestones in craftsmanship and community living.",
     ],
-    projectsCtaLabel: "See our projects",
-    servicesCtaLabel: "Browse services",
-    valuesTitle: "What we hold ourselves to",
-    milestonesTitle: "Milestones",
-    processTitle: "How a build runs",
-    brandsTitle: "Materials we build with",
+    projectsCtaLabel: "Explore our projects",
+    servicesCtaLabel: "View project specifications",
+    valuesTitle: "The Pillars We Stand On",
+    milestonesTitle: "Key Milestones",
+    processTitle: "How We Craft Landmarks",
+    brandsTitle: "Verified High-Grade Materials",
     brandsIntro:
-      "The bill of materials is published in your contract, and these are the names on it. No substitutions without your sign-off.",
-    ctaTitle: "Have a plot in mind?",
+      "Every detail from Jaquar fittings and 800x1600 vitrified tiles to UPVC powder-coated windows is vetted for enduring luxury.",
+    ctaTitle: "Ready to step into Aura?",
     ctaText:
-      "Send us the location and plot size — we will come back with a feasibility read and an honest cost range before you commit to anything.",
-    ctaLabel: "Talk to us on WhatsApp",
+      "Visit our site office on Congress Nagar Road, Amravati. Our team will walk you through cut section models, floor plans, and financial options.",
+    ctaLabel: "Connect on WhatsApp",
   },
   projects: {
-    metaTitle: "Projects | The Premium Construction",
+    metaTitle: "Projects | Aura & Lifestyle Home Spaces Amravati",
     metaDescription:
-      "Browse every home, villa, office and renovation we have delivered across Delhi NCR — filter by category to find work closest to your own plot.",
-    badge: "Projects",
-    title: "Everything We Have Built",
+      "Explore Aura by Lifestyle on Congress Nagar Road and Lifestyle Home Spaces on DPS Road. 2 & 3 BHK luxury residences and commercial spaces in Amravati.",
+    badge: "Our Landmarks",
+    title: "Signature Developments in Amravati",
     intro:
-      "Homes, villas, offices, interiors and full renovations — every project below was handled turnkey by one team, from the first site visit to handover. Filter by category to see the work closest to what you have in mind.",
+      "From our iconic 15-storey highrise tower Aura by Lifestyle in Congress Nagar to our ready-for-possession enclave Lifestyle Home Spaces on DPS Road — discover spaces crafted for distinction.",
   },
   services: {
-    metaTitle: "Services | The Premium Construction",
+    metaTitle: "Specifications & Amenities | Aura by Lifestyle",
     metaDescription:
-      "Construction, design, interiors, renovation and aftercare — every service we offer across Delhi NCR, with indicative pricing and timelines. Filter by category.",
-    badge: "Services",
-    title: "Everything We Handle For You",
+      "Explore Aura's rooftop sky oasis, infinity pool, multi-sports turf, 4 elevators, Jaquar fittings, and 800x1600 vitrified flooring in Amravati.",
+    badge: "Amenities & Specs",
+    title: "Engineered For A Life Beyond Imagination",
     intro:
-      "From a bare plot to a finished home, and long after the keys are handed over — one team, transparent pricing, and a dedicated site manager on every job. Filter by category to find the work you need.",
+      "From the rooftop sky pool and sports turf down to the 4 elevators with generator backup and 24x7 CCTV coverage, every corner of Aura pulses with thoughtful engineering.",
   },
   contact: {
-    metaTitle: "Contact Us | The Premium Construction",
+    metaTitle: "Contact Us | Aura by Lifestyle & Lifestyle Home Spaces",
     metaDescription:
-      "Book a free site visit. Tell us your plot location and size and we will come back with a feasibility read and an honest cost range across Delhi NCR.",
-    badge: "Contact us",
-    title: "Book A Free Site Visit",
+      "Contact Lifestyle Homes Spaces site office at Congress Nagar Road, Camp, Amravati. Call 777-0000-750 or WhatsApp +91 9730768982 for bookings and brochures.",
+    badge: "Contact Us",
+    title: "Schedule Your Private Site Tour",
     intro:
-      "Tell us where the plot is and roughly what you have in mind. We will visit, study orientation and soil, and come back with a feasibility read and an honest cost range — before you commit to anything.",
-    sidebarTitle: "Prefer to talk?",
+      "Step into our site office on Congress Nagar Road, Next to Dreamz Signature, Camp, Amravati. Walk through the 3D cut sections, sample finishes, and experience the horizon.",
+    sidebarTitle: "Direct Booking Contacts",
   },
   paintVisualizer: {
-    metaTitle: "Paint Visualizer | The Premium Construction",
+    metaTitle: "Paint Visualizer | Aura by Lifestyle",
     metaDescription:
-      "See how any paint colour will look on your walls before you buy. Try 30 curated shades on a blank room or your own photo, then copy the exact HEX, RGB, and HSL codes.",
-    badge: "Paint Visualizer",
-    title: "See The Colour Before You Buy It",
+      "Visualize wall textures and designer paint shades for your new 2 BHK or 3 BHK residence at Aura by Lifestyle.",
+    badge: "Interactive Preview",
+    title: "Envision Your Dream Home Palette",
     intro:
-      "Start with a bare white room — pick a wall or the ceiling, pick a colour, and it fills instantly. Prefer something real? Upload a photo of your own — everything runs in your browser, and your photo never leaves your device. When you find the one, copy the exact colour code and send it to your painter.",
+      "Explore curated interior shades for your master suite, living room, and children's bedroom. See how colors interact with natural light before finalizing your interior decor.",
   },
 };
