@@ -170,8 +170,8 @@
 .answerText {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #9ca3af;
-  font-size: 18px;
+  color: #e2e8f0;
+  font-size: 17px;
   line-height: 28px;
   letter-spacing: -0.3px;
 }
@@ -191,20 +191,27 @@
 
   .title {
     font-size: 64px;
+    color: #ffffff !important;
   }
 }
 
 @media (max-width: 767px) {
   .section {
-    padding: 64px 24px;
+    padding: 60px 16px;
   }
 
   .container {
     gap: 32px;
   }
 
+  .badgeText {
+    color: #f5d77f !important;
+  }
+
   .title {
     font-size: 36px;
+    color: #ffffff !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
   }
 
   .list {
@@ -212,11 +219,13 @@
   }
 
   .trigger {
-    padding: 20px;
+    padding: 18px;
   }
 
   .question {
-    font-size: 20px;
+    font-size: 19px;
+    color: #ffffff !important;
+    font-weight: 600;
   }
 
   .answerWrapper {
@@ -225,10 +234,15 @@
 
   .answerInner {
     padding: 16px;
+    background: rgba(14, 18, 26, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.2);
   }
 
   .answerText {
-    font-size: 16px;
+    font-size: 15px;
+    color: #e2e8f0 !important;
+    line-height: 1.6;
+    font-weight: 400;
   }
 }
 

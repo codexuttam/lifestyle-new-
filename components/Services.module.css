@@ -204,6 +204,14 @@
     margin-bottom: 28px;
   }
 
+  .heading {
+    color: #ffffff !important;
+  }
+
+  .intro {
+    color: #f1f5f9 !important;
+  }
+
   .grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -211,33 +219,39 @@
 
 @media (max-width: 767px) {
   .services {
-    padding: 64px 20px;
+    padding: 60px 16px;
+  }
+
+  .badgeText {
+    color: #f5d77f !important;
   }
 
   .heading {
     font-size: 34px;
-    color: #ffffff;
+    color: #ffffff !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
   }
 
   .intro {
-    font-size: 15px;
-    color: #e2e8f0;
+    font-size: 15.5px;
+    color: #f1f5f9 !important;
+    line-height: 1.6;
   }
 
   .card {
     padding: 24px;
-    background: rgba(14, 18, 26, 0.95);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(10, 14, 22, 0.96) !important;
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
   }
 
   .cardTitle {
     font-size: 24px;
-    color: #ffffff;
+    color: #ffffff !important;
   }
 
   .cardText {
-    font-size: 14px;
-    color: #e2e8f0;
-    line-height: 1.55;
+    font-size: 14.5px;
+    color: #e2e8f0 !important;
+    line-height: 1.6;
   }
 }

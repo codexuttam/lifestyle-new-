@@ -362,21 +362,33 @@
 
   .heading {
     font-size: 34px;
+    color: #ffffff !important;
   }
 
   .largeTitle {
     font-size: 36px;
+    color: #ffffff !important;
+  }
+
+  .desc {
+    color: #e2e8f0 !important;
   }
 }
 
 @media (max-width: 767px) {
   .properties {
-    padding: 64px 20px;
+    padding: 56px 16px;
+  }
+
+  .tagText {
+    color: #f5d77f !important;
+    font-weight: 700;
   }
 
   .heading {
     font-size: 28px;
-    color: #ffffff;
+    color: #ffffff !important;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
   }
 
   .largeScrim,
@@ -384,22 +396,22 @@
     background: linear-gradient(
       to top,
       rgba(6, 9, 14, 0.98) 0%,
-      rgba(6, 9, 14, 0.6) 45%,
-      rgba(6, 9, 14, 0.2) 75%,
+      rgba(6, 9, 14, 0.65) 45%,
+      rgba(6, 9, 14, 0.25) 75%,
       transparent 100%
     );
   }
 
   .largeTitle,
   .smallTitle {
-    color: #ffffff;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+    color: #ffffff !important;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98);
   }
 
   .desc {
-    color: #e2e8f0;
+    color: #f1f5f9 !important;
     font-size: 15px;
-    line-height: 1.55;
+    line-height: 1.6;
   }
 
   .smallRow {
@@ -413,5 +425,10 @@
   .bottomRow {
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
+  }
+
+  .navButtons {
+    align-self: flex-start;
   }
 }

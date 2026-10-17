@@ -379,34 +379,37 @@
 
   .heading {
     font-size: 40px;
+    color: #ffffff !important;
   }
 }
 
 @media (max-width: 767px) {
   .section {
-    padding: 64px 20px;
+    padding: 60px 16px;
   }
 
   .heading {
     font-size: 32px;
-    color: #ffffff;
+    color: #ffffff !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
   }
 
   .card {
     padding: 24px;
-    background: rgba(14, 18, 26, 0.95);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(10, 14, 22, 0.96) !important;
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
   }
 
   .cardTitle {
-    color: #ffffff;
+    color: #ffffff !important;
     font-size: 26px;
+    font-weight: 700;
   }
 
   .cardDesc {
-    color: #e2e8f0;
-    font-size: 14px;
-    line-height: 1.55;
+    color: #f1f5f9 !important;
+    font-size: 14.5px;
+    line-height: 1.6;
   }
 
   .cardHeader {
@@ -415,7 +418,7 @@
 
   .thumb {
     width: 100%;
-    height: 180px;
+    height: 190px;
   }
 
   .specs {
@@ -424,13 +427,27 @@
   }
 
   .specLabel {
-    color: #cbd5e1;
+    color: #cbd5e1 !important;
     font-size: 12.5px;
+    font-weight: 500;
   }
 
   .specValue {
-    color: #f5d77f;
+    color: #f5d77f !important;
     font-size: 16px;
+    font-weight: 700;
+  }
+
+  .priceLabel {
+    color: #cbd5e1 !important;
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+
+  .priceValue {
+    color: #ffffff !important;
+    font-size: 20px;
+    font-weight: 700;
   }
 
   .actionRow {

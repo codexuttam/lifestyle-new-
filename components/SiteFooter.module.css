@@ -98,7 +98,7 @@
 
 .colLabelText {
   font-family: var(--font-inter), sans-serif;
-  color: #7a7a7a;
+  color: #cbd5e1;
   font-size: 16px;
   letter-spacing: -0.025em;
 }
@@ -148,7 +148,7 @@
 .newsletterCopy {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #9a9a9a;
+  color: #e2e8f0;
   font-size: 17px;
   letter-spacing: -0.025em;
 }
@@ -326,14 +326,14 @@
   gap: 24px;
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #7a7a7a;
+  color: #cbd5e1;
   font-family: var(--font-inter), sans-serif;
 }
 
 .bottomItem {
   font-size: 16px;
   text-decoration: none;
-  color: inherit;
+  color: #cbd5e1;
   transition: color 0.3s ease;
 }
 
@@ -367,16 +367,20 @@ a.bottomItem:hover {
 
 @media (max-width: 767px) {
   .footer {
-    padding: 64px 24px;
+    padding: 60px 16px;
   }
 
   .topGrid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
+    gap: 40px;
   }
 
   .col {
     grid-column: auto;
+  }
+
+  .colLabelText {
+    color: #cbd5e1 !important;
   }
 
   .bigLink {
@@ -389,9 +393,19 @@ a.bottomItem:hover {
     gap: 12px;
   }
 
+  .newsletterCopy {
+    color: #e2e8f0 !important;
+    font-size: 15px;
+  }
+
   .form {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .formNote {
+    color: #f5d77f !important;
+    font-size: 13.5px;
   }
 
   .subscribeBtn {
@@ -405,5 +419,12 @@ a.bottomItem:hover {
   .bottomBar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+    color: #cbd5e1 !important;
+  }
+
+  .bottomItem {
+    font-size: 14.5px;
+    color: #cbd5e1 !important;
   }
 }
