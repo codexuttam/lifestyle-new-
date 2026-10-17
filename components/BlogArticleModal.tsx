@@ -12,6 +12,106 @@ interface BlogArticleModalProps {
   onOpenEnquiry?: (projectTitle?: string) => void;
 }
 
+/**
+ * Parses inline markdown:
+ * - Links: [label](url) -> Clickable anchor
+ * - Bold: **text** -> <strong>
+ * - Code: `code` -> <code>
+ * - Italic: *text* -> <em>
+ */
+export function renderInlineFormatting(text: string): React.ReactNode {
+  if (!text) return text;
+  const tokens: React.ReactNode[] = [];
+  let keyIndex = 0;
+
+  // Regex to match markdown links [label](url), bold **text**, inline code `code`, italic *text*
+  const regex = /(\[(.*?)\]\((.*?)\)|\*\*(.*?)\*\*|`([^`]+)`|\*(.*?)\*)/g;
+  let match: RegExpExecArray | null;
+  let lastIndex = 0;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push(text.substring(lastIndex, match.index));
+    }
+
+    if (match[2] !== undefined && match[3] !== undefined) {
+      // Markdown Link: [label](url)
+      const linkLabel = match[2];
+      const linkUrl = match[3];
+      const isExternal = linkUrl.startsWith("http://") || linkUrl.startsWith("https://");
+
+      tokens.push(
+        <a
+          key={`lnk-${keyIndex++}`}
+          href={linkUrl}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          style={{
+            color: "#f5d77f",
+            textDecoration: "underline",
+            textUnderlineOffset: "3px",
+            textDecorationColor: "rgba(212, 175, 55, 0.6)",
+            fontWeight: 600,
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+            wordBreak: "break-word",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#ffffff";
+            e.currentTarget.style.textDecorationColor = "#ffffff";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "#f5d77f";
+            e.currentTarget.style.textDecorationColor = "rgba(212, 175, 55, 0.6)";
+          }}
+        >
+          {linkLabel}
+        </a>
+      );
+    } else if (match[4] !== undefined) {
+      // Bold: **text**
+      tokens.push(
+        <strong key={`bld-${keyIndex++}`} style={{ fontWeight: 700, color: "#ffffff" }}>
+          {match[4]}
+        </strong>
+      );
+    } else if (match[5] !== undefined) {
+      // Inline Code: `code`
+      tokens.push(
+        <code
+          key={`cd-${keyIndex++}`}
+          style={{
+            fontFamily: "monospace",
+            fontSize: "0.86em",
+            background: "rgba(255, 255, 255, 0.08)",
+            padding: "2px 6px",
+            borderRadius: "4px",
+            color: "#f5d77f",
+            border: "1px solid rgba(212, 175, 55, 0.25)",
+          }}
+        >
+          {match[5]}
+        </code>
+      );
+    } else if (match[6] !== undefined) {
+      // Italic: *text*
+      tokens.push(
+        <em key={`it-${keyIndex++}`} style={{ fontStyle: "italic", color: "#cfd3dc" }}>
+          {match[6]}
+        </em>
+      );
+    }
+
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    tokens.push(text.substring(lastIndex));
+  }
+
+  return tokens.length > 0 ? tokens : text;
+}
+
 export default function BlogArticleModal({
   blog,
   onClose,
@@ -58,6 +158,8 @@ export default function BlogArticleModal({
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
+  const primaryImage = blog.image || "/aura/aura-hero-clean-4k.jpg";
+
   return (
     <div
       style={{
@@ -67,8 +169,8 @@ export default function BlogArticleModal({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(6, 9, 14, 0.9)",
-        backdropFilter: "blur(16px)",
+        backgroundColor: "rgba(6, 9, 14, 0.92)",
+        backdropFilter: "blur(18px)",
         padding: "1rem",
         overflowY: "auto",
       }}
@@ -81,13 +183,13 @@ export default function BlogArticleModal({
       <div
         style={{
           width: "100%",
-          maxWidth: "880px",
+          maxWidth: "920px",
           maxHeight: "92vh",
           overflowY: "auto",
           background: "linear-gradient(135deg, #0d1017 0%, #06080c 100%)",
           border: "1px solid rgba(212, 175, 55, 0.35)",
           borderRadius: "24px",
-          padding: "2.2rem",
+          padding: "2rem",
           boxShadow: "0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.15)",
           color: "#ffffff",
           position: "relative",
@@ -95,8 +197,17 @@ export default function BlogArticleModal({
           fontFamily: "var(--font-inter), sans-serif",
         }}
       >
-        {/* Top Header Actions */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
+        {/* Top Header Actions (Sticky Feel) */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "1.5rem",
+            paddingBottom: "1rem",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          }}
+        >
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.6rem" }}>
             <span
               style={{
@@ -127,12 +238,12 @@ export default function BlogArticleModal({
               ✓ MahaRERA Verified
             </span>
             {blog.readTime && (
-              <span style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.6)" }}>
+              <span style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.65)" }}>
                 ⏱ {blog.readTime}
               </span>
             )}
             {blog.date && (
-              <span style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.6)" }}>
+              <span style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.65)" }}>
                 📅 {blog.date}
               </span>
             )}
@@ -198,33 +309,87 @@ export default function BlogArticleModal({
 
         {/* Excerpt */}
         <p style={{ color: "#cfd3dc", fontSize: "1.05rem", lineHeight: 1.6, marginBottom: "1.5rem" }}>
-          {blog.excerpt}
+          {renderInlineFormatting(blog.excerpt)}
         </p>
 
-        {/* Cover Image */}
-        {blog.image && (
-          <div
+        {/* Featured Visual Header Image - Always Rendered */}
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "clamp(240px, 32vw, 380px)",
+            borderRadius: "18px",
+            overflow: "hidden",
+            marginBottom: "2rem",
+            border: "1px solid rgba(212, 175, 55, 0.35)",
+            boxShadow: "0 14px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.15)",
+            background: "#12141c",
+          }}
+        >
+          <img
+            src={primaryImage}
+            alt={blog.title}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/aura/aura-hero-clean-4k.jpg";
+            }}
             style={{
               width: "100%",
-              height: "340px",
-              borderRadius: "18px",
-              overflow: "hidden",
-              marginBottom: "2rem",
-              border: "1px solid rgba(212, 175, 55, 0.25)",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.6)",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              display: "block",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to top, rgba(6, 9, 14, 0.9) 0%, rgba(6, 9, 14, 0.25) 50%, transparent 100%)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "16px",
+              left: "20px",
+              right: "20px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "8px",
+              pointerEvents: "none",
             }}
           >
-            <img
-              src={blog.image}
-              alt={blog.title}
+            <span
               style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
+                fontFamily: "monospace",
+                color: "#f5d77f",
+                fontSize: "0.8rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                fontWeight: 700,
+                textShadow: "0 2px 8px rgba(0,0,0,0.8)",
               }}
-            />
+            >
+              🏛️ Lifestyle Architectural Insights · Amravati
+            </span>
+            <span
+              style={{
+                fontFamily: "monospace",
+                fontSize: "0.72rem",
+                color: "#ffffff",
+                background: "rgba(6, 9, 14, 0.8)",
+                padding: "4px 10px",
+                borderRadius: "6px",
+                border: "1px solid rgba(212, 175, 55, 0.3)",
+              }}
+            >
+              Full Research Edition
+            </span>
           </div>
-        )}
+        </div>
 
         {/* Key Highlights */}
         {blog.highlights && blog.highlights.length > 0 && (
@@ -249,10 +414,10 @@ export default function BlogArticleModal({
             >
               Key Architectural &amp; Investment Takeaways
             </h4>
-            <ul style={{ margin: 0, paddingLeft: "1.2rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <ul style={{ margin: 0, paddingLeft: "1.2rem", display: "flex", flexDirection: "column", gap: "0.55rem" }}>
               {blog.highlights.map((h, i) => (
                 <li key={i} style={{ color: "rgba(255, 255, 255, 0.9)", fontSize: "0.92rem", lineHeight: 1.55 }}>
-                  {h}
+                  {renderInlineFormatting(h)}
                 </li>
               ))}
             </ul>
@@ -262,7 +427,7 @@ export default function BlogArticleModal({
         {/* Article Body: Markdown Rendered or Formatted Paragraphs */}
         <div style={{ color: "rgba(255, 255, 255, 0.88)", fontSize: "1.02rem", lineHeight: 1.8 }}>
           {blog.markdown ? (
-            renderMarkdownContent(blog.markdown)
+            renderMarkdownContent(blog.markdown, blog.title)
           ) : (
             blog.content.map((p, i) => renderParagraph(p, i))
           )}
@@ -462,34 +627,34 @@ export default function BlogArticleModal({
 function renderParagraph(paragraph: string, index: number) {
   if (paragraph.startsWith("# ")) {
     return (
-      <h2 key={index} style={{ fontSize: "1.6rem", color: "#f5d77f", marginTop: "1.8rem", marginBottom: "0.8rem" }}>
-        {paragraph.replace("# ", "")}
+      <h2 key={index} style={{ fontSize: "1.6rem", color: "#f5d77f", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
+        {renderInlineFormatting(paragraph.replace("# ", ""))}
       </h2>
     );
   }
   if (paragraph.startsWith("## ")) {
     return (
-      <h3 key={index} style={{ fontSize: "1.35rem", color: "#ffffff", marginTop: "1.5rem", marginBottom: "0.6rem" }}>
-        {paragraph.replace("## ", "")}
+      <h3 key={index} style={{ fontSize: "1.35rem", color: "#ffffff", marginTop: "1.5rem", marginBottom: "0.6rem", fontWeight: 700 }}>
+        {renderInlineFormatting(paragraph.replace("## ", ""))}
       </h3>
     );
   }
   if (paragraph.startsWith("### ")) {
     return (
-      <h4 key={index} style={{ fontSize: "1.15rem", color: "#f5d77f", marginTop: "1.2rem", marginBottom: "0.5rem" }}>
-        {paragraph.replace("### ", "")}
+      <h4 key={index} style={{ fontSize: "1.15rem", color: "#f5d77f", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
+        {renderInlineFormatting(paragraph.replace("### ", ""))}
       </h4>
     );
   }
   return (
-    <p key={index} style={{ marginBottom: "1.25rem" }}>
-      {paragraph}
+    <p key={index} style={{ marginBottom: "1.25rem", color: "rgba(255, 255, 255, 0.88)", lineHeight: 1.8 }}>
+      {renderInlineFormatting(paragraph)}
     </p>
   );
 }
 
-/** Markdown parser that recognizes tables, blockquotes, headings, lists */
-function renderMarkdownContent(markdown: string) {
+/** Markdown parser that recognizes tables, blockquotes, headings, lists, images, links */
+function renderMarkdownContent(markdown: string, articleTitle?: string) {
   const blocks = markdown.split(/\n\s*\n/);
   const elements: React.ReactNode[] = [];
 
@@ -507,6 +672,49 @@ function renderMarkdownContent(markdown: string) {
       return;
     }
 
+    // Skip the top # Heading if it duplicates the article title
+    if (trimmed.startsWith("# ")) {
+      const headingText = trimmed.replace(/^#\s+/, "").trim();
+      if (articleTitle && headingText.toLowerCase() === articleTitle.toLowerCase()) {
+        return; // Already rendered prominently in modal header
+      }
+      elements.push(
+        <h2 key={`h1-${idx}`} style={{ fontSize: "1.6rem", color: "#f5d77f", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
+          {renderInlineFormatting(headingText)}
+        </h2>
+      );
+      return;
+    }
+
+    // Table of Contents
+    if (trimmed.startsWith("## Table of Contents")) {
+      const tocLines = trimmed.split("\n").filter((l) => l.trim().startsWith("- ["));
+      elements.push(
+        <div
+          key={`toc-${idx}`}
+          style={{
+            margin: "2rem 0",
+            padding: "1.4rem",
+            background: "rgba(255, 255, 255, 0.03)",
+            border: "1px solid rgba(212, 175, 55, 0.25)",
+            borderRadius: "16px",
+          }}
+        >
+          <div style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "#f5d77f", fontWeight: 700, marginBottom: "0.8rem" }}>
+            📑 Table of Contents
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "0.5rem" }}>
+            {tocLines.map((line, lIdx) => (
+              <div key={lIdx} style={{ fontSize: "0.88rem", color: "#cfd3dc", lineHeight: 1.5 }}>
+                {renderInlineFormatting(line.replace(/^-\s+/, ""))}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+      return;
+    }
+
     // Markdown Table
     const lines = trimmed.split("\n").map((l) => l.trim());
     if (lines.length >= 2 && lines[0].startsWith("|") && lines[1].includes("|---")) {
@@ -514,23 +722,20 @@ function renderMarkdownContent(markdown: string) {
       const rowLines = lines.slice(2);
 
       elements.push(
-        <div key={`table-${idx}`} style={{ overflowX: "auto", margin: "1.5rem 0" }}>
+        <div key={`table-${idx}`} style={{ overflowX: "auto", margin: "1.8rem 0", borderRadius: "12px", border: "1px solid rgba(212, 175, 55, 0.3)" }}>
           <table
             style={{
               width: "100%",
               borderCollapse: "collapse",
               fontSize: "0.88rem",
               background: "#0c0e14",
-              border: "1px solid rgba(212, 175, 55, 0.3)",
-              borderRadius: "12px",
-              overflow: "hidden",
             }}
           >
             <thead>
               <tr style={{ background: "rgba(212, 175, 55, 0.15)", borderBottom: "1px solid rgba(212, 175, 55, 0.3)" }}>
                 {headerCols.map((h, hIdx) => (
-                  <th key={hIdx} style={{ padding: "10px 14px", textAlign: "left", color: "#f5d77f", fontWeight: 700 }}>
-                    {h}
+                  <th key={hIdx} style={{ padding: "12px 14px", textAlign: "left", color: "#f5d77f", fontWeight: 700 }}>
+                    {renderInlineFormatting(h)}
                   </th>
                 ))}
               </tr>
@@ -547,8 +752,8 @@ function renderMarkdownContent(markdown: string) {
                     }}
                   >
                     {cells.map((cell, cIdx) => (
-                      <td key={cIdx} style={{ padding: "10px 14px", color: "rgba(255, 255, 255, 0.85)" }}>
-                        {cell}
+                      <td key={cIdx} style={{ padding: "11px 14px", color: "rgba(255, 255, 255, 0.88)" }}>
+                        {renderInlineFormatting(cell)}
                       </td>
                     ))}
                   </tr>
@@ -559,6 +764,31 @@ function renderMarkdownContent(markdown: string) {
         </div>
       );
       return;
+    }
+
+    // Embedded Markdown Image: ![alt](url)
+    if (trimmed.startsWith("![") && trimmed.includes("](") && trimmed.endsWith(")")) {
+      const imgMatch = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
+      if (imgMatch) {
+        elements.push(
+          <div key={`img-${idx}`} style={{ margin: "1.8rem 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(212, 175, 55, 0.3)" }}>
+            <img
+              src={imgMatch[2]}
+              alt={imgMatch[1] || "Article visual"}
+              style={{ width: "100%", maxHeight: "420px", objectFit: "cover", display: "block" }}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = "/aura/aura-hero-clean-4k.jpg";
+              }}
+            />
+            {imgMatch[1] && (
+              <div style={{ padding: "8px 14px", background: "rgba(0,0,0,0.6)", fontSize: "0.8rem", color: "#f5d77f" }}>
+                {imgMatch[1]}
+              </div>
+            )}
+          </div>
+        );
+        return;
+      }
     }
 
     // Blockquote
@@ -578,25 +808,17 @@ function renderMarkdownContent(markdown: string) {
             fontStyle: "italic",
           }}
         >
-          {quoteText}
+          {renderInlineFormatting(quoteText)}
         </blockquote>
       );
       return;
     }
 
     // Headings
-    if (trimmed.startsWith("# ")) {
-      elements.push(
-        <h2 key={`h1-${idx}`} style={{ fontSize: "1.6rem", color: "#f5d77f", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
-          {trimmed.replace("# ", "")}
-        </h2>
-      );
-      return;
-    }
     if (trimmed.startsWith("## ")) {
       elements.push(
         <h3 key={`h2-${idx}`} style={{ fontSize: "1.35rem", color: "#ffffff", marginTop: "1.6rem", marginBottom: "0.7rem", fontWeight: 700 }}>
-          {trimmed.replace("## ", "")}
+          {renderInlineFormatting(trimmed.replace("## ", ""))}
         </h3>
       );
       return;
@@ -604,7 +826,7 @@ function renderMarkdownContent(markdown: string) {
     if (trimmed.startsWith("### ")) {
       elements.push(
         <h4 key={`h3-${idx}`} style={{ fontSize: "1.15rem", color: "#f5d77f", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
-          {trimmed.replace("### ", "")}
+          {renderInlineFormatting(trimmed.replace("### ", ""))}
         </h4>
       );
       return;
@@ -614,10 +836,10 @@ function renderMarkdownContent(markdown: string) {
     if (trimmed.startsWith("- ") || trimmed.startsWith("* ") || /^\d+\.\s/.test(trimmed)) {
       const listItems = trimmed.split("\n").map((l) => l.trim()).filter(Boolean);
       elements.push(
-        <ul key={`list-${idx}`} style={{ margin: "1rem 0", paddingLeft: "1.4rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+        <ul key={`list-${idx}`} style={{ margin: "1rem 0", paddingLeft: "1.4rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
           {listItems.map((li, liIdx) => (
-            <li key={liIdx} style={{ color: "rgba(255, 255, 255, 0.88)", fontSize: "0.95rem", lineHeight: 1.55 }}>
-              {li.replace(/^[-*]\s+|\d+\.\s+/, "")}
+            <li key={liIdx} style={{ color: "rgba(255, 255, 255, 0.88)", fontSize: "0.95rem", lineHeight: 1.6 }}>
+              {renderInlineFormatting(li.replace(/^[-*]\s+|\d+\.\s+/, ""))}
             </li>
           ))}
         </ul>
@@ -627,8 +849,8 @@ function renderMarkdownContent(markdown: string) {
 
     // Standard Paragraph
     elements.push(
-      <p key={`p-${idx}`} style={{ marginBottom: "1.25rem", color: "rgba(255, 255, 255, 0.88)" }}>
-        {trimmed}
+      <p key={`p-${idx}`} style={{ marginBottom: "1.25rem", color: "rgba(255, 255, 255, 0.88)", lineHeight: 1.8 }}>
+        {renderInlineFormatting(trimmed)}
       </p>
     );
   });

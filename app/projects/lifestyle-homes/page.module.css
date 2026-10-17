@@ -74,26 +74,27 @@
 
 .headline {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
   font-size: min(20vw, 320px);
   line-height: 1;
   letter-spacing: 0.04em;
-  padding-top: 50px;
+  padding-top: 40px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.95) 20%,
-    rgba(255, 255, 255, 0.6) 55%,
-    rgba(212, 175, 55, 0.35) 80%,
-    transparent 100%
+    #ffffff 0%,
+    #fbf4d9 30%,
+    #f5d77f 65%,
+    #d4af37 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
-  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.6));
+  color: #ffffff;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.95)) drop-shadow(0 12px 36px rgba(0, 0, 0, 0.9));
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
   user-select: none;
 }
 

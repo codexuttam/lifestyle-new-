@@ -201,9 +201,9 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               type="button"
               className={styles.btnSignIn}
               onClick={() => setIsAuthOpen(true)}
-              title="Sign in with mobile number via WhatsApp OTP"
+              title="Member Sign In via Mobile OTP"
             >
-              <i className="fa-brands fa-whatsapp" style={{ color: "#25D366" }} /> Sign In
+              Sign In
             </button>
           )}
 
@@ -212,6 +212,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
             type="button"
             className={styles.btnContact}
             onClick={() => setIsEnquiryOpen(true)}
+            aria-label="Open project enquiry form"
           >
             Enquire Now
           </button>
@@ -254,14 +255,13 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           {!currentUser && (
             <button
               type="button"
-              className={styles.btnSignIn}
-              style={{ width: "100%", justifyContent: "center", marginBottom: "0.5rem" }}
+              className={styles.mobileSignInBtn}
               onClick={() => {
                 setMenuOpen(false);
                 setIsAuthOpen(true);
               }}
             >
-              <i className="fa-brands fa-whatsapp" style={{ color: "#25D366" }} /> Sign In (WhatsApp OTP)
+              Sign In
             </button>
           )}
 

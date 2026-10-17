@@ -88,7 +88,7 @@ export const INITIAL_BLOGS: BrandBlogPost[] = [
     date: "May 2026",
     excerpt:
       "A guided walkthrough of our fully furnished 2 & 3 BHK sample apartments on DPS Road, highlighting material choices, natural cross-ventilation, and interior elegance.",
-    image: "/projects/lifestyle-homes/bedroom-showcase.jpg",
+    image: "/assets/interiors/bedroom-balcony-clean.jpg",
     content: [
       "Buying a home on paper requires imagination, but inspecting a finished, fully furnished sample apartment provides genuine certainty. At Lifestyle Homes, our live sample flat on DPS Road is open for prospective buyers to touch, feel, and inspect every structural detail.",
       "From the moment you step through the decorative entrance door, you notice the spacious living hall finished with premium vitrified tiles and delicate lighting fixtures that create an immediate aura of quiet luxury.",
