@@ -9,27 +9,25 @@ import EnquiryModal from "@/components/EnquiryModal";
 import { VerifiedUser } from "@/lib/types/auth";
 
 const LIFESTYLE_MENU_ITEMS = [
-  { label: "Overview", href: "#hero-section" },
-  { label: "About", href: "#about-lifestyle-section" },
-  { label: "Building 3D", href: "#explore-site-section" },
-  { label: "Floor Plans", href: "#unit-plans" },
-  { label: "Commercial", href: "#commercial-shops" },
-  { label: "Specs", href: "#specifications" },
-  { label: "Location", href: "#location-connectivity" },
+  { label: "Overview", href: "/projects/lifestyle-homes#hero-section" },
+  { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans" },
+  { label: "Amenities", href: "/projects/lifestyle-homes#amenities-lifestyle-section" },
+  { label: "Architecture", href: "/projects/lifestyle-homes#explore-site-section" },
+  { label: "All Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
-  { label: "FAQ", href: "#faq-section" },
+  { label: "About", href: "/projects/lifestyle-homes#about-lifestyle-section" },
   { label: "Aura Flagship ↗", href: "/" },
 ];
 
 const DEFAULT_MENU_ITEMS = [
-  { label: "Aura (Flagship)", href: "/#hero-section" },
-  { label: "Building 3D", href: "/#explore-site-section" },
+  { label: "Overview", href: "/#hero-section" },
   { label: "Floor Plans", href: "/#floor-plans" },
-  { label: "Developments", href: "/#properties-section" },
+  { label: "Amenities", href: "/#properties-section" },
+  { label: "Architecture", href: "/#explore-site-section" },
+  { label: "All Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
-  { label: "FAQ", href: "/#faq-section" },
   { label: "About", href: "/about" },
-  { label: "Lifestyle Homes", href: "/projects/lifestyle-homes" },
+  { label: "Lifestyle Homes ↗", href: "/projects/lifestyle-homes" },
 ];
 
 /** Luxury Dark Glassmorphism Nav with Smooth Scroll Interception, WhatsApp OTP Auth & Short CRM Enquiry */
@@ -157,11 +155,11 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         <div className={styles.menuCapsule}>
           {menuItems.map((item, idx) => {
             const isActive =
-              isLifestylePage
-                ? idx === 0
-                : item.href === activeHref ||
-                  (item.href === "/projects/lifestyle-homes" && isLifestylePage) ||
-                  (item.href === "/blogs" && pathname === "/blogs");
+              (isLifestylePage && item.label === "Overview" && (pathname === "/projects/lifestyle-homes" || activeHref === "/projects/lifestyle-homes")) ||
+              (!isLifestylePage && item.label === "Overview" && (pathname === "/" || activeHref === "/")) ||
+              (item.href === "/blogs" && pathname === "/blogs") ||
+              (item.href === "/projects" && pathname === "/projects") ||
+              (item.href === "/about" && pathname === "/about");
 
             const className = `${styles.menuItem}${isActive ? ` ${styles.menuItemActive}` : ""}`;
 

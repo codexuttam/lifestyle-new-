@@ -41,6 +41,6 @@ export const FAQS: FaqEntry[] = [
     id: "booking-and-site-visit",
     question: "How can I book a site visit or get floor plan details?",
     answer:
-      "You can call our booking line at 777-0000-750 or reach us on WhatsApp at +91 9730768982. Our site office is located on Congress Nagar Road, Next to Dreamz Signature, Camp, Amravati.",
+      "You can call our booking line at +91 8530763405 or reach us on WhatsApp at +91 8530763405. Our site office is located on Congress Nagar Road, Next to Dreamz Signature, Camp, Amravati.",
   },
 ];

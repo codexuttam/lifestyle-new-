@@ -16,9 +16,9 @@ export type SiteSettings = {
 
 export const SITE_SETTINGS: SiteSettings = {
   brandName: "Aura by Lifestyle",
-  whatsapp: "919730768982",
-  phone: "+919730768982",
-  bookingContact: "777-0000-750",
+  whatsapp: "918530763405",
+  phone: "+918530763405",
+  bookingContact: "8530763405",
   email: "admin@lifestylehomespaces.com",
   address: "Site & Office: Aura by Lifestyle, Congress Nagar Road, Next to Dreamz Signature, Congress Nagar, Camp, Amravati — 444606",
   reraNumber: "P5030002502915",
@@ -26,6 +26,6 @@ export const SITE_SETTINGS: SiteSettings = {
   social: [
     { label: "Instagram", href: "https://www.instagram.com/lifestylerealestate_11" },
     { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61591959993385" },
-    { label: "WhatsApp", href: "https://wa.me/919730768982" },
+    { label: "WhatsApp", href: "https://wa.me/918530763405" },
   ],
 };

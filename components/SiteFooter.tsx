@@ -50,7 +50,7 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
             <div className={styles.contactInfo}>
               <span className={styles.contactLabel}>Site & Booking Enquiries</span>
               <a href={telHref(settings)} className={styles.emailLink} style={{ color: "#d4af37", fontWeight: 600 }}>
-                📞 +91 9730768982 / 777-0000-750
+                📞 +91 8530763405
               </a>
               <a href={mailtoHref(settings)} className={styles.emailLink} style={{ marginTop: "4px" }}>
                 {settings.email}
@@ -155,6 +155,12 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
           <div className={`${styles.corner} ${styles.cornerTr}`} />
           <div className={`${styles.corner} ${styles.cornerBl}`} />
           <div className={`${styles.corner} ${styles.cornerBr}`} />
+          <img
+            src="/aura/aura-hero-clean-4k.jpg"
+            alt="Aura 15-Storey Tower Landmark"
+            className={styles.brandingBgImage}
+          />
+          <div className={styles.brandingOverlay} />
           <p className={styles.giantTitle} aria-hidden="true">
             AURA
           </p>
@@ -164,9 +170,9 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
           <span className={styles.bottomItem}>
             {settings.copyright}
           </span>
-          <a href="#privacy" className={styles.bottomItem}>
-            Privacy & Disclaimer
-          </a>
+          <Link href="/privacy" className={styles.bottomItem}>
+            Privacy &amp; Disclaimer
+          </Link>
           <span className={styles.bottomItem}>{settings.address}</span>
         </div>
       </div>

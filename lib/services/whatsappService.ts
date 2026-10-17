@@ -29,7 +29,7 @@ const TOKEN = getEnv(
   "EABAPJDHtQEABShEt6D8x9xA6EGkA3ToQBanxh1SpfQzPI18My0L4v5BDo9gZAfmZBOBajHhQSwxySONbjgAc2P3LImZCloZCDtGdL5JQWtMK4cZBzPP4FM1mfWQPHrAJw9lew5n5gMqIil6VU0pamR8zgynZC7ZCZAknI6zkpZACJfmzX403penOHcB4CTad2AZDZD"
 );
 const PHONE_NUMBER_ID = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
-export const OFFICIAL_LIFESTYLE_WHATSAPP = "919730768982";
+export const OFFICIAL_LIFESTYLE_WHATSAPP = "918530763405";
 
 /**
  * Sends a verified 6-digit OTP code to the customer's WhatsApp using Meta WhatsApp Cloud API.
@@ -115,7 +115,7 @@ export async function sendWhatsappOtp(
 }
 
 /**
- * Sends a real-time WhatsApp notification directly to the owner number (919730768982)
+ * Sends a real-time WhatsApp notification directly to the owner number (918530763405)
  * using Bitlance AI (Phone ID 744188362103708) from Real Estate CRM.
  */
 export async function notifyOwnerOnWhatsApp(
@@ -127,7 +127,7 @@ export async function notifyOwnerOnWhatsApp(
     "EAAU6uBLPyowBRZB635p73IoYSJusGBYeJPNezLQWnPmjnr5i2ZB7ZCNZCmZCkvvjGuvqSFVb6ejubUsH1hgt95joyIxi7emH2NlfxCT5sIAwtisWs9HQZBKURg79rqKa20cYRi2KQ0mLRXE7hhIRJ3vjlfrsDUFD0mk6pW3DGwMoR5AItC2OwZAFqzhMMHQwYfyHQZDZD"
   );
 
-  const ownerRecipient = getEnv("VITE_OWNER_WHATSAPP_NUMBER", "919730768982").replace(/\D/g, "");
+  const ownerRecipient = getEnv("VITE_OWNER_WHATSAPP_NUMBER", "918530763405").replace(/\D/g, "");
   const cleanOwnerTo = ownerRecipient.length === 10 ? "91" + ownerRecipient : ownerRecipient;
 
   const nowIST = new Date().toLocaleString("en-IN", {

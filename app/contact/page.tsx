@@ -27,10 +27,6 @@ export default async function ContactPage() {
       <main className={styles.page}>
         <div className={styles.inner}>
           <header className={styles.header}>
-            <div className={styles.badge}>
-              <span className={styles.badgeDot} aria-hidden="true" />
-              <span className={styles.badgeText}>{copy.badge}</span>
-            </div>
             <h1 className={styles.title}>{copy.title}</h1>
             <p className={styles.intro}>{copy.intro}</p>
           </header>

@@ -110,10 +110,6 @@ export default function AuraFloorPlans() {
     <section className={styles.section} id="floor-plans">
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className={styles.badge}>
-            <span className={styles.badgeDot} />
-            <span>ARCHITECTURAL PLANS & CUT SECTIONS</span>
-          </div>
           <h2 className={styles.title}>
             Masterfully Planned For <span>Identity & Distinction</span>
           </h2>
@@ -184,7 +180,7 @@ export default function AuraFloorPlans() {
 
             <div className={styles.actionRow}>
               <a
-                href="https://wa.me/919730768982?text=Hello%20Lifestyle%20Homes,%20I%20am%20interested%20in%20Aura%20floor%20plans%20and%20pricing."
+                href="https://wa.me/918530763405?text=Hello%20Lifestyle%20Homes,%20I%20am%20interested%20in%20Aura%20floor%20plans%20and%20pricing."
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.whatsappBtn}

@@ -1,18 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import type { HomeRecord } from "@/lib/schemas/home";
 import styles from "./Hero.module.css";
-
-const MENU_ITEMS = [
-  { label: "Aura Overview", href: "/", active: true },
-  { label: "Floor Plans", href: "/#floor-plans", active: false },
-  { label: "Sky Amenities", href: "#explore-site-section", active: false },
-  { label: "Architecture", href: "/services", active: false },
-  { label: "All Projects", href: "/projects", active: false },
-  { label: "About", href: "/about", active: false },
-];
 
 function SparkleIcon() {
   return (
@@ -31,8 +21,6 @@ function SparkleIcon() {
 }
 
 export default function Hero({ content }: { content: HomeRecord["hero"] }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <section className={styles.hero} id="hero-section">
       {/* 4K Clean Building Background Image */}
@@ -45,87 +33,6 @@ export default function Hero({ content }: { content: HomeRecord["hero"] }) {
         />
         <div className={styles.heroOverlay} />
       </div>
-
-      {/* Navbar */}
-      <nav className={styles.nav}>
-        <Link href="/" className={styles.logo} aria-label="Aura by Lifestyle — Home">
-          <img
-            src="/aura/aura-logo-official.png"
-            alt="Aura Emblem"
-            width={46}
-            height={46}
-            className={styles.logoImg}
-          />
-          <span className={styles.logoLockup}>
-            <span className={styles.logoName}>AURA</span>
-            <span className={styles.logoSub}>BY LIFESTYLE</span>
-          </span>
-        </Link>
-
-        <div className={styles.menuCapsule}>
-          {MENU_ITEMS.map((item) => {
-            const className = `${styles.menuItem}${item.active ? ` ${styles.menuItemActive}` : ""}`;
-            return item.href.includes("#") ? (
-              <a key={item.label} href={item.href} className={className}>
-                {item.label}
-              </a>
-            ) : (
-              <Link key={item.label} href={item.href} className={className}>
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className={styles.navActions}>
-          <Link href="/contact" className={styles.btnContact}>
-            Enquire Now
-          </Link>
-        </div>
-
-        <button
-          className={styles.mobileToggle}
-          aria-label="Toggle navigation menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          ) : (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <line x1="4" y1="6" x2="20" y2="6" />
-              <line x1="4" y1="18" x2="20" y2="18" />
-            </svg>
-          )}
-        </button>
-      </nav>
-
-      {menuOpen && (
-        <div className={styles.mobileMenu}>
-          {MENU_ITEMS.map((item) =>
-            item.href.includes("#") ? (
-              <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
-          <Link href="/contact" onClick={() => setMenuOpen(false)} className={styles.mobileHighlightLink}>
-            Enquire Now
-          </Link>
-        </div>
-      )}
 
       {/* Giant Headline */}
       <div className={styles.headlineContainer}>
@@ -150,3 +57,4 @@ export default function Hero({ content }: { content: HomeRecord["hero"] }) {
     </section>
   );
 }
+

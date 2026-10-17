@@ -173,7 +173,7 @@ export default function AuthOtpModal({
     }
 
     const adminUser: VerifiedUser = {
-      phone: normalizePhone(phone || "9730768982"),
+      phone: normalizePhone(phone || "8530763405"),
       name: name.trim() || "Lifestyle Administrator",
       email: email.trim() || "admin@lifestylehomespaces.com",
       verified: true,

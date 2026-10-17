@@ -1,4 +1,5 @@
 import { BrandBlogPost } from "@/lib/types/blog";
+import { SAMPLE_BITLANCE_FULL_MARKDOWN } from "@/lib/data/sampleBitlanceFullBlog";
 
 const getEnv = (key: string, fallback = "") => {
   if (typeof process !== "undefined" && process.env) {
@@ -76,6 +77,7 @@ export const INITIAL_BLOGS: BrandBlogPost[] = [
       "Rooftop infinity amenities and sky wellness decks become essential luxury criteria",
       "Ready-to-move homes provide immediate physical inspection certainty"
     ],
+    markdown: SAMPLE_BITLANCE_FULL_MARKDOWN,
     relatedProject: "aura",
   },
   {

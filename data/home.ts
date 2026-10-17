@@ -63,7 +63,7 @@ export const HOME_CONTENT: HomeContent = {
     progress: 95,
   },
   properties: {
-    tag: "Residences & Penthouses",
+    tag: "",
     heading:
       "Crafted for those who seek identity and distinction. 2 & 3 BHK luxury residences.",
     description:

@@ -23,12 +23,12 @@ export async function POST(request: Request) {
     const resolvedName = (name || "").trim() || "Lifestyle Client";
     const resolvedEmail = (email || "").trim() || undefined;
 
-    const ownerPhone = (process.env.VITE_OWNER_WHATSAPP_NUMBER || "919730768982").replace(/\D/g, "");
+    const ownerPhone = (process.env.VITE_OWNER_WHATSAPP_NUMBER || "918530763405").replace(/\D/g, "");
     const adminEmail = (process.env.VITE_CRM_ADMIN_EMAIL || "admin@lifestylehomespaces.com").toLowerCase();
 
     const isAdmin = Boolean(
       cleanDigits === ownerPhone ||
-      cleanDigits.endsWith("9730768982") ||
+      cleanDigits.endsWith("8530763405") ||
       (resolvedEmail && resolvedEmail.toLowerCase() === adminEmail)
     );
 

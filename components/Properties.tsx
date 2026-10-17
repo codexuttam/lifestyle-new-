@@ -70,11 +70,6 @@ export default function Properties({
   return (
     <section className={styles.properties} id="properties-section">
       <div className={styles.grid}>
-        <div className={styles.tag}>
-          <span className={styles.dot} aria-hidden="true" />
-          <span className={styles.tagText}>{content.tag}</span>
-        </div>
-
         <div className={styles.headingWrapper}>
           <h2 className={styles.heading}>{content.heading}</h2>
         </div>

@@ -1,3 +1,5 @@
+import SiteNav from "@/components/SiteNav";
+import Chatbot from "@/components/Chatbot";
 import Hero from "@/components/Hero";
 import ExploreSection from "@/components/ExploreSection";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
@@ -40,6 +42,7 @@ export default async function Home() {
   return (
     <>
       <RevealAnimations />
+      <SiteNav activeHref="/" />
       <Hero content={home.hero} />
 
       {/* SECTION 1: EXPLORE 3D BUILDING */}
@@ -73,10 +76,8 @@ export default async function Home() {
       {/* SECTION 1h: FOOTER */}
       <SiteFooter settings={settings} />
 
-      {/* Sticky Floating Button */}
-      <a href={whatsappHref(settings)} className="floating-wa">
-        <i className="fa-brands fa-whatsapp" />
-      </a>
+      {/* Interactive AI Portfolio Concierge */}
+      <Chatbot />
 
       {/* Mobile Sticky Bar */}
       <div className="mobile-sticky-bar">

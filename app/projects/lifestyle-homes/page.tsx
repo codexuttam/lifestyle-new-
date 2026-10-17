@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import Chatbot from "@/components/Chatbot";
 import LifestyleBuildingInspector from "@/components/LifestyleBuildingInspector";
 import LifestyleInteractiveShowcase from "@/components/LifestyleInteractiveShowcase";
 import RevealAnimations from "@/components/RevealAnimations";
@@ -513,14 +514,8 @@ export default async function LifestyleHomesPage() {
 
       <SiteFooter settings={settings} />
 
-      {/* Sticky Floating Button */}
-      <a
-        href={whatsappHref(settings)}
-        className="floating-wa"
-        aria-label="Chat with Lifestyle Homes on WhatsApp"
-      >
-        <i className="fa-brands fa-whatsapp" />
-      </a>
+      {/* Interactive AI Portfolio Concierge */}
+      <Chatbot />
 
       {/* Mobile Sticky Bar */}
       <div className="mobile-sticky-bar">
