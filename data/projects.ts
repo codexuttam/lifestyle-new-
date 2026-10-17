@@ -90,21 +90,6 @@ export const PROJECTS: Project[] = [
     summary:
       "24 ready-to-move commercial shops with premier road frontage on DPS Road, serving an affluent, thriving residential catchment.",
   },
-  {
-    id: "aura-interior-suite",
-    title: "Aura Designer Living Suites",
-    category: "Interior",
-    status: "In Progress",
-    location: "Congress Nagar Road, Camp, Amravati",
-    year: "2026",
-    price: "Tailored Packages",
-    beds: "2 & 3 BHK",
-    baths: "3",
-    area: "1,450 sqft",
-    img: "/aura/luxury-master-bedroom.jpg",
-    summary:
-      "Custom bespoke interior finishes including Italian marble texture vitrified tiles (800x1600), acoustic glass windows, and designer sanitary fittings.",
-  },
 ];
 
 /** The projects with a walkthrough clip, used by the homepage carousel. */

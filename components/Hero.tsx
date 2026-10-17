@@ -54,6 +54,24 @@ export default function Hero({ content }: { content: HomeRecord["hero"] }) {
           </Link>
         </div>
       </div>
+
+      {/* Bottom-right glass info box (Matches Reference Image) */}
+      <div className={styles.rightWrapper}>
+        <div className={styles.infoBox}>
+          <img
+            src={content.infoImage || "/aura/luxury-master-bedroom.jpg"}
+            alt="Aura Luxury Residence"
+            className={styles.infoImage}
+          />
+          <div className={styles.infoText}>
+            <span className={styles.infoTag}>Starting Price</span>
+            <h2 className={styles.infoPrice}>{content.infoPrice || "₹65 L - 1.45 Cr"}</h2>
+            <p className={styles.infoDescription}>
+              {content.infoCaption || "2 & 3 BHK Luxury Residences · Camp, Amravati"}
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

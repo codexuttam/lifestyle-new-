@@ -258,6 +258,24 @@ export default async function LifestyleHomesPage() {
               </a>
             </div>
           </div>
+
+          {/* Bottom-right glass info box (Matches Reference Image) */}
+          <div className={styles.rightWrapper}>
+            <div className={styles.infoBox}>
+              <img
+                src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
+                alt="Lifestyle Home Spaces"
+                className={styles.infoImage}
+              />
+              <div className={styles.infoText}>
+                <span className={styles.infoTag}>Ready Possession</span>
+                <h2 className={styles.infoPrice}>₹48 L - 85 L</h2>
+                <p className={styles.infoDescription}>
+                  Ready 2 &amp; 3 BHK Homes &amp; Shops — DPS Road, Parvati Nagar, Amravati.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ============ ABOUT LIFESTYLE HOMES (Identical Aura Architecture) ============ */}

@@ -96,7 +96,7 @@ export default function ProjectsExplorer({
           const detailHref =
             project.id === "lifestyle-homes" || project.id === "lifestyle-retail-galleria"
               ? "/projects/lifestyle-homes"
-              : project.id === "aura" || project.id === "aura-sky-suites" || project.id === "aura-interior-suite"
+              : project.id === "aura" || project.id === "aura-sky-suites"
               ? "/"
               : `/projects/${project.id}`;
 

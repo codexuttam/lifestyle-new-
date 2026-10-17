@@ -62,39 +62,35 @@
   z-index: 2;
 }
 
-/* --- Giant Clean Headline --- */
+/* --- Giant Architectural Headline Container (Matches Reference Image) --- */
 .headlineContainer {
   position: absolute;
   inset-inline: 0;
   top: 30px;
   text-align: center;
-  z-index: 10;
+  z-index: 5;
   pointer-events: none;
 }
 
 .headline {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 900;
+  font-weight: 800;
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
-  font-size: min(20vw, 320px);
+  font-size: min(19vw, 340px);
   line-height: 1;
-  letter-spacing: 0.04em;
-  padding-top: 40px;
+  letter-spacing: -0.01em;
+  padding-top: 60px;
   background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #fbf4d9 30%,
-    #f5d77f 65%,
-    #d4af37 100%
+    rgb(255, 255, 255) 31.05%,
+    rgba(255, 255, 255, 0) 70.24%
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #ffffff;
-  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.95)) drop-shadow(0 12px 36px rgba(0, 0, 0, 0.9));
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
+  color: transparent;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.45));
   user-select: none;
 }
 
@@ -199,6 +195,73 @@
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 0 20px rgba(192, 24, 83, 0.4);
+}
+
+/* --- Right glass info box (Matches Reference Image) --- */
+.rightWrapper {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  z-index: 30;
+}
+
+.infoBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 16px;
+  background: rgba(14, 8, 20, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 30px rgba(192, 24, 83, 0.25);
+  padding: 12px 22px 12px 12px;
+}
+
+.infoImage {
+  width: 140px;
+  height: 125px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 260px;
+}
+
+.infoTag {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d4af37;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.infoPrice {
+  font-family: var(--font-big-shoulders), sans-serif;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.infoDescription {
+  font-family: var(--font-inter), sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
+  margin-top: 4px;
 }
 
 /* ============ SECTION COMMON STYLES ============ */
@@ -789,17 +852,18 @@
     font-size: min(22vw, 140px);
     padding-top: 30px;
     background: linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #f5d77f 40%,
-      #e84393 85%,
-      #c01853 100%
+      rgb(255, 255, 255) 31.05%,
+      rgba(255, 255, 255, 0) 70.24%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.5));
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45));
     user-select: none;
+  }
+
+  .rightWrapper {
+    display: none;
   }
 
   .leftBox {
