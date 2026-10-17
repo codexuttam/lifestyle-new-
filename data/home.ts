@@ -15,8 +15,8 @@ export const HOME_CONTENT: HomeContent = {
     backgroundVideo: "/videos/aura-building-clip-1.mp4",
     buildingImage: "/aura/real-aura.png",
     infoImage: "/aura/luxury-master-bedroom.jpg",
-    infoPrice: "₹65 L - 1.45 Cr",
-    infoCaption: "2 & 3 BHK Lux Residences · Camp, Amravati · MahaRERA: P5030002502915",
+    infoPrice: "Aura Residences",
+    infoCaption: "2 & 3 BHK Luxury Suites · Camp, Amravati · MahaRERA: P5030002502915",
   },
   about: {
     label: "",

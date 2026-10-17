@@ -8,7 +8,7 @@ const UNITS = [
     id: "3bhk",
     title: "3 BHK Royal Luxury Suite (Type 3/4)",
     badge: "1,550 SQFT SUPER BUILT-UP",
-    price: "₹65 L – ₹78 L*",
+    price: "Price on Request",
     img: "/assets/projects/lifestyle-homes/floor-plans/plan-3bhk-3d-iso.jpg",
     summary:
       "A grand 3-bedroom corner suite featuring 3 expansive private balconies, dedicated master wardrobe dressing niche, kitchen with store & utility, and 100% Vastu alignment on DPS Road.",
@@ -33,7 +33,7 @@ const UNITS = [
     id: "2bhk",
     title: "2 BHK Comfort Modern Home (Type 1 & 2)",
     badge: "1,100 – 1,245 SQFT",
-    price: "₹48 L – ₹58 L*",
+    price: "Price on Request",
     img: "/assets/projects/lifestyle-homes/floor-plans/plan-2bhk-3d-iso.jpg",
     summary:
       "Thoughtfully designed 2 BHK residences (Flat Type-1 & Type-2) with zero wasted corridors, expansive 16-foot drawing room, separate dining area, dual sit-outs, and utility wash.",
@@ -83,7 +83,7 @@ const UNITS = [
     id: "commercial",
     title: "24 Road-Facing Retail Showrooms",
     badge: "12 GROUND + 12 FIRST",
-    price: "₹32 L – ₹85 L*",
+    price: "Price on Request",
     img: "/assets/projects/lifestyle-homes/floor-plans/plan-ground-commercial.jpg",
     summary:
       "24 road-facing prime commercial showrooms on DPS Road, Parvati Nagar. Delivered with full glass display frontage and customer parking, already hosting Dee Bakers & MORE.",

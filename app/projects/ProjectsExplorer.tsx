@@ -175,13 +175,8 @@ export default function ProjectsExplorer({
                   </div>
                 </div>
 
-                {/* Price and Actions */}
+                {/* Card Actions */}
                 <div className={styles.actionRow}>
-                  <div className={styles.priceBlock}>
-                    <span className={styles.priceLabel}>Price Guide</span>
-                    <span className={styles.price}>{project.price}</span>
-                  </div>
-
                   <div className={styles.btnGroup}>
                     <a href={detailHref} className={styles.btnExplore}>
                       <span>Explore Details →</span>
@@ -194,7 +189,7 @@ export default function ProjectsExplorer({
                       title="Schedule Site Walkthrough"
                     >
                       <CalendarIcon />
-                      <span>Tour</span>
+                      <span>Tour Walkthrough</span>
                     </a>
                   </div>
                 </div>

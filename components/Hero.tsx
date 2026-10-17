@@ -55,7 +55,7 @@ export default function Hero({ content }: { content: HomeRecord["hero"] }) {
         </div>
       </div>
 
-      {/* Bottom-right glass info box (Matches Reference Image) */}
+      {/* Bottom-right glass info box */}
       <div className={styles.rightWrapper}>
         <div className={styles.infoBox}>
           <img
@@ -64,10 +64,10 @@ export default function Hero({ content }: { content: HomeRecord["hero"] }) {
             className={styles.infoImage}
           />
           <div className={styles.infoText}>
-            <span className={styles.infoTag}>Starting Price</span>
-            <h2 className={styles.infoPrice}>{content.infoPrice || "₹65 L - 1.45 Cr"}</h2>
+            <span className={styles.infoTag}>✦ Signature Highrise</span>
+            <h2 className={styles.infoTitle}>Aura Residences</h2>
             <p className={styles.infoDescription}>
-              {content.infoCaption || "2 & 3 BHK Luxury Residences · Camp, Amravati"}
+              2 &amp; 3 BHK Luxury Suites · Camp, Amravati · MahaRERA: P5030002502915
             </p>
           </div>
         </div>

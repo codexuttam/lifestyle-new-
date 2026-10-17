@@ -61,7 +61,7 @@ export const SERVICES: Service[] = [
       "RCC frame in M25 concrete with premium TMT steel",
       "Fixed-price contract with a dedicated site manager",
     ],
-    startingAt: "₹1,850 / sqft",
+    startingAt: "Custom Quote",
     timeline: "9–14 months",
     featured: true,
   },
@@ -93,7 +93,7 @@ export const SERVICES: Service[] = [
       "Seismic detailing per IS 13920",
       "Shuttering, curing and de-shuttering to schedule",
     ],
-    startingAt: "₹1,150 / sqft",
+    startingAt: "Custom Quote",
     timeline: "4–7 months",
   },
   {
@@ -108,7 +108,7 @@ export const SERVICES: Service[] = [
       "Material and finish selection within your budget",
       "Cost estimate before a single brick is laid",
     ],
-    startingAt: "₹25,000 / consult",
+    startingAt: "Custom Quote",
     timeline: "1–3 weeks",
     featured: true,
   },
@@ -124,7 +124,7 @@ export const SERVICES: Service[] = [
       "Working drawings for the site team",
       "Two rounds of revisions included",
     ],
-    startingAt: "₹65 / sqft",
+    startingAt: "Custom Quote",
     timeline: "3–6 weeks",
   },
   {
@@ -139,7 +139,7 @@ export const SERVICES: Service[] = [
       "False ceiling, cove and task lighting",
       "Furniture layout and soft-furnishing guidance",
     ],
-    startingAt: "₹1,400 / sqft",
+    startingAt: "Custom Quote",
     timeline: "8–16 weeks",
   },
   {
@@ -154,7 +154,7 @@ export const SERVICES: Service[] = [
       "Texture, lime wash and accent-wall finishes",
       "Exterior weatherproof coats with a 5-year film warranty",
     ],
-    startingAt: "₹38 / sqft",
+    startingAt: "Custom Quote",
     timeline: "2–5 weeks",
   },
   {
@@ -169,7 +169,7 @@ export const SERVICES: Service[] = [
       "Layout reconfiguration and opening-up of walls",
       "Phased schedule to limit disruption",
     ],
-    startingAt: "₹1,600 / sqft",
+    startingAt: "Custom Quote",
     timeline: "3–9 months",
   },
   {
@@ -184,7 +184,7 @@ export const SERVICES: Service[] = [
       "Concrete repair, rebar treatment and re-plastering",
       "Post-monsoon inspection included",
     ],
-    startingAt: "₹95 / sqft",
+    startingAt: "Custom Quote",
     timeline: "2–8 weeks",
   },
   {
@@ -215,7 +215,7 @@ export const SERVICES: Service[] = [
       "Annual terrace and drainage check before monsoon",
       "Discounted rates on parts and repainting",
     ],
-    startingAt: "₹36,000 / year",
+    startingAt: "Custom Quote",
     timeline: "Rolling annual",
   },
 ];

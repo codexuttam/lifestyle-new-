@@ -268,10 +268,10 @@ export default async function LifestyleHomesPage() {
                 className={styles.infoImage}
               />
               <div className={styles.infoText}>
-                <span className={styles.infoTag}>Ready Possession</span>
-                <h2 className={styles.infoPrice}>₹48 L - 85 L</h2>
+                <span className={styles.infoTag}>✓ 100% Ready Possession</span>
+                <h2 className={styles.infoTitle}>Lifestyle Homes</h2>
                 <p className={styles.infoDescription}>
-                  Ready 2 &amp; 3 BHK Homes &amp; Shops — DPS Road, Parvati Nagar, Amravati.
+                  Ready 2 &amp; 3 BHK Homes &amp; Shops · DPS Road · MahaRERA: P50300054447
                 </p>
               </div>
             </div>
