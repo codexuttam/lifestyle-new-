@@ -26,14 +26,14 @@ const getEnv = (key: string, fallback = "") => {
 
 const TOKEN = getEnv(
   "VITE_WHATSAPP_ACCESS_TOKEN",
-  "EABAPJDHtQEABShEt6D8x9xA6EGkA3ToQBanxh1SpfQzPI18My0L4v5BDo9gZAfmZBOBajHhQSwxySONbjgAc2P3LImZCloZCDtGdL5JQWtMK4cZBzPP4FM1mfWQPHrAJw9lew5n5gMqIil6VU0pamR8zgynZC7ZCZAknI6zkpZACJfmzX403penOHcB4CTad2AZDZD"
+  "EAAU6uBLPyowBRZB635p73IoYSJusGBYeJPNezLQWnPmjnr5i2ZB7ZCNZCmZCkvvjGuvqSFVb6ejubUsH1hgt95joyIxi7emH2NlfxCT5sIAwtisWs9HQZBKURg79rqKa20cYRi2KQ0mLRXE7hhIRJ3vjlfrsDUFD0mk6pW3DGwMoR5AItC2OwZAFqzhMMHQwYfyHQZDZD"
 );
 const PHONE_NUMBER_ID = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
 export const OFFICIAL_LIFESTYLE_WHATSAPP = "918530763405";
 
 /**
  * Sends a verified 6-digit OTP code to the customer's WhatsApp using Meta WhatsApp Cloud API.
- * Uses the pre-approved 'web_verify' template.
+ * Uses the pre-approved 'web_verify' template with automatic direct message fallback.
  */
 export async function sendWhatsappOtp(
   phone: string,
@@ -93,7 +93,46 @@ export async function sendWhatsappOtp(
     const result = await response.json();
 
     if (!response.ok) {
-      console.warn("WhatsApp Cloud API response not OK:", result);
+      console.warn("WhatsApp Cloud API template response not OK:", result);
+
+      // Attempt fallback direct text message via configured Phone ID and active Phone ID
+      const targetPhoneIds = [PHONE_NUMBER_ID, "744188362103708"].filter(
+        (id, index, self) => Boolean(id) && self.indexOf(id) === index
+      );
+
+      for (const pid of targetPhoneIds) {
+        try {
+          const textUrl = `https://graph.facebook.com/v20.0/${pid}/messages`;
+          const textRes = await fetch(textUrl, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              messaging_product: "whatsapp",
+              recipient_type: "individual",
+              to: cleanPhone,
+              type: "text",
+              text: {
+                preview_url: false,
+                body: `*LIFESTYLE & AURA RESIDENCES*\n\nYour login verification OTP is: *${otp}*\n\nValid for 10 minutes. Do not share this OTP with anyone.\n\nLifestyle Home Spaces · Amravati`,
+              },
+            }),
+          });
+          const textResult = await textRes.json();
+          if (textRes.ok && textResult.messages?.[0]?.id) {
+            console.log(`WhatsApp OTP delivered via Phone ID ${pid}:`, textResult.messages[0].id);
+            return {
+              success: true,
+              messageId: textResult.messages[0].id,
+            };
+          }
+        } catch (fallbackErr) {
+          console.warn(`Direct text fallback on ${pid} encountered error:`, fallbackErr);
+        }
+      }
+
       return {
         success: false,
         error: result.error?.message || "Failed to dispatch WhatsApp OTP",

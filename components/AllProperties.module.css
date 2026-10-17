@@ -2,6 +2,9 @@
 
 .section {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   background: #06090e;
   padding: 96px 120px;
   display: flex;

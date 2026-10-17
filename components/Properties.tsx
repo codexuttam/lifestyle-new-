@@ -85,7 +85,7 @@ export default function Properties({
             <div className={styles.largeScrim} />
             <div className={styles.pills}>
               <span className={styles.pill}>{feature.category}</span>
-              <span className={styles.pill}>{feature.price}</span>
+              <span className={styles.pill}>{feature.status === "Delivered" ? "✓ Ready to Move" : "✦ Skyline Landmark"}</span>
             </div>
             <div className={styles.largeTitleRow}>
               <h3 className={styles.largeTitle}>{feature.title}</h3>

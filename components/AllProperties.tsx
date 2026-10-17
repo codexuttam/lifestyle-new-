@@ -157,8 +157,8 @@ export default async function AllProperties({
 
               <div className={styles.actionRow}>
                 <div className={styles.priceBlock}>
-                  <span className={styles.priceLabel}>Price</span>
-                  <span className={styles.price}>{listing.price}</span>
+                  <span className={styles.priceLabel}>Location</span>
+                  <span className={styles.price}>{listing.location}</span>
                 </div>
                 <a href={whatsappHref(settings)} className={styles.tourBtn}>
                   <CalendarIcon />

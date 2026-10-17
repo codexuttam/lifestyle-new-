@@ -11,10 +11,10 @@ import styles from "./Services.module.css";
 
 /** Offset each card animates in from as it enters view, by position. */
 const CARD_FROM: { x?: number; y?: number }[] = [
-  { x: -140 },
-  { x: 140 },
-  { y: 140 },
-  { y: -140 },
+  { y: 30 },
+  { y: 40 },
+  { y: 50 },
+  { y: 60 },
 ];
 
 export default function Services({
@@ -32,13 +32,12 @@ export default function Services({
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Each card slides in from its own direction as the grid enters view.
+      // Each card slides in smoothly as the grid enters view.
       gsap.utils.toArray<HTMLElement>(`.${styles.card}`).forEach((card, i) => {
         gsap.from(card, {
           opacity: 0,
-          x: CARD_FROM[i]?.x ?? 0,
-          y: CARD_FROM[i]?.y ?? 0,
-          duration: 0.9,
+          y: CARD_FROM[i]?.y ?? 30,
+          duration: 0.8,
           ease: "power3.out",
           scrollTrigger: {
             trigger: card,
@@ -61,7 +60,7 @@ export default function Services({
         <div className={styles.introWrapper}>
           <p className={styles.intro}>
             At{" "}
-            <span className={styles.introStrong}>The Premium Construction</span>,{" "}
+            <span className={styles.introStrong}>Aura by Lifestyle</span>,{" "}
             {content.intro}
           </p>
         </div>
