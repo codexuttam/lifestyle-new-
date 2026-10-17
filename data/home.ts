@@ -19,9 +19,9 @@ export const HOME_CONTENT: HomeContent = {
     infoCaption: "2 & 3 BHK Lux Residences · Camp, Amravati · MahaRERA: P5030002502915",
   },
   about: {
-    label: "Aura by Lifestyle",
+    label: "",
     statement:
-      "Lifestyle Homes brings a new dimension of living to the people of Amravati by offering premium, elite-class residences that redefine your identity and status. Delivering landmark projects is the vision and mission of Lifestyle Homes, built on the pillars of trust and transparency.",
+      "Amravati's premier 15-storey highrise tower in Camp featuring 2 & 3 BHK luxury residences, rooftop sky oasis, and bespoke living crafted with trust and transparency.",
     ctaLabel: "More About Us",
     cards: [
       {
@@ -54,7 +54,7 @@ export const HOME_CONTENT: HomeContent = {
     ],
   },
   explore: {
-    tag: "Thrills in the Sky",
+    tag: "",
     headline:
       "Experience Life In The Sky — With A Rooftop Crafted For Adventure, Wellness, And Unrivalled Horizons Over Amravati.",
     video: "/videos/aura-building-clip-1.mp4",

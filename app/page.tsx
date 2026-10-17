@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import ExploreSection from "@/components/ExploreSection";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
 import Properties from "@/components/Properties";
@@ -43,10 +42,7 @@ export default async function Home() {
       <RevealAnimations />
       <Hero content={home.hero} />
 
-      {/* SECTION 1: ABOUT US */}
-      <About content={home.about} />
-
-      {/* SECTION 1b: EXPLORE MORE */}
+      {/* SECTION 1: EXPLORE 3D BUILDING */}
       <ExploreSection
         content={home.explore}
         projectTitle={

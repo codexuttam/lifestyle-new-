@@ -19,11 +19,11 @@ const LIFESTYLE_MENU_ITEMS = [
 
 const DEFAULT_MENU_ITEMS = [
   { label: "Aura (Flagship)", href: "/#hero-section" },
-  { label: "About", href: "/#about-us-section" },
   { label: "Building 3D", href: "/#explore-site-section" },
   { label: "Floor Plans", href: "/#floor-plans" },
   { label: "Developments", href: "/#properties-section" },
   { label: "FAQ", href: "/#faq-section" },
+  { label: "About", href: "/about" },
   { label: "Lifestyle Homes", href: "/projects/lifestyle-homes" },
 ];
 

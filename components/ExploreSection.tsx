@@ -181,10 +181,6 @@ export default function ExploreSection({
 
   return (
     <section className={styles.explore} id="explore-site-section" ref={sectionRef}>
-      <div className={styles.tag}>
-        <span className={styles.dot} aria-hidden="true" />
-        <span className={styles.tagText}>{content.tag}</span>
-      </div>
 
       <div className={styles.headingContainer}>
         <h2 className={styles.heading} ref={headingRef}>
