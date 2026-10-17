@@ -45,8 +45,6 @@ export async function sendWhatsappOtp(
   }
 
   const configuredPhoneId = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
-  const bitlancePhoneId = getEnv("VITE_BITLANCE_WHATSAPP_PHONE_ID", "744188362103708");
-  const bitlanceToken = getEnv("VITE_BITLANCE_WHATSAPP_TOKEN", TOKEN);
 
   // 1. Primary Attempt: Approved Lifestyle Home Spaces template (estateflow_lead_acknowledgment - en)
   const primaryUrl = `https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`;
@@ -96,100 +94,39 @@ export async function sendWhatsappOtp(
       };
     }
 
-    console.warn("Lifestyle WhatsApp template response not OK:", result);
+    console.warn("Lifestyle WhatsApp template response not OK, attempting direct text fallback:", result);
 
-    // 2. High-Priority Fallback: Approved Real Estate Template on Bitlance AI (Phone ID 744188362103708)
-    // Meta WhatsApp Cloud API strictly requires an APPROVED TEMPLATE to reach users outside the 24-hr customer service window.
-    // estateflow_lead_acknowledgment is approved and active.
-    try {
-      const templateFallbackUrl = `https://graph.facebook.com/v20.0/${bitlancePhoneId}/messages`;
-      const templateFallbackPayload = {
+    // 2. Direct text message fallback via official Lifestyle phone ID
+    const textUrl = `https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`;
+    const textRes = await fetch(textUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         messaging_product: "whatsapp",
+        recipient_type: "individual",
         to: cleanPhone,
-        type: "template",
-        template: {
-          name: "estateflow_lead_acknowledgment",
-          language: { code: "en_US" },
-          components: [
-            {
-              type: "body",
-              parameters: [
-                {
-                  type: "text",
-                  text: `Valued Client (Your Aura & Lifestyle verification code is: ${otp})`,
-                },
-              ],
-            },
-          ],
+        type: "text",
+        text: {
+          preview_url: false,
+          body: `*LIFESTYLE & AURA RESIDENCES*\n\nYour login verification OTP is: *${otp}*\n\nValid for 10 minutes. Do not share this OTP with anyone.\n\nLifestyle Home Spaces · Amravati`,
         },
+      }),
+    });
+    const textResult = await textRes.json();
+    if (textRes.ok && textResult.messages?.[0]?.id) {
+      console.log(`WhatsApp OTP delivered via direct text on Phone ID ${configuredPhoneId}:`, textResult.messages[0].id);
+      return {
+        success: true,
+        messageId: textResult.messages[0].id,
       };
-
-      const tfRes = await fetch(templateFallbackUrl, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${bitlanceToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(templateFallbackPayload),
-      });
-
-      const tfData = await tfRes.json();
-      if (tfRes.ok && tfData.messages?.[0]?.id) {
-        console.log(
-          `WhatsApp OTP delivered via approved template estateflow_lead_acknowledgment on Phone ID ${bitlancePhoneId}:`,
-          tfData.messages[0].id
-        );
-        return {
-          success: true,
-          messageId: tfData.messages[0].id,
-        };
-      }
-      console.warn("Bitlance template fallback response not OK:", tfData);
-    } catch (tfErr) {
-      console.warn("Bitlance template fallback error:", tfErr);
-    }
-
-    // 3. Fallback: Direct text message (for recipients who have an active 24h conversation window)
-    const targetPhoneIds = [bitlancePhoneId, configuredPhoneId].filter(
-      (id, index, self) => Boolean(id) && self.indexOf(id) === index
-    );
-
-    for (const pid of targetPhoneIds) {
-      try {
-        const textUrl = `https://graph.facebook.com/v20.0/${pid}/messages`;
-        const textRes = await fetch(textUrl, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${bitlanceToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            messaging_product: "whatsapp",
-            recipient_type: "individual",
-            to: cleanPhone,
-            type: "text",
-            text: {
-              preview_url: false,
-              body: `*LIFESTYLE & AURA RESIDENCES*\n\nYour login verification OTP is: *${otp}*\n\nValid for 10 minutes. Do not share this OTP with anyone.\n\nLifestyle Home Spaces · Amravati`,
-            },
-          }),
-        });
-        const textResult = await textRes.json();
-        if (textRes.ok && textResult.messages?.[0]?.id) {
-          console.log(`WhatsApp OTP delivered via Phone ID ${pid}:`, textResult.messages[0].id);
-          return {
-            success: true,
-            messageId: textResult.messages[0].id,
-          };
-        }
-      } catch (fallbackErr) {
-        console.warn(`Direct text fallback on ${pid} encountered error:`, fallbackErr);
-      }
     }
 
     return {
       success: false,
-      error: result.error?.message || "Failed to dispatch WhatsApp OTP",
+      error: textResult?.error?.message || result?.error?.message || "Failed to dispatch WhatsApp OTP",
     };
   } catch (error: any) {
     console.error("Error invoking WhatsApp Cloud API:", error);
@@ -318,23 +255,7 @@ export async function notifyOwnerOnWhatsApp(
       return { success: true };
     }
 
-    // 3. Fallback to Bitlance AI channel
-    const bitlanceRes = await fetch(`https://graph.facebook.com/v20.0/${bitlancePhoneId}/messages`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${bitlanceToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messaging_product: "whatsapp",
-        recipient_type: "individual",
-        to: cleanOwnerTo,
-        type: "text",
-        text: { preview_url: false, body: textMessage },
-      }),
-    });
-
-    return { success: bitlanceRes.ok };
+    return { success: false, error: dData?.error?.message || tData?.error?.message || "Delivery failed" };
   } catch (err: any) {
     console.warn("Owner WhatsApp notification error (non-blocking):", err);
     return { success: false, error: err?.message };
@@ -358,6 +279,9 @@ export const AURA_BROCHURE_MEDIA_ID = "1607495040856667";
 /**
  * Sends the official Aura by Lifestyle PDF brochure directly to the customer's WhatsApp
  * upon login, sign-up, or enquiry submission.
+ *
+ * Uses Meta's approved 'property_brochure' template with a Document Header.
+ * This guarantees delivery to all users on WhatsApp, even outside the 24-hr service window.
  */
 export async function sendAuraBrochureOnWhatsApp(
   userPhone: string,
@@ -370,20 +294,42 @@ export async function sendAuraBrochureOnWhatsApp(
   }
 
   const configuredPhoneId = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
-  const greeting = customerName?.trim() ? `Dear ${customerName.trim()}` : "Hello";
-  const caption = `🏛️ *Welcome to Aura by Lifestyle!*\n\n${greeting}, here is your official architectural brochure featuring 2 & 3 BHK luxury residences, rooftop sky pool, multi-sports turf, and verified floor plans at Camp, Amravati.\n\n_Lifestyle Home Spaces · MahaRERA Reg. No. P5030002502915_`;
+  const recipientName = customerName?.trim() || "Valued Client";
 
   try {
-    // 1. Primary Attempt: Send document via public high-speed CDN URL
-    const docPayload = {
+    // 1. Primary Attempt: Official Approved Lifestyle Meta Template 'property_brochure' (Utility)
+    // with Document Header. Meta GUARANTEES delivery to ANY user outside the 24h window.
+    const templatePayload = {
       messaging_product: "whatsapp",
       recipient_type: "individual",
       to: cleanPhone,
-      type: "document",
-      document: {
-        link: AURA_BROCHURE_URL,
-        filename: "Aura_by_Lifestyle_Brochure.pdf",
-        caption,
+      type: "template",
+      template: {
+        name: "property_brochure",
+        language: { code: "en" },
+        components: [
+          {
+            type: "header",
+            parameters: [
+              {
+                type: "document",
+                document: {
+                  link: AURA_BROCHURE_URL,
+                  filename: "Aura_by_Lifestyle_Brochure.pdf",
+                },
+              },
+            ],
+          },
+          {
+            type: "body",
+            parameters: [
+              {
+                type: "text",
+                text: recipientName,
+              },
+            ],
+          },
+        ],
       },
     };
 
@@ -393,27 +339,49 @@ export async function sendAuraBrochureOnWhatsApp(
         Authorization: `Bearer ${TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(docPayload),
+      body: JSON.stringify(templatePayload),
     });
 
     const data = await res.json();
     if (res.ok && data.messages?.[0]?.id) {
-      console.log(`Brochure PDF delivered to ${cleanPhone} via link:`, data.messages[0].id);
+      console.log(`Brochure PDF delivered to ${cleanPhone} via approved template property_brochure:`, data.messages[0].id);
       return { success: true, messageId: data.messages[0].id };
     }
 
-    console.warn("Direct link brochure delivery returned non-OK, trying uploaded Media ID:", data);
+    console.warn("property_brochure template with link returned non-OK:", data);
 
-    // 2. Secondary Attempt: Send using pre-uploaded Meta Media ID
-    const mediaPayload = {
+    // 2. Secondary Attempt: Same approved template using pre-uploaded Meta Media ID
+    const templateMediaPayload = {
       messaging_product: "whatsapp",
       recipient_type: "individual",
       to: cleanPhone,
-      type: "document",
-      document: {
-        id: AURA_BROCHURE_MEDIA_ID,
-        filename: "Aura_by_Lifestyle_Brochure.pdf",
-        caption,
+      type: "template",
+      template: {
+        name: "property_brochure",
+        language: { code: "en" },
+        components: [
+          {
+            type: "header",
+            parameters: [
+              {
+                type: "document",
+                document: {
+                  id: AURA_BROCHURE_MEDIA_ID,
+                  filename: "Aura_by_Lifestyle_Brochure.pdf",
+                },
+              },
+            ],
+          },
+          {
+            type: "body",
+            parameters: [
+              {
+                type: "text",
+                text: recipientName,
+              },
+            ],
+          },
+        ],
       },
     };
 
@@ -423,16 +391,43 @@ export async function sendAuraBrochureOnWhatsApp(
         Authorization: `Bearer ${TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(mediaPayload),
+      body: JSON.stringify(templateMediaPayload),
     });
 
     const mData = await mediaRes.json();
     if (mediaRes.ok && mData.messages?.[0]?.id) {
-      console.log(`Brochure PDF delivered to ${cleanPhone} via media ID:`, mData.messages[0].id);
+      console.log(`Brochure PDF delivered to ${cleanPhone} via approved template with media ID:`, mData.messages[0].id);
       return { success: true, messageId: mData.messages[0].id };
     }
 
-    return { success: false, error: mData?.error?.message || "Delivery failed" };
+    console.warn("Template with media ID returned non-OK:", mData);
+
+    // 3. Tertiary Attempt: Direct text message with download link
+    const textRes = await fetch(`https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        recipient_type: "individual",
+        to: cleanPhone,
+        type: "text",
+        text: {
+          preview_url: true,
+          body: `🏛️ *Welcome to Aura by Lifestyle!*\n\nDear ${recipientName}, thank you for your interest. You can download and review the official architectural brochure and floor plans here:\n${AURA_BROCHURE_URL}\n\n_Lifestyle Home Spaces · MahaRERA: P5030002502915_`,
+        },
+      }),
+    });
+
+    const tData = await textRes.json();
+    if (textRes.ok && tData.messages?.[0]?.id) {
+      console.log(`Brochure link delivered to ${cleanPhone} via direct text:`, tData.messages[0].id);
+      return { success: true, messageId: tData.messages[0].id };
+    }
+
+    return { success: false, error: mData?.error?.message || data?.error?.message || "Delivery failed" };
   } catch (err: any) {
     console.error("Failed to dispatch WhatsApp brochure PDF:", err);
     return { success: false, error: err?.message };

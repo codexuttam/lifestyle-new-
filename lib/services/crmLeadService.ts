@@ -189,6 +189,8 @@ export async function captureLeadInCRM(
         location: "Amravati, Maharashtra",
         property_type: propertyType,
         notes: detailedNotes,
+        skip_automation: true,
+        no_ack: true,
       };
 
       const webhookRes = await fetch(CRM_WEBHOOK_URL, {
