@@ -88,7 +88,7 @@ export default function BlogsPage() {
       const adminUser: VerifiedUser = {
         name: "Lifestyle Administrator",
         email: "admin@lifestylehomespaces.com",
-        phone: "8530763405",
+        phone: "7498256708",
         verified: true,
         isAdmin: true,
       };

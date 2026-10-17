@@ -20,15 +20,16 @@ export async function POST(request: Request) {
     }
 
     const normPhone = normalizePhone(phone);
-    const resolvedName = (name || "").trim() || "Lifestyle Client";
+    const resolvedName = (name || "").trim() || "Lifestyle Resident";
     const resolvedEmail = (email || "").trim() || undefined;
 
-    const ownerPhone = (process.env.VITE_OWNER_WHATSAPP_NUMBER || "918530763405").replace(/\D/g, "");
+    const ownerPhone = (process.env.VITE_OWNER_WHATSAPP_NUMBER || "919730768982").replace(/\D/g, "");
     const adminEmail = (process.env.VITE_CRM_ADMIN_EMAIL || "admin@lifestylehomespaces.com").toLowerCase();
 
     const isAdmin = Boolean(
       cleanDigits === ownerPhone ||
-      cleanDigits.endsWith("8530763405") ||
+      cleanDigits.endsWith("9730768982") ||
+      cleanDigits.endsWith("7498256708") ||
       (resolvedEmail && resolvedEmail.toLowerCase() === adminEmail)
     );
 
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
       phone: normPhone,
       email: resolvedEmail,
       project: "Aura by Lifestyle",
-      preference: "Exclusive Client Access",
+      preference: "Exclusive Resident Access",
       source: "WhatsApp OTP Sign-In",
       verifiedAt,
       consent: true,

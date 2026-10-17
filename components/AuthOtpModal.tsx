@@ -28,7 +28,6 @@ export default function AuthOtpModal({
   const [resendCooldown, setResendCooldown] = useState(0);
   const [otpExpirySeconds, setOtpExpirySeconds] = useState(300);
   const [verifiedUser, setVerifiedUser] = useState<VerifiedUser | null>(null);
-  const [devOtpHint, setDevOtpHint] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -37,7 +36,6 @@ export default function AuthOtpModal({
       setEnteredOtp("");
       setIsAdminMode(false);
       setAdminPasscode("");
-      setDevOtpHint(null);
       try {
         const saved = localStorage.getItem("lifestyle_verified_user");
         if (saved) {
@@ -100,10 +98,6 @@ export default function AuthOtpModal({
         return;
       }
 
-      if (data.devFallbackOtp) {
-        setDevOtpHint(data.devFallbackOtp);
-      }
-
       setStep("otp");
       setIsLoading(false);
       setResendCooldown(60);
@@ -164,7 +158,7 @@ export default function AuthOtpModal({
     if (!verifiedUser) return;
     const updated: VerifiedUser = {
       ...verifiedUser,
-      name: name.trim() || "Lifestyle Client",
+      name: name.trim() || "Lifestyle Resident",
       email: email.trim() || undefined,
     };
     finishLogin(updated);
@@ -179,7 +173,7 @@ export default function AuthOtpModal({
     }
 
     const adminUser: VerifiedUser = {
-      phone: normalizePhone(phone || "8530763405"),
+      phone: normalizePhone(phone || "7498256708"),
       name: name.trim() || "Lifestyle Administrator",
       email: email.trim() || "admin@lifestylehomespaces.com",
       verified: true,
@@ -507,36 +501,6 @@ export default function AuthOtpModal({
               </p>
             </div>
 
-            {devOtpHint && (
-              <div
-                onClick={() => setEnteredOtp(devOtpHint)}
-                role="button"
-                tabIndex={0}
-                title="Click to auto-fill code"
-                style={{
-                  marginBottom: "1.1rem",
-                  padding: "0.65rem 0.95rem",
-                  borderRadius: "10px",
-                  background: "rgba(212, 175, 55, 0.12)",
-                  border: "1px dashed rgba(212, 175, 55, 0.45)",
-                  color: "#f5d77f",
-                  fontSize: "0.82rem",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <span>
-                  Code: <strong style={{ letterSpacing: "2px", color: "#ffffff", fontSize: "0.95rem" }}>{devOtpHint}</strong>
-                </span>
-                <span style={{ fontSize: "0.75rem", color: "#25D366", fontWeight: 600 }}>
-                  Tap to Auto-fill ⚡
-                </span>
-              </div>
-            )}
-
             <form onSubmit={handleVerifyOtp}>
               <div style={{ marginBottom: "1.2rem" }}>
                 <input
@@ -755,7 +719,7 @@ export default function AuthOtpModal({
               Signed In Successfully!
             </h3>
             <p style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "0.9rem" }}>
-              Welcome, {name || "Valued Client"}. Your verified session is active.
+              Welcome, {name || "Valued Resident"}. Your verified session is active.
             </p>
           </div>
         )}

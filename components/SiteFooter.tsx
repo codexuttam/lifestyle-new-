@@ -76,7 +76,7 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
                 📝 Submit Online Enquiry
               </button>
               <a href={telHref(settings)} className={styles.emailLink} style={{ color: "#d4af37", fontWeight: 600 }}>
-                📞 +91 8530763405
+                📞 +91 7498256708
               </a>
               <a href={mailtoHref(settings)} className={styles.emailLink} style={{ marginTop: "4px" }}>
                 {settings.email}

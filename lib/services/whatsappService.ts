@@ -29,7 +29,7 @@ const TOKEN = getEnv(
   "EABAPJDHtQEABShEt6D8x9xA6EGkA3ToQBanxh1SpfQzPI18My0L4v5BDo9gZAfmZBOBajHhQpSwxySONbjgAc2P3LImZCloZCDtGdL5JQWtMK4cZBzPP4FM1mfWQPHrAJw9lew5n5gMqIil6VU0pamR8zgynZC7ZCZAknI6zkpZACJfmzX403penOHcB4CTad2AZDZD"
 );
 const PHONE_NUMBER_ID = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
-export const OFFICIAL_LIFESTYLE_WHATSAPP = "918530763405";
+export const OFFICIAL_LIFESTYLE_WHATSAPP = getEnv("VITE_LIFESTYLE_WHATSAPP_NUMBER", "917498256708");
 
 /**
  * Sends a verified 6-digit OTP code to the customer's WhatsApp using Meta WhatsApp Cloud API.
@@ -237,7 +237,7 @@ export async function notifyOwnerOnWhatsApp(
   const refParam = params.referenceId || `LHS-MEMBER-${params.phone.replace(/\D/g, "").slice(-4)}`;
   const emailLine = params.email?.trim() ? `\n• *Email*: ${params.email.trim()}` : "";
 
-  const textMessage = `🏛️ *LIFESTYLE & AURA LEAD REPORT*\n\n• *Event*: ${eventLabel}\n• *Customer*: ${params.name || "Valued Client"}\n• *Phone*: ${params.phone}${emailLine}\n• *Details*: ${detailParam}\n• *Reference ID*: ${refParam}\n• *Timestamp*: ${nowIST} IST\n\n_Auto-registered in Real Estate CRM & Supabase Database._`;
+  const textMessage = `🏛️ *LIFESTYLE & AURA LEAD REPORT*\n\n• *Event*: ${eventLabel}\n• *Customer*: ${params.name || "Customer"}\n• *Phone*: ${params.phone}${emailLine}\n• *Details*: ${detailParam}\n• *Reference ID*: ${refParam}\n• *Timestamp*: ${nowIST} IST\n\n_Auto-registered in Real Estate CRM & Supabase Database._`;
 
   try {
     // 1. Primary Attempt: Approved Meta Template (estateflow_lead_ai_summary) via Lifestyle Home Spaces
@@ -253,7 +253,7 @@ export async function notifyOwnerOnWhatsApp(
           {
             type: "body",
             parameters: [
-              { type: "text", text: `${params.name || "Client"} (${params.phone})` },
+              { type: "text", text: `${params.name || "Customer"} (${params.phone})` },
               { type: "text", text: eventLabel },
               { type: "text", text: `${detailParam} · Ref: ${refParam} · ${nowIST} IST` },
             ],

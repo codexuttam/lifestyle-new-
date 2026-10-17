@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 
 type Filter = ProjectCategory | "All";
 
-const WHATSAPP_PHONE = "918530763405";
+const WHATSAPP_PHONE = "917498256708";
 
 function CalendarIcon() {
   return (

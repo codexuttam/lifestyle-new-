@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { BrandBlogPost } from "@/lib/types/blog";
 import { captureLeadInCRM } from "@/lib/services/crmLeadService";
 
-const WHATSAPP_NUMBER = "918530763405";
+const WHATSAPP_NUMBER = "917498256708";
 
 interface BlogArticleModalProps {
   blog: BrandBlogPost | null;
@@ -600,7 +600,7 @@ export default function BlogArticleModal({
           }}
         >
           <div style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.55)" }}>
-            Need direct assistance? Call <strong>+91 8530763405</strong>
+            Need direct assistance? Call <strong>+91 7498256708</strong>
           </div>
           <button
             type="button"

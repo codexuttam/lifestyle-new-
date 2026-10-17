@@ -4,8 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./Chatbot.module.css";
 import EnquiryModal from "@/components/EnquiryModal";
 
-const WHATSAPP_NUMBER = "918530763405";
-const PHONE_NUMBER = "+918530763405";
+const WHATSAPP_NUMBER = "917498256708";
+const PHONE_NUMBER = "+917498256708";
 
 interface Option {
   label: string;
@@ -304,7 +304,7 @@ export default function Chatbot() {
                 isWhatsApp: true,
               },
               {
-                label: "📞 Call +91 8530763405 Directly",
+                label: "📞 Call +91 7498256708 Directly",
                 action: () => {
                   window.location.href = `tel:${PHONE_NUMBER}`;
                 },
@@ -446,7 +446,7 @@ export default function Chatbot() {
           <div className={styles.chatFooter}>
             <span>Official Sales Desk:</span>
             <a href={`tel:${PHONE_NUMBER}`} className={styles.deskLink}>
-              📞 +91 8530763405
+              📞 +91 7498256708
             </a>
           </div>
         </div>

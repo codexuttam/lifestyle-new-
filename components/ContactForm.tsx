@@ -64,7 +64,7 @@ export default function ContactForm() {
 
   if (status === "sent") {
     const waUrl = getLifestyleConciergeWhatsAppUrl(
-      `Hello Lifestyle Homes team, I submitted an enquiry for Aura with Ref ID ${referenceId}. Please share pricing and arrange a site visit.`
+      `Hello Lifestyle Homes team, I submitted an enquiry for Aura by Lifestyle under Ref ID ${referenceId || ""}. Please share pricing details.`
     );
 
     return (

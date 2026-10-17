@@ -43,14 +43,23 @@ const CRM_WEBHOOK_URL = getEnv(
   "VITE_CRM_WEBHOOK_URL",
   "https://realstatecrm.bitlancetechhub.com/api/webhooks/leads"
 );
-const CRM_WEBHOOK_SECRET = getEnv("VITE_CRM_WEBHOOK_SECRET", "");
+const CRM_WEBHOOK_SECRET = getEnv(
+  "VITE_CRM_WEBHOOK_SECRET",
+  "whsec_1f6b4e17bccfc6a5a0dde2c5dcde533e6638652203f517e8"
+);
 
-// Target Organizations: Primary Lifestyle Org + Dashboard Org
+// Target Organizations:
+// 1. PRIMARY_ORG_ID: Lifestyle Home Spaces (8a7fe841-bda6-46a1-a033-d68d2bb2a318)
+// 2. TALDA_ORG_ID: Amit Talda & Agent Lifestyle Home Space (fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d)
+// 3. DASHBOARD_ORG_ID: Real Estate CRM Dashboard Org (956739fd-5b6f-46f6-9e8f-82b6e17ee482)
 const PRIMARY_ORG_ID = getEnv("VITE_CRM_ORG_ID", "8a7fe841-bda6-46a1-a033-d68d2bb2a318");
+export const TALDA_ORG_ID = "fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d";
 const DASHBOARD_ORG_ID = "956739fd-5b6f-46f6-9e8f-82b6e17ee482";
 
-const CRM_ADMIN_ID = getEnv("VITE_CRM_ADMIN_ID", "403ac464-fdf6-4cd7-b415-4cef9f17fa21");
-const CRM_AGENT_ID = getEnv("VITE_CRM_AGENT_ID", "2b0fc266-1ca1-4c36-97cf-783f7155a32e");
+// Admin: admittalda@lifestylehomespaces.com (0cc4c84a-bc35-4f81-9291-4ffef2490543)
+// Agent: agent@lifestylehomespaces.com (fd56919d-073f-48f4-8fc0-965bb2f67a2d)
+const CRM_ADMIN_ID = getEnv("VITE_CRM_ADMIN_ID", "0cc4c84a-bc35-4f81-9291-4ffef2490543");
+const CRM_AGENT_ID = getEnv("VITE_CRM_AGENT_ID", "fd56919d-073f-48f4-8fc0-965bb2f67a2d");
 
 // Generates an official reference ID (e.g. LHS-2026-A82F)
 export function generateReferenceId(): string {
@@ -62,19 +71,25 @@ export function generateReferenceId(): string {
   return `LHS-2026-${code}`;
 }
 
-// Splits full name into first and last name safely
+// Splits full name into first and last name safely without adding any 'Client' suffix
 export function splitName(fullName: string): { firstName: string; lastName: string } {
-  const trimmed = (fullName || "").trim().replace(/\s+/g, " ");
+  let trimmed = (fullName || "").trim().replace(/\s+/g, " ");
   if (!trimmed) {
     return { firstName: "", lastName: "" };
   }
+
+  // Strip trailing "client" or "Client" if mistakenly entered or appended (e.g. "Raj Client" -> "Raj")
+  trimmed = trimmed.replace(/\s+[Cc]lient$/i, "").trim() || trimmed;
+
   const parts = trimmed.split(" ");
   if (parts.length === 1) {
     return { firstName: parts[0], lastName: "" };
   }
+  const firstName = parts[0];
+  const lastName = parts.slice(1).join(" ");
   return {
-    firstName: parts[0],
-    lastName: parts.slice(1).join(" "),
+    firstName,
+    lastName: lastName.toLowerCase() === "client" ? "" : lastName,
   };
 }
 
@@ -203,7 +218,9 @@ export async function captureLeadInCRM(
         Prefer: "return=representation",
       };
 
-      const targetOrgs = Array.from(new Set([PRIMARY_ORG_ID, DASHBOARD_ORG_ID].filter(Boolean)));
+      const targetOrgs = Array.from(
+        new Set([PRIMARY_ORG_ID, TALDA_ORG_ID, DASHBOARD_ORG_ID].filter(Boolean))
+      );
       const phoneLast10 = phone.replace(/\D/g, "").slice(-10);
 
       for (const orgId of targetOrgs) {
@@ -223,7 +240,7 @@ export async function captureLeadInCRM(
             }
           }
 
-          let leadId: string;
+          let leadId: string | undefined;
 
           if (existingLead) {
             leadId = existingLead.id;
@@ -237,16 +254,18 @@ export async function captureLeadInCRM(
               updated_at: new Date().toISOString(),
             };
 
-            const existingFirstName = (existingLead.first_name || "").trim().toLowerCase();
-            const isPlaceholderName =
-              !existingFirstName ||
-              existingFirstName === "prospective" ||
-              existingFirstName === "client" ||
-              existingFirstName === "lifestyle";
+            // Update lead name whenever a genuine customer name is submitted
+            const isPlaceholder =
+              !firstName ||
+              firstName.toLowerCase() === "lifestyle" ||
+              firstName.toLowerCase() === "client" ||
+              firstName.toLowerCase() === "prospective";
 
-            if (firstName && isPlaceholderName) {
+            if (firstName && !isPlaceholder) {
               patchBody.first_name = firstName;
-              patchBody.last_name = lastName;
+              patchBody.last_name = lastName || "";
+            } else if ((existingLead.last_name || "").trim().toLowerCase() === "client") {
+              patchBody.last_name = "";
             }
 
             await fetch(`${SUPABASE_URL}/rest/v1/leads?id=eq.${leadId}`, {
@@ -268,7 +287,6 @@ export async function captureLeadInCRM(
               property_type: propertyType,
               notes: detailedNotes,
               assigned_to: CRM_AGENT_ID || null,
-              created_by: CRM_ADMIN_ID || null,
             };
 
             const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
@@ -281,6 +299,49 @@ export async function captureLeadInCRM(
               const inserted = await insertRes.json();
               leadId = Array.isArray(inserted) && inserted.length > 0 ? inserted[0]?.id : undefined;
             }
+          }
+
+          if (!webhookLeadId) {
+            webhookLeadId = leadId;
+          }
+
+          // Log timeline activity inside CRM
+          try {
+            await fetch(`${SUPABASE_URL}/rest/v1/activities`, {
+              method: "POST",
+              headers,
+              body: JSON.stringify({
+                organization_id: orgId,
+                lead_id: leadId,
+                type: "lead_created",
+                payload: {
+                  via: "website",
+                  reference_id: referenceId,
+                  details: `Website form submitted for ${project} (${preference})`,
+                  source: "website",
+                  lead_name: resolvedFullName,
+                },
+              }),
+            });
+          } catch {}
+
+          // Create notification for sales team in CRM
+          if (orgId === PRIMARY_ORG_ID || orgId === TALDA_ORG_ID) {
+            try {
+              if (CRM_AGENT_ID) {
+                await fetch(`${SUPABASE_URL}/rest/v1/notifications`, {
+                  method: "POST",
+                  headers,
+                  body: JSON.stringify({
+                    organization_id: orgId,
+                    recipient_id: CRM_AGENT_ID,
+                    lead_id: leadId,
+                    type: "lead_assigned",
+                    message: `New Lead [${referenceId}]: ${resolvedFullName} (${phone}) for ${project} [${preference}]`,
+                  }),
+                });
+              }
+            } catch {}
           }
         } catch (orgSyncErr) {
           console.warn(`Supabase sync failed for org ${orgId}:`, orgSyncErr);

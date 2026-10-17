@@ -52,7 +52,7 @@ export const PAGES_CONTENT: PagesContent = {
   contact: {
     metaTitle: "Contact Us | Aura by Lifestyle & Lifestyle Home Spaces",
     metaDescription:
-      "Contact Lifestyle Homes Spaces site office at Congress Nagar Road, Camp, Amravati. Call +91 8530763405 or WhatsApp +91 8530763405 for bookings and brochures.",
+      "Contact Lifestyle Homes Spaces site office at Congress Nagar Road, Camp, Amravati. Call +91 7498256708 or WhatsApp +91 7498256708 for bookings and brochures.",
     badge: "Contact Us",
     title: "Schedule Your Private Site Tour",
     intro:

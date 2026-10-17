@@ -135,7 +135,7 @@ export default function PrivacyPage() {
             >
               <p style={{ margin: "0 0 0.4rem" }}><strong>Entity:</strong> Lifestyle Home Spaces &amp; Aura by Lifestyle</p>
               <p style={{ margin: "0 0 0.4rem" }}><strong>Site &amp; Head Office:</strong> Aura by Lifestyle, Congress Nagar Road, Next to Dreamz Signature, Camp, Amravati — 444606</p>
-              <p style={{ margin: "0 0 0.4rem" }}><strong>Direct Sales Desk:</strong> +91 8530763405</p>
+              <p style={{ margin: "0 0 0.4rem" }}><strong>Direct Sales Desk:</strong> +91 7498256708</p>
               <p style={{ margin: 0 }}><strong>Email:</strong> admin@lifestylehomespaces.com</p>
             </div>
           </section>
