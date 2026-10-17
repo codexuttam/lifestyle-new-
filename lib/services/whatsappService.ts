@@ -201,20 +201,22 @@ export async function sendWhatsappOtp(
 }
 
 /**
- * Sends a real-time WhatsApp notification directly to the owner number (918530763405)
- * using Bitlance AI (Phone ID 744188362103708) from Real Estate CRM.
+ * Sends a real-time WhatsApp notification directly to the CEO/owner number (configured in .env)
+ * whenever a user logs in or submits an enquiry form.
  */
 export async function notifyOwnerOnWhatsApp(
   params: OwnerNotificationParams
 ): Promise<{ success: boolean; error?: string }> {
+  const configuredPhoneId = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
   const bitlancePhoneId = getEnv("VITE_BITLANCE_WHATSAPP_PHONE_ID", "744188362103708");
-  const bitlanceToken = getEnv(
-    "VITE_BITLANCE_WHATSAPP_TOKEN",
-    "EAAU6uBLPyowBRZB635p73IoYSJusGBYeJPNezLQWnPmjnr5i2ZB7ZCNZCmZCkvvjGuvqSFVb6ejubUsH1hgt95joyIxi7emH2NlfxCT5sIAwtisWs9HQZBKURg79rqKa20cYRi2KQ0mLRXE7hhIRJ3vjlfrsDUFD0mk6pW3DGwMoR5AItC2OwZAFqzhMMHQwYfyHQZDZD"
-  );
+  const bitlanceToken = getEnv("VITE_BITLANCE_WHATSAPP_TOKEN", TOKEN);
 
-  const ownerRecipient = getEnv("VITE_OWNER_WHATSAPP_NUMBER", "918530763405").replace(/\D/g, "");
-  const cleanOwnerTo = ownerRecipient.length === 10 ? "91" + ownerRecipient : ownerRecipient;
+  const rawCeoPhone =
+    getEnv("VITE_OWNER_WHATSAPP_NUMBER") ||
+    getEnv("NEXT_PUBLIC_OWNER_WHATSAPP_NUMBER") ||
+    "919730768982";
+  const digits = rawCeoPhone.replace(/\D/g, "");
+  const cleanOwnerTo = digits.length === 10 ? "91" + digits : digits;
 
   const nowIST = new Date().toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
@@ -222,78 +224,117 @@ export async function notifyOwnerOnWhatsApp(
     timeStyle: "short",
   });
 
-  const actionText =
+  const eventLabel =
     params.type === "sign_in"
-      ? "signed in to the client portal"
-      : "submitted a new property enquiry";
+      ? "Member Sign-In / Login"
+      : "New Property Enquiry";
 
   const detailParam =
     params.type === "sign_in"
-      ? "Member Portal Access"
+      ? "Portal Access"
       : `${params.project || "Aura by Lifestyle"} (${params.preference || "Residence"})`;
 
   const refParam = params.referenceId || `LHS-MEMBER-${params.phone.replace(/\D/g, "").slice(-4)}`;
-  const emailLine = params.email?.trim() ? `\n• Email: ${params.email.trim()}` : "";
+  const emailLine = params.email?.trim() ? `\n• *Email*: ${params.email.trim()}` : "";
 
-  const textMessage = `Hello Lifestyle Team,\n\nA customer has ${actionText} on the official website.\n\n*Customer Details:*\n• Name: ${params.name || "Valued Client"}\n• Phone: ${params.phone}${emailLine}\n• Details / Project: ${detailParam}\n• Reference ID: ${refParam}\n• Time: ${nowIST} IST\n\nPlease follow up with the customer promptly.`;
+  const textMessage = `🏛️ *LIFESTYLE & AURA LEAD REPORT*\n\n• *Event*: ${eventLabel}\n• *Customer*: ${params.name || "Valued Client"}\n• *Phone*: ${params.phone}${emailLine}\n• *Details*: ${detailParam}\n• *Reference ID*: ${refParam}\n• *Timestamp*: ${nowIST} IST\n\n_Auto-registered in Real Estate CRM & Supabase Database._`;
 
   try {
-    const url = `https://graph.facebook.com/v19.0/${bitlancePhoneId}/messages`;
-
-    // Try sending template lifestyle_lead_alert first
+    // 1. Primary Attempt: Approved Meta Template (estateflow_lead_ai_summary) via Lifestyle Home Spaces
+    // Guaranteed delivery outside 24-hr window
     const templatePayload = {
       messaging_product: "whatsapp",
       to: cleanOwnerTo,
       type: "template",
       template: {
-        name: "lifestyle_lead_alert",
+        name: "estateflow_lead_ai_summary",
         language: { code: "en" },
         components: [
           {
             type: "body",
             parameters: [
-              { type: "text", text: params.name || "Valued Customer" },
-              { type: "text", text: params.phone },
-              { type: "text", text: detailParam },
-              { type: "text", text: refParam },
+              { type: "text", text: `${params.name || "Client"} (${params.phone})` },
+              { type: "text", text: eventLabel },
+              { type: "text", text: `${detailParam} · Ref: ${refParam} · ${nowIST} IST` },
             ],
           },
         ],
       },
     };
 
-    const templateRes = await fetch(url, {
+    const templateRes = await fetch(`https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${bitlanceToken}`,
+        Authorization: `Bearer ${TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(templatePayload),
     });
 
-    if (templateRes.ok) {
+    const tData = await templateRes.json();
+    if (templateRes.ok && tData.messages?.[0]?.id) {
+      console.log(`CEO Alert delivered to ${cleanOwnerTo} via approved template:`, tData.messages[0].id);
+
+      // Also fire direct detailed text message for richer reading experience
+      fetch(`https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          recipient_type: "individual",
+          to: cleanOwnerTo,
+          type: "text",
+          text: { preview_url: false, body: textMessage },
+        }),
+      }).catch(() => {});
+
       return { success: true };
     }
 
-    // Fallback: standard direct text message
-    const directPayload = {
-      messaging_product: "whatsapp",
-      recipient_type: "individual",
-      to: cleanOwnerTo,
-      type: "text",
-      text: { body: textMessage },
-    };
+    console.warn("Lifestyle template alert response not OK:", tData);
 
-    const directRes = await fetch(url, {
+    // 2. Direct text message fallback
+    const directRes = await fetch(`https://graph.facebook.com/v20.0/${configuredPhoneId}/messages`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        recipient_type: "individual",
+        to: cleanOwnerTo,
+        type: "text",
+        text: { preview_url: false, body: textMessage },
+      }),
+    });
+
+    const dData = await directRes.json();
+    if (directRes.ok && dData.messages?.[0]?.id) {
+      console.log(`CEO Alert delivered to ${cleanOwnerTo} via direct text:`, dData.messages[0].id);
+      return { success: true };
+    }
+
+    // 3. Fallback to Bitlance AI channel
+    const bitlanceRes = await fetch(`https://graph.facebook.com/v20.0/${bitlancePhoneId}/messages`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${bitlanceToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(directPayload),
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        recipient_type: "individual",
+        to: cleanOwnerTo,
+        type: "text",
+        text: { preview_url: false, body: textMessage },
+      }),
     });
 
-    return { success: directRes.ok };
+    return { success: bitlanceRes.ok };
   } catch (err: any) {
     console.warn("Owner WhatsApp notification error (non-blocking):", err);
     return { success: false, error: err?.message };
