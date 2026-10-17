@@ -23,7 +23,14 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: "Aura by Lifestyle | 15-Storey Ultra-Luxury Landmark, Amravati",
   description:
-    "Aura by Lifestyle — Amravati's premier 15-storey architectural highrise in Congress Nagar featuring 2 & 3 BHK luxury residences, rooftop infinity pool, 40+ sky thrills, and high-street commercial arcade. MahaRERA: P5030002502915.",
+    "Aura by Lifestyle — Amravati's premier 15-storey architectural highrise in Congress Nagar featuring 2 & 3 BHK luxury residences, rooftop infinity pool, 40+ sky amenities, and double-height entrance lobby. MahaRERA: P5030002502915.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+  },
 };
 
 export const viewport = {

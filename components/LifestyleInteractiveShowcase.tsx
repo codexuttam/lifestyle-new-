@@ -521,31 +521,75 @@ export default function LifestyleInteractiveShowcase({
         </div>
       </section>
 
-      {/* ================= LIGHTBOX MODAL ================= */}
+      {/* ================= 4K ULTRA-HD LIGHTBOX MODAL ================= */}
       {modalMedia && (
-        <div className={styles.modalBackdrop} onClick={() => setModalMedia(null)}>
+        <div
+          className={styles.modalBackdrop}
+          onClick={() => setModalMedia(null)}
+          role="dialog"
+          aria-modal="true"
+        >
           <div
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              type="button"
-              className={styles.modalCloseBtn}
-              onClick={() => setModalMedia(null)}
-              aria-label="Close Preview"
-            >
-              <i className="fa-solid fa-xmark" />
-            </button>
+            <div className={styles.modalHeader}>
+              <div className={styles.modalHeaderInfo}>
+                <span className={styles.modalBadge}>
+                  <i className="fa-solid fa-eye" /> 4K Ultra-HD Layout Inspection
+                </span>
+                <h4 className={styles.modalTitle}>{modalMedia.title}</h4>
+              </div>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setModalMedia(null)}
+                aria-label="Close Preview"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
 
-            <img
-              src={modalMedia.src}
-              alt={modalMedia.title}
-              className={styles.modalImg}
-            />
+            <div className={styles.modalImgWrapper}>
+              <img
+                src={modalMedia.src}
+                alt={modalMedia.title}
+                className={styles.modalImg}
+              />
+            </div>
 
             <div className={styles.modalCaption}>
-              <h4 className={styles.modalTitle}>{modalMedia.title}</h4>
-              <p className={styles.modalDesc}>{modalMedia.desc}</p>
+              <div className={styles.modalTextCol}>
+                <p className={styles.modalDesc}>{modalMedia.desc}</p>
+                <div className={styles.modalSpecsRow}>
+                  <span>DPS Road, Parvati Nagar, Amravati</span>
+                  <span>•</span>
+                  <span>MahaRERA: P50300054447</span>
+                  <span>•</span>
+                  <span>100% Ready Possession</span>
+                </div>
+              </div>
+
+              <div className={styles.modalActions}>
+                <a
+                  href={`${whatsappHref}?text=${encodeURIComponent(
+                    `Hello Lifestyle Homes, I inspected the 4K plan for "${modalMedia.title}". Please share pricing and arrange a site visit.`
+                  )}`}
+                  className={styles.modalWaBtn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fa-brands fa-whatsapp" />
+                  <span>Enquire on WhatsApp</span>
+                </a>
+                <a href={telHref} className={styles.modalCallBtn}>
+                  <i className="fa-solid fa-phone" />
+                  <span>Call Sales Desk</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

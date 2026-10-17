@@ -100,18 +100,32 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
   return (
     <>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.logo} aria-label="Aura & Lifestyle — Home">
-          <img
-            src="/aura/aura-logo-official.png"
-            alt="Aura & Lifestyle Emblem"
-            width={46}
-            height={46}
-            className={styles.logoImg}
-          />
-          <span className={styles.logoLockup}>
-            <span className={styles.logoName}>AURA</span>
-            <span className={styles.logoSub}>BY LIFESTYLE</span>
-          </span>
+        <Link
+          href={isLifestylePage ? "/projects/lifestyle-homes" : "/"}
+          className={styles.logo}
+          aria-label={isLifestylePage ? "Lifestyle Homes — Home" : "Aura & Lifestyle — Home"}
+        >
+          {isLifestylePage ? (
+            <img
+              src="/lifestyle-homes-logo.png"
+              alt="Lifestyle Homes"
+              className={styles.lifestyleLogoImg}
+            />
+          ) : (
+            <>
+              <img
+                src="/aura/aura-logo-official.png"
+                alt="Aura & Lifestyle Emblem"
+                width={46}
+                height={46}
+                className={styles.logoImg}
+              />
+              <span className={styles.logoLockup}>
+                <span className={styles.logoName}>AURA</span>
+                <span className={styles.logoSub}>BY LIFESTYLE</span>
+              </span>
+            </>
+          )}
         </Link>
 
         <div className={styles.menuCapsule}>

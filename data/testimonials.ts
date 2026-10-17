@@ -10,38 +10,38 @@ export type Testimonial = {
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    "id": "rajesh-priya-malhotra",
-    "name": "Rajesh & Priya Malhotra",
-    "role": "Casa Meridian",
-    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&h=250&q=80",
-    "quote": "“The Premium Construction delivered our dream home exactly on time and within budget. The quality of the RCC structure and finishing is exceptional. Couldn't have asked for a better team.”"
+    id: "neha-rohit-kapoor",
+    name: "Neha & Rohit Kapoor",
+    role: "Camp Road, Amravati",
+    avatar: "/testimonials/indian_couple.jpg",
+    quote: "“Excellent material quality, no hidden costs, and a breathtaking finish. Lifestyle Home Spaces has set a new benchmark in Amravati’s luxury residential living.”",
   },
   {
-    "id": "amit-sharma",
-    "name": "Amit Sharma",
-    "role": "Noida Sector 50",
-    "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=250&h=250&q=80",
-    "quote": "“From the first site visit to the final handover, every step was transparent and professional. Our 4BHK turned out better than we imagined.”"
+    id: "dr-amit-deshmukh",
+    name: "Dr. Amit & Priya Deshmukh",
+    role: "Parvati Nagar, Amravati",
+    avatar: "/testimonials/indian_doctor.jpg",
+    quote: "“From the first site inspection on DPS Road to the key handover, every step was transparent and professional. The 100% Vastu layout and ventilation are truly exceptional.”",
   },
   {
-    "id": "sanjay-verma",
-    "name": "Sanjay Verma",
-    "role": "The Ivory Residence",
-    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&h=250&q=80",
-    "quote": "“The dedicated site manager kept us updated daily. We were in Dubai during construction and had zero stress. Truly turnkey.”"
+    id: "priya-agrawal",
+    name: "Priya & Rajesh Agrawal",
+    role: "Congress Nagar, Amravati",
+    avatar: "/testimonials/indian_businesswoman.jpg",
+    quote: "“The quality of the RCC structure, Jaquar bath fittings, and double-height lobbies exceeded our expectations. Best residential investment in Amravati.”",
   },
   {
-    "id": "neha-rohit-kapoor",
-    "name": "Neha & Rohit Kapoor",
-    "role": "DLF Phase 2, Delhi",
-    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&h=250&q=80",
-    "quote": "“Excellent material quality, no hidden costs, and a beautiful finish. The Premium Construction has set a new benchmark in Delhi NCR construction.”"
+    id: "rajesh-mishra",
+    name: "Rajesh Mishra & Family",
+    role: "Rajapeth Avenue, Amravati",
+    avatar: "/testimonials/indian_senior.jpg",
+    quote: "“We inspected multiple developers in Amravati before choosing Lifestyle. The dual Otis elevators and generator backup give complete peace of mind to our family.”",
   },
   {
-    "id": "vikram-nair",
-    "name": "Vikram Nair",
-    "role": "Sector 43, Gurugram",
-    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=250&h=250&q=80",
-    "quote": "“We compared 6 contractors before choosing The Premium Construction. Best decision we made. The 30-month warranty gave us complete peace of mind.”"
-  }
+    id: "vikram-kothari",
+    name: "Vikram Kothari",
+    role: "Badnera Road, Amravati",
+    avatar: "/testimonials/indian_tech.jpg",
+    quote: "“The commercial showrooms and residential suites are planned to perfection. 24-metre DPS road frontage and high footfall make it unbeatable in Amravati.”",
+  },
 ];

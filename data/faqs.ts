@@ -29,7 +29,7 @@ export const FAQS: FaqEntry[] = [
     id: "aura-configurations-available",
     question: "What configurations are available in Aura by Lifestyle?",
     answer:
-      "Aura offers thoughtfully designed 2 BHK and 3 BHK luxury residences on the upper 13 storeys, alongside 3 levels of high-street commercial retail shops and corporate office spaces on the lower ground, upper ground, and first floors.",
+      "Aura offers thoughtfully designed 2 BHK and 3 BHK ultra-luxury residences across 15 storeys, featuring private panoramic sit-out balconies, premium branded finishes, double-height entrance lobby, and 100% Vastu compliance.",
   },
   {
     id: "lifestyle-homes-project",

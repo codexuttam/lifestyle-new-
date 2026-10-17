@@ -22,11 +22,23 @@
     --text-on-dark-secondary: rgba(255, 255, 255, 0.82);
 
     /* Accent — two tones: `ink` for text (AA on light), `gold` for fills */
-    --accent-ink: #8a6d1f;    /* accent text/links  ~4.9:1 on --bg */
-    --accent: #c9a84c;        /* decorative fills, borders, on-dark text */
-    --accent-strong: #b3902f; /* hover on fills */
-    --accent-soft: rgba(201, 168, 76, 0.35);
-    --accent-wash: rgba(201, 168, 76, 0.12);
+    --accent-ink: #c01853;    /* royal magenta for links/accents */
+    --accent: #d4af37;        /* royal gold fills, borders */
+    --accent-strong: #9e0e41; /* deep magenta hover */
+    --accent-soft: rgba(212, 175, 55, 0.35);
+    --accent-wash: rgba(192, 24, 83, 0.12);
+
+    /* Royal Gold & Magenta Dedicated Palette */
+    --gold: #d4af37;
+    --gold-light: #f5d77f;
+    --gold-dark: #aa8210;
+    --gold-glow: rgba(212, 175, 55, 0.4);
+    --magenta: #c01853;
+    --magenta-dark: #8b0a38;
+    --magenta-light: #e02d6b;
+    --magenta-glow: rgba(192, 24, 83, 0.45);
+    --royal-gradient: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+    --gold-gradient: linear-gradient(135deg, #f5d77f 0%, #d4af37 55%, #aa8210 100%);
 
     /* Lines & elevation */
     --border: rgba(26, 22, 19, 0.12);
@@ -1256,22 +1268,24 @@ textarea:focus-visible,
     position: fixed;
     bottom: 40px;
     right: 40px;
-    width: 60px;
-    height: 60px;
-    background: var(--whatsapp);
+    width: 62px;
+    height: 62px;
+    background: #25d366;
     color: #fff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    box-shadow: 0 6px 20px rgba(18, 140, 74, 0.35);
+    border: 2px solid #d4af37;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 0 16px rgba(192, 24, 83, 0.35);
     z-index: 1000;
-    transition: transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .floating-wa:hover {
     transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6), 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .mobile-sticky-bar {
@@ -1290,12 +1304,14 @@ textarea:focus-visible,
     left: 0;
     width: 12px;
     height: 12px;
-    background: var(--accent-ink);
+    background: #c01853;
+    border: 1.5px solid #d4af37;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    box-shadow: 0 0 12px rgba(192, 24, 83, 0.6), 0 0 6px rgba(212, 175, 55, 0.5);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
 body:hover .custom-cursor {
@@ -1303,10 +1319,11 @@ body:hover .custom-cursor {
 }
 
 a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid var(--accent-ink);
+    width: 32px;
+    height: 32px;
+    background: rgba(192, 24, 83, 0.15);
+    border: 1.5px solid #d4af37;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.6);
 }
 
 /* Responsive adjustments */
@@ -1423,8 +1440,16 @@ a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
         font-size: 14px;
     }
 
-    .call-btn { background: #1a1613; border-top: 1px solid #1a1613; }
-    .wa-btn { background: var(--whatsapp); border-top: 1px solid var(--whatsapp); }
+    .call-btn {
+        background: linear-gradient(135deg, #c01853 0%, #8b0a38 100%);
+        border-top: 2px solid #d4af37;
+        color: #ffffff;
+    }
+    .wa-btn {
+        background: #128c4a;
+        border-top: 2px solid #d4af37;
+        color: #ffffff;
+    }
 
     .custom-cursor { display: none; }
 }

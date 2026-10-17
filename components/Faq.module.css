@@ -32,16 +32,17 @@
   width: 10px;
   height: 10px;
   border-radius: 9999px;
-  background: #afe37e;
-  box-shadow: 0 0 12px rgba(175, 227, 126, 0.4);
+  background: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.7), 0 0 20px rgba(192, 24, 83, 0.5);
 }
 
 .badgeText {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
-  color: #d1d5db;
-  font-size: 16px;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  color: #f5d77f;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   line-height: normal;
 }
 
@@ -57,7 +58,11 @@
 .title {
   font-family: var(--font-big-shoulders), sans-serif;
   font-weight: 500;
-  color: #f9fafb;
+  background: linear-gradient(135deg, #ffffff 40%, #f5d77f 75%, #e65c8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   font-size: 72px;
   line-height: normal;
   letter-spacing: normal;
@@ -79,15 +84,16 @@
   background: rgba(255, 255, 255, 0.03);
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.14);
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
 }
 
 .item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(192, 24, 83, 0.06);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px rgba(192, 24, 83, 0.2);
   transform: translateY(-2px);
 }
 
@@ -105,7 +111,7 @@
 }
 
 .trigger:focus-visible {
-  outline: 2px solid #afe37e;
+  outline: 2px solid #d4af37;
   outline-offset: -4px;
 }
 
@@ -119,7 +125,7 @@
 }
 
 .chevron {
-  color: #afe37e;
+  color: #f5d77f;
   flex-shrink: 0;
   margin-left: 16px;
   display: flex;

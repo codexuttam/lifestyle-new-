@@ -27,7 +27,7 @@ export const MILESTONES = [
   {
     year: "2026",
     title: "Aura by Lifestyle Unveiled",
-    text: "Unveiled Aura on Congress Nagar Road — Amravati's premier 15-storey highrise tower with rooftop sky pool, sports turf, and commercial promenade.",
+    text: "Unveiled Aura on Congress Nagar Road — Amravati's premier 15-storey highrise tower with rooftop sky pool, sports turf, and luxury sky lounge.",
   },
 ];
 

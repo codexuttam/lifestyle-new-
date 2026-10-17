@@ -73,21 +73,21 @@
   gap: 8px;
   padding: 13px 26px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
-  color: #06090e;
+  background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+  color: #ffffff;
   text-decoration: none;
   font-family: var(--font-inter), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 18px rgba(192, 24, 83, 0.4);
   transition: all 0.3s ease;
 }
 
 .viewAll:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 26px rgba(192, 24, 83, 0.6), 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
 .grid {
@@ -115,7 +115,7 @@
 .card:hover {
   transform: translateY(-5px);
   border-color: rgba(212, 175, 55, 0.45);
-  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.7), 0 0 20px rgba(192, 24, 83, 0.2);
 }
 
 .cardTop {
@@ -131,11 +131,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #f0d886 0%, #d4af37 60%, #aa8010 100%);
+  background: linear-gradient(135deg, #c01853 0%, #d4af37 100%);
   width: 58px;
   height: 58px;
-  color: #06090e;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(192, 24, 83, 0.35), 0 0 12px rgba(212, 175, 55, 0.3);
 }
 
 .categoryChip {

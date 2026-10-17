@@ -25,12 +25,12 @@
   gap: 8px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(192, 24, 83, 0.12);
   border: 1px solid rgba(212, 175, 55, 0.35);
   font-family: var(--font-inter), sans-serif;
   font-size: 11px;
   letter-spacing: 0.15em;
-  color: #d4af37;
+  color: #f5d77f;
   text-transform: uppercase;
   margin-bottom: 16px;
 }
@@ -40,7 +40,7 @@
   height: 6px;
   border-radius: 50%;
   background: #d4af37;
-  box-shadow: 0 0 8px #d4af37;
+  box-shadow: 0 0 8px #d4af37, 0 0 5px #c01853;
 }
 
 .title {
@@ -106,10 +106,10 @@
 }
 
 .activeTab {
-  background: linear-gradient(135deg, #d4af37 0%, #b89128 100%) !important;
-  color: #0b0c10 !important;
-  font-weight: 600;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+  background: linear-gradient(135deg, #c01853 0%, #d4af37 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(192, 24, 83, 0.45), 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .tabBadge {
@@ -324,20 +324,22 @@
   justify-content: center;
   padding: 12px 22px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
+  background: rgba(192, 24, 83, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f5d77f;
   font-family: var(--font-inter), sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
 .visitBtn:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(192, 24, 83, 0.35);
   border-color: #d4af37;
-  color: #d4af37;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(192, 24, 83, 0.4);
 }
 
 /* Location Banner */

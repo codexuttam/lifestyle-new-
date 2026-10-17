@@ -24,8 +24,8 @@ export const SITE_SETTINGS: SiteSettings = {
   reraNumber: "P5030002502915",
   copyright: "© 2026 Lifestyle Home Spaces. All rights reserved. MahaRERA Reg. No. P5030002502915",
   social: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "Facebook", href: "https://facebook.com" },
+    { label: "Instagram", href: "https://www.instagram.com/lifestylerealestate_11" },
+    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61591959993385" },
     { label: "WhatsApp", href: "https://wa.me/919730768982" },
   ],
 };

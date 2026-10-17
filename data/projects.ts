@@ -41,7 +41,7 @@ export const PROJECTS: Project[] = [
     img: "/aura/real-aura.png",
     video: "/videos/aura-building-clip-1.mp4",
     summary:
-      "Amravati's premier 15-storey architectural highrise featuring 2 & 3 BHK luxury residences, rooftop infinity pool, sky-view multi-sports turf, and 3-level high-street commercial promenade.",
+      "Amravati's premier 15-storey architectural highrise featuring 2 & 3 BHK luxury residences, rooftop sky lounge, infinity pool, multi-sports turf, and double-height designer entrance lobby.",
   },
   {
     id: "lifestyle-homes",
