@@ -143,8 +143,18 @@ export async function captureLeadInCRM(
     }
 
     const rawName = (payload.name || "").trim().replace(/\s+/g, " ");
-    const { firstName, lastName } = splitName(rawName);
-    const resolvedFullName = rawName || [firstName, lastName].filter(Boolean).join(" ");
+    const isPlaceholderName =
+      !rawName ||
+      rawName.toLowerCase() === "lifestyle resident" ||
+      rawName.toLowerCase() === "lifestyle" ||
+      rawName.toLowerCase() === "client" ||
+      rawName.toLowerCase() === "prospective";
+
+    const { firstName, lastName } = isPlaceholderName
+      ? { firstName: "Applicant", lastName: "" }
+      : splitName(rawName);
+
+    const resolvedFullName = [firstName, lastName].filter(Boolean).join(" ");
     const phone = normalizePhone(payload.phone || "");
     const email = payload.email?.trim() || undefined;
     const project = payload.project || "Aura by Lifestyle";

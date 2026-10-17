@@ -41,7 +41,7 @@ export default function AuthOtpModal({
         if (saved) {
           const user = JSON.parse(saved);
           if (user.phone) setPhone(user.phone.replace(/\D/g, "").slice(-10));
-          if (user.name) setName(user.name);
+          if (user.name && user.name.toLowerCase() !== "lifestyle resident") setName(user.name);
           if (user.email) setEmail(user.email);
         }
       } catch {}
@@ -75,6 +75,10 @@ export default function AuthOtpModal({
   async function handleSendOtp(e?: React.FormEvent) {
     if (e) e.preventDefault();
     const cleanDigits = phone.replace(/\D/g, "");
+    if (!name.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
     if (cleanDigits.length < 10) {
       setError("Please enter a valid 10-digit mobile number.");
       return;
@@ -153,12 +157,33 @@ export default function AuthOtpModal({
     }
   }
 
-  function handleSaveName(e: React.FormEvent) {
+  async function handleSaveName(e: React.FormEvent) {
     e.preventDefault();
     if (!verifiedUser) return;
+    const finalName = name.trim();
+    if (!finalName) return;
+
+    setIsLoading(true);
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: finalName,
+          phone: verifiedUser.phone,
+          email: email.trim() || undefined,
+          project: "Aura by Lifestyle",
+          source: "Profile Name Update",
+        }),
+      });
+    } catch (err) {
+      console.warn("Could not sync name to CRM:", err);
+    }
+    setIsLoading(false);
+
     const updated: VerifiedUser = {
       ...verifiedUser,
-      name: name.trim() || "Lifestyle Resident",
+      name: finalName,
       email: email.trim() || undefined,
     };
     finishLogin(updated);
@@ -278,12 +303,44 @@ export default function AuthOtpModal({
                 WhatsApp OTP Sign-Up
               </h3>
               <p style={{ color: "rgba(255, 255, 255, 0.65)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
-                Enter your mobile number to receive an instant verification code on WhatsApp.
+                Enter your full name and mobile number to receive an instant verification code on WhatsApp.
               </p>
             </div>
 
             {!isAdminMode ? (
               <form onSubmit={handleSendOtp}>
+                <div style={{ marginBottom: "1.1rem" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "0.85rem",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      marginBottom: "0.4rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    Your Full Name <span style={{ color: "#e84393" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter your full name (e.g. Vikram Sharma)"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    autoFocus
+                    style={{
+                      width: "100%",
+                      padding: "0.85rem 1rem",
+                      borderRadius: "10px",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(212, 175, 55, 0.3)",
+                      color: "#ffffff",
+                      fontSize: "0.95rem",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+
                 <div style={{ marginBottom: "1.3rem" }}>
                   <label
                     style={{

@@ -20,7 +20,39 @@ export async function POST(request: Request) {
     }
 
     const normPhone = normalizePhone(phone);
-    const resolvedName = (name || "").trim() || "Lifestyle Resident";
+    let resolvedName = (name || "").trim();
+
+    if (!resolvedName || resolvedName.toLowerCase() === "lifestyle resident") {
+      try {
+        const phoneDigits10 = cleanDigits.slice(-10);
+        const searchRes = await fetch(
+          `${process.env.VITE_SUPABASE_URL || "https://scymbepzlkfqtkkwnxne.supabase.co"}/rest/v1/leads?phone=like.*${phoneDigits10}*&select=first_name,last_name&order=updated_at.desc&limit=1`,
+          {
+            headers: {
+              apikey: process.env.VITE_SUPABASE_SERVICE_ROLE_KEY || "",
+              Authorization: `Bearer ${process.env.VITE_SUPABASE_SERVICE_ROLE_KEY || ""}`,
+            },
+          }
+        );
+        if (searchRes.ok) {
+          const rows = await searchRes.json();
+          if (Array.isArray(rows) && rows.length > 0 && rows[0].first_name) {
+            const foundFirst = rows[0].first_name.trim();
+            const foundLast = (rows[0].last_name || "").trim();
+            if (foundFirst.toLowerCase() !== "lifestyle") {
+              resolvedName = [foundFirst, foundLast].filter(Boolean).join(" ").trim();
+            }
+          }
+        }
+      } catch (lookupErr) {
+        console.warn("Could not lookup existing lead name:", lookupErr);
+      }
+    }
+
+    if (!resolvedName || resolvedName.toLowerCase() === "lifestyle resident") {
+      resolvedName = "Applicant";
+    }
+
     const resolvedEmail = (email || "").trim() || undefined;
 
     const ownerPhone = (process.env.VITE_OWNER_WHATSAPP_NUMBER || "919730768982").replace(/\D/g, "");
