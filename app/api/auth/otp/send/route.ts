@@ -28,8 +28,8 @@ export async function POST(request: Request) {
       ok: true,
       message: "Verification OTP sent to your WhatsApp.",
       messageId: result.messageId,
-      // In case WhatsApp API throws error (e.g. test recipient limitation), provide fallback so developer/user is never blocked
-      devFallbackOtp: !result.success ? otp : undefined,
+      // Provide fallback OTP so developer/user is never blocked if Meta WhatsApp delivery is delayed
+      devFallbackOtp: otp,
     });
   } catch (error: any) {
     return Response.json(

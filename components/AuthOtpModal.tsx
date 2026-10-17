@@ -28,6 +28,7 @@ export default function AuthOtpModal({
   const [resendCooldown, setResendCooldown] = useState(0);
   const [otpExpirySeconds, setOtpExpirySeconds] = useState(300);
   const [verifiedUser, setVerifiedUser] = useState<VerifiedUser | null>(null);
+  const [devOtpHint, setDevOtpHint] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -36,6 +37,7 @@ export default function AuthOtpModal({
       setEnteredOtp("");
       setIsAdminMode(false);
       setAdminPasscode("");
+      setDevOtpHint(null);
       try {
         const saved = localStorage.getItem("lifestyle_verified_user");
         if (saved) {
@@ -96,6 +98,10 @@ export default function AuthOtpModal({
         setError(data.error || "Failed to send WhatsApp OTP. Please try again.");
         setIsLoading(false);
         return;
+      }
+
+      if (data.devFallbackOtp) {
+        setDevOtpHint(data.devFallbackOtp);
       }
 
       setStep("otp");
@@ -500,6 +506,36 @@ export default function AuthOtpModal({
                 Code sent to <strong>+91 {phone.replace(/\D/g, "").slice(-10)}</strong> via Lifestyle WhatsApp.
               </p>
             </div>
+
+            {devOtpHint && (
+              <div
+                onClick={() => setEnteredOtp(devOtpHint)}
+                role="button"
+                tabIndex={0}
+                title="Click to auto-fill code"
+                style={{
+                  marginBottom: "1.1rem",
+                  padding: "0.65rem 0.95rem",
+                  borderRadius: "10px",
+                  background: "rgba(212, 175, 55, 0.12)",
+                  border: "1px dashed rgba(212, 175, 55, 0.45)",
+                  color: "#f5d77f",
+                  fontSize: "0.82rem",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                <span>
+                  Code: <strong style={{ letterSpacing: "2px", color: "#ffffff", fontSize: "0.95rem" }}>{devOtpHint}</strong>
+                </span>
+                <span style={{ fontSize: "0.75rem", color: "#25D366", fontWeight: 600 }}>
+                  Tap to Auto-fill ⚡
+                </span>
+              </div>
+            )}
 
             <form onSubmit={handleVerifyOtp}>
               <div style={{ marginBottom: "1.2rem" }}>

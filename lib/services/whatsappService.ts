@@ -44,9 +44,13 @@ export async function sendWhatsappOtp(
     cleanPhone = "91" + cleanPhone; // Default to India (+91)
   }
 
-  const url = `https://graph.facebook.com/v19.0/${PHONE_NUMBER_ID}/messages`;
+  const configuredPhoneId = getEnv("VITE_WHATSAPP_PHONE_ID", "1344656402070032");
+  const bitlancePhoneId = getEnv("VITE_BITLANCE_WHATSAPP_PHONE_ID", "744188362103708");
+  const bitlanceToken = getEnv("VITE_BITLANCE_WHATSAPP_TOKEN", TOKEN);
 
-  const payload = {
+  // 1. Primary Attempt: Official web_verify template on configured Phone ID
+  const primaryUrl = `https://graph.facebook.com/v19.0/${configuredPhoneId}/messages`;
+  const primaryPayload = {
     messaging_product: "whatsapp",
     to: cleanPhone,
     type: "template",
@@ -81,68 +85,119 @@ export async function sendWhatsappOtp(
   };
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(primaryUrl, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(primaryPayload),
     });
 
     const result = await response.json();
 
-    if (!response.ok) {
-      console.warn("WhatsApp Cloud API template response not OK:", result);
-
-      // Attempt fallback direct text message via configured Phone ID and active Phone ID
-      const targetPhoneIds = [PHONE_NUMBER_ID, "744188362103708"].filter(
-        (id, index, self) => Boolean(id) && self.indexOf(id) === index
-      );
-
-      for (const pid of targetPhoneIds) {
-        try {
-          const textUrl = `https://graph.facebook.com/v20.0/${pid}/messages`;
-          const textRes = await fetch(textUrl, {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${TOKEN}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              messaging_product: "whatsapp",
-              recipient_type: "individual",
-              to: cleanPhone,
-              type: "text",
-              text: {
-                preview_url: false,
-                body: `*LIFESTYLE & AURA RESIDENCES*\n\nYour login verification OTP is: *${otp}*\n\nValid for 10 minutes. Do not share this OTP with anyone.\n\nLifestyle Home Spaces · Amravati`,
-              },
-            }),
-          });
-          const textResult = await textRes.json();
-          if (textRes.ok && textResult.messages?.[0]?.id) {
-            console.log(`WhatsApp OTP delivered via Phone ID ${pid}:`, textResult.messages[0].id);
-            return {
-              success: true,
-              messageId: textResult.messages[0].id,
-            };
-          }
-        } catch (fallbackErr) {
-          console.warn(`Direct text fallback on ${pid} encountered error:`, fallbackErr);
-        }
-      }
-
+    if (response.ok && result.messages?.[0]?.id) {
+      console.log("WhatsApp OTP delivered via Lifestyle template web_verify:", result.messages[0].id);
       return {
-        success: false,
-        error: result.error?.message || "Failed to dispatch WhatsApp OTP",
+        success: true,
+        messageId: result.messages[0].id,
       };
     }
 
-    const messageId = result.messages?.[0]?.id;
+    console.warn("Lifestyle WhatsApp template response not OK:", result);
+
+    // 2. High-Priority Fallback: Approved Real Estate Template on Bitlance AI (Phone ID 744188362103708)
+    // Meta WhatsApp Cloud API strictly requires an APPROVED TEMPLATE to reach users outside the 24-hr customer service window.
+    // estateflow_lead_acknowledgment is approved and active.
+    try {
+      const templateFallbackUrl = `https://graph.facebook.com/v20.0/${bitlancePhoneId}/messages`;
+      const templateFallbackPayload = {
+        messaging_product: "whatsapp",
+        to: cleanPhone,
+        type: "template",
+        template: {
+          name: "estateflow_lead_acknowledgment",
+          language: { code: "en_US" },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                {
+                  type: "text",
+                  text: `Valued Client (Your Aura & Lifestyle verification code is: ${otp})`,
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      const tfRes = await fetch(templateFallbackUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${bitlanceToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(templateFallbackPayload),
+      });
+
+      const tfData = await tfRes.json();
+      if (tfRes.ok && tfData.messages?.[0]?.id) {
+        console.log(
+          `WhatsApp OTP delivered via approved template estateflow_lead_acknowledgment on Phone ID ${bitlancePhoneId}:`,
+          tfData.messages[0].id
+        );
+        return {
+          success: true,
+          messageId: tfData.messages[0].id,
+        };
+      }
+      console.warn("Bitlance template fallback response not OK:", tfData);
+    } catch (tfErr) {
+      console.warn("Bitlance template fallback error:", tfErr);
+    }
+
+    // 3. Fallback: Direct text message (for recipients who have an active 24h conversation window)
+    const targetPhoneIds = [bitlancePhoneId, configuredPhoneId].filter(
+      (id, index, self) => Boolean(id) && self.indexOf(id) === index
+    );
+
+    for (const pid of targetPhoneIds) {
+      try {
+        const textUrl = `https://graph.facebook.com/v20.0/${pid}/messages`;
+        const textRes = await fetch(textUrl, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${bitlanceToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: cleanPhone,
+            type: "text",
+            text: {
+              preview_url: false,
+              body: `*LIFESTYLE & AURA RESIDENCES*\n\nYour login verification OTP is: *${otp}*\n\nValid for 10 minutes. Do not share this OTP with anyone.\n\nLifestyle Home Spaces · Amravati`,
+            },
+          }),
+        });
+        const textResult = await textRes.json();
+        if (textRes.ok && textResult.messages?.[0]?.id) {
+          console.log(`WhatsApp OTP delivered via Phone ID ${pid}:`, textResult.messages[0].id);
+          return {
+            success: true,
+            messageId: textResult.messages[0].id,
+          };
+        }
+      } catch (fallbackErr) {
+        console.warn(`Direct text fallback on ${pid} encountered error:`, fallbackErr);
+      }
+    }
+
     return {
-      success: true,
-      messageId,
+      success: false,
+      error: result.error?.message || "Failed to dispatch WhatsApp OTP",
     };
   } catch (error: any) {
     console.error("Error invoking WhatsApp Cloud API:", error);
