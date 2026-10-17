@@ -10,3 +10,5 @@ tsconfig.tsbuildinfo
 *.pdf
 brochure_ocr_results.txt
 scratch_brochure_text.txt
+server/
+types/

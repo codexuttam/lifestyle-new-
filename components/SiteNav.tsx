@@ -4,6 +4,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./SiteNav.module.css";
+import AuthOtpModal from "@/components/AuthOtpModal";
+import EnquiryModal from "@/components/EnquiryModal";
+import { VerifiedUser } from "@/lib/types/auth";
 
 const LIFESTYLE_MENU_ITEMS = [
   { label: "Overview", href: "#hero-section" },
@@ -13,6 +16,7 @@ const LIFESTYLE_MENU_ITEMS = [
   { label: "Commercial", href: "#commercial-shops" },
   { label: "Specs", href: "#specifications" },
   { label: "Location", href: "#location-connectivity" },
+  { label: "Blogs", href: "/blogs" },
   { label: "FAQ", href: "#faq-section" },
   { label: "Aura Flagship ↗", href: "/" },
 ];
@@ -22,14 +26,19 @@ const DEFAULT_MENU_ITEMS = [
   { label: "Building 3D", href: "/#explore-site-section" },
   { label: "Floor Plans", href: "/#floor-plans" },
   { label: "Developments", href: "/#properties-section" },
+  { label: "Blogs", href: "/blogs" },
   { label: "FAQ", href: "/#faq-section" },
   { label: "About", href: "/about" },
   { label: "Lifestyle Homes", href: "/projects/lifestyle-homes" },
 ];
 
-/** Luxury Dark Glassmorphism Nav with Smooth Scroll Interception across all pages */
+/** Luxury Dark Glassmorphism Nav with Smooth Scroll Interception, WhatsApp OTP Auth & Short CRM Enquiry */
 export default function SiteNav({ activeHref }: { activeHref?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<VerifiedUser | null>(null);
+
   const pathname = usePathname();
   const router = useRouter();
 
@@ -39,6 +48,24 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     activeHref === "/projects/lifestyle-homes";
 
   const menuItems = isLifestylePage ? LIFESTYLE_MENU_ITEMS : DEFAULT_MENU_ITEMS;
+
+  // Listen to verified user session
+  useEffect(() => {
+    const checkAuth = () => {
+      try {
+        const saved = localStorage.getItem("lifestyle_verified_user");
+        if (saved) {
+          setCurrentUser(JSON.parse(saved));
+        } else {
+          setCurrentUser(null);
+        }
+      } catch {}
+    };
+
+    checkAuth();
+    window.addEventListener("lifestyle_auth_changed", checkAuth);
+    return () => window.removeEventListener("lifestyle_auth_changed", checkAuth);
+  }, []);
 
   // Handle smooth scroll on cross-page and in-page navigation
   useEffect(() => {
@@ -89,7 +116,6 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         }
         setMenuOpen(false);
       } else {
-        // Cross-page navigation with hash
         setMenuOpen(false);
       }
     } else {
@@ -134,7 +160,8 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               isLifestylePage
                 ? idx === 0
                 : item.href === activeHref ||
-                  (item.href === "/projects/lifestyle-homes" && isLifestylePage);
+                  (item.href === "/projects/lifestyle-homes" && isLifestylePage) ||
+                  (item.href === "/blogs" && pathname === "/blogs");
 
             const className = `${styles.menuItem}${isActive ? ` ${styles.menuItemActive}` : ""}`;
 
@@ -152,9 +179,44 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         </div>
 
         <div className={styles.navActions}>
-          <Link href="/contact" className={styles.btnContact}>
+          {/* Member Login / Verified Badge */}
+          {currentUser ? (
+            <div className={styles.userBadge}>
+              <span>✓ {currentUser.name ? currentUser.name.split(" ")[0] : "Member"}</span>
+              <button
+                type="button"
+                className={styles.btnSignOut}
+                title="Sign Out"
+                onClick={() => {
+                  try {
+                    localStorage.removeItem("lifestyle_verified_user");
+                    setCurrentUser(null);
+                    window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
+                  } catch {}
+                }}
+              >
+                ✕
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className={styles.btnSignIn}
+              onClick={() => setIsAuthOpen(true)}
+              title="Sign in with mobile number via WhatsApp OTP"
+            >
+              <i className="fa-brands fa-whatsapp" style={{ color: "#25D366" }} /> Sign In
+            </button>
+          )}
+
+          {/* Short Enquiry Modal Trigger */}
+          <button
+            type="button"
+            className={styles.btnContact}
+            onClick={() => setIsEnquiryOpen(true)}
+          >
             Enquire Now
-          </Link>
+          </button>
 
           <button
             className={styles.mobileToggle}
@@ -178,6 +240,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         </div>
       </nav>
 
+      {/* Mobile Drawer Menu */}
       {menuOpen && (
         <div className={styles.mobileMenu}>
           {menuItems.map((item) => (
@@ -189,15 +252,47 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               {item.label}
             </a>
           ))}
-          <Link
-            href="/contact"
+
+          {!currentUser && (
+            <button
+              type="button"
+              className={styles.btnSignIn}
+              style={{ width: "100%", justifyContent: "center", marginBottom: "0.5rem" }}
+              onClick={() => {
+                setMenuOpen(false);
+                setIsAuthOpen(true);
+              }}
+            >
+              <i className="fa-brands fa-whatsapp" style={{ color: "#25D366" }} /> Sign In (WhatsApp OTP)
+            </button>
+          )}
+
+          <button
+            type="button"
             className={styles.mobileContactBtn}
-            onClick={() => setMenuOpen(false)}
+            onClick={() => {
+              setMenuOpen(false);
+              setIsEnquiryOpen(true);
+            }}
           >
             Enquire Now
-          </Link>
+          </button>
         </div>
       )}
+
+      {/* Global WhatsApp OTP Modal */}
+      <AuthOtpModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onSuccess={(user) => setCurrentUser(user)}
+      />
+
+      {/* Global Short Enquiry Modal */}
+      <EnquiryModal
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        projectTitle={isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle"}
+      />
     </>
   );
 }

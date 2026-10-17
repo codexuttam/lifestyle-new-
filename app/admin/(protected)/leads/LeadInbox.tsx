@@ -133,7 +133,7 @@ export default function LeadInbox({ initial }: { initial: LeadRecord[] }) {
                       >
                         {STATUS_LABELS[lead.status]}
                       </span>{" "}
-                      {lead.city} · {TYPE_LABELS[lead.type]} ·{" "}
+                      {lead.city || "Amravati"} · {(lead.type && TYPE_LABELS[lead.type]) || lead.preference || "Luxury Residence"} ·{" "}
                       {formatDate(lead.createdAt)}
                     </div>
                   </div>
@@ -183,20 +183,24 @@ export default function LeadInbox({ initial }: { initial: LeadRecord[] }) {
                       <div>
                         <dt className={styles.detailLabel}>Email</dt>
                         <dd>
-                          <a href={`mailto:${lead.email}`}>{lead.email}</a>
+                          {lead.email ? (
+                            <a href={`mailto:${lead.email}`}>{lead.email}</a>
+                          ) : (
+                            "—"
+                          )}
                         </dd>
                       </div>
                       <div>
-                        <dt className={styles.detailLabel}>Plot size</dt>
-                        <dd>{lead.plotSize || "—"}</dd>
+                        <dt className={styles.detailLabel}>Project</dt>
+                        <dd>{lead.project || "Aura by Lifestyle"}</dd>
                       </div>
                       <div>
                         <dt className={styles.detailLabel}>Package</dt>
-                        <dd>{PACKAGE_LABELS[lead.package]}</dd>
+                        <dd>{(lead.package && PACKAGE_LABELS[lead.package]) || lead.preference || "2 & 3 BHK Luxury"}</dd>
                       </div>
                       <div>
                         <dt className={styles.detailLabel}>Expected start</dt>
-                        <dd>{lead.startDate || "—"}</dd>
+                        <dd>{lead.startDate || "Immediate"}</dd>
                       </div>
                     </dl>
 

@@ -4,19 +4,19 @@ import { clientIp, rateLimit } from "@/lib/api/rateLimit";
 import { hasFirebaseAdminEnv } from "@/lib/env.server";
 import { adminDb } from "@/lib/firebase/admin";
 import { leadInputSchema } from "@/lib/schemas/lead";
+import { captureLeadInCRM } from "@/lib/services/crmLeadService";
+import { notifyOwnerOnWhatsApp } from "@/lib/services/whatsappService";
 
 /**
- * Public endpoint — the only unauthenticated write in the app.
- *
- * It is deliberately narrow: the schema whitelists exactly the fields the form
- * sends, nothing is echoed back, and submissions are capped per IP so the
- * collection cannot be flooded.
+ * Public endpoint for short enquiry submissions:
+ * - Saves lead directly into the Real Estate CRM & Supabase dual-org database
+ * - Sends instant WhatsApp notification to the owner
+ * - Optionally archives to Firestore if Firebase Admin is configured
  */
-
 export async function POST(request: Request) {
   const limit = rateLimit({
     key: `leads:${clientIp(request)}`,
-    limit: 5,
+    limit: 10,
     windowMs: 60_000,
   });
 
@@ -27,49 +27,70 @@ export async function POST(request: Request) {
     );
   }
 
-  const parsed = leadInputSchema.safeParse(
-    await request.json().catch(() => null)
-  );
+  const body = await request.json().catch(() => null);
+  const parsed = leadInputSchema.safeParse(body);
 
   if (!parsed.success) {
-    return Response.json(
-      { error: "Please check the highlighted fields and try again." },
-      { status: 400 }
-    );
+    const errorMsg =
+      parsed.error.issues[0]?.message || "Please check the highlighted fields and try again.";
+    return Response.json({ error: errorMsg }, { status: 400 });
   }
 
-  // Bots fill the hidden field. Answer as though it worked so they stop retrying.
+  // Honeypot check for spam bots
   if (parsed.data.website) {
     return Response.json({ ok: true });
   }
 
-  if (!hasFirebaseAdminEnv()) {
-    console.error("[leads] dropped a submission — Firestore is not configured");
-    return Response.json(
-      { error: "We could not record that just now. Please call or WhatsApp us." },
-      { status: 503 }
-    );
+  const { name, phone, email, project, preference, message } = parsed.data;
+
+  // 1. Ingest lead directly into Real Estate CRM & Supabase dual-org
+  const crmResult = await captureLeadInCRM({
+    name,
+    phone,
+    email: email || undefined,
+    project: project || "Aura by Lifestyle",
+    preference: preference || "2 & 3 BHK Luxury Residences",
+    message: message || undefined,
+    source: "Website Enquiry Form",
+  });
+
+  // 2. Alert the owner directly on WhatsApp (non-blocking)
+  notifyOwnerOnWhatsApp({
+    type: "enquiry",
+    name,
+    phone,
+    email: email || undefined,
+    project: project || "Aura by Lifestyle",
+    preference: preference || "Luxury Residence",
+    referenceId: crmResult.referenceId,
+  }).catch((err) => console.warn("[leads] Owner WhatsApp alert:", err));
+
+  // 3. Optional Firestore archive if configured
+  if (hasFirebaseAdminEnv()) {
+    try {
+      await adminDb()
+        .collection("leads")
+        .add({
+          name,
+          phone,
+          email: email || null,
+          project: project || "Aura by Lifestyle",
+          referenceId: crmResult.referenceId,
+          status: "new",
+          source: "website",
+          createdAt: FieldValue.serverTimestamp(),
+        });
+    } catch (e) {
+      console.warn("[leads] Firestore optional backup skipped:", e);
+    }
   }
 
-  const { website: _honeypot, ...lead } = parsed.data;
-
-  try {
-    await adminDb()
-      .collection("leads")
-      .add({
-        ...lead,
-        status: "new",
-        notes: "",
-        source: "website",
-        createdAt: FieldValue.serverTimestamp(),
-      });
-  } catch (error) {
-    console.error("[leads] could not store submission:", error);
-    return Response.json(
-      { error: "We could not record that just now. Please call or WhatsApp us." },
-      { status: 500 }
-    );
-  }
-
-  return Response.json({ ok: true }, { status: 201 });
+  return Response.json(
+    {
+      ok: true,
+      referenceId: crmResult.referenceId,
+      message: crmResult.message || "Thank you! Your enquiry has been received.",
+    },
+    { status: 201 }
+  );
 }

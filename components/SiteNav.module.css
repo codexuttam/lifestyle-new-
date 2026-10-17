@@ -151,6 +151,59 @@
   transform: scale(0.97);
 }
 
+.btnSignIn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 9px 18px;
+  cursor: pointer;
+  font-family: var(--font-inter), sans-serif;
+  color: #f5d77f;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btnSignIn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: #d4af37;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.userBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  padding: 7px 14px;
+  font-family: var(--font-inter), sans-serif;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btnSignOut {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.btnSignOut:hover {
+  color: #ff7675;
+}
+
 .mobileToggle {
   display: none;
   padding: 8px;
