@@ -1,6 +1,8 @@
+import { cookies } from "next/headers";
 import { after } from "next/server";
 
-import { verifyStoredOtp } from "@/lib/auth/otpStore";
+import { clientIp, rateLimit } from "@/lib/api/rateLimit";
+import { OTP_COOKIE, verifyOtpToken } from "@/lib/auth/otpStore";
 import { captureLeadInCRM, normalizePhone } from "@/lib/services/crmLeadService";
 import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp } from "@/lib/services/whatsappService";
 
@@ -16,10 +18,21 @@ export async function POST(request: Request) {
       );
     }
 
-    const verification = verifyStoredOtp(cleanDigits, otp);
+    const limit = rateLimit({ key: `otp-verify:${clientIp(request)}`, limit: 10, windowMs: 10 * 60_000 });
+    if (!limit.allowed) {
+      return Response.json(
+        { error: "Too many attempts. Please wait a few minutes and request a new code." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
+      );
+    }
+
+    const cookieStore = await cookies();
+    const verification = verifyOtpToken(cookieStore.get(OTP_COOKIE)?.value, cleanDigits, String(otp));
     if (!verification.valid) {
       return Response.json({ error: verification.reason || "Invalid OTP code." }, { status: 400 });
     }
+    // One-time use
+    cookieStore.delete({ name: OTP_COOKIE, path: "/api/auth/otp" });
 
     const normPhone = normalizePhone(phone);
     let resolvedName = (name || "").trim();
