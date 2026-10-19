@@ -315,22 +315,6 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                         <span>Explore All Projects</span>
                       </Link>
 
-                      {currentUser.isAdmin && (
-                        <Link
-                          href="/admin"
-                          className={styles.userDropdownItem}
-                          onClick={() => setUserMenuOpen(false)}
-                        >
-                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <rect width="18" height="18" x="3" y="3" rx="2" />
-                            <path d="M9 3v18" />
-                            <path d="M14 9h7" />
-                            <path d="M14 15h7" />
-                          </svg>
-                          <span>Admin Portal</span>
-                        </Link>
-                      )}
-
                       <button
                         type="button"
                         className={`${styles.userDropdownItem} ${styles.userDropdownSignOut}`}

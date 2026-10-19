@@ -508,21 +508,6 @@ export default function AuthOtpModal({
                     <span>Explore platform as guest</span>
                     <span style={{ fontSize: "0.85rem", color: "#f5d77f" }}>✕</span>
                   </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setIsAdminMode(true)}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "rgba(255, 255, 255, 0.35)",
-                      fontSize: "0.75rem",
-                      cursor: "pointer",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    Admin Passcode Login
-                  </button>
                 </div>
               </form>
             ) : (
