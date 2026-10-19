@@ -1,4 +1,5 @@
 import { FieldValue } from "firebase-admin/firestore";
+import { after } from "next/server";
 
 import { clientIp, rateLimit } from "@/lib/api/rateLimit";
 import { hasFirebaseAdminEnv } from "@/lib/env.server";
@@ -54,21 +55,24 @@ export async function POST(request: Request) {
     source: "Website Enquiry Form",
   });
 
-  // 2. Alert the owner directly on WhatsApp (non-blocking)
-  notifyOwnerOnWhatsApp({
-    type: "enquiry",
-    name,
-    phone,
-    email: email || undefined,
-    project: project || "Aura by Lifestyle",
-    preference: preference || "Luxury Residence",
-    referenceId: crmResult.referenceId,
-  }).catch((err) => console.warn("[leads] Owner WhatsApp alert:", err));
-
-  // 3. Deliver official Aura by Lifestyle PDF brochure directly to the customer on WhatsApp (non-blocking)
-  sendAuraBrochureOnWhatsApp(phone, name).catch((err) =>
-    console.warn("[leads] User brochure delivery:", err)
-  );
+  // 2 & 3. Owner alert + brochure delivery run after the response is sent.
+  // after() keeps the serverless function alive until they finish (required on Vercel).
+  after(async () => {
+    await Promise.allSettled([
+      notifyOwnerOnWhatsApp({
+        type: "enquiry",
+        name,
+        phone,
+        email: email || undefined,
+        project: project || "Aura by Lifestyle",
+        preference: preference || "Luxury Residence",
+        referenceId: crmResult.referenceId,
+      }).then((r) => !r.success && console.warn("[leads] Owner WhatsApp alert failed:", r.error)),
+      sendAuraBrochureOnWhatsApp(phone, name).then(
+        (r) => !r.success && console.warn("[leads] Brochure delivery failed:", r.error)
+      ),
+    ]);
+  });
 
   // 3. Optional Firestore archive if configured
   if (hasFirebaseAdminEnv()) {

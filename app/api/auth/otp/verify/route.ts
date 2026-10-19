@@ -1,3 +1,5 @@
+import { after } from "next/server";
+
 import { verifyStoredOtp } from "@/lib/auth/otpStore";
 import { captureLeadInCRM, normalizePhone } from "@/lib/services/crmLeadService";
 import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp } from "@/lib/services/whatsappService";
@@ -56,15 +58,15 @@ export async function POST(request: Request) {
     const resolvedEmail = (email || "").trim() || undefined;
 
     const ownerPhone = (process.env.VITE_OWNER_WHATSAPP_NUMBER || "919730768982").replace(/\D/g, "");
-    const adminEmail = (process.env.VITE_CRM_ADMIN_EMAIL || "admin@lifestylehomespaces.com").toLowerCase();
 
-    const isAdmin = Boolean(
-      cleanDigits === ownerPhone ||
-      cleanDigits.endsWith("8318768905") ||
-      cleanDigits.endsWith("9730768982") ||
-      cleanDigits.endsWith("7498256708") ||
-      (resolvedEmail && resolvedEmail.toLowerCase() === adminEmail)
-    );
+    // Admin access is granted only to numbers listed in ADMIN_PHONE_NUMBERS (comma-separated,
+    // server-only env var). Falls back to the owner number when unset.
+    const adminPhones = (process.env.ADMIN_PHONE_NUMBERS || ownerPhone)
+      .split(",")
+      .map((p) => p.replace(/\D/g, "").slice(-10))
+      .filter((p) => p.length === 10);
+
+    const isAdmin = adminPhones.includes(cleanDigits.slice(-10));
 
     const verifiedAt = new Date().toISOString();
 
@@ -80,19 +82,22 @@ export async function POST(request: Request) {
       consent: true,
     });
 
-    // 2. Alert the owner
-    notifyOwnerOnWhatsApp({
-      type: "sign_in",
-      name: resolvedName,
-      phone: normPhone,
-      email: resolvedEmail,
-      referenceId: crmResult.referenceId,
-    }).catch((e) => console.warn("Owner alert error:", e));
-
-    // 3. Deliver official Aura by Lifestyle PDF brochure directly to the customer on WhatsApp
-    sendAuraBrochureOnWhatsApp(normPhone, resolvedName).catch((e) =>
-      console.warn("User brochure WhatsApp delivery error:", e)
-    );
+    // 2 & 3. Owner alert + brochure delivery run after the response is sent.
+    // after() keeps the serverless function alive until they finish (required on Vercel).
+    after(async () => {
+      await Promise.allSettled([
+        notifyOwnerOnWhatsApp({
+          type: "sign_in",
+          name: resolvedName,
+          phone: normPhone,
+          email: resolvedEmail,
+          referenceId: crmResult.referenceId,
+        }).then((r) => !r.success && console.warn("Owner alert failed:", r.error)),
+        sendAuraBrochureOnWhatsApp(normPhone, resolvedName).then(
+          (r) => !r.success && console.warn("Brochure delivery failed:", r.error)
+        ),
+      ]);
+    });
 
     return Response.json({
       ok: true,
