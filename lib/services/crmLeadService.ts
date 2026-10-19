@@ -40,20 +40,24 @@ const CRM_WEBHOOK_URL = getEnv(
   "VITE_CRM_WEBHOOK_URL",
   "https://realstatecrm.bitlancetechhub.com/api/webhooks/leads"
 );
-const CRM_WEBHOOK_SECRET = getEnv("VITE_CRM_WEBHOOK_SECRET", "");
+// Webhook Secret for Lifestyle Home Space (fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d)
+const CRM_WEBHOOK_SECRET = getEnv(
+  "VITE_CRM_WEBHOOK_SECRET",
+  "whsec_af073b139cbccf55e06c6412b7f63513fa820f369fc0bc52"
+);
 
 // Target Organizations:
-// 1. PRIMARY_ORG_ID: Lifestyle Home Spaces (8a7fe841-bda6-46a1-a033-d68d2bb2a318)
-// 2. TALDA_ORG_ID: Amit Talda & Agent Lifestyle Home Space (fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d)
-// 3. DASHBOARD_ORG_ID: Real Estate CRM Dashboard Org (956739fd-5b6f-46f6-9e8f-82b6e17ee482)
-const PRIMARY_ORG_ID = getEnv("VITE_CRM_ORG_ID", "8a7fe841-bda6-46a1-a033-d68d2bb2a318");
+// 1. PRIMARY_ORG_ID: Lifestyle Home Space (fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d)
+// 2. BACKUP_ORG_ID: Lifestyle Home Spaces (8a7fe841-bda6-46a1-a033-d68d2bb2a318)
+const PRIMARY_ORG_ID = getEnv("VITE_CRM_ORG_ID", "fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d");
 export const TALDA_ORG_ID = "fa3ac4b0-ca18-4a4d-8f62-a0d6fc1f201d";
+const BACKUP_ORG_ID = "8a7fe841-bda6-46a1-a033-d68d2bb2a318";
 const DASHBOARD_ORG_ID = "956739fd-5b6f-46f6-9e8f-82b6e17ee482";
 
-// Admin: admittalda@lifestylehomespaces.com (0cc4c84a-bc35-4f81-9291-4ffef2490543)
-// Agent: agent@lifestylehomespaces.com (fd56919d-073f-48f4-8fc0-965bb2f67a2d)
+// Admin: Amit Talda (0cc4c84a-bc35-4f81-9291-4ffef2490543)
+// Agent: shailey Sachdev (076cb77c-68fa-4d6e-bf65-0c2cba1a0485)
 const CRM_ADMIN_ID = getEnv("VITE_CRM_ADMIN_ID", "0cc4c84a-bc35-4f81-9291-4ffef2490543");
-const CRM_AGENT_ID = getEnv("VITE_CRM_AGENT_ID", "fd56919d-073f-48f4-8fc0-965bb2f67a2d");
+const CRM_AGENT_ID = getEnv("VITE_CRM_AGENT_ID", "076cb77c-68fa-4d6e-bf65-0c2cba1a0485");
 
 // Generates an official reference ID (e.g. LHS-2026-A82F)
 export function generateReferenceId(): string {
@@ -184,9 +188,10 @@ export async function captureLeadInCRM(
     // 1. Primary Ingestion via authenticated CRM Webhook
     try {
       const webhookPayload = {
+        organization_id: PRIMARY_ORG_ID,
         name: resolvedFullName,
         first_name: firstName,
-        last_name: lastName,
+        last_name: lastName || "",
         phone,
         email: email || undefined,
         source: "website",
@@ -225,7 +230,7 @@ export async function captureLeadInCRM(
       };
 
       const targetOrgs = Array.from(
-        new Set([PRIMARY_ORG_ID, TALDA_ORG_ID, DASHBOARD_ORG_ID].filter(Boolean))
+        new Set([PRIMARY_ORG_ID, TALDA_ORG_ID, BACKUP_ORG_ID, DASHBOARD_ORG_ID].filter(Boolean))
       );
       const phoneLast10 = phone.replace(/\D/g, "").slice(-10);
 
@@ -283,7 +288,7 @@ export async function captureLeadInCRM(
             const insertPayload: Record<string, any> = {
               organization_id: orgId,
               first_name: firstName,
-              last_name: lastName,
+              last_name: lastName || "",
               email: email || null,
               phone,
               status: "new",
@@ -292,7 +297,7 @@ export async function captureLeadInCRM(
               location: "Amravati, Maharashtra",
               property_type: propertyType,
               notes: detailedNotes,
-              assigned_to: CRM_AGENT_ID || null,
+              assigned_to: orgId === PRIMARY_ORG_ID ? CRM_AGENT_ID : null,
             };
 
             const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
