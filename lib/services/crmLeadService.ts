@@ -202,6 +202,7 @@ export async function captureLeadInCRM(
         notes: detailedNotes,
         skip_automation: true,
         no_ack: true,
+        assigned_to: CRM_AGENT_ID,
       };
 
       const webhookRes = await fetch(CRM_WEBHOOK_URL, {
