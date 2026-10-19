@@ -28,6 +28,10 @@ const DEFAULT_MENU_ITEMS = [
   { label: "About", href: "/about" },
 ];
 
+// Track whether the visitor dismissed the login prompt during the current browser page load.
+// On every page refresh (F5 / Cmd+R) or new platform visit, this in-memory variable resets to false.
+let hasDismissedLoginThisLoad = false;
+
 /** Luxury Dark Glassmorphism Nav with Smooth Scroll Interception, WhatsApp OTP Auth & Short CRM Enquiry */
 export default function SiteNav({ activeHref }: { activeHref?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,8 +66,10 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
 
   const menuItems = isLifestylePage ? LIFESTYLE_MENU_ITEMS : DEFAULT_MENU_ITEMS;
 
-  // Listen to verified user session
+  // Listen to verified user session & auto-prompt login modal on platform visit or page refresh
   useEffect(() => {
+    let promptTimer: NodeJS.Timeout | null = null;
+
     const checkAuth = () => {
       try {
         const saved = localStorage.getItem("lifestyle_verified_user");
@@ -71,8 +77,20 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           setCurrentUser(JSON.parse(saved));
         } else {
           setCurrentUser(null);
+          // If unauthenticated and not dismissed yet in this load, pop up the login modal
+          if (!hasDismissedLoginThisLoad) {
+            promptTimer = setTimeout(() => {
+              setIsAuthOpen(true);
+            }, 500);
+          }
         }
-      } catch {}
+      } catch {
+        if (!hasDismissedLoginThisLoad) {
+          promptTimer = setTimeout(() => {
+            setIsAuthOpen(true);
+          }, 500);
+        }
+      }
     };
 
     checkAuth();
@@ -84,6 +102,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     window.addEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
 
     return () => {
+      if (promptTimer) clearTimeout(promptTimer);
       window.removeEventListener("lifestyle_auth_changed", checkAuth);
       window.removeEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
     };
@@ -318,6 +337,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                         onClick={() => {
                           try {
                             localStorage.removeItem("lifestyle_verified_user");
+                            hasDismissedLoginThisLoad = false;
                             setCurrentUser(null);
                             setUserMenuOpen(false);
                             window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
@@ -399,6 +419,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                 onClick={() => {
                   try {
                     localStorage.removeItem("lifestyle_verified_user");
+                    hasDismissedLoginThisLoad = false;
                     setCurrentUser(null);
                     setMenuOpen(false);
                     window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
@@ -449,8 +470,14 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       {/* Global WhatsApp OTP Modal */}
       <AuthOtpModal
         isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-        onSuccess={(user) => setCurrentUser(user)}
+        onClose={() => {
+          hasDismissedLoginThisLoad = true;
+          setIsAuthOpen(false);
+        }}
+        onSuccess={(user) => {
+          hasDismissedLoginThisLoad = true;
+          setCurrentUser(user);
+        }}
       />
 
       {/* Global Short Enquiry Modal */}

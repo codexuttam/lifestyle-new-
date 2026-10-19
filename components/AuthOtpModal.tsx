@@ -49,6 +49,17 @@ export default function AuthOtpModal({
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
     let timer: NodeJS.Timeout;
     if (resendCooldown > 0) {
       timer = setInterval(() => setResendCooldown((prev) => Math.max(prev - 1, 0)), 1000);
@@ -241,41 +252,84 @@ export default function AuthOtpModal({
       role="dialog"
       aria-modal="true"
     >
+      <style>{`
+        @keyframes authModalPopIn {
+          from {
+            opacity: 0;
+            transform: scale(0.94) translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+      `}</style>
       <div
         style={{
           width: "100%",
           maxWidth: "440px",
           background: "linear-gradient(135deg, #11141b 0%, #0a0d13 100%)",
-          border: "1px solid rgba(212, 175, 55, 0.35)",
+          border: "1px solid rgba(212, 175, 55, 0.4)",
           borderRadius: "20px",
           padding: "2rem",
-          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(212, 175, 55, 0.15)",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.18)",
           color: "#ffffff",
           position: "relative",
+          animation: "authModalPopIn 0.28s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
+        {/* Prominent Luxury Cross (✕) Close Button */}
         <button
           onClick={onClose}
           type="button"
-          aria-label="Close"
+          aria-label="Close login dialog"
+          title="Close (Esc)"
           style={{
             position: "absolute",
-            top: "1.25rem",
-            right: "1.25rem",
-            width: "36px",
-            height: "36px",
+            top: "1.15rem",
+            right: "1.15rem",
+            width: "42px",
+            height: "42px",
             borderRadius: "50%",
-            background: "rgba(255, 255, 255, 0.08)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
-            color: "#ffffff",
-            fontSize: "1.2rem",
+            background: "rgba(18, 22, 31, 0.9)",
+            border: "1.5px solid rgba(212, 175, 55, 0.45)",
+            color: "#f5d77f",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
+            boxShadow: "0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.15)",
+            transition: "all 0.22s cubic-bezier(0.16, 1, 0.3, 1)",
+            zIndex: 10,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(212, 175, 55, 0.22)";
+            e.currentTarget.style.borderColor = "#f5d77f";
+            e.currentTarget.style.color = "#ffffff";
+            e.currentTarget.style.transform = "scale(1.1) rotate(90deg)";
+            e.currentTarget.style.boxShadow = "0 6px 20px rgba(212, 175, 55, 0.4)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(18, 22, 31, 0.9)";
+            e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.45)";
+            e.currentTarget.style.color = "#f5d77f";
+            e.currentTarget.style.transform = "scale(1) rotate(0deg)";
+            e.currentTarget.style.boxShadow = "0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.15)";
           }}
         >
-          ✕
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
 
         {/* STEP 1: PHONE NUMBER ONLY */}
@@ -431,15 +485,38 @@ export default function AuthOtpModal({
                   {isLoading ? "Sending WhatsApp OTP..." : "Get OTP on WhatsApp"}
                 </button>
 
-                <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
+                <div style={{ marginTop: "1.1rem", textAlign: "center", display: "flex", flexDirection: "column", gap: "0.55rem", alignItems: "center" }}>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontSize: "0.82rem",
+                      cursor: "pointer",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      padding: "0.3rem 0.6rem",
+                      borderRadius: "6px",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#f5d77f")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)")}
+                  >
+                    <span>Explore platform as guest</span>
+                    <span style={{ fontSize: "0.85rem", color: "#f5d77f" }}>✕</span>
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => setIsAdminMode(true)}
                     style={{
                       background: "transparent",
                       border: "none",
-                      color: "rgba(255, 255, 255, 0.45)",
-                      fontSize: "0.78rem",
+                      color: "rgba(255, 255, 255, 0.35)",
+                      fontSize: "0.75rem",
                       cursor: "pointer",
                       textDecoration: "underline",
                     }}
