@@ -96,42 +96,13 @@ export default function ExploreSection({
   projectTitle: string;
 }) {
   const HEADLINE = content.headline;
-  const [activeZone, setActiveZone] = useState<ZonePreset>(ZONES[0]);
-  const [currentScale, setCurrentScale] = useState<number>(1.0);
-  const [currentTranslateY, setCurrentTranslateY] = useState<number>(0);
+  const [activeZone] = useState<ZonePreset>(ZONES[0]);
 
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const percentRef = useRef<HTMLSpanElement>(null);
-
-  const selectZone = (zone: ZonePreset) => {
-    setActiveZone(zone);
-    setCurrentScale(zone.scale);
-    setCurrentTranslateY(zone.translateY);
-  };
-
-  const handleZoomIn = () => {
-    setCurrentScale((prev) => Math.min(Number((prev + 0.3).toFixed(2)), 3.0));
-  };
-
-  const handleZoomOut = () => {
-    setCurrentScale((prev) => {
-      const next = Math.max(Number((prev - 0.3).toFixed(2)), 1.0);
-      if (next === 1.0) {
-        setActiveZone(ZONES[0]);
-        setCurrentTranslateY(0);
-      }
-      return next;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveZone(ZONES[0]);
-    setCurrentScale(1.0);
-    setCurrentTranslateY(0);
-  };
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -193,70 +164,19 @@ export default function ExploreSection({
       </div>
 
       <div className={styles.mediaPanel} ref={panelRef}>
-        {/* Architectural Image Viewer with Zoom & Pan */}
+        {/* Architectural 3D Drone Video & Interactive Inspector */}
         <div className={styles.buildingViewer}>
-          <img
-            src="/aura/aura-hero-clean-4k.jpg"
-            alt="Aura 15-Storey Tower 4K Architectural Inspector"
-            className={styles.viewerImage}
-            style={{
-              transform: `translate3d(0, ${currentTranslateY}%, 0) scale(${currentScale})`,
-            }}
-          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={styles.viewerVideo}
+            aria-hidden="true"
+          >
+            <source src="/videos/aura-showcase-clip.mp4" type="video/mp4" />
+          </video>
           <div className={styles.viewerOverlay} />
-        </div>
-
-        {/* Floating Zoom & Zone Inspector Toolbar */}
-        <div className={styles.viewerToolbar}>
-          <div className={styles.zoneButtonGroup}>
-            {ZONES.map((zone) => {
-              const isActive = activeZone.id === zone.id && currentScale > 1.0 ? true : (zone.id === "full" && currentScale === 1.0);
-              return (
-                <button
-                  key={zone.id}
-                  type="button"
-                  className={`${styles.zoneBtn}${isActive ? ` ${styles.zoneBtnActive}` : ""}`}
-                  onClick={() => selectZone(zone)}
-                  aria-pressed={isActive}
-                >
-                  {zone.name}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className={styles.zoomControls}>
-            <button
-              type="button"
-              className={styles.zoomBtn}
-              onClick={handleZoomOut}
-              aria-label="Zoom out"
-              title="Zoom Out"
-              disabled={currentScale <= 1.0}
-            >
-              −
-            </button>
-            <span className={styles.zoomScaleText}>{currentScale.toFixed(1)}x</span>
-            <button
-              type="button"
-              className={styles.zoomBtn}
-              onClick={handleZoomIn}
-              aria-label="Zoom in"
-              title="Zoom In"
-              disabled={currentScale >= 3.0}
-            >
-              +
-            </button>
-            <button
-              type="button"
-              className={`${styles.zoomBtn} ${styles.resetBtn}`}
-              onClick={handleReset}
-              aria-label="Reset view"
-              title="Reset View"
-            >
-              ⟲
-            </button>
-          </div>
         </div>
 
         {/* Dynamic Architectural Detail Card */}

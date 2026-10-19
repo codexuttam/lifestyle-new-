@@ -430,7 +430,7 @@ export default function LifestyleInteractiveShowcase({
               />
               <div className={styles.sliderMinMax}>
                 <span>₹45 Lakhs (2 BHK)</span>
-                <span>₹1.20 Cr (Penthouse/3 BHK)</span>
+                <span>₹1.20 Cr (Grand 3 BHK)</span>
               </div>
             </div>
 

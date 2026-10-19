@@ -88,8 +88,8 @@ export const HOME_CONTENT: HomeContent = {
     title: "Frequently Asked Questions About Aura by Lifestyle",
   },
   composition: {
-    featuredProjectIds: ["aura", "lifestyle-homes", "aura-sky-suites"],
-    listingProjectIds: ["aura", "lifestyle-homes", "aura-sky-suites"],
+    featuredProjectIds: ["aura", "lifestyle-homes", "lifestyle-retail-galleria"],
+    listingProjectIds: ["aura", "lifestyle-homes"],
     featuredServiceIds: [
       "new-home-construction",
       "turnkey-handover",

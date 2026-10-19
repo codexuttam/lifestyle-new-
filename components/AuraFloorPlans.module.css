@@ -3,7 +3,7 @@
   max-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 100px 24px;
+  padding: clamp(36px, 5vh, 60px) 24px;
   background: #090a0d;
   color: #fff;
   position: relative;
@@ -16,7 +16,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,16 +26,16 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 9999px;
   background: rgba(192, 24, 83, 0.12);
   border: 1px solid rgba(212, 175, 55, 0.35);
   font-family: var(--font-inter), sans-serif;
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: 0.15em;
   color: #f5d77f;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .badgeDot {
@@ -48,13 +48,13 @@
 
 .title {
   font-family: var(--font-big-shoulders), serif;
-  font-size: clamp(34px, 5vw, 56px);
+  font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.1;
   color: #ffffff;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .title span {
@@ -67,11 +67,11 @@
 
 .subtitle {
   font-family: var(--font-inter), sans-serif;
-  font-size: 17px;
-  color: #e2e8f0;
-  max-width: 680px;
-  line-height: 1.6;
-  margin-bottom: 36px;
+  font-size: 14.5px;
+  color: #cbd5e1;
+  max-width: 620px;
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
 /* Tabs */
@@ -79,9 +79,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  background: rgba(18, 20, 26, 0.8);
-  padding: 8px;
+  gap: 8px;
+  background: rgba(18, 20, 26, 0.85);
+  padding: 6px;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
@@ -91,12 +91,12 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 7px 16px;
   border-radius: 9999px;
   background: transparent;
   border: none;
   font-family: var(--font-inter), sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #e2e8f0;
   cursor: pointer;
@@ -127,14 +127,15 @@
 /* Display Card */
 .displayCard {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 36px;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
   background: rgba(15, 17, 23, 0.85);
   border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 24px;
-  padding: 36px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-  margin-bottom: 48px;
+  border-radius: 20px;
+  padding: 22px 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  margin-bottom: 32px;
+  align-items: center;
 }
 
 .imageCol {
@@ -146,19 +147,24 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  border-radius: 16px;
+  max-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
   overflow: hidden;
   background: #000;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
 }
 
 .planImg {
   width: 100%;
+  max-height: 440px;
   height: auto;
   display: block;
   object-fit: contain;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
 .imageWrapper:hover .planImg {
@@ -167,15 +173,15 @@
 
 .imageTag {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 14px;
   background: rgba(10, 11, 15, 0.85);
   border: 1px solid #d4af37;
   color: #d4af37;
-  padding: 6px 14px;
+  padding: 4px 12px;
   border-radius: 9999px;
   font-family: var(--font-inter), sans-serif;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.1em;
 }
@@ -188,47 +194,47 @@
 }
 
 .detailsHeader {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .planCategory {
   font-family: var(--font-inter), sans-serif;
-  font-size: 11px;
+  font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: #d4af37;
   font-weight: 600;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .planTitle {
   font-family: var(--font-big-shoulders), serif;
-  font-size: clamp(26px, 3vw, 36px);
+  font-size: clamp(22px, 2.2vw, 30px);
   font-weight: 700;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .planSubtitle {
   font-family: var(--font-inter), sans-serif;
-  font-size: 15px;
+  font-size: 13.5px;
   color: #e2e8f0;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 /* Specs Grid */
 .specsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 8px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
 }
 
 .specItem {

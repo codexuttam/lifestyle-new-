@@ -94,9 +94,11 @@ export default function ProjectsExplorer({
       <div className={styles.cards}>
         {visible.map((project) => {
           const detailHref =
-            project.id === "lifestyle-homes" || project.id === "lifestyle-retail-galleria"
+            project.id === "lifestyle-retail-galleria"
+              ? "/projects/lifestyle-homes#commercial-shops"
+              : project.id === "lifestyle-homes"
               ? "/projects/lifestyle-homes"
-              : project.id === "aura" || project.id === "aura-sky-suites"
+              : project.id === "aura"
               ? "/"
               : `/projects/${project.id}`;
 

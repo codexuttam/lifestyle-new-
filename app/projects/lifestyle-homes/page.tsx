@@ -209,38 +209,50 @@ export default async function LifestyleHomesPage() {
       <SiteNav activeHref="/projects/lifestyle-homes" />
 
       <main className={styles.page}>
-        {/* ============ DRAMATIC LUXURY HERO SECTION (Identical Aura Format) ============ */}
+        {/* ============ DRAMATIC LUXURY HERO SECTION (Cinematic Video Showcase) ============ */}
         <section className={styles.hero} id="hero-section">
-          {/* 4K Zoomed-out Building Background Image */}
-          <div className={styles.buildingContainer}>
-            <img
-              src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
-              alt="Lifestyle Home Spaces Delivered 8-Storey Highrise"
-              className={styles.buildingImage}
-            />
+          {/* 1. Cinematic Lifestyle Showcase Video (Full Dynamic Building Video) */}
+          <div className={styles.videoContainer}>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={styles.heroVideo}
+              aria-hidden="true"
+            >
+              <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
+            </video>
             <div className={styles.heroOverlay} />
           </div>
 
-          {/* Giant Clean Headline */}
+          {/* 2. Giant Clean Architectural Headline */}
           <div className={styles.headlineContainer}>
             <h1 className={styles.headline}>LIFESTYLE</h1>
           </div>
 
-          {/* Bottom-right glass info box (Matches Reference Image) */}
-          <div className={styles.rightWrapper}>
-            <div className={styles.infoBox}>
-              <img
-                src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
-                alt="Lifestyle Home Spaces"
-                className={styles.infoImage}
-              />
-              <div className={styles.infoText}>
-                <span className={styles.infoTag}>✓ 100% Ready Possession</span>
-                <h2 className={styles.infoTitle}>Lifestyle Homes</h2>
-                <p className={styles.infoDescription}>
-                  Ready 2 &amp; 3 BHK Homes &amp; Shops · DPS Road · MahaRERA: P50300054447
-                </p>
-              </div>
+          {/* 3. Left Box: Sparkle, Subtitle & Action Pills */}
+          <div className={styles.leftBox}>
+            <div className={styles.sparkle} aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2C12 2 12.5 8 13.5 10.5C16 11.5 22 12 22 12C22 12 16 12.5 13.5 15C12.5 17.5 12 22 12 22C12 22 11.5 17.5 10.5 15C8 12.5 2 12 2 12C2 12 8 11.5 10.5 10.5C11.5 8 12 2 12 2Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M12 6C12 6 12.3 9.3 13 11C14.7 11.7 18 12 18 12C18 12 14.7 12.3 13 14C12.3 15.7 12 19 12 19C12 19 11.7 15.7 11 14C9.3 12.3 6 12 6 12C6 12 9.3 11.7 11 11C11.7 9.3 12 6 12 6Z"
+                  fill="currentColor"
+                  transform="rotate(45 12 12)"
+                />
+              </svg>
+            </div>
+            <p className={styles.leftDescription}>
+              Delivered 8-storey landmark featuring ready-to-move 2 &amp; 3 BHK homes and 24 commercial shops on DPS Road, Amravati.
+            </p>
+            <div className={styles.btnGroup}>
+              <a href="#about-lifestyle-section" className={styles.btnMore}>
+                More About Us
+              </a>
             </div>
           </div>
         </section>
@@ -459,6 +471,35 @@ export default async function LifestyleHomesPage() {
           </div>
         </section>
 
+        {/* ============ DELIVERED REALITY SHOWCASE: LIFESTYLE HOMES ============ */}
+        <div className={styles.lifestyleBannerWrapper}>
+          <div className={styles.lifestyleBanner}>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={styles.lifestyleBannerVideo}
+              aria-hidden="true"
+            >
+              <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
+            </video>
+            <div className={styles.lifestyleBannerOverlay}>
+              <div className={styles.lifestyleBannerContent}>
+                <div className={styles.lifestyleBannerBadge}>
+                  <i className="fa-solid fa-play" /> Delivered Reality Showcase
+                </div>
+                <h2 className={styles.lifestyleBannerTitle}>
+                  Experience Lifestyle Home Spaces in Motion
+                </h2>
+                <p className={styles.lifestyleBannerDesc}>
+                  Watch the completed architectural reality on DPS Road, Parvati Nagar, Amravati — featuring 30 premium residences and 24 high-street retail showrooms ready for immediate possession.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* ============ FREQUENTLY ASKED QUESTIONS (Identical Aura Accordion) ============ */}
         <Faq
           faqs={LIFESTYLE_HOMES_FAQS}
@@ -472,11 +513,16 @@ export default async function LifestyleHomesPage() {
         <div className={styles.auraBannerWrapper}>
           <div className={styles.auraBanner}>
             <div className={styles.auraBannerBg}>
-              <img
-                src="/aura/aura-hero-clean-4k.jpg"
-                alt="Aura by Lifestyle 15-Storey Tower in 4K"
-                className={styles.auraBannerImg}
-              />
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={styles.auraBannerVideo}
+                aria-hidden="true"
+              >
+                <source src="/videos/aura-showcase-clip.mp4" type="video/mp4" />
+              </video>
             </div>
             <div className={styles.auraBannerContent}>
               <div className={styles.auraBannerBadge}>

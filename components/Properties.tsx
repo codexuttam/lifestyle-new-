@@ -76,12 +76,26 @@ export default function Properties({
 
         <div className={styles.largeWrapper}>
           <div className={styles.largeCard}>
-            <img
-              key={feature.id}
-              src={feature.img}
-              alt={feature.title}
-              className={styles.media}
-            />
+            {feature.video ? (
+              <video
+                key={feature.id}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={styles.media}
+                aria-hidden="true"
+              >
+                <source src={feature.video} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                key={feature.id}
+                src={feature.img}
+                alt={feature.title}
+                className={styles.media}
+              />
+            )}
             <div className={styles.largeScrim} />
             <div className={styles.pills}>
               <span className={styles.pill}>{feature.category}</span>
@@ -93,6 +107,8 @@ export default function Properties({
                 href={
                   feature.id === "lifestyle-homes"
                     ? "/projects/lifestyle-homes"
+                    : feature.id === "lifestyle-retail-galleria"
+                    ? "/projects/lifestyle-homes#commercial-shops"
                     : feature.id === "aura"
                     ? "#floor-plans"
                     : "/projects"
@@ -118,12 +134,26 @@ export default function Properties({
           <div className={styles.smallRow}>
             {secondary.map((property) => (
               <div className={styles.smallCard} key={property.id}>
-                <img
-                  key={property.id}
-                  src={property.img}
-                  alt={property.title}
-                  className={styles.media}
-                />
+                {property.video ? (
+                  <video
+                    key={property.id}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className={styles.media}
+                    aria-hidden="true"
+                  >
+                    <source src={property.video} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img
+                    key={property.id}
+                    src={property.img}
+                    alt={property.title}
+                    className={styles.media}
+                  />
+                )}
                 <div className={styles.smallScrim} />
                 <span className={styles.smallPill}>{property.category}</span>
                 <div className={styles.smallTitleRow}>
@@ -132,6 +162,8 @@ export default function Properties({
                     href={
                       property.id === "lifestyle-homes"
                         ? "/projects/lifestyle-homes"
+                        : property.id === "lifestyle-retail-galleria"
+                        ? "/projects/lifestyle-homes#commercial-shops"
                         : property.id === "aura"
                         ? "#floor-plans"
                         : "/projects"

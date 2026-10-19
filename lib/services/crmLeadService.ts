@@ -35,18 +35,12 @@ const getEnv = (key: string, fallback = "") => {
 };
 
 const SUPABASE_URL = getEnv("VITE_SUPABASE_URL", "https://scymbepzlkfqtkkwnxne.supabase.co");
-const SERVICE_KEY = getEnv(
-  "VITE_SUPABASE_SERVICE_ROLE_KEY",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjeW1iZXB6bGtmcXRra3dueG5lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk1NTUzNywiZXhwIjoyMDk4NTMxNTM3fQ.GyqIVGPGaTeFy0rhAHXDM7F-48cjKtj1V8BcXFklZpk"
-);
+const SERVICE_KEY = getEnv("VITE_SUPABASE_SERVICE_ROLE_KEY", "");
 const CRM_WEBHOOK_URL = getEnv(
   "VITE_CRM_WEBHOOK_URL",
   "https://realstatecrm.bitlancetechhub.com/api/webhooks/leads"
 );
-const CRM_WEBHOOK_SECRET = getEnv(
-  "VITE_CRM_WEBHOOK_SECRET",
-  "whsec_1f6b4e17bccfc6a5a0dde2c5dcde533e6638652203f517e8"
-);
+const CRM_WEBHOOK_SECRET = getEnv("VITE_CRM_WEBHOOK_SECRET", "");
 
 // Target Organizations:
 // 1. PRIMARY_ORG_ID: Lifestyle Home Spaces (8a7fe841-bda6-46a1-a033-d68d2bb2a318)

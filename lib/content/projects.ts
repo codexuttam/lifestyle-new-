@@ -54,11 +54,12 @@ export async function getFeaturedProjects(): Promise<ProjectRecord[]> {
     : projects.filter((project) => project.video);
 }
 
-/** The three sticky cards in the "All Properties" section. */
+/** The sticky cards in the "All Properties" section (strictly 2 landmark developments). */
 export async function getListingProjects(): Promise<ProjectRecord[]> {
   const [projects, home] = await Promise.all([getProjects(), getHome()]);
   const picked = pick(projects, home.composition.listingProjectIds);
-  return picked.length === 3 ? picked : projects.slice(0, 3);
+  const target = picked.length > 0 ? picked : projects;
+  return target.slice(0, 2);
 }
 
 /** The single project named in the Explore section overlay. */

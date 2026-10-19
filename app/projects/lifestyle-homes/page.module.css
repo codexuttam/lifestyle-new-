@@ -8,70 +8,65 @@
   overflow-x: hidden;
 }
 
-/* ============ HERO SECTION (Identical Aura Format) ============ */
+/* ============ HERO SECTION (Dream Home Luxury Cloud Video Hero) ============ */
 .hero {
+  --hero-bottom-inset: 24px;
   position: relative;
   width: 100%;
   height: 100vh;
-  min-height: 750px;
+  min-height: 700px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(ellipse 95% 75% at 50% 30%, #151e33 0%, #0d1526 45%, #05080e 100%);
+  background: #0a0a0a;
 }
 
-.buildingContainer {
+/* --- Full Cinematic Showcase Video Container --- */
+.videoContainer {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
+  overflow: hidden;
 }
 
-.buildingImage {
+.heroVideo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 85%;
+  object-position: center 30%;
+  filter: brightness(0.8) saturate(1.15);
   transform: scale(1);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: brightness(0.96) contrast(1.14) saturate(1.32) hue-rotate(-2deg);
+  display: block;
 }
 
-.hero:hover .buildingImage {
+.hero:hover .heroVideo {
   transform: scale(1.02);
 }
 
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      circle 650px at 50% 25%,
-      rgba(243, 202, 108, 0.24) 0%,
-      rgba(232, 67, 147, 0.18) 38%,
-      rgba(24, 48, 92, 0.22) 70%,
-      transparent 100%
-    ),
-    radial-gradient(
-      ellipse 95% 65% at 50% 88%,
-      rgba(192, 24, 83, 0.28) 0%,
-      rgba(10, 16, 30, 0.6) 45%,
-      rgba(4, 7, 12, 0.92) 100%
+  background: radial-gradient(
+      ellipse 95% 80% at 50% 50%,
+      transparent 35%,
+      rgba(6, 9, 14, 0.45) 70%,
+      rgba(6, 9, 14, 0.9) 100%
     ),
     linear-gradient(
-      to bottom,
-      rgba(5, 8, 14, 0.55) 0%,
-      transparent 18%,
-      transparent 55%,
-      rgba(5, 8, 14, 0.65) 80%,
-      rgba(4, 6, 10, 0.94) 100%
+      180deg,
+      rgba(6, 9, 14, 0.55) 0%,
+      transparent 25%,
+      transparent 60%,
+      rgba(6, 9, 14, 0.95) 100%
     );
   pointer-events: none;
   z-index: 2;
 }
 
-/* --- Giant Architectural Headline Container (Matches Reference Image) --- */
+/* --- Giant Architectural Headline Over / Integrated with Video --- */
 .headlineContainer {
   position: absolute;
   inset-inline: 0;
@@ -83,33 +78,27 @@
 
 .headline {
   font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 900;
+  font-weight: 800;
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
-  font-size: min(19vw, 340px);
+  font-size: min(15.5vw, 240px);
   line-height: 1;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   padding-top: 60px;
   background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #fff2d6 20%,
-    #f5d070 45%,
-    #e84393 75%,
-    #c01853 96%
+    rgb(255, 255, 255) 30%,
+    rgba(255, 255, 255, 0.15) 85%
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 0 35px rgba(245, 208, 112, 0.5))
-          drop-shadow(0 0 75px rgba(232, 67, 147, 0.4))
-          drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.85));
   user-select: none;
 }
 
-/* --- Bottom-left Content Box --- */
+/* --- Left Box (Sparkle, Description & Action Buttons) --- */
 .leftBox {
   position: absolute;
   left: 60px;
@@ -118,53 +107,46 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
-  width: 440px;
-  max-width: 90vw;
-  background: rgba(8, 12, 20, 0.76);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  border-radius: 24px;
-  padding: 24px 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  gap: 20px;
+  width: 420px;
+  max-width: calc(100% - 120px);
 }
 
 .sparkle {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f5d77f;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-  animation: heroSparklePulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  color: #afe37e;
+  animation: heroSparklePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes heroSparklePulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
   50% {
-    opacity: 0.65;
-    transform: scale(0.92);
+    opacity: 0.4;
+    transform: scale(0.94);
   }
 }
 
 .leftDescription {
+  color: #f1f5f9;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
   font-family: var(--font-inter), sans-serif;
-  color: #f8fafc;
-  font-size: 15.5px;
-  font-weight: 450;
-  line-height: 1.6;
-  letter-spacing: -0.2px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  font-weight: 400;
   margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
-.btnRow {
+.btnGroup {
   display: flex;
-  gap: 12px;
   align-items: center;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -173,55 +155,50 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+  background: #fff;
   padding: 12px 26px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: none;
   cursor: pointer;
   text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  color: #171717;
+  font-size: 14px;
   font-family: var(--font-inter), sans-serif;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(192, 24, 83, 0.4);
-}
-
-.btnMore:hover {
-  background: linear-gradient(135deg, #d4af37 0%, #c01853 100%);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(192, 24, 83, 0.6), 0 0 15px rgba(212, 175, 55, 0.45);
-}
-
-.btnOtherProject {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: rgba(192, 24, 83, 0.16);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(212, 175, 55, 0.4);
-  padding: 12px 22px;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: var(--font-inter), sans-serif;
-  color: #f5d77f;
-  font-size: 15px;
   font-weight: 600;
   transition: all 0.25s ease;
 }
 
-.btnOtherProject:hover {
-  background: rgba(192, 24, 83, 0.35);
+.btnMore:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.btnWatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 18, 26, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f5d77f;
+  border-radius: 9999px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: var(--font-inter), sans-serif;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.btnWatch:hover {
+  background: rgba(212, 175, 55, 0.2);
   border-color: #d4af37;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(192, 24, 83, 0.4);
 }
 
-/* --- Right glass info box (Matches Reference Image) --- */
+/* --- Right Frosted Glass Info Box with Live Clip --- */
 .rightWrapper {
   position: absolute;
   right: 60px;
@@ -230,68 +207,80 @@
 }
 
 .infoBox {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 16px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(22, 14, 30, 0.85) 0%, rgba(12, 18, 34, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(245, 208, 112, 0.55);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 35px rgba(232, 67, 147, 0.35), 0 0 15px rgba(212, 175, 55, 0.3);
-  padding: 13px 24px 13px 13px;
+  border-radius: 24px;
+  background: rgba(10, 14, 22, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 16px 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  max-width: 440px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.infoImage {
-  width: 140px;
-  height: 125px;
-  border-radius: 10px;
-  object-fit: cover;
+.infoBox:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 175, 55, 0.6);
+}
+
+.infoVideoThumb {
+  width: 120px;
+  height: 80px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #000;
   border: 1px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+}
+
+.thumbVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.liveBadge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(46, 204, 113, 0.9);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .infoText {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 260px;
+  gap: 4px;
 }
 
-.infoTag {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #d4af37;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.infoTitle,
 .infoPrice {
-  font-family: var(--font-big-shoulders), sans-serif;
-  color: #fff;
+  color: #ffffff;
   font-size: 26px;
-  font-weight: 700;
-  line-height: 1.15;
-  text-transform: uppercase;
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 800;
   letter-spacing: 0.02em;
-  background: linear-gradient(135deg, #ffffff 40%, #f5d77f 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   margin: 0;
+  line-height: 1.1;
 }
 
 .infoDescription {
+  color: #cbd5e1;
+  font-size: 13px;
   font-family: var(--font-inter), sans-serif;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 13.5px;
-  font-weight: 400;
   line-height: 1.4;
-  letter-spacing: -0.2px;
-  margin-top: 4px;
+  margin: 0;
 }
 
 /* ============ SECTION COMMON STYLES ============ */
@@ -755,6 +744,88 @@
   box-shadow: 0 0 8px #d4af37;
 }
 
+/* ============ DELIVERED REALITY SHOWCASE: LIFESTYLE HOMES ============ */
+.lifestyleBannerWrapper {
+  max-width: 1320px;
+  margin: 5rem auto 0;
+  padding: 0 2rem;
+}
+
+.lifestyleBanner {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
+  background: #06090e;
+  height: 500px;
+}
+
+.lifestyleBannerVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65) saturate(1.15);
+  display: block;
+}
+
+.lifestyleBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 9, 14, 0.2) 0%,
+    rgba(6, 9, 14, 0.45) 50%,
+    rgba(6, 9, 14, 0.92) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 48px;
+  z-index: 2;
+}
+
+.lifestyleBannerContent {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lifestyleBannerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #f5d77f;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lifestyleBannerTitle {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.lifestyleBannerDesc {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* ============ CROSS-PROJECT PROMO: AURA FLAGSHIP ============ */
 .auraBannerWrapper {
   max-width: 1320px;
@@ -781,12 +852,14 @@
   z-index: 1;
 }
 
-.auraBannerImg {
+.auraBannerImg,
+.auraBannerVideo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
   filter: brightness(0.4) saturate(1.2);
+  display: block;
 }
 
 .auraBannerContent {
@@ -853,96 +926,72 @@
 /* ============ RESPONSIVE BREAKPOINTS ============ */
 @media (max-width: 1024px) {
   .hero {
-    height: 100vh;
-    min-height: 720px;
-  }
-
-  .heroOverlay {
-    background: radial-gradient(
-        ellipse 95% 80% at 50% 50%,
-        transparent 30%,
-        rgba(4, 6, 10, 0.6) 70%,
-        rgba(3, 4, 7, 0.95) 100%
-      ),
-      linear-gradient(
-        to bottom,
-        rgba(4, 6, 10, 0.85) 0%,
-        rgba(4, 6, 10, 0.45) 20%,
-        rgba(4, 6, 10, 0.75) 55%,
-        rgba(3, 4, 7, 0.98) 82%,
-        #06090e 100%
-      );
+    min-height: 850px;
   }
 
   .headlineContainer {
-    top: 60px;
+    top: 50px;
   }
 
   .headline {
-    font-size: min(22vw, 140px);
-    padding-top: 30px;
-    background: linear-gradient(
-      rgb(255, 255, 255) 31.05%,
-      rgba(255, 255, 255, 0) 70.24%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45));
-    user-select: none;
-  }
-
-  .rightWrapper {
-    display: none;
+    font-size: min(20vw, 160px);
+    padding-top: 40px;
   }
 
   .leftBox {
-    left: 16px;
-    right: 16px;
-    bottom: 84px;
-    width: auto;
-    max-width: calc(100% - 32px);
-    background: rgba(6, 9, 14, 0.92);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1.5px solid rgba(212, 175, 55, 0.45);
-    border-radius: 22px;
-    padding: 22px 20px;
-    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(192, 24, 83, 0.35);
-    gap: 14px;
+    left: 24px;
+    bottom: calc(var(--hero-bottom-inset) + 206px);
+    width: calc(100% - 48px);
+    max-width: 380px;
+  }
+
+  .rightWrapper {
+    left: 24px;
+    right: 24px;
+    bottom: var(--hero-bottom-inset);
+  }
+
+  .infoBox {
+    width: 100%;
+  }
+
+  .infoText {
+    max-width: none;
+    flex: 1 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    --hero-bottom-inset: 84px;
+  }
+
+  .headline {
+    font-size: min(22vw, 110px);
+    padding-top: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .infoImage {
+    width: 110px;
+    height: 110px;
+  }
+
+  .infoPrice {
+    font-size: 38px;
+  }
+
+  .infoDescription {
+    font-size: 16px;
   }
 
   .leftDescription {
-    color: #ffffff !important;
-    font-size: 15.5px;
-    font-weight: 500;
-    line-height: 1.6;
-    letter-spacing: -0.2px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    font-size: 17px;
   }
+}
 
-  .btnRow {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .btnMore {
-    background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
-    color: #ffffff !important;
-    font-weight: 700;
-    border: 1px solid rgba(212, 175, 55, 0.45);
-    box-shadow: 0 4px 16px rgba(192, 24, 83, 0.5);
-  }
-
-  .btnOtherProject {
-    background: rgba(14, 18, 26, 0.92) !important;
-    color: #f5d77f !important;
-    border: 1.5px solid #d4af37 !important;
-    font-weight: 600;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-  }
-
+@media (max-width: 1024px) {
   .commercialGrid,
   .locationGrid {
     grid-template-columns: 1fr;
@@ -963,35 +1012,7 @@
     font-size: min(22vw, 110px);
   }
 
-  .leftBox {
-    left: 12px;
-    right: 12px;
-    bottom: 74px;
-    max-width: calc(100% - 24px);
-    padding: 16px 14px;
-    border-radius: 18px;
-    gap: 12px;
-  }
 
-  .leftDescription {
-    font-size: 14px;
-    line-height: 1.55;
-    color: #ffffff !important;
-  }
-
-  .btnRow {
-    flex-direction: column;
-    width: 100%;
-    gap: 8px;
-  }
-
-  .btnMore,
-  .btnOtherProject {
-    width: 100%;
-    justify-content: center;
-    padding: 11px 18px;
-    font-size: 14px;
-  }
 
   .specsGrid {
     grid-template-columns: 1fr;

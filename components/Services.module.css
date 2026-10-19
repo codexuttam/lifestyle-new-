@@ -95,9 +95,11 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
+  perspective: 1400px;
 }
 
 .card {
+  position: relative;
   background: rgba(14, 18, 26, 0.85);
   border: 1px solid rgba(212, 175, 55, 0.2);
   padding: 40px;
@@ -105,17 +107,57 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 280px;
+  min-height: 310px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale3d(var(--card-scale, 1), var(--card-scale, 1), var(--card-scale, 1));
+  transform-style: preserve-3d;
+  transition: transform 0.16s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(212, 175, 55, 0.45);
-  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.7), 0 0 20px rgba(192, 24, 83, 0.2);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 32px 75px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.2), 0 0 20px rgba(192, 24, 83, 0.18);
+}
+
+/* Mouse-tracking radial spotlight glow overlay */
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    520px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(212, 175, 55, 0.22) 0%,
+    rgba(192, 24, 83, 0.12) 40%,
+    transparent 75%
+  );
+  opacity: var(--glow-opacity, 0);
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.cardBorderHighlight {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(212, 175, 55, 0.75),
+    transparent 60%
+  );
+  opacity: var(--glow-opacity, 0);
+  transition: opacity 0.25s ease;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 2;
 }
 
 .cardTop {
@@ -123,7 +165,11 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 3;
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
 }
 
 .iconBadge {
@@ -136,6 +182,11 @@
   height: 58px;
   color: #ffffff;
   box-shadow: 0 4px 16px rgba(192, 24, 83, 0.35), 0 0 12px rgba(212, 175, 55, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.card:hover .iconBadge {
+  transform: scale(1.08) rotate(4deg);
 }
 
 .categoryChip {
@@ -156,6 +207,10 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  position: relative;
+  z-index: 3;
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
 }
 
 .cardTitle {
@@ -171,10 +226,40 @@
 .cardText {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  color: #e2e8f0;
+  color: #cbd5e1;
   font-size: 15px;
   line-height: 1.6;
   letter-spacing: -0.2px;
+}
+
+.cardFooter {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 3;
+  transform: translateZ(16px);
+}
+
+.learnMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #f0d886;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.card:hover .learnMore {
+  color: #ffffff;
+  gap: 12px;
 }
 
 /* ============ RESPONSIVE ============ */
