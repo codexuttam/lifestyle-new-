@@ -27,8 +27,10 @@ export interface LeadCaptureResult {
 const getEnv = (key: string, fallback = "") => {
   if (typeof process !== "undefined" && process.env) {
     if (process.env[key]) return process.env[key]!;
-    if (process.env[`NEXT_PUBLIC_${key.replace(/^VITE_/, "")}`]) {
-      return process.env[`NEXT_PUBLIC_${key.replace(/^VITE_/, "")}`]!;
+    const cleanKey = key.replace(/^VITE_/, "");
+    if (process.env[cleanKey]) return process.env[cleanKey]!;
+    if (process.env[`NEXT_PUBLIC_${cleanKey}`]) {
+      return process.env[`NEXT_PUBLIC_${cleanKey}`]!;
     }
   }
   return fallback;
