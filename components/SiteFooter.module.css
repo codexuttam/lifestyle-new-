@@ -4,14 +4,14 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  background: radial-gradient(circle at 50% 0%, #0f172a 0%, #06090e 65%, #030508 100%);
+  background: radial-gradient(circle at 50% 0%, #0f1d38 0%, #0a1428 65%, #050a16 100%);
   color: #fff;
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.2));
   position: relative;
 }
 
@@ -64,25 +64,25 @@
 }
 
 .contactLabel {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 400;
   color: #7a7a7a;
-  font-size: 17px;
+  font-size: 16px;
   letter-spacing: -0.025em;
 }
 
 .emailLink {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 500;
   color: #fff;
-  font-size: 18px;
+  font-size: 17px;
   text-decoration: none;
   margin-top: 2px;
   transition: color 0.3s ease;
 }
 
 .emailLink:hover {
-  color: #d4af37;
+  color: var(--color-wine, #c21a22);
 }
 
 .colLabel {
@@ -95,14 +95,16 @@
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: #d4af37;
+  background: var(--color-wine, #c21a22);
+  box-shadow: 0 0 8px var(--color-wine-glow, rgba(194, 26, 34, 0.5));
 }
 
 .colLabelText {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   color: #cbd5e1;
-  font-size: 16px;
-  letter-spacing: -0.025em;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .linkList {
@@ -113,7 +115,7 @@
 }
 
 .bigLink {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.78);
   font-size: 15px;
@@ -127,7 +129,7 @@
 }
 
 .bigLink:hover {
-  color: #f5d77f;
+  color: var(--color-wine, #c21a22);
   transform: translateX(4px);
 }
 
@@ -152,11 +154,11 @@
 }
 
 .newsletterCopy {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 400;
   color: #e2e8f0;
-  font-size: 17px;
-  letter-spacing: -0.025em;
+  font-size: 16px;
+  letter-spacing: -0.01em;
 }
 
 .form {
@@ -178,14 +180,14 @@
 }
 
 .inputBox:focus-within {
-  border-bottom-color: #fff;
+  border-bottom-color: var(--color-wine, #c21a22);
 }
 
 .input {
   width: 100%;
   background: transparent;
   color: #fff;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 16px;
   border: none;
   padding: 6px 8px 6px 0;
@@ -201,25 +203,27 @@
 
 .subscribeBtn {
   width: auto;
-  background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+  background: var(--color-wine, #c21a22);
   color: #ffffff;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-wine-hover, #9e1218);
   border-radius: 9999px;
   padding: 14px 32px;
   flex-shrink: 0;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(192, 24, 83, 0.4);
+  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.4);
   transition: all 0.3s ease;
 }
 
 .subscribeBtn:hover {
-  background: linear-gradient(135deg, #d4af37 0%, #c01853 100%);
+  background: var(--color-wine-hover, #9e1218);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(192, 24, 83, 0.6), 0 0 15px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 8px 24px rgba(194, 26, 34, 0.6);
 }
 
 .subscribeBtn:active {
@@ -227,9 +231,9 @@
 }
 
 .formNote {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 15px;
-  color: #d4af37;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 14px;
+  color: var(--color-text-secondary, #cbd5e1);
   flex: 1;
   max-width: 576px;
 }
@@ -262,7 +266,7 @@
 .brandingOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(6, 9, 14, 0.35) 0%, rgba(6, 9, 14, 0.95) 85%);
+  background: radial-gradient(circle at center, rgba(15, 29, 56, 0.35) 0%, rgba(5, 10, 22, 0.95) 85%);
   pointer-events: none;
 }
 
@@ -301,10 +305,10 @@
 }
 
 .giantTitle {
-  font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 800;
-  font-size: min(22vw, 320px);
-  letter-spacing: 0.08em;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: min(16vw, 220px);
+  letter-spacing: 0.04em;
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
@@ -333,7 +337,7 @@
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #cbd5e1;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
 }
 
 .bottomItem {
@@ -410,7 +414,7 @@ a.bottomItem:hover {
   }
 
   .formNote {
-    color: #f5d77f !important;
+    color: #cbd5e1 !important;
     font-size: 13.5px;
   }
 

@@ -6,55 +6,69 @@
    stays legible over imagery.
    ========================================== */
 :root {
-    color-scheme: light;
+    color-scheme: dark light;
 
     /* Surfaces */
-    --bg: #faf8f5;            /* page background - warm off-white */
-    --surface: #ffffff;       /* cards, forms */
-    --surface-alt: #f2ede4;   /* alternating sections */
-    --surface-sunk: #e9e2d6;  /* wells, placeholders */
+    --bg-white-navy: linear-gradient(180deg, #070e1f 0%, #0d1b38 18%, #162b54 40%, #1e3a70 65%, #0a1428 88%, #050a16 100%);
+    --bg-white-navy-radial: radial-gradient(ellipse 100% 70% at 50% 0%, #162b54 0%, #0d1b38 35%, #070e1f 100%);
+    --bg: #070e1f;            /* page background */
+    --surface: #0e1a34;       /* cards, forms */
+    --surface-alt: #132448;   /* alternating sections */
+    --surface-sunk: #091326;  /* wells, placeholders */
 
     /* Ink */
-    --text: #1a1613;          /* primary text  ~15.9:1 on --bg */
-    --text-secondary: #554d44; /* body / secondary  ~7.6:1 on --bg */
-    --text-muted: #7a7168;    /* captions, notes  ~4.6:1 on --bg */
+    --text: #ffffff;          /* primary text */
+    --text-secondary: #cbd5e1; /* body / secondary */
+    --text-muted: #94a3b8;    /* captions, notes */
     --text-on-dark: #ffffff;
-    --text-on-dark-secondary: rgba(255, 255, 255, 0.82);
+    --text-on-dark-secondary: rgba(255, 255, 255, 0.88);
 
-    /* Accent — two tones: `ink` for text (AA on light), `gold` for fills */
-    --accent-ink: #c01853;    /* royal magenta for links/accents */
-    --accent: #d4af37;        /* royal gold fills, borders */
-    --accent-strong: #9e0e41; /* deep magenta hover */
-    --accent-soft: rgba(212, 175, 55, 0.35);
-    --accent-wash: rgba(192, 24, 83, 0.12);
+    /* Accent — Lotlite SIEC Reddish Wine Theme */
+    --accent-ink: #c21a22;    /* Lotlite wine */
+    --accent: #c21a22;        /* Lotlite wine fills, borders */
+    --accent-strong: #9e1218; /* deep wine hover */
+    --accent-soft: rgba(194, 26, 34, 0.35);
+    --accent-wash: rgba(194, 26, 34, 0.12);
 
-    /* Royal Gold & Magenta Dedicated Palette */
-    --gold: #d4af37;
-    --gold-light: #f5d77f;
-    --gold-dark: #aa8210;
-    --gold-glow: rgba(212, 175, 55, 0.4);
-    --magenta: #c01853;
-    --magenta-dark: #8b0a38;
-    --magenta-light: #e02d6b;
-    --magenta-glow: rgba(192, 24, 83, 0.45);
-    --royal-gradient: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
-    --gold-gradient: linear-gradient(135deg, #f5d77f 0%, #d4af37 55%, #aa8210 100%);
+    /* Lotlite Wine Palette */
+    --wine: #c21a22;
+    --wine-hover: #9e1218;
+    --wine-light: rgba(194, 26, 34, 0.08);
+    --wine-glow: rgba(194, 26, 34, 0.45);
+    --wine-gradient: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
+
+    /* Legacy mapping redirected away from gold to wine / navy gradient */
+    --gold: #c21a22;
+    --gold-light: #ff4d58;
+    --gold-dark: #9e1218;
+    --gold-glow: rgba(194, 26, 34, 0.4);
+    --magenta: #c21a22;
+    --magenta-dark: #9e1218;
+    --magenta-light: #ff4d58;
+    --magenta-glow: rgba(194, 26, 34, 0.45);
+    --royal-gradient: linear-gradient(180deg, #ffffff 0%, #e2eaf5 12%, #9bb7db 28%, #1a3158 55%, #0a142a 82%, #050a16 100%);
+    --gold-gradient: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
 
     /* Lines & elevation */
-    --border: rgba(26, 22, 19, 0.12);
-    --border-strong: rgba(26, 22, 19, 0.24);
-    --shadow-sm: 0 1px 2px rgba(26, 22, 19, 0.06), 0 2px 8px rgba(26, 22, 19, 0.04);
-    --shadow-md: 0 2px 6px rgba(26, 22, 19, 0.06), 0 12px 32px rgba(26, 22, 19, 0.08);
-    --shadow-lg: 0 4px 12px rgba(26, 22, 19, 0.08), 0 24px 56px rgba(26, 22, 19, 0.12);
+    --border: rgba(160, 190, 232, 0.14);
+    --border-strong: rgba(160, 190, 232, 0.28);
+    --shadow-sm: 0 1px 2px rgba(5, 10, 22, 0.3), 0 2px 8px rgba(5, 10, 22, 0.2);
+    --shadow-md: 0 4px 16px rgba(5, 10, 22, 0.4), 0 12px 32px rgba(5, 10, 22, 0.3);
+    --shadow-lg: 0 8px 28px rgba(5, 10, 22, 0.5), 0 24px 56px rgba(5, 10, 22, 0.4);
 
     /* Scrims over photography */
-    --scrim-strong: rgba(20, 17, 14, 0.94);
-    --scrim: rgba(20, 17, 14, 0.78);
+    --scrim-strong: rgba(7, 14, 31, 0.94);
+    --scrim: rgba(7, 14, 31, 0.78);
+
+    /* Typography */
+    --font-sans: var(--font-montserrat, "Montserrat", sans-serif);
+    --font-inter: var(--font-montserrat, "Montserrat", sans-serif);
+    --font-big-shoulders: var(--font-montserrat, "Montserrat", sans-serif);
 
     /* Utility */
-    --whatsapp: #128c4a;      /* darkened from #25D366 for AA on white */
-    --radius: 6px;
-    --radius-lg: 10px;
+    --whatsapp: #128c4a;
+    --radius: 8px;
+    --radius-lg: 12px;
 }
 
 /* Reset and Base Styles */
@@ -71,14 +85,16 @@ html {
     overflow-x: clip;
     max-width: 100%;
     width: 100%;
+    font-family: var(--font-montserrat), "Montserrat", sans-serif;
 }
 
 body {
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    background-color: var(--bg);
-    font-family: var(--font-inter), sans-serif;
+    background: var(--bg-white-navy, linear-gradient(180deg, #070e1f 0%, #0d1b38 18%, #162b54 40%, #1e3a70 65%, #0a1428 88%, #050a16 100%));
+    background-attachment: fixed;
+    font-family: var(--font-montserrat), "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     color: var(--text);
     overflow-x: hidden;
     overflow-x: clip;
@@ -1287,15 +1303,15 @@ textarea:focus-visible,
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    border: 2px solid #d4af37;
-    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 0 16px rgba(192, 24, 83, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 0 16px rgba(194, 26, 34, 0.35);
     z-index: 1000;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .floating-wa:hover {
     transform: scale(1.1);
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6), 0 0 20px rgba(212, 175, 55, 0.6);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6), 0 0 20px rgba(194, 26, 34, 0.6);
 }
 
 .mobile-sticky-bar {
@@ -1314,13 +1330,13 @@ textarea:focus-visible,
     left: 0;
     width: 12px;
     height: 12px;
-    background: #c01853;
-    border: 1.5px solid #d4af37;
+    background: #c21a22;
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 12px rgba(192, 24, 83, 0.6), 0 0 6px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 12px rgba(194, 26, 34, 0.6);
     transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
@@ -1331,9 +1347,9 @@ body:hover .custom-cursor {
 a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
     width: 32px;
     height: 32px;
-    background: rgba(192, 24, 83, 0.15);
-    border: 1.5px solid #d4af37;
-    box-shadow: 0 0 16px rgba(212, 175, 55, 0.6);
+    background: rgba(194, 26, 34, 0.15);
+    border: 1.5px solid #c21a22;
+    box-shadow: 0 0 16px rgba(194, 26, 34, 0.6);
 }
 
 /* Responsive adjustments */
@@ -1451,13 +1467,13 @@ a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
     }
 
     .call-btn {
-        background: linear-gradient(135deg, #c01853 0%, #8b0a38 100%);
-        border-top: 2px solid #d4af37;
+        background: linear-gradient(135deg, #c21a22 0%, #8a1318 100%);
+        border-top: 2px solid #c21a22;
         color: #ffffff;
     }
     .wa-btn {
         background: #128c4a;
-        border-top: 2px solid #d4af37;
+        border-top: 2px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
     }
 

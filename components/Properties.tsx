@@ -118,7 +118,7 @@ export default function Properties({
                   alignItems: "center",
                   gap: "0.4rem",
                   fontSize: "0.85rem",
-                  color: "#d4af37",
+                  color: "var(--color-wine, #c21a22)",
                   textDecoration: "none",
                   fontWeight: 600,
                   marginTop: "0.35rem",
@@ -171,7 +171,7 @@ export default function Properties({
                     style={{
                       display: "inline-block",
                       fontSize: "0.75rem",
-                      color: "#d4af37",
+                      color: "var(--color-wine, #c21a22)",
                       textDecoration: "none",
                       fontWeight: 600,
                       marginTop: "0.2rem",

@@ -5,11 +5,13 @@ import SiteFooter from "@/components/SiteFooter";
 import Chatbot from "@/components/Chatbot";
 import LifestyleBuildingInspector from "@/components/LifestyleBuildingInspector";
 import LifestyleInteractiveShowcase from "@/components/LifestyleInteractiveShowcase";
+import LifestyleSpecsShowcase from "@/components/LifestyleSpecsShowcase";
 import RevealAnimations from "@/components/RevealAnimations";
 import CustomCursor from "@/components/CustomCursor";
 import Faq from "@/components/Faq";
 import { getSettings } from "@/lib/content/settings";
 import { telHref, whatsappHref } from "@/lib/schemas/settings";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import styles from "./page.module.css";
 import aboutStyles from "@/components/About.module.css";
 
@@ -22,14 +24,14 @@ export const metadata: Metadata = {
     title: "Lifestyle Home Spaces | Delivered 2 & 3 BHK Homes & 24 Shops, Amravati",
     description:
       "Ready for immediate possession. 30 residential suites and 24 commercial shops on DPS Road, Parvati Nagar, Amravati. MahaRERA: P50300054447.",
-    images: [{ url: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg" }],
+    images: [{ url: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg" }],
   },
 };
 
 
 const LIFESTYLE_ABOUT_CARDS = [
   {
-    img: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg",
     alt: "8-Storey Highrise Architecture",
     prefix: "",
     target: 8,
@@ -104,17 +106,7 @@ const OFFICIAL_SPECS = [
   {
     icon: "fa-solid fa-cube",
     title: "RCC Earthquake-Resistant Structure",
-    desc: "Robust RCC framed structure engineered to IS code standards. Red brick masonry with 6-inch outer and 4-inch inner walls finished with smooth double-coat plaster.",
-  },
-  {
-    icon: "fa-solid fa-border-all",
-    title: "Vitrified Flooring & Granite Stairs",
-    desc: "Minimum 2' × 4' nano-polished vitrified tiles in Living, Dining, Bedrooms, and Kitchen. Granite stone flooring with SS safety railings on all staircases.",
-  },
-  {
-    icon: "fa-solid fa-utensils",
-    title: "Granite Kitchen with Semi-Modular Trolley",
-    desc: "Jet-black granite platform with stainless steel sink, ceramic wall tiles up to lintel level, dedicated light & exhaust points, and semi-modular kitchen trolley provision.",
+    desc: "Robust RCC framed structure engineered to IS code standards with red brick masonry and smooth double-coat plaster.",
   },
   {
     icon: "fa-solid fa-faucet-drip",
@@ -139,27 +131,7 @@ const OFFICIAL_SPECS = [
   {
     icon: "fa-solid fa-bolt",
     title: "Concealed Wiring & Inverter Provision",
-    desc: "Concealed fire-retardant copper wiring with modular switches of reputed brand. Dedicated pre-installed wiring provision for inverter backup in each apartment.",
-  },
-  {
-    icon: "fa-solid fa-water",
-    title: "24-Hour Dual Water Supply System",
-    desc: "Continuous 24-hour pressurized water supply from common sump well, bore-well with OHT network system, and heavy-duty RCC overhead water storage tank.",
-  },
-  {
-    icon: "fa-solid fa-paintbrush",
-    title: "Acrylic Paint & POP Ceiling Finish",
-    desc: "External walls finished in weather-shield acrylic paint. Internal walls finished with putty and Tractor Emulsion paint, plus decorative POP in Living, Hall & Bedrooms.",
-  },
-  {
-    icon: "fa-solid fa-video",
-    title: "Gated Security & CCTV with 15-Day Backup",
-    desc: "Attractive entrance security gate, manned security post, and comprehensive CCTV surveillance coverage across parking and common areas with 15-day recording backup.",
-  },
-  {
-    icon: "fa-solid fa-dumbbell",
-    title: "Exclusive Open-Air Fitness Gym",
-    desc: "Dedicated open gym and wellness zone provided exclusively for the health and recreation of residential apartment owners.",
+    desc: "Concealed fire-retardant copper wiring with modular switches and dedicated pre-installed inverter backup provision.",
   },
 ];
 
@@ -260,6 +232,11 @@ export default async function LifestyleHomesPage() {
         {/* ============ ABOUT LIFESTYLE HOMES (Identical Aura Architecture) ============ */}
         <section className={aboutStyles.about} id="about-lifestyle-section">
           <div className={aboutStyles.headerRow}>
+            <div className={aboutStyles.label}>
+              <span className={aboutStyles.dot} aria-hidden="true" />
+              <span className={aboutStyles.labelText}>LIFESTYLE HOME SPACES</span>
+            </div>
+
             <div className={aboutStyles.statement}>
               <h2 className={aboutStyles.heading}>
                 Crafted For Peaceful Urban Living. 2 &amp; 3 BHK Vastu Residences &amp; 24 High-Street Showrooms.
@@ -280,13 +257,13 @@ export default async function LifestyleHomesPage() {
                     className={aboutStyles.cardImage}
                   />
                   <div className={aboutStyles.cardStat}>
-                    <span className={aboutStyles.cardNumber}>
-                      {card.prefix}
-                      <span className="counter" data-target={card.target}>
-                        0
-                      </span>
-                      {card.suffix}
-                    </span>
+                    <AnimatedCounter
+                      target={card.target}
+                      prefix={card.prefix}
+                      suffix={card.suffix}
+                      className={aboutStyles.cardNumber}
+                      unitClassName={aboutStyles.cardUnit}
+                    />
                     <span className={aboutStyles.cardLabel}>{card.label}</span>
                   </div>
                 </div>
@@ -394,17 +371,7 @@ export default async function LifestyleHomesPage() {
             </p>
           </div>
 
-          <div className={styles.specsGrid}>
-            {OFFICIAL_SPECS.map((spec, idx) => (
-              <div className={styles.specCard} key={idx}>
-                <div className={styles.specIconBox}>
-                  <i className={spec.icon} />
-                </div>
-                <h3 className={styles.specTitle}>{spec.title}</h3>
-                <p className={styles.specDesc}>{spec.desc}</p>
-              </div>
-            ))}
-          </div>
+          <LifestyleSpecsShowcase specs={OFFICIAL_SPECS} />
         </section>
 
         {/* ============ LOCATION & STRATEGIC CONNECTIVITY ============ */}

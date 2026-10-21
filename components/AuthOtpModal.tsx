@@ -238,12 +238,13 @@ export default function AuthOtpModal({
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 9999,
+        zIndex: 100005,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(6, 9, 14, 0.85)",
-        backdropFilter: "blur(12px)",
+        backgroundColor: "rgba(4, 6, 10, 0.78)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
         padding: "1rem",
       }}
       onClick={(e) => {
@@ -253,10 +254,10 @@ export default function AuthOtpModal({
       aria-modal="true"
     >
       <style>{`
-        @keyframes authModalPopIn {
+        @keyframes lotliteModalIn {
           from {
             opacity: 0;
-            transform: scale(0.94) translateY(10px);
+            transform: scale(0.95) translateY(24px);
           }
           to {
             opacity: 1;
@@ -264,62 +265,64 @@ export default function AuthOtpModal({
           }
         }
       `}</style>
+
+      {/* Lotlite SIEC Architecture Card: Split Layout on Desktop, Fluid on Mobile */}
       <div
         style={{
           width: "100%",
-          maxWidth: "440px",
-          background: "linear-gradient(135deg, #11141b 0%, #0a0d13 100%)",
-          border: "1px solid rgba(212, 175, 55, 0.4)",
-          borderRadius: "20px",
-          padding: "2rem",
-          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.18)",
+          maxWidth: "760px",
+          background: "rgba(17, 21, 30, 0.98)",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
+          borderRadius: "24px",
+          overflow: "hidden",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(194, 26, 34, 0.15)",
           color: "#ffffff",
           position: "relative",
-          animation: "authModalPopIn 0.28s cubic-bezier(0.16, 1, 0.3, 1)",
+          animation: "lotliteModalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+          display: "flex",
+          flexDirection: "row",
+          maxHeight: "90vh",
         }}
       >
-        {/* Prominent Luxury Cross (✕) Close Button */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           type="button"
-          aria-label="Close login dialog"
+          aria-label="Close dialog"
           title="Close (Esc)"
           style={{
             position: "absolute",
-            top: "1.15rem",
-            right: "1.15rem",
-            width: "42px",
-            height: "42px",
+            top: "1rem",
+            right: "1rem",
+            width: "36px",
+            height: "36px",
             borderRadius: "50%",
-            background: "rgba(18, 22, 31, 0.9)",
-            border: "1.5px solid rgba(212, 175, 55, 0.45)",
-            color: "#f5d77f",
+            background: "rgba(255, 255, 255, 0.06)",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            color: "rgba(255, 255, 255, 0.7)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
-            boxShadow: "0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.15)",
-            transition: "all 0.22s cubic-bezier(0.16, 1, 0.3, 1)",
-            zIndex: 10,
+            zIndex: 30,
+            transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(212, 175, 55, 0.22)";
-            e.currentTarget.style.borderColor = "#f5d77f";
+            e.currentTarget.style.background = "#c21a22";
+            e.currentTarget.style.borderColor = "#c21a22";
             e.currentTarget.style.color = "#ffffff";
-            e.currentTarget.style.transform = "scale(1.1) rotate(90deg)";
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(212, 175, 55, 0.4)";
+            e.currentTarget.style.transform = "rotate(90deg)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(18, 22, 31, 0.9)";
-            e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.45)";
-            e.currentTarget.style.color = "#f5d77f";
-            e.currentTarget.style.transform = "scale(1) rotate(0deg)";
-            e.currentTarget.style.boxShadow = "0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.15)";
+            e.currentTarget.style.background = "rgba(255, 255, 255, 0.06)";
+            e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+            e.currentTarget.style.color = "rgba(255, 255, 255, 0.7)";
+            e.currentTarget.style.transform = "rotate(0deg)";
           }}
         >
           <svg
-            width="18"
-            height="18"
+            width="14"
+            height="14"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -332,128 +335,586 @@ export default function AuthOtpModal({
           </svg>
         </button>
 
-        {/* STEP 1: PHONE NUMBER ONLY */}
-        {step === "phone" && (
-          <div>
-            <div style={{ marginBottom: "1.5rem" }}>
-              <span
-                style={{
-                  display: "inline-block",
-                  padding: "0.25rem 0.75rem",
-                  borderRadius: "9999px",
-                  background: "linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 67, 147, 0.15))",
-                  border: "1px solid rgba(212, 175, 55, 0.35)",
-                  color: "#f5d77f",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.5px",
-                  textTransform: "uppercase",
-                  marginBottom: "0.6rem",
-                }}
-              >
-                Exclusive Member Sign-In
-              </span>
-              <h3 style={{ fontSize: "1.45rem", fontWeight: 700, margin: 0 }}>
-                WhatsApp OTP Sign-Up
-              </h3>
-              <p style={{ color: "rgba(255, 255, 255, 0.65)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
-                Enter your full name and mobile number to receive an instant verification code on WhatsApp.
-              </p>
-            </div>
+        {/* LEFT SHOWCASE PANEL (Lotlite SIEC Admission / Profiling Identity) */}
+        <div
+          style={{
+            width: "38%",
+            position: "relative",
+            background: "url('/aura/aura-hero-clean-4k.jpg') center/cover no-repeat, #0a0d14",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            padding: "2rem",
+            overflow: "hidden",
+            flexShrink: 0,
+          }}
+          className="auth-modal-left-panel"
+        >
+          {/* Dark Overlay */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(6, 9, 14, 0.4) 0%, rgba(6, 9, 14, 0.92) 100%)",
+              zIndex: 1,
+            }}
+          />
 
-            {!isAdminMode ? (
-              <form onSubmit={handleSendOtp}>
-                <div style={{ marginBottom: "1.1rem" }}>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      color: "rgba(255, 255, 255, 0.8)",
-                      marginBottom: "0.4rem",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Your Full Name <span style={{ color: "#e84393" }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter your full name (e.g. Vikram Sharma)"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    autoFocus
-                    style={{
-                      width: "100%",
-                      padding: "0.85rem 1rem",
-                      borderRadius: "10px",
-                      background: "rgba(255, 255, 255, 0.05)",
-                      border: "1px solid rgba(212, 175, 55, 0.3)",
-                      color: "#ffffff",
-                      fontSize: "0.95rem",
-                      outline: "none",
-                    }}
-                  />
-                </div>
+          {/* Ambient Wine Glow */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-20px",
+              right: "-20px",
+              width: "160px",
+              height: "160px",
+              borderRadius: "50%",
+              background: "rgba(194, 26, 34, 0.35)",
+              filter: "blur(40px)",
+              pointerEvents: "none",
+              zIndex: 2,
+            }}
+          />
 
-                <div style={{ marginBottom: "1.3rem" }}>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      color: "rgba(255, 255, 255, 0.8)",
-                      marginBottom: "0.4rem",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Mobile Number <span style={{ color: "#e84393" }}>*</span>
-                  </label>
-                  <div style={{ display: "flex", gap: "0.5rem" }}>
-                    <div
+          <div style={{ position: "relative", zIndex: 10 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "3px 10px",
+                borderRadius: "9999px",
+                background: "#c21a22",
+                color: "#ffffff",
+                fontSize: "8.5px",
+                fontWeight: 800,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
+              }}
+            >
+              ★ Resident Access
+            </span>
+            <h3
+              style={{
+                fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif",
+                fontSize: "1.35rem",
+                fontWeight: 700,
+                color: "#ffffff",
+                lineHeight: 1.25,
+                marginBottom: "0.5rem",
+                textShadow: "0 2px 8px rgba(0,0,0,0.8)",
+              }}
+            >
+              Aura by Lifestyle
+            </h3>
+            <p
+              style={{
+                fontFamily: "var(--font-montserrat), sans-serif",
+                fontSize: "0.78rem",
+                color: "rgba(255, 255, 255, 0.7)",
+                lineHeight: 1.45,
+                margin: 0,
+              }}
+            >
+              Amravati&apos;s 15-storey landmark in Congress Nagar. Sign in for verified floor plans &amp; direct concierge access.
+            </p>
+          </div>
+        </div>
+
+        {/* RIGHT FORM CONTAINER */}
+        <div
+          style={{
+            flex: 1,
+            padding: "2.25rem 2rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            overflowY: "auto",
+          }}
+        >
+          {/* STEP 1: PHONE & NAME INPUT */}
+          {step === "phone" && (
+            <div>
+              <div style={{ marginBottom: "1.5rem" }}>
+                <span
+                  style={{
+                    display: "inline-block",
+                    padding: "3px 10px",
+                    borderRadius: "9999px",
+                    background: "rgba(194, 26, 34, 0.12)",
+                    border: "1px solid rgba(194, 26, 34, 0.25)",
+                    color: "#c21a22",
+                    fontSize: "9.5px",
+                    fontWeight: 700,
+                    letterSpacing: "0.25em",
+                    textTransform: "uppercase",
+                    marginBottom: "0.5rem",
+                    fontFamily: "var(--font-montserrat), sans-serif",
+                  }}
+                >
+                  Instant Verification
+                </span>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    margin: 0,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Member Sign-In
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-montserrat), sans-serif",
+                    color: "#94a3b8",
+                    fontSize: "0.82rem",
+                    marginTop: "0.35rem",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  Enter your details to receive an instant verification code on WhatsApp.
+                </p>
+              </div>
+
+              {!isAdminMode ? (
+                <form onSubmit={handleSendOtp} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                  <div>
+                    <label
                       style={{
-                        padding: "0.85rem 0.9rem",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(212, 175, 55, 0.3)",
-                        borderRadius: "10px",
-                        color: "#f5d77f",
-                        fontWeight: 600,
-                        fontSize: "0.95rem",
-                        display: "flex",
-                        alignItems: "center",
+                        display: "block",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        fontSize: "9.5px",
+                        fontWeight: 700,
+                        color: "#94a3b8",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        marginBottom: "0.4rem",
                       }}
                     >
-                      +91
-                    </div>
+                      Full Name <span style={{ color: "#c21a22" }}>*</span>
+                    </label>
                     <input
-                      type="tel"
-                      placeholder="Enter 10-digit mobile number"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      type="text"
+                      placeholder="Enter your name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       required
                       autoFocus
                       style={{
-                        flex: 1,
-                        padding: "0.85rem 1rem",
-                        borderRadius: "10px",
+                        width: "100%",
+                        padding: "10px 14px",
+                        borderRadius: "12px",
                         background: "rgba(255, 255, 255, 0.05)",
-                        border: "1px solid rgba(212, 175, 55, 0.3)",
+                        border: "1px solid rgba(255, 255, 255, 0.12)",
                         color: "#ffffff",
-                        fontSize: "0.95rem",
+                        fontSize: "0.88rem",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        outline: "none",
+                        transition: "all 0.2s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = "#c21a22";
+                        e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        fontSize: "9.5px",
+                        fontWeight: 700,
+                        color: "#94a3b8",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        marginBottom: "0.4rem",
+                      }}
+                    >
+                      WhatsApp Mobile Number <span style={{ color: "#c21a22" }}>*</span>
+                    </label>
+                    <div style={{ display: "flex", gap: "0.5rem" }}>
+                      <div
+                        style={{
+                          padding: "10px 12px",
+                          background: "rgba(255, 255, 255, 0.05)",
+                          border: "1px solid rgba(255, 255, 255, 0.12)",
+                          borderRadius: "12px",
+                          color: "#c21a22",
+                          fontWeight: 700,
+                          fontSize: "0.88rem",
+                          fontFamily: "var(--font-montserrat), sans-serif",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        +91
+                      </div>
+                      <input
+                        type="tel"
+                        placeholder="10-digit mobile number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        style={{
+                          flex: 1,
+                          padding: "10px 14px",
+                          borderRadius: "12px",
+                          background: "rgba(255, 255, 255, 0.05)",
+                          border: "1px solid rgba(255, 255, 255, 0.12)",
+                          color: "#ffffff",
+                          fontSize: "0.88rem",
+                          fontFamily: "var(--font-montserrat), sans-serif",
+                          outline: "none",
+                          transition: "all 0.2s ease",
+                        }}
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = "#c21a22";
+                          e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+                          e.currentTarget.style.boxShadow = "none";
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        fontSize: "9.5px",
+                        fontWeight: 700,
+                        color: "#94a3b8",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        marginBottom: "0.4rem",
+                      }}
+                    >
+                      Email Address <span style={{ color: "#64748b", textTransform: "none" }}>(Optional)</span>
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Enter email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      style={{
+                        width: "100%",
+                        padding: "10px 14px",
+                        borderRadius: "12px",
+                        background: "rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.12)",
+                        color: "#ffffff",
+                        fontSize: "0.88rem",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        outline: "none",
+                        transition: "all 0.2s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = "#c21a22";
+                        e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    />
+                  </div>
+
+                  {error && (
+                    <div
+                      style={{
+                        padding: "8px 12px",
+                        background: "rgba(239, 68, 68, 0.12)",
+                        border: "1px solid rgba(239, 68, 68, 0.35)",
+                        borderRadius: "8px",
+                        color: "#ef4444",
+                        fontSize: "0.82rem",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {error}
+                    </div>
+                  )}
+
+                  {/* Primary CTA (Lotlite SIEC Button Architecture) */}
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    style={{
+                      width: "100%",
+                      padding: "12px 20px",
+                      borderRadius: "12px",
+                      background: "#c21a22",
+                      color: "#ffffff",
+                      fontFamily: "var(--font-montserrat), sans-serif",
+                      fontWeight: 700,
+                      fontSize: "11px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      border: "none",
+                      cursor: isLoading ? "not-allowed" : "pointer",
+                      boxShadow: "0 8px 24px rgba(194, 26, 34, 0.3)",
+                      opacity: isLoading ? 0.75 : 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "0.5rem",
+                      transition: "all 0.2s ease",
+                      marginTop: "0.25rem",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isLoading) {
+                        e.currentTarget.style.background = "#9e1218";
+                        e.currentTarget.style.transform = "translateY(-1px)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "#c21a22";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
+                  >
+                    <i className="fa-brands fa-whatsapp" style={{ fontSize: "1rem" }} />
+                    {isLoading ? "Sending OTP..." : "Get OTP on WhatsApp"}
+                  </button>
+
+                  <div style={{ textAlign: "center", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "0.5rem" }}>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#94a3b8",
+                        fontSize: "0.78rem",
+                        cursor: "pointer",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      Continue as Guest
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsAdminMode(true)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#64748b",
+                        fontSize: "0.75rem",
+                        cursor: "pointer",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                      }}
+                    >
+                      Admin Access
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form onSubmit={handleAdminPasscodeLogin} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontFamily: "var(--font-montserrat), sans-serif",
+                        fontSize: "9.5px",
+                        fontWeight: 700,
+                        color: "#94a3b8",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        marginBottom: "0.4rem",
+                      }}
+                    >
+                      Admin Passcode
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Enter Admin Passcode"
+                      value={adminPasscode}
+                      onChange={(e) => setAdminPasscode(e.target.value)}
+                      required
+                      autoFocus
+                      style={{
+                        width: "100%",
+                        padding: "10px 14px",
+                        borderRadius: "12px",
+                        background: "rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.12)",
+                        color: "#ffffff",
+                        fontSize: "0.88rem",
+                        fontFamily: "var(--font-montserrat), sans-serif",
                         outline: "none",
                       }}
                     />
                   </div>
+
+                  {error && (
+                    <div
+                      style={{
+                        padding: "8px 12px",
+                        background: "rgba(239, 68, 68, 0.12)",
+                        border: "1px solid rgba(239, 68, 68, 0.35)",
+                        borderRadius: "8px",
+                        color: "#ef4444",
+                        fontSize: "0.82rem",
+                      }}
+                    >
+                      {error}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    style={{
+                      width: "100%",
+                      padding: "12px 20px",
+                      borderRadius: "12px",
+                      background: "#c21a22",
+                      color: "#ffffff",
+                      fontFamily: "var(--font-montserrat), sans-serif",
+                      fontWeight: 700,
+                      fontSize: "11px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Verify Admin
+                  </button>
+                  <div style={{ textAlign: "center", marginTop: "0.5rem" }}>
+                    <button
+                      type="button"
+                      onClick={() => setIsAdminMode(false)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#94a3b8",
+                        fontSize: "0.8rem",
+                        cursor: "pointer",
+                      }}
+                    >
+                      ← Back to WhatsApp OTP
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          )}
+
+          {/* STEP 2: ENTER OTP */}
+          {step === "otp" && (
+            <div>
+              <div style={{ marginBottom: "1.4rem" }}>
+                <span
+                  style={{
+                    display: "inline-block",
+                    padding: "3px 10px",
+                    borderRadius: "9999px",
+                    background: "rgba(22, 163, 74, 0.12)",
+                    border: "1px solid rgba(22, 163, 74, 0.35)",
+                    color: "#16a34a",
+                    fontSize: "9.5px",
+                    fontWeight: 700,
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    marginBottom: "0.5rem",
+                    fontFamily: "var(--font-montserrat), sans-serif",
+                  }}
+                >
+                  Code Sent to WhatsApp
+                </span>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "1.45rem",
+                    fontWeight: 700,
+                    margin: 0,
+                  }}
+                >
+                  Enter Verification Code
+                </h3>
+                <p style={{ color: "#94a3b8", fontSize: "0.82rem", marginTop: "0.35rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
+                  Code sent to <strong>+91 {phone.replace(/\D/g, "").slice(-10)}</strong>.
+                </p>
+              </div>
+
+              <form onSubmit={handleVerifyOtp} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <div>
+                  <input
+                    type="text"
+                    maxLength={6}
+                    placeholder="••••••"
+                    value={enteredOtp}
+                    onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, ""))}
+                    required
+                    autoFocus
+                    style={{
+                      width: "100%",
+                      padding: "14px",
+                      borderRadius: "12px",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1.5px solid #c21a22",
+                      color: "#ffffff",
+                      fontSize: "1.5rem",
+                      fontWeight: 700,
+                      letterSpacing: "8px",
+                      textAlign: "center",
+                      outline: "none",
+                      boxShadow: "0 0 0 3px rgba(194, 26, 34, 0.15)",
+                    }}
+                  />
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    fontSize: "0.82rem",
+                    color: "#94a3b8",
+                    fontFamily: "var(--font-montserrat), sans-serif",
+                  }}
+                >
+                  <span>Expires in: {formatTimer(otpExpirySeconds)}</span>
+                  <button
+                    type="button"
+                    disabled={resendCooldown > 0 || isLoading}
+                    onClick={() => handleSendOtp()}
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: resendCooldown > 0 ? "rgba(255, 255, 255, 0.35)" : "#c21a22",
+                      cursor: resendCooldown > 0 ? "not-allowed" : "pointer",
+                      textDecoration: "underline",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : "Resend OTP"}
+                  </button>
                 </div>
 
                 {error && (
                   <div
                     style={{
-                      marginBottom: "1rem",
-                      padding: "0.65rem 0.9rem",
-                      background: "rgba(232, 67, 147, 0.15)",
-                      border: "1px solid rgba(232, 67, 147, 0.4)",
+                      padding: "8px 12px",
+                      background: "rgba(239, 68, 68, 0.12)",
+                      border: "1px solid rgba(239, 68, 68, 0.35)",
                       borderRadius: "8px",
-                      color: "#ff7675",
-                      fontSize: "0.85rem",
+                      color: "#ef4444",
+                      fontSize: "0.82rem",
                     }}
                   >
                     {error}
@@ -465,383 +926,140 @@ export default function AuthOtpModal({
                   disabled={isLoading}
                   style={{
                     width: "100%",
-                    padding: "0.95rem 1.5rem",
-                    borderRadius: "9999px",
-                    background: "linear-gradient(135deg, #d4af37 0%, #e84393 100%)",
-                    color: "#0a0a0c",
+                    padding: "12px 20px",
+                    borderRadius: "12px",
+                    background: "#c21a22",
+                    color: "#ffffff",
+                    fontFamily: "var(--font-montserrat), sans-serif",
                     fontWeight: 700,
-                    fontSize: "0.98rem",
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.15em",
                     border: "none",
                     cursor: isLoading ? "not-allowed" : "pointer",
-                    boxShadow: "0 8px 24px rgba(212, 175, 55, 0.25)",
-                    opacity: isLoading ? 0.7 : 1,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.5rem",
+                    boxShadow: "0 8px 24px rgba(194, 26, 34, 0.3)",
+                    opacity: isLoading ? 0.75 : 1,
                   }}
                 >
-                  <i className="fa-brands fa-whatsapp" style={{ fontSize: "1.1rem" }} />
-                  {isLoading ? "Sending WhatsApp OTP..." : "Get OTP on WhatsApp"}
+                  {isLoading ? "Verifying..." : "Verify & Sign In"}
                 </button>
 
-                <div style={{ marginTop: "1.1rem", textAlign: "center", display: "flex", flexDirection: "column", gap: "0.55rem", alignItems: "center" }}>
+                <div style={{ textAlign: "center" }}>
                   <button
                     type="button"
-                    onClick={onClose}
+                    onClick={() => setStep("phone")}
                     style={{
                       background: "transparent",
                       border: "none",
-                      color: "rgba(255, 255, 255, 0.6)",
-                      fontSize: "0.82rem",
+                      color: "#64748b",
+                      fontSize: "0.78rem",
                       cursor: "pointer",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.4rem",
-                      padding: "0.3rem 0.6rem",
-                      borderRadius: "6px",
-                      transition: "color 0.2s ease",
+                      fontFamily: "var(--font-montserrat), sans-serif",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#f5d77f")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)")}
                   >
-                    <span>Explore platform as guest</span>
-                    <span style={{ fontSize: "0.85rem", color: "#f5d77f" }}>✕</span>
+                    Change Mobile Number
                   </button>
                 </div>
               </form>
-            ) : (
-              <form onSubmit={handleAdminPasscodeLogin}>
-                <div style={{ marginBottom: "1.3rem" }}>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      color: "rgba(255, 255, 255, 0.8)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    Admin Passcode
+            </div>
+          )}
+
+          {/* STEP 3: OPTIONAL NAME TO FINALIZE */}
+          {step === "name" && (
+            <div>
+              <div style={{ marginBottom: "1.4rem" }}>
+                <h3 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "1.4rem", fontWeight: 700, margin: 0 }}>
+                  Welcome to Lifestyle Homes!
+                </h3>
+                <p style={{ color: "#94a3b8", fontSize: "0.82rem", marginTop: "0.35rem" }}>
+                  What should our concierge address you as?
+                </p>
+              </div>
+
+              <form onSubmit={handleSaveName} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <div>
+                  <label style={{ display: "block", fontSize: "9.5px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.4rem" }}>
+                    Your Full Name <span style={{ color: "#c21a22" }}>*</span>
                   </label>
                   <input
-                    type="password"
-                    placeholder="Enter Admin Passcode"
-                    value={adminPasscode}
-                    onChange={(e) => setAdminPasscode(e.target.value)}
+                    type="text"
+                    placeholder="e.g. Vikram Deshmukh"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
+                    autoFocus
                     style={{
                       width: "100%",
-                      padding: "0.85rem 1rem",
-                      borderRadius: "10px",
+                      padding: "10px 14px",
+                      borderRadius: "12px",
                       background: "rgba(255, 255, 255, 0.05)",
-                      border: "1px solid rgba(212, 175, 55, 0.3)",
+                      border: "1px solid rgba(255, 255, 255, 0.12)",
                       color: "#ffffff",
-                      fontSize: "0.95rem",
+                      fontSize: "0.88rem",
                       outline: "none",
                     }}
                   />
                 </div>
 
-                {error && (
-                  <div
-                    style={{
-                      marginBottom: "1rem",
-                      padding: "0.65rem 0.9rem",
-                      background: "rgba(232, 67, 147, 0.15)",
-                      border: "1px solid rgba(232, 67, 147, 0.4)",
-                      borderRadius: "8px",
-                      color: "#ff7675",
-                      fontSize: "0.85rem",
-                    }}
-                  >
-                    {error}
-                  </div>
-                )}
-
                 <button
                   type="submit"
                   style={{
                     width: "100%",
-                    padding: "0.95rem 1.5rem",
-                    borderRadius: "9999px",
-                    background: "linear-gradient(135deg, #d4af37, #b8860b)",
-                    color: "#0a0a0c",
+                    padding: "12px 20px",
+                    borderRadius: "12px",
+                    background: "#c21a22",
+                    color: "#ffffff",
                     fontWeight: 700,
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.15em",
                     border: "none",
                     cursor: "pointer",
                   }}
                 >
-                  Verify Admin Access
+                  Complete Profile
                 </button>
-                <div style={{ marginTop: "1rem", textAlign: "center" }}>
-                  <button
-                    type="button"
-                    onClick={() => setIsAdminMode(false)}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "#f5d77f",
-                      fontSize: "0.82rem",
-                      cursor: "pointer",
-                    }}
-                  >
-                    ← Back to WhatsApp OTP
-                  </button>
-                </div>
               </form>
-            )}
-          </div>
-        )}
-
-        {/* STEP 2: ENTER OTP */}
-        {step === "otp" && (
-          <div>
-            <div style={{ marginBottom: "1.4rem" }}>
-              <span
-                style={{
-                  display: "inline-block",
-                  padding: "0.25rem 0.75rem",
-                  borderRadius: "9999px",
-                  background: "rgba(37, 211, 102, 0.15)",
-                  border: "1px solid rgba(37, 211, 102, 0.35)",
-                  color: "#25D366",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  marginBottom: "0.6rem",
-                }}
-              >
-                OTP Sent to WhatsApp
-              </span>
-              <h3 style={{ fontSize: "1.4rem", fontWeight: 700, margin: 0 }}>
-                Enter Verification Code
-              </h3>
-              <p style={{ color: "rgba(255, 255, 255, 0.65)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
-                Code sent to <strong>+91 {phone.replace(/\D/g, "").slice(-10)}</strong> via Lifestyle WhatsApp.
-              </p>
             </div>
+          )}
 
-            <form onSubmit={handleVerifyOtp}>
-              <div style={{ marginBottom: "1.2rem" }}>
-                <input
-                  type="text"
-                  maxLength={6}
-                  placeholder="6-digit OTP code"
-                  value={enteredOtp}
-                  onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, ""))}
-                  required
-                  autoFocus
-                  style={{
-                    width: "100%",
-                    padding: "1rem",
-                    borderRadius: "10px",
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(212, 175, 55, 0.4)",
-                    color: "#f5d77f",
-                    fontSize: "1.5rem",
-                    fontWeight: 700,
-                    letterSpacing: "6px",
-                    textAlign: "center",
-                    outline: "none",
-                  }}
-                />
-              </div>
-
+          {/* STEP 4: SUCCESS CONFIRMATION */}
+          {step === "success" && (
+            <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
               <div
                 style={{
+                  width: "60px",
+                  height: "60px",
+                  margin: "0 auto 1.25rem",
+                  borderRadius: "50%",
+                  background: "rgba(22, 163, 74, 0.15)",
+                  border: "1px solid rgba(22, 163, 74, 0.35)",
+                  color: "#16a34a",
                   display: "flex",
-                  justifyContent: "space-between",
                   alignItems: "center",
-                  fontSize: "0.82rem",
-                  color: "rgba(255, 255, 255, 0.6)",
-                  marginBottom: "1.2rem",
+                  justifyContent: "center",
+                  fontSize: "1.8rem",
                 }}
               >
-                <span>Expires in: {formatTimer(otpExpirySeconds)}</span>
-                <button
-                  type="button"
-                  disabled={resendCooldown > 0 || isLoading}
-                  onClick={() => handleSendOtp()}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    color: resendCooldown > 0 ? "rgba(255, 255, 255, 0.35)" : "#f5d77f",
-                    cursor: resendCooldown > 0 ? "not-allowed" : "pointer",
-                    textDecoration: "underline",
-                  }}
-                >
-                  {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : "Resend OTP"}
-                </button>
+                ✓
               </div>
-
-              {error && (
-                <div
-                  style={{
-                    marginBottom: "1rem",
-                    padding: "0.65rem 0.9rem",
-                    background: "rgba(232, 67, 147, 0.15)",
-                    border: "1px solid rgba(232, 67, 147, 0.4)",
-                    borderRadius: "8px",
-                    color: "#ff7675",
-                    fontSize: "0.85rem",
-                  }}
-                >
-                  {error}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isLoading}
+              <h3
                 style={{
-                  width: "100%",
-                  padding: "0.95rem 1.5rem",
-                  borderRadius: "9999px",
-                  background: "linear-gradient(135deg, #d4af37 0%, #e84393 100%)",
-                  color: "#0a0a0c",
+                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                  fontSize: "1.5rem",
                   fontWeight: 700,
-                  fontSize: "0.98rem",
-                  border: "none",
-                  cursor: isLoading ? "not-allowed" : "pointer",
-                  boxShadow: "0 8px 24px rgba(212, 175, 55, 0.25)",
-                  opacity: isLoading ? 0.7 : 1,
+                  color: "#ffffff",
+                  marginBottom: "0.5rem",
                 }}
               >
-                {isLoading ? "Verifying..." : "Verify & Sign In"}
-              </button>
-
-              <div style={{ marginTop: "1rem", textAlign: "center" }}>
-                <button
-                  type="button"
-                  onClick={() => setStep("phone")}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    color: "rgba(255, 255, 255, 0.55)",
-                    fontSize: "0.8rem",
-                    cursor: "pointer",
-                  }}
-                >
-                  Change Mobile Number
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
-
-        {/* STEP 3: OPTIONAL NAME TO FINALIZE */}
-        {step === "name" && (
-          <div>
-            <div style={{ marginBottom: "1.4rem" }}>
-              <h3 style={{ fontSize: "1.4rem", fontWeight: 700, margin: 0 }}>
-                Welcome to Lifestyle Homes!
+                Signed In Successfully!
               </h3>
-              <p style={{ color: "rgba(255, 255, 255, 0.65)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
-                What should our team and concierge address you as?
+              <p style={{ color: "#94a3b8", fontSize: "0.88rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
+                Welcome, {name || "Valued Resident"}. Your verified session is active.
               </p>
             </div>
-
-            <form onSubmit={handleSaveName}>
-              <div style={{ marginBottom: "1.1rem" }}>
-                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "0.35rem" }}>
-                  Your Full Name <span style={{ color: "#e84393" }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Vikram Deshmukh"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  autoFocus
-                  style={{
-                    width: "100%",
-                    padding: "0.85rem 1rem",
-                    borderRadius: "10px",
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(212, 175, 55, 0.3)",
-                    color: "#ffffff",
-                    fontSize: "0.95rem",
-                    outline: "none",
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: "1.5rem" }}>
-                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "0.35rem", color: "rgba(255, 255, 255, 0.7)" }}>
-                  Email Address <span style={{ color: "rgba(255, 255, 255, 0.4)", fontSize: "0.8rem" }}>(Optional)</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="e.g. vikram@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.85rem 1rem",
-                    borderRadius: "10px",
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(212, 175, 55, 0.2)",
-                    color: "#ffffff",
-                    fontSize: "0.95rem",
-                    outline: "none",
-                  }}
-                />
-              </div>
-
-              <button
-                type="submit"
-                style={{
-                  width: "100%",
-                  padding: "0.95rem 1.5rem",
-                  borderRadius: "9999px",
-                  background: "linear-gradient(135deg, #d4af37 0%, #e84393 100%)",
-                  color: "#0a0a0c",
-                  fontWeight: 700,
-                  fontSize: "0.98rem",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                Complete Profile
-              </button>
-            </form>
-          </div>
-        )}
-
-        {/* STEP 4: SUCCESS */}
-        {step === "success" && (
-          <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
-            <div
-              style={{
-                width: "60px",
-                height: "60px",
-                margin: "0 auto 1.25rem",
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, #d4af37, #e84393)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "1.8rem",
-              }}
-            >
-              ✓
-            </div>
-            <h3
-              style={{
-                fontSize: "1.45rem",
-                fontWeight: 700,
-                background: "linear-gradient(135deg, #f5d77f, #e84393)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Signed In Successfully!
-            </h3>
-            <p style={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "0.9rem" }}>
-              Welcome, {name || "Valued Resident"}. Your verified session is active.
-            </p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

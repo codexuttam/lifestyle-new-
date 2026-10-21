@@ -81,25 +81,41 @@ export function generateReferenceId(): string {
   return `LHS-2026-${code}`;
 }
 
-// Splits full name into first and last name safely without adding any 'Client' suffix
+// Splits full name into first and last name safely without adding any 'Client' prefix or suffix
 export function splitName(fullName: string): { firstName: string; lastName: string } {
-  let trimmed = (fullName || "").trim().replace(/\s+/g, " ");
+  let trimmed = (fullName || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/^(?:client|customer|valued\s+client)\s+/i, "")
+    .replace(/\s+(?:client|customer)$/i, "")
+    .trim();
+
   if (!trimmed) {
     return { firstName: "", lastName: "" };
   }
 
-  // Strip trailing "client" or "Client" if mistakenly entered or appended (e.g. "Raj Client" -> "Raj")
-  trimmed = trimmed.replace(/\s+[Cc]lient$/i, "").trim() || trimmed;
-
   const parts = trimmed.split(" ");
   if (parts.length === 1) {
-    return { firstName: parts[0], lastName: "" };
+    const single = parts[0];
+    return {
+      firstName: single.toLowerCase() === "client" ? "Applicant" : single,
+      lastName: "",
+    };
   }
-  const firstName = parts[0];
-  const lastName = parts.slice(1).join(" ");
+  let firstName = parts[0];
+  let lastName = parts.slice(1).join(" ");
+
+  if (firstName.toLowerCase() === "client") {
+    firstName = lastName;
+    lastName = "";
+  }
+  if (lastName.toLowerCase() === "client") {
+    lastName = "";
+  }
+
   return {
     firstName,
-    lastName: lastName.toLowerCase() === "client" ? "" : lastName,
+    lastName,
   };
 }
 

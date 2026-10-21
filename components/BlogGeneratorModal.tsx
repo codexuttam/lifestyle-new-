@@ -73,11 +73,11 @@ export default function BlogGeneratorModal({
         style={{
           width: "100%",
           maxWidth: "480px",
-          background: "linear-gradient(135deg, #11141b 0%, #0a0d13 100%)",
-          border: "1px solid rgba(212, 175, 55, 0.35)",
+          background: "linear-gradient(135deg, #0a1428 0%, #050a16 100%)",
+          border: "1px solid rgba(194, 26, 34, 0.4)",
           borderRadius: "20px",
           padding: "2rem",
-          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(232, 67, 147, 0.15)",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(194, 26, 34, 0.2)",
           color: "#ffffff",
           position: "relative",
         }}
@@ -112,8 +112,8 @@ export default function BlogGeneratorModal({
               display: "inline-block",
               padding: "0.25rem 0.75rem",
               borderRadius: "9999px",
-              background: "linear-gradient(135deg, rgba(232, 67, 147, 0.25), rgba(212, 175, 55, 0.2))",
-              border: "1px solid rgba(232, 67, 147, 0.4)",
+              background: "linear-gradient(135deg, rgba(194, 26, 34, 0.25), rgba(26, 51, 92, 0.4))",
+              border: "1px solid rgba(194, 26, 34, 0.4)",
               color: "#ff7675",
               fontSize: "0.75rem",
               fontWeight: 600,
@@ -135,7 +135,7 @@ export default function BlogGeneratorModal({
         <form onSubmit={handleGenerate}>
           <div style={{ marginBottom: "1.2rem" }}>
             <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "0.35rem", fontWeight: 500 }}>
-              Article Topic / Focus Title <span style={{ color: "#e84393" }}>*</span>
+              Article Topic / Focus Title <span style={{ color: "#c21a22" }}>*</span>
             </label>
             <input
               type="text"
@@ -149,7 +149,7 @@ export default function BlogGeneratorModal({
                 padding: "0.85rem 1rem",
                 borderRadius: "10px",
                 background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.16)",
                 color: "#ffffff",
                 fontSize: "0.95rem",
                 outline: "none",
@@ -171,7 +171,7 @@ export default function BlogGeneratorModal({
                 padding: "0.85rem 1rem",
                 borderRadius: "10px",
                 background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(212, 175, 55, 0.2)",
+                border: "1px solid rgba(255, 255, 255, 0.14)",
                 color: "#ffffff",
                 fontSize: "0.95rem",
                 outline: "none",
@@ -190,9 +190,9 @@ export default function BlogGeneratorModal({
                 style={{
                   padding: "0.75rem 1rem",
                   borderRadius: "10px",
-                  background: mode === "SEO" ? "rgba(212, 175, 55, 0.2)" : "rgba(255, 255, 255, 0.04)",
-                  border: mode === "SEO" ? "1px solid #d4af37" : "1px solid rgba(255, 255, 255, 0.1)",
-                  color: mode === "SEO" ? "#f5d77f" : "rgba(255, 255, 255, 0.7)",
+                  background: mode === "SEO" ? "rgba(194, 26, 34, 0.2)" : "rgba(255, 255, 255, 0.04)",
+                  border: mode === "SEO" ? "1px solid #c21a22" : "1px solid rgba(255, 255, 255, 0.1)",
+                  color: mode === "SEO" ? "#ffffff" : "rgba(255, 255, 255, 0.7)",
                   fontWeight: 600,
                   fontSize: "0.88rem",
                   cursor: "pointer",
@@ -206,9 +206,9 @@ export default function BlogGeneratorModal({
                 style={{
                   padding: "0.75rem 1rem",
                   borderRadius: "10px",
-                  background: mode === "GEO" ? "rgba(232, 67, 147, 0.2)" : "rgba(255, 255, 255, 0.04)",
-                  border: mode === "GEO" ? "1px solid #e84393" : "1px solid rgba(255, 255, 255, 0.1)",
-                  color: mode === "GEO" ? "#ff7675" : "rgba(255, 255, 255, 0.7)",
+                  background: mode === "GEO" ? "rgba(194, 26, 34, 0.3)" : "rgba(255, 255, 255, 0.04)",
+                  border: mode === "GEO" ? "1px solid #c21a22" : "1px solid rgba(255, 255, 255, 0.1)",
+                  color: mode === "GEO" ? "#ffffff" : "rgba(255, 255, 255, 0.7)",
                   fontWeight: 600,
                   fontSize: "0.88rem",
                   cursor: "pointer",
@@ -224,8 +224,8 @@ export default function BlogGeneratorModal({
               style={{
                 marginBottom: "1rem",
                 padding: "0.65rem 0.9rem",
-                background: "rgba(232, 67, 147, 0.15)",
-                border: "1px solid rgba(232, 67, 147, 0.4)",
+                background: "rgba(194, 26, 34, 0.15)",
+                border: "1px solid rgba(194, 26, 34, 0.4)",
                 borderRadius: "8px",
                 color: "#ff7675",
                 fontSize: "0.85rem",
@@ -242,13 +242,13 @@ export default function BlogGeneratorModal({
               width: "100%",
               padding: "0.95rem 1.5rem",
               borderRadius: "9999px",
-              background: "linear-gradient(135deg, #d4af37 0%, #e84393 100%)",
-              color: "#0a0a0c",
+              background: "var(--color-wine, #c21a22)",
+              color: "#ffffff",
               fontWeight: 700,
               fontSize: "0.98rem",
               border: "none",
               cursor: isGenerating ? "not-allowed" : "pointer",
-              boxShadow: "0 8px 24px rgba(212, 175, 55, 0.25)",
+              boxShadow: "0 8px 24px rgba(194, 26, 34, 0.35)",
               opacity: isGenerating ? 0.7 : 1,
             }}
           >

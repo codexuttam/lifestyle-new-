@@ -1,0 +1,187 @@
+/**
+ * Lotlite SIEC Extracted Design Tokens
+ * Reusable design system tokens extracted from https://www.lotlitesiec.com/
+ * Adapted for Aura (Primary Flagship) & Lifestyle Home Spaces (Related Landmark)
+ */
+
+:root {
+  /* ==========================================================================
+     1. COLOR SYSTEM (Verified Lotlite SIEC Palette & White/Navy Gradient)
+     ========================================================================== */
+  --color-wine: #c21a22;
+  --color-wine-hover: #9e1218;
+  --color-wine-light: rgba(194, 26, 34, 0.08);
+  --color-wine-light-border: rgba(194, 26, 34, 0.28);
+  --color-wine-glow: rgba(194, 26, 34, 0.35);
+  --wine-glow-rgb: 194, 26, 34;
+  --color-wine-gradient: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
+
+  /* Gradient of White and Navy Blue for Platform Background */
+  --navy-deep: #050a16;
+  --navy-dark: #0a1428;
+  --navy-primary: #101e3a;
+  --navy-accent: #1e355b;
+  --bg-platform-gradient: linear-gradient(180deg, #070e1f 0%, #0d1b38 18%, #162b54 40%, #1e3a70 65%, #0a1428 88%, #050a16 100%);
+  --bg-white-navy-radial: radial-gradient(ellipse 100% 70% at 50% 0%, #162b54 0%, #0d1b38 35%, #070e1f 100%);
+  --bg-navy-canvas: linear-gradient(180deg, #091224 0%, #0e1c38 50%, #050a14 100%);
+  --bg-navy-gradient: linear-gradient(135deg, #0d1b36 0%, #152952 50%, #081124 100%);
+
+  /* Surfaces & Canvas */
+  --color-bg: #070e1f;
+  --color-bg-secondary: #0c1730;
+  --color-bg-card: rgba(14, 26, 52, 0.94);
+  --color-bg-card-hover: rgba(22, 40, 78, 0.98);
+  --color-bg-input: rgba(255, 255, 255, 0.06);
+  --color-bg-input-focus: rgba(255, 255, 255, 0.1);
+
+  /* Typography Colors */
+  --color-text: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #0a1428;
+
+  /* Borders & Dividers */
+  --color-border: rgba(160, 190, 232, 0.14);
+  --color-border-hover: rgba(194, 26, 34, 0.45);
+  --color-border-strong: rgba(160, 190, 232, 0.28);
+
+  /* Status Tokens */
+  --color-success: #16a34a;
+  --color-success-bg: rgba(22, 163, 74, 0.12);
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-error-bg: rgba(239, 68, 68, 0.12);
+
+  /* Badges & Tags */
+  --color-badge-bg: rgba(194, 26, 34, 0.12);
+  --color-badge-text: #c21a22;
+  --color-badge-border: rgba(194, 26, 34, 0.28);
+
+  /* Overlays & Backdrops */
+  --overlay-backdrop: rgba(5, 10, 22, 0.82);
+  --overlay-blur: 16px;
+
+  /* ==========================================================================
+     2. TYPOGRAPHY (Verified Lotlite SIEC Montserrat Everywhere)
+     ========================================================================== */
+  --font-sans: var(--font-montserrat, "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  --font-display: var(--font-montserrat, "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  --font-serif: var(--font-montserrat, "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  --font-inter: var(--font-montserrat, "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  --font-big-shoulders: var(--font-montserrat, "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+
+  /* Type Scale */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.15em;
+  --tracking-widest: 0.35em;
+
+  /* ==========================================================================
+     3. RADII & SHADOWS (Observed Card & Dialog Geometry)
+     ========================================================================== */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;      /* Standard Inputs, Buttons */
+  --radius-xl: 16px;     /* Content Cards, Badges */
+  --radius-2xl: 20px;    /* Feature Cards, Accordions */
+  --radius-3xl: 24px;    /* Signature Modals, Hero Panels */
+  --radius-full: 9999px; /* Badges, Pill Buttons, Icons */
+
+  /* Elevation Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.35), 0 0 1px rgba(255, 255, 255, 0.1);
+  --shadow-card-hover: 0 22px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(194, 26, 34, 0.15);
+  --shadow-modal: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(194, 26, 34, 0.18);
+  --shadow-button: 0 8px 24px rgba(194, 26, 34, 0.3);
+
+  /* ==========================================================================
+     4. TRANSITIONS & TIMING
+     ========================================================================== */
+  --duration-fast: 0.15s;
+  --duration-standard: 0.28s;
+  --duration-slow: 0.5s;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==========================================================================
+   5. EXTRACTED LOTLITE SIEC ANIMATIONS
+   ========================================================================== */
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(6deg); }
+}
+
+@keyframes winePulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes modalSpringIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 32s linear infinite;
+}
+
+.animate-floating {
+  animation: floating 6s ease-in-out infinite;
+}
+
+/* Atmospheric Glow Elements */
+.wine-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(194, 26, 34, 0.28) 0%, rgba(194, 26, 34, 0) 70%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Accessibility Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

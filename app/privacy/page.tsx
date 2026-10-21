@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div style={{ backgroundColor: "#06090e", color: "#ffffff", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#050a16", color: "#ffffff", minHeight: "100vh", fontFamily: "var(--font-sans), 'Montserrat', sans-serif" }}>
       <SiteNav activeHref="/privacy" />
 
       <main
@@ -26,14 +26,12 @@ export default function PrivacyPage() {
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: "3rem", borderBottom: "1px solid rgba(212, 175, 55, 0.25)", paddingBottom: "2rem" }}>
+        <div style={{ marginBottom: "3rem", borderBottom: "1px solid rgba(255, 255, 255, 0.12)", paddingBottom: "2rem" }}>
           <h1
             style={{
               fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
-              fontWeight: 700,
-              background: "linear-gradient(135deg, #ffffff 40%, #f5d77f 80%, #e84393 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              fontWeight: 800,
+              color: "#ffffff",
               marginBottom: "0.75rem",
             }}
           >
@@ -49,9 +47,9 @@ export default function PrivacyPage() {
               alignItems: "center",
               gap: "1.25rem",
               fontSize: "0.85rem",
-              color: "#f5d77f",
-              background: "rgba(212, 175, 55, 0.1)",
-              border: "1px solid rgba(212, 175, 55, 0.3)",
+              color: "#ffffff",
+              background: "rgba(194, 26, 34, 0.12)",
+              border: "1px solid rgba(194, 26, 34, 0.35)",
               padding: "0.5rem 1rem",
               borderRadius: "8px",
             }}
@@ -65,11 +63,11 @@ export default function PrivacyPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", color: "rgba(255, 255, 255, 0.82)", lineHeight: 1.8 }}>
           
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#f5d77f", marginBottom: "0.75rem", fontWeight: 600 }}>
+            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
               1. MahaRERA Statutory Disclaimer
             </h2>
             <p>
-              Aura by Lifestyle is officially registered under the Maharashtra Real Estate Regulatory Authority (MahaRERA) with Registration Number <strong>P5030002502915</strong>. All project details, sanctioned building plans, layout approvals, specifications, and commencement certificates are available for public verification on the official MahaRERA website at <a href="https://maharera.maharashtra.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: "#f5d77f", textDecoration: "underline" }}>maharera.maharashtra.gov.in</a>.
+              Aura by Lifestyle is officially registered under the Maharashtra Real Estate Regulatory Authority (MahaRERA) with Registration Number <strong>P5030002502915</strong>. All project details, sanctioned building plans, layout approvals, specifications, and commencement certificates are available for public verification on the official MahaRERA website at <a href="https://maharera.maharashtra.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-wine, #c21a22)", textDecoration: "underline" }}>maharera.maharashtra.gov.in</a>.
             </p>
             <p style={{ marginTop: "0.5rem" }}>
               Lifestyle Home Spaces on DPS Road is delivered with immediate possession available. All transactions are governed strictly in accordance with statutory MahaRERA consumer protection norms.
@@ -77,7 +75,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#f5d77f", marginBottom: "0.75rem", fontWeight: 600 }}>
+            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
               2. Architectural Renderings &amp; Visual Representation
             </h2>
             <p>
@@ -86,7 +84,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#f5d77f", marginBottom: "0.75rem", fontWeight: 600 }}>
+            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
               3. Information Collection &amp; Use
             </h2>
             <p>
@@ -100,7 +98,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#f5d77f", marginBottom: "0.75rem", fontWeight: 600 }}>
+            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
               4. Zero Commercial Trading of Personal Data
             </h2>
             <p>
@@ -109,7 +107,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#f5d77f", marginBottom: "0.75rem", fontWeight: 600 }}>
+            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
               5. WhatsApp Communications &amp; OTP Verification
             </h2>
             <p>
@@ -118,7 +116,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#f5d77f", marginBottom: "0.75rem", fontWeight: 600 }}>
+            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
               6. Official Developer &amp; Site Office Contact
             </h2>
             <p>
@@ -129,8 +127,8 @@ export default function PrivacyPage() {
                 marginTop: "0.75rem",
                 padding: "1.25rem",
                 borderRadius: "12px",
-                background: "rgba(255, 255, 255, 0.04)",
-                border: "1px solid rgba(212, 175, 55, 0.25)",
+                background: "#0a1428",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
               }}
             >
               <p style={{ margin: "0 0 0.4rem" }}><strong>Entity:</strong> Lifestyle Home Spaces &amp; Aura by Lifestyle</p>

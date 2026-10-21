@@ -161,9 +161,9 @@ export default function BlogsPage() {
               display: "inline-block",
               padding: "0.35rem 1.1rem",
               borderRadius: "9999px",
-              background: "linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(232, 67, 147, 0.18))",
-              border: "1px solid rgba(212, 175, 55, 0.4)",
-              color: "#f5d77f",
+              background: "rgba(194, 26, 34, 0.15)",
+              border: "1px solid rgba(194, 26, 34, 0.4)",
+              color: "#ffffff",
               fontSize: "0.82rem",
               fontWeight: 700,
               textTransform: "uppercase",
@@ -178,7 +178,7 @@ export default function BlogsPage() {
               fontSize: "clamp(2.1rem, 4.5vw, 3.4rem)",
               fontWeight: 800,
               lineHeight: 1.2,
-              background: "linear-gradient(135deg, #ffffff 40%, #f5d77f 80%, #e84393 100%)",
+              background: "linear-gradient(135deg, #ffffff 50%, var(--color-wine, #c21a22) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               marginBottom: "1.1rem",
@@ -220,13 +220,13 @@ export default function BlogsPage() {
                   gap: "0.65rem",
                   padding: "0.9rem 1.8rem",
                   borderRadius: "9999px",
-                  background: "linear-gradient(135deg, #d4af37 0%, #f5d77f 50%, #e84393 100%)",
-                  color: "#0a0a0c",
+                  background: "var(--color-wine, #c21a22)",
+                  color: "#ffffff",
                   fontWeight: 800,
                   fontSize: "0.92rem",
                   border: "none",
                   cursor: "pointer",
-                  boxShadow: "0 8px 24px rgba(212, 175, 55, 0.35)",
+                  boxShadow: "0 8px 24px rgba(194, 26, 34, 0.35)",
                   transition: "transform 0.2s ease, box-shadow 0.2s ease",
                   textTransform: "uppercase",
                   letterSpacing: "0.5px",
@@ -240,13 +240,13 @@ export default function BlogsPage() {
                   textAlign: "left",
                   fontSize: "0.78rem",
                   fontFamily: "monospace",
-                  borderLeft: "2px solid rgba(212, 175, 55, 0.35)",
+                  borderLeft: "2px solid rgba(194, 26, 34, 0.4)",
                   paddingLeft: "1rem",
                   color: "rgba(255, 255, 255, 0.75)",
                 }}
               >
                 <div style={{ color: "#ffffff", fontWeight: 700 }}>Administrator Session Active</div>
-                <div style={{ color: "#d4af37" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
+                <div style={{ color: "#c21a22" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
               </div>
 
               <button
@@ -275,7 +275,7 @@ export default function BlogsPage() {
                 background: "rgba(255, 255, 255, 0.03)",
                 padding: "0.5rem 1.2rem",
                 borderRadius: "9999px",
-                border: "1px solid rgba(212, 175, 55, 0.2)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
               }}
             >
               <span
@@ -293,8 +293,8 @@ export default function BlogsPage() {
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",
-                    backgroundColor: "#d4af37",
-                    boxShadow: "0 0 8px #d4af37",
+                    backgroundColor: "#c21a22",
+                    boxShadow: "0 0 8px rgba(194, 26, 34, 0.7)",
                   }}
                 />
                 Official Lifestyle Home Spaces Publications · MahaRERA Verified
@@ -334,7 +334,7 @@ export default function BlogsPage() {
             marginBottom: "2.5rem",
             padding: "1rem 1.25rem",
             background: "rgba(255, 255, 255, 0.03)",
-            border: "1px solid rgba(212, 175, 55, 0.2)",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
             borderRadius: "16px",
           }}
         >
@@ -351,14 +351,14 @@ export default function BlogsPage() {
                     padding: "0.45rem 1rem",
                     borderRadius: "9999px",
                     background: isActive
-                      ? "linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(232, 67, 147, 0.2))"
+                      ? "var(--color-wine, #c21a22)"
                       : "transparent",
                     border: isActive
-                      ? "1px solid #d4af37"
+                      ? "1px solid var(--color-wine, #c21a22)"
                       : "1px solid rgba(255, 255, 255, 0.12)",
-                    color: isActive ? "#f5d77f" : "rgba(255, 255, 255, 0.7)",
+                    color: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.7)",
                     fontSize: "0.85rem",
-                    fontWeight: isActive ? 600 : 500,
+                    fontWeight: isActive ? 700 : 500,
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                   }}
@@ -380,7 +380,7 @@ export default function BlogsPage() {
                 width: "100%",
                 padding: "0.65rem 1rem 0.65rem 2.2rem",
                 background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(212, 175, 55, 0.25)",
+                border: "1px solid rgba(255, 255, 255, 0.16)",
                 borderRadius: "9999px",
                 color: "#ffffff",
                 fontSize: "0.88rem",
@@ -444,9 +444,9 @@ export default function BlogsPage() {
               style={{
                 padding: "0.6rem 1.4rem",
                 borderRadius: "9999px",
-                background: "rgba(212, 175, 55, 0.2)",
-                border: "1px solid #d4af37",
-                color: "#f5d77f",
+                background: "rgba(194, 26, 34, 0.2)",
+                border: "1px solid #c21a22",
+                color: "#ffffff",
                 fontWeight: 600,
                 cursor: "pointer",
               }}
@@ -468,7 +468,7 @@ export default function BlogsPage() {
                 onClick={() => setSelectedBlog(blog)}
                 style={{
                   background: "linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%)",
-                  border: "1px solid rgba(212, 175, 55, 0.22)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
                   borderRadius: "20px",
                   overflow: "hidden",
                   cursor: "pointer",
@@ -480,12 +480,12 @@ export default function BlogsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.6)";
-                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(212, 175, 55, 0.2)";
+                  e.currentTarget.style.borderColor = "rgba(194, 26, 34, 0.6)";
+                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(194, 26, 34, 0.25)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.22)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
                   e.currentTarget.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.4)";
                 }}
               >
@@ -526,10 +526,10 @@ export default function BlogsPage() {
                       style={{
                         padding: "0.25rem 0.75rem",
                         borderRadius: "9999px",
-                        background: "rgba(6, 9, 14, 0.85)",
+                        background: "rgba(15, 29, 56, 0.85)",
                         backdropFilter: "blur(6px)",
-                        border: "1px solid rgba(212, 175, 55, 0.35)",
-                        color: "#f5d77f",
+                        border: "1px solid rgba(255, 255, 255, 0.2)",
+                        color: "#ffffff",
                         fontSize: "0.75rem",
                         fontWeight: 600,
                         textTransform: "uppercase",
@@ -620,7 +620,7 @@ export default function BlogsPage() {
                       justifyContent: "space-between",
                       paddingTop: "1rem",
                       borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                      color: "#f5d77f",
+                      color: "var(--color-wine, #c21a22)",
                       fontWeight: 600,
                       fontSize: "0.88rem",
                     }}
@@ -664,11 +664,11 @@ export default function BlogsPage() {
             style={{
               width: "100%",
               maxWidth: "440px",
-              background: "linear-gradient(135deg, #12141e 0%, #080a0e 100%)",
-              border: "1px solid rgba(212, 175, 55, 0.4)",
+              background: "linear-gradient(135deg, #0a1428 0%, #050a16 100%)",
+              border: "1px solid rgba(194, 26, 34, 0.4)",
               borderRadius: "20px",
               padding: "2rem",
-              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.2)",
+              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(194, 26, 34, 0.2)",
               color: "#ffffff",
               position: "relative",
             }}
@@ -703,14 +703,14 @@ export default function BlogsPage() {
                   width: "50px",
                   height: "50px",
                   borderRadius: "50%",
-                  background: "rgba(212, 175, 55, 0.15)",
-                  border: "1px solid rgba(212, 175, 55, 0.35)",
+                  background: "rgba(194, 26, 34, 0.15)",
+                  border: "1px solid rgba(194, 26, 34, 0.35)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: "1.4rem",
                   margin: "0 auto 0.8rem",
-                  color: "#d4af37",
+                  color: "#c21a22",
                 }}
               >
                 🔐
@@ -740,7 +740,7 @@ export default function BlogsPage() {
                     padding: "12px 16px",
                     borderRadius: "12px",
                     background: "rgba(255, 255, 255, 0.06)",
-                    border: adminPasscodeError ? "1px solid #ff7675" : "1px solid rgba(212, 175, 55, 0.35)",
+                    border: adminPasscodeError ? "1px solid #ff7675" : "1px solid rgba(255, 255, 255, 0.18)",
                     color: "#ffffff",
                     fontSize: "0.95rem",
                     outline: "none",
@@ -759,13 +759,13 @@ export default function BlogsPage() {
                 style={{
                   padding: "12px 20px",
                   borderRadius: "9999px",
-                  background: "linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #c01853 100%)",
-                  color: "#080a0e",
+                  background: "var(--color-wine, #c21a22)",
+                  color: "#ffffff",
                   fontWeight: 800,
                   fontSize: "0.92rem",
                   border: "none",
                   cursor: "pointer",
-                  boxShadow: "0 4px 18px rgba(192, 24, 83, 0.35)",
+                  boxShadow: "0 4px 18px rgba(194, 26, 34, 0.35)",
                   textTransform: "uppercase",
                   letterSpacing: "0.5px",
                 }}

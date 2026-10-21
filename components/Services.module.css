@@ -2,7 +2,7 @@
 
 .services {
   width: 100%;
-  background: #06090e;
+  background: linear-gradient(180deg, #091326 0%, #0d1b36 50%, #060c18 100%);
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
@@ -31,12 +31,12 @@
 }
 
 .heading {
-  font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 700;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-weight: 800;
   color: #ffffff;
-  font-size: 64px;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
+  font-size: clamp(38px, 4.5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
 }
 
@@ -48,17 +48,17 @@
 }
 
 .intro {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 400;
   color: #e2e8f0;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
   letter-spacing: -0.2px;
 }
 
 .introStrong {
   font-weight: 600;
-  color: #f0d886;
+  color: #ffffff;
 }
 
 /* --- Service cards --- */
@@ -71,23 +71,24 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 26px;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+  padding: 11px 22px;
+  border-radius: 12px;
+  background: var(--color-wine, #c21a22);
   color: #ffffff;
   text-decoration: none;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 13px;
+  font-family: var(--font-montserrat), var(--font-inter), sans-serif;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  box-shadow: 0 4px 18px rgba(192, 24, 83, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.35);
+  transition: all 0.25s ease;
 }
 
 .viewAll:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(192, 24, 83, 0.6), 0 0 15px rgba(212, 175, 55, 0.4);
+  background: var(--color-wine-hover, #9e1218);
+  box-shadow: 0 8px 26px rgba(194, 26, 34, 0.55);
 }
 
 .grid {
@@ -100,10 +101,10 @@
 
 .card {
   position: relative;
-  background: rgba(14, 18, 26, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 40px;
-  border-radius: 28px;
+  background: rgba(17, 21, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 36px;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -120,8 +121,8 @@
 }
 
 .card:hover {
-  border-color: rgba(212, 175, 55, 0.55);
-  box-shadow: 0 32px 75px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.2), 0 0 20px rgba(192, 24, 83, 0.18);
+  border-color: rgba(194, 26, 34, 0.55);
+  box-shadow: 0 32px 75px rgba(0, 0, 0, 0.8), 0 0 25px rgba(194, 26, 34, 0.3);
 }
 
 /* Mouse-tracking radial spotlight glow overlay */
@@ -131,8 +132,8 @@
   pointer-events: none;
   background: radial-gradient(
     520px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    rgba(212, 175, 55, 0.22) 0%,
-    rgba(192, 24, 83, 0.12) 40%,
+    rgba(194, 26, 34, 0.22) 0%,
+    rgba(26, 51, 92, 0.3) 40%,
     transparent 75%
   );
   opacity: var(--glow-opacity, 0);
@@ -149,7 +150,7 @@
   pointer-events: none;
   background: radial-gradient(
     400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    rgba(212, 175, 55, 0.75),
+    rgba(194, 26, 34, 0.75),
     transparent 60%
   );
   opacity: var(--glow-opacity, 0);
@@ -177,11 +178,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #c01853 0%, #d4af37 100%);
+  background: var(--color-wine, #c21a22);
   width: 58px;
   height: 58px;
   color: #ffffff;
-  box-shadow: 0 4px 16px rgba(192, 24, 83, 0.35), 0 0 12px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 16px var(--color-wine-glow, rgba(194, 26, 34, 0.4));
   transition: transform 0.3s ease;
 }
 
@@ -192,15 +193,15 @@
 .categoryChip {
   padding: 6px 14px;
   border-radius: 9999px;
-  background: rgba(6, 9, 14, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  color: #f0d886;
-  font-family: var(--font-inter), sans-serif;
+  background: rgba(14, 26, 52, 0.85);
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.3));
+  color: #ffffff;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .cardBody {
@@ -214,20 +215,20 @@
 }
 
 .cardTitle {
-  font-family: var(--font-big-shoulders), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 28px;
-  line-height: 1.1;
+  font-size: 22px;
+  line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
 .cardText {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 400;
   color: #cbd5e1;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   letter-spacing: -0.2px;
 }
@@ -235,7 +236,7 @@
 .cardFooter {
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  border-top: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.2));
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -248,11 +249,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #f0d886;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  color: var(--color-wine, #c21a22);
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   transition: gap 0.25s ease, color 0.25s ease;
 }
@@ -308,7 +309,7 @@
   }
 
   .badgeText {
-    color: #f5d77f !important;
+    color: var(--color-wine, #c21a22) !important;
   }
 
   .heading {
@@ -325,8 +326,8 @@
 
   .card {
     padding: 24px;
-    background: rgba(10, 14, 22, 0.96) !important;
-    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    background: rgba(10, 20, 40, 0.96) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
   }
 
   .cardTitle {

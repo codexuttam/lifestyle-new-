@@ -4,7 +4,7 @@
   box-sizing: border-box;
   overflow: hidden;
   padding: clamp(36px, 5vh, 60px) 24px;
-  background: #090a0d;
+  background: linear-gradient(180deg, #091326 0%, #0e1c38 50%, #060c18 100%);
   color: #fff;
   position: relative;
 }
@@ -26,14 +26,14 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 14px;
+  padding: 4px 14px;
   border-radius: 9999px;
-  background: rgba(192, 24, 83, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  font-family: var(--font-inter), sans-serif;
-  font-size: 10.5px;
-  letter-spacing: 0.15em;
-  color: #f5d77f;
+  background: var(--color-wine-light, rgba(194, 26, 34, 0.08));
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.22));
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--color-wine, #c21a22);
   text-transform: uppercase;
   margin-bottom: 10px;
 }
@@ -42,33 +42,33 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #d4af37;
-  box-shadow: 0 0 8px #d4af37, 0 0 5px #c01853;
+  background: var(--color-wine, #c21a22);
+  box-shadow: 0 0 8px rgba(194, 26, 34, 0.7);
 }
 
 .title {
-  font-family: var(--font-big-shoulders), serif;
-  font-size: clamp(28px, 3.5vw, 42px);
-  font-weight: 700;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
   color: #ffffff;
   margin-bottom: 8px;
 }
 
 .title span {
-  color: #d4af37;
-  background: linear-gradient(135deg, #f5e6c8 20%, #d4af37 100%);
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.75) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 14.5px;
-  color: #cbd5e1;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 14px;
+  color: #94a3b8;
   max-width: 620px;
   line-height: 1.5;
   margin-bottom: 16px;
@@ -95,24 +95,24 @@
   border-radius: 9999px;
   background: transparent;
   border: none;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 13px;
+  font-family: var(--font-montserrat), var(--font-inter), sans-serif;
+  font-size: 12.5px;
   font-weight: 500;
   color: #e2e8f0;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.22s ease;
 }
 
 .tabBtn:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(194, 26, 34, 0.15);
 }
 
 .activeTab {
-  background: linear-gradient(135deg, #c01853 0%, #d4af37 100%) !important;
+  background: var(--color-wine, #c21a22) !important;
   color: #ffffff !important;
   font-weight: 700;
-  box-shadow: 0 4px 16px rgba(192, 24, 83, 0.45), 0 0 10px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 16px rgba(194, 26, 34, 0.45);
 }
 
 .tabBadge {
@@ -129,8 +129,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
-  background: rgba(15, 17, 23, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(17, 21, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 22px 28px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
@@ -175,14 +175,14 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(10, 11, 15, 0.85);
-  border: 1px solid #d4af37;
-  color: #d4af37;
+  background: rgba(10, 11, 15, 0.9);
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.4));
+  color: var(--color-wine, #c21a22);
   padding: 4px 12px;
   border-radius: 9999px;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 10.5px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.1em;
 }
 
@@ -198,19 +198,19 @@
 }
 
 .planCategory {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 10.5px;
+  font-family: var(--font-sans, "Montserrat", sans-serif);
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: #d4af37;
-  font-weight: 600;
+  color: var(--color-wine, #c21a22);
+  font-weight: 700;
   display: block;
   margin-bottom: 4px;
 }
 
 .planTitle {
-  font-family: var(--font-big-shoulders), serif;
-  font-size: clamp(22px, 2.2vw, 30px);
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 700;
   text-transform: uppercase;
   color: #fff;
@@ -219,7 +219,7 @@
 }
 
 .planSubtitle {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 13.5px;
   color: #e2e8f0;
   line-height: 1.4;
@@ -231,7 +231,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(160, 190, 232, 0.2);
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 12px;
@@ -244,7 +244,7 @@
 }
 
 .specRoom {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 11.5px;
   color: #cbd5e1;
   font-weight: 500;
@@ -253,10 +253,10 @@
 }
 
 .specDim {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 14.5px;
-  font-weight: 600;
-  color: #f5d77f;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 /* Highlights */
@@ -265,10 +265,10 @@
 }
 
 .highlightsTitle {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 13px;
-  font-weight: 600;
-  color: #d4af37;
+  font-weight: 700;
+  color: var(--color-wine, #c21a22);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-bottom: 12px;
@@ -315,9 +315,9 @@
   border-radius: 9999px;
   background: #25d366;
   color: #0b0c10;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.25s ease;
   box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
@@ -334,22 +334,23 @@
   justify-content: center;
   padding: 12px 22px;
   border-radius: 9999px;
-  background: rgba(192, 24, 83, 0.15);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  color: #f5d77f;
-  font-family: var(--font-inter), sans-serif;
+  background: var(--color-wine, #c21a22);
+  border: 1px solid var(--color-wine-hover, #9e1218);
+  color: #ffffff;
+  font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.25s ease;
+  box-shadow: 0 4px 14px var(--color-wine-glow, rgba(194, 26, 34, 0.35));
 }
 
 .visitBtn:hover {
-  background: rgba(192, 24, 83, 0.35);
-  border-color: #d4af37;
+  background: var(--color-wine-hover, #9e1218);
+  border-color: var(--color-wine, #c21a22);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 0 18px rgba(192, 24, 83, 0.4);
+  box-shadow: 0 0 18px var(--color-wine-glow, rgba(194, 26, 34, 0.5));
 }
 
 /* Location Banner */
@@ -358,7 +359,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 36px;
   background: linear-gradient(135deg, rgba(20, 22, 30, 0.9) 0%, rgba(12, 13, 18, 0.9) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.25));
   border-radius: 24px;
   padding: 36px;
   align-items: center;
@@ -376,21 +377,21 @@
   gap: 8px;
   padding: 5px 14px;
   border-radius: 9999px;
-  background: rgba(212, 175, 55, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  font-family: var(--font-inter), sans-serif;
+  background: var(--color-wine-light, rgba(194, 26, 34, 0.12));
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.35));
+  font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 11px;
   letter-spacing: 0.12em;
-  color: #d4af37;
+  color: var(--color-wine, #c21a22);
   text-transform: uppercase;
   margin-bottom: 12px;
   width: fit-content;
 }
 
 .locationTitle {
-  font-family: var(--font-big-shoulders), serif;
-  font-size: clamp(26px, 3.2vw, 40px);
-  font-weight: 700;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
   text-transform: uppercase;
   line-height: 1.15;
   color: #fff;
@@ -398,9 +399,9 @@
 }
 
 .locationDesc {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 15px;
-  color: #e2e8f0;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 14.5px;
+  color: #cbd5e1;
   line-height: 1.6;
   margin-bottom: 22px;
 }
@@ -415,16 +416,17 @@
   padding: 6px 14px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  font-family: var(--font-inter), sans-serif;
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.25));
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 13px;
-  color: #f5e6c8;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .locationMapWrapper {
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.25));
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -484,8 +486,8 @@
   .locationBanner {
     padding: 20px;
     border-radius: 18px;
-    background: rgba(14, 17, 24, 0.95);
-    border: 1px solid rgba(212, 175, 55, 0.35);
+    background: rgba(10, 20, 40, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.16);
   }
 
   .planTitle {
@@ -509,13 +511,13 @@
   }
 
   .specDim {
-    color: #f5d77f !important;
+    color: #ffffff !important;
     font-size: 15px;
     font-weight: 700;
   }
 
   .highlightsTitle {
-    color: #f5d77f !important;
+    color: var(--color-wine, #c21a22) !important;
     font-size: 13px;
   }
 
@@ -538,9 +540,9 @@
   }
 
   .chip {
-    color: #f5e6c8 !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-    border: 1px solid rgba(212, 175, 55, 0.35) !important;
+    color: #ffffff !important;
+    background: rgba(194, 26, 34, 0.15) !important;
+    border: 1px solid rgba(194, 26, 34, 0.4) !important;
     font-size: 12.5px;
   }
 }

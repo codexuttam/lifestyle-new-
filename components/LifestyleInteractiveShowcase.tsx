@@ -298,7 +298,7 @@ export default function LifestyleInteractiveShowcase({
           <div className={styles.unitInfoCol}>
             <div className={styles.unitTitleRow}>
               <div>
-                <span className={styles.unitBadge}>{activeUnit.badge}</span>
+                <span className={styles.unitPlanBadge}>{activeUnit.badge}</span>
                 <h3 className={styles.unitTitle}>{activeUnit.title}</h3>
               </div>
               <span className={styles.unitPrice}>{activeUnit.price}</span>

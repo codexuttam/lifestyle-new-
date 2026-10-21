@@ -1,26 +1,16 @@
-import { Inter, Playfair_Display, Big_Shoulders } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import "./design-tokens.css";
 import "./globals.css";
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "600"],
-  variable: "--font-inter",
-});
-
-const bigShoulders = Big_Shoulders({
-  subsets: ["latin"],
-  weight: ["500", "800"],
-  variable: "--font-big-shoulders",
-  adjustFontFallback: false,
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
+  display: "swap",
 });
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "Aura by Lifestyle | 15-Storey Ultra-Luxury Landmark, Amravati",
   description:
     "Aura by Lifestyle — Amravati's premier 15-storey architectural highrise in Congress Nagar featuring 2 & 3 BHK luxury residences, rooftop infinity pool, 40+ sky amenities, and double-height entrance lobby. MahaRERA: P5030002502915.",
@@ -36,13 +26,13 @@ export const metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#06090e",
+  themeColor: "#050a16",
   colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${bigShoulders.variable}`}>
+    <html lang="en" className={montserrat.variable}>
       <head>
         <link
           rel="stylesheet"

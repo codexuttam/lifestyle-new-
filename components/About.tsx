@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import type { HomeRecord } from "@/lib/schemas/home";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import styles from "./About.module.css";
-
 
 export default function About({ content }: { content: HomeRecord["about"] }) {
   return (
@@ -31,13 +31,13 @@ export default function About({ content }: { content: HomeRecord["about"] }) {
                 className={styles.cardImage}
               />
               <div className={styles.cardStat}>
-                <span className={styles.cardNumber}>
-                  {card.prefix}
-                  <span className="counter" data-target={card.target}>
-                    0
-                  </span>
-                  {card.suffix}
-                </span>
+                <AnimatedCounter
+                  target={card.target}
+                  prefix={card.prefix}
+                  suffix={card.suffix}
+                  className={styles.cardNumber}
+                  unitClassName={styles.cardUnit}
+                />
                 <span className={styles.cardLabel}>{card.label}</span>
               </div>
             </div>

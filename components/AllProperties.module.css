@@ -6,7 +6,7 @@
   box-sizing: border-box;
   overflow: visible;
   overflow-x: clip;
-  background: #06090e;
+  background: linear-gradient(180deg, #0a1428 0%, #050a16 100%);
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
@@ -39,46 +39,46 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
+  padding: 5px 16px;
   border-radius: 9999px;
-  background: rgba(192, 24, 83, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: var(--color-wine-light, rgba(194, 26, 34, 0.08));
+  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.22));
   margin-top: 8px;
   flex-shrink: 0;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 9999px;
-  background: #d4af37;
-  box-shadow: 0 0 10px #d4af37, 0 0 5px #c01853;
+  background: var(--color-wine, #c21a22);
+  box-shadow: 0 0 10px rgba(194, 26, 34, 0.7);
 }
 
 .labelText {
-  font-family: var(--font-inter), sans-serif;
-  color: #f5d77f;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  color: var(--color-wine, #c21a22);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .heading {
-  font-family: var(--font-big-shoulders), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 64px;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   align-self: stretch;
 }
 
 .subheading {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   color: #94a3b8;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   max-width: 440px;
 }
@@ -88,23 +88,24 @@
   align-items: center;
   gap: 8px;
   margin-top: 8px;
-  padding: 13px 26px;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+  padding: 11px 22px;
+  border-radius: 12px;
+  background: var(--color-wine, #c21a22);
   color: #ffffff;
   text-decoration: none;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 13px;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  box-shadow: 0 4px 18px rgba(192, 24, 83, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.35);
+  transition: all 0.25s ease;
 }
 
 .viewAll:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(192, 24, 83, 0.6), 0 0 15px rgba(212, 175, 55, 0.4);
+  background: var(--color-wine-hover, #9e1218);
+  box-shadow: 0 8px 26px rgba(194, 26, 34, 0.55);
 }
 
 /* ============ DYNAMIC CARD STACK ============ */
@@ -131,10 +132,10 @@
   gap: 10px;
   padding: 8px 18px;
   border-radius: 9999px;
-  background: rgba(14, 18, 26, 0.7);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(15, 29, 56, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94a3b8;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -144,22 +145,22 @@
 
 .tabBtn:hover {
   color: #ffffff;
-  border-color: rgba(212, 175, 55, 0.6);
-  background: rgba(20, 26, 38, 0.85);
+  border-color: rgba(194, 26, 34, 0.6);
+  background: rgba(20, 36, 68, 0.85);
 }
 
 .activeTabBtn {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: #d4af37;
-  color: #f5d77f;
-  box-shadow: 0 0 16px rgba(212, 175, 55, 0.2);
+  background: var(--color-wine, #c21a22);
+  border-color: var(--color-wine, #c21a22);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(194, 26, 34, 0.4);
 }
 
 .tabNum {
-  font-family: var(--font-big-shoulders), sans-serif;
-  font-size: 15px;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
+  font-size: 14px;
   font-weight: 800;
-  color: #d4af37;
+  color: #ffffff;
 }
 
 .tabTitle {
@@ -180,8 +181,8 @@
 .card {
   position: sticky;
   top: 110px;
-  background: #0d111a;
-  border: 1px solid rgba(212, 175, 55, 0.32);
+  background: #0a1428;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 28px;
   padding: 34px;
   display: flex;
@@ -204,8 +205,8 @@
 }
 
 .card:hover {
-  border-color: rgba(212, 175, 55, 0.6);
-  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.8), 0 35px 80px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.25);
+  border-color: rgba(194, 26, 34, 0.6);
+  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.8), 0 35px 80px rgba(0, 0, 0, 0.9), 0 0 25px rgba(194, 26, 34, 0.25);
 }
 
 /* Mouse spotlight glow for property card */
@@ -215,8 +216,8 @@
   pointer-events: none;
   background: radial-gradient(
     600px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    rgba(212, 175, 55, 0.16) 0%,
-    rgba(192, 24, 83, 0.08) 40%,
+    rgba(194, 26, 34, 0.16) 0%,
+    rgba(10, 20, 40, 0.08) 40%,
     transparent 70%
   );
   opacity: var(--glow-op, 0);
@@ -233,7 +234,7 @@
   pointer-events: none;
   background: radial-gradient(
     450px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    rgba(212, 175, 55, 0.7),
+    rgba(194, 26, 34, 0.7),
     transparent 60%
   );
   opacity: var(--glow-op, 0);
@@ -260,8 +261,8 @@
   border-radius: 20px;
   overflow: hidden;
   flex-shrink: 0;
-  background: #090c12;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: #050a16;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .thumbImg {
@@ -291,11 +292,11 @@
 
 .categoryBadge {
   padding: 5px 14px;
-  background: rgba(6, 9, 14, 0.8);
-  color: #f0d886;
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(15, 29, 56, 0.8);
+  color: #ffffff;
+  border: 1px solid rgba(194, 26, 34, 0.4);
   border-radius: 9999px;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -308,7 +309,7 @@
   color: #2ecc71;
   border: 1px solid rgba(46, 204, 113, 0.4);
   border-radius: 9999px;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -321,24 +322,24 @@
 }
 
 .cardTitle {
-  font-family: var(--font-big-shoulders), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 34px;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   transition: color 0.2s ease;
 }
 
 .card:hover .cardTitle {
-  color: #f5d77f;
+  color: #f1f5f9;
 }
 
 .divider {
   width: 100%;
   height: 1px;
-  background: rgba(212, 175, 55, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   margin: 22px 0;
   position: relative;
   z-index: 3;
@@ -365,22 +366,22 @@
   align-items: center;
   gap: 6px;
   color: #cbd5e1;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
 .specIcon {
-  color: #d4af37;
+  color: var(--color-wine, #c21a22);
   flex-shrink: 0;
 }
 
 .specValue {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 600;
-  color: #f0d886;
-  font-size: 18px;
+  color: #ffffff;
+  font-size: 17px;
   white-space: nowrap;
 }
 
@@ -404,17 +405,17 @@
 
 .priceLabel {
   color: #cbd5e1;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .price {
-  font-family: var(--font-big-shoulders), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 800;
   color: #ffffff;
-  font-size: 30px;
+  font-size: 26px;
   line-height: 1.1;
 }
 
@@ -424,14 +425,14 @@
   align-items: center;
   gap: 8px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #c01853 0%, #a80c43 45%, #d4af37 100%);
+  background: var(--color-wine, #c21a22);
   padding: 13px 24px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 18px rgba(192, 24, 83, 0.4);
+  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.35);
   color: #ffffff;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.02em;
@@ -442,8 +443,8 @@
 
 .tourBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(192, 24, 83, 0.6), 0 0 15px rgba(212, 175, 55, 0.5);
-  filter: brightness(1.08);
+  background: var(--color-wine-hover, #9e1218);
+  box-shadow: 0 8px 26px rgba(194, 26, 34, 0.55);
 }
 
 .tourIcon {
@@ -456,7 +457,7 @@
 }
 
 .tourText {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 13px;
   line-height: 1;
@@ -472,11 +473,11 @@
 .banner {
   width: 100%;
   position: relative;
-  background: #090c12;
+  background: #0a1428;
   border-radius: 32px;
   overflow: hidden;
   height: 520px;
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
 }
 
@@ -493,9 +494,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(6, 9, 14, 0.15) 0%,
-    rgba(6, 9, 14, 0.4) 50%,
-    rgba(6, 9, 14, 0.92) 100%
+    rgba(10, 20, 40, 0.2) 0%,
+    rgba(10, 20, 40, 0.6) 50%,
+    rgba(5, 10, 22, 0.95) 100%
   );
   display: flex;
   align-items: flex-end;
@@ -517,10 +518,10 @@
   align-self: flex-start;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(212, 175, 55, 0.15);
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  color: #f5d77f;
-  font-family: var(--font-inter), sans-serif;
+  background: var(--color-wine, #c21a22);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -528,18 +529,18 @@
 }
 
 .bannerTitle {
-  font-family: var(--font-big-shoulders), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 800;
   color: #ffffff;
-  font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.1;
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.15;
   text-transform: uppercase;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
 .bannerDesc {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 16px;
   color: #cbd5e1;
   line-height: 1.6;

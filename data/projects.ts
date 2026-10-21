@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     beds: "2 & 3 BHK",
     baths: "2 - 3",
     area: "1,050 - 1,600 sqft",
-    img: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg",
     video: "/videos/lifestyle-showcase-clip.mp4",
     summary:
       "Ready for immediate possession. Refined 2 & 3 BHK residences and 24 integrated high-street shops on DPS Road, Amravati. 100% Vastu compliant with private balconies and dedicated parking.",

@@ -169,7 +169,7 @@ export default function AuraFloorPlans() {
               <ul className={styles.highlightsList}>
                 {plan.features.map((f, i) => (
                   <li key={i}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2.5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-wine, #c21a22)" strokeWidth="2.5">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                     <span>{f}</span>

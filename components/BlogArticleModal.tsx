@@ -47,10 +47,10 @@ export function renderInlineFormatting(text: string): React.ReactNode {
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
           style={{
-            color: "#f5d77f",
+            color: "var(--color-wine, #c21a22)",
             textDecoration: "underline",
             textUnderlineOffset: "3px",
-            textDecorationColor: "rgba(212, 175, 55, 0.6)",
+            textDecorationColor: "var(--color-wine, #c21a22)",
             fontWeight: 600,
             cursor: "pointer",
             transition: "all 0.2s ease",
@@ -61,8 +61,8 @@ export function renderInlineFormatting(text: string): React.ReactNode {
             e.currentTarget.style.textDecorationColor = "#ffffff";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#f5d77f";
-            e.currentTarget.style.textDecorationColor = "rgba(212, 175, 55, 0.6)";
+            e.currentTarget.style.color = "var(--color-wine, #c21a22)";
+            e.currentTarget.style.textDecorationColor = "var(--color-wine, #c21a22)";
           }}
         >
           {linkLabel}
@@ -86,8 +86,8 @@ export function renderInlineFormatting(text: string): React.ReactNode {
             background: "rgba(255, 255, 255, 0.08)",
             padding: "2px 6px",
             borderRadius: "4px",
-            color: "#f5d77f",
-            border: "1px solid rgba(212, 175, 55, 0.25)",
+            color: "#ffffff",
+            border: "1px solid rgba(255, 255, 255, 0.15)",
           }}
         >
           {match[5]}
@@ -186,15 +186,15 @@ export default function BlogArticleModal({
           maxWidth: "920px",
           maxHeight: "92vh",
           overflowY: "auto",
-          background: "linear-gradient(135deg, #0d1017 0%, #06080c 100%)",
-          border: "1px solid rgba(212, 175, 55, 0.35)",
+          background: "linear-gradient(135deg, #0a1428 0%, #050a16 100%)",
+          border: "1px solid rgba(194, 26, 34, 0.4)",
           borderRadius: "24px",
           padding: "2rem",
-          boxShadow: "0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.15)",
+          boxShadow: "0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(194, 26, 34, 0.2)",
           color: "#ffffff",
           position: "relative",
           margin: "auto",
-          fontFamily: "var(--font-inter), sans-serif",
+          fontFamily: "var(--font-montserrat), sans-serif",
         }}
       >
         {/* Top Header Actions (Sticky Feel) */}
@@ -213,9 +213,9 @@ export default function BlogArticleModal({
               style={{
                 padding: "0.3rem 0.85rem",
                 borderRadius: "9999px",
-                background: "linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(192, 24, 83, 0.2))",
-                border: "1px solid rgba(212, 175, 55, 0.4)",
-                color: "#f5d77f",
+                background: "var(--color-wine, #c21a22)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                color: "#ffffff",
                 fontSize: "0.78rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -256,7 +256,7 @@ export default function BlogArticleModal({
               style={{
                 background: "rgba(255, 255, 255, 0.08)",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
-                color: "#f5d77f",
+                color: "#ffffff",
                 padding: "6px 14px",
                 borderRadius: "9999px",
                 fontSize: "0.8rem",
@@ -295,13 +295,10 @@ export default function BlogArticleModal({
         <h1
           style={{
             fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
-            fontWeight: 700,
+            fontWeight: 800,
             lineHeight: 1.25,
             color: "#ffffff",
             marginBottom: "0.8rem",
-            background: "linear-gradient(135deg, #ffffff 40%, #f5d77f 80%, #e84393 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
           }}
         >
           {blog.title}
@@ -321,9 +318,9 @@ export default function BlogArticleModal({
             borderRadius: "18px",
             overflow: "hidden",
             marginBottom: "2rem",
-            border: "1px solid rgba(212, 175, 55, 0.35)",
-            boxShadow: "0 14px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.15)",
-            background: "#12141c",
+            border: "1px solid rgba(255, 255, 255, 0.15)",
+            boxShadow: "0 14px 40px rgba(0, 0, 0, 0.7)",
+            background: "#0a1428",
           }}
         >
           <img
@@ -365,7 +362,7 @@ export default function BlogArticleModal({
             <span
               style={{
                 fontFamily: "monospace",
-                color: "#f5d77f",
+                color: "#ffffff",
                 fontSize: "0.8rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
@@ -383,7 +380,7 @@ export default function BlogArticleModal({
                 background: "rgba(6, 9, 14, 0.8)",
                 padding: "4px 10px",
                 borderRadius: "6px",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.18)",
               }}
             >
               Full Research Edition
@@ -396,8 +393,8 @@ export default function BlogArticleModal({
           <div
             style={{
               padding: "1.4rem 1.6rem",
-              background: "linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(192, 24, 83, 0.08))",
-              borderLeft: "4px solid #d4af37",
+              background: "rgba(194, 26, 34, 0.08)",
+              borderLeft: "4px solid var(--color-wine, #c21a22)",
               borderRadius: "0 16px 16px 0",
               marginBottom: "2rem",
             }}
@@ -406,7 +403,7 @@ export default function BlogArticleModal({
               style={{
                 fontSize: "0.95rem",
                 fontWeight: 700,
-                color: "#f5d77f",
+                color: "#ffffff",
                 marginBottom: "0.75rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
@@ -440,7 +437,7 @@ export default function BlogArticleModal({
             padding: "1.2rem 1.6rem",
             borderRadius: "16px",
             background: "rgba(255, 255, 255, 0.03)",
-            border: "1px solid rgba(212, 175, 55, 0.2)",
+            border: "1px solid rgba(255, 255, 255, 0.15)",
             display: "flex",
             alignItems: "center",
             gap: "1rem",
@@ -451,11 +448,11 @@ export default function BlogArticleModal({
               width: "44px",
               height: "44px",
               borderRadius: "50%",
-              background: "rgba(212, 175, 55, 0.2)",
+              background: "rgba(194, 26, 34, 0.2)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#d4af37",
+              color: "var(--color-wine, #c21a22)",
               fontSize: "1.2rem",
               flexShrink: 0,
             }}
@@ -478,8 +475,8 @@ export default function BlogArticleModal({
             marginTop: "2rem",
             padding: "1.8rem",
             borderRadius: "20px",
-            background: "linear-gradient(135deg, rgba(18, 22, 32, 0.95), rgba(10, 12, 18, 0.95))",
-            border: "1px solid rgba(212, 175, 55, 0.35)",
+            background: "#0a1428",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
             boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
           }}
         >
@@ -489,7 +486,7 @@ export default function BlogArticleModal({
                 fontSize: "0.75rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.15em",
-                color: "#d4af37",
+                color: "var(--color-wine, #c21a22)",
                 fontWeight: 700,
                 display: "block",
                 marginBottom: "0.4rem",
@@ -516,7 +513,7 @@ export default function BlogArticleModal({
                 padding: "10px 16px",
                 borderRadius: "12px",
                 background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 color: "#ffffff",
                 fontSize: "0.9rem",
                 outline: "none",
@@ -532,7 +529,7 @@ export default function BlogArticleModal({
                 padding: "10px 16px",
                 borderRadius: "12px",
                 background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 color: "#ffffff",
                 fontSize: "0.9rem",
                 outline: "none",
@@ -547,7 +544,7 @@ export default function BlogArticleModal({
                 padding: "10px 16px",
                 borderRadius: "12px",
                 background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 color: "#ffffff",
                 fontSize: "0.9rem",
                 outline: "none",
@@ -562,13 +559,13 @@ export default function BlogArticleModal({
                 marginTop: "0.5rem",
                 padding: "12px 20px",
                 borderRadius: "9999px",
-                background: "linear-gradient(135deg, #f5d77f 0%, #d4af37 45%, #c01853 100%)",
-                color: "#070608",
+                background: "var(--color-wine, #c21a22)",
+                color: "#ffffff",
                 fontWeight: 800,
                 fontSize: "0.95rem",
                 border: "none",
                 cursor: "pointer",
-                boxShadow: "0 4px 18px rgba(192, 24, 83, 0.4)",
+                boxShadow: "0 4px 18px rgba(194, 26, 34, 0.4)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -627,7 +624,7 @@ export default function BlogArticleModal({
 function renderParagraph(paragraph: string, index: number) {
   if (paragraph.startsWith("# ")) {
     return (
-      <h2 key={index} style={{ fontSize: "1.6rem", color: "#f5d77f", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
+      <h2 key={index} style={{ fontSize: "1.6rem", color: "#ffffff", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
         {renderInlineFormatting(paragraph.replace("# ", ""))}
       </h2>
     );
@@ -641,7 +638,7 @@ function renderParagraph(paragraph: string, index: number) {
   }
   if (paragraph.startsWith("### ")) {
     return (
-      <h4 key={index} style={{ fontSize: "1.15rem", color: "#f5d77f", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
+      <h4 key={index} style={{ fontSize: "1.15rem", color: "#ffffff", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
         {renderInlineFormatting(paragraph.replace("### ", ""))}
       </h4>
     );
@@ -679,7 +676,7 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
         return; // Already rendered prominently in modal header
       }
       elements.push(
-        <h2 key={`h1-${idx}`} style={{ fontSize: "1.6rem", color: "#f5d77f", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
+        <h2 key={`h1-${idx}`} style={{ fontSize: "1.6rem", color: "#ffffff", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
           {renderInlineFormatting(headingText)}
         </h2>
       );
@@ -695,12 +692,12 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
           style={{
             margin: "2rem 0",
             padding: "1.4rem",
-            background: "rgba(255, 255, 255, 0.03)",
-            border: "1px solid rgba(212, 175, 55, 0.25)",
+            background: "rgba(15, 29, 56, 0.5)",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
             borderRadius: "16px",
           }}
         >
-          <div style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "#f5d77f", fontWeight: 700, marginBottom: "0.8rem" }}>
+          <div style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--color-wine, #c21a22)", fontWeight: 700, marginBottom: "0.8rem" }}>
             📑 Table of Contents
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "0.5rem" }}>
@@ -722,19 +719,19 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       const rowLines = lines.slice(2);
 
       elements.push(
-        <div key={`table-${idx}`} style={{ overflowX: "auto", margin: "1.8rem 0", borderRadius: "12px", border: "1px solid rgba(212, 175, 55, 0.3)" }}>
+        <div key={`table-${idx}`} style={{ overflowX: "auto", margin: "1.8rem 0", borderRadius: "12px", border: "1px solid rgba(255, 255, 255, 0.12)" }}>
           <table
             style={{
               width: "100%",
               borderCollapse: "collapse",
               fontSize: "0.88rem",
-              background: "#0c0e14",
+              background: "#0a1428",
             }}
           >
             <thead>
-              <tr style={{ background: "rgba(212, 175, 55, 0.15)", borderBottom: "1px solid rgba(212, 175, 55, 0.3)" }}>
+              <tr style={{ background: "rgba(194, 26, 34, 0.15)", borderBottom: "1px solid rgba(194, 26, 34, 0.3)" }}>
                 {headerCols.map((h, hIdx) => (
-                  <th key={hIdx} style={{ padding: "12px 14px", textAlign: "left", color: "#f5d77f", fontWeight: 700 }}>
+                  <th key={hIdx} style={{ padding: "12px 14px", textAlign: "left", color: "#ffffff", fontWeight: 700 }}>
                     {renderInlineFormatting(h)}
                   </th>
                 ))}
@@ -771,7 +768,7 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       const imgMatch = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
       if (imgMatch) {
         elements.push(
-          <div key={`img-${idx}`} style={{ margin: "1.8rem 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(212, 175, 55, 0.3)" }}>
+          <div key={`img-${idx}`} style={{ margin: "1.8rem 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255, 255, 255, 0.12)" }}>
             <img
               src={imgMatch[2]}
               alt={imgMatch[1] || "Article visual"}
@@ -781,7 +778,7 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
               }}
             />
             {imgMatch[1] && (
-              <div style={{ padding: "8px 14px", background: "rgba(0,0,0,0.6)", fontSize: "0.8rem", color: "#f5d77f" }}>
+              <div style={{ padding: "8px 14px", background: "rgba(0,0,0,0.6)", fontSize: "0.8rem", color: "#ffffff" }}>
                 {imgMatch[1]}
               </div>
             )}
@@ -800,10 +797,10 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
           style={{
             margin: "1.4rem 0",
             padding: "1rem 1.4rem",
-            background: "rgba(212, 175, 55, 0.08)",
-            borderLeft: "4px solid #d4af37",
+            background: "rgba(194, 26, 34, 0.08)",
+            borderLeft: "4px solid var(--color-wine, #c21a22)",
             borderRadius: "0 12px 12px 0",
-            color: "#f5e6c8",
+            color: "#e2e8f0",
             fontSize: "0.95rem",
             fontStyle: "italic",
           }}
@@ -825,7 +822,7 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
     }
     if (trimmed.startsWith("### ")) {
       elements.push(
-        <h4 key={`h3-${idx}`} style={{ fontSize: "1.15rem", color: "#f5d77f", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
+        <h4 key={`h3-${idx}`} style={{ fontSize: "1.15rem", color: "#ffffff", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
           {renderInlineFormatting(trimmed.replace("### ", ""))}
         </h4>
       );

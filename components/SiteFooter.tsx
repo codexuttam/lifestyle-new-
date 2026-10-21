@@ -62,26 +62,26 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
                   marginBottom: "8px",
                   padding: "7px 16px",
                   borderRadius: "9999px",
-                  background: "linear-gradient(135deg, #c01853 0%, #d4af37 100%)",
-                  border: "1px solid rgba(212, 175, 55, 0.45)",
+                  background: "var(--color-wine, #c21a22)",
+                  border: "1px solid rgba(255, 255, 255, 0.25)",
                   color: "#ffffff",
                   fontSize: "12.5px",
                   fontWeight: 700,
                   cursor: "pointer",
                   letterSpacing: "0.02em",
-                  boxShadow: "0 2px 12px rgba(192, 24, 83, 0.4)",
+                  boxShadow: "0 2px 12px rgba(194, 26, 34, 0.4)",
                   transition: "all 0.2s ease",
                 }}
               >
                 📝 Submit Online Enquiry
               </button>
-              <a href={telHref(settings)} className={styles.emailLink} style={{ color: "#d4af37", fontWeight: 600 }}>
+              <a href={telHref(settings)} className={styles.emailLink} style={{ color: "#ffffff", fontWeight: 600 }}>
                 📞 +91 7498256708
               </a>
               <a href={mailtoHref(settings)} className={styles.emailLink} style={{ marginTop: "4px" }}>
                 {settings.email}
               </a>
-              <div style={{ marginTop: "10px", fontSize: "12px", color: "#d4af37" }}>
+              <div style={{ marginTop: "10px", fontSize: "12px", color: "#94a3b8" }}>
                 MahaRERA: P5030002502915
               </div>
             </div>
