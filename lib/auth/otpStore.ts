@@ -11,7 +11,8 @@ import { createHmac, timingSafeEqual } from "crypto";
  */
 
 export const OTP_COOKIE = "lh_otp";
-export const OTP_TTL_MS = 5 * 60 * 1000;
+// 1 minute validity (+ 15s network latency buffer for serverless roundtrips)
+export const OTP_TTL_MS = 75 * 1000;
 
 function getSecret(): string {
   const secret =

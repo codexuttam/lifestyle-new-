@@ -23,10 +23,11 @@ export default function AuthOtpModal({
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [adminPasscode, setAdminPasscode] = useState("");
 
+  const OTP_VALIDITY_SECONDS = 60; // 1 minute in sync with resend cooldown
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [resendCooldown, setResendCooldown] = useState(0);
-  const [otpExpirySeconds, setOtpExpirySeconds] = useState(300);
+  const [otpTimer, setOtpTimer] = useState(OTP_VALIDITY_SECONDS);
   const [verifiedUser, setVerifiedUser] = useState<VerifiedUser | null>(null);
 
   useEffect(() => {
@@ -61,19 +62,11 @@ export default function AuthOtpModal({
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (resendCooldown > 0) {
-      timer = setInterval(() => setResendCooldown((prev) => Math.max(prev - 1, 0)), 1000);
+    if (step === "otp" && otpTimer > 0) {
+      timer = setInterval(() => setOtpTimer((prev) => Math.max(prev - 1, 0)), 1000);
     }
     return () => clearInterval(timer);
-  }, [resendCooldown]);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (step === "otp" && otpExpirySeconds > 0) {
-      timer = setInterval(() => setOtpExpirySeconds((prev) => Math.max(prev - 1, 0)), 1000);
-    }
-    return () => clearInterval(timer);
-  }, [step, otpExpirySeconds]);
+  }, [step, otpTimer]);
 
   if (!isOpen) return null;
 
@@ -115,8 +108,7 @@ export default function AuthOtpModal({
 
       setStep("otp");
       setIsLoading(false);
-      setResendCooldown(60);
-      setOtpExpirySeconds(300);
+      setOtpTimer(OTP_VALIDITY_SECONDS);
     } catch {
       setError("Network error. Please try again.");
       setIsLoading(false);
@@ -125,6 +117,10 @@ export default function AuthOtpModal({
 
   async function handleVerifyOtp(e: React.FormEvent) {
     e.preventDefault();
+    if (otpTimer <= 0) {
+      setError("This verification code has expired. Please tap 'Resend OTP' to receive a new code.");
+      return;
+    }
     if (!enteredOtp || enteredOtp.trim().length < 4) {
       setError("Please enter the 6-digit OTP received on WhatsApp.");
       return;
@@ -888,21 +884,23 @@ export default function AuthOtpModal({
                     fontFamily: "var(--font-montserrat), sans-serif",
                   }}
                 >
-                  <span>Expires in: {formatTimer(otpExpirySeconds)}</span>
+                  <span style={{ color: otpTimer === 0 ? "#ef4444" : "#94a3b8", fontWeight: otpTimer === 0 ? 600 : 400 }}>
+                    {otpTimer > 0 ? `Expires in: ${formatTimer(otpTimer)}` : "Code expired"}
+                  </span>
                   <button
                     type="button"
-                    disabled={resendCooldown > 0 || isLoading}
+                    disabled={otpTimer > 0 || isLoading}
                     onClick={() => handleSendOtp()}
                     style={{
                       background: "transparent",
                       border: "none",
-                      color: resendCooldown > 0 ? "rgba(255, 255, 255, 0.35)" : "#c21a22",
-                      cursor: resendCooldown > 0 ? "not-allowed" : "pointer",
-                      textDecoration: "underline",
+                      color: otpTimer > 0 ? "rgba(255, 255, 255, 0.35)" : "#c21a22",
+                      cursor: otpTimer > 0 ? "not-allowed" : "pointer",
+                      textDecoration: otpTimer > 0 ? "none" : "underline",
                       fontWeight: 600,
                     }}
                   >
-                    {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : "Resend OTP"}
+                    {otpTimer > 0 ? `Resend in ${otpTimer}s` : "Resend OTP"}
                   </button>
                 </div>
 
