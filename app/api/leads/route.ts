@@ -1,9 +1,7 @@
-import { FieldValue } from "firebase-admin/firestore";
 import { after } from "next/server";
 
 import { clientIp, rateLimit } from "@/lib/api/rateLimit";
 import { hasFirebaseAdminEnv } from "@/lib/env.server";
-import { adminDb } from "@/lib/firebase/admin";
 import { leadInputSchema } from "@/lib/schemas/lead";
 import { captureLeadInCRM } from "@/lib/services/crmLeadService";
 import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp } from "@/lib/services/whatsappService";
@@ -77,6 +75,10 @@ export async function POST(request: Request) {
   // 3. Optional Firestore archive if configured
   if (hasFirebaseAdminEnv()) {
     try {
+      const [{ adminDb }, { FieldValue }] = await Promise.all([
+        import("@/lib/firebase/admin"),
+        import("firebase-admin/firestore"),
+      ]);
       await adminDb()
         .collection("leads")
         .add({
