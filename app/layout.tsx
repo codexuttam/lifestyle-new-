@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Montserrat } from "next/font/google";
 import "./design-tokens.css";
 import "./globals.css";
@@ -39,7 +40,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
