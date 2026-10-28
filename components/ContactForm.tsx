@@ -53,6 +53,11 @@ export default function ContactForm() {
         return;
       }
 
+      // Track Meta Pixel Lead event after successful CRM lead creation
+      if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+        (window as any).fbq("track", "Lead");
+      }
+
       setReferenceId(body.referenceId || "LHS-2026-VIP");
       setValues(BLANK);
       setStatus("sent");

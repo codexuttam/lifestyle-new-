@@ -172,7 +172,7 @@ export default function AuthOtpModal({
 
     setIsLoading(true);
     try {
-      await fetch("/api/leads", {
+      const leadRes = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -183,6 +183,9 @@ export default function AuthOtpModal({
           source: "Profile Name Update",
         }),
       });
+      if (leadRes.ok && typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+        (window as any).fbq("track", "Lead");
+      }
     } catch (err) {
       console.warn("Could not sync name to CRM:", err);
     }

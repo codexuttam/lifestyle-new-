@@ -77,6 +77,11 @@ export default function EnquiryModal({
         return;
       }
 
+      // Track Meta Pixel Lead event after successful CRM lead creation
+      if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+        (window as any).fbq("track", "Lead");
+      }
+
       setReferenceId(data.referenceId || "LHS-2026-VIP");
       setIsSubmitting(false);
     } catch {
