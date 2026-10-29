@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Chatbot.module.css";
 import EnquiryModal from "@/components/EnquiryModal";
+import { submitLead } from "@/lib/leads/submitLead";
 
 const WHATSAPP_NUMBER = "917498256708";
 const PHONE_NUMBER = "+917498256708";
@@ -19,6 +20,132 @@ interface Message {
   sender: "bot" | "user";
   text: string;
   options?: Option[];
+  /** Renders the in-chat name/mobile/consent form under this message. */
+  leadForm?: boolean;
+}
+
+/** Answers collected by the qualification flow. */
+interface Qualification {
+  propertyType?: string;
+  project?: string;
+  budget?: string;
+  timeline?: string;
+  contactMode?: "Callback" | "Site visit";
+  preferredTime?: string;
+}
+
+function ChatLeadInlineForm({
+  qual,
+  onSaved,
+}: {
+  qual: Qualification;
+  onSaved: (name: string, refId: string) => void;
+}) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmittingRef.current) return;
+
+    const digits = phone.replace(/\D/g, "");
+    if (name.trim().length < 2) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (digits.length < 10) {
+      setError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+    if (!consent) {
+      setError("Please agree to be contacted.");
+      return;
+    }
+
+    isSubmittingRef.current = true;
+    setIsSubmitting(true);
+    setError(null);
+
+    const preference = [
+      qual.propertyType,
+      qual.budget ? `Budget: ${qual.budget}` : null,
+      qual.timeline ? `Timeline: ${qual.timeline}` : null,
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
+    const message = [
+      qual.contactMode ? `Mode: ${qual.contactMode}` : null,
+      qual.preferredTime ? `Preferred Time: ${qual.preferredTime}` : null,
+      qual.budget ? `Budget: ${qual.budget}` : null,
+      qual.timeline ? `Buying Timeline: ${qual.timeline}` : null,
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
+    try {
+      const res = await submitLead({
+        name: name.trim(),
+        phone: digits,
+        project: qual.project || "Aura by Lifestyle",
+        preference: preference || undefined,
+        message: message || undefined,
+        source: "Website Chatbot",
+        consent: true,
+      });
+
+      if (!res.ok) {
+        setError(res.error);
+        return;
+      }
+
+      onSaved(name.trim(), res.referenceId);
+    } finally {
+      isSubmittingRef.current = false;
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={styles.inChatForm} noValidate>
+      <input
+        type="text"
+        required
+        placeholder="Your Full Name *"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className={styles.inChatInput}
+      />
+      <input
+        type="tel"
+        required
+        placeholder="10-digit Mobile Number *"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value.replace(/[^\d+\s-]/g, ""))}
+        className={styles.inChatInput}
+      />
+      <label className={styles.inChatConsent}>
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+        />
+        <span>I agree to be contacted by Lifestyle Home Spaces on WhatsApp/Call.</span>
+      </label>
+      {error && <p className={styles.inChatError}>{error}</p>}
+      <button type="submit" disabled={isSubmitting} className={styles.inChatSubmit}>
+        {isSubmitting
+          ? "Connecting..."
+          : qual.contactMode === "Site visit"
+          ? "Confirm Site Visit Request"
+          : "Request Callback"}
+      </button>
+    </form>
+  );
 }
 
 export default function Chatbot() {
@@ -28,16 +155,16 @@ export default function Chatbot() {
   const [enquiryProject, setEnquiryProject] = useState("Aura by Lifestyle");
   const [enquiryPreference, setEnquiryPreference] = useState("2 & 3 BHK Luxury Residences");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messageCounterRef = useRef(0);
+  const qualRef = useRef<Qualification>({});
 
   const openEnquiry = (project = "Aura by Lifestyle", preference = "2 & 3 BHK Luxury Residences") => {
+    // Only open the chatbot's own modal. (Previously this also dispatched
+    // "lifestyle_open_enquiry", which made SiteNav open a SECOND enquiry modal
+    // on top — risking duplicate submissions and duplicate Meta Lead events.)
     setEnquiryProject(project);
     setEnquiryPreference(preference);
     setIsEnquiryOpen(true);
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(
-        new CustomEvent("lifestyle_open_enquiry", { detail: { project, preference } })
-      );
-    }
   };
 
   const scrollToBottom = () => {
@@ -53,6 +180,11 @@ export default function Chatbot() {
             sender: "bot",
             text: "Namaste! Welcome to Lifestyle Home Spaces.\n\nI am your digital portfolio concierge. Which landmark development in Amravati would you like to explore today?",
             options: [
+              {
+                label: "🤝 Request Callback / Site Visit",
+                action: () => startQualification(),
+                isEnquiry: true,
+              },
               {
                 label: "📝 Submit Online Enquiry Form",
                 action: () => openEnquiry("Aura by Lifestyle", "General Concierge Enquiry"),
@@ -81,7 +213,119 @@ export default function Chatbot() {
   }, [messages]);
 
   const addMessage = (msg: Omit<Message, "id">) => {
-    setMessages((prev) => [...prev, { ...msg, id: Date.now().toString() }]);
+    messageCounterRef.current += 1;
+    const id = `${Date.now()}-${messageCounterRef.current}`;
+    setMessages((prev) => [...prev, { ...msg, id }]);
+  };
+
+  /** Shows the visitor's choice, then the bot's next question after a short pause. */
+  const reply = (userText: string, bot: Omit<Message, "id" | "sender">) => {
+    addMessage({ sender: "user", text: userText });
+    setTimeout(() => addMessage({ sender: "bot", ...bot }), 350);
+  };
+
+  // ---------- Lead qualification flow ----------
+
+  const startQualification = () => {
+    qualRef.current = {};
+    reply("I'd like a callback / site visit", {
+      text: "Hello! Are you looking for a home or a shop in Amravati?",
+      options: [
+        { label: "2 BHK flat", action: () => selectPropertyType("2 BHK flat") },
+        { label: "3 BHK flat", action: () => selectPropertyType("3 BHK flat") },
+        { label: "Shop / Showroom", action: () => selectPropertyType("Shop / Showroom") },
+        { label: "Office space", action: () => selectPropertyType("Office space") },
+      ],
+    });
+  };
+
+  const selectPropertyType = (propertyType: string) => {
+    qualRef.current.propertyType = propertyType;
+    reply(propertyType, {
+      text: "Which project would you like to explore?",
+      options: [
+        {
+          label: "Aura by Lifestyle (Congress Nagar Rd)",
+          action: () => selectProject("Aura by Lifestyle"),
+        },
+        {
+          label: "Lifestyle Home Spaces (DPS Rd, ready to move)",
+          action: () => selectProject("Lifestyle Home Spaces"),
+        },
+        { label: "Not sure yet", action: () => selectProject("Not sure yet") },
+      ],
+    });
+  };
+
+  const selectProject = (project: string) => {
+    qualRef.current.project = project;
+    reply(project, {
+      text: "Great! What's your preferred budget?",
+      options: ["Under ₹40 lakh", "₹40–50 lakh", "₹50 lakh+", "Not decided yet"].map((b) => ({
+        label: b,
+        action: () => selectBudget(b),
+      })),
+    });
+  };
+
+  const selectBudget = (budget: string) => {
+    qualRef.current.budget = budget;
+    reply(budget, {
+      text: "When are you planning to buy?",
+      options: ["Immediately", "Within 3 months", "3–6 months", "Just exploring"].map((t) => ({
+        label: t,
+        action: () => selectTimeline(t),
+      })),
+    });
+  };
+
+  const selectTimeline = (timeline: string) => {
+    qualRef.current.timeline = timeline;
+    reply(timeline, {
+      text: "How would you like us to help?",
+      options: [
+        { label: "📞 Request a callback", action: () => selectContactMode("Callback") },
+        { label: "🏢 Book a site visit", action: () => selectContactMode("Site visit") },
+      ],
+    });
+  };
+
+  const selectContactMode = (mode: "Callback" | "Site visit") => {
+    qualRef.current.contactMode = mode;
+    reply(mode === "Callback" ? "Request a callback" : "Book a site visit", {
+      text: "What time suits you best?",
+      options: ["Morning (10am–1pm)", "Afternoon (1–5pm)", "Evening (5–8pm)"].map((t) => ({
+        label: t,
+        action: () => selectPreferredTime(t),
+      })),
+    });
+  };
+
+  const selectPreferredTime = (preferredTime: string) => {
+    qualRef.current.preferredTime = preferredTime;
+    const mode = qualRef.current.contactMode === "Site visit" ? "site visit" : "callback";
+    reply(preferredTime, {
+      text: `I can arrange a ${mode}. Please share your name and mobile number to continue.`,
+      leadForm: true,
+    });
+  };
+
+  /** Called by the in-chat form after the server accepted the lead. */
+  const handleChatLeadSaved = (formMessageId: string, name: string, referenceId: string) => {
+    // Hide the form so it can't be submitted twice.
+    setMessages((prev) =>
+      prev.map((m) => (m.id === formMessageId ? { ...m, leadForm: false } : m))
+    );
+    const q = qualRef.current;
+    addMessage({
+      sender: "bot",
+      text: `Thank you, ${name}! ✅\n\nYour ${
+        q.contactMode === "Site visit" ? "site visit request" : "callback request"
+      } has been registered${referenceId ? ` under Reference ID ${referenceId}` : ""}. Our property advisor will contact you ${
+        q.preferredTime ? `in the ${q.preferredTime.split(" ")[0].toLowerCase()}` : "shortly"
+      }.`,
+      options: [{ label: "↩ Main Menu", action: () => handleOptionClick("Main Menu") }],
+    });
   };
 
   const handleOptionClick = (optionLabel: string) => {
@@ -321,6 +565,11 @@ export default function Chatbot() {
             text: "How can I assist you further with Lifestyle Home Spaces portfolio?",
             options: [
               {
+                label: "🤝 Request Callback / Site Visit",
+                action: () => startQualification(),
+                isEnquiry: true,
+              },
+              {
                 label: "📝 Submit Online Enquiry Form",
                 action: () => openEnquiry("Aura by Lifestyle", "General Concierge Enquiry"),
                 isEnquiry: true,
@@ -415,6 +664,16 @@ export default function Chatbot() {
                 >
                   {msg.text}
                 </div>
+
+                {/* In-Chat Lead Capture Form */}
+                {msg.leadForm && (
+                  <ChatLeadInlineForm
+                    qual={qualRef.current}
+                    onSaved={(savedName, refId) =>
+                      handleChatLeadSaved(msg.id, savedName, refId)
+                    }
+                  />
+                )}
 
                 {/* Interactive Option Pills */}
                 {msg.options && (

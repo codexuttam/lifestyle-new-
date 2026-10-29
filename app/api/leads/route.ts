@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: true });
   }
 
-  const { name, phone, email, project, preference, message } = parsed.data;
+  const { name, phone, email, project, preference, message, source, consent } = parsed.data;
 
   // 1. Ingest lead directly into Real Estate CRM & Supabase dual-org
   const crmResult = await captureLeadInCRM({
@@ -50,7 +50,8 @@ export async function POST(request: Request) {
     project: project || "Aura by Lifestyle",
     preference: preference || "2 & 3 BHK Luxury Residences",
     message: message || undefined,
-    source: "Website Enquiry Form",
+    source: source || "Website Enquiry Form",
+    consent,
   });
 
   // 2 & 3. Owner alert + brochure delivery run after the response is sent.
@@ -99,6 +100,8 @@ export async function POST(request: Request) {
   return Response.json(
     {
       ok: true,
+      // false when every CRM write failed; the browser must not fire Meta "Lead" in that case.
+      crmSaved: crmResult.success,
       referenceId: crmResult.referenceId,
       message: crmResult.message || "Thank you! Your enquiry has been received.",
     },

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { getLifestyleConciergeWhatsAppUrl } from "@/lib/services/whatsappService";
+import { submitLead } from "@/lib/leads/submitLead";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -16,6 +17,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [referenceId, setReferenceId] = useState<string>("");
+  const isSubmittingRef = useRef(false);
 
   function set(key: keyof typeof BLANK, value: string) {
     setValues((current) => ({ ...current, [key]: value }));
@@ -23,47 +25,39 @@ export default function ContactForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // Prevent duplicate submissions while a request is in progress
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setStatus("sending");
     setError(null);
 
     const form = new FormData(event.currentTarget);
 
     try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: values.name.trim(),
-          phone: values.phone.trim(),
-          email: values.email.trim() || undefined,
-          project: "Aura by Lifestyle",
-          preference: "2 & 3 BHK Luxury Residences",
-          // Hidden from real users; only a bot fills it in.
-          website: String(form.get("website") ?? ""),
-        }),
+      const result = await submitLead({
+        name: values.name.trim(),
+        phone: values.phone.trim(),
+        email: values.email.trim() || undefined,
+        project: "Aura by Lifestyle",
+        preference: "2 & 3 BHK Luxury Residences",
+        source: "Contact Page Form",
+        // Hidden from real users; only a bot fills it in.
+        website: String(form.get("website") ?? ""),
       });
 
-      const body = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        setError(
-          body?.error ?? "Something went wrong. Please connect with us directly on WhatsApp."
-        );
+      if (!result.ok) {
+        setError(result.error);
         setStatus("error");
         return;
       }
 
-      // Track Meta Pixel Lead event after successful CRM lead creation
-      if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-        (window as any).fbq("track", "Lead");
-      }
-
-      setReferenceId(body.referenceId || "LHS-2026-VIP");
+      // Meta "Lead" is fired inside submitLead, only after the CRM confirms the save.
+      setReferenceId(result.referenceId || "LHS-2026-VIP");
       setValues(BLANK);
       setStatus("sent");
-    } catch {
-      setError("Network connection issue. Please connect with us directly on WhatsApp.");
-      setStatus("error");
+    } finally {
+      isSubmittingRef.current = false;
     }
   }
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import Chatbot from "@/components/Chatbot";
+import VslSection from "@/components/VslSection";
 import LifestyleBuildingInspector from "@/components/LifestyleBuildingInspector";
 import LifestyleInteractiveShowcase from "@/components/LifestyleInteractiveShowcase";
 import LifestyleSpecsShowcase from "@/components/LifestyleSpecsShowcase";
@@ -228,6 +229,25 @@ export default async function LifestyleHomesPage() {
             </div>
           </div>
         </section>
+
+        {/* ============ VIDEO SALES LETTER + LEAD CAPTURE POPUP ============ */}
+        <VslSection
+          id="lifestyle-vsl"
+          project="Lifestyle Home Spaces"
+          preference="Ready Possession 2 & 3 BHK"
+          source="VSL Popup (Lifestyle Home Spaces)"
+          videoSrc="/videos/lifestyle-vsl.mp4"
+          poster="/videos/2nd-clip-thumb.png"
+          headline="Lifestyle Home Spaces: Ready-to-Move Homes on DPS Road"
+          intro="See the finished homes, the neighbourhood and the amenities, then book a walkthrough of a ready flat with our team."
+          points={[
+            "100% delivered: ready for immediate key handover",
+            "18 × 2 BHK and 12 × 3 BHK Vastu-compliant residences",
+            "24 road-facing retail shops on the ground and first floors",
+            "DPS Road, Parvati Nagar, Amravati: 2 min to Delhi Public School, quick Ring Road access",
+            "Covered parking, 24/7 security, cross-ventilated layouts. MahaRERA: P50300054447",
+          ]}
+        />
 
         {/* ============ ABOUT LIFESTYLE HOMES (Identical Aura Architecture) ============ */}
         <section className={aboutStyles.about} id="about-lifestyle-section">

@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { VerifiedUser } from "@/lib/types/auth";
 import { normalizePhone } from "@/lib/services/crmLeadService";
+import { markLeadSubmitted, submitLead, trackMetaLead } from "@/lib/leads/submitLead";
 
 interface AuthOtpModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export default function AuthOtpModal({
   const [error, setError] = useState<string | null>(null);
   const [otpTimer, setOtpTimer] = useState(OTP_VALIDITY_SECONDS);
   const [verifiedUser, setVerifiedUser] = useState<VerifiedUser | null>(null);
+  const isSubmittingRef = useRef(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -117,6 +119,7 @@ export default function AuthOtpModal({
 
   async function handleVerifyOtp(e: React.FormEvent) {
     e.preventDefault();
+    if (isSubmittingRef.current) return;
     if (otpTimer <= 0) {
       setError("This verification code has expired. Please tap 'Resend OTP' to receive a new code.");
       return;
@@ -126,6 +129,7 @@ export default function AuthOtpModal({
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsLoading(true);
     setError(null);
 
@@ -143,53 +147,57 @@ export default function AuthOtpModal({
 
       const data = await res.json().catch(() => ({}));
 
-      if (!res.ok) {
-        setError(data.error || "Invalid OTP code. Please check your WhatsApp.");
-        setIsLoading(false);
+      if (!res.ok || data?.ok === false) {
+        setError(data?.error || "Invalid OTP code. Please check your WhatsApp.");
         return;
       }
 
       const user: VerifiedUser = data.user;
       setVerifiedUser(user);
-      setIsLoading(false);
 
       if (!name.trim()) {
         setStep("name");
       } else {
+        // Fire Meta "Lead" only if the server confirms the CRM saved this sign-in lead.
+        if (data?.crmSaved === true) {
+          trackMetaLead();
+          markLeadSubmitted();
+        }
         finishLogin(user);
       }
     } catch {
       setError("Verification failed. Please check your connection.");
+    } finally {
+      isSubmittingRef.current = false;
       setIsLoading(false);
     }
   }
 
   async function handleSaveName(e: React.FormEvent) {
     e.preventDefault();
+    if (isSubmittingRef.current) return;
     if (!verifiedUser) return;
     const finalName = name.trim();
     if (!finalName) return;
 
+    isSubmittingRef.current = true;
     setIsLoading(true);
     try {
-      const leadRes = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: finalName,
-          phone: verifiedUser.phone,
-          email: email.trim() || undefined,
-          project: "Aura by Lifestyle",
-          source: "Profile Name Update",
-        }),
+      // submitLead fires Meta "Lead" only after the CRM confirms the save.
+      const result = await submitLead({
+        name: finalName,
+        phone: verifiedUser.phone,
+        email: email.trim() || undefined,
+        project: "Aura by Lifestyle",
+        source: "Profile Name Update",
       });
-      if (leadRes.ok && typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-        (window as any).fbq("track", "Lead");
+      if (!result.ok) {
+        console.warn("Could not sync name to CRM:", result.error);
       }
-    } catch (err) {
-      console.warn("Could not sync name to CRM:", err);
+    } finally {
+      isSubmittingRef.current = false;
+      setIsLoading(false);
     }
-    setIsLoading(false);
 
     const updated: VerifiedUser = {
       ...verifiedUser,

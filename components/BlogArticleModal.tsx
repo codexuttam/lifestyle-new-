@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BrandBlogPost } from "@/lib/types/blog";
-import { captureLeadInCRM } from "@/lib/services/crmLeadService";
+import { submitLead } from "@/lib/leads/submitLead";
 
 const WHATSAPP_NUMBER = "917498256708";
 
@@ -123,6 +123,7 @@ export default function BlogArticleModal({
   const [isCopied, setIsCopied] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   if (!blog) return null;
 
@@ -136,21 +137,28 @@ export default function BlogArticleModal({
 
   const handleArticleInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmittingRef.current) return;
     if (!inquiryName.trim() || !inquiryPhone.trim()) return;
 
+    isSubmittingRef.current = true;
     setSubmitting(true);
     try {
-      await captureLeadInCRM({
+      // Goes through /api/leads (server-side CRM save). submitLead fires Meta "Lead"
+      // only after the CRM confirms the save.
+      const result = await submitLead({
         name: inquiryName.trim(),
         phone: inquiryPhone.trim(),
         project: blog.relatedProject === "lifestyle-homes" ? "Lifestyle Home Spaces" : "Aura by Lifestyle",
-        source: `Article Inquiry (${blog.title})`,
-        notes: inquiryNote.trim() || `Inquired via blog publication: ${blog.title}`,
+        source: `Article Inquiry (${blog.title})`.slice(0, 80),
+        message: inquiryNote.trim() || `Inquired via blog publication: ${blog.title}`,
       });
-      setSubmitted(true);
-    } catch (err) {
-      console.error("CRM capture error:", err);
+      if (result.ok) {
+        setSubmitted(true);
+      } else {
+        console.error("CRM capture error:", result.error);
+      }
     } finally {
+      isSubmittingRef.current = false;
       setSubmitting(false);
     }
 

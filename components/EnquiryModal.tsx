@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getLifestyleConciergeWhatsAppUrl } from "@/lib/services/whatsappService";
+import { submitLead } from "@/lib/leads/submitLead";
 
 interface EnquiryModalProps {
   isOpen: boolean;
@@ -22,6 +23,7 @@ export default function EnquiryModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [referenceId, setReferenceId] = useState<string | null>(null);
+  const isSubmittingRef = useRef(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -53,39 +55,32 @@ export default function EnquiryModal({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    // Prevent duplicate submissions while a request is in progress.
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setError(null);
 
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: phone.trim(),
-          email: email.trim() || undefined,
-          project: projectTitle,
-          preference: defaultPreference,
-        }),
+      const result = await submitLead({
+        name: name.trim(),
+        phone: phone.trim(),
+        email: email.trim() || undefined,
+        project: projectTitle,
+        preference: defaultPreference,
+        source: "Website Enquiry Form",
       });
 
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        setError(data.error || "Failed to submit enquiry. Please try again.");
-        setIsSubmitting(false);
+      if (!result.ok) {
+        setError(result.error);
         return;
       }
 
-      // Track Meta Pixel Lead event after successful CRM lead creation
-      if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-        (window as any).fbq("track", "Lead");
-      }
-
-      setReferenceId(data.referenceId || "LHS-2026-VIP");
-      setIsSubmitting(false);
-    } catch {
-      setError("Network connection issue. Please connect with us directly on WhatsApp.");
+      // Meta "Lead" is fired inside submitLead, only after the CRM confirms the save.
+      setReferenceId(result.referenceId || "LHS-2026-VIP");
+    } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   }

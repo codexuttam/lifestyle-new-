@@ -25,6 +25,10 @@ export const leadInputSchema = z.object({
   package: z.string().optional().default("luxury"),
   startDate: z.string().max(40).optional(),
   message: z.string().max(2000).optional(),
+  /** Where the lead came from, e.g. "VSL Popup" or "Website Chatbot". */
+  source: z.string().max(80).optional(),
+  /** Visitor explicitly agreed to be contacted. */
+  consent: z.boolean().optional(),
   /**
    * Honeypot: Real people never see this field.
    */

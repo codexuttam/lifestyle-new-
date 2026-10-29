@@ -212,6 +212,8 @@ export async function captureLeadInCRM(
 
     let webhookLeadId: string | undefined;
     let isDeduped = false;
+    // True only when at least one CRM write (webhook or Supabase) actually succeeded.
+    let savedToCrm = false;
 
     // 1. Primary Ingestion via authenticated CRM Webhook
     try {
@@ -241,6 +243,7 @@ export async function captureLeadInCRM(
       });
 
       if (webhookRes.ok) {
+        savedToCrm = true;
         const webhookData = await webhookRes.json();
         webhookLeadId = webhookData.leadId;
         isDeduped = !!webhookData.deduped;
@@ -308,11 +311,12 @@ export async function captureLeadInCRM(
               patchBody.last_name = "";
             }
 
-            await fetch(`${SUPABASE_URL}/rest/v1/leads?id=eq.${leadId}`, {
+            const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/leads?id=eq.${leadId}`, {
               method: "PATCH",
               headers,
               body: JSON.stringify(patchBody),
             });
+            if (patchRes.ok) savedToCrm = true;
           } else {
             const insertPayload: Record<string, any> = {
               organization_id: orgId,
@@ -336,6 +340,7 @@ export async function captureLeadInCRM(
             });
 
             if (insertRes.ok) {
+              savedToCrm = true;
               const inserted = await insertRes.json();
               leadId = Array.isArray(inserted) && inserted.length > 0 ? inserted[0]?.id : undefined;
             }
@@ -389,8 +394,12 @@ export async function captureLeadInCRM(
       }
     }
 
+    if (!savedToCrm) {
+      console.error(`[crm] Lead ${referenceId} was NOT saved: webhook and Supabase writes all failed.`);
+    }
+
     return {
-      success: true,
+      success: savedToCrm,
       leadId: webhookLeadId,
       referenceId,
       deduped: isDeduped,
@@ -401,7 +410,8 @@ export async function captureLeadInCRM(
   } catch (err: any) {
     console.error("Critical error in captureLeadInCRM:", err);
     return {
-      success: true, // Graceful fallback
+      // The visitor still sees a friendly message, but callers must not treat this as a saved lead.
+      success: false,
       referenceId,
       message: `Enquiry received under Ref ID: ${referenceId}. Our concierge will connect with you.`,
     };
