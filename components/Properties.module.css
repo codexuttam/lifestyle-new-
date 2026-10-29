@@ -5,7 +5,7 @@
   max-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: linear-gradient(180deg, #050a16 0%, #0a1428 50%, #050a16 100%);
+  background: #050507;
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
@@ -37,13 +37,13 @@
   width: 7px;
   height: 7px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: linear-gradient(135deg, #f7efdc 0%, #d4af37 60%, #b89130 100%); color: #050507;
   box-shadow: 0 0 10px rgba(194, 26, 34, 0.7);
 }
 
 .tagText {
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -60,8 +60,10 @@
 .heading {
   font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
-  color: #ffffff;
-  font-size: 40px;
+  color: #f7efdc;
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -85,15 +87,15 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .largeCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(194, 26, 34, 0.6);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(194, 26, 34, 0.25);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
 }
 
 .media {
@@ -116,8 +118,8 @@
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(5, 10, 22, 0.95) 0%,
-    rgba(5, 10, 22, 0.4) 50%,
+    rgba(5, 5, 7, 0.95) 0%,
+    rgba(5, 5, 7, 0.4) 50%,
     transparent 100%
   );
 }
@@ -134,10 +136,10 @@
 
 .pill {
   padding: 7px 16px;
-  background: rgba(15, 29, 56, 0.85);
+  background: rgba(18, 18, 22, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(194, 26, 34, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
   color: #ffffff;
   font-family: var(--font-sans), "Montserrat", sans-serif;
@@ -185,7 +187,7 @@
   aspect-ratio: 4 / 3;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
   transition: transform 0.35s ease, border-color 0.35s ease;
 }
@@ -202,8 +204,8 @@
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(5, 10, 22, 0.95) 0%,
-    rgba(5, 10, 22, 0.35) 50%,
+    rgba(5, 5, 7, 0.95) 0%,
+    rgba(5, 5, 7, 0.35) 50%,
     transparent 100%
   );
 }
@@ -215,8 +217,8 @@
   z-index: 20;
   padding: 6px 14px;
   border-radius: 9999px;
-  background: rgba(15, 29, 56, 0.85);
-  border: 1px solid rgba(194, 26, 34, 0.4);
+  background: rgba(18, 18, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
@@ -268,7 +270,7 @@
   gap: 8px;
   padding: 13px 26px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: linear-gradient(135deg, #f7efdc 0%, #d4af37 60%, #b89130 100%); color: #050507;
   color: #ffffff;
   text-decoration: none;
   font-family: var(--font-sans), "Montserrat", sans-serif;
@@ -282,7 +284,7 @@
 
 .viewAll:hover {
   transform: translateY(-2px);
-  background: var(--color-wine-hover, #9e1218);
+  filter: brightness(1.08);
   box-shadow: 0 8px 26px rgba(194, 26, 34, 0.6);
 }
 
@@ -320,26 +322,26 @@
 
 .navPrev {
   border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(15, 29, 56, 0.85);
+  background: rgba(18, 18, 22, 0.75);
   color: #ffffff;
 }
 
 .navPrev:hover {
-  background: var(--color-wine, #c21a22);
-  border-color: var(--color-wine, #c21a22);
+  background: linear-gradient(135deg, #f7efdc 0%, #d4af37 60%, #b89130 100%); color: #050507;
+  border-color: var(--color-gold, #d4af37);
   color: #ffffff;
 }
 
 .navNext {
   border: none;
-  background: var(--color-wine, #c21a22);
+  background: linear-gradient(135deg, #f7efdc 0%, #d4af37 60%, #b89130 100%); color: #050507;
   color: #ffffff;
   box-shadow: 0 4px 16px rgba(194, 26, 34, 0.35);
 }
 
 .navNext:hover {
   transform: scale(1.05);
-  background: var(--color-wine-hover, #9e1218);
+  filter: brightness(1.08);
   box-shadow: 0 6px 22px rgba(194, 26, 34, 0.55);
 }
 

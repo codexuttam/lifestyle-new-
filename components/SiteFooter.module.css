@@ -4,14 +4,14 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  background: radial-gradient(circle at 50% 0%, #0f1d38 0%, #0a1428 65%, #050a16 100%);
+  background: #050507;
   color: #fff;
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  border-top: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.2));
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .emailLink:hover {
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
 }
 
 .colLabel {
@@ -95,7 +95,7 @@
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-gold, #d4af37);
   box-shadow: 0 0 8px var(--color-wine-glow, rgba(194, 26, 34, 0.5));
 }
 
@@ -129,7 +129,7 @@
 }
 
 .bigLink:hover {
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   transform: translateX(4px);
 }
 
@@ -180,7 +180,7 @@
 }
 
 .inputBox:focus-within {
-  border-bottom-color: var(--color-wine, #c21a22);
+  border-bottom-color: var(--color-gold, #d4af37);
 }
 
 .input {
@@ -203,7 +203,7 @@
 
 .subscribeBtn {
   width: auto;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-gold, #d4af37);
   color: #ffffff;
   font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;

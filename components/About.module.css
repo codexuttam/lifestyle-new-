@@ -2,7 +2,7 @@
 
 .about {
   width: 100%;
-  background: linear-gradient(180deg, #050a16 0%, #0a1428 50%, #050a16 100%);
+  background: #050507;
   padding: 80px clamp(20px, 4vw, 64px);
   box-sizing: border-box;
   display: flex;
@@ -45,7 +45,7 @@
 
 .labelText {
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -64,8 +64,10 @@
 .heading {
   font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
-  color: #ffffff;
-  font-size: clamp(26px, 3.2vw, 40px);
+  color: #f7efdc;
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.25;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -77,13 +79,14 @@
   justify-content: center;
   align-items: center;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
-  padding: 13px 26px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #f7efdc 0%, #d4af37 60%, #b89130 100%);
+  padding: 13px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #050507;
   cursor: pointer;
   text-decoration: none;
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  color: #ffffff;
+  color: #f7efdc;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -93,8 +96,8 @@
 }
 
 .btnMore:hover {
-  background: var(--color-wine-hover, #9e1218);
-  color: #ffffff;
+  filter: brightness(1.08);
+  color: #050507;
   transform: translateY(-2px);
   box-shadow: 0 8px 26px rgba(194, 26, 34, 0.55);
 }
@@ -115,8 +118,8 @@
 }
 
 .card {
-  background: linear-gradient(160deg, rgba(16, 28, 54, 0.8) 0%, rgba(8, 14, 30, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(14, 14, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 28px 24px;
   border-radius: 24px;
   display: flex;
@@ -131,8 +134,8 @@
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: rgba(194, 26, 34, 0.5);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.65), 0 0 20px rgba(194, 26, 34, 0.2);
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
 }
 
 .cardTop {
@@ -179,7 +182,7 @@
 .cardUnit {
   font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
+  color: #f7efdc;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }

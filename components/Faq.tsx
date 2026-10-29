@@ -59,6 +59,7 @@ export default function Faq({
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(open ? null : i)}
                 >
+                  <span className={styles.faqIndex}>{String(i + 1).padStart(2, "0")}</span>
                   <span className={styles.question}>{faq.question}</span>
                   <ChevronDown open={open} />
                 </button>

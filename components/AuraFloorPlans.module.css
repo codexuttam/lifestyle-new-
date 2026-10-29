@@ -3,20 +3,20 @@
   max-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  padding: clamp(36px, 5vh, 60px) 24px;
-  background: linear-gradient(180deg, #091326 0%, #0e1c38 50%, #060c18 100%);
+  padding: clamp(60px, 8vh, 100px) clamp(20px, 4vw, 48px);
+  background: #050507;
   color: #fff;
   position: relative;
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,50 +28,46 @@
   gap: 8px;
   padding: 4px 14px;
   border-radius: 9999px;
-  background: var(--color-wine-light, rgba(194, 26, 34, 0.08));
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.22));
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--color-wine, #c21a22);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--color-gold, #d4af37);
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .badgeDot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-wine, #c21a22);
-  box-shadow: 0 0 8px rgba(194, 26, 34, 0.7);
+  background: var(--color-gold, #d4af37);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
 }
 
 .title {
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  font-size: clamp(24px, 3.2vw, 38px);
-  font-weight: 800;
+  font-size: clamp(26px, 3.6vw, 44px);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.03em;
   line-height: 1.15;
-  color: #ffffff;
-  margin-bottom: 8px;
+  color: #f7efdc;
+  margin-bottom: 10px;
 }
 
 .title span {
   color: #ffffff;
-  background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.75) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  font-size: 14px;
-  color: #94a3b8;
-  max-width: 620px;
-  line-height: 1.5;
-  margin-bottom: 16px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 660px;
+  line-height: 1.6;
+  margin-bottom: 24px;
 }
 
 /* Tabs */
@@ -80,39 +76,41 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  background: rgba(18, 20, 26, 0.85);
+  background: rgba(18, 18, 22, 0.75);
   padding: 6px;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 }
 
 .tabBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 8px 18px;
   border-radius: 9999px;
   background: transparent;
   border: none;
   font-family: var(--font-montserrat), var(--font-inter), sans-serif;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 500;
-  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  transition: all 0.22s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tabBtn:hover {
   color: #fff;
-  background: rgba(194, 26, 34, 0.15);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .activeTab {
-  background: var(--color-wine, #c21a22) !important;
-  color: #ffffff !important;
-  font-weight: 700;
-  box-shadow: 0 4px 16px rgba(194, 26, 34, 0.45);
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #f7efdc !important;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .tabBadge {
@@ -128,13 +126,15 @@
 .displayCard {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  background: rgba(17, 21, 30, 0.95);
+  gap: 32px;
+  background: rgba(14, 14, 18, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 22px 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  margin-bottom: 32px;
+  border-radius: 24px;
+  padding: 28px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  margin-bottom: 36px;
   align-items: center;
 }
 
@@ -175,9 +175,9 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(10, 11, 15, 0.9);
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.4));
-  color: var(--color-wine, #c21a22);
+  background: rgba(5, 5, 7, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: var(--color-gold-light, #f7efdc);
   padding: 4px 12px;
   border-radius: 9999px;
   font-family: var(--font-sans, "Montserrat", sans-serif);
@@ -202,7 +202,7 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   font-weight: 700;
   display: block;
   margin-bottom: 4px;
@@ -268,7 +268,7 @@
   font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 13px;
   font-weight: 700;
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-bottom: 12px;
@@ -334,7 +334,7 @@
   justify-content: center;
   padding: 12px 22px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-gold, #d4af37);
   border: 1px solid var(--color-wine-hover, #9e1218);
   color: #ffffff;
   font-family: var(--font-sans, "Montserrat", sans-serif);
@@ -347,7 +347,7 @@
 
 .visitBtn:hover {
   background: var(--color-wine-hover, #9e1218);
-  border-color: var(--color-wine, #c21a22);
+  border-color: var(--color-gold, #d4af37);
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 0 18px var(--color-wine-glow, rgba(194, 26, 34, 0.5));
@@ -382,7 +382,7 @@
   font-family: var(--font-sans, "Montserrat", sans-serif);
   font-size: 11px;
   letter-spacing: 0.12em;
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   text-transform: uppercase;
   margin-bottom: 12px;
   width: fit-content;

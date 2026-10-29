@@ -6,7 +6,7 @@
   box-sizing: border-box;
   overflow: visible;
   overflow-x: clip;
-  background: linear-gradient(180deg, #0a1428 0%, #050a16 100%);
+  background: #050507;
   padding: 96px 120px;
   display: flex;
   flex-direction: column;
@@ -51,13 +51,13 @@
   width: 7px;
   height: 7px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: rgba(255, 255, 255, 0.12); color: #f7efdc; border-color: rgba(212, 175, 55, 0.4);
   box-shadow: 0 0 10px rgba(194, 26, 34, 0.7);
 }
 
 .labelText {
   font-family: var(--font-sans), "Montserrat", sans-serif;
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -67,8 +67,10 @@
 .heading {
   font-family: var(--font-sans), "Montserrat", sans-serif;
   font-weight: 700;
-  color: #ffffff;
-  font-size: 56px;
+  color: #f7efdc;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -89,8 +91,9 @@
   gap: 8px;
   margin-top: 8px;
   padding: 11px 22px;
-  border-radius: 12px;
-  background: var(--color-wine, #c21a22);
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #f7efdc 0%, #d4af37 60%, #b89130 100%);
+  color: #050507;
   color: #ffffff;
   text-decoration: none;
   font-family: var(--font-sans), "Montserrat", sans-serif;
@@ -104,7 +107,7 @@
 
 .viewAll:hover {
   transform: translateY(-2px);
-  background: var(--color-wine-hover, #9e1218);
+  filter: brightness(1.08);
   box-shadow: 0 8px 26px rgba(194, 26, 34, 0.55);
 }
 
@@ -132,7 +135,7 @@
   gap: 10px;
   padding: 8px 18px;
   border-radius: 9999px;
-  background: rgba(15, 29, 56, 0.7);
+  background: rgba(18, 18, 22, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94a3b8;
   font-family: var(--font-sans), "Montserrat", sans-serif;
@@ -146,12 +149,12 @@
 .tabBtn:hover {
   color: #ffffff;
   border-color: rgba(194, 26, 34, 0.6);
-  background: rgba(20, 36, 68, 0.85);
+  background: rgba(25, 25, 32, 0.85);
 }
 
 .activeTabBtn {
-  background: var(--color-wine, #c21a22);
-  border-color: var(--color-wine, #c21a22);
+  background: rgba(255, 255, 255, 0.12); color: #f7efdc; border-color: rgba(212, 175, 55, 0.4);
+  border-color: var(--color-gold, #d4af37);
   color: #ffffff;
   box-shadow: 0 0 16px rgba(194, 26, 34, 0.4);
 }
@@ -373,7 +376,7 @@
 }
 
 .specIcon {
-  color: var(--color-wine, #c21a22);
+  color: var(--color-gold, #d4af37);
   flex-shrink: 0;
 }
 
@@ -425,7 +428,7 @@
   align-items: center;
   gap: 8px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: rgba(255, 255, 255, 0.12); color: #f7efdc; border-color: rgba(212, 175, 55, 0.4);
   padding: 13px 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
@@ -443,7 +446,7 @@
 
 .tourBtn:hover {
   transform: translateY(-2px);
-  background: var(--color-wine-hover, #9e1218);
+  filter: brightness(1.08);
   box-shadow: 0 8px 26px rgba(194, 26, 34, 0.55);
 }
 
@@ -496,7 +499,7 @@
     180deg,
     rgba(10, 20, 40, 0.2) 0%,
     rgba(10, 20, 40, 0.6) 50%,
-    rgba(5, 10, 22, 0.95) 100%
+    rgba(5, 5, 7, 0.95) 100%
   );
   display: flex;
   align-items: flex-end;
@@ -518,7 +521,7 @@
   align-self: flex-start;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: rgba(255, 255, 255, 0.12); color: #f7efdc; border-color: rgba(212, 175, 55, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   font-family: var(--font-sans), "Montserrat", sans-serif;

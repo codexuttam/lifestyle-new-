@@ -6,59 +6,56 @@
    stays legible over imagery.
    ========================================== */
 :root {
-    color-scheme: dark light;
+    color-scheme: dark;
 
-    /* Surfaces */
-    --bg-white-navy: linear-gradient(180deg, #070e1f 0%, #0d1b38 18%, #162b54 40%, #1e3a70 65%, #0a1428 88%, #050a16 100%);
-    --bg-white-navy-radial: radial-gradient(ellipse 100% 70% at 50% 0%, #162b54 0%, #0d1b38 35%, #070e1f 100%);
-    --bg: #070e1f;            /* page background */
-    --surface: #0e1a34;       /* cards, forms */
-    --surface-alt: #132448;   /* alternating sections */
-    --surface-sunk: #091326;  /* wells, placeholders */
+    /* Surfaces — Virtuaze Architectural Obsidian */
+    --bg-white-navy: linear-gradient(180deg, #050507 0%, #0a0a0d 40%, #050507 100%);
+    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #121217 0%, #08080a 50%, #050507 100%);
+    --bg: #050507;            /* pure obsidian background */
+    --surface: #0a0a0d;       /* architectural cards, surfaces */
+    --surface-alt: #101014;   /* elevated sections */
+    --surface-sunk: #040405;  /* wells, placeholders */
 
     /* Ink */
     --text: #ffffff;          /* primary text */
-    --text-secondary: #cbd5e1; /* body / secondary */
-    --text-muted: #94a3b8;    /* captions, notes */
+    --text-ivory: #f7efdc;    /* luxury warm ivory */
+    --text-cream: #f5efe5;
+    --text-secondary: rgba(255, 255, 255, 0.72); /* body / secondary */
+    --text-muted: rgba(255, 255, 255, 0.44);    /* captions, subtle specs */
     --text-on-dark: #ffffff;
-    --text-on-dark-secondary: rgba(255, 255, 255, 0.88);
+    --text-on-dark-secondary: rgba(255, 255, 255, 0.82);
 
-    /* Accent — Lotlite SIEC Reddish Wine Theme */
-    --accent-ink: #c21a22;    /* Lotlite wine */
-    --accent: #c21a22;        /* Lotlite wine fills, borders */
-    --accent-strong: #9e1218; /* deep wine hover */
-    --accent-soft: rgba(194, 26, 34, 0.35);
-    --accent-wash: rgba(194, 26, 34, 0.12);
+    /* Accent — Virtuaze Champagne Gold & Refined Bronze */
+    --accent-ink: #d4af37;
+    --accent: #d4af37;
+    --accent-strong: #b89130;
+    --accent-soft: rgba(212, 175, 55, 0.28);
+    --accent-wash: rgba(212, 175, 55, 0.08);
 
-    /* Lotlite Wine Palette */
+    /* Champagne Gold Palette */
+    --gold: #d4af37;
+    --gold-light: #f7efdc;
+    --gold-dark: #b89130;
+    --gold-glow: rgba(212, 175, 55, 0.35);
+    --gold-gradient: linear-gradient(135deg, #f7efdc 0%, #d4af37 50%, #aa8222 100%);
+
+    /* Wine accent kept subtle for specific brand tags */
     --wine: #c21a22;
     --wine-hover: #9e1218;
     --wine-light: rgba(194, 26, 34, 0.08);
-    --wine-glow: rgba(194, 26, 34, 0.45);
+    --wine-glow: rgba(194, 26, 34, 0.35);
     --wine-gradient: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
 
-    /* Legacy mapping redirected away from gold to wine / navy gradient */
-    --gold: #c21a22;
-    --gold-light: #ff4d58;
-    --gold-dark: #9e1218;
-    --gold-glow: rgba(194, 26, 34, 0.4);
-    --magenta: #c21a22;
-    --magenta-dark: #9e1218;
-    --magenta-light: #ff4d58;
-    --magenta-glow: rgba(194, 26, 34, 0.45);
-    --royal-gradient: linear-gradient(180deg, #ffffff 0%, #e2eaf5 12%, #9bb7db 28%, #1a3158 55%, #0a142a 82%, #050a16 100%);
-    --gold-gradient: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
-
     /* Lines & elevation */
-    --border: rgba(160, 190, 232, 0.14);
-    --border-strong: rgba(160, 190, 232, 0.28);
-    --shadow-sm: 0 1px 2px rgba(5, 10, 22, 0.3), 0 2px 8px rgba(5, 10, 22, 0.2);
-    --shadow-md: 0 4px 16px rgba(5, 10, 22, 0.4), 0 12px 32px rgba(5, 10, 22, 0.3);
-    --shadow-lg: 0 8px 28px rgba(5, 10, 22, 0.5), 0 24px 56px rgba(5, 10, 22, 0.4);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.85);
 
     /* Scrims over photography */
-    --scrim-strong: rgba(7, 14, 31, 0.94);
-    --scrim: rgba(7, 14, 31, 0.78);
+    --scrim-strong: rgba(5, 5, 7, 0.92);
+    --scrim: rgba(5, 5, 7, 0.75);
 
     /* Typography */
     --font-sans: var(--font-montserrat, "Montserrat", sans-serif);
@@ -68,7 +65,7 @@
     /* Utility */
     --whatsapp: #128c4a;
     --radius: 8px;
-    --radius-lg: 12px;
+    --radius-lg: 14px;
 }
 
 /* Reset and Base Styles */
@@ -92,8 +89,7 @@ body {
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    background: var(--bg-white-navy, linear-gradient(180deg, #070e1f 0%, #0d1b38 18%, #162b54 40%, #1e3a70 65%, #0a1428 88%, #050a16 100%));
-    background-attachment: fixed;
+    background: #050507;
     font-family: var(--font-montserrat), "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     color: var(--text);
     overflow-x: hidden;
@@ -1328,15 +1324,15 @@ textarea:focus-visible,
     position: fixed;
     top: 0;
     left: 0;
-    width: 12px;
-    height: 12px;
-    background: #c21a22;
-    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    width: 10px;
+    height: 10px;
+    background: #d4af37;
+    border: 1px solid rgba(255, 255, 255, 0.85);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 12px rgba(194, 26, 34, 0.6);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
     transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
@@ -1345,11 +1341,11 @@ body:hover .custom-cursor {
 }
 
 a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
-    width: 32px;
-    height: 32px;
-    background: rgba(194, 26, 34, 0.15);
-    border: 1.5px solid #c21a22;
-    box-shadow: 0 0 16px rgba(194, 26, 34, 0.6);
+    width: 28px;
+    height: 28px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid #d4af37;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
 }
 
 /* Responsive adjustments */

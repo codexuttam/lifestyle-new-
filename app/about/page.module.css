@@ -2,7 +2,7 @@
 
 .page {
   width: 100%;
-  background: var(--bg-white-navy, linear-gradient(180deg, #ffffff 0%, #eef4fc 8%, #a0bee8 24%, #1a335c 52%, #0a1428 78%, #050a16 100%));
+  background: #050507;
   color: #f5f6f8;
   padding: 140px 120px 96px;
   min-height: 100vh;
