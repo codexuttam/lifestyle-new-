@@ -8,25 +8,45 @@ import AuthOtpModal from "@/components/AuthOtpModal";
 import EnquiryModal from "@/components/EnquiryModal";
 import { VerifiedUser } from "@/lib/types/auth";
 
-const LIFESTYLE_MENU_ITEMS = [
-  { label: "Overview", href: "/projects/lifestyle-homes#hero-section", group: "left" },
-  { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans", group: "left" },
-  { label: "Amenities", href: "/projects/lifestyle-homes#amenities-lifestyle-section", group: "left" },
-  { label: "All Projects", href: "/projects", group: "left" },
-  { label: "Architecture", href: "/projects/lifestyle-homes#explore-site-section", group: "right" },
-  { label: "Blogs", href: "/blogs", group: "right" },
-  { label: "About", href: "/projects/lifestyle-homes#about-lifestyle-section", group: "right" },
+const LIFESTYLE_DESKTOP_LINKS = [
+  { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const DEFAULT_MENU_ITEMS = [
-  { label: "Overview", href: "/#hero-section", group: "left" },
-  { label: "Explore", href: "/#explore-site-section", group: "left" },
-  { label: "Floor Plans", href: "/#floor-plans", group: "left" },
-  { label: "Projects", href: "/projects", group: "left" },
-  { label: "Journey", href: "/#journey-section", group: "right" },
-  { label: "Stories", href: "/#testimonial-section", group: "right" },
-  { label: "Blogs", href: "/blogs", group: "right" },
-  { label: "About", href: "/about", group: "right" },
+const DEFAULT_DESKTOP_LINKS = [
+  { label: "Floor Plans", href: "/#floor-plans" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+const LIFESTYLE_MOBILE_LINKS = [
+  { label: "Overview", href: "/projects/lifestyle-homes#hero-section" },
+  { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans" },
+  { label: "Showrooms", href: "/projects/lifestyle-homes#commercial-shops" },
+  { label: "Specifications", href: "/projects/lifestyle-homes#specifications" },
+  { label: "All Projects", href: "/projects" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+const DEFAULT_MOBILE_LINKS = [
+  { label: "Overview", href: "/#hero-section" },
+  { label: "Explore", href: "/#explore-site-section" },
+  { label: "Floor Plans", href: "/#floor-plans" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 let hasDismissedLoginThisLoad = false;
@@ -48,9 +68,8 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     pathname === "/projects/lifestyle" ||
     activeHref === "/projects/lifestyle-homes";
 
-  const menuItems = isLifestylePage ? LIFESTYLE_MENU_ITEMS : DEFAULT_MENU_ITEMS;
-  const leftItems = menuItems.filter((item) => item.group === "left");
-  const rightItems = menuItems.filter((item) => item.group === "right");
+  const desktopLinks = isLifestylePage ? LIFESTYLE_DESKTOP_LINKS : DEFAULT_DESKTOP_LINKS;
+  const mobileLinks = isLifestylePage ? LIFESTYLE_MOBILE_LINKS : DEFAULT_MOBILE_LINKS;
 
   // Sync scroll state and saved theme
   useEffect(() => {
@@ -180,30 +199,6 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     }
   };
 
-  const renderPillLink = (item: (typeof menuItems)[number]) => {
-    const isActive =
-      (isLifestylePage &&
-        item.label === "Overview" &&
-        (pathname === "/projects/lifestyle-homes" || activeHref === "/projects/lifestyle-homes")) ||
-      (!isLifestylePage && item.label === "Overview" && (pathname === "/" || activeHref === "/")) ||
-      (item.href === "/blogs" && pathname === "/blogs") ||
-      (item.href === "/projects" && pathname === "/projects") ||
-      (item.href === "/about" && pathname === "/about");
-
-    return (
-      <a
-        key={item.label}
-        href={item.href}
-        className={`${styles.navPill} roll-button${isActive ? ` ${styles.navPillActive}` : ""}`}
-        onClick={(e) => handleNavClick(e, item.href)}
-      >
-        <span className="roll-text" data-text={item.label}>
-          {item.label}
-        </span>
-      </a>
-    );
-  };
-
   return (
     <>
       <header
@@ -211,9 +206,29 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           theme === "light" && scrolled ? ` ${styles.navLight}` : ""
         }`}
       >
-        {/* Left Navigation Pills */}
+        {/* Primary Navigation Links */}
         <nav className={styles.leftLinks} aria-label="Primary sections">
-          {leftItems.map(renderPillLink)}
+          {desktopLinks.map((item) => {
+            const isExact = pathname === item.href || activeHref === item.href;
+            const isRouteMatch =
+              item.href.startsWith("/") &&
+              !item.href.includes("#") &&
+              pathname.startsWith(item.href);
+            const isActive = isExact || isRouteMatch;
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`${styles.navLink} roll-button${isActive ? ` ${styles.navLinkActive}` : ""}`}
+                onClick={(e) => handleNavClick(e, item.href)}
+              >
+                <span className="roll-text" data-text={item.label}>
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Centered Compact Brand Lockup */}
@@ -233,22 +248,17 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               <img
                 src="/aura/aura-logo-official.png"
                 alt="Aura by Lifestyle emblem"
-                width={38}
-                height={38}
+                width={34}
+                height={34}
                 className={styles.logoImg}
               />
-              <span className={styles.logoLockup}>
-                <span className={styles.logoName}>AURA</span>
-                <span className={styles.logoSub}>BY LIFESTYLE</span>
-              </span>
+              <span className={styles.logoName}>AURA</span>
             </>
           )}
         </Link>
 
-        {/* Right Navigation Pills + Enquiry + Theme & Member Controls */}
+        {/* Right Action Cluster: Identical-Style Sign In & Enquire Pills */}
         <div className={styles.navActions}>
-          <div className={styles.rightLinks}>{rightItems.slice(0, 2).map(renderPillLink)}</div>
-
           {currentUser ? (
             <div className={styles.userMenuWrapper} ref={userMenuRef}>
               <button
@@ -335,7 +345,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           ) : (
             <button
               type="button"
-              className={`${styles.btnSignIn} roll-button`}
+              className={`${styles.btnAction} roll-button`}
               onClick={() => setIsAuthOpen(true)}
             >
               <span className="roll-text" data-text="Sign In">
@@ -346,33 +356,13 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
 
           <button
             type="button"
-            className={`${styles.btnContact} roll-button`}
+            className={`${styles.btnAction} roll-button`}
             onClick={() => setIsEnquiryOpen(true)}
             aria-label="Open project enquiry form"
           >
-            <span className="roll-text" data-text="Enquire Now">
-              Enquire Now
+            <span className="roll-text" data-text="Enquire">
+              Enquire
             </span>
-          </button>
-
-          <button
-            type="button"
-            className={styles.themeToggle}
-            onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to warm ivory theme" : "Switch to charcoal dark theme"}
-            aria-pressed={theme === "light"}
-            title={theme === "dark" ? "Warm Ivory Theme" : "Charcoal Dark Theme"}
-          >
-            {theme === "dark" ? (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-              </svg>
-            ) : (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-              </svg>
-            )}
           </button>
 
           <button
@@ -445,8 +435,8 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
             )}
 
             <div className={styles.mobileLinkList}>
-              {menuItems.map((item, idx) => (
-                <a
+              {mobileLinks.map((item, idx) => (
+                <Link
                   key={item.label}
                   href={item.href}
                   className={styles.mobileLink}
@@ -455,7 +445,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                   <span className={styles.mobileLinkIndex}>0{idx + 1}</span>
                   <span>{item.label}</span>
                   <span className={styles.mobileLinkArrow} aria-hidden="true">→</span>
-                </a>
+                </Link>
               ))}
             </div>
 
@@ -463,25 +453,25 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               {!currentUser && (
                 <button
                   type="button"
-                  className={styles.mobileSignInBtn}
+                  className={styles.mobileActionBtn}
                   onClick={() => {
                     setMenuOpen(false);
                     setIsAuthOpen(true);
                   }}
                 >
-                  Member Sign In
+                  Sign In
                 </button>
               )}
 
               <button
                 type="button"
-                className={styles.mobileContactBtn}
+                className={styles.mobileActionBtn}
                 onClick={() => {
                   setMenuOpen(false);
                   setIsEnquiryOpen(true);
                 }}
               >
-                Enquire Now →
+                Enquire →
               </button>
             </div>
           </div>

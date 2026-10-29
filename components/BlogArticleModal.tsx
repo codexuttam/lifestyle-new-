@@ -12,19 +12,11 @@ interface BlogArticleModalProps {
   onOpenEnquiry?: (projectTitle?: string) => void;
 }
 
-/**
- * Parses inline markdown:
- * - Links: [label](url) -> Clickable anchor
- * - Bold: **text** -> <strong>
- * - Code: `code` -> <code>
- * - Italic: *text* -> <em>
- */
 export function renderInlineFormatting(text: string): React.ReactNode {
   if (!text) return text;
   const tokens: React.ReactNode[] = [];
   let keyIndex = 0;
 
-  // Regex to match markdown links [label](url), bold **text**, inline code `code`, italic *text*
   const regex = /(\[(.*?)\]\((.*?)\)|\*\*(.*?)\*\*|`([^`]+)`|\*(.*?)\*)/g;
   let match: RegExpExecArray | null;
   let lastIndex = 0;
@@ -35,7 +27,6 @@ export function renderInlineFormatting(text: string): React.ReactNode {
     }
 
     if (match[2] !== undefined && match[3] !== undefined) {
-      // Markdown Link: [label](url)
       const linkLabel = match[2];
       const linkUrl = match[3];
       const isExternal = linkUrl.startsWith("http://") || linkUrl.startsWith("https://");
@@ -47,56 +38,44 @@ export function renderInlineFormatting(text: string): React.ReactNode {
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
           style={{
-            color: "var(--color-wine, #c21a22)",
+            color: "#d5bd87",
             textDecoration: "underline",
             textUnderlineOffset: "3px",
-            textDecorationColor: "var(--color-wine, #c21a22)",
+            textDecorationColor: "rgba(191, 149, 63, 0.6)",
             fontWeight: 600,
             cursor: "pointer",
-            transition: "all 0.2s ease",
             wordBreak: "break-word",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#ffffff";
-            e.currentTarget.style.textDecorationColor = "#ffffff";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "var(--color-wine, #c21a22)";
-            e.currentTarget.style.textDecorationColor = "var(--color-wine, #c21a22)";
           }}
         >
           {linkLabel}
         </a>
       );
     } else if (match[4] !== undefined) {
-      // Bold: **text**
       tokens.push(
-        <strong key={`bld-${keyIndex++}`} style={{ fontWeight: 700, color: "#ffffff" }}>
+        <strong key={`bld-${keyIndex++}`} style={{ fontWeight: 700, color: "#f7efdc" }}>
           {match[4]}
         </strong>
       );
     } else if (match[5] !== undefined) {
-      // Inline Code: `code`
       tokens.push(
         <code
           key={`cd-${keyIndex++}`}
           style={{
             fontFamily: "monospace",
             fontSize: "0.86em",
-            background: "rgba(255, 255, 255, 0.08)",
+            background: "rgba(247, 239, 220, 0.08)",
             padding: "2px 6px",
             borderRadius: "4px",
-            color: "#ffffff",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
+            color: "#f7efdc",
+            border: "1px solid rgba(247, 239, 220, 0.15)",
           }}
         >
           {match[5]}
         </code>
       );
     } else if (match[6] !== undefined) {
-      // Italic: *text*
       tokens.push(
-        <em key={`it-${keyIndex++}`} style={{ fontStyle: "italic", color: "#cfd3dc" }}>
+        <em key={`it-${keyIndex++}`} style={{ fontStyle: "italic", color: "rgba(247, 239, 220, 0.8)" }}>
           {match[6]}
         </em>
       );
@@ -115,7 +94,6 @@ export function renderInlineFormatting(text: string): React.ReactNode {
 export default function BlogArticleModal({
   blog,
   onClose,
-  onOpenEnquiry,
 }: BlogArticleModalProps) {
   const [inquiryName, setInquiryName] = useState("");
   const [inquiryPhone, setInquiryPhone] = useState("");
@@ -143,8 +121,6 @@ export default function BlogArticleModal({
     isSubmittingRef.current = true;
     setSubmitting(true);
     try {
-      // Goes through /api/leads (server-side CRM save). submitLead fires Meta "Lead"
-      // only after the CRM confirms the save.
       const result = await submitLead({
         name: inquiryName.trim(),
         phone: inquiryPhone.trim(),
@@ -177,7 +153,7 @@ export default function BlogArticleModal({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(6, 9, 14, 0.92)",
+        backgroundColor: "rgba(5, 5, 5, 0.92)",
         backdropFilter: "blur(18px)",
         padding: "1rem",
         overflowY: "auto",
@@ -194,18 +170,18 @@ export default function BlogArticleModal({
           maxWidth: "920px",
           maxHeight: "92vh",
           overflowY: "auto",
-          background: "linear-gradient(135deg, #0a1428 0%, #050a16 100%)",
-          border: "1px solid rgba(194, 26, 34, 0.4)",
-          borderRadius: "24px",
-          padding: "2rem",
-          boxShadow: "0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(194, 26, 34, 0.2)",
-          color: "#ffffff",
+          background: "#101210",
+          border: "1px solid rgba(191, 149, 63, 0.36)",
+          borderRadius: "26px",
+          padding: "2.2rem",
+          boxShadow: "0 32px 84px rgba(0, 0, 0, 0.85)",
+          color: "#f7efdc",
           position: "relative",
           margin: "auto",
-          fontFamily: "var(--font-montserrat), sans-serif",
+          fontFamily: "var(--font-sans)",
         }}
       >
-        {/* Top Header Actions (Sticky Feel) */}
+        {/* Top Header Actions */}
         <div
           style={{
             display: "flex",
@@ -213,68 +189,69 @@ export default function BlogArticleModal({
             alignItems: "center",
             marginBottom: "1.5rem",
             paddingBottom: "1rem",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+            borderBottom: "1px solid rgba(247, 239, 220, 0.1)",
           }}
         >
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.6rem" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px" }}>
             <span
               style={{
-                padding: "0.3rem 0.85rem",
+                padding: "5px 12px",
                 borderRadius: "9999px",
-                background: "var(--color-wine, #c21a22)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                color: "#ffffff",
-                fontSize: "0.78rem",
-                fontWeight: 600,
+                background: "#bf953f",
+                color: "#080808",
+                fontSize: "10.5px",
+                fontWeight: 700,
                 textTransform: "uppercase",
-                letterSpacing: "0.5px",
+                letterSpacing: "0.12em",
               }}
             >
               {blog.category}
             </span>
             <span
               style={{
-                padding: "0.3rem 0.75rem",
+                padding: "5px 11px",
                 borderRadius: "9999px",
-                background: "rgba(37, 211, 102, 0.12)",
-                border: "1px solid rgba(37, 211, 102, 0.35)",
-                color: "#68d391",
-                fontSize: "0.75rem",
+                background: "rgba(191, 149, 63, 0.12)",
+                border: "1px solid rgba(191, 149, 63, 0.34)",
+                color: "#d5bd87",
+                fontSize: "10.5px",
                 fontWeight: 600,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
               }}
             >
               ✓ MahaRERA Verified
             </span>
             {blog.readTime && (
-              <span style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.65)" }}>
-                ⏱ {blog.readTime}
+              <span style={{ fontSize: "12px", color: "rgba(247, 239, 220, 0.6)" }}>
+                · {blog.readTime}
               </span>
             )}
             {blog.date && (
-              <span style={{ fontSize: "0.82rem", color: "rgba(255, 255, 255, 0.65)" }}>
-                📅 {blog.date}
+              <span style={{ fontSize: "12px", color: "rgba(247, 239, 220, 0.6)" }}>
+                · {blog.date}
               </span>
             )}
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <button
               onClick={handleShare}
               type="button"
               style={{
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                color: "#ffffff",
-                padding: "6px 14px",
+                background: "#080808",
+                border: "1px solid rgba(247, 239, 220, 0.2)",
+                color: "#f7efdc",
+                padding: "7px 14px",
                 borderRadius: "9999px",
-                fontSize: "0.8rem",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
                 cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
               }}
             >
-              {isCopied ? "✓ Link Copied!" : "🔗 Share"}
+              {isCopied ? "✓ Link Copied" : "Share"}
             </button>
             <button
               onClick={onClose}
@@ -284,10 +261,10 @@ export default function BlogArticleModal({
                 width: "36px",
                 height: "36px",
                 borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                color: "#ffffff",
-                fontSize: "1.1rem",
+                background: "#080808",
+                border: "1px solid rgba(247, 239, 220, 0.2)",
+                color: "#f7efdc",
+                fontSize: "1rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -302,33 +279,33 @@ export default function BlogArticleModal({
         {/* Title */}
         <h1
           style={{
-            fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
-            fontWeight: 800,
-            lineHeight: 1.25,
-            color: "#ffffff",
-            marginBottom: "0.8rem",
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.9rem, 3.6vw, 2.8rem)",
+            fontWeight: 600,
+            lineHeight: 0.98,
+            textTransform: "uppercase",
+            color: "#f7efdc",
+            marginBottom: "0.85rem",
           }}
         >
           {blog.title}
         </h1>
 
-        {/* Excerpt */}
-        <p style={{ color: "#cfd3dc", fontSize: "1.05rem", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+        <p style={{ color: "rgba(247, 239, 220, 0.76)", fontSize: "1rem", lineHeight: 1.65, marginBottom: "1.5rem" }}>
           {renderInlineFormatting(blog.excerpt)}
         </p>
 
-        {/* Featured Visual Header Image - Always Rendered */}
+        {/* Featured Visual Header Image */}
         <div
           style={{
             position: "relative",
             width: "100%",
             height: "clamp(240px, 32vw, 380px)",
-            borderRadius: "18px",
+            borderRadius: "20px",
             overflow: "hidden",
             marginBottom: "2rem",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
-            boxShadow: "0 14px 40px rgba(0, 0, 0, 0.7)",
-            background: "#0a1428",
+            border: "1px solid rgba(191, 149, 63, 0.3)",
+            background: "#080808",
           }}
         >
           <img
@@ -349,7 +326,7 @@ export default function BlogArticleModal({
             style={{
               position: "absolute",
               inset: 0,
-              background: "linear-gradient(to top, rgba(6, 9, 14, 0.9) 0%, rgba(6, 9, 14, 0.25) 50%, transparent 100%)",
+              background: "linear-gradient(to top, rgba(8, 8, 8, 0.88) 0%, rgba(8, 8, 8, 0.2) 50%, transparent 100%)",
               pointerEvents: "none",
             }}
           />
@@ -369,26 +346,25 @@ export default function BlogArticleModal({
           >
             <span
               style={{
-                fontFamily: "monospace",
-                color: "#ffffff",
-                fontSize: "0.8rem",
+                color: "#d5bd87",
+                fontSize: "10.5px",
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                fontWeight: 700,
-                textShadow: "0 2px 8px rgba(0,0,0,0.8)",
+                letterSpacing: "0.18em",
+                fontWeight: 600,
               }}
             >
-              🏛️ Lifestyle Architectural Insights · Amravati
+              LIFESTYLE ARCHITECTURAL INSIGHTS · AMRAVATI
             </span>
             <span
               style={{
-                fontFamily: "monospace",
-                fontSize: "0.72rem",
-                color: "#ffffff",
-                background: "rgba(6, 9, 14, 0.8)",
+                fontSize: "10px",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#f7efdc",
+                background: "rgba(8, 8, 8, 0.82)",
                 padding: "4px 10px",
-                borderRadius: "6px",
-                border: "1px solid rgba(255, 255, 255, 0.18)",
+                borderRadius: "9999px",
+                border: "1px solid rgba(247, 239, 220, 0.18)",
               }}
             >
               Full Research Edition
@@ -401,27 +377,27 @@ export default function BlogArticleModal({
           <div
             style={{
               padding: "1.4rem 1.6rem",
-              background: "rgba(194, 26, 34, 0.08)",
-              borderLeft: "4px solid var(--color-wine, #c21a22)",
+              background: "rgba(191, 149, 63, 0.08)",
+              borderLeft: "3px solid #bf953f",
               borderRadius: "0 16px 16px 0",
               marginBottom: "2rem",
             }}
           >
             <h4
               style={{
-                fontSize: "0.95rem",
+                fontSize: "11px",
                 fontWeight: 700,
-                color: "#ffffff",
+                color: "#d5bd87",
                 marginBottom: "0.75rem",
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.18em",
               }}
             >
-              Key Architectural &amp; Investment Takeaways
+              KEY ARCHITECTURAL &amp; INVESTMENT TAKEAWAYS
             </h4>
             <ul style={{ margin: 0, paddingLeft: "1.2rem", display: "flex", flexDirection: "column", gap: "0.55rem" }}>
               {blog.highlights.map((h, i) => (
-                <li key={i} style={{ color: "rgba(255, 255, 255, 0.9)", fontSize: "0.92rem", lineHeight: 1.55 }}>
+                <li key={i} style={{ color: "rgba(247, 239, 220, 0.9)", fontSize: "0.92rem", lineHeight: 1.55 }}>
                   {renderInlineFormatting(h)}
                 </li>
               ))}
@@ -429,8 +405,8 @@ export default function BlogArticleModal({
           </div>
         )}
 
-        {/* Article Body: Markdown Rendered or Formatted Paragraphs */}
-        <div style={{ color: "rgba(255, 255, 255, 0.88)", fontSize: "1.02rem", lineHeight: 1.8 }}>
+        {/* Article Body */}
+        <div style={{ color: "rgba(247, 239, 220, 0.86)", fontSize: "1rem", lineHeight: 1.8 }}>
           {blog.markdown ? (
             renderMarkdownContent(blog.markdown, blog.title)
           ) : (
@@ -444,8 +420,8 @@ export default function BlogArticleModal({
             marginTop: "2.5rem",
             padding: "1.2rem 1.6rem",
             borderRadius: "16px",
-            background: "rgba(255, 255, 255, 0.03)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
+            background: "rgba(247, 239, 220, 0.03)",
+            border: "1px solid rgba(247, 239, 220, 0.12)",
             display: "flex",
             alignItems: "center",
             gap: "1rem",
@@ -453,26 +429,28 @@ export default function BlogArticleModal({
         >
           <div
             style={{
-              width: "44px",
-              height: "44px",
+              width: "42px",
+              height: "42px",
               borderRadius: "50%",
-              background: "rgba(194, 26, 34, 0.2)",
+              background: "rgba(191, 149, 63, 0.14)",
+              border: "1px solid rgba(191, 149, 63, 0.36)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "var(--color-wine, #c21a22)",
-              fontSize: "1.2rem",
+              color: "#d5bd87",
+              fontSize: "0.95rem",
+              fontWeight: 700,
               flexShrink: 0,
             }}
           >
-            🏛️
+            ✦
           </div>
           <div>
-            <div style={{ fontSize: "0.92rem", fontWeight: 700, color: "#ffffff" }}>
+            <div style={{ fontSize: "0.92rem", fontWeight: 600, color: "#f7efdc" }}>
               Lifestyle Home Spaces Editorial &amp; Engineering Desk
             </div>
-            <div style={{ fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.6)", marginTop: "2px" }}>
-              Published in accordance with MahaRERA disclosures (Aura: P5030002502915 | Lifestyle: P50300054447).
+            <div style={{ fontSize: "0.8rem", color: "rgba(247, 239, 220, 0.6)", marginTop: "2px" }}>
+              Published in accordance with MahaRERA disclosures (Aura: P5030002502915 · Lifestyle: P50300054447).
             </div>
           </div>
         </div>
@@ -482,31 +460,39 @@ export default function BlogArticleModal({
           style={{
             marginTop: "2rem",
             padding: "1.8rem",
-            borderRadius: "20px",
-            background: "#0a1428",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+            borderRadius: "22px",
+            background: "#080808",
+            border: "1px solid rgba(191, 149, 63, 0.3)",
           }}
         >
           <div style={{ textAlign: "center", maxWidth: "560px", margin: "0 auto 1.5rem" }}>
             <span
               style={{
-                fontSize: "0.75rem",
+                fontSize: "10.5px",
                 textTransform: "uppercase",
-                letterSpacing: "0.15em",
-                color: "var(--color-wine, #c21a22)",
+                letterSpacing: "0.22em",
+                color: "#bf953f",
                 fontWeight: 700,
                 display: "block",
                 marginBottom: "0.4rem",
               }}
             >
-              Fast Inquiry &amp; Brochure Request
+              FAST INQUIRY &amp; BROCHURE REQUEST
             </span>
-            <h3 style={{ fontSize: "1.35rem", fontWeight: 700, color: "#ffffff" }}>
-              Connect with Senior Advisory Desk
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "1.75rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                color: "#f7efdc",
+                margin: 0,
+              }}
+            >
+              CONNECT WITH SENIOR ADVISORY DESK
             </h3>
-            <p style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.65)", marginTop: "0.3rem" }}>
-              Get verified floor plans, pricing signals, and schedule an on-site walkthrough with Amit Talda &amp; Rajesh Mishra.
+            <p style={{ fontSize: "13px", color: "rgba(247, 239, 220, 0.65)", marginTop: "0.35rem" }}>
+              Receive verified floor plans and schedule an on-site walkthrough with Amit Talda &amp; Rajesh Mishra.
             </p>
           </div>
 
@@ -518,11 +504,11 @@ export default function BlogArticleModal({
               onChange={(e) => setInquiryName(e.target.value)}
               placeholder="Your Full Name *"
               style={{
-                padding: "10px 16px",
+                padding: "11px 16px",
                 borderRadius: "12px",
-                background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                color: "#ffffff",
+                background: "#101210",
+                border: "1px solid rgba(247, 239, 220, 0.16)",
+                color: "#f7efdc",
                 fontSize: "0.9rem",
                 outline: "none",
               }}
@@ -534,11 +520,11 @@ export default function BlogArticleModal({
               onChange={(e) => setInquiryPhone(e.target.value)}
               placeholder="Your Phone / WhatsApp Number *"
               style={{
-                padding: "10px 16px",
+                padding: "11px 16px",
                 borderRadius: "12px",
-                background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                color: "#ffffff",
+                background: "#101210",
+                border: "1px solid rgba(247, 239, 220, 0.16)",
+                color: "#f7efdc",
                 fontSize: "0.9rem",
                 outline: "none",
               }}
@@ -549,11 +535,11 @@ export default function BlogArticleModal({
               onChange={(e) => setInquiryNote(e.target.value)}
               placeholder="Specific questions or configuration preference (Optional)"
               style={{
-                padding: "10px 16px",
+                padding: "11px 16px",
                 borderRadius: "12px",
-                background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                color: "#ffffff",
+                background: "#101210",
+                border: "1px solid rgba(247, 239, 220, 0.16)",
+                color: "#f7efdc",
                 fontSize: "0.9rem",
                 outline: "none",
                 resize: "none",
@@ -565,26 +551,22 @@ export default function BlogArticleModal({
               disabled={submitting}
               style={{
                 marginTop: "0.5rem",
-                padding: "12px 20px",
+                padding: "13px 22px",
                 borderRadius: "9999px",
-                background: "var(--color-wine, #c21a22)",
-                color: "#ffffff",
-                fontWeight: 800,
-                fontSize: "0.95rem",
-                border: "none",
+                background: "#bf953f",
+                color: "#080808",
+                fontWeight: 700,
+                fontSize: "11px",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                border: "1px solid #d4af37",
                 cursor: "pointer",
-                boxShadow: "0 4px 18px rgba(194, 26, 34, 0.4)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
               }}
             >
-              <i className="fa-brands fa-whatsapp" style={{ fontSize: "1.1rem" }} />
-              <span>{submitting ? "Connecting..." : "Request Details via WhatsApp"}</span>
+              {submitting ? "Connecting..." : "Request Details via WhatsApp →"}
             </button>
             {submitted && (
-              <span style={{ textAlign: "center", color: "#68d391", fontSize: "0.85rem", marginTop: "4px" }}>
+              <span style={{ textAlign: "center", color: "#d5bd87", fontSize: "0.85rem", marginTop: "4px" }}>
                 ✓ Inquiry registered in CRM! Opening WhatsApp desk...
               </span>
             )}
@@ -596,7 +578,7 @@ export default function BlogArticleModal({
           style={{
             marginTop: "2rem",
             paddingTop: "1.2rem",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            borderTop: "1px solid rgba(247, 239, 220, 0.1)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -604,19 +586,22 @@ export default function BlogArticleModal({
             gap: "0.8rem",
           }}
         >
-          <div style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.55)" }}>
-            Need direct assistance? Call <strong>+91 7498256708</strong>
+          <div style={{ fontSize: "0.85rem", color: "rgba(247, 239, 220, 0.6)" }}>
+            Need direct assistance? Call <strong style={{ color: "#f7efdc" }}>+91 7498256708</strong>
           </div>
           <button
             type="button"
             onClick={onClose}
             style={{
-              padding: "0.6rem 1.4rem",
+              padding: "9px 18px",
               borderRadius: "9999px",
               background: "transparent",
-              border: "1px solid rgba(255, 255, 255, 0.25)",
-              color: "#ffffff",
-              fontSize: "0.88rem",
+              border: "1px solid rgba(247, 239, 220, 0.25)",
+              color: "#f7efdc",
+              fontSize: "11px",
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
               cursor: "pointer",
             }}
           >
@@ -628,37 +613,57 @@ export default function BlogArticleModal({
   );
 }
 
-/** Helper to render plain paragraph */
 function renderParagraph(paragraph: string, index: number) {
   if (paragraph.startsWith("# ")) {
     return (
-      <h2 key={index} style={{ fontSize: "1.6rem", color: "#ffffff", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
+      <h2
+        key={index}
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "1.8rem",
+          textTransform: "uppercase",
+          color: "#f7efdc",
+          marginTop: "1.8rem",
+          marginBottom: "0.8rem",
+          fontWeight: 600,
+        }}
+      >
         {renderInlineFormatting(paragraph.replace("# ", ""))}
       </h2>
     );
   }
   if (paragraph.startsWith("## ")) {
     return (
-      <h3 key={index} style={{ fontSize: "1.35rem", color: "#ffffff", marginTop: "1.5rem", marginBottom: "0.6rem", fontWeight: 700 }}>
+      <h3
+        key={index}
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "1.5rem",
+          textTransform: "uppercase",
+          color: "#f7efdc",
+          marginTop: "1.5rem",
+          marginBottom: "0.6rem",
+          fontWeight: 600,
+        }}
+      >
         {renderInlineFormatting(paragraph.replace("## ", ""))}
       </h3>
     );
   }
   if (paragraph.startsWith("### ")) {
     return (
-      <h4 key={index} style={{ fontSize: "1.15rem", color: "#ffffff", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
+      <h4 key={index} style={{ fontSize: "1.1rem", color: "#d5bd87", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
         {renderInlineFormatting(paragraph.replace("### ", ""))}
       </h4>
     );
   }
   return (
-    <p key={index} style={{ marginBottom: "1.25rem", color: "rgba(255, 255, 255, 0.88)", lineHeight: 1.8 }}>
+    <p key={index} style={{ marginBottom: "1.25rem", color: "rgba(247, 239, 220, 0.86)", lineHeight: 1.8 }}>
       {renderInlineFormatting(paragraph)}
     </p>
   );
 }
 
-/** Markdown parser that recognizes tables, blockquotes, headings, lists, images, links */
 function renderMarkdownContent(markdown: string, articleTitle?: string) {
   const blocks = markdown.split(/\n\s*\n/);
   const elements: React.ReactNode[] = [];
@@ -667,7 +672,6 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
     const trimmed = block.trim();
     if (!trimmed) return;
 
-    // Filter out top meta header block lines
     if (
       trimmed.startsWith("> 📌") ||
       trimmed.startsWith("> 📝") ||
@@ -677,21 +681,30 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       return;
     }
 
-    // Skip the top # Heading if it duplicates the article title
     if (trimmed.startsWith("# ")) {
       const headingText = trimmed.replace(/^#\s+/, "").trim();
       if (articleTitle && headingText.toLowerCase() === articleTitle.toLowerCase()) {
-        return; // Already rendered prominently in modal header
+        return;
       }
       elements.push(
-        <h2 key={`h1-${idx}`} style={{ fontSize: "1.6rem", color: "#ffffff", marginTop: "1.8rem", marginBottom: "0.8rem", fontWeight: 700 }}>
+        <h2
+          key={`h1-${idx}`}
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "1.8rem",
+            textTransform: "uppercase",
+            color: "#f7efdc",
+            marginTop: "1.8rem",
+            marginBottom: "0.8rem",
+            fontWeight: 600,
+          }}
+        >
           {renderInlineFormatting(headingText)}
         </h2>
       );
       return;
     }
 
-    // Table of Contents
     if (trimmed.startsWith("## Table of Contents")) {
       const tocLines = trimmed.split("\n").filter((l) => l.trim().startsWith("- ["));
       elements.push(
@@ -700,17 +713,17 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
           style={{
             margin: "2rem 0",
             padding: "1.4rem",
-            background: "rgba(15, 29, 56, 0.5)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
+            background: "#080808",
+            border: "1px solid rgba(191, 149, 63, 0.25)",
             borderRadius: "16px",
           }}
         >
-          <div style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--color-wine, #c21a22)", fontWeight: 700, marginBottom: "0.8rem" }}>
-            📑 Table of Contents
+          <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.18em", color: "#bf953f", fontWeight: 700, marginBottom: "0.8rem" }}>
+            TABLE OF CONTENTS
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "0.5rem" }}>
             {tocLines.map((line, lIdx) => (
-              <div key={lIdx} style={{ fontSize: "0.88rem", color: "#cfd3dc", lineHeight: 1.5 }}>
+              <div key={lIdx} style={{ fontSize: "0.88rem", color: "rgba(247, 239, 220, 0.8)", lineHeight: 1.5 }}>
                 {renderInlineFormatting(line.replace(/^-\s+/, ""))}
               </div>
             ))}
@@ -720,26 +733,25 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       return;
     }
 
-    // Markdown Table
     const lines = trimmed.split("\n").map((l) => l.trim());
     if (lines.length >= 2 && lines[0].startsWith("|") && lines[1].includes("|---")) {
       const headerCols = lines[0].split("|").map((c) => c.trim()).filter(Boolean);
       const rowLines = lines.slice(2);
 
       elements.push(
-        <div key={`table-${idx}`} style={{ overflowX: "auto", margin: "1.8rem 0", borderRadius: "12px", border: "1px solid rgba(255, 255, 255, 0.12)" }}>
+        <div key={`table-${idx}`} style={{ overflowX: "auto", margin: "1.8rem 0", borderRadius: "14px", border: "1px solid rgba(247, 239, 220, 0.14)" }}>
           <table
             style={{
               width: "100%",
               borderCollapse: "collapse",
               fontSize: "0.88rem",
-              background: "#0a1428",
+              background: "#080808",
             }}
           >
             <thead>
-              <tr style={{ background: "rgba(194, 26, 34, 0.15)", borderBottom: "1px solid rgba(194, 26, 34, 0.3)" }}>
+              <tr style={{ background: "rgba(191, 149, 63, 0.14)", borderBottom: "1px solid rgba(191, 149, 63, 0.3)" }}>
                 {headerCols.map((h, hIdx) => (
-                  <th key={hIdx} style={{ padding: "12px 14px", textAlign: "left", color: "#ffffff", fontWeight: 700 }}>
+                  <th key={hIdx} style={{ padding: "12px 14px", textAlign: "left", color: "#f7efdc", fontWeight: 700 }}>
                     {renderInlineFormatting(h)}
                   </th>
                 ))}
@@ -752,12 +764,12 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
                   <tr
                     key={rIdx}
                     style={{
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
-                      background: rIdx % 2 === 0 ? "rgba(255, 255, 255, 0.02)" : "transparent",
+                      borderBottom: "1px solid rgba(247, 239, 220, 0.07)",
+                      background: rIdx % 2 === 0 ? "rgba(247, 239, 220, 0.02)" : "transparent",
                     }}
                   >
                     {cells.map((cell, cIdx) => (
-                      <td key={cIdx} style={{ padding: "11px 14px", color: "rgba(255, 255, 255, 0.88)" }}>
+                      <td key={cIdx} style={{ padding: "11px 14px", color: "rgba(247, 239, 220, 0.85)" }}>
                         {renderInlineFormatting(cell)}
                       </td>
                     ))}
@@ -771,12 +783,11 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       return;
     }
 
-    // Embedded Markdown Image: ![alt](url)
     if (trimmed.startsWith("![") && trimmed.includes("](") && trimmed.endsWith(")")) {
       const imgMatch = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
       if (imgMatch) {
         elements.push(
-          <div key={`img-${idx}`} style={{ margin: "1.8rem 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255, 255, 255, 0.12)" }}>
+          <div key={`img-${idx}`} style={{ margin: "1.8rem 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(247, 239, 220, 0.14)" }}>
             <img
               src={imgMatch[2]}
               alt={imgMatch[1] || "Article visual"}
@@ -786,7 +797,7 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
               }}
             />
             {imgMatch[1] && (
-              <div style={{ padding: "8px 14px", background: "rgba(0,0,0,0.6)", fontSize: "0.8rem", color: "#ffffff" }}>
+              <div style={{ padding: "8px 14px", background: "#080808", fontSize: "0.8rem", color: "rgba(247, 239, 220, 0.78)" }}>
                 {imgMatch[1]}
               </div>
             )}
@@ -796,7 +807,6 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       }
     }
 
-    // Blockquote
     if (trimmed.startsWith("> ")) {
       const quoteText = trimmed.replace(/^>\s*/gm, "");
       elements.push(
@@ -805,10 +815,10 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
           style={{
             margin: "1.4rem 0",
             padding: "1rem 1.4rem",
-            background: "rgba(194, 26, 34, 0.08)",
-            borderLeft: "4px solid var(--color-wine, #c21a22)",
+            background: "rgba(191, 149, 63, 0.08)",
+            borderLeft: "3px solid #bf953f",
             borderRadius: "0 12px 12px 0",
-            color: "#e2e8f0",
+            color: "rgba(247, 239, 220, 0.88)",
             fontSize: "0.95rem",
             fontStyle: "italic",
           }}
@@ -819,10 +829,20 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       return;
     }
 
-    // Headings
     if (trimmed.startsWith("## ")) {
       elements.push(
-        <h3 key={`h2-${idx}`} style={{ fontSize: "1.35rem", color: "#ffffff", marginTop: "1.6rem", marginBottom: "0.7rem", fontWeight: 700 }}>
+        <h3
+          key={`h2-${idx}`}
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "1.55rem",
+            textTransform: "uppercase",
+            color: "#f7efdc",
+            marginTop: "1.6rem",
+            marginBottom: "0.7rem",
+            fontWeight: 600,
+          }}
+        >
           {renderInlineFormatting(trimmed.replace("## ", ""))}
         </h3>
       );
@@ -830,20 +850,19 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
     }
     if (trimmed.startsWith("### ")) {
       elements.push(
-        <h4 key={`h3-${idx}`} style={{ fontSize: "1.15rem", color: "#ffffff", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
+        <h4 key={`h3-${idx}`} style={{ fontSize: "1.12rem", color: "#d5bd87", marginTop: "1.2rem", marginBottom: "0.5rem", fontWeight: 600 }}>
           {renderInlineFormatting(trimmed.replace("### ", ""))}
         </h4>
       );
       return;
     }
 
-    // Lists (bullet or numbered)
     if (trimmed.startsWith("- ") || trimmed.startsWith("* ") || /^\d+\.\s/.test(trimmed)) {
       const listItems = trimmed.split("\n").map((l) => l.trim()).filter(Boolean);
       elements.push(
         <ul key={`list-${idx}`} style={{ margin: "1rem 0", paddingLeft: "1.4rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
           {listItems.map((li, liIdx) => (
-            <li key={liIdx} style={{ color: "rgba(255, 255, 255, 0.88)", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <li key={liIdx} style={{ color: "rgba(247, 239, 220, 0.86)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               {renderInlineFormatting(li.replace(/^[-*]\s+|\d+\.\s+/, ""))}
             </li>
           ))}
@@ -852,9 +871,8 @@ function renderMarkdownContent(markdown: string, articleTitle?: string) {
       return;
     }
 
-    // Standard Paragraph
     elements.push(
-      <p key={`p-${idx}`} style={{ marginBottom: "1.25rem", color: "rgba(255, 255, 255, 0.88)", lineHeight: 1.8 }}>
+      <p key={`p-${idx}`} style={{ marginBottom: "1.25rem", color: "rgba(247, 239, 220, 0.86)", lineHeight: 1.8 }}>
         {renderInlineFormatting(trimmed)}
       </p>
     );

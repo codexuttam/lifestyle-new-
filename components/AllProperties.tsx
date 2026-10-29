@@ -18,48 +18,50 @@ export default async function AllProperties({
 
   return (
     <section className={styles.section} id="properties-all-show-section">
-      <div className={styles.grid}>
-        <div className={styles.leftCol}>
-          <h2 className={styles.heading}>{content.heading}</h2>
-          <p className={styles.subheading}>
-            Discover signature luxury highrise residences and delivered landmarks crafted with precision across Amravati.
-          </p>
-          <Link href="/projects" className={styles.viewAll}>
-            {content.ctaLabel}
-          </Link>
+      <div className={styles.container}>
+        <div className={styles.grid}>
+          <div className={styles.leftCol}>
+            <h2 className={styles.heading}>{content.heading}</h2>
+            <p className={styles.subheading}>
+              Scroll through our signature Amravati developments — featuring live architectural walkthroughs, verified MahaRERA specifications, and instant private tour booking.
+            </p>
+            <Link href="/projects" className={`${styles.viewAll} roll-button`}>
+              <span className="roll-text" data-text={`${content.ctaLabel} →`}>
+                {content.ctaLabel} →
+              </span>
+            </Link>
+          </div>
+
+          {/* Sticky 3D Tilt-Glow Dynamic Card Stacking Showcase */}
+          <AllPropertiesStack
+            listings={listings}
+            whatsappUrl={whatsappHref(settings)}
+          />
         </div>
 
-        {/* Dynamic Card Stacking Showcase */}
-        <AllPropertiesStack
-          listings={listings}
-          whatsappUrl={whatsappHref(settings)}
-        />
-      </div>
-
-      {/* Cinematic Showcase Video Banner */}
-      <div className={styles.bannerWrapper}>
-        <div className={styles.banner}>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className={styles.bannerVideo}
-            aria-hidden="true"
-          >
-            <source src="/videos/aura-showcase-clip.mp4" type="video/mp4" />
-          </video>
-          <div className={styles.bannerOverlay}>
-            <div className={styles.bannerContent}>
-              <span className={styles.bannerBadge}>
-                <i className="fa-solid fa-play" /> CINEMATIC TOUR
-              </span>
-              <h3 className={styles.bannerTitle}>
-                Crafted For Those Who Expect Nothing Less Than Extraordinary
-              </h3>
-              <p className={styles.bannerDesc}>
-                Step inside our vision of elevated living in Amravati — Aura by Lifestyle 15-Storey Tower.
-              </p>
+        {/* Cinematic Showcase Video Banner */}
+        <div className={styles.bannerWrapper}>
+          <div className={styles.banner}>
+            <video
+              src="/videos/aura-showcase-clip.mp4"
+              poster="/aura/aura-hero-clean-4k.jpg"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              className={styles.bannerVideo}
+              aria-hidden="true"
+            />
+            <div className={styles.bannerOverlay}>
+              <div className={styles.bannerContent}>
+                <h3 className={styles.bannerTitle}>
+                  CRAFTED FOR THOSE WHO EXPECT BENCHMARK LIVING IN AMRAVATI
+                </h3>
+                <p className={styles.bannerDesc}>
+                  Experience Aura by Lifestyle at Congress Nagar, Camp alongside our 100% delivered Lifestyle Home Spaces landmark on DPS Road.
+                </p>
+              </div>
             </div>
           </div>
         </div>

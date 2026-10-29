@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { TestimonialRecord } from "@/lib/schemas/testimonial";
 import styles from "./Testimonials.module.css";
 
@@ -9,7 +11,7 @@ const PROJECT_CLIPS = [
     id: "aura-walkthrough",
     label: "Aura 15-Storey Tower",
     location: "Congress Nagar, Camp",
-    src: "/videos/aura-building-clip-1.mp4",
+    src: "/videos/aura-showcase-clip.mp4",
     poster: "/aura/aura-hero-clean-4k.jpg",
   },
   {
@@ -37,14 +39,57 @@ export default function Testimonials({
 }) {
   const [activeQuote, setActiveQuote] = useState(0);
   const [activeClip, setActiveClip] = useState(0);
+  const [clipProgress, setClipProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const quoteBodyRef = useRef<HTMLDivElement>(null);
+
+  // GSAP scroll-reveal entrance for the dual cards
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        "[data-testimonial-card]",
+        { opacity: 0, y: 42, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.85,
+          stagger: 0.14,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Animate quote body smoothly when switching reviews
+  useEffect(() => {
+    if (!quoteBodyRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      quoteBodyRef.current,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }
+    );
+  }, [activeQuote]);
 
   // Pause clip automatically when scrolled offscreen
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !("IntersectionObserver" in window)) return;
+    setClipProgress(0);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -92,11 +137,16 @@ export default function Testimonials({
     }
   };
 
+  const handleTimeUpdate = () => {
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+    setClipProgress(Math.min(100, (video.currentTime / video.duration) * 100));
+  };
+
   return (
-    <section className={styles.section} id="testimonial-section">
+    <section className={styles.section} id="testimonial-section" ref={sectionRef}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <span className={styles.eyebrow}>{badge || "RESIDENT STORIES & FILMS"}</span>
           <h2 className={styles.heading}>
             REAL WALKTHROUGHS &amp; <span>AMRAVATI FAMILY VOICES</span>
           </h2>
@@ -104,39 +154,57 @@ export default function Testimonials({
 
         {/* Split Dual-Card Layout: Dark Film Card + Warm Ivory Editorial Quote Card */}
         <div className={styles.splitGrid}>
-          {/* Left: Real Project Clips with Play/Pause & Sound Controls */}
-          <div className={styles.videoCard}>
+          {/* Left: Real Project Clips with Story Progress, Play/Pause & Sound Controls */}
+          <div className={styles.videoCard} data-testimonial-card>
             <video
               ref={videoRef}
               key={clip.src}
+              src={clip.src}
               autoPlay
-              loop
               muted={isMuted}
               playsInline
               preload="metadata"
               poster={clip.poster}
               className={styles.videoEl}
               onClick={togglePlay}
-            >
-              <source src={clip.src} type="video/mp4" />
-            </video>
+              onTimeUpdate={handleTimeUpdate}
+              onEnded={() => setActiveClip((prev) => (prev + 1) % PROJECT_CLIPS.length)}
+            />
             <div className={styles.videoScrim} />
 
-            {/* Top Controls: Clip Tag + Floating Sound Pill */}
-            <div className={styles.videoTopBar}>
-              <span className={styles.clipBadge}>
-                0{activeClip + 1} · {clip.label}
-              </span>
+            {/* Top Wrapper: Story Progress Bars + Clip Tag + Sound Pill */}
+            <div className={styles.videoTopCluster}>
+              <div className={styles.storyBars} aria-hidden="true">
+                {PROJECT_CLIPS.map((c, idx) => {
+                  const widthPct =
+                    idx < activeClip ? 100 : idx === activeClip ? clipProgress : 0;
+                  return (
+                    <span key={c.id} className={styles.storyBarTrack}>
+                      <span
+                        className={styles.storyBarFill}
+                        style={{ width: `${widthPct}%` }}
+                      />
+                    </span>
+                  );
+                })}
+              </div>
 
-              <button
-                type="button"
-                className={styles.soundPill}
-                onClick={toggleMute}
-                aria-pressed={!isMuted}
-                aria-label={isMuted ? "Unmute project video" : "Mute project video"}
-              >
-                {isMuted ? "🔇 Tap for sound" : "🔊 Sound on"}
-              </button>
+              <div className={styles.videoTopBar}>
+                <span className={styles.clipBadge}>
+                  <span className={styles.liveDot} aria-hidden="true" />
+                  0{activeClip + 1} · {clip.label}
+                </span>
+
+                <button
+                  type="button"
+                  className={styles.soundPill}
+                  onClick={toggleMute}
+                  aria-pressed={!isMuted}
+                  aria-label={isMuted ? "Unmute project video" : "Mute project video"}
+                >
+                  {isMuted ? "🔇 Tap for sound" : "🔊 Sound on"}
+                </button>
+              </div>
             </div>
 
             {/* Bottom Controls: Play/Pause + Clip Switcher Dots */}
@@ -153,7 +221,7 @@ export default function Testimonials({
                       className={`${styles.clipDotBtn}${idx === activeClip ? ` ${styles.clipDotActive}` : ""}`}
                       onClick={() => setActiveClip(idx)}
                     >
-                      0{idx + 1}
+                      0{idx + 1} · {c.label.split(" ")[0]}
                     </button>
                   ))}
                 </div>
@@ -171,17 +239,39 @@ export default function Testimonials({
           </div>
 
           {/* Right: Warm Ivory Editorial Quote Card */}
-          <div className={styles.quoteCard}>
+          <div className={styles.quoteCard} data-testimonial-card>
             <div className={styles.quoteCardTop}>
-              <span className={styles.quoteMark} aria-hidden="true">“</span>
+              <div className={styles.trustCluster}>
+                <div className={styles.stackedAvatars} aria-hidden="true">
+                  {testimonials.slice(0, 4).map((person) => (
+                    <img
+                      key={person.id}
+                      src={person.avatar}
+                      alt=""
+                      className={styles.stackedAvatarImg}
+                      loading="lazy"
+                    />
+                  ))}
+                </div>
+                <div className={styles.ratingMeta}>
+                  <span className={styles.stars} aria-label="5 out of 5 stars">
+                    ★★★★★
+                  </span>
+                  <span className={styles.verifiedTag}>Verified Amravati Homeowners</span>
+                </div>
+              </div>
+
               <span className={styles.quoteCounter}>
                 0{activeQuote + 1} / 0{testimonials.length}
               </span>
             </div>
 
-            <blockquote className={styles.quoteText} key={current.id}>
-              {current.quote.replace(/^[“"]|[”"]$/g, "")}
-            </blockquote>
+            <div ref={quoteBodyRef} className={styles.quoteBodyWrap}>
+              <span className={styles.quoteMark} aria-hidden="true">“</span>
+              <blockquote className={styles.quoteText}>
+                {current.quote.replace(/^[“"]|[”"]$/g, "")}
+              </blockquote>
+            </div>
 
             <div className={styles.authorBlock}>
               <div className={styles.authorIdentity}>

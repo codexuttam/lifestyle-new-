@@ -1,16 +1,16 @@
-/* ============ CONTACT PAGE (NAVY GRADIENT THEME) ============ */
+/* ============ CONTACT PAGE — UNIFIED CHARCOAL & GOLD ARCHITECTURAL THEME ============ */
 
 .page {
   width: 100%;
-  background: var(--bg-white-navy, linear-gradient(180deg, #ffffff 0%, #eef4fc 8%, #a0bee8 24%, #1a335c 52%, #101210 78%, #050a16 100%));
-  color: #f5f6f8;
-  padding: 140px 120px 96px;
+  background: #080808;
+  color: #f7efdc;
+  padding: 136px 48px 96px;
   min-height: 100vh;
 }
 
 .inner {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1380px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -21,72 +21,70 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 48px;
-  max-width: 900px;
+  gap: 14px;
+  margin-bottom: 44px;
+  max-width: 860px;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 16px;
+  gap: 8px;
+  padding: 6px 14px;
   border-radius: 9999px;
   background: rgba(191, 149, 63, 0.08);
-  border: 1px solid rgba(191, 149, 63, 0.3);
+  border: 1px solid rgba(191, 149, 63, 0.34);
 }
 
 .badgeDot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 9999px;
   background: #bf953f;
-  box-shadow: 0 0 10px rgba(191, 149, 63, 0.6);
+  box-shadow: 0 0 8px rgba(191, 149, 63, 0.6);
 }
 
 .badgeText {
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   font-weight: 600;
-  color: #bf953f;
-  font-size: 14px;
-  letter-spacing: 0.04em;
+  color: #d5bd87;
+  font-size: 10px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 .title {
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 800;
-  color: #ffffff;
-  font-size: 64px;
-  line-height: 1.08;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  color: #f7efdc;
+  font-size: clamp(3rem, 5.6vw, 4.8rem);
+  line-height: 0.94;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
 .intro {
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-  color: rgba(235, 240, 245, 0.85);
-  letter-spacing: -0.2px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(247, 239, 220, 0.68);
+  margin: 0;
 }
 
 /* --- Layout --- */
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 40px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 32px;
   align-items: start;
 }
 
 .formPanel {
-  background: rgba(12, 13, 12, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
-  padding: 44px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  background: #101210;
+  border: 1px solid rgba(247, 239, 220, 0.14);
+  border-radius: 24px;
+  padding: 40px;
 }
 
 .formPanel :global(.form-row) {
@@ -96,17 +94,17 @@
 }
 
 .formPanel :global(.form-group) {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .formPanel :global(label) {
   display: block;
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 13px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 10px;
   font-weight: 600;
-  color: #a0bee8;
+  color: #d5bd87;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.18em;
   margin-bottom: 8px;
 }
 
@@ -114,20 +112,19 @@
 .formPanel :global(select),
 .formPanel :global(textarea) {
   width: 100%;
-  padding: 14px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 14px;
-  background: rgba(6, 12, 24, 0.7);
-  color: #ffffff;
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 15px;
-  letter-spacing: -0.2px;
+  padding: 13px 16px;
+  border: 1px solid rgba(247, 239, 220, 0.15);
+  border-radius: 12px;
+  background: #080808;
+  color: #f7efdc;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.94rem;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .formPanel :global(input::placeholder),
 .formPanel :global(textarea::placeholder) {
-  color: rgba(235, 240, 245, 0.45);
+  color: rgba(247, 239, 220, 0.42);
 }
 
 .formPanel :global(textarea) {
@@ -140,57 +137,33 @@
 .formPanel :global(textarea:focus) {
   outline: none;
   border-color: #bf953f;
-  box-shadow: 0 0 16px rgba(191, 149, 63, 0.35);
+  box-shadow: 0 0 0 3px rgba(191, 149, 63, 0.18);
 }
 
 .formPanel :global(.cta-button) {
   width: 100%;
-  padding: 16px 28px;
-  border: none;
+  padding: 15px 26px;
+  border: 1px solid #d4af37;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #bf953f 0%, #967022 100%);
-  color: #ffffff;
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 15px;
+  background: #bf953f;
+  color: #080808;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(191, 149, 63, 0.4);
-  transition: all 0.3s ease;
+  transition: background 0.25s ease, transform 0.25s ease;
 }
 
 .formPanel :global(.cta-button:hover:not(:disabled)) {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #d32029 0%, #b0151c 100%);
-  box-shadow: 0 8px 28px rgba(191, 149, 63, 0.55);
+  transform: translateY(-1px);
+  background: #d5bd87;
 }
 
 .formPanel :global(.cta-button:disabled) {
   opacity: 0.6;
   cursor: progress;
-}
-
-.formPanel :global(.form-success) {
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #2ecc71;
-  background: rgba(46, 204, 113, 0.12);
-  border: 1px solid rgba(46, 204, 113, 0.35);
-  border-radius: 16px;
-  padding: 24px;
-}
-
-.formPanel :global(.form-error) {
-  margin-top: 14px;
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 14px;
-  color: #e74c3c;
-  background: rgba(231, 76, 60, 0.12);
-  border: 1px solid rgba(231, 76, 60, 0.35);
-  border-radius: 12px;
-  padding: 12px 16px;
 }
 
 /* --- Contact details --- */
@@ -199,36 +172,33 @@
   flex-direction: column;
   gap: 4px;
   padding: 36px;
-  background: rgba(12, 13, 12, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
+  background: #101210;
+  border: 1px solid rgba(247, 239, 220, 0.14);
+  border-radius: 24px;
   position: sticky;
-  top: 120px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  top: 104px;
 }
 
 .detailsTitle {
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 1.2;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1;
   text-transform: uppercase;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-  margin-bottom: 16px;
+  color: #f7efdc;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
 }
 
 .detailRow {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 18px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 5px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(247, 239, 220, 0.1);
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .detailRow:first-of-type {
@@ -236,52 +206,35 @@
 }
 
 .detailLabel {
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 12px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 10px;
   font-weight: 600;
-  color: #a0bee8;
+  color: #d5bd87;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.18em;
 }
 
 .detailValue {
-  font-family: var(--font-montserrat), sans-serif;
-  font-size: 16px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.96rem;
   font-weight: 500;
-  color: #ffffff;
-  letter-spacing: -0.2px;
+  color: #f7efdc;
+  line-height: 1.5;
 }
 
 a.detailRow:hover .detailValue {
   color: #bf953f;
-  text-decoration: underline;
 }
 
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 1279px) {
   .page {
-    padding: 120px 64px 80px;
-  }
-
-  .title {
-    font-size: 52px;
+    padding: 120px 36px 80px;
   }
 }
 
 @media (max-width: 1023px) {
-  .page {
-    padding: 110px 40px 64px;
-  }
-
-  .title {
-    font-size: 40px;
-  }
-
-  .intro {
-    font-size: 16px;
-  }
-
   .layout {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -296,13 +249,10 @@ a.detailRow:hover .detailValue {
     padding: 100px 20px 64px;
   }
 
-  .title {
-    font-size: 32px;
-  }
-
-  .formPanel {
-    padding: 26px;
-    border-radius: 24px;
+  .formPanel,
+  .details {
+    padding: 24px;
+    border-radius: 20px;
   }
 
   .formPanel :global(.form-row) {

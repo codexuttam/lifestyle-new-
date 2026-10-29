@@ -6,19 +6,49 @@
   color: var(--ink-on-ivory, #0c0d0c);
   padding: 120px 40px;
   border-bottom: 1px solid rgba(12, 13, 12, 0.12);
-  overflow: hidden;
+  overflow-x: clip;
 }
 
-.gridBackdrop {
+/* 3D Perspective Architectural Floor Grid */
+.perspectiveStage {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(143, 107, 32, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(143, 107, 32, 0.08) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 30%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 30%, transparent 100%);
+  overflow: hidden;
+  perspective: 720px;
   pointer-events: none;
+  z-index: 0;
+}
+
+.gridFloor {
+  position: absolute;
+  left: -40%;
+  right: -40%;
+  bottom: -14%;
+  height: 135%;
+  transform-origin: bottom center;
+  transform: rotateX(72deg);
+  background-image:
+    linear-gradient(rgba(143, 107, 32, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143, 107, 32, 0.22) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: floorDrift 18s linear infinite;
+  mask-image: linear-gradient(to top, transparent 0%, #000 25%, #000 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 25%, #000 62%, transparent 100%);
+}
+
+@keyframes floorDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 64px;
+  }
+}
+
+.horizonGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 45% at 50% 68%, rgba(191, 149, 63, 0.14), transparent 72%);
 }
 
 .container {
@@ -45,6 +75,17 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  padding-left: 22px;
+}
+
+.verticalProgressRule {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 0;
+  width: 2px;
+  transform-origin: top center;
+  background: linear-gradient(180deg, #8f6b20 0%, #bf953f 65%, transparent 100%);
 }
 
 .eyebrowLine {
@@ -118,8 +159,15 @@
   display: grid;
   grid-template-columns: 56px 1fr;
   gap: 20px;
-  padding: 32px 0;
+  padding: 32px 16px;
   border-bottom: 1px solid rgba(12, 13, 12, 0.14);
+  border-radius: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pillarBlock:hover {
+  background: rgba(250, 247, 241, 0.78);
+  transform: translateX(6px);
 }
 
 .pillarIndex {
@@ -184,7 +232,8 @@
 }
 
 .card {
-  background: #faf7f1;
+  background: rgba(250, 247, 241, 0.92);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(12, 13, 12, 0.12);
   border-radius: 20px;
   padding: 26px 24px;
@@ -194,13 +243,13 @@
   gap: 22px;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
 .card:hover {
   border-color: #8f6b20;
-  transform: translateY(-4px);
-  box-shadow: 0 20px 44px rgba(12, 13, 12, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(12, 13, 12, 0.11);
 }
 
 .cardTop {
@@ -211,15 +260,22 @@
 }
 
 .iconBadge {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  background: rgba(191, 149, 63, 0.14);
-  border: 1px solid rgba(143, 107, 32, 0.3);
+  background: rgba(191, 149, 63, 0.15);
+  border: 1px solid rgba(143, 107, 32, 0.32);
   color: #8f6b20;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover .iconBadge {
+  transform: scale(1.08);
+  background: #8f6b20;
+  color: #faf7f1;
 }
 
 .categoryChip {
@@ -276,7 +332,7 @@
 }
 
 .card:hover .learnMore {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 @media (max-width: 1100px) {
@@ -306,7 +362,7 @@
   .pillarBlock {
     grid-template-columns: 1fr;
     gap: 8px;
-    padding: 24px 0;
+    padding: 24px 8px;
   }
 
   .grid {

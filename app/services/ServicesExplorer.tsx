@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
 import ServiceIcon from "@/components/ServiceIcons";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import type { ServiceCategory } from "@/data/services";
@@ -14,8 +15,8 @@ function CheckIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width="15"
+      height="15"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -38,8 +39,8 @@ export default function ServicesExplorer({
   services: ServiceRecord[];
 }) {
   const [filter, setFilter] = useState<Filter>("All");
+  const cardsRef = useRef<HTMLDivElement | null>(null);
 
-  // Only offer categories that something published actually sits in.
   const filters = useMemo<Filter[]>(
     () => [
       "All",
@@ -58,6 +59,19 @@ export default function ServicesExplorer({
     [filter, services]
   );
 
+  useEffect(() => {
+    const grid = cardsRef.current;
+    if (!grid) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const items = Array.from(grid.children);
+    if (!items.length) return;
+    gsap.fromTo(
+      items,
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.48, stagger: 0.06, ease: "power3.out" }
+    );
+  }, [filter]);
+
   const countFor = (value: Filter) =>
     value === "All"
       ? services.length
@@ -65,7 +79,7 @@ export default function ServicesExplorer({
 
   return (
     <>
-      <div className={styles.filters} role="tablist" aria-label="Service categories">
+      <div className={styles.filters} role="tablist" aria-label="Service categories" data-reveal>
         {filters.map((value) => (
           <button
             key={value}
@@ -88,7 +102,7 @@ export default function ServicesExplorer({
         {filter === "All" ? "" : ` in ${filter}`}
       </p>
 
-      <div className={styles.cards}>
+      <div className={styles.cards} ref={cardsRef}>
         {visible.map((service) => (
           <article className={styles.card} key={service.id}>
             <div className={styles.cardTop}>
@@ -123,8 +137,10 @@ export default function ServicesExplorer({
               </div>
             </div>
 
-            <a href={whatsappHref(settings)} className={styles.quoteBtn}>
-              Get a quote
+            <a href={whatsappHref(settings)} className={`${styles.quoteBtn} roll-button`}>
+              <span className="roll-text" data-text="Get a Quote →">
+                Get a Quote →
+              </span>
             </a>
           </article>
         ))}

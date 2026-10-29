@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import styles from "./AuraFloorPlans.module.css";
 
 const PLANS = [
@@ -109,7 +110,18 @@ const PLANS = [
 export default function AuraFloorPlans() {
   const [activeTab, setActiveTab] = useState(0);
   const [zoomOpen, setZoomOpen] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const plan = PLANS[activeTab];
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      cardRef.current.querySelectorAll("[data-plan-anim]"),
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.45, stagger: 0.04, ease: "power3.out", clearProps: "transform" }
+    );
+  }, [activeTab]);
 
   useEffect(() => {
     if (!zoomOpen) return;
@@ -124,7 +136,6 @@ export default function AuraFloorPlans() {
     <section className={styles.section} id="floor-plans">
       <div className={styles.container}>
         <div className={styles.header}>
-          <span className={styles.eyebrow}>ARCHITECTURAL CUT-SECTIONS &amp; DIMENSIONS</span>
           <h2 className={styles.title}>
             MASTERFULLY PLANNED FOR <span>IDENTITY &amp; DISTINCTION</span>
           </h2>
@@ -151,8 +162,8 @@ export default function AuraFloorPlans() {
         </div>
 
         {/* Interactive Floor Plan Inspection Card */}
-        <div className={styles.displayCard}>
-          <div className={styles.imageCol}>
+        <div className={styles.displayCard} ref={cardRef}>
+          <div className={styles.imageCol} data-plan-anim>
             <button
               type="button"
               className={styles.imageWrapper}
@@ -160,6 +171,7 @@ export default function AuraFloorPlans() {
               aria-label={`Enlarge ${plan.title} architectural drawing`}
             >
               <img
+                key={plan.image}
                 src={plan.image}
                 alt={plan.title}
                 className={styles.planImg}
@@ -171,15 +183,14 @@ export default function AuraFloorPlans() {
           </div>
 
           <div className={styles.detailsCol}>
-            <div className={styles.detailsHeader}>
-              <span className={styles.planCategory}>OFFICIAL BROCHURE PLATE · {plan.index}</span>
+            <div className={styles.detailsHeader} data-plan-anim>
               <h3 className={styles.planTitle}>{plan.title}</h3>
               <p className={styles.planSubtitle}>{plan.subtitle}</p>
             </div>
 
             <div className={styles.specsGrid}>
               {plan.specs.map((s) => (
-                <div key={s.room} className={styles.specItem}>
+                <div key={s.room} className={styles.specItem} data-plan-anim>
                   <span className={styles.specRoom}>{s.room}</span>
                   <span className={styles.specDim}>{s.dim}</span>
                 </div>

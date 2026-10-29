@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
 import { PROJECT_CATEGORIES } from "@/data/projects";
 import type { ProjectCategory } from "@/data/projects";
 import type { ProjectRecord } from "@/lib/schemas/project";
@@ -33,6 +34,60 @@ function CalendarIcon() {
   );
 }
 
+function ProjectCardMedia({
+  project,
+}: {
+  project: ProjectRecord;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [project.video]);
+
+  if (project.video) {
+    return (
+      <video
+        ref={videoRef}
+        src={project.video}
+        poster={project.img || "/aura/aura-hero-clean-4k.jpg"}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        className={styles.thumbImg}
+        aria-hidden="true"
+      />
+    );
+  }
+
+  return (
+    <img
+      src={project.img || "/aura/aura-hero-clean-4k.jpg"}
+      alt={project.title}
+      className={styles.thumbImg}
+      loading="lazy"
+      onError={(e) => {
+        (e.currentTarget as HTMLImageElement).src = "/aura/aura-hero-clean-4k.jpg";
+      }}
+    />
+  );
+}
+
 export default function ProjectsExplorer({
   projects,
 }: {
@@ -40,6 +95,7 @@ export default function ProjectsExplorer({
   projects: ProjectRecord[];
 }) {
   const [filter, setFilter] = useState<Filter>("All");
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const filters = useMemo<Filter[]>(
     () => [
@@ -63,6 +119,35 @@ export default function ProjectsExplorer({
     value === "All"
       ? projects.length
       : projects.filter((project) => project.category === value).length;
+
+  // Staggered GSAP entrance when filtering or mounting
+  useEffect(() => {
+    if (!gridRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cards = gridRef.current.querySelectorAll("[data-project-card]");
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 28, scale: 0.97 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.55,
+        stagger: 0.08,
+        ease: "power3.out",
+        clearProps: "transform",
+      }
+    );
+  }, [filter]);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty("--mx", `${x.toFixed(1)}%`);
+    el.style.setProperty("--my", `${y.toFixed(1)}%`);
+  };
 
   return (
     <>
@@ -91,7 +176,7 @@ export default function ProjectsExplorer({
       </p>
 
       {/* Cards Grid */}
-      <div className={styles.cards}>
+      <div className={styles.cards} ref={gridRef}>
         {visible.map((project) => {
           const detailHref =
             project.id === "lifestyle-retail-galleria"
@@ -113,21 +198,19 @@ export default function ProjectsExplorer({
           const tourHref = `https://wa.me/${WHATSAPP_PHONE}?text=${tourMsg}`;
 
           return (
-            <article className={styles.card} key={project.id}>
-              {/* Card Image Banner */}
-              <a href={detailHref} className={styles.thumb}>
-                <img
-                  src={project.img || "/aura/aura-hero-clean-4k.jpg"}
-                  alt={project.title}
-                  className={styles.thumbImg}
-                  loading="lazy"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = "/aura/aura-hero-clean-4k.jpg";
-                  }}
-                />
-                
+            <article
+              className={styles.card}
+              key={project.id}
+              data-project-card
+              onMouseMove={handleCardMouseMove}
+            >
+              {/* Card Image / Live Video Banner */}
+              <a href={detailHref} className={styles.thumb} aria-label={project.title}>
+                <ProjectCardMedia project={project} />
+
                 {/* Category Pill */}
                 <span className={styles.categoryPill}>
+                  {project.video ? "▶ " : ""}
                   {project.category}
                 </span>
 
@@ -155,7 +238,7 @@ export default function ProjectsExplorer({
                     <h2 className={styles.cardTitle}>{project.title}</h2>
                   </a>
                   <p className={styles.cardMeta}>
-                    📍 {project.location} · {project.year}
+                    {project.location} · {project.year}
                   </p>
                 </div>
 
@@ -180,8 +263,10 @@ export default function ProjectsExplorer({
                 {/* Card Actions */}
                 <div className={styles.actionRow}>
                   <div className={styles.btnGroup}>
-                    <a href={detailHref} className={styles.btnExplore}>
-                      <span>Explore Details →</span>
+                    <a href={detailHref} className={`${styles.btnExplore} roll-button`}>
+                      <span className="roll-text" data-text="Explore Details →">
+                        Explore Details →
+                      </span>
                     </a>
                     <a
                       href={tourHref}

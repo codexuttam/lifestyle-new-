@@ -6,249 +6,420 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { HomeRecord } from "@/lib/schemas/home";
 import styles from "./ExploreSection.module.css";
 
-interface ZonePreset {
+interface ZonePanel {
   id: string;
   index: string;
-  name: string;
-  badge: string;
+  tag: string;
   title: string;
-  sublabel: string;
+  subtitle: string;
   description: string;
   video?: string;
   image: string;
-  specs: string[];
+  facts: string[];
 }
 
-const ZONES: ZonePreset[] = [
+const ZONES: ZonePanel[] = [
   {
     id: "full",
     index: "01",
-    name: "Full 15-Storey Tower",
-    badge: "Flagship Elevation",
+    tag: "FULL 15-STOREY TOWER",
     title: "Aura by Lifestyle",
-    sublabel: "Congress Nagar Road · Camp, Amravati",
+    subtitle: "Flagship 15-Storey Residential Landmark · Congress Nagar, Camp",
     description:
-      "Amravati's 15-storey architectural landmark uniting ground-level commercial Boulevard frontage, 14 residential floors, and a crowning sky deck.",
+      "Rising 15 storeys above Camp's greenest residential avenue with contemporary rectilinear facades, four high-speed elevators, and MahaRERA registered transparency.",
     video: "/videos/aura-showcase-clip.mp4",
     image: "/aura/aura-hero-clean-4k.jpg",
-    specs: ["15 Storeys", "4 High-Speed Lifts", "MahaRERA P5030002502915"],
+    facts: [
+      "15 Storeys + Level 15 Sky Deck",
+      "4 High-Speed Lifts with Power Backup",
+      "MahaRERA Reg. P5030002502915",
+    ],
   },
   {
     id: "rooftop",
     index: "02",
-    name: "Rooftop Sky Oasis",
-    badge: "Level 15 Crown",
+    tag: "ROOFTOP SKY OASIS",
     title: "Sky Pool & Multi-Sports Turf",
-    sublabel: "360° Unobstructed Amravati & Melghat Views",
+    subtitle: "Level 15 Crown Leisure Above Street Noise",
     description:
-      "Lap & leisure swimming pool, shallow kids pool, enclosed box-cricket & multi-sports turf, rooftop jogging loop, party lawn, and sunset cabanas.",
-    image: "/aura/rooftop-amenities-3d.jpg",
-    specs: ["Infinity Sky Pool", "Box Cricket Turf", "Solar Common Grid"],
+      "An elevated sanctuary featuring a panoramic infinity lap pool, kids splash deck, enclosed box-cricket and tennis turf, jogging loop, and sunset cabanas.",
+    image: "/videos/web-clip-thumb.png",
+    facts: [
+      "Panoramic Rooftop Lap & Kids Pool",
+      "Enclosed Multi-Sports Box Turf",
+      "360° Unobstructed Camp & Melghat Views",
+    ],
   },
   {
     id: "residences",
     index: "03",
-    name: "2 & 3 BHK Sky Suites",
-    badge: "Levels 1 to 14",
-    title: "Cross-Ventilated Vastu Residences",
-    sublabel: "1,150 – 1,850 Sqft · Private Balconies",
+    tag: "2 & 3 BHK SKY SUITES",
+    title: "Cross-Ventilated Vastu Suites",
+    subtitle: "Levels 1 to 14 · 1,150 to 1,850 Sqft Residences",
     description:
-      "Expansive living-dining cores finished with 800×1600 mm vitrified slabs, concealed Jaquar bathware, dedicated utility balconies, and zero shared walls.",
+      "Zero-shared-wall 2 and 3 BHK residences crafted with private sit-out balconies, 800×1600 mm vitrified slabs, and concealed Jaquar bathware.",
     image: "/aura/modern-living-room.jpg",
-    specs: ["800×1600 Vitrified", "Jaquar Bathware", "100% Vastu Layout"],
+    facts: [
+      "Zero Shared Walls for Acoustic Privacy",
+      "800×1600 mm Vitrified Flooring",
+      "100% Vastu-Aligned Daylight Layouts",
+    ],
   },
   {
     id: "entrance",
     index: "04",
-    name: "Arrival & Boulevard",
-    badge: "Ground & Podium",
+    tag: "ARRIVAL & BOULEVARD",
     title: "Double-Height Designer Lobby",
-    sublabel: "Manned Security, CCTV & Covered Parking",
+    subtitle: "Segregated Residential Arrival & Covered Parking",
     description:
-      "Welcoming double-height entrance lobby, dedicated residential arrival portico separated from retail bays, 24×7 CCTV surveillance, and generator backup.",
-    image: "/aura/aura-brand-showcase.jpg",
-    specs: ["24×7 CCTV Security", "Generator Backup", "Dedicated Parking"],
+      "Grand residential arrival portico separated from street-front bays, complete with 24×7 CCTV surveillance, gated security, and covered resident parking.",
+    image: "/aura/building-full-4k.jpg",
+    facts: [
+      "Double-Height Granite Entrance Lobby",
+      "24×7 CCTV & Manned Gated Security",
+      "Dedicated Covered Resident Parking",
+    ],
   },
 ];
 
+function getDeckTransform(idx: number, activeIdx: number) {
+  const diff = idx - activeIdx;
+  if (diff === 0) {
+    return {
+      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
+      opacity: 1,
+      zIndex: 30,
+      filter: "brightness(1)",
+    };
+  }
+  if (diff > 0) {
+    const clamped = Math.min(diff, 3);
+    return {
+      transform: `translate3d(${clamped * 28}px, ${clamped * 14}px, ${-clamped * 50}px) rotateZ(${clamped * 2.8}deg) scale(${1 - clamped * 0.055})`,
+      opacity: diff > 3 ? 0 : Math.max(0.28, 0.85 - diff * 0.2),
+      zIndex: 30 - diff,
+      filter: "brightness(0.58)",
+    };
+  }
+  const abs = Math.min(Math.abs(diff), 2);
+  return {
+    transform: `translate3d(${-abs * 30}px, ${-abs * 12}px, ${-abs * 60}px) rotateZ(${-abs * 2.8}deg) scale(${1 - abs * 0.06})`,
+    opacity: Math.abs(diff) > 2 ? 0 : 0.36,
+    zIndex: 20 - abs,
+    filter: "brightness(0.48)",
+  };
+}
+
 export default function ExploreSection({
   content,
-  projectTitle,
 }: {
   content: HomeRecord["explore"];
-  projectTitle: string;
+  projectTitle?: string;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeZone = ZONES[activeIndex];
-
+  const [activeIdx, setActiveIdx] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const runwayRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    let observer: IntersectionObserver | null = null;
-    if (video && "IntersectionObserver" in window) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) video.play().catch(() => {});
-          else video.pause();
-        },
-        { threshold: 0.15 }
-      );
-      observer.observe(video);
-    }
-    return () => observer?.disconnect();
-  }, [activeZone.id]);
-
+  // Scroll-scrubbed word illumination on section headline
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      gsap.from("[data-explore-reveal]", {
-        y: 32,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
+      const words = headingRef.current?.querySelectorAll(`.${styles.word}`);
+      if (words?.length) {
+        gsap.fromTo(
+          words,
+          { opacity: 0.26, y: 10 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: "top 86%",
+              end: "bottom 54%",
+              scrub: 0.45,
+            },
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const handleKeyNav = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      setActiveIndex((prev) => (prev + 1) % ZONES.length);
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      setActiveIndex((prev) => (prev - 1 + ZONES.length) % ZONES.length);
+  // Native CSS Sticky Scroll Progress (same motion architecture as AuraFeatureSequence)
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let rafId = 0;
+    const updateFromScroll = () => {
+      rafId = 0;
+      if (window.innerWidth < 1024) return;
+      const runway = runwayRef.current;
+      if (!runway) return;
+
+      const rect = runway.getBoundingClientRect();
+      const stickyOffset = 88;
+      const scrollable = rect.height - (window.innerHeight - stickyOffset);
+      if (scrollable <= 0) return;
+
+      const scrolled = stickyOffset - rect.top;
+      const progress = Math.min(0.9999, Math.max(0, scrolled / scrollable));
+      const idx = Math.floor(progress * ZONES.length);
+      setActiveIdx((prev) => (prev === idx ? prev : idx));
+    };
+
+    const onScroll = () => {
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(updateFromScroll);
+      }
+    };
+
+    updateFromScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const handleSelectZone = (idx: number) => {
+    setActiveIdx(idx);
+    const runway = runwayRef.current;
+    if (runway && window.innerWidth >= 1024) {
+      const stickyOffset = 88;
+      const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
+      const scrollable = runway.offsetHeight - (window.innerHeight - stickyOffset);
+      if (scrollable > 0) {
+        const targetY =
+          runwayTop - stickyOffset + ((idx + 0.35) / ZONES.length) * scrollable;
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      }
     }
   };
+
+  const current = ZONES[activeIdx];
+  const words = content.headline.trim().split(/\s+/);
 
   return (
     <section className={styles.explore} id="explore-site-section" ref={sectionRef}>
       <div className={styles.container}>
-        <div className={styles.headerRow} data-explore-reveal>
-          <div className={styles.eyebrowBox}>
-            <span className={styles.eyebrow}>INTERACTIVE TOWER EXPLORER</span>
-            {projectTitle && <span className={styles.projectMeta}>{projectTitle}</span>}
-          </div>
-          <h2 className={styles.heading}>{content.headline}</h2>
+        <div className={styles.headerRow}>
+          <h2 className={styles.heading} ref={headingRef}>
+            {words.map((word, idx) => (
+              <span key={`${word}-${idx}`}>
+                <span className={styles.word}>{word}</span>
+                {idx < words.length - 1 ? " " : ""}
+              </span>
+            ))}
+          </h2>
         </div>
 
-        {/* Keyboard & Touch Accessible Zone Selector */}
-        <div
-          className={styles.zoneTabs}
-          role="tablist"
-          aria-label="Explore Aura building levels"
-          onKeyDown={handleKeyNav}
-          data-explore-reveal
-        >
-          {ZONES.map((zone, idx) => {
-            const isActive = idx === activeIndex;
-            return (
-              <button
-                type="button"
-                role="tab"
-                id={`zone-tab-${zone.id}`}
-                aria-selected={isActive}
-                aria-controls={`zone-panel-${zone.id}`}
-                tabIndex={isActive ? 0 : -1}
-                key={zone.id}
-                onClick={() => setActiveIndex(idx)}
-                className={`${styles.zoneTab}${isActive ? ` ${styles.zoneTabActive}` : ""}`}
-              >
-                <span className={styles.tabIndex}>{zone.index}</span>
-                <span className={styles.tabName}>{zone.name}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Desktop Sticky Scroll-Driven 3D Deck Runway */}
+        <div className={styles.desktopRunway} ref={runwayRef}>
+          <div className={styles.desktopSticky}>
+            <div className={styles.selectorRail} role="tablist" aria-label="Explore Aura building levels">
+              {ZONES.map((zone, idx) => {
+                const isActive = idx === activeIdx;
+                return (
+                  <button
+                    key={zone.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`${styles.railBtn}${isActive ? ` ${styles.railBtnActive}` : ""}`}
+                    onClick={() => handleSelectZone(idx)}
+                  >
+                    <span className={styles.railIndex}>({zone.index})</span>
+                    <span className={styles.railLabel}>{zone.tag}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-        {/* Framed Interactive Architectural Stage */}
-        <div
-          className={styles.mediaPanel}
-          id={`zone-panel-${activeZone.id}`}
-          role="tabpanel"
-          aria-labelledby={`zone-tab-${activeZone.id}`}
-          data-explore-reveal
-        >
-          <div className={styles.buildingViewer}>
-            {activeZone.video ? (
-              <video
-                ref={videoRef}
-                key={activeZone.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                poster={activeZone.image}
-                className={styles.viewerMedia}
-                aria-hidden="true"
-              >
-                <source src={activeZone.video} type="video/mp4" />
-              </video>
-            ) : (
-              <img
-                key={activeZone.image}
-                src={activeZone.image}
-                alt={activeZone.title}
-                className={styles.viewerMedia}
-              />
-            )}
-            <div className={styles.viewerOverlay} />
-          </div>
+            <div className={styles.stageCard}>
+              <div className={styles.stageCopy}>
+                <div className={styles.stageNumberRow}>
+                  <span className={styles.stageNumber}>({current.index})</span>
+                  <span className={styles.stageSubtitle}>{current.subtitle}</span>
+                </div>
 
-          <div className={styles.cardWrapper}>
-            <div className={styles.card}>
-              <div className={styles.cardTopRow}>
-                <span className={styles.cardBadge}>{activeZone.badge}</span>
-                <span className={styles.cardCounter}>
-                  {activeZone.index} / 0{ZONES.length}
-                </span>
+                <h3 className={styles.stageTitle} key={`t-${current.index}`}>
+                  {current.title}
+                </h3>
+                <p className={styles.stageDesc}>{current.description}</p>
+
+                <ul className={styles.factList}>
+                  {current.facts.map((fact) => (
+                    <li key={fact}>
+                      <span aria-hidden="true">✦</span>
+                      <span>{fact}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className={styles.ctaRow}>
+                  <a href="#floor-plans" className={`${styles.primaryBtn} roll-button`}>
+                    <span className="roll-text" data-text="Inspect Floor Plans ↓">
+                      Inspect Floor Plans ↓
+                    </span>
+                  </a>
+                  <button
+                    type="button"
+                    className={styles.enquireLink}
+                    onClick={() =>
+                      window.dispatchEvent(
+                        new CustomEvent("lifestyle_open_enquiry", {
+                          detail: {
+                            project: "Aura by Lifestyle",
+                            source: `Tower Explorer - ${current.title}`,
+                          },
+                        })
+                      )
+                    }
+                  >
+                    Private Enquiry →
+                  </button>
+                </div>
+
+                <div className={styles.bottomBar}>
+                  <div className={styles.progressFooter}>
+                    <div className={styles.progressTrack}>
+                      <div
+                        className={styles.progressFill}
+                        style={{ width: `${((activeIdx + 1) / ZONES.length) * 100}%` }}
+                      />
+                    </div>
+                    <span className={styles.progressCount}>
+                      {current.index} / 0{ZONES.length}
+                    </span>
+                  </div>
+
+                  <div className={styles.deckControls}>
+                    <button
+                      type="button"
+                      className={styles.deckStepBtn}
+                      onClick={() => handleSelectZone((activeIdx - 1 + ZONES.length) % ZONES.length)}
+                      aria-label="Previous tower level"
+                    >
+                      ← Prev
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.deckStepBtn}
+                      onClick={() => handleSelectZone((activeIdx + 1) % ZONES.length)}
+                      aria-label="Next tower level"
+                    >
+                      Next →
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <h3 className={styles.cardTitle}>{activeZone.title}</h3>
-              <p className={styles.cardSublabel}>{activeZone.sublabel}</p>
-              <p className={styles.cardDescription}>{activeZone.description}</p>
-
-              <div className={styles.specChips}>
-                {activeZone.specs.map((spec) => (
-                  <span className={styles.specChip} key={spec}>
-                    ✦ {spec}
-                  </span>
-                ))}
-              </div>
-
-              <div className={styles.cardActions}>
-                <a href="#floor-plans" className={`${styles.cardActionBtn} roll-button`}>
-                  <span className="roll-text" data-text="Inspect Floor Plates ↓">
-                    Inspect Floor Plates ↓
-                  </span>
-                </a>
-                <button
-                  type="button"
-                  className={styles.enquireLink}
-                  onClick={() =>
-                    window.dispatchEvent(
-                      new CustomEvent("lifestyle_open_enquiry", {
-                        detail: { project: "Aura by Lifestyle", source: `Tower Explorer - ${activeZone.name}` },
-                      })
-                    )
-                  }
-                >
-                  Request Brochure →
-                </button>
+              <div className={styles.deckStage}>
+                {ZONES.map((zone, idx) => {
+                  const isFront = idx === activeIdx;
+                  const styleObj = getDeckTransform(idx, activeIdx);
+                  return (
+                    <div
+                      key={zone.id}
+                      className={`${styles.flyingCard}${isFront ? ` ${styles.flyingCardActive}` : ""}`}
+                      style={styleObj}
+                      onClick={() => handleSelectZone(idx)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Focus (${zone.index}) ${zone.title}`}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleSelectZone(idx);
+                        }
+                      }}
+                    >
+                      {zone.video && isFront ? (
+                        <video
+                          src={zone.video}
+                          poster={zone.image}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="metadata"
+                          className={styles.flyingMedia}
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <img
+                          src={zone.image}
+                          alt={zone.title}
+                          className={styles.flyingMedia}
+                          loading="lazy"
+                        />
+                      )}
+                      <div className={styles.flyingScrim} />
+                      <div className={styles.flyingCardCaption}>
+                        <div className={styles.flyingIndexRow}>
+                          <span className={styles.flyingLine} />
+                          <span>({zone.index})</span>
+                        </div>
+                        <h4 className={styles.flyingTitle}>{zone.title}</h4>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile / Tablet Responsive Stack */}
+        <div className={styles.mobileStack}>
+          {ZONES.map((zone) => (
+            <article className={styles.mobileCard} key={zone.id}>
+              <div className={styles.mobileImgWrap}>
+                {zone.video ? (
+                  <video
+                    src={zone.video}
+                    poster={zone.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className={styles.mobileImg}
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <img
+                    src={zone.image}
+                    alt={zone.title}
+                    className={styles.mobileImg}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div className={styles.mobileBody}>
+                <span className={styles.mobileIndex}>({zone.index}) · {zone.tag}</span>
+                <h3 className={styles.mobileTitle}>{zone.title}</h3>
+                <p className={styles.mobileDesc}>{zone.description}</p>
+                <ul className={styles.factList}>
+                  {zone.facts.map((fact) => (
+                    <li key={fact}>
+                      <span aria-hidden="true">✦</span>
+                      <span>{fact}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

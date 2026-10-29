@@ -14,7 +14,6 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
 
       <div className={styles.container}>
         <div className={styles.leftCol}>
-          <span className={styles.eyebrow}>PRIVATE ADVISORY &amp; SITE VISITS</span>
           <h2 className={styles.heading}>
             RESERVE YOUR PRIVATE <span>SITE WALKTHROUGH</span>
           </h2>
@@ -50,7 +49,6 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
 
         <div className={styles.formCard}>
           <div className={styles.formHeader}>
-            <span className={styles.formBadge}>DIRECT DEVELOPER ENQUIRY</span>
             <h3 className={styles.formTitle}>Schedule Callback Or Visit</h3>
             <p className={styles.formSub}>
               Leave your contact details and our Camp site office team will reach out promptly.

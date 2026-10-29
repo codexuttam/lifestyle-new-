@@ -1,135 +1,164 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import styles from "./LifestyleInteractiveShowcase.module.css";
 
-const UNITS = [
+interface UnifiedPlate {
+  id: string;
+  index: string;
+  tabLabel: string;
+  title: string;
+  subtitle: string;
+  img: string;
+  video?: string;
+  isBlueprint?: boolean;
+  summary: string;
+  rooms: { name: string; dim: string }[];
+  features: string[];
+}
+
+const PLATES: UnifiedPlate[] = [
   {
-    id: "3bhk",
-    title: "3 BHK Royal Luxury Suite (Type 3/4)",
-    badge: "1,550 SQFT SUPER BUILT-UP",
-    price: "Price on Request",
-    img: "/assets/projects/lifestyle-homes/floor-plans/plan-3bhk-3d-iso.jpg",
+    id: "landmark",
+    index: "01",
+    tabLabel: "8-Storey Landmark",
+    title: "Delivered 8-Storey Landmark",
+    subtitle: "DPS Road, Parvati Nagar · 100% Ready Possession",
+    img: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    video: "/videos/lifestyle-showcase-clip.mp4",
+    isBlueprint: false,
     summary:
-      "A grand 3-bedroom corner suite featuring 3 expansive private balconies, dedicated master wardrobe dressing niche, kitchen with store & utility, and 100% Vastu alignment on DPS Road.",
+      "Completed 8-storey residential and commercial landmark on 24-metre DPS Road featuring 30 Vastu residences, 24 high-street showrooms, granite lobby, and dual ARD elevators.",
     rooms: [
-      { name: "Drawing Hall", dim: "11'0\" × 18'0\"" },
-      { name: "Dinning Area", dim: "10'0\" × 10'3\"" },
-      { name: "Modular Kitchen", dim: "10'0\" × 9'6\"" },
-      { name: "Master Suite", dim: "12'4\" × 13'0\" + Dressing" },
-      { name: "Bedroom 2", dim: "11'0\" × 12'0\"" },
-      { name: "Bedroom 3", dim: "11'0\" × 11'0\"" },
-      { name: "Private Balconies", dim: "6'0\" Wide Balcony + Veranda" },
-      { name: "Bathrooms", dim: "3 Toilets (Jaquar Fittings)" },
+      { name: "Residences", dim: "18 × 2 BHK + 12 × 3 BHK" },
+      { name: "Commercial", dim: "24 Road-Facing Showrooms" },
+      { name: "Elevators", dim: "Passenger + Stretcher ARD" },
+      { name: "MahaRERA", dim: "P50300054447 (Delivered)" },
     ],
     features: [
-      "Triple Balcony layout ensuring 360-degree cross-ventilation and natural daylight",
-      "Minimum 2' × 4' nano-polished double-charged vitrified floor tiling",
-      "Teak-wood frame main door with video call doorbell for maximum family safety",
-      "Concealed copper wiring with modular switches and dedicated inverter backup line",
+      "100% delivered landmark with immediate key handover and operational retail",
+      "Earthquake-resistant IS-code RCC frame with solar-powered common lighting",
+      "24×7 CCTV surveillance, gated security cabin, and basement + stilt parking",
+    ],
+  },
+  {
+    id: "3bhk",
+    index: "02",
+    tabLabel: "3 BHK Royal Suite",
+    title: "3 BHK Royal Luxury Suite (Type 3/4)",
+    subtitle: "1,550 Sqft Super Built-Up · Corner Vastu Suite",
+    img: "/assets/projects/lifestyle-homes/floor-plans/plan-3bhk-3d-iso.jpg",
+    isBlueprint: true,
+    summary:
+      "Grand 3-bedroom corner suite featuring 3 private balconies, master wardrobe dressing niche, kitchen with store and utility, and 360-degree daylight.",
+    rooms: [
+      { name: "Drawing Hall", dim: "11'0\" × 18'0\"" },
+      { name: "Dining & Kitchen", dim: "10'0\" × 10'3\" · 10'0\" × 9'6\"" },
+      { name: "Master Suite", dim: "12'4\" × 13'0\" + Dressing" },
+      { name: "Bedrooms 2 & 3", dim: "11'0\" × 12'0\" · 11'0\" × 11'0\"" },
+    ],
+    features: [
+      "Triple-balcony corner layout ensuring natural cross-ventilation",
+      "2' × 4' nano-polished double-charged vitrified floor slabs",
+      "Teak-wood frame main door with video call doorbell and Jaquar fittings",
     ],
   },
   {
     id: "2bhk",
+    index: "03",
+    tabLabel: "2 BHK Comfort Home",
     title: "2 BHK Comfort Modern Home (Type 1 & 2)",
-    badge: "1,100 – 1,245 SQFT",
-    price: "Price on Request",
+    subtitle: "1,100 – 1,245 Sqft · East & North Vastu",
     img: "/assets/projects/lifestyle-homes/floor-plans/plan-2bhk-3d-iso.jpg",
+    isBlueprint: true,
     summary:
-      "Thoughtfully designed 2 BHK residences (Flat Type-1 & Type-2) with zero wasted corridors, expansive 16-foot drawing room, separate dining area, dual sit-outs, and utility wash.",
+      "Zero-wasted-corridor 2 BHK residences with an expansive 16-foot drawing hall, dedicated dining lobby, dual sit-out balconies, and separate utility wash.",
     rooms: [
       { name: "Drawing Room", dim: "16'0\" × 11'0\"" },
-      { name: "Dinning Lobby", dim: "9'0\" × 13'5\"" },
+      { name: "Dining Lobby", dim: "9'0\" × 13'5\"" },
       { name: "Master Bedroom", dim: "12'10\" × 11'10\"" },
-      { name: "Children's Room", dim: "11'0\" × 11'0\"" },
-      { name: "Kitchen & Utility", dim: "8'11\" × 8'10\" (Utility 6'9\")" },
-      { name: "Sit-Out Balconies", dim: "6'11\" Wide Sit-Out" },
-      { name: "Bathrooms", dim: "2 Toilets (Master + Common)" },
-      { name: "Orientation", dim: "100% Vastu East / North" },
+      { name: "Bedroom 2 & Kitchen", dim: "11'0\" × 11'0\" · 8'11\" × 8'10\"" },
     ],
     features: [
-      "Zero dead-space floor design maximizing usable carpet and living space",
-      "Granite kitchen counter with stainless steel sink and semi-modular trolley provision",
-      "Powder-coated 3-track aluminum sliding windows with integrated mosquito net",
-      "24-Hour pressurized dual water supply (Borewell + Common Sump + RCC Overhead)",
+      "Zero dead-space layout maximizing usable family carpet area",
+      "Granite kitchen counter with stainless steel sink and utility veranda",
+      "3-track powder-coated aluminum windows with integrated mosquito mesh",
     ],
   },
   {
     id: "typical",
+    index: "04",
+    tabLabel: "Typical Floor Plate",
     title: "Typical 2nd to 6th Floor Plan",
-    badge: "5 FLATS / FLOOR",
-    price: "Level 2 to 6",
+    subtitle: "5 Residences Per Floor · 9-Foot Central Lobby",
     img: "/assets/projects/lifestyle-homes/floor-plans/plan-typical-floor.jpg",
+    isBlueprint: true,
     summary:
-      "Cluster of 5 spacious residences per floor arranged along a wide 9-foot central lobby, served by dual automatic Otis elevators (stretcher ARD lift) and fire safety stairs.",
+      "Low-density cluster of 5 residences per floor arranged around a 9-foot granite lobby served by passenger and stretcher ARD elevators.",
     rooms: [
-      { name: "Central Lobby", dim: "9'0\" Wide Grand Lobby" },
-      { name: "Flat 1 (3 BHK)", dim: "1,684 SQFT Super Built-up" },
-      { name: "Flat 2 (2 BHK)", dim: "1,271 SQFT Super Built-up" },
-      { name: "Flat 3 (3 BHK)", dim: "1,512 SQFT Super Built-up" },
-      { name: "Flat 4 (3 BHK)", dim: "1,595 SQFT Super Built-up" },
-      { name: "Flat 5 (2 BHK)", dim: "1,246 SQFT Super Built-up" },
-      { name: "Elevators", dim: "1 Passenger + 1 Stretcher ARD" },
-      { name: "Ventilation", dim: "3-Side Open Light Shafts" },
+      { name: "3 BHK Units", dim: "1,512 – 1,684 Sqft" },
+      { name: "2 BHK Units", dim: "1,246 – 1,271 Sqft" },
+      { name: "Central Lobby", dim: "9'0\" Wide Granite Corridor" },
+      { name: "Lift Core", dim: "1 Passenger + 1 Stretcher ARD" },
     ],
     features: [
-      "Privacy-focused entrance verandas for each flat avoiding direct eye contact",
-      "Granite finished common corridors and staircase with SS safety railings",
-      "Independent light and ventilation shafts ensuring fresh air flow into all kitchens",
-      "Concealed electrical and plumbing shafts for easy maintenance without disruption",
+      "Privacy-oriented entrance foyers avoiding direct sightlines between flats",
+      "3-side open ventilation and dedicated light shafts for every kitchen",
+      "Concealed plumbing and electrical service ducts for effortless upkeep",
     ],
   },
   {
     id: "commercial",
-    title: "24 Road-Facing Retail Showrooms",
-    badge: "12 GROUND + 12 FIRST",
-    price: "Price on Request",
+    index: "05",
+    tabLabel: "24 Shops & Parking",
+    title: "24 Retail Showrooms & Basement Bays",
+    subtitle: "12 Ground + 12 First Floor · 24m DPS Road",
     img: "/assets/projects/lifestyle-homes/floor-plans/plan-ground-commercial.jpg",
+    isBlueprint: true,
     summary:
-      "24 road-facing prime commercial showrooms on DPS Road, Parvati Nagar. Delivered with full glass display frontage and customer parking, already hosting Dee Bakers & MORE.",
+      "24 road-facing glass showrooms on arterial DPS Road (hosting Dee Bakers and MORE Supermarket) paired with two-way ramped basement and stilt resident parking.",
     rooms: [
-      { name: "Ground Floor", dim: "12 Shops (191 to 337 SQFT)" },
-      { name: "First Floor", dim: "12 Shops (170 to 400 SQFT)" },
-      { name: "Road Width", dim: "24 Metres Main DPS Road" },
-      { name: "Frontage", dim: "Direct Street-Level Glass Front" },
-      { name: "Customer Parking", dim: "Dedicated Front Stalls" },
-      { name: "Power", dim: "3-Phase Commercial Dedicated" },
-      { name: "Footfall", dim: "Parvati Nagar Core Commercial" },
-      { name: "Possession", dim: "Delivered & Fully Operational" },
+      { name: "Ground Showrooms", dim: "12 Shops (191 – 337 Sqft)" },
+      { name: "First Showrooms", dim: "12 Shops (170 – 400 Sqft)" },
+      { name: "Frontage", dim: "24-Metre Main DPS Road" },
+      { name: "Parking", dim: "Customer Bays + Basement Stalls" },
     ],
     features: [
-      "High visibility on 24-metre wide arterial DPS Road connecting Badnera and Akoli",
-      "Surrounded by dense residential developments, DPS School, and hospital hubs",
-      "Full glass frontage and wide paved walkways with prominent branding signage",
-      "24/7 CCTV surveillance and attractive gated security for retail peace of mind",
-    ],
-  },
-  {
-    id: "basement",
-    title: "Basement & Stilt Parking Plan",
-    badge: "DEDICATED SLOTS",
-    price: "Reserved Parking",
-    img: "/assets/projects/lifestyle-homes/floor-plans/plan-basement-parking.jpg",
-    summary:
-      "Spacious basement parking facility with clearly delineated 4-wheeler and 2-wheeler bays, wide two-way ramped driveways, automated sump, and direct elevator connectivity to all residences.",
-    rooms: [
-      { name: "Driveway", dim: "Two-Way Ramped Access" },
-      { name: "Car Bays", dim: "Dedicated Marked Stalls" },
-      { name: "2-Wheeler", dim: "Dedicated Parking Zone" },
-      { name: "Surveillance", dim: "24/7 CCTV (15-Day Backup)" },
-      { name: "Lighting", dim: "Automated Energy-Efficient LED" },
-      { name: "Access", dim: "Direct Lift to Residence" },
-      { name: "Drainage", dim: "Automated Sump Dewatering" },
-      { name: "Security", dim: "Attractive Gate & Guard Cabin" },
-    ],
-    features: [
-      "Direct weatherproof elevator access from basement straight to your flat floor",
-      "High ceiling clearance accommodating SUVs and tall passenger vehicles",
-      "Heavy-duty paved floor finish resistant to oil spills and tyre wear",
-      "Round-the-clock security surveillance recording with 15-day storage backup",
+      "Direct street-level glass display frontage with dedicated customer parking",
+      "Segregated residential lift access straight from basement to apartment floors",
+      "3-phase commercial power and round-the-clock CCTV security coverage",
     ],
   },
 ];
+
+function getDeckTransform(idx: number, activeIdx: number) {
+  const diff = idx - activeIdx;
+  if (diff === 0) {
+    return {
+      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
+      opacity: 1,
+      zIndex: 30,
+      filter: "brightness(1)",
+    };
+  }
+  if (diff > 0) {
+    const clamped = Math.min(diff, 3);
+    return {
+      transform: `translate3d(${clamped * 28}px, ${clamped * 14}px, ${-clamped * 50}px) rotateZ(${clamped * 2.8}deg) scale(${1 - clamped * 0.055})`,
+      opacity: diff > 3 ? 0 : Math.max(0.28, 0.85 - diff * 0.2),
+      zIndex: 30 - diff,
+      filter: "brightness(0.6)",
+    };
+  }
+  const abs = Math.min(Math.abs(diff), 2);
+  return {
+    transform: `translate3d(${-abs * 30}px, ${-abs * 12}px, ${-abs * 60}px) rotateZ(${-abs * 2.8}deg) scale(${1 - abs * 0.06})`,
+    opacity: Math.abs(diff) > 2 ? 0 : 0.36,
+    zIndex: 20 - abs,
+    filter: "brightness(0.48)",
+  };
+}
 
 const GALLERY_ITEMS = [
   {
@@ -143,35 +172,35 @@ const GALLERY_ITEMS = [
     id: 2,
     category: "Actual",
     title: "Active High-Street Retail Arcade",
-    desc: "Delivered shops with Dee Bakers, MORE Supermarket, and bustling customer parking",
+    desc: "Delivered shops with Dee Bakers, MORE Supermarket, and dedicated customer parking",
     src: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-angled.jpg",
   },
   {
     id: 3,
     category: "Architecture",
-    title: "Daytime Architectural Elevation",
-    desc: "Official architectural rendering from developer brochure showing corner geometry",
-    src: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg",
+    title: "4K Architectural Elevation & Retail Galleria",
+    desc: "Corner geometry, cantilevered balconies, and double-storey high-street frontage on DPS Road",
+    src: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
   },
   {
     id: 4,
-    category: "Architecture",
-    title: "Twilight Evening Illumination",
-    desc: "Architectural facade rendered with glowing commercial galleria and private balconies",
-    src: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-night.jpg",
+    category: "Commercial",
+    title: "DPS Road Commercial Frontage",
+    desc: "24 road-facing retail showrooms across Ground and First levels with direct street bays",
+    src: "/assets/projects/lifestyle-homes/building/building-hero-polished.jpg",
   },
   {
     id: 5,
-    category: "Commercial",
-    title: "Double-Storey Commercial Galleria",
-    desc: "High-street retail showrooms with double-height signage and wide pedestrian walkways",
-    src: "/assets/projects/lifestyle-homes/gallery/lifestyle-shops-commercial.jpg",
+    category: "Interiors",
+    title: "Designer Chandelier & Wood-Paneled Lobby",
+    desc: "Delivered arrival corridor with warm ceiling panelling and herringbone floor tiling",
+    src: "/assets/projects/lifestyle-homes/interiors/night-view.jpg",
   },
   {
     id: 6,
     category: "Interiors",
     title: "Delivered Finished Living Room",
-    desc: "Actual finished 2 & 3 BHK living hall opening into panoramic sit-out balcony",
+    desc: "Actual finished 2 & 3 BHK living hall opening into a cross-ventilated sit-out balcony",
     src: "/assets/projects/lifestyle-homes/interiors/living-room-polished.jpg",
   },
   {
@@ -197,8 +226,10 @@ export default function LifestyleInteractiveShowcase({
   whatsappHref: string;
   telHref: string;
 }) {
-  const [activeUnitIdx, setActiveUnitIdx] = useState(0);
-  const activeUnit = UNITS[activeUnitIdx];
+  const [activePlateIdx, setActivePlateIdx] = useState(0);
+  const activePlate = PLATES[activePlateIdx];
+  const runwayRef = useRef<HTMLDivElement>(null);
+  const galleryGridRef = useRef<HTMLDivElement>(null);
 
   const [modalMedia, setModalMedia] = useState<{
     src: string;
@@ -218,6 +249,79 @@ export default function LifestyleInteractiveShowcase({
             : item.category === "Interiors" || item.category === "Location"
         );
 
+  // Sticky Scroll-Driven 3D Deck Progress across the 5 Landmark & Layout Plates
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let rafId = 0;
+    const updateFromScroll = () => {
+      rafId = 0;
+      if (window.innerWidth < 1024) return;
+      const runway = runwayRef.current;
+      if (!runway) return;
+
+      const rect = runway.getBoundingClientRect();
+      const stickyOffset = 88;
+      const scrollable = rect.height - (window.innerHeight - stickyOffset);
+      if (scrollable <= 0) return;
+
+      const scrolled = stickyOffset - rect.top;
+      const progress = Math.min(0.9999, Math.max(0, scrolled / scrollable));
+      const idx = Math.floor(progress * PLATES.length);
+      setActivePlateIdx((prev) => (prev === idx ? prev : idx));
+    };
+
+    const onScroll = () => {
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(updateFromScroll);
+      }
+    };
+
+    updateFromScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const handleSelectPlate = (idx: number) => {
+    setActivePlateIdx(idx);
+    const runway = runwayRef.current;
+    if (runway && window.innerWidth >= 1024) {
+      const stickyOffset = 88;
+      const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
+      const scrollable = runway.offsetHeight - (window.innerHeight - stickyOffset);
+      if (scrollable > 0) {
+        const targetY =
+          runwayTop - stickyOffset + ((idx + 0.35) / PLATES.length) * scrollable;
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (!galleryGridRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cards = Array.from(galleryGridRef.current.children);
+    if (!cards.length) return;
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 18 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        stagger: 0.05,
+        ease: "power3.out",
+        clearProps: "transform,opacity",
+      }
+    );
+  }, [galleryFilter]);
+
   // Dynamic EMI Calculator
   const [priceLakhs, setPriceLakhs] = useState(55);
   const [downPercent, setDownPercent] = useState(20);
@@ -236,287 +340,466 @@ export default function LifestyleInteractiveShowcase({
 
   return (
     <div className={styles.wrapper}>
-      {/* ================= 1. DYNAMIC UNIT PLANS & MATRIX ================= */}
+      {/* ================= 1. UNIFIED LANDMARK EXPLORER & 3D FLOOR LAYOUTS (STICKY SCROLL 3D DECK) ================= */}
       <section className={styles.unitSection} id="unit-plans">
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>
-            Architectural <span>Cut-Sections &amp; Layouts</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            High-resolution 3D isometric cut-sections from the official Lifestyle Home Spaces brochure. Inspect room dimensions, private balconies, and 100% Vastu compliance.
-          </p>
-        </div>
-
-        {/* Unit Tabs */}
-        <div className={styles.unitTabs}>
-          {UNITS.map((unit, idx) => (
-            <button
-              key={unit.id}
-              type="button"
-              className={`${styles.unitTab} ${
-                activeUnitIdx === idx ? styles.unitTabActive : ""
-              }`}
-              onClick={() => setActiveUnitIdx(idx)}
-            >
-              <span>{unit.title}</span>
-              <span className={styles.unitBadge}>{unit.badge}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Unit Card */}
-        <div className={styles.unitCard}>
-          <div className={styles.unitMediaCol}>
-            <button
-              type="button"
-              className={styles.zoomTrigger}
-              onClick={() =>
-                setModalMedia({
-                  src: activeUnit.img,
-                  title: `${activeUnit.title} — Floor Plan Layout`,
-                  desc: activeUnit.summary,
-                })
-              }
-            >
-              <i className="fa-solid fa-expand" />
-              <span>Click To Zoom in 4K</span>
-            </button>
-            <img
-              src={activeUnit.img}
-              alt={activeUnit.title}
-              className={styles.unitPlanImg}
-              onClick={() =>
-                setModalMedia({
-                  src: activeUnit.img,
-                  title: `${activeUnit.title} — Floor Plan Layout`,
-                  desc: activeUnit.summary,
-                })
-              }
-            />
+        <span id="explore-site-section" className={styles.anchorAlias} aria-hidden="true" />
+        <span id="explore-lifestyle-section" className={styles.anchorAlias} aria-hidden="true" />
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHeader} data-reveal>
+            <h2 className={styles.sectionTitle}>
+              LANDMARK EXPLORER &amp; <span>3D FLOOR LAYOUTS</span>
+            </h2>
+            <p className={styles.sectionSubtitle}>
+              Scroll through the delivered 8-storey landmark and official 3D isometric cut-sections—inspect room dimensions, Vastu alignment, and commercial floor plates in motion.
+            </p>
           </div>
 
-          <div className={styles.unitInfoCol}>
-            <div className={styles.unitTitleRow}>
-              <div>
-                <span className={styles.unitPlanBadge}>{activeUnit.badge}</span>
-                <h3 className={styles.unitTitle}>{activeUnit.title}</h3>
+          {/* Desktop Sticky Scroll-Driven 3D Runway */}
+          <div className={styles.desktopRunway} ref={runwayRef}>
+            <div className={styles.desktopSticky}>
+              <div className={styles.selectorRail} role="tablist" aria-label="Landmark and floor plan plates">
+                {PLATES.map((plate, idx) => {
+                  const isActive = idx === activePlateIdx;
+                  return (
+                    <button
+                      key={plate.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      className={`${styles.railBtn}${isActive ? ` ${styles.railBtnActive}` : ""}`}
+                      onClick={() => handleSelectPlate(idx)}
+                    >
+                      <span className={styles.railIndex}>({plate.index})</span>
+                      <span className={styles.railLabel}>{plate.tabLabel}</span>
+                    </button>
+                  );
+                })}
               </div>
-              <span className={styles.unitPrice}>{activeUnit.price}</span>
-            </div>
 
-            <p className={styles.unitSummary}>{activeUnit.summary}</p>
+              <div className={styles.stageCard}>
+                <div className={styles.stageCopy}>
+                  <div className={styles.stageMetaRow}>
+                    <span className={styles.stageNumber}>({activePlate.index})</span>
+                    <span className={styles.stageSub}>{activePlate.subtitle}</span>
+                  </div>
 
-            <div className={styles.roomGrid}>
-              {activeUnit.rooms.map((r, i) => (
-                <div className={styles.roomBox} key={i}>
-                  <span className={styles.roomName}>{r.name}</span>
-                  <span className={styles.roomDim}>{r.dim}</span>
+                  <h3 className={styles.unitTitle} key={activePlate.id}>
+                    {activePlate.title}
+                  </h3>
+                  <p className={styles.unitSummary}>{activePlate.summary}</p>
+
+                  <div className={styles.roomGrid}>
+                    {activePlate.rooms.map((r) => (
+                      <div className={styles.roomBox} key={r.name}>
+                        <span className={styles.roomName}>{r.name}</span>
+                        <span className={styles.roomDim}>{r.dim}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={styles.unitFeaturesList}>
+                    {activePlate.features.map((feat) => (
+                      <div className={styles.unitFeatureItem} key={feat}>
+                        <span className={styles.featureStar} aria-hidden="true">
+                          ✦
+                        </span>
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={styles.unitActionRow}>
+                    <a
+                      href={`${whatsappHref}?text=${encodeURIComponent(
+                        `Hello Lifestyle Homes, I am interested in "${activePlate.title}" at Lifestyle Home Spaces on DPS Road. Please share pricing and available unit numbers.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${styles.unitWaBtn} roll-button`}
+                    >
+                      <span className="roll-text" data-text="Enquire For This Layout →">
+                        Enquire For This Layout →
+                      </span>
+                    </a>
+
+                    <button
+                      type="button"
+                      className={styles.zoomBtn}
+                      onClick={() =>
+                        setModalMedia({
+                          src: activePlate.img,
+                          title: activePlate.title,
+                          desc: activePlate.summary,
+                        })
+                      }
+                    >
+                      ⤢ Inspect 4K Plate
+                    </button>
+                  </div>
+
+                  <div className={styles.bottomBar}>
+                    <div className={styles.progressFooter}>
+                      <div className={styles.progressTrack}>
+                        <div
+                          className={styles.progressFill}
+                          style={{ width: `${((activePlateIdx + 1) / PLATES.length) * 100}%` }}
+                        />
+                      </div>
+                      <span className={styles.progressCount}>
+                        {activePlate.index} / 0{PLATES.length}
+                      </span>
+                    </div>
+
+                    <div className={styles.deckControls}>
+                      <button
+                        type="button"
+                        className={styles.deckStepBtn}
+                        onClick={() =>
+                          handleSelectPlate((activePlateIdx - 1 + PLATES.length) % PLATES.length)
+                        }
+                        aria-label="Previous layout plate"
+                      >
+                        ← Prev
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.deckStepBtn}
+                        onClick={() => handleSelectPlate((activePlateIdx + 1) % PLATES.length)}
+                        aria-label="Next layout plate"
+                      >
+                        Next →
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
 
-            <div className={styles.unitFeaturesList}>
-              {activeUnit.features.map((feat, i) => (
-                <div className={styles.unitFeatureItem} key={i}>
-                  <i className="fa-solid fa-circle-check" />
-                  <span>{feat}</span>
+                {/* Right: 3D Fanning Live Video & Floor Plan Deck */}
+                <div className={styles.deckStage}>
+                  {PLATES.map((plate, idx) => {
+                    const isFront = idx === activePlateIdx;
+                    const styleObj = getDeckTransform(idx, activePlateIdx);
+                    return (
+                      <div
+                        key={plate.id}
+                        className={`${styles.flyingCard}${
+                          plate.isBlueprint ? ` ${styles.flyingCardBlueprint}` : ""
+                        }${isFront ? ` ${styles.flyingCardActive}` : ""}`}
+                        style={styleObj}
+                        onClick={() =>
+                          isFront
+                            ? setModalMedia({
+                                src: plate.img,
+                                title: plate.title,
+                                desc: plate.summary,
+                              })
+                            : handleSelectPlate(idx)
+                        }
+                        role="button"
+                        tabIndex={0}
+                        aria-label={
+                          isFront ? `Zoom ${plate.title}` : `Focus (${plate.index}) ${plate.title}`
+                        }
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            if (isFront) {
+                              setModalMedia({
+                                src: plate.img,
+                                title: plate.title,
+                                desc: plate.summary,
+                              });
+                            } else {
+                              handleSelectPlate(idx);
+                            }
+                          }
+                        }}
+                      >
+                        {plate.video && isFront ? (
+                          <video
+                            src={plate.video}
+                            poster={plate.img}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="metadata"
+                            className={styles.flyingMediaCover}
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <img
+                            src={plate.img}
+                            alt={plate.title}
+                            className={
+                              plate.isBlueprint ? styles.flyingMediaContain : styles.flyingMediaCover
+                            }
+                            loading="lazy"
+                          />
+                        )}
+                        <div
+                          className={
+                            plate.isBlueprint ? styles.flyingScrimBlueprint : styles.flyingScrim
+                          }
+                        />
+                        <div
+                          className={`${styles.flyingCardCaption}${
+                            plate.isBlueprint ? ` ${styles.flyingCaptionDark}` : ""
+                          }`}
+                        >
+                          <div className={styles.flyingIndexRow}>
+                            <span className={styles.flyingLine} />
+                            <span>({plate.index})</span>
+                            {isFront && (
+                              <span className={styles.zoomBadge}>⤢ Tap to Zoom</span>
+                            )}
+                          </div>
+                          <h4 className={styles.flyingTitle}>{plate.tabLabel}</h4>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
+              </div>
             </div>
+          </div>
 
-            <div className={styles.unitActionRow}>
-              <a
-                href={`${whatsappHref}?text=${encodeURIComponent(
-                  `Hello Lifestyle Homes, I am interested in the ${activeUnit.title} on DPS Road. Please share pricing and available unit numbers.`
-                )}`}
-                className={styles.unitWaBtn}
-              >
-                <i className="fa-brands fa-whatsapp" />
-                <span>Enquire For This Layout</span>
-              </a>
-
-              <a href={telHref} className={styles.unitSecondaryBtn}>
-                <i className="fa-solid fa-phone" />
-                <span>Call Sales Desk</span>
-              </a>
-            </div>
+          {/* Mobile / Tablet Stack */}
+          <div className={styles.mobilePlates}>
+            {PLATES.map((plate) => (
+              <article className={styles.mobilePlateCard} key={plate.id}>
+                <button
+                  type="button"
+                  className={
+                    plate.isBlueprint ? styles.mobileBlueprintWrap : styles.mobilePhotoWrap
+                  }
+                  onClick={() =>
+                    setModalMedia({
+                      src: plate.img,
+                      title: plate.title,
+                      desc: plate.summary,
+                    })
+                  }
+                >
+                  {plate.video ? (
+                    <video
+                      src={plate.video}
+                      poster={plate.img}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className={styles.mobileCoverMedia}
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <img
+                      src={plate.img}
+                      alt={plate.title}
+                      className={
+                        plate.isBlueprint ? styles.mobileContainMedia : styles.mobileCoverMedia
+                      }
+                      loading="lazy"
+                    />
+                  )}
+                </button>
+                <div className={styles.mobilePlateBody}>
+                  <span className={styles.mobilePlateMeta}>
+                    ({plate.index}) · {plate.subtitle}
+                  </span>
+                  <h3 className={styles.mobilePlateTitle}>{plate.title}</h3>
+                  <p className={styles.unitSummary}>{plate.summary}</p>
+                  <div className={styles.roomGrid}>
+                    {plate.rooms.map((r) => (
+                      <div className={styles.roomBox} key={r.name}>
+                        <span className={styles.roomName}>{r.name}</span>
+                        <span className={styles.roomDim}>{r.dim}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ================= 2. DELIVERED GALLERY & ARCHITECTURE ================= */}
+      {/* ================= 2. DELIVERED GALLERY & ARCHITECTURE (WARM IVORY) ================= */}
       <section className={styles.gallerySection} id="gallery">
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>
-            Actual Site Photographs &amp; <span>Architectural Views</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Compare real on-site photographs of the delivered building with official architectural renderings and interior finishes.
-          </p>
-        </div>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHeaderLight} data-reveal>
+            <h2 className={styles.sectionTitleLight}>
+              ACTUAL SITE PHOTOGRAPHS &amp; <span>ARCHITECTURAL VIEWS</span>
+            </h2>
+            <p className={styles.sectionSubtitleLight}>
+              Inspect real on-site photographs of the delivered 8-storey landmark alongside architectural views and interior finishes.
+            </p>
+          </div>
 
-        {/* Gallery Filter Buttons */}
-        <div className={styles.filterRow}>
-          {["All", "Actual", "Architecture", "Interiors"].map((filt) => (
-            <button
-              key={filt}
-              type="button"
-              className={`${styles.filterBtn} ${
-                galleryFilter === filt ? styles.filterBtnActive : ""
-              }`}
-              onClick={() => setGalleryFilter(filt)}
-            >
-              {filt === "Actual"
-                ? "On-Site Delivered Photos"
-                : filt === "Architecture"
-                ? "Brochure Renders & Shops"
-                : filt === "Interiors"
-                ? "Lobby & Interiors"
-                : "All Showcase Media"}
-            </button>
-          ))}
-        </div>
+          <div className={styles.filterRow}>
+            {["All", "Actual", "Architecture", "Interiors"].map((filt) => (
+              <button
+                key={filt}
+                type="button"
+                className={`${styles.filterBtn} ${
+                  galleryFilter === filt ? styles.filterBtnActive : ""
+                }`}
+                onClick={() => setGalleryFilter(filt)}
+              >
+                {filt === "Actual"
+                  ? "On-Site Delivered Photos"
+                  : filt === "Architecture"
+                  ? "Elevation & Retail Frontage"
+                  : filt === "Interiors"
+                  ? "Lobby & Interiors"
+                  : "All Showcase Media"}
+              </button>
+            ))}
+          </div>
 
-        {/* Dynamic Media Grid */}
-        <div className={styles.galleryGrid}>
-          {filteredGallery.map((item) => (
-            <div
-              className={styles.galleryCard}
-              key={item.id}
-              onClick={() => setModalMedia(item)}
-            >
-              <img src={item.src} alt={item.title} className={styles.galleryCardImg} />
-              <div className={styles.galleryOverlay}>
-                <span className={styles.galleryTag}>{item.category}</span>
-                <h4 className={styles.galleryItemTitle}>{item.title}</h4>
-                <p className={styles.galleryItemDesc}>{item.desc}</p>
-              </div>
-              <div className={styles.galleryExpandIcon}>
-                <i className="fa-solid fa-expand" />
-              </div>
-            </div>
-          ))}
+          <div className={styles.galleryGrid} ref={galleryGridRef}>
+            {filteredGallery.map((item) => (
+              <button
+                type="button"
+                className={styles.galleryCard}
+                key={item.id}
+                onClick={() => setModalMedia(item)}
+              >
+                <img src={item.src} alt={item.title} className={styles.galleryCardImg} />
+                <div className={styles.galleryOverlay}>
+                  <span className={styles.galleryTag}>{item.category}</span>
+                  <h4 className={styles.galleryItemTitle}>{item.title}</h4>
+                  <p className={styles.galleryItemDesc}>{item.desc}</p>
+                </div>
+                <span className={styles.galleryExpandIcon} aria-hidden="true">
+                  ⤢
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ================= 3. DYNAMIC EMI & AFFORDABILITY CALCULATOR ================= */}
+      {/* ================= 3. DYNAMIC EMI & AFFORDABILITY CALCULATOR (CHARCOAL) ================= */}
       <section className={styles.calcSection} id="emi-calculator">
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>
-            Ready-Possession <span>EMI &amp; Loan Calculator</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Estimate your monthly mortgage payments with bank-approved home loan rates (SBI, HDFC, ICICI, Bank of Baroda).
-          </p>
-        </div>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHeader} data-reveal>
+            <h2 className={styles.sectionTitle}>
+              READY-POSSESSION <span>EMI &amp; LOAN CALCULATOR</span>
+            </h2>
+            <p className={styles.sectionSubtitle}>
+              Estimate monthly mortgage payments with pre-approved home loan rates from SBI, HDFC, ICICI, Axis Bank, and Bank of Baroda.
+            </p>
+          </div>
 
-        <div className={styles.calcCard}>
-          <div className={styles.calcInputsCol}>
-            {/* Input 1: Flat Price */}
-            <div className={styles.sliderGroup}>
-              <div className={styles.sliderHeader}>
-                <label htmlFor="flat-price">Property Value</label>
-                <span className={styles.sliderValueBadge}>₹{priceLakhs} Lakhs</span>
+          <div className={styles.calcCard} data-reveal>
+            <div className={styles.calcInputsCol}>
+              <div className={styles.sliderGroup}>
+                <div className={styles.sliderHeader}>
+                  <label htmlFor="flat-price">Property Value</label>
+                  <span className={styles.sliderValueBadge}>₹{priceLakhs} Lakhs</span>
+                </div>
+                <input
+                  id="flat-price"
+                  type="range"
+                  min="45"
+                  max="120"
+                  step="1"
+                  value={priceLakhs}
+                  onChange={(e) => setPriceLakhs(Number(e.target.value))}
+                  className={styles.rangeSlider}
+                />
+                <div className={styles.sliderMinMax}>
+                  <span>₹45 Lakhs (2 BHK)</span>
+                  <span>₹1.20 Cr (Grand 3 BHK)</span>
+                </div>
               </div>
-              <input
-                id="flat-price"
-                type="range"
-                min="45"
-                max="120"
-                step="1"
-                value={priceLakhs}
-                onChange={(e) => setPriceLakhs(Number(e.target.value))}
-                className={styles.rangeSlider}
-              />
-              <div className={styles.sliderMinMax}>
-                <span>₹45 Lakhs (2 BHK)</span>
-                <span>₹1.20 Cr (Grand 3 BHK)</span>
+
+              <div className={styles.sliderGroup}>
+                <div className={styles.sliderHeader}>
+                  <label htmlFor="down-payment">Down Payment</label>
+                  <span className={styles.sliderValueBadge}>
+                    {downPercent}% (₹{((priceLakhs * downPercent) / 100).toFixed(1)} L)
+                  </span>
+                </div>
+                <input
+                  id="down-payment"
+                  type="range"
+                  min="10"
+                  max="50"
+                  step="5"
+                  value={downPercent}
+                  onChange={(e) => setDownPercent(Number(e.target.value))}
+                  className={styles.rangeSlider}
+                />
+                <div className={styles.sliderMinMax}>
+                  <span>10% Minimum</span>
+                  <span>50% Maximum</span>
+                </div>
+              </div>
+
+              <div className={styles.sliderGroup}>
+                <div className={styles.sliderHeader}>
+                  <label htmlFor="loan-tenure">Loan Tenure</label>
+                  <span className={styles.sliderValueBadge}>{tenureYears} Years</span>
+                </div>
+                <input
+                  id="loan-tenure"
+                  type="range"
+                  min="5"
+                  max="30"
+                  step="1"
+                  value={tenureYears}
+                  onChange={(e) => setTenureYears(Number(e.target.value))}
+                  className={styles.rangeSlider}
+                />
+                <div className={styles.sliderMinMax}>
+                  <span>5 Years</span>
+                  <span>30 Years</span>
+                </div>
               </div>
             </div>
 
-            {/* Input 2: Down Payment */}
-            <div className={styles.sliderGroup}>
-              <div className={styles.sliderHeader}>
-                <label htmlFor="down-payment">Down Payment</label>
-                <span className={styles.sliderValueBadge}>
-                  {downPercent}% (₹{((priceLakhs * downPercent) / 100).toFixed(1)} L)
+            <div className={styles.calcResultsCol}>
+              <div className={styles.emiHighlightBox}>
+                <span className={styles.emiLabel}>ESTIMATED MONTHLY EMI</span>
+                <div className={styles.emiAmount}>
+                  ₹{emi.toLocaleString("en-IN")}
+                  <span className={styles.perMonth}>/ month</span>
+                </div>
+                <span className={styles.rateBadge}>
+                  @ {interestRate}% P.A. · Bank Pre-Approved
                 </span>
               </div>
-              <input
-                id="down-payment"
-                type="range"
-                min="10"
-                max="50"
-                step="5"
-                value={downPercent}
-                onChange={(e) => setDownPercent(Number(e.target.value))}
-                className={styles.rangeSlider}
-              />
-              <div className={styles.sliderMinMax}>
-                <span>10% Minimum</span>
-                <span>50% Maximum</span>
-              </div>
-            </div>
 
-            {/* Input 3: Loan Tenure */}
-            <div className={styles.sliderGroup}>
-              <div className={styles.sliderHeader}>
-                <label htmlFor="loan-tenure">Loan Tenure</label>
-                <span className={styles.sliderValueBadge}>{tenureYears} Years</span>
+              <div className={styles.breakdownList}>
+                <div className={styles.breakdownRow}>
+                  <span>Loan Principal Amount</span>
+                  <strong>₹{(principal / 100000).toFixed(2)} Lakhs</strong>
+                </div>
+                <div className={styles.breakdownRow}>
+                  <span>Total Interest Payable</span>
+                  <strong>₹{(totalInterest / 100000).toFixed(2)} Lakhs</strong>
+                </div>
+                <div className={styles.breakdownRow}>
+                  <span>Total Amount Payable</span>
+                  <strong>₹{(totalPayment / 100000).toFixed(2)} Lakhs</strong>
+                </div>
               </div>
-              <input
-                id="loan-tenure"
-                type="range"
-                min="5"
-                max="30"
-                step="1"
-                value={tenureYears}
-                onChange={(e) => setTenureYears(Number(e.target.value))}
-                className={styles.rangeSlider}
-              />
-              <div className={styles.sliderMinMax}>
-                <span>5 Years</span>
-                <span>30 Years</span>
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.calcResultsCol}>
-            <div className={styles.emiHighlightBox}>
-              <span className={styles.emiLabel}>Estimated Monthly EMI</span>
-              <div className={styles.emiAmount}>
-                ₹{emi.toLocaleString("en-IN")}
-                <span className={styles.perMonth}>/ month</span>
-              </div>
-              <span className={styles.rateBadge}>
-                @ {interestRate}% P.A. (Floating Nationalized Rate)
-              </span>
+              <a
+                href={`${whatsappHref}?text=${encodeURIComponent(
+                  `Hello Lifestyle Homes, I calculated an EMI of approx ₹${emi.toLocaleString("en-IN")}/month for a ₹${priceLakhs} Lakh unit. Please arrange bank loan assistance.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.calcCtaBtn} roll-button`}
+              >
+                <span className="roll-text" data-text="Request Bank Loan Assistance →">
+                  Request Bank Loan Assistance →
+                </span>
+              </a>
             </div>
-
-            <div className={styles.breakdownList}>
-              <div className={styles.breakdownRow}>
-                <span>Loan Principal Amount</span>
-                <strong>₹{(principal / 100000).toFixed(2)} Lakhs</strong>
-              </div>
-              <div className={styles.breakdownRow}>
-                <span>Total Interest Payable</span>
-                <strong>₹{(totalInterest / 100000).toFixed(2)} Lakhs</strong>
-              </div>
-              <div className={styles.breakdownRow}>
-                <span>Total Amount Payable</span>
-                <strong>₹{(totalPayment / 100000).toFixed(2)} Lakhs</strong>
-              </div>
-            </div>
-
-            <a
-              href={`${whatsappHref}?text=${encodeURIComponent(
-                `Hello Lifestyle Homes, I calculated an EMI of approx ₹${emi.toLocaleString("en-IN")}/month for a ₹${priceLakhs} Lakh unit. Please arrange bank loan assistance.`
-              )}`}
-              className={styles.calcCtaBtn}
-            >
-              <i className="fa-solid fa-file-invoice-dollar" />
-              <span>Get Bank Loan Approval &amp; Subsidy Help</span>
-            </a>
           </div>
         </div>
       </section>
@@ -535,9 +818,6 @@ export default function LifestyleInteractiveShowcase({
           >
             <div className={styles.modalHeader}>
               <div className={styles.modalHeaderInfo}>
-                <span className={styles.modalBadge}>
-                  <i className="fa-solid fa-eye" /> 4K Ultra-HD Layout Inspection
-                </span>
                 <h4 className={styles.modalTitle}>{modalMedia.title}</h4>
               </div>
               <button
@@ -546,10 +826,7 @@ export default function LifestyleInteractiveShowcase({
                 onClick={() => setModalMedia(null)}
                 aria-label="Close Preview"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+                ✕ Close
               </button>
             </div>
 
@@ -566,9 +843,9 @@ export default function LifestyleInteractiveShowcase({
                 <p className={styles.modalDesc}>{modalMedia.desc}</p>
                 <div className={styles.modalSpecsRow}>
                   <span>DPS Road, Parvati Nagar, Amravati</span>
-                  <span>•</span>
+                  <span>·</span>
                   <span>MahaRERA: P50300054447</span>
-                  <span>•</span>
+                  <span>·</span>
                   <span>100% Ready Possession</span>
                 </div>
               </div>
@@ -578,16 +855,16 @@ export default function LifestyleInteractiveShowcase({
                   href={`${whatsappHref}?text=${encodeURIComponent(
                     `Hello Lifestyle Homes, I inspected the 4K plan for "${modalMedia.title}". Please share pricing and arrange a site visit.`
                   )}`}
-                  className={styles.modalWaBtn}
+                  className={`${styles.modalWaBtn} roll-button`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fa-brands fa-whatsapp" />
-                  <span>Enquire on WhatsApp</span>
+                  <span className="roll-text" data-text="Enquire on WhatsApp →">
+                    Enquire on WhatsApp →
+                  </span>
                 </a>
                 <a href={telHref} className={styles.modalCallBtn}>
-                  <i className="fa-solid fa-phone" />
-                  <span>Call Sales Desk</span>
+                  Call Sales Desk
                 </a>
               </div>
             </div>

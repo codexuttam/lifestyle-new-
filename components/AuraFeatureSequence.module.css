@@ -1,9 +1,11 @@
-/* ============ SECTION 6: PINNED DESKTOP FEATURE SEQUENCE (WARM IVORY) ============ */
+/* ============ SECTION 6: STICKY DESKTOP 3D FLYING CARD SEQUENCE (WARM IVORY) ============ */
 
 .section {
+  position: relative;
+  z-index: 2;
   background: var(--surface-ivory, #f6f1e7);
   color: var(--ink-on-ivory, #0c0d0c);
-  padding: 112px 40px;
+  padding: 108px 40px 120px;
   border-bottom: 1px solid rgba(12, 13, 12, 0.12);
 }
 
@@ -12,7 +14,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 44px;
+  gap: 36px;
 }
 
 .sectionHeader {
@@ -55,11 +57,19 @@
   color: #8f6b20;
 }
 
-/* Desktop Pinned Stage */
-.desktopStage {
+/* Native CSS Sticky Runway — Strictly In-Flow so Adjacent Sections Never Overlap */
+.desktopRunway {
+  position: relative;
+  height: 275vh;
+  min-height: 1650px;
+}
+
+.desktopSticky {
+  position: sticky;
+  top: 86px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .selectorRail {
@@ -69,22 +79,23 @@
 }
 
 .railBtn {
-  padding: 11px 12px;
+  padding: 10px 12px;
   border-radius: 12px;
   border: 1px solid rgba(12, 13, 12, 0.14);
   background: #faf7f1;
   color: rgba(12, 13, 12, 0.66);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .railBtn:hover {
   border-color: #8f6b20;
   color: #0c0d0c;
+  transform: translateY(-1px);
 }
 
 .railBtnActive {
@@ -95,7 +106,7 @@
 
 .railIndex {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   color: #8f6b20;
   font-variant-numeric: tabular-nums;
@@ -107,9 +118,9 @@
 
 .railLabel {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -118,22 +129,25 @@
 
 .stageCard {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 36px;
-  background: #0c0d0c;
+  grid-template-columns: 0.94fr 1.06fr;
+  gap: 40px;
+  background: #0b0c0b;
   color: #f7efdc;
   border: 1px solid rgba(191, 149, 63, 0.45);
-  border-radius: 26px;
-  padding: 40px;
-  min-height: 510px;
+  border-radius: 28px;
+  padding: 34px 40px;
+  min-height: 460px;
   align-items: center;
-  box-shadow: 0 28px 64px rgba(12, 13, 12, 0.16);
+  box-shadow: 0 32px 72px rgba(12, 13, 12, 0.18);
+  overflow: hidden;
 }
 
 .stageCopy {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 13px;
+  position: relative;
+  z-index: 2;
 }
 
 .stageMeta {
@@ -162,18 +176,18 @@
 
 .stageTitle {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 3.4vw, 3.2rem);
+  font-size: clamp(1.95rem, 3vw, 2.85rem);
   font-weight: 600;
   line-height: 0.96;
   text-transform: uppercase;
   color: #f7efdc;
-  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideUpFade 0.42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideUpFade {
   from {
-    opacity: 0.35;
-    transform: translateY(10px);
+    opacity: 0.25;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -182,7 +196,7 @@
 }
 
 .stageSubtitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -190,8 +204,8 @@
 }
 
 .stageDesc {
-  font-size: 14.5px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.65;
   color: rgba(247, 239, 220, 0.74);
 }
 
@@ -199,15 +213,15 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-top: 6px;
+  gap: 7px;
+  padding-top: 2px;
 }
 
 .factList li {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
   color: #f7efdc;
 }
@@ -217,16 +231,26 @@
   font-size: 11px;
 }
 
-.progressFooter {
-  margin-top: 12px;
+.bottomBar {
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(247, 239, 220, 0.1);
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.progressFooter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .progressTrack {
   flex: 1;
-  height: 2px;
+  height: 2.5px;
   background: rgba(247, 239, 220, 0.14);
   border-radius: 9999px;
   overflow: hidden;
@@ -235,41 +259,135 @@
 .progressFill {
   height: 100%;
   background: linear-gradient(90deg, #bf953f, #fcf6ba);
-  transition: width 0.3s ease;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .progressCount {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: #d5bd87;
   font-variant-numeric: tabular-nums;
 }
 
-.stageMedia {
-  width: 100%;
-  height: 430px;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(191, 149, 63, 0.32);
-  background: #151715;
+.deckControls {
+  display: flex;
+  gap: 8px;
 }
 
-.stageImg {
+.deckStepBtn {
+  padding: 7px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(247, 239, 220, 0.18);
+  background: rgba(247, 239, 220, 0.04);
+  color: #f7efdc;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.deckStepBtn:hover {
+  border-color: #bf953f;
+  background: #bf953f;
+  color: #080808;
+}
+
+/* 3D Fanning Card Stack Stage */
+.deckStage {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flyingCard {
+  position: absolute;
+  width: min(86%, 455px);
+  height: 372px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  background: #121412;
+  box-shadow: 0 28px 68px rgba(0, 0, 0, 0.72);
+  cursor: pointer;
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s ease,
+    filter 0.5s ease,
+    border-color 0.35s ease;
+  will-change: transform, opacity;
+}
+
+.flyingCardActive {
+  border-color: #d4af37;
+  box-shadow: 0 32px 84px rgba(0, 0, 0, 0.85), 0 0 32px rgba(191, 149, 63, 0.2);
+}
+
+.flyingMedia {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: fadeZoom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
 }
 
-@keyframes fadeZoom {
-  from {
-    opacity: 0.45;
-    transform: scale(1.03);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.flyingScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 8, 8, 0.06) 0%, rgba(8, 8, 8, 0.2) 52%, rgba(8, 8, 8, 0.88) 100%);
+  pointer-events: none;
+}
+
+.flyingCardCaption {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flyingIndexRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #d5bd87;
+}
+
+.flyingLine {
+  width: 24px;
+  height: 1px;
+  background: #bf953f;
+}
+
+.videoChip {
+  margin-left: auto;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: rgba(191, 149, 63, 0.24);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #fcf6ba;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.flyingTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: #f7efdc;
 }
 
 /* Mobile / Tablet Stacked Deck */
@@ -282,7 +400,7 @@
     padding: 84px 20px;
   }
 
-  .desktopStage {
+  .desktopRunway {
     display: none;
   }
 
@@ -367,16 +485,3 @@
     grid-template-columns: 1fr;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .desktopStage {
-    display: none;
-  }
-
-  .mobileStack {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-  }
-}
-

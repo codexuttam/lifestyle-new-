@@ -32,17 +32,6 @@ export default function TrustStrip() {
 
   return (
     <section className={styles.section} aria-label="Project credentials and highlights">
-      <div className={styles.header}>
-        <div className={styles.eyebrowRow}>
-          <span className={styles.flankLine} aria-hidden="true" />
-          <span className={styles.eyebrow}>VERIFIED PROJECT CREDENTIALS</span>
-          <span className={styles.flankLine} aria-hidden="true" />
-        </div>
-        <p className={styles.subhead}>
-          CRAFTED WITH TRANSPARENT MAHARERA DOCUMENTATION, DELIVERED PROVENANCE &amp; BENCHMARK ENGINEERING
-        </p>
-      </div>
-
       <div className={styles.marqueeBand}>
         <div className={styles.marqueeTrack}>
           {repeated.map((item, idx) => (

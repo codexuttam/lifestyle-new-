@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { HomeRecord } from "@/lib/schemas/home";
 import type { ProjectRecord } from "@/lib/schemas/project";
 import styles from "./Properties.module.css";
@@ -13,6 +15,34 @@ function getProjectHref(id: string) {
   return "/projects";
 }
 
+function getDeckTransform(idx: number, activeIdx: number) {
+  const diff = idx - activeIdx;
+  if (diff === 0) {
+    return {
+      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
+      opacity: 1,
+      zIndex: 30,
+      filter: "brightness(1)",
+    };
+  }
+  if (diff > 0) {
+    const clamped = Math.min(diff, 2);
+    return {
+      transform: `translate3d(${clamped * 30}px, ${clamped * 15}px, ${-clamped * 50}px) rotateZ(${clamped * 2.8}deg) scale(${1 - clamped * 0.055})`,
+      opacity: Math.max(0.32, 0.85 - diff * 0.22),
+      zIndex: 30 - diff,
+      filter: "brightness(0.6)",
+    };
+  }
+  const abs = Math.min(Math.abs(diff), 2);
+  return {
+    transform: `translate3d(${-abs * 30}px, ${-abs * 12}px, ${-abs * 60}px) rotateZ(${-abs * 2.8}deg) scale(${1 - abs * 0.06})`,
+    opacity: 0.36,
+    zIndex: 20 - abs,
+    filter: "brightness(0.48)",
+  };
+}
+
 export default function Properties({
   projects,
   content,
@@ -20,203 +50,322 @@ export default function Properties({
   projects: ProjectRecord[];
   content: HomeRecord["properties"];
 }) {
-  const [index, setIndex] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const runwayRef = useRef<HTMLDivElement>(null);
 
   const total = projects.length;
 
+  // Scroll-scrubbed word reveal on section heading
   useEffect(() => {
-    const video = videoRef.current;
-    let observer: IntersectionObserver | null = null;
-    if (video && "IntersectionObserver" in window) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) video.play().catch(() => {});
-          else video.pause();
-        },
-        { threshold: 0.15 }
-      );
-      observer.observe(video);
-    }
-    return () => observer?.disconnect();
-  }, [index]);
+    if (total === 0) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const words = headingRef.current?.querySelectorAll(`.${styles.word}`);
+      if (words?.length) {
+        gsap.fromTo(
+          words,
+          { opacity: 0.28, y: 10 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.09,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: "top 86%",
+              end: "bottom 54%",
+              scrub: 0.45,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [total]);
+
+  // Native CSS Sticky Scroll Progress across Portfolio Projects
+  useEffect(() => {
+    if (total <= 1) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let rafId = 0;
+    const updateFromScroll = () => {
+      rafId = 0;
+      if (window.innerWidth < 1024) return;
+      const runway = runwayRef.current;
+      if (!runway) return;
+
+      const rect = runway.getBoundingClientRect();
+      const stickyOffset = 88;
+      const scrollable = rect.height - (window.innerHeight - stickyOffset);
+      if (scrollable <= 0) return;
+
+      const scrolled = stickyOffset - rect.top;
+      const progress = Math.min(0.9999, Math.max(0, scrolled / scrollable));
+      const idx = Math.floor(progress * total);
+      setActiveIdx((prev) => (prev === idx ? prev : idx));
+    };
+
+    const onScroll = () => {
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(updateFromScroll);
+      }
+    };
+
+    updateFromScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [total]);
 
   if (total === 0) return null;
 
-  const feature = projects[index % total];
-  const secondary = projects.filter((_, idx) => idx !== index % total);
+  const handleSelectProject = (idx: number) => {
+    setActiveIdx(idx);
+    const runway = runwayRef.current;
+    if (runway && window.innerWidth >= 1024) {
+      const stickyOffset = 88;
+      const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
+      const scrollable = runway.offsetHeight - (window.innerHeight - stickyOffset);
+      if (scrollable > 0) {
+        const targetY =
+          runwayTop - stickyOffset + ((idx + 0.35) / total) * scrollable;
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      }
+    }
+  };
 
-  const step = (delta: number) =>
-    setIndex((current) => (current + delta + total) % total);
+  const feature = projects[activeIdx % total];
+  const headingWords = content.heading.trim().split(/\s+/);
 
   return (
-    <section className={styles.properties} id="properties-section">
+    <section className={styles.properties} id="properties-section" ref={sectionRef}>
       <div className={styles.container}>
-        {/* Header + Numbered Selection Controls */}
         <div className={styles.topHeader}>
-          <div className={styles.headingBlock}>
-            <span className={styles.eyebrow}>PORTFOLIO SHOWCASE · AMRAVATI</span>
-            <h2 className={styles.heading}>{content.heading}</h2>
-            <p className={styles.desc}>{content.description}</p>
-          </div>
+          <h2 className={styles.heading} ref={headingRef}>
+            {headingWords.map((word, idx) => (
+              <span key={`${word}-${idx}`}>
+                <span className={styles.word}>{word}</span>
+                {idx < headingWords.length - 1 ? " " : ""}
+              </span>
+            ))}
+          </h2>
+          <p className={styles.desc}>{content.description}</p>
+        </div>
 
-          <div className={styles.controlsCluster}>
-            <div className={styles.pillSelectors} role="tablist" aria-label="Select landmark project">
+        {/* Desktop Sticky Scroll-Driven 3D Portfolio Runway */}
+        <div className={styles.desktopRunway} ref={runwayRef}>
+          <div className={styles.desktopSticky}>
+            <div
+              className={styles.selectorRail}
+              style={{ gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))` }}
+              role="tablist"
+              aria-label="Select landmark project"
+            >
               {projects.map((proj, idx) => {
-                const isActive = idx === index % total;
+                const isActive = idx === activeIdx % total;
                 return (
                   <button
                     key={proj.id}
                     type="button"
                     role="tab"
                     aria-selected={isActive}
-                    className={`${styles.selectPill}${isActive ? ` ${styles.selectPillActive}` : ""}`}
-                    onClick={() => setIndex(idx)}
+                    className={`${styles.railBtn}${isActive ? ` ${styles.railBtnActive}` : ""}`}
+                    onClick={() => handleSelectProject(idx)}
                   >
-                    <span className={styles.pillNum}>0{idx + 1}</span>
-                    <span>{proj.title}</span>
+                    <span className={styles.railIndex}>(0{idx + 1})</span>
+                    <span className={styles.railLabel}>{proj.title}</span>
                   </button>
                 );
               })}
             </div>
 
-            <div className={styles.arrowGroup}>
-              <button
-                type="button"
-                className={styles.arrowBtn}
-                aria-label="Previous project"
-                onClick={() => step(-1)}
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                className={styles.arrowBtn}
-                aria-label="Next project"
-                onClick={() => step(1)}
-              >
-                →
-              </button>
+            <div className={styles.stageCard}>
+              <div className={styles.stageCopy}>
+                <div className={styles.stageMetaRow}>
+                  <span className={styles.stageNumber}>(0{(activeIdx % total) + 1})</span>
+                  <span className={styles.stageLocation}>
+                    {feature.location} · {feature.status}
+                  </span>
+                </div>
+
+                <h3 className={styles.stageTitle} key={feature.id}>
+                  {feature.title}
+                </h3>
+                <p className={styles.stageSummary}>{feature.summary}</p>
+
+                <div className={styles.metricsBar}>
+                  <div className={styles.metricCell}>
+                    <span className={styles.metricKey}>Typology</span>
+                    <span className={styles.metricVal}>{feature.beds}</span>
+                  </div>
+                  <div className={styles.metricCell}>
+                    <span className={styles.metricKey}>Area Range</span>
+                    <span className={styles.metricVal}>{feature.area}</span>
+                  </div>
+                  <div className={styles.metricCell}>
+                    <span className={styles.metricKey}>Pricing</span>
+                    <span className={styles.metricVal}>{feature.price}</span>
+                  </div>
+                </div>
+
+                <div className={styles.primaryActions}>
+                  <Link
+                    href={getProjectHref(feature.id)}
+                    className={`${styles.btnPrimary} roll-button`}
+                  >
+                    <span className="roll-text" data-text="Explore Development →">
+                      Explore Development →
+                    </span>
+                  </Link>
+                  <Link href="/projects" className={styles.viewAllLink}>
+                    {content.ctaLabel} →
+                  </Link>
+                </div>
+
+                <div className={styles.bottomBar}>
+                  <div className={styles.progressFooter}>
+                    <div className={styles.progressTrack}>
+                      <div
+                        className={styles.progressFill}
+                        style={{ width: `${(((activeIdx % total) + 1) / total) * 100}%` }}
+                      />
+                    </div>
+                    <span className={styles.progressCount}>
+                      0{(activeIdx % total) + 1} / 0{total}
+                    </span>
+                  </div>
+
+                  <div className={styles.deckControls}>
+                    <button
+                      type="button"
+                      className={styles.deckStepBtn}
+                      onClick={() => handleSelectProject((activeIdx - 1 + total) % total)}
+                      aria-label="Previous project"
+                    >
+                      ← Prev
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.deckStepBtn}
+                      onClick={() => handleSelectProject((activeIdx + 1) % total)}
+                      aria-label="Next project"
+                    >
+                      Next →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.deckStage}>
+                {projects.map((proj, idx) => {
+                  const isFront = idx === activeIdx % total;
+                  const styleObj = getDeckTransform(idx, activeIdx % total);
+                  return (
+                    <div
+                      key={proj.id}
+                      className={`${styles.flyingCard}${isFront ? ` ${styles.flyingCardActive}` : ""}`}
+                      style={styleObj}
+                      onClick={() => handleSelectProject(idx)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Focus (0${idx + 1}) ${proj.title}`}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleSelectProject(idx);
+                        }
+                      }}
+                    >
+                      {proj.video && isFront ? (
+                        <video
+                          src={proj.video}
+                          poster={proj.img}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="metadata"
+                          className={styles.flyingMedia}
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <img
+                          src={proj.img}
+                          alt={proj.title}
+                          className={styles.flyingMedia}
+                          loading="lazy"
+                        />
+                      )}
+                      <div className={styles.flyingScrim} />
+                      <div className={styles.flyingCardCaption}>
+                        <div className={styles.flyingIndexRow}>
+                          <span className={styles.flyingLine} />
+                          <span>(0{idx + 1}) · {proj.category}</span>
+                        </div>
+                        <h4 className={styles.flyingTitle}>{proj.title}</h4>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Layered Primary Showcase + Supporting Cards */}
-        <div className={styles.showcaseGrid}>
-          <article className={styles.primaryCard}>
-            <div className={styles.primaryMediaWrap}>
-              {feature.video ? (
-                <video
-                  ref={videoRef}
-                  key={feature.id}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster={feature.img}
-                  className={styles.media}
-                  aria-hidden="true"
-                >
-                  <source src={feature.video} type="video/mp4" />
-                </video>
-              ) : (
-                <img
-                  key={feature.id}
-                  src={feature.img}
-                  alt={feature.title}
-                  className={styles.media}
-                />
-              )}
-              <div className={styles.primaryScrim} />
-
-              <div className={styles.topBadges}>
-                <span className={styles.badgeCategory}>{feature.category}</span>
-                <span className={styles.badgeStatus}>
-                  {feature.status === "Delivered" ? "✓ Delivered & Ready" : "✦ Ongoing Landmark"}
+        {/* Mobile / Tablet Stack */}
+        <div className={styles.mobileStack}>
+          {projects.map((proj, idx) => (
+            <article className={styles.mobileCard} key={proj.id}>
+              <div className={styles.mobileImgWrap}>
+                {proj.video ? (
+                  <video
+                    src={proj.video}
+                    poster={proj.img}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className={styles.mobileImg}
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <img
+                    src={proj.img}
+                    alt={proj.title}
+                    className={styles.mobileImg}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div className={styles.mobileBody}>
+                <span className={styles.mobileIndex}>
+                  (0{idx + 1}) · {proj.location}
                 </span>
-              </div>
-            </div>
-
-            <div className={styles.primaryContent}>
-              <div className={styles.primaryMetaRow}>
-                <span className={styles.locationText}>{feature.location}</span>
-                <span className={styles.yearText}>Target / Year · {feature.year}</span>
-              </div>
-
-              <h3 className={styles.primaryTitle}>{feature.title}</h3>
-              <p className={styles.primarySummary}>{feature.summary}</p>
-
-              <div className={styles.metricsBar}>
-                <div className={styles.metricCell}>
-                  <span className={styles.metricKey}>Typology</span>
-                  <span className={styles.metricVal}>{feature.beds}</span>
-                </div>
-                <div className={styles.metricCell}>
-                  <span className={styles.metricKey}>Area Range</span>
-                  <span className={styles.metricVal}>{feature.area}</span>
-                </div>
-                <div className={styles.metricCell}>
-                  <span className={styles.metricKey}>Pricing</span>
-                  <span className={styles.metricVal}>{feature.price}</span>
-                </div>
-              </div>
-
-              <div className={styles.primaryActions}>
+                <h3 className={styles.mobileTitle}>{proj.title}</h3>
+                <p className={styles.mobileDesc}>{proj.summary}</p>
                 <Link
-                  href={getProjectHref(feature.id)}
+                  href={getProjectHref(proj.id)}
                   className={`${styles.btnPrimary} roll-button`}
                 >
                   <span className="roll-text" data-text="Explore Development →">
                     Explore Development →
                   </span>
                 </Link>
-                <Link href="/projects" className={styles.viewAllLink}>
-                  {content.ctaLabel}
-                </Link>
               </div>
-            </div>
-          </article>
-
-          <div className={styles.sideStack}>
-            {secondary.map((proj) => {
-              const originalIdx = projects.findIndex((p) => p.id === proj.id);
-              return (
-                <div
-                  key={proj.id}
-                  className={styles.secondaryCard}
-                  onClick={() => setIndex(originalIdx)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setIndex(originalIdx);
-                    }
-                  }}
-                  aria-label={`Preview ${proj.title}`}
-                >
-                  <img
-                    src={proj.img}
-                    alt={proj.title}
-                    className={styles.secondaryImg}
-                    loading="lazy"
-                  />
-                  <div className={styles.secondaryScrim} />
-                  <div className={styles.secondaryOverlay}>
-                    <div className={styles.secondaryTop}>
-                      <span className={styles.secondaryNum}>0{originalIdx + 1}</span>
-                      <span className={styles.secondaryStatus}>{proj.status}</span>
-                    </div>
-                    <div className={styles.secondaryBottom}>
-                      <span className={styles.secondaryLoc}>{proj.location}</span>
-                      <h4 className={styles.secondaryTitle}>{proj.title}</h4>
-                      <span className={styles.secondaryHint}>Select to inspect ↗</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

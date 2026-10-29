@@ -4,7 +4,6 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import Chatbot from "@/components/Chatbot";
 import VslSection from "@/components/VslSection";
-import LifestyleBuildingInspector from "@/components/LifestyleBuildingInspector";
 import LifestyleInteractiveShowcase from "@/components/LifestyleInteractiveShowcase";
 import LifestyleSpecsShowcase from "@/components/LifestyleSpecsShowcase";
 import RevealAnimations from "@/components/RevealAnimations";
@@ -14,7 +13,6 @@ import { getSettings } from "@/lib/content/settings";
 import { telHref, whatsappHref } from "@/lib/schemas/settings";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import styles from "./page.module.css";
-import aboutStyles from "@/components/About.module.css";
 
 export const metadata: Metadata = {
   title: "Lifestyle Home Spaces | Ready-to-Move 2 & 3 BHK Residences on DPS Road, Amravati",
@@ -25,15 +23,21 @@ export const metadata: Metadata = {
     title: "Lifestyle Home Spaces | Delivered 2 & 3 BHK Homes & 24 Shops, Amravati",
     description:
       "Ready for immediate possession. 30 residential suites and 24 commercial shops on DPS Road, Parvati Nagar, Amravati. MahaRERA: P50300054447.",
-    images: [{ url: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg" }],
+    images: [{ url: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg" }],
   },
 };
 
+const SPOTLIGHT_SPECS = [
+  { key: "Possession Status", value: "100% Ready-to-Move" },
+  { key: "Prime Address", value: "24m DPS Road, Parvati Nagar" },
+  { key: "Residential Scale", value: "30 Vastu 2 & 3 BHK Homes" },
+  { key: "Commercial Galleria", value: "24 Road-Facing Showrooms" },
+];
 
 const LIFESTYLE_ABOUT_CARDS = [
   {
-    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg",
-    alt: "8-Storey Highrise Architecture",
+    img: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    alt: "8-Storey Highrise Architecture on DPS Road",
     prefix: "",
     target: 8,
     suffix: " Storeys",
@@ -41,7 +45,7 @@ const LIFESTYLE_ABOUT_CARDS = [
     desc: "Earthquake-resistant RCC framed landmark with dual high-speed elevators including dedicated stretcher lift with automatic rescue device (ARD).",
   },
   {
-    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-shops-commercial.jpg",
+    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-angled.jpg",
     alt: "24 Road-Facing High-Street Retail Showrooms",
     prefix: "",
     target: 24,
@@ -50,8 +54,8 @@ const LIFESTYLE_ABOUT_CARDS = [
     desc: "Prime commercial frontage on 24-metre wide DPS Road with dedicated customer parking bays and active landmark brand footfalls.",
   },
   {
-    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-front.jpg",
-    alt: "100% Ready Possession with Immediate Key Handover",
+    img: "/assets/projects/lifestyle-homes/interiors/living-room-polished.jpg",
+    alt: "100% Ready Possession Finished Living Suite",
     prefix: "",
     target: 100,
     suffix: "%",
@@ -163,7 +167,7 @@ const CONNECTIVITY_ITEMS = [
     places: "Rangoli Grand Hotel · Neelam Luxury Hotel & Dining",
   },
   {
-    category: "Commercial Core (3 - 4 KM)",
+    category: "Commercial Core (3 – 4 KM)",
     icon: "fa-solid fa-briefcase",
     places: "Rajapeth Business Square · Nawathe Commercial Hub · Rajkamal Chowk",
   },
@@ -182,16 +186,18 @@ export default async function LifestyleHomesPage() {
       <SiteNav activeHref="/projects/lifestyle-homes" />
 
       <main className={styles.page}>
-        {/* ============ DRAMATIC LUXURY HERO SECTION (Cinematic Video Showcase) ============ */}
-        <section className={styles.hero} id="hero-section">
-          {/* 1. Cinematic Lifestyle Showcase Video (Full Dynamic Building Video) */}
-          <div className={styles.videoContainer}>
+        {/* ============ SECTION 1: CINEMATIC ARCHITECTURAL HERO (CHARCOAL) ============ */}
+        <section className={styles.hero} id="hero-section" data-hero-stage>
+          <div className={styles.videoContainer} data-hero-frame>
             <video
               autoPlay
               loop
               muted
               playsInline
+              preload="auto"
+              poster="/videos/2nd-clip-thumb.png"
               className={styles.heroVideo}
+              data-hero-video
               aria-hidden="true"
             >
               <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
@@ -199,38 +205,70 @@ export default async function LifestyleHomesPage() {
             <div className={styles.heroOverlay} />
           </div>
 
-          {/* 2. Giant Clean Architectural Headline */}
-          <div className={styles.headlineContainer}>
-            <h1 className={styles.headline}>LIFESTYLE</h1>
-          </div>
+          <div className={styles.heroInner}>
+            <div className={styles.heroBottomDeck}>
+              <div className={styles.headlineWrap}>
+                <h1 className={styles.headline}>
+                  <span className={styles.lineMask}>
+                    <span className={styles.lineInner} data-hero-line>
+                      LIFESTYLE HOME SPACES
+                    </span>
+                  </span>
+                  <span className={styles.lineMask}>
+                    <span
+                      className={`${styles.lineInner} ${styles.headlineAccent}`}
+                      data-hero-line
+                    >
+                      2 &amp; 3 BHK RESIDENCES &amp; 24 SHOWROOMS
+                    </span>
+                  </span>
+                </h1>
+              </div>
 
-          {/* 3. Left Box: Sparkle, Subtitle & Action Pills */}
-          <div className={styles.leftBox}>
-            <div className={styles.sparkle} aria-hidden="true">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2C12 2 12.5 8 13.5 10.5C16 11.5 22 12 22 12C22 12 16 12.5 13.5 15C12.5 17.5 12 22 12 22C12 22 11.5 17.5 10.5 15C8 12.5 2 12 2 12C2 12 8 11.5 10.5 10.5C11.5 8 12 2 12 2Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M12 6C12 6 12.3 9.3 13 11C14.7 11.7 18 12 18 12C18 12 14.7 12.3 13 14C12.3 15.7 12 19 12 19C12 19 11.7 15.7 11 14C9.3 12.3 6 12 6 12C6 12 9.3 11.7 11 11C11.7 9.3 12 6 12 6Z"
-                  fill="currentColor"
-                  transform="rotate(45 12 12)"
-                />
-              </svg>
-            </div>
-            <p className={styles.leftDescription}>
-              Delivered 8-storey landmark featuring ready-to-move 2 &amp; 3 BHK homes and 24 commercial shops on DPS Road, Amravati.
-            </p>
-            <div className={styles.btnGroup}>
-              <a href="#about-lifestyle-section" className={styles.btnMore}>
-                More About Us
-              </a>
+              <div className={styles.heroDivider} data-hero-rule />
+
+              <div className={styles.heroFooterBar} data-hero-fade>
+                <div className={styles.heroSpecList}>
+                  <div className={styles.heroSpecItem}>
+                    <span className={styles.heroSpecKey}>Configurations</span>
+                    <span className={styles.heroSpecVal}>2 &amp; 3 BHK Vastu Homes</span>
+                  </div>
+                  <div className={styles.heroSpecItem}>
+                    <span className={styles.heroSpecKey}>High-Street Galleria</span>
+                    <span className={styles.heroSpecVal}>24 Retail Showrooms</span>
+                  </div>
+                  <div className={styles.heroSpecItem}>
+                    <span className={styles.heroSpecKey}>MahaRERA Registered</span>
+                    <span className={styles.heroSpecVal}>P50300054447</span>
+                  </div>
+                </div>
+
+                <div className={styles.heroBtnGroup}>
+                  <a
+                    href="#unit-plans"
+                    className={`${styles.btnExplore} roll-button`}
+                  >
+                    <span className="roll-text" data-text="Explore Landmark ↓">
+                      Explore Landmark ↓
+                    </span>
+                  </a>
+                  <a
+                    href={waVisitHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.btnSchedule} roll-button`}
+                  >
+                    <span className="roll-text" data-text="Schedule Site Visit →">
+                      Schedule Site Visit →
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ============ VIDEO SALES LETTER + LEAD CAPTURE POPUP ============ */}
+        {/* ============ SECTION 2: VIDEO SALES LETTER + 30% POPUP (WARM IVORY) ============ */}
         <VslSection
           id="lifestyle-vsl"
           project="Lifestyle Home Spaces"
@@ -238,6 +276,7 @@ export default async function LifestyleHomesPage() {
           source="VSL Popup (Lifestyle Home Spaces)"
           videoSrc="/videos/lifestyle-vsl.mp4"
           poster="/videos/2nd-clip-thumb.png"
+          eyebrow=""
           headline="Lifestyle Home Spaces: Ready-to-Move Homes on DPS Road"
           intro="See the finished homes, the neighbourhood and the amenities, then book a walkthrough of a ready flat with our team."
           points={[
@@ -249,288 +288,315 @@ export default async function LifestyleHomesPage() {
           ]}
         />
 
-        {/* ============ ABOUT LIFESTYLE HOMES (Identical Aura Architecture) ============ */}
-        <section className={aboutStyles.about} id="about-lifestyle-section">
-          <div className={aboutStyles.headerRow}>
-            <div className={aboutStyles.statement}>
-              <h2 className={aboutStyles.heading}>
-                Crafted For Peaceful Urban Living. 2 &amp; 3 BHK Vastu Residences &amp; 24 High-Street Showrooms.
+        {/* ============ SECTION 3: ARCHITECTURAL SPOTLIGHT & BENCHMARK CARDS (CHARCOAL) ============ */}
+        <section className={styles.spotlightSection} id="about-lifestyle-section">
+          <div className={styles.sectionInner}>
+            <div className={styles.spotlightIntro} data-reveal>
+              <h2 className={styles.monumentTitle}>
+                <span>DELIVERED</span>
+                <span className={styles.monumentAccent}>EXCELLENCE</span>
               </h2>
-              <a href={waVisitHref} className={aboutStyles.btnMore}>
-                Schedule Site Visit →
-              </a>
+              <p className={styles.spotlightStatement}>
+                Crafted for peaceful urban living on 24-metre DPS Road—combining 30 ready-to-move Vastu residences with 24 active ground and first-floor commercial showrooms.
+              </p>
             </div>
-          </div>
 
-          <div className={aboutStyles.grid}>
-            {LIFESTYLE_ABOUT_CARDS.map((card) => (
-              <div className={aboutStyles.card} key={card.label}>
-                <div className={aboutStyles.cardTop}>
-                  <img
-                    src={card.img}
-                    alt={card.alt}
-                    className={aboutStyles.cardImage}
-                  />
-                  <div className={aboutStyles.cardStat}>
+            <div className={styles.specBar} data-reveal>
+              {SPOTLIGHT_SPECS.map((item) => (
+                <div className={styles.specCol} key={item.key}>
+                  <span className={styles.specKey}>{item.key}</span>
+                  <span className={styles.specVal}>{item.value}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.benchmarkGrid} data-reveal-group>
+              {LIFESTYLE_ABOUT_CARDS.map((card, index) => (
+                <article className={styles.benchmarkCard} key={card.label}>
+                  <div className={styles.benchmarkHeader}>
+                    <span className={styles.benchmarkIndex}>(0{index + 1})</span>
+                    <span className={styles.benchmarkLabel}>{card.label}</span>
+                  </div>
+
+                  <div className={styles.benchmarkImageWrap}>
+                    <img
+                      src={card.img}
+                      alt={card.alt}
+                      className={styles.benchmarkImg}
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className={styles.benchmarkStatRow}>
                     <AnimatedCounter
                       target={card.target}
                       prefix={card.prefix}
                       suffix={card.suffix}
-                      className={aboutStyles.cardNumber}
-                      unitClassName={aboutStyles.cardUnit}
+                      className={styles.benchmarkNumber}
+                      unitClassName={styles.benchmarkUnit}
                     />
-                    <span className={aboutStyles.cardLabel}>{card.label}</span>
                   </div>
-                </div>
-                <div className={aboutStyles.divider} />
-                <p className={aboutStyles.cardDesc}>{card.desc}</p>
-              </div>
-            ))}
+
+                  <div className={styles.benchmarkDivider} />
+                  <p className={styles.benchmarkDesc}>{card.desc}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* ============ 4K INTERACTIVE BUILDING INSPECTOR ============ */}
-        <LifestyleBuildingInspector whatsappHref={waVisitHref} />
-
-        {/* ============ DYNAMIC INTERACTIVE SHOWCASE (3D Floor Plans & Gallery) ============ */}
+        {/* ============ SECTION 4-6: UNIFIED LANDMARK EXPLORER & 3D LAYOUTS + GALLERY + EMI ============ */}
         <LifestyleInteractiveShowcase
           whatsappHref={whatsappHref(settings)}
           telHref={telHref(settings)}
         />
 
-        {/* ============ 24 COMMERCIAL SHOPS SECTION ============ */}
+        {/* ============ SECTION 7: 24 COMMERCIAL SHOPS (WARM IVORY EDITORIAL) ============ */}
         <section className={styles.commercialSection} id="commercial-shops">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              24 High-Street <span>Retail Showrooms</span>
-            </h2>
-            <p className={styles.sectionSubtitle}>
-              Facing the prominent 24-metre wide DPS Road with direct customer parking and massive daily footfall. Hosting landmark tenants like Dee Bakers and MORE Supermarket.
-            </p>
-          </div>
-
-          <div className={styles.commercialGrid}>
-            <div className={styles.commercialImageCol}>
-              <img
-                src="/assets/projects/lifestyle-homes/gallery/lifestyle-shops-commercial.jpg"
-                alt="Lifestyle Homes Commercial Galleria"
-                className={styles.commercialImg}
-              />
-              <div className={styles.commercialBadge}>
-                <span className={styles.commercialBadgeDot} />
-                <span>12 Ground + 12 First Floor Showrooms</span>
-              </div>
+          <div className={styles.sectionInner}>
+            <div className={styles.sectionHeaderLight} data-reveal>
+              <h2 className={styles.sectionTitleLight}>
+                24 ROAD-FACING <span>RETAIL SHOWROOMS</span>
+              </h2>
+              <p className={styles.sectionSubtitleLight}>
+                Fronting the prominent 24-metre wide DPS Road with dedicated customer parking and high daily footfall—hosting operating brands including Dee Bakers and MORE Supermarket.
+              </p>
             </div>
 
-            <div className={styles.commercialDetailsCol}>
-              <div className={styles.statBoxRow}>
-                <div className={styles.statBox}>
-                  <span className={styles.statVal}>24</span>
-                  <span className={styles.statLbl}>Prime Retail Shops</span>
-                </div>
-                <div className={styles.statBox}>
-                  <span className={styles.statVal}>24 M</span>
-                  <span className={styles.statLbl}>DPS Road Width</span>
-                </div>
-                <div className={styles.statBox}>
-                  <span className={styles.statVal}>100%</span>
-                  <span className={styles.statLbl}>Delivered &amp; Active</span>
-                </div>
+            <div className={styles.commercialGrid}>
+              <div className={styles.commercialImageCol} data-reveal>
+                <img
+                  src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
+                  alt="Lifestyle Home Spaces Commercial Galleria on DPS Road"
+                  className={styles.commercialImg}
+                />
               </div>
 
-              <div className={styles.shopsTableCard}>
-                <h3 className={styles.tableCardHeading}>Official Brochure Area Statement</h3>
-                <div className={styles.tableRow}>
-                  <div>
-                    <strong>Ground Floor (Shops 1 to 12)</strong>
-                    <p>Sizes ranging from 191 to 337 SQFT built-up area</p>
+              <div className={styles.commercialDetailsCol} data-reveal>
+                <div className={styles.statBoxRow}>
+                  <div className={styles.statBox}>
+                    <span className={styles.statVal}>24</span>
+                    <span className={styles.statLbl}>Prime Retail Shops</span>
                   </div>
-                  <span className={styles.tableTag}>Immediate Possession</span>
-                </div>
-                <div className={styles.tableRow}>
-                  <div>
-                    <strong>First Floor (Shops 1 to 12)</strong>
-                    <p>Sizes ranging from 170 to 400 SQFT built-up area</p>
+                  <div className={styles.statBox}>
+                    <span className={styles.statVal}>24M</span>
+                    <span className={styles.statLbl}>DPS Road Frontage</span>
                   </div>
-                  <span className={styles.tableTag}>Immediate Possession</span>
+                  <div className={styles.statBox}>
+                    <span className={styles.statVal}>100%</span>
+                    <span className={styles.statLbl}>Delivered &amp; Active</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className={styles.commercialCtas}>
-                <a
-                  href={`${whatsappHref(settings)}?text=${encodeURIComponent(
-                    "Hello Lifestyle Homes, I am interested in leasing or purchasing a commercial retail showroom at Lifestyle Home Spaces on DPS Road."
-                  )}`}
-                  className={styles.commercialPrimaryBtn}
-                >
-                  <i className="fa-brands fa-whatsapp" />
-                  <span>Enquire For Available Shops</span>
-                </a>
-                <a href={telHref(settings)} className={styles.commercialSecondaryBtn}>
-                  <i className="fa-solid fa-phone" />
-                  <span>Call: +91 70385 00084</span>
-                </a>
+                <div className={styles.shopsTableCard}>
+                  <span className={styles.tableCardHeading}>
+                    OFFICIAL BROCHURE AREA STATEMENT
+                  </span>
+                  <div className={styles.tableRow}>
+                    <div>
+                      <strong>Ground Floor · Shops 1 to 12</strong>
+                      <p>Sizes ranging from 191 to 337 SQFT built-up area</p>
+                    </div>
+                    <span className={styles.tableTag}>Immediate Possession</span>
+                  </div>
+                  <div className={styles.tableRow}>
+                    <div>
+                      <strong>First Floor · Shops 1 to 12</strong>
+                      <p>Sizes ranging from 170 to 400 SQFT built-up area</p>
+                    </div>
+                    <span className={styles.tableTag}>Immediate Possession</span>
+                  </div>
+                </div>
+
+                <div className={styles.commercialCtas}>
+                  <a
+                    href={`${whatsappHref(settings)}?text=${encodeURIComponent(
+                      "Hello Lifestyle Homes, I am interested in leasing or purchasing a commercial retail showroom at Lifestyle Home Spaces on DPS Road."
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.commercialPrimaryBtn} roll-button`}
+                  >
+                    <span className="roll-text" data-text="Enquire For Available Shops →">
+                      Enquire For Available Shops →
+                    </span>
+                  </a>
+                  <a
+                    href={telHref(settings)}
+                    className={`${styles.commercialSecondaryBtn} roll-button`}
+                  >
+                    <span className="roll-text" data-text="Call: +91 70385 00084">
+                      Call: +91 70385 00084
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ============ TECHNICAL SPECIFICATIONS GRID ============ */}
+        {/* ============ SECTION 8: TECHNICAL SPECIFICATIONS GRID (CHARCOAL) ============ */}
         <section className={styles.specsSection} id="specifications">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Engineering &amp; <span>Material Specifications</span>
-            </h2>
-            <p className={styles.sectionSubtitle}>
-              Directly extracted from Page 16 of the official Lifestyle Home Spaces brochure. Built with earthquake-resistant structural safety and branded materials.
-            </p>
-          </div>
+          <div className={styles.sectionInner}>
+            <div className={styles.sectionHeaderDark} data-reveal>
+              <h2 className={styles.sectionTitleDark}>
+                ENGINEERING &amp; <span>MATERIAL SPECIFICATIONS</span>
+              </h2>
+              <p className={styles.sectionSubtitleDark}>
+                Directly verified from the official Lifestyle Home Spaces brochure—engineered with earthquake-resistant RCC structural safety and branded interior finishes.
+              </p>
+            </div>
 
-          <LifestyleSpecsShowcase specs={OFFICIAL_SPECS} />
+            <LifestyleSpecsShowcase specs={OFFICIAL_SPECS} />
+          </div>
         </section>
 
-        {/* ============ LOCATION & STRATEGIC CONNECTIVITY ============ */}
+        {/* ============ SECTION 9: LOCATION & STRATEGIC CONNECTIVITY (WARM IVORY) ============ */}
         <section className={styles.locationSection} id="location-connectivity">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Location &amp; <span>Strategic Connectivity</span>
-            </h2>
-            <p className={styles.sectionSubtitle}>
-              Situated on DPS Road in Parvati Nagar, connecting Badnera Road to Akoli Road, minutes away from top institutions, medical hubs, and shopping destinations.
-            </p>
-          </div>
-
-          <div className={styles.locationGrid}>
-            <div className={styles.connectivityList}>
-              {CONNECTIVITY_ITEMS.map((item, idx) => (
-                <div className={styles.connItem} key={idx}>
-                  <div className={styles.connIconBox}>
-                    <i className={item.icon} />
-                  </div>
-                  <div className={styles.connText}>
-                    <h3 className={styles.connCategory}>{item.category}</h3>
-                    <p className={styles.connPlaces}>{item.places}</p>
-                  </div>
-                </div>
-              ))}
-
-              <div className={styles.projectDetailsCard}>
-                <h3 className={styles.projectDetailsTitle}>Official Project Credentials</h3>
-                <div className={styles.credRow}>
-                  <span>Promoters:</span>
-                  <strong>Rajesh Mishra | Amit Talda</strong>
-                </div>
-                <div className={styles.credRow}>
-                  <span>MahaRERA Registration:</span>
-                  <strong className={styles.goldText}>P50300054447</strong>
-                </div>
-                <div className={styles.credRow}>
-                  <span>Architect:</span>
-                  <strong>Rohit Punshi</strong>
-                </div>
-                <div className={styles.credRow}>
-                  <span>Structural Designer:</span>
-                  <strong>Er. Pankaj Deshmukh</strong>
-                </div>
-                <div className={styles.credRow}>
-                  <span>Site Address:</span>
-                  <strong>DPS Road, Parvati Nagar, Near Avinashe Avenue, Amravati</strong>
-                </div>
-              </div>
+          <div className={styles.sectionInner}>
+            <div className={styles.sectionHeaderLight} data-reveal>
+              <h2 className={styles.sectionTitleLight}>
+                LOCATION &amp; <span>STRATEGIC CONNECTIVITY</span>
+              </h2>
+              <p className={styles.sectionSubtitleLight}>
+                Situated on DPS Road in Parvati Nagar connecting Badnera Road to Akoli Road—minutes from leading schools, multi-speciality hospitals, and retail hubs.
+              </p>
             </div>
 
-            <div className={styles.locationMapCard}>
-              <img
-                src="/assets/projects/lifestyle-homes/gallery/lifestyle-location-connectivity.jpg"
-                alt="Lifestyle Homes Official Location Map"
-                className={styles.locationMapImg}
-              />
-              <div className={styles.mapCaption}>
-                <span className={styles.mapPinDot} />
-                <span>DPS Road, Parvati Nagar, Amravati — MahaRERA: P50300054447</span>
+            <div className={styles.locationGrid}>
+              <div className={styles.connectivityList} data-reveal-group>
+                {CONNECTIVITY_ITEMS.map((item, idx) => (
+                  <div className={styles.connItem} key={idx}>
+                    <div className={styles.connIconBox}>
+                      <i className={item.icon} aria-hidden="true" />
+                    </div>
+                    <div className={styles.connText}>
+                      <h3 className={styles.connCategory}>{item.category}</h3>
+                      <p className={styles.connPlaces}>{item.places}</p>
+                    </div>
+                  </div>
+                ))}
+
+                <div className={styles.projectDetailsCard}>
+                  <span className={styles.projectDetailsTitle}>
+                    OFFICIAL PROJECT CREDENTIALS
+                  </span>
+                  <div className={styles.credRow}>
+                    <span>Promoters</span>
+                    <strong>Rajesh Mishra · Amit Talda</strong>
+                  </div>
+                  <div className={styles.credRow}>
+                    <span>MahaRERA Registration</span>
+                    <strong className={styles.goldText}>P50300054447</strong>
+                  </div>
+                  <div className={styles.credRow}>
+                    <span>Architect</span>
+                    <strong>Rohit Punshi</strong>
+                  </div>
+                  <div className={styles.credRow}>
+                    <span>Structural Designer</span>
+                    <strong>Er. Pankaj Deshmukh</strong>
+                  </div>
+                  <div className={styles.credRow}>
+                    <span>Site Address</span>
+                    <strong>DPS Road, Parvati Nagar, Near Avinashe Avenue, Amravati</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.locationMapCard} data-reveal>
+                <div className={styles.mapBlueprintStage}>
+                  <img
+                    src="/assets/projects/lifestyle-homes/gallery/lifestyle-location-connectivity.jpg"
+                    alt="Lifestyle Home Spaces Official Location Map & Shops Area Statement"
+                    className={styles.locationMapImg}
+                  />
+                </div>
+                <div className={styles.mapCaption}>
+                  <span className={styles.mapPinDot} />
+                  <span>DPS Road, Parvati Nagar, Amravati · MahaRERA: P50300054447</span>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ============ DELIVERED REALITY SHOWCASE: LIFESTYLE HOMES ============ */}
-        <div className={styles.lifestyleBannerWrapper}>
-          <div className={styles.lifestyleBanner}>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className={styles.lifestyleBannerVideo}
-              aria-hidden="true"
-            >
-              <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
-            </video>
-            <div className={styles.lifestyleBannerOverlay}>
-              <div className={styles.lifestyleBannerContent}>
-                <div className={styles.lifestyleBannerBadge}>
-                  <i className="fa-solid fa-play" /> Delivered Reality Showcase
-                </div>
-                <h2 className={styles.lifestyleBannerTitle}>
-                  Experience Lifestyle Home Spaces in Motion
-                </h2>
-                <p className={styles.lifestyleBannerDesc}>
-                  Watch the completed architectural reality on DPS Road, Parvati Nagar, Amravati — featuring 30 premium residences and 24 high-street retail showrooms ready for immediate possession.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ============ FREQUENTLY ASKED QUESTIONS (Identical Aura Accordion) ============ */}
-        <Faq
-          faqs={LIFESTYLE_HOMES_FAQS}
-          content={{
-            badge: "Lifestyle FAQ",
-            title: "FREQUENTLY ASKED QUESTIONS",
-          }}
-        />
-
-        {/* ============ CROSS-PROJECT PROMO: AURA FLAGSHIP ============ */}
-        <div className={styles.auraBannerWrapper}>
-          <div className={styles.auraBanner}>
-            <div className={styles.auraBannerBg}>
+        {/* ============ SECTION 10: DELIVERED REALITY FILM BANNER (CHARCOAL) ============ */}
+        <section className={styles.bannersSection}>
+          <div className={styles.sectionInner}>
+            <div className={styles.lifestyleBanner} data-reveal>
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
+                poster="/videos/2nd-clip-thumb.png"
+                className={styles.lifestyleBannerVideo}
+                aria-hidden="true"
+              >
+                <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
+              </video>
+              <div className={styles.lifestyleBannerOverlay}>
+                <div className={styles.lifestyleBannerContent}>
+                  <h2 className={styles.bannerTitle}>
+                    EXPERIENCE LIFESTYLE HOME SPACES IN MOTION
+                  </h2>
+                  <p className={styles.bannerDesc}>
+                    Watch the completed architectural landmark on DPS Road, Parvati Nagar, Amravati—30 Vastu residences and 24 high-street retail showrooms ready for immediate possession.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ SECTION 11: FREQUENTLY ASKED QUESTIONS ============ */}
+        <Faq
+          faqs={LIFESTYLE_HOMES_FAQS}
+          content={{
+            badge: "",
+            title: "FREQUENTLY ASKED QUESTIONS",
+          }}
+        />
+
+        {/* ============ SECTION 12: CROSS-PROJECT PROMO — AURA FLAGSHIP ============ */}
+        <section className={styles.auraPromoSection}>
+          <div className={styles.sectionInner}>
+            <div className={styles.auraBanner} data-reveal>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/aura/aura-hero-clean-4k.jpg"
                 className={styles.auraBannerVideo}
                 aria-hidden="true"
               >
                 <source src="/videos/aura-showcase-clip.mp4" type="video/mp4" />
               </video>
-            </div>
-            <div className={styles.auraBannerContent}>
-              <div className={styles.auraBannerBadge}>
-                <i className="fa-solid fa-gem" /> Flagship 15-Storey Sky Living Landmark
+              <div className={styles.auraBannerScrim} />
+              <div className={styles.auraBannerContent}>
+                <h2 className={styles.bannerTitle}>
+                  EXPLORE AURA BY LIFESTYLE IN CAMP, AMRAVATI
+                </h2>
+                <p className={styles.bannerDesc}>
+                  Discover 15 storeys of contemporary skyline residences with a rooftop infinity pool, multi-sports turf, and panoramic sky horizons on Congress Nagar Road, Camp.
+                </p>
+                <Link href="/" className={`${styles.btnSchedule} roll-button`}>
+                  <span className="roll-text" data-text="Explore Aura Flagship Showcase →">
+                    Explore Aura Flagship Showcase →
+                  </span>
+                </Link>
               </div>
-              <h2 className={styles.auraBannerTitle}>
-                Explore Aura by Lifestyle in Camp, Amravati
-              </h2>
-              <p className={styles.auraBannerDesc}>
-                Looking for iconic highrise living with rooftop sky pool, 40+ luxury amenities, and 15 storeys of bespoke residential luxury? Discover Aura by Lifestyle — Amravati’s premier architectural landmark.
-              </p>
-              <Link href="/" className={styles.auraBannerBtn}>
-                <span>Explore Aura Flagship Showcase</span>
-                <i className="fa-solid fa-arrow-right" />
-              </Link>
             </div>
           </div>
-        </div>
+        </section>
       </main>
 
       <SiteFooter settings={settings} />
 
-      {/* Interactive AI Portfolio Concierge */}
       <Chatbot />
 
-      {/* Mobile Sticky Bar */}
       <div className="mobile-sticky-bar">
         <a href={telHref(settings)} className="call-btn">
           <i className="fa-solid fa-phone" /> Call Now

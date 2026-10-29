@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
+import RevealAnimations from "@/components/RevealAnimations";
 import { getPages } from "@/lib/content/pages";
 import { getSettings } from "@/lib/content/settings";
 import SiteFooter from "@/components/SiteFooter";
@@ -19,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
+
 export default async function PaintVisualizerPage() {
   const [settings, pages] = await Promise.all([getSettings(), getPages()]);
   const copy = pages.paintVisualizer;
@@ -29,16 +31,19 @@ export default async function PaintVisualizerPage() {
 
       <main className={styles.page}>
         <div className={styles.inner}>
-          <header className={styles.header}>
+          <header className={styles.header} data-reveal>
             <h1 className={styles.title}>{copy.title}</h1>
             <p className={styles.intro}>{copy.intro}</p>
           </header>
 
-          <PaintVisualizer />
+          <div data-reveal>
+            <PaintVisualizer />
+          </div>
         </div>
       </main>
 
       <SiteFooter settings={settings} />
+      <RevealAnimations />
     </>
   );
 }

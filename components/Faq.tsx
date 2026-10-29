@@ -19,11 +19,6 @@ export default function Faq({
     <section className={styles.section} id="faq-section">
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className={styles.eyebrowRow}>
-            <span className={styles.flank} aria-hidden="true" />
-            <span className={styles.eyebrow}>{content.badge || "FREQUENTLY ASKED"}</span>
-            <span className={styles.flank} aria-hidden="true" />
-          </div>
           <h2 className={styles.title}>{content.title}</h2>
         </div>
 

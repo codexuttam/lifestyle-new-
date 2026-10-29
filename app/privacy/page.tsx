@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import RevealAnimations from "@/components/RevealAnimations";
 import { SITE_SETTINGS } from "@/data/settings";
 
 export const metadata: Metadata = {
@@ -12,13 +13,13 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div style={{ backgroundColor: "#050a16", color: "#ffffff", minHeight: "100vh", fontFamily: "var(--font-sans), 'Montserrat', sans-serif" }}>
+    <div style={{ backgroundColor: "#080808", color: "#f7efdc", minHeight: "100vh", fontFamily: "var(--font-sans), sans-serif" }}>
       <SiteNav activeHref="/privacy" />
 
       <main
         style={{
-          paddingTop: "7.5rem",
-          paddingBottom: "5rem",
+          paddingTop: "8.2rem",
+          paddingBottom: "5.5rem",
           maxWidth: "960px",
           margin: "0 auto",
           paddingLeft: "1.5rem",
@@ -26,56 +27,102 @@ export default function PrivacyPage() {
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: "3rem", borderBottom: "1px solid rgba(255, 255, 255, 0.12)", paddingBottom: "2rem" }}>
+        <div
+          data-reveal
+          style={{
+            marginBottom: "3rem",
+            borderBottom: "1px solid rgba(247, 239, 220, 0.12)",
+            paddingBottom: "2rem",
+          }}
+        >
           <h1
             style={{
-              fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
-              fontWeight: 800,
-              color: "#ffffff",
-              marginBottom: "0.75rem",
+              fontFamily: "var(--font-display), sans-serif",
+              fontSize: "clamp(2.8rem, 5vw, 4.4rem)",
+              fontWeight: 600,
+              lineHeight: 0.95,
+              textTransform: "uppercase",
+              color: "#f7efdc",
+              marginBottom: "0.85rem",
             }}
           >
             Privacy Policy &amp; Legal Disclaimer
           </h1>
-          <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1rem", lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: "rgba(247, 239, 220, 0.68)", fontSize: "0.98rem", lineHeight: 1.65, margin: 0 }}>
             Official regulatory disclosures, MahaRERA compliance, and data protection policies for Lifestyle Home Spaces &amp; Aura by Lifestyle.
           </p>
           <div
             style={{
               marginTop: "1.25rem",
               display: "inline-flex",
+              flexWrap: "wrap",
               alignItems: "center",
               gap: "1.25rem",
-              fontSize: "0.85rem",
-              color: "#ffffff",
-              background: "rgba(194, 26, 34, 0.12)",
-              border: "1px solid rgba(194, 26, 34, 0.35)",
-              padding: "0.5rem 1rem",
-              borderRadius: "8px",
+              fontSize: "0.82rem",
+              color: "#f7efdc",
+              background: "rgba(191, 149, 63, 0.1)",
+              border: "1px solid rgba(191, 149, 63, 0.35)",
+              padding: "0.55rem 1.1rem",
+              borderRadius: "9999px",
             }}
           >
-            <span><strong>MahaRERA Reg. No.:</strong> P5030002502915</span>
-            <span><strong>Jurisdiction:</strong> Amravati, Maharashtra</span>
+            <span><strong style={{ color: "#d5bd87" }}>MahaRERA Reg. No.:</strong> P5030002502915</span>
+            <span><strong style={{ color: "#d5bd87" }}>Jurisdiction:</strong> Amravati, Maharashtra</span>
           </div>
         </div>
 
         {/* Content Clauses */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", color: "rgba(255, 255, 255, 0.82)", lineHeight: 1.8 }}>
-          
+        <div
+          data-reveal-group
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "2.25rem",
+            color: "rgba(247, 239, 220, 0.78)",
+            lineHeight: 1.8,
+            fontSize: "0.95rem",
+          }}
+        >
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.75rem",
+                color: "#f7efdc",
+                marginBottom: "0.65rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
               1. MahaRERA Statutory Disclaimer
             </h2>
             <p>
-              Aura by Lifestyle is officially registered under the Maharashtra Real Estate Regulatory Authority (MahaRERA) with Registration Number <strong>P5030002502915</strong>. All project details, sanctioned building plans, layout approvals, specifications, and commencement certificates are available for public verification on the official MahaRERA website at <a href="https://maharera.maharashtra.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-wine, #c21a22)", textDecoration: "underline" }}>maharera.maharashtra.gov.in</a>.
+              Aura by Lifestyle is officially registered under the Maharashtra Real Estate Regulatory Authority (MahaRERA) with Registration Number <strong>P5030002502915</strong>. All project details, sanctioned building plans, layout approvals, specifications, and commencement certificates are available for public verification on the official MahaRERA website at{" "}
+              <a
+                href="https://maharera.maharashtra.gov.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#d5bd87", textDecoration: "underline" }}
+              >
+                maharera.maharashtra.gov.in
+              </a>.
             </p>
             <p style={{ marginTop: "0.5rem" }}>
-              Lifestyle Home Spaces on DPS Road is delivered with immediate possession available. All transactions are governed strictly in accordance with statutory MahaRERA consumer protection norms.
+              Lifestyle Home Spaces on DPS Road is delivered with immediate possession available (MahaRERA Reg. No. <strong>P50300054447</strong>). All transactions are governed strictly in accordance with statutory MahaRERA consumer protection norms.
             </p>
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.75rem",
+                color: "#f7efdc",
+                marginBottom: "0.65rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
               2. Architectural Renderings &amp; Visual Representation
             </h2>
             <p>
@@ -84,7 +131,16 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.75rem",
+                color: "#f7efdc",
+                marginBottom: "0.65rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
               3. Information Collection &amp; Use
             </h2>
             <p>
@@ -98,7 +154,16 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.75rem",
+                color: "#f7efdc",
+                marginBottom: "0.65rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
               4. Zero Commercial Trading of Personal Data
             </h2>
             <p>
@@ -107,7 +172,16 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.75rem",
+                color: "#f7efdc",
+                marginBottom: "0.65rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
               5. WhatsApp Communications &amp; OTP Verification
             </h2>
             <p>
@@ -116,7 +190,16 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 style={{ fontSize: "1.35rem", color: "#ffffff", marginBottom: "0.75rem", fontWeight: 700 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.75rem",
+                color: "#f7efdc",
+                marginBottom: "0.65rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
               6. Official Developer &amp; Site Office Contact
             </h2>
             <p>
@@ -124,24 +207,24 @@ export default function PrivacyPage() {
             </p>
             <div
               style={{
-                marginTop: "0.75rem",
-                padding: "1.25rem",
-                borderRadius: "12px",
-                background: "#0a1428",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
+                marginTop: "0.85rem",
+                padding: "1.4rem",
+                borderRadius: "18px",
+                background: "#101210",
+                border: "1px solid rgba(247, 239, 220, 0.14)",
               }}
             >
-              <p style={{ margin: "0 0 0.4rem" }}><strong>Entity:</strong> Lifestyle Home Spaces &amp; Aura by Lifestyle</p>
-              <p style={{ margin: "0 0 0.4rem" }}><strong>Site &amp; Head Office:</strong> Aura by Lifestyle, Congress Nagar Road, Next to Dreamz Signature, Camp, Amravati — 444606</p>
-              <p style={{ margin: "0 0 0.4rem" }}><strong>Direct Sales Desk:</strong> +91 7498256708</p>
-              <p style={{ margin: 0 }}><strong>Email:</strong> admin@lifestylehomespaces.com</p>
+              <p style={{ margin: "0 0 0.4rem" }}><strong style={{ color: "#d5bd87" }}>Entity:</strong> Lifestyle Home Spaces &amp; Aura by Lifestyle</p>
+              <p style={{ margin: "0 0 0.4rem" }}><strong style={{ color: "#d5bd87" }}>Site &amp; Head Office:</strong> Aura by Lifestyle, Congress Nagar Road, Next to Dreamz Signature, Camp, Amravati — 444606</p>
+              <p style={{ margin: "0 0 0.4rem" }}><strong style={{ color: "#d5bd87" }}>Direct Sales Desk:</strong> +91 7498256708</p>
+              <p style={{ margin: 0 }}><strong style={{ color: "#d5bd87" }}>Email:</strong> admin@lifestylehomespaces.com</p>
             </div>
           </section>
-
         </div>
       </main>
 
       <SiteFooter settings={SITE_SETTINGS} />
+      <RevealAnimations />
     </div>
   );
 }

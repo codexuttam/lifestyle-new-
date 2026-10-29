@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
+import RevealAnimations from "@/components/RevealAnimations";
 import { getSettings } from "@/lib/content/settings";
 import SiteFooter from "@/components/SiteFooter";
 import { getPages } from "@/lib/content/pages";
@@ -20,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
+
 export default async function ServicesPage() {
   const [services, settings, pages] = await Promise.all([
     getServices(),
@@ -34,7 +36,7 @@ export default async function ServicesPage() {
 
       <main className={styles.page}>
         <div className={styles.inner}>
-          <header className={styles.header}>
+          <header className={styles.header} data-reveal>
             <h1 className={styles.title}>{copy.title}</h1>
             <p className={styles.intro}>{copy.intro}</p>
           </header>
@@ -44,6 +46,7 @@ export default async function ServicesPage() {
       </main>
 
       <SiteFooter settings={settings} />
+      <RevealAnimations />
     </>
   );
 }

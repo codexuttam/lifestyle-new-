@@ -9,43 +9,59 @@ export default function NotFound() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#050a16",
-        color: "#ffffff",
-        fontFamily: "var(--font-sans), 'Montserrat', sans-serif",
+        backgroundColor: "#080808",
+        color: "#f7efdc",
+        fontFamily: "var(--font-sans), sans-serif",
         textAlign: "center",
         padding: "2rem",
       }}
     >
       <h1
         style={{
-          fontSize: "5rem",
-          fontWeight: 800,
-          background: "linear-gradient(135deg, #ffffff 40%, var(--color-wine, #c21a22) 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          marginBottom: "1rem",
+          fontFamily: "var(--font-display), sans-serif",
+          fontSize: "clamp(4.5rem, 10vw, 7.5rem)",
+          fontWeight: 600,
+          lineHeight: 0.9,
+          textTransform: "uppercase",
+          color: "#f7efdc",
+          margin: "0 0 1rem",
         }}
       >
         404
       </h1>
-      <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1.2rem", marginBottom: "2rem" }}>
-        The page you are looking for does not exist or has been moved.
+      <p
+        style={{
+          color: "rgba(247, 239, 220, 0.68)",
+          fontSize: "1rem",
+          maxWidth: "460px",
+          lineHeight: 1.6,
+          marginBottom: "2rem",
+        }}
+      >
+        The page you are looking for does not exist or has been relocated within our portfolio.
       </p>
       <Link
         href="/"
+        className="roll-button"
         style={{
-          display: "inline-block",
-          padding: "0.85rem 1.75rem",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "13px 26px",
           borderRadius: "9999px",
-          background: "var(--color-wine, #c21a22)",
-          color: "#ffffff",
+          background: "#bf953f",
+          border: "1px solid #d4af37",
+          color: "#080808",
+          fontSize: "11px",
           fontWeight: 700,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
           textDecoration: "none",
-          transition: "transform 0.2s ease",
-          boxShadow: "0 4px 18px rgba(194, 26, 34, 0.4)",
         }}
       >
-        Return to Home
+        <span className="roll-text" data-text="Return to Aura →">
+          Return to Aura →
+        </span>
       </Link>
     </div>
   );

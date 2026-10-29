@@ -35,21 +35,52 @@ export default function Services({
   content: HomeRecord["services"];
 }) {
   const sectionRef = useRef<HTMLElement>(null);
+  const colRuleRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      gsap.from("[data-value-item]", {
-        y: 32,
+      if (colRuleRef.current) {
+        gsap.fromTo(
+          colRuleRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 70%",
+              end: "bottom 60%",
+              scrub: 0.4,
+            },
+          }
+        );
+      }
+
+      gsap.from("[data-pillar-item]", {
+        y: 36,
         opacity: 0,
         duration: 0.85,
-        stagger: 0.12,
+        stagger: 0.15,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 78%",
+          trigger: `.${styles.pillarsCol}`,
+          start: "top 82%",
+          once: true,
+        },
+      });
+
+      gsap.from("[data-service-card]", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: `.${styles.grid}`,
+          start: "top 85%",
           once: true,
         },
       });
@@ -60,16 +91,16 @@ export default function Services({
 
   return (
     <section className={styles.services} id="services-section" ref={sectionRef}>
-      <div className={styles.gridBackdrop} aria-hidden="true" />
+      {/* Virtuaze-Style 3D Perspective Architectural Floor Grid */}
+      <div className={styles.perspectiveStage} aria-hidden="true">
+        <div className={styles.gridFloor} />
+        <div className={styles.horizonGlow} />
+      </div>
 
       <div className={styles.container}>
         {/* Editorial Sticky Left + Scroll-Revealed Right Value Narrative */}
         <div className={styles.editorialSplit}>
           <div className={styles.stickyCol}>
-            <div className={styles.eyebrowLine}>
-              <span className={styles.rule} aria-hidden="true" />
-              <span className={styles.eyebrow}>ARCHITECTURAL VALUE</span>
-            </div>
             <h2 className={styles.heading}>{content.heading}</h2>
             <p className={styles.intro}>{content.intro}</p>
             <Link href="/services" className={`${styles.viewAll} roll-button`}>
@@ -77,11 +108,12 @@ export default function Services({
                 {content.ctaLabel} →
               </span>
             </Link>
+            <span className={styles.verticalProgressRule} ref={colRuleRef} aria-hidden="true" />
           </div>
 
           <div className={styles.pillarsCol}>
             {ARCHITECTURAL_PILLARS.map((pillar) => (
-              <article className={styles.pillarBlock} key={pillar.index} data-value-item>
+              <article className={styles.pillarBlock} key={pillar.index} data-pillar-item>
                 <span className={styles.pillarIndex}>({pillar.index})</span>
                 <div className={styles.pillarContent}>
                   <h3 className={styles.pillarTitle}>{pillar.title}</h3>
@@ -93,18 +125,13 @@ export default function Services({
         </div>
 
         {/* 4 Core Engineering & Turnkey Capabilities */}
-        <div className={styles.cardsHeader} data-value-item>
-          <span className={styles.cardsLabel}>IN-HOUSE ENGINEERING &amp; RESIDENT CARE</span>
-          <span className={styles.cardsLine} aria-hidden="true" />
-        </div>
-
         <div className={styles.grid}>
           {services.map((service, index) => (
             <Link
               href="/services"
               key={service.id}
               className={styles.card}
-              data-value-item
+              data-service-card
             >
               <div className={styles.cardTop}>
                 <div className={styles.iconBadge}>

@@ -26,43 +26,43 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const STORY_IMAGES = [
   {
-    src: "/aura/hero-building-4k.jpg",
+    src: "/aura/aura-hero-clean-4k.jpg",
     alt: "Aura by Lifestyle 15-Storey Tower in Congress Nagar, Amravati",
   },
   {
-    src: "/assets/projects/lifestyle-homes/gallery/lifestyle-elevation-day.jpg",
-    alt: "Lifestyle Home Spaces, ready-for-possession landmark on DPS Road, Amravati",
+    src: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    alt: "Lifestyle Home Spaces ready-for-possession landmark on DPS Road, Amravati",
   },
   {
-    src: "/aura/rooftop-amenities-3d.jpg",
-    alt: "Aura Sky Oasis rooftop amenities deck and sports arena",
+    src: "/videos/web-clip-thumb.png",
+    alt: "Aura Sky Oasis rooftop pool deck and multi-sports arena",
   },
 ];
 
 const STAT_META: Record<
   number,
-  { icon: string; tag: string; defaultUnit: string; desc: string }
+  { num: string; tag: string; defaultUnit: string; desc: string }
 > = {
   0: {
-    icon: "🏛️",
+    num: "01",
     tag: "SKYLINE BENCHMARK",
     defaultUnit: "STOREYS",
     desc: "15-Storey landmark with rooftop pool & sky sports turf",
   },
   1: {
-    icon: "🧭",
+    num: "02",
     tag: "VASTU HARMONY",
     defaultUnit: "%",
     desc: "100% Vastu-compliant layouts with natural cross-breeze",
   },
   2: {
-    icon: "🛡️",
-    tag: "GOVT. CERTIFIED",
+    num: "03",
+    tag: "MAHARERA CERTIFIED",
     defaultUnit: "%",
-    desc: "MahaRERA verified clear titles: P5030002502915",
+    desc: "Verified clear titles: P5030002502915 & P50300054447",
   },
   3: {
-    icon: "📍",
+    num: "04",
     tag: "PORTFOLIO",
     defaultUnit: "LANDMARKS",
     desc: "Aura (Congress Nagar) & Lifestyle Homes (DPS Road)",
@@ -91,70 +91,37 @@ export default async function AboutPage() {
       <SiteNav activeHref="/about" />
 
       <main className={styles.page}>
-        <div className={styles.inner}>
-          {/* --- Hero Header with 2-Column Luxury Showcase --- */}
-          <section className={styles.heroSection}>
+        {/* --- BAND 1: CHARCOAL HERO & STATS --- */}
+        <section className={styles.heroBand}>
+          <div className={styles.sectionInner}>
             <div className={styles.heroGrid}>
-              <div className={styles.heroContent}>
+              <div className={styles.heroContent} data-reveal>
                 <h1 className={styles.title}>
-                  Redefining Urban Living{" "}
-                  <span className={styles.titleGradient}>in Amravati</span>
+                  REDEFINING URBAN LIVING <span>IN AMRAVATI</span>
                 </h1>
 
                 <p className={styles.intro}>{copy.intro}</p>
 
-                <div className={styles.trustRow}>
-                  <div className={styles.trustChip}>
-                    <span className={styles.trustIcon}>🏛️</span>
-                    <span>Dual Landmark Highrises</span>
-                  </div>
-                  <div className={styles.trustChip}>
-                    <span className={styles.trustIcon}>🧭</span>
-                    <span>100% Vastu Compliant</span>
-                  </div>
-                  <div className={styles.trustChip}>
-                    <span className={styles.trustIcon}>🛡️</span>
-                    <span>MahaRERA: P5030002502915</span>
-                  </div>
-                </div>
-
                 <div className={styles.heroActions}>
-                  <Link href="/projects" className={styles.primaryBtn}>
-                    Explore Developments
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+                  <Link href="/projects" className={`${styles.primaryBtn} roll-button`}>
+                    <span className="roll-text" data-text="Explore Developments →">
+                      Explore Developments →
+                    </span>
                   </Link>
                   <a
                     href={whatsappHref(settings)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.secondaryBtn}
+                    className={`${styles.secondaryBtn} roll-button`}
                   >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.311.045-.698.057-2.371-.599-1.895-.744-3.155-2.651-3.252-2.781-.097-.13-.768-1.02-.768-1.944 0-.923.486-1.378.658-1.564.172-.187.376-.233.501-.233.126 0 .252.002.361.008.117.006.273-.044.426.326.157.379.539 1.312.585 1.407.047.095.078.206.016.329-.063.123-.094.2-.187.309-.094.109-.197.243-.282.326-.094.093-.192.195-.083.382.109.187.484.798 1.038 1.292.713.636 1.314.833 1.501.927.187.093.297.081.407-.047.11-.128.469-.545.594-.733.125-.187.25-.156.422-.093.172.062 1.094.516 1.282.609.188.094.313.141.36.219.047.078.047.452-.097.857z" />
-                    </svg>
-                    Connect with Site Office
+                    <span className="roll-text" data-text="Connect with Site Office">
+                      Connect with Site Office
+                    </span>
                   </a>
                 </div>
               </div>
 
-              {/* Architectural Landmark Card */}
-              <div className={styles.heroVisualCard}>
+              <div className={styles.heroVisualCard} data-reveal>
                 <img
                   src="/aura/aura-hero-clean-4k.jpg"
                   alt="Aura by Lifestyle 15-Storey Tower Architecture"
@@ -162,40 +129,24 @@ export default async function AboutPage() {
                   loading="eager"
                 />
                 <div className={styles.visualCardOverlay}>
-                  <div className={styles.visualCardTopTags}>
-                    <span className={styles.visualTag}>
-                      <span className={styles.visualTagDot} />
-                      Flagship Landmark
-                    </span>
-                    <span className={styles.visualTagAlt}>
-                      MahaRERA: P5030002502915
-                    </span>
-                  </div>
+                  <div />
 
                   <div className={styles.visualCardBottom}>
                     <div className={styles.visualCardMeta}>
-                      <span className={styles.visualProjectName}>
-                        Aura by Lifestyle
-                      </span>
+                      <span className={styles.visualProjectName}>AURA BY LIFESTYLE</span>
                       <span className={styles.visualProjectLoc}>
-                        📍 Congress Nagar Road, Amravati
+                        Congress Nagar Road · Camp, Amravati
                       </span>
-                    </div>
-                    <div className={styles.visualPillsRow}>
-                      <span className={styles.visualMiniPill}>15 Storeys</span>
-                      <span className={styles.visualMiniPill}>Rooftop Pool</span>
-                      <span className={styles.visualMiniPill}>2 &amp; 3 BHK</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* --- Stats Bento Grid --- */}
-            <div className={styles.statsRow} aria-label="Company at a glance">
+            <div className={styles.statsRow} aria-label="Company at a glance" data-reveal-group>
               {stats.map((stat, idx) => {
                 const meta = STAT_META[idx] || {
-                  icon: "✨",
+                  num: `0${idx + 1}`,
                   tag: "BENCHMARK",
                   defaultUnit: "",
                   desc: stat.label,
@@ -205,18 +156,13 @@ export default async function AboutPage() {
                 return (
                   <div className={styles.statCard} key={stat.label}>
                     <div className={styles.statCardTop}>
-                      <div className={styles.statIconBox} aria-hidden="true">
-                        {meta.icon}
-                      </div>
+                      <span className={styles.statIndex}>({meta.num})</span>
                       <span className={styles.statMicroTag}>{meta.tag}</span>
                     </div>
 
                     <div className={styles.statNumberBlock}>
                       <span className={styles.statValue}>
-                        <AnimatedCounter
-                          target={stat.target}
-                          duration={1600}
-                        />
+                        <AnimatedCounter target={stat.target} duration={1600} />
                       </span>
                       {unit && <span className={styles.statUnit}>{unit}</span>}
                     </div>
@@ -229,107 +175,134 @@ export default async function AboutPage() {
                 );
               })}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* --- Story --- */}
-          <section className={styles.story}>
-            <div className={styles.storyText}>
-              <h2 className={styles.sectionTitle}>{copy.storyTitle}</h2>
-              {copy.storyParagraphs.map((paragraph) => (
-                <p className={styles.body} key={paragraph.slice(0, 40)}>
-                  {paragraph}
-                </p>
-              ))}
-              <div className={styles.storyLinks}>
-                <Link href="/projects" className={styles.primaryBtn}>
-                  {copy.projectsCtaLabel}
-                </Link>
-                <Link href="/services" className={styles.secondaryBtn}>
-                  {copy.servicesCtaLabel}
-                </Link>
+        {/* --- BAND 2: WARM IVORY STORY & VALUES --- */}
+        <section className={styles.ivoryBand}>
+          <div className={styles.sectionInner}>
+            <div className={styles.story}>
+              <div className={styles.storyText} data-reveal>
+                <h2 className={styles.sectionTitleLight}>{copy.storyTitle}</h2>
+                {copy.storyParagraphs.map((paragraph) => (
+                  <p className={styles.bodyLight} key={paragraph.slice(0, 40)}>
+                    {paragraph}
+                  </p>
+                ))}
+                <div className={styles.storyLinks}>
+                  <Link href="/projects" className={`${styles.primaryBtn} roll-button`}>
+                    <span className="roll-text" data-text={`${copy.projectsCtaLabel} →`}>
+                      {copy.projectsCtaLabel} →
+                    </span>
+                  </Link>
+                  <Link href="/services" className={`${styles.secondaryBtnLight} roll-button`}>
+                    <span className="roll-text" data-text={copy.servicesCtaLabel}>
+                      {copy.servicesCtaLabel}
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className={styles.storyImages} data-reveal-group>
+                {STORY_IMAGES.map((image) => (
+                  <img
+                    key={image.src}
+                    src={image.src}
+                    alt={image.alt}
+                    className={styles.storyImg}
+                    loading="lazy"
+                  />
+                ))}
               </div>
             </div>
 
-            <div className={styles.storyImages}>
-              {STORY_IMAGES.map((image) => (
-                <img
-                  key={image.src}
-                  src={image.src}
-                  alt={image.alt}
-                  className={styles.storyImg}
-                  loading="lazy"
-                />
-              ))}
+            <div className={styles.block}>
+              <div className={styles.blockHeader} data-reveal>
+                <h2 className={styles.sectionTitleLight}>{copy.valuesTitle}</h2>
+              </div>
+              <div className={styles.valueGrid} data-reveal-group>
+                {values.map((value, idx) => (
+                  <article className={styles.valueCard} key={value.title}>
+                    <span className={styles.valueIndex}>(0{idx + 1})</span>
+                    <h3 className={styles.valueTitle}>{value.title}</h3>
+                    <p className={styles.valueText}>{value.text}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* --- Values --- */}
-          <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>{copy.valuesTitle}</h2>
-            <div className={styles.valueGrid}>
-              {values.map((value) => (
-                <article className={styles.valueCard} key={value.title}>
-                  <h3 className={styles.valueTitle}>{value.title}</h3>
-                  <p className={styles.valueText}>{value.text}</p>
-                </article>
-              ))}
+        {/* --- BAND 3: CHARCOAL MILESTONES & PROCESS --- */}
+        <section className={styles.charcoalBand}>
+          <div className={styles.sectionInner}>
+            <div className={styles.block}>
+              <div className={styles.blockHeader} data-reveal>
+                <h2 className={styles.sectionTitle}>{copy.milestonesTitle}</h2>
+              </div>
+              <ol className={styles.timeline} data-reveal-group>
+                {milestones.map((milestone) => (
+                  <li className={styles.milestone} key={milestone.year}>
+                    <span className={styles.milestoneYear}>{milestone.year}</span>
+                    <div className={styles.milestoneBody}>
+                      <h3 className={styles.milestoneTitle}>{milestone.title}</h3>
+                      <p className={styles.milestoneText}>{milestone.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
-          </section>
 
-          {/* --- Milestones --- */}
-          <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>{copy.milestonesTitle}</h2>
-            <ol className={styles.timeline}>
-              {milestones.map((milestone) => (
-                <li className={styles.milestone} key={milestone.year}>
-                  <span className={styles.milestoneYear}>{milestone.year}</span>
-                  <div className={styles.milestoneBody}>
-                    <h3 className={styles.milestoneTitle}>{milestone.title}</h3>
-                    <p className={styles.milestoneText}>{milestone.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          {/* --- Process --- */}
-          <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>{copy.processTitle}</h2>
-            <div className={styles.processGrid}>
-              {processSteps.map((step, i) => (
-                <article className={styles.processCard} key={step.title}>
-                  <span className={styles.processNumber}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className={styles.processTitle}>{step.title}</h3>
-                  <p className={styles.processText}>{step.text}</p>
-                </article>
-              ))}
+            <div className={styles.block}>
+              <div className={styles.blockHeader} data-reveal>
+                <h2 className={styles.sectionTitle}>{copy.processTitle}</h2>
+              </div>
+              <div className={styles.processGrid} data-reveal-group>
+                {processSteps.map((step, i) => (
+                  <article className={styles.processCard} key={step.title}>
+                    <span className={styles.processNumber}>
+                      ({String(i + 1).padStart(2, "0")})
+                    </span>
+                    <h3 className={styles.processTitle}>{step.title}</h3>
+                    <p className={styles.processText}>{step.text}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* --- Brands --- */}
-          <section className={styles.block}>
-            <h2 className={styles.sectionTitle}>{copy.brandsTitle}</h2>
-            <p className={styles.body}>{copy.brandsIntro}</p>
-            <ul className={styles.brandList}>
-              {brands.map((brand) => (
-                <li className={styles.brand} key={brand}>
-                  {brand}
-                </li>
-              ))}
-            </ul>
-          </section>
+        {/* --- BAND 4: WARM IVORY BRANDS & CLOSING CTA --- */}
+        <section className={styles.ivoryBand}>
+          <div className={styles.sectionInner}>
+            <div className={styles.block} data-reveal>
+              <h2 className={styles.sectionTitleLight}>{copy.brandsTitle}</h2>
+              <p className={styles.bodyLight}>{copy.brandsIntro}</p>
+              <ul className={styles.brandList}>
+                {brands.map((brand) => (
+                  <li className={styles.brand} key={brand}>
+                    {brand}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* --- Closing CTA --- */}
-          <section className={styles.cta}>
-            <h2 className={styles.ctaTitle}>{copy.ctaTitle}</h2>
-            <p className={styles.ctaText}>{copy.ctaText}</p>
-            <a href={whatsappHref(settings)} className={styles.primaryBtn}>
-              {copy.ctaLabel}
-            </a>
-          </section>
-        </div>
+            <div className={styles.cta} data-reveal>
+              <h2 className={styles.ctaTitle}>{copy.ctaTitle}</h2>
+              <p className={styles.ctaText}>{copy.ctaText}</p>
+              <a
+                href={whatsappHref(settings)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.primaryBtn} roll-button`}
+              >
+                <span className="roll-text" data-text={`${copy.ctaLabel} →`}>
+                  {copy.ctaLabel} →
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
 
       <SiteFooter settings={settings} />

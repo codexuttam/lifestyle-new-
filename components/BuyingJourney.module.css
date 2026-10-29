@@ -65,8 +65,31 @@
   max-width: 46ch;
 }
 
+.activeReadout {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: rgba(143, 107, 32, 0.1);
+  border: 1px solid rgba(143, 107, 32, 0.3);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8f6b20;
+}
+
+.activeReadoutDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #bf953f;
+  box-shadow: 0 0 0 4px rgba(191, 149, 63, 0.22);
+}
+
 .ctaBtn {
-  margin-top: 8px;
+  margin-top: 6px;
   padding: 13px 26px;
   border-radius: 9999px;
   border: 1px solid #0c0d0c;
@@ -78,47 +101,76 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
 .ctaBtn:hover {
   background: #8f6b20;
   border-color: #8f6b20;
+  transform: translateY(-2px);
 }
 
 /* Vertical Timeline Rail */
 .timelineCol {
   position: relative;
-  border-left: 1px solid rgba(143, 107, 32, 0.34);
-  padding-left: 36px;
+  padding-left: 42px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.railProgressTrack {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: rgba(143, 107, 32, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.railProgressFill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #8f6b20 0%, #bf953f 65%, #e2c275 100%);
+  transform-origin: top center;
+  transform: scaleY(0.25);
 }
 
 .stepCard {
   position: relative;
   background: #faf7f1;
   border: 1px solid rgba(12, 13, 12, 0.1);
-  border-radius: 22px;
+  border-radius: 24px;
   padding: 28px 30px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.35s ease;
+}
+
+.stepCard:hover {
+  transform: translateX(4px);
+  border-color: rgba(143, 107, 32, 0.45);
 }
 
 .stepCardActive {
   background: #ffffff;
   border-color: #8f6b20;
-  box-shadow: 0 20px 44px rgba(12, 13, 12, 0.08);
+  box-shadow: 0 24px 52px rgba(12, 13, 12, 0.09);
+  transform: translateX(6px);
 }
 
 .railMarker {
   position: absolute;
-  left: -52px;
-  top: 28px;
+  left: -56px;
+  top: 30px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -129,25 +181,64 @@
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.connectorLine {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: 24px;
+  height: 1.5px;
+  background: #bf953f;
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(0);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stepCardActive .railMarker {
   background: #bf953f;
   border-color: #bf953f;
   color: #080808;
-  transform: scale(1.1);
+  transform: scale(1.12);
+  box-shadow: 0 0 0 6px rgba(191, 149, 63, 0.18);
+}
+
+.stepCardActive .connectorLine {
+  transform: translateY(-50%) scaleX(1);
+}
+
+.diamond {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stepCardActive .diamond {
+  transform: rotate(90deg);
+}
+
+.stepTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
 }
 
 .stepHeader {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-bottom: 6px;
 }
 
 .stepNum {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
   color: #8f6b20;
   font-variant-numeric: tabular-nums;
@@ -170,6 +261,50 @@
   color: #0c0d0c;
 }
 
+/* Self-drawing architectural blueprint badge */
+.blueprintBox {
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: #f6f1e7;
+  border: 1px solid rgba(143, 107, 32, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+
+.stepCardActive .blueprintBox {
+  background: #0c0d0c;
+  border-color: #bf953f;
+  transform: scale(1.05);
+}
+
+.blueprintSvg {
+  width: 36px;
+  height: 36px;
+  stroke: rgba(143, 107, 32, 0.55);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.blueprintSvg rect,
+.blueprintSvg path,
+.blueprintSvg circle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0.35;
+  transition: stroke-dashoffset 0.75s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.35s ease;
+}
+
+.blueprintSvgActive rect,
+.blueprintSvgActive path,
+.blueprintSvgActive circle {
+  stroke: #e2c275;
+  stroke-dashoffset: 0;
+}
+
 .stepDesc {
   font-size: 14px;
   line-height: 1.68;
@@ -180,11 +315,19 @@
   margin-top: 4px;
   padding-top: 12px;
   border-top: 1px solid rgba(12, 13, 12, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #8f6b20;
+}
+
+.detailDiamond {
+  font-size: 10px;
+  color: #bf953f;
 }
 
 @media (max-width: 1024px) {
@@ -208,17 +351,29 @@
   }
 
   .timelineCol {
-    padding-left: 24px;
+    padding-left: 26px;
   }
 
   .railMarker {
-    left: -38px;
+    left: -39px;
     width: 26px;
     height: 26px;
+  }
+
+  .connectorLine {
+    width: 12px;
   }
 
   .stepCard {
     padding: 22px 18px;
   }
-}
 
+  .stepCardActive {
+    transform: none;
+  }
+
+  .blueprintBox {
+    width: 48px;
+    height: 48px;
+  }
+}

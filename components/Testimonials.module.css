@@ -56,7 +56,7 @@
 
 .videoCard {
   position: relative;
-  min-height: 540px;
+  min-height: 556px;
   border-radius: 28px;
   overflow: hidden;
   background: #050505;
@@ -64,7 +64,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px;
+  padding: 22px 24px 24px;
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.55);
 }
 
 .videoEl {
@@ -74,6 +75,11 @@
   height: 100%;
   object-fit: cover;
   cursor: pointer;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.videoCard:hover .videoEl {
+  transform: scale(1.03);
 }
 
 .videoScrim {
@@ -81,11 +87,40 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(8, 8, 8, 0.55) 0%,
-    rgba(8, 8, 8, 0.06) 45%,
-    rgba(8, 8, 8, 0.78) 100%
+    rgba(8, 8, 8, 0.62) 0%,
+    rgba(8, 8, 8, 0.08) 45%,
+    rgba(8, 8, 8, 0.84) 100%
   );
   pointer-events: none;
+}
+
+.videoTopCluster {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.storyBars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.storyBarTrack {
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(247, 239, 220, 0.24);
+  overflow: hidden;
+}
+
+.storyBarFill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #bf953f, #f0d799);
+  border-radius: 9999px;
+  transition: width 0.15s linear;
 }
 
 .videoTopBar,
@@ -99,6 +134,9 @@
 }
 
 .clipBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 7px 14px;
   border-radius: 9999px;
   background: rgba(8, 8, 8, 0.72);
@@ -109,6 +147,14 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #f7efdc;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #bf953f;
+  box-shadow: 0 0 8px rgba(191, 149, 63, 0.85);
 }
 
 .soundPill {
@@ -148,17 +194,21 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 .clipDotBtn {
-  padding: 5px 11px;
+  padding: 6px 12px;
   border-radius: 9999px;
   border: 1px solid rgba(247, 239, 220, 0.25);
   background: rgba(8, 8, 8, 0.65);
-  color: rgba(247, 239, 220, 0.76);
-  font-size: 10.5px;
+  color: rgba(247, 239, 220, 0.78);
+  font-size: 10px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .clipDotActive {
@@ -170,6 +220,7 @@
 .playBtn {
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid rgba(191, 149, 63, 0.6);
   background: rgba(8, 8, 8, 0.78);
@@ -180,12 +231,13 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .playBtn:hover {
   background: #bf953f;
   color: #080808;
+  transform: scale(1.06);
 }
 
 /* Contrasting Warm Ivory Quote Card */
@@ -193,25 +245,67 @@
   background: #f6f1e7;
   color: #0c0d0c;
   border-radius: 28px;
-  padding: 40px;
+  padding: 38px 40px;
   border: 1px solid rgba(191, 149, 63, 0.35);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  gap: 24px;
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.45);
 }
 
 .quoteCardTop {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
-.quoteMark {
-  font-family: var(--font-display);
-  font-size: 64px;
-  line-height: 0.7;
+.trustCluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stackedAvatars {
+  display: inline-flex;
+  align-items: center;
+}
+
+.stackedAvatarImg {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #f6f1e7;
+  margin-left: -8px;
+  box-shadow: 0 4px 10px rgba(12, 13, 12, 0.14);
+}
+
+.stackedAvatarImg:first-child {
+  margin-left: 0;
+}
+
+.ratingMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.stars {
+  font-size: 13px;
+  letter-spacing: 0.12em;
   color: #8f6b20;
+  line-height: 1;
+}
+
+.verifiedTag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(12, 13, 12, 0.58);
 }
 
 .quoteCounter {
@@ -222,24 +316,25 @@
   font-variant-numeric: tabular-nums;
 }
 
+.quoteBodyWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quoteMark {
+  font-family: var(--font-display);
+  font-size: 58px;
+  line-height: 0.65;
+  color: #8f6b20;
+}
+
 .quoteText {
   font-family: var(--font-sans);
-  font-size: clamp(1.15rem, 1.75vw, 1.45rem);
+  font-size: clamp(1.14rem, 1.7vw, 1.42rem);
   font-weight: 500;
   line-height: 1.58;
   color: #0c0d0c;
-  animation: quoteFade 0.4s ease;
-}
-
-@keyframes quoteFade {
-  from {
-    opacity: 0.35;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .authorBlock {
@@ -260,7 +355,7 @@
 .authorAvatar {
   width: 52px;
   height: 52px;
-  border-radius: 50%;
+  border-radius: 14px;
   object-fit: cover;
   border: 1.5px solid #8f6b20;
 }
@@ -300,12 +395,13 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .quoteArrow:hover {
   background: #0c0d0c;
   color: #f6f1e7;
+  transform: translateY(-1px);
 }
 
 .avatarStrip {

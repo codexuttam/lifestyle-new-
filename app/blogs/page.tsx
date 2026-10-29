@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import RevealAnimations from "@/components/RevealAnimations";
 import BlogArticleModal from "@/components/BlogArticleModal";
 import BlogGeneratorModal from "@/components/BlogGeneratorModal";
 import EnquiryModal from "@/components/EnquiryModal";
@@ -149,34 +150,34 @@ export default function BlogsPage() {
   };
 
   return (
-    <div style={{ backgroundColor: "#06090e", color: "#ffffff", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#080808", color: "#f7efdc", minHeight: "100vh", fontFamily: "var(--font-sans)" }}>
+      <RevealAnimations />
       <SiteNav activeHref="/blogs" />
 
-      <main style={{ paddingTop: "7.5rem", paddingBottom: "5rem", maxWidth: "1280px", margin: "0 auto", paddingLeft: "1.5rem", paddingRight: "1.5rem" }}>
-        
+      <main style={{ paddingTop: "8.5rem", paddingBottom: "6rem", maxWidth: "1400px", margin: "0 auto", paddingLeft: "2.5rem", paddingRight: "2.5rem" }}>
         {/* Header Hero Section */}
-        <div style={{ textAlign: "center", maxWidth: "860px", margin: "0 auto 3.5rem" }}>
+        <div style={{ maxWidth: "880px", marginBottom: "2.8rem" }} data-reveal>
           <h1
             style={{
-              fontSize: "clamp(2.1rem, 4.5vw, 3.4rem)",
-              fontWeight: 800,
-              lineHeight: 1.2,
-              background: "linear-gradient(135deg, #ffffff 50%, var(--color-wine, #bf953f) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              marginBottom: "1.1rem",
-              letterSpacing: "-0.02em",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2.8rem, 5.2vw, 4.9rem)",
+              fontWeight: 600,
+              lineHeight: 0.94,
+              textTransform: "uppercase",
+              color: "#f7efdc",
+              marginBottom: "1rem",
+              letterSpacing: "-0.015em",
             }}
           >
-            Lifestyle Articles &amp; Buyer Folios
+            LIFESTYLE ARTICLES &amp; <span style={{ color: "#bf953f" }}>BUYER FOLIOS</span>
           </h1>
           <p
             style={{
-              color: "rgba(255, 255, 255, 0.78)",
-              fontSize: "1.05rem",
+              color: "rgba(247, 239, 220, 0.72)",
+              fontSize: "15.5px",
               lineHeight: 1.7,
-              margin: "0 auto",
-              maxWidth: "720px",
+              margin: 0,
+              maxWidth: "68ch",
             }}
           >
             Official market analysis, architectural benchmarks, and intelligent property guides for homebuyers and commercial investors across Amravati and Vidarbha.
@@ -186,12 +187,11 @@ export default function BlogsPage() {
           {isAdmin ? (
             <div
               style={{
-                marginTop: "2rem",
+                marginTop: "1.8rem",
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
-                justifyContent: "center",
-                gap: "1.2rem",
+                gap: "1.1rem",
               }}
             >
               <button
@@ -200,19 +200,17 @@ export default function BlogsPage() {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.65rem",
-                  padding: "0.9rem 1.8rem",
+                  gap: "0.55rem",
+                  padding: "13px 24px",
                   borderRadius: "9999px",
-                  background: "var(--color-wine, #bf953f)",
-                  color: "#ffffff",
-                  fontWeight: 800,
-                  fontSize: "0.92rem",
-                  border: "none",
+                  background: "#bf953f",
+                  color: "#080808",
+                  fontWeight: 700,
+                  fontSize: "11px",
+                  border: "1px solid #d4af37",
                   cursor: "pointer",
-                  boxShadow: "0 8px 24px rgba(191, 149, 63, 0.35)",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
                   textTransform: "uppercase",
-                  letterSpacing: "0.5px",
+                  letterSpacing: "0.14em",
                 }}
               >
                 <span>✦</span> Generate Article with Bitlance AI
@@ -221,27 +219,28 @@ export default function BlogsPage() {
               <div
                 style={{
                   textAlign: "left",
-                  fontSize: "0.78rem",
-                  fontFamily: "monospace",
-                  borderLeft: "2px solid rgba(191, 149, 63, 0.4)",
-                  paddingLeft: "1rem",
-                  color: "rgba(255, 255, 255, 0.75)",
+                  fontSize: "11.5px",
+                  borderLeft: "2px solid rgba(191, 149, 63, 0.45)",
+                  paddingLeft: "0.9rem",
+                  color: "rgba(247, 239, 220, 0.75)",
                 }}
               >
-                <div style={{ color: "#ffffff", fontWeight: 700 }}>Administrator Session Active</div>
-                <div style={{ color: "#bf953f" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
+                <div style={{ color: "#f7efdc", fontWeight: 600 }}>Administrator Session Active</div>
+                <div style={{ color: "#d5bd87" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
               </div>
 
               <button
                 type="button"
                 onClick={handleAdminLogout}
                 style={{
-                  background: "rgba(255, 255, 255, 0.06)",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                  color: "rgba(255, 255, 255, 0.7)",
-                  padding: "0.5rem 1rem",
+                  background: "transparent",
+                  border: "1px solid rgba(247, 239, 220, 0.22)",
+                  color: "rgba(247, 239, 220, 0.75)",
+                  padding: "8px 16px",
                   borderRadius: "9999px",
-                  fontSize: "0.78rem",
+                  fontSize: "11px",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
                   cursor: "pointer",
                 }}
               >
@@ -249,40 +248,7 @@ export default function BlogsPage() {
               </button>
             </div>
           ) : (
-            <div
-              style={{
-                marginTop: "1.75rem",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "1rem",
-                background: "rgba(255, 255, 255, 0.03)",
-                padding: "0.5rem 1.2rem",
-                borderRadius: "9999px",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "0.82rem",
-                  color: "#cfd3dc",
-                  fontFamily: "monospace",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                }}
-              >
-                <span
-                  style={{
-                    width: "8px",
-                    height: "8px",
-                    borderRadius: "50%",
-                    backgroundColor: "#bf953f",
-                    boxShadow: "0 0 8px rgba(191, 149, 63, 0.7)",
-                  }}
-                />
-                Official Lifestyle Home Spaces Publications · MahaRERA Verified
-              </span>
-
+            <div style={{ marginTop: "1rem" }}>
               <button
                 type="button"
                 onClick={() => setShowAdminModal(true)}
@@ -290,17 +256,15 @@ export default function BlogsPage() {
                 style={{
                   background: "transparent",
                   border: "none",
-                  color: "rgba(255, 255, 255, 0.4)",
+                  color: "rgba(247, 239, 220, 0.42)",
                   cursor: "pointer",
-                  fontSize: "0.78rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "4px",
-                  padding: "2px 6px",
-                  borderRadius: "4px",
+                  fontSize: "11px",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  padding: "4px 0",
                 }}
               >
-                <span>🔒</span> Admin
+                Admin Sign In →
               </button>
             </div>
           )}
@@ -315,14 +279,14 @@ export default function BlogsPage() {
             alignItems: "center",
             gap: "1.25rem",
             marginBottom: "2.5rem",
-            padding: "1rem 1.25rem",
-            background: "rgba(255, 255, 255, 0.03)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
-            borderRadius: "16px",
+            padding: "12px 16px",
+            background: "#101210",
+            border: "1px solid rgba(247, 239, 220, 0.12)",
+            borderRadius: "20px",
           }}
         >
           {/* Categories */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -331,17 +295,17 @@ export default function BlogsPage() {
                   type="button"
                   onClick={() => setActiveCategory(cat)}
                   style={{
-                    padding: "0.45rem 1rem",
+                    padding: "9px 16px",
                     borderRadius: "9999px",
-                    background: isActive
-                      ? "var(--color-wine, #bf953f)"
-                      : "transparent",
+                    background: isActive ? "#bf953f" : "transparent",
                     border: isActive
-                      ? "1px solid var(--color-wine, #bf953f)"
-                      : "1px solid rgba(255, 255, 255, 0.12)",
-                    color: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.7)",
-                    fontSize: "0.85rem",
-                    fontWeight: isActive ? 700 : 500,
+                      ? "1px solid #d4af37"
+                      : "1px solid rgba(247, 239, 220, 0.14)",
+                    color: isActive ? "#080808" : "rgba(247, 239, 220, 0.72)",
+                    fontSize: "11px",
+                    fontWeight: isActive ? 700 : 600,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                   }}
@@ -361,41 +325,29 @@ export default function BlogsPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: "100%",
-                padding: "0.65rem 1rem 0.65rem 2.2rem",
-                background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(255, 255, 255, 0.16)",
+                padding: "10px 34px 10px 16px",
+                background: "#080808",
+                border: "1px solid rgba(247, 239, 220, 0.16)",
                 borderRadius: "9999px",
-                color: "#ffffff",
-                fontSize: "0.88rem",
+                color: "#f7efdc",
+                fontSize: "13px",
                 outline: "none",
               }}
             />
-            <span
-              style={{
-                position: "absolute",
-                left: "0.9rem",
-                top: "50%",
-                transform: "translateY(-50%)",
-                color: "rgba(255, 255, 255, 0.4)",
-                fontSize: "0.85rem",
-              }}
-            >
-              🔍
-            </span>
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
                 style={{
                   position: "absolute",
-                  right: "0.8rem",
+                  right: "12px",
                   top: "50%",
                   transform: "translateY(-50%)",
                   background: "transparent",
                   border: "none",
-                  color: "rgba(255, 255, 255, 0.5)",
+                  color: "rgba(247, 239, 220, 0.6)",
                   cursor: "pointer",
-                  fontSize: "0.9rem",
+                  fontSize: "13px",
                 }}
               >
                 ✕
@@ -410,12 +362,12 @@ export default function BlogsPage() {
             style={{
               textAlign: "center",
               padding: "4rem 2rem",
-              background: "rgba(255, 255, 255, 0.02)",
-              borderRadius: "16px",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
+              background: "#101210",
+              borderRadius: "22px",
+              border: "1px solid rgba(247, 239, 220, 0.1)",
             }}
           >
-            <p style={{ color: "rgba(255, 255, 255, 0.6)", fontSize: "1.1rem", marginBottom: "1rem" }}>
+            <p style={{ color: "rgba(247, 239, 220, 0.65)", fontSize: "1rem", marginBottom: "1.2rem" }}>
               No articles found matching &quot;{searchQuery || activeCategory}&quot;.
             </p>
             <button
@@ -425,12 +377,15 @@ export default function BlogsPage() {
                 setActiveCategory("All");
               }}
               style={{
-                padding: "0.6rem 1.4rem",
+                padding: "11px 22px",
                 borderRadius: "9999px",
-                background: "rgba(191, 149, 63, 0.2)",
-                border: "1px solid #bf953f",
-                color: "#ffffff",
-                fontWeight: 600,
+                background: "#bf953f",
+                border: "1px solid #d4af37",
+                color: "#080808",
+                fontSize: "11px",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
                 cursor: "pointer",
               }}
             >
@@ -439,10 +394,11 @@ export default function BlogsPage() {
           </div>
         ) : (
           <div
+            data-reveal-group
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-              gap: "2rem",
+              gap: "24px",
             }}
           >
             {filteredBlogs.map((blog) => (
@@ -450,30 +406,27 @@ export default function BlogsPage() {
                 key={blog.id}
                 onClick={() => setSelectedBlog(blog)}
                 style={{
-                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  borderRadius: "20px",
+                  background: "#101210",
+                  border: "1px solid rgba(247, 239, 220, 0.12)",
+                  borderRadius: "24px",
                   overflow: "hidden",
                   cursor: "pointer",
                   display: "flex",
                   flexDirection: "column",
-                  transition: "transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
+                  transition: "transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
                   position: "relative",
-                  boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
+                  boxShadow: "0 18px 44px rgba(0, 0, 0, 0.55)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.borderColor = "rgba(191, 149, 63, 0.6)";
-                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(191, 149, 63, 0.25)";
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                  e.currentTarget.style.borderColor = "rgba(191, 149, 63, 0.55)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
-                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.4)";
+                  e.currentTarget.style.borderColor = "rgba(247, 239, 220, 0.12)";
                 }}
               >
-                {/* Image Header with Guaranteed Fallback */}
-                <div style={{ height: "220px", width: "100%", overflow: "hidden", position: "relative", background: "#11141c" }}>
+                <div style={{ height: "230px", width: "100%", overflow: "hidden", position: "relative", background: "#080808" }}>
                   <img
                     src={blog.image || "/aura/aura-hero-clean-4k.jpg"}
                     alt={blog.title}
@@ -486,35 +439,35 @@ export default function BlogsPage() {
                       objectFit: "cover",
                       objectPosition: "center",
                       display: "block",
-                      transition: "transform 0.4s ease",
                     }}
                   />
                   <div
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "linear-gradient(to top, rgba(6, 9, 14, 0.95) 0%, rgba(6, 9, 14, 0.1) 60%, transparent 100%)",
+                      background: "linear-gradient(to top, rgba(8, 8, 8, 0.92) 0%, rgba(8, 8, 8, 0.15) 60%, transparent 100%)",
                     }}
                   />
                   <div
                     style={{
                       position: "absolute",
-                      top: "1rem",
-                      left: "1rem",
+                      top: "14px",
+                      left: "14px",
                       display: "flex",
-                      gap: "0.5rem",
+                      gap: "8px",
                     }}
                   >
                     <span
                       style={{
-                        padding: "0.25rem 0.75rem",
+                        padding: "5px 12px",
                         borderRadius: "9999px",
-                        background: "rgba(15, 29, 56, 0.85)",
-                        backdropFilter: "blur(6px)",
-                        border: "1px solid rgba(255, 255, 255, 0.2)",
-                        color: "#ffffff",
-                        fontSize: "0.75rem",
+                        background: "rgba(8, 8, 8, 0.82)",
+                        backdropFilter: "blur(8px)",
+                        border: "1px solid rgba(191, 149, 63, 0.42)",
+                        color: "#f7efdc",
+                        fontSize: "10px",
                         fontWeight: 600,
+                        letterSpacing: "0.14em",
                         textTransform: "uppercase",
                       }}
                     >
@@ -523,21 +476,21 @@ export default function BlogsPage() {
                     {blog.isAiGenerated && (
                       <span
                         style={{
-                          padding: "0.25rem 0.65rem",
+                          padding: "5px 11px",
                           borderRadius: "9999px",
-                          background: "rgba(232, 67, 147, 0.85)",
-                          backdropFilter: "blur(6px)",
-                          color: "#ffffff",
-                          fontSize: "0.72rem",
-                          fontWeight: 600,
+                          background: "#bf953f",
+                          color: "#080808",
+                          fontSize: "10px",
+                          fontWeight: 700,
+                          letterSpacing: "0.1em",
+                          textTransform: "uppercase",
                         }}
                       >
-                        ✦ AI Generated
+                        ✦ AI Folio
                       </span>
                     )}
                   </div>
 
-                  {/* Admin Only Delete Action */}
                   {isAdmin && blog.isAiGenerated && (
                     <button
                       type="button"
@@ -545,40 +498,42 @@ export default function BlogsPage() {
                       onClick={(e) => handleDeleteAiBlog(e, blog.id)}
                       style={{
                         position: "absolute",
-                        top: "1rem",
-                        right: "1rem",
+                        top: "14px",
+                        right: "14px",
                         width: "32px",
                         height: "32px",
                         borderRadius: "50%",
-                        background: "rgba(0, 0, 0, 0.75)",
-                        border: "1px solid rgba(255, 118, 117, 0.5)",
-                        color: "#ff7675",
+                        background: "rgba(8, 8, 8, 0.85)",
+                        border: "1px solid rgba(247, 239, 220, 0.3)",
+                        color: "#f7efdc",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: "0.9rem",
+                        fontSize: "12px",
                       }}
                     >
-                      🗑
+                      ✕
                     </button>
                   )}
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <div style={{ display: "flex", gap: "0.85rem", fontSize: "0.8rem", color: "rgba(255, 255, 255, 0.55)", marginBottom: "0.75rem" }}>
-                    {blog.date && <span>📅 {blog.date}</span>}
-                    {blog.readTime && <span>⏱ {blog.readTime}</span>}
+                <div style={{ padding: "24px", flex: 1, display: "flex", flexDirection: "column" }}>
+                  <div style={{ display: "flex", gap: "12px", fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase", color: "#d5bd87", marginBottom: "10px" }}>
+                    {blog.date && <span>{blog.date}</span>}
+                    {blog.readTime && <span>· {blog.readTime}</span>}
                   </div>
 
                   <h3
                     style={{
-                      fontSize: "1.25rem",
-                      fontWeight: 700,
-                      lineHeight: 1.4,
-                      color: "#ffffff",
-                      marginBottom: "0.75rem",
+                      fontFamily: "var(--font-display)",
+                      fontSize: "1.6rem",
+                      fontWeight: 600,
+                      lineHeight: 1.04,
+                      textTransform: "uppercase",
+                      color: "#f7efdc",
+                      marginBottom: "10px",
                     }}
                   >
                     {blog.title}
@@ -586,10 +541,10 @@ export default function BlogsPage() {
 
                   <p
                     style={{
-                      color: "rgba(255, 255, 255, 0.72)",
-                      fontSize: "0.92rem",
-                      lineHeight: 1.6,
-                      marginBottom: "1.5rem",
+                      color: "rgba(247, 239, 220, 0.7)",
+                      fontSize: "13.5px",
+                      lineHeight: 1.65,
+                      marginBottom: "20px",
                       flex: 1,
                     }}
                   >
@@ -601,16 +556,18 @@ export default function BlogsPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      paddingTop: "1rem",
-                      borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                      color: "var(--color-wine, #bf953f)",
+                      paddingTop: "14px",
+                      borderTop: "1px solid rgba(247, 239, 220, 0.09)",
+                      color: "#bf953f",
                       fontWeight: 600,
-                      fontSize: "0.88rem",
+                      fontSize: "11px",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
                     }}
                   >
-                    <span>Read Full Article &rarr;</span>
+                    <span>Read Full Article →</span>
                     {blog.relatedProject && (
-                      <span style={{ fontSize: "0.75rem", color: "rgba(255, 255, 255, 0.45)" }}>
+                      <span style={{ fontSize: "10.5px", color: "rgba(247, 239, 220, 0.45)" }}>
                         {blog.relatedProject === "aura" ? "Aura Flagship" : "Lifestyle Homes"}
                       </span>
                     )}
@@ -632,7 +589,7 @@ export default function BlogsPage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "rgba(6, 9, 14, 0.9)",
+            backgroundColor: "rgba(5, 5, 5, 0.9)",
             backdropFilter: "blur(16px)",
             padding: "1rem",
           }}
@@ -647,12 +604,12 @@ export default function BlogsPage() {
             style={{
               width: "100%",
               maxWidth: "440px",
-              background: "linear-gradient(135deg, #101210 0%, #050a16 100%)",
+              background: "#101210",
               border: "1px solid rgba(191, 149, 63, 0.4)",
-              borderRadius: "20px",
+              borderRadius: "24px",
               padding: "2rem",
-              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(191, 149, 63, 0.2)",
-              color: "#ffffff",
+              boxShadow: "0 28px 70px rgba(0, 0, 0, 0.85)",
+              color: "#f7efdc",
               position: "relative",
             }}
           >
@@ -668,9 +625,9 @@ export default function BlogsPage() {
                 width: "32px",
                 height: "32px",
                 borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                color: "#ffffff",
+                background: "#080808",
+                border: "1px solid rgba(247, 239, 220, 0.18)",
+                color: "#f7efdc",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
@@ -681,27 +638,34 @@ export default function BlogsPage() {
             </button>
 
             <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              <div
+              <span
                 style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  background: "rgba(191, 149, 63, 0.15)",
-                  border: "1px solid rgba(191, 149, 63, 0.35)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "1.4rem",
-                  margin: "0 auto 0.8rem",
-                  color: "#bf953f",
+                  display: "inline-block",
+                  padding: "4px 12px",
+                  borderRadius: "9999px",
+                  border: "1px solid rgba(191, 149, 63, 0.4)",
+                  color: "#d5bd87",
+                  fontSize: "10px",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  marginBottom: "10px",
                 }}
               >
-                🔐
-              </div>
-              <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#ffffff", marginBottom: "0.4rem" }}>
-                Administrator Passcode
+                EXECUTIVE ACCESS
+              </span>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.8rem",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  color: "#f7efdc",
+                  marginBottom: "0.4rem",
+                }}
+              >
+                ADMINISTRATOR PASSCODE
               </h3>
-              <p style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.65)", margin: 0 }}>
+              <p style={{ fontSize: "13px", color: "rgba(247, 239, 220, 0.65)", margin: 0 }}>
                 Enter your executive master passcode to unlock the Bitlance AI Blog Generator.
               </p>
             </div>
@@ -722,16 +686,17 @@ export default function BlogsPage() {
                     width: "100%",
                     padding: "12px 16px",
                     borderRadius: "12px",
-                    background: "rgba(255, 255, 255, 0.06)",
-                    border: adminPasscodeError ? "1px solid #ff7675" : "1px solid rgba(255, 255, 255, 0.18)",
-                    color: "#ffffff",
+                    background: "#080808",
+                    border: adminPasscodeError
+                      ? "1px solid #d5bd87"
+                      : "1px solid rgba(247, 239, 220, 0.18)",
+                    color: "#f7efdc",
                     fontSize: "0.95rem",
                     outline: "none",
-                    letterSpacing: "1px",
                   }}
                 />
                 {adminPasscodeError && (
-                  <div style={{ color: "#ff7675", fontSize: "0.8rem", marginTop: "0.4rem" }}>
+                  <div style={{ color: "#d5bd87", fontSize: "0.8rem", marginTop: "0.4rem" }}>
                     {adminPasscodeError}
                   </div>
                 )}
@@ -740,20 +705,19 @@ export default function BlogsPage() {
               <button
                 type="submit"
                 style={{
-                  padding: "12px 20px",
+                  padding: "13px 22px",
                   borderRadius: "9999px",
-                  background: "var(--color-wine, #bf953f)",
-                  color: "#ffffff",
-                  fontWeight: 800,
-                  fontSize: "0.92rem",
-                  border: "none",
+                  background: "#bf953f",
+                  color: "#080808",
+                  fontWeight: 700,
+                  fontSize: "11px",
+                  border: "1px solid #d4af37",
                   cursor: "pointer",
-                  boxShadow: "0 4px 18px rgba(191, 149, 63, 0.35)",
                   textTransform: "uppercase",
-                  letterSpacing: "0.5px",
+                  letterSpacing: "0.14em",
                 }}
               >
-                Unlock Administrator Access
+                Unlock Administrator Access →
               </button>
             </form>
           </div>

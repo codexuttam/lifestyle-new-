@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
+import RevealAnimations from "@/components/RevealAnimations";
 import { getSettings } from "@/lib/content/settings";
 import SiteFooter from "@/components/SiteFooter";
 import { getPages } from "@/lib/content/pages";
@@ -20,24 +21,26 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
+
 export default async function ProjectsPage() {
-  const [projects, settings, pages] = await Promise.all([
+  const [projects, settings] = await Promise.all([
     getProjects(),
     getSettings(),
-    getPages(),
   ]);
-  const copy = pages.projects;
 
   return (
     <>
+      <RevealAnimations />
       <SiteNav activeHref="/projects" />
 
       <main className={styles.page}>
         <div className={styles.inner}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>Signature Developments &amp; Commercial Arcades</h1>
+          <header className={styles.header} data-reveal>
+            <h1 className={styles.title}>
+              SIGNATURE DEVELOPMENTS &amp; <span>COMMERCIAL ARCADES</span>
+            </h1>
             <p className={styles.intro}>
-              From our iconic 15-storey highrise tower Aura by Lifestyle in Congress Nagar to 100% delivered ready-to-move Lifestyle Home Spaces on DPS Road — discover benchmark luxury residences and prime commercial showrooms.
+              From our 15-storey skyline tower Aura by Lifestyle in Congress Nagar to 100% delivered ready-to-move Lifestyle Home Spaces on DPS Road—discover architectural residences and road-facing commercial showrooms.
             </p>
           </header>
 

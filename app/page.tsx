@@ -8,6 +8,7 @@ import ExploreSection from "@/components/ExploreSection";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
 import AuraFeatureSequence from "@/components/AuraFeatureSequence";
 import Properties from "@/components/Properties";
+import AllProperties from "@/components/AllProperties";
 import BuyingJourney from "@/components/BuyingJourney";
 import Testimonials from "@/components/Testimonials";
 import Faq from "@/components/Faq";
@@ -43,23 +44,23 @@ export default async function Home() {
   ]);
 
   return (
-    <main style={{ width: "100%", maxWidth: "100vw", overflowX: "clip" }}>
+    <main style={{ width: "100%" }}>
       <RevealAnimations />
       <SiteNav activeHref="/" />
 
-      {/* 01. Full-Screen Architectural Hero (Dark Charcoal) */}
+      {/* 01. Full-Screen Architectural Hero with Scroll-Morphing Video Stage (Dark Charcoal) */}
       <Hero content={home.hero} />
 
       {/* 02. Verified Landmark Credentials & MahaRERA Strip (Warm Ivory) */}
       <TrustStrip />
 
-      {/* 03. Architectural Spotlight & Brand Introduction (Dark Charcoal) */}
+      {/* 03. Architectural Spotlight & Converging Monumental Title (Dark Charcoal) */}
       <About content={home.about} />
 
-      {/* 04. Scroll-Revealed Value & Engineering Craftsmanship (Warm Ivory) */}
+      {/* 04. 3D Perspective Grid & Scroll-Revealed Engineering Craftsmanship (Warm Ivory) */}
       <Services services={featuredServices} content={home.services} />
 
-      {/* 05. Interactive Tower & Floor-Plate Exploration (Dark Charcoal) */}
+      {/* 05. Interactive Tower Hotspots & Floor-Plate Exploration (Dark Charcoal) */}
       <ExploreSection
         content={home.explore}
         projectTitle={
@@ -70,13 +71,14 @@ export default async function Home() {
       />
       <AuraFloorPlans />
 
-      {/* 06. Pinned Desktop / Stacked Mobile Feature Sequence (Warm Ivory) */}
+      {/* 06. Pinned 3D Fanning Video & Render Card Deck (Warm Ivory) */}
       <AuraFeatureSequence />
 
-      {/* 07. Interactive Portfolio & Property Showcase (Deep Charcoal) */}
+      {/* 07. Interactive Portfolio Stage & Sticky 3D Dynamic Card Stack (Deep Charcoal) */}
       <Properties projects={featuredProjects} content={home.properties} />
+      <AllProperties content={home.allProperties} />
 
-      {/* 08. Homebuying & Possession Journey Timeline (Warm Ivory) */}
+      {/* 08. Homebuying & Possession Journey Timeline with Blueprint SVGs (Warm Ivory) */}
       <BuyingJourney />
 
       {/* 09. Real Project Clips & Resident Testimonials (Dark + Warm Ivory Split) */}

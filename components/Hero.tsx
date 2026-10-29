@@ -2,65 +2,113 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { HomeRecord } from "@/lib/schemas/home";
 import styles from "./Hero.module.css";
 
-export default function Hero({ content }: { content: HomeRecord["hero"] }) {
+export default function Hero({ content: _content }: { content: HomeRecord["hero"] }) {
   const heroRef = useRef<HTMLElement>(null);
+  const videoFrameRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Pause hero video when offscreen & run restrained entrance reveal
+  // Ensure immediate video playback & offscreen auto-pause
   useEffect(() => {
     const video = videoRef.current;
-    let observer: IntersectionObserver | null = null;
+    if (!video) return;
 
-    if (video && "IntersectionObserver" in window) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        },
-        { threshold: 0.1 }
-      );
-      observer.observe(video);
-    }
+    video.muted = true;
+    video.play().catch(() => {});
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return () => observer?.disconnect();
-    }
+    if (!("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.08 }
+    );
+    observer.observe(video);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Kinetic masked entrance + Virtuaze 3D clip-path scroll-morph
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        "[data-hero-reveal]",
-        { y: 20, opacity: 0.01 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.75,
-          stagger: 0.08,
-          ease: "power3.out",
-          clearProps: "transform,opacity",
+      if (!reduced) {
+        gsap.fromTo(
+          "[data-hero-line]",
+          { yPercent: 108, opacity: 0.2 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.0,
+            stagger: 0.1,
+            ease: "power4.out",
+            clearProps: "transform,opacity",
+          }
+        );
+
+        gsap.fromTo(
+          "[data-hero-fade]",
+          { y: 22, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.08,
+            delay: 0.15,
+            ease: "power3.out",
+            clearProps: "transform,opacity",
+          }
+        );
+
+        gsap.fromTo(
+          "[data-hero-rule]",
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 1.1,
+            ease: "power3.inOut",
+            delay: 0.18,
+            clearProps: "transform",
+          }
+        );
+
+        if (videoFrameRef.current && videoRef.current) {
+          gsap.to(videoFrameRef.current, {
+            clipPath: "inset(3.2% 2.8% 4.2% 2.8% round 28px)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.5,
+            },
+          });
+
+          gsap.to(videoRef.current, {
+            scale: 1.14,
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.5,
+            },
+          });
         }
-      );
-      gsap.fromTo(
-        "[data-hero-rule]",
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 0.9,
-          ease: "power3.inOut",
-          clearProps: "transform",
-        }
-      );
+      }
     }, heroRef);
 
-    return () => {
-      observer?.disconnect();
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   const handleOpenEnquiry = () => {
@@ -78,50 +126,44 @@ export default function Hero({ content }: { content: HomeRecord["hero"] }) {
 
   return (
     <section className={styles.hero} id="hero-section" ref={heroRef}>
-      {/* Full-Screen Architectural Film & Elevation Poster */}
-      <div className={styles.videoContainer}>
+      {/* Full-Screen Scroll-Morphing 3D Video Frame (Watermark-Free Clip) */}
+      <div className={styles.videoContainer} ref={videoFrameRef}>
         <video
           ref={videoRef}
+          src="/videos/aura-showcase-clip.mp4"
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           poster="/aura/aura-hero-clean-4k.jpg"
           className={styles.heroVideo}
           aria-hidden="true"
-        >
-          <source src="/videos/aura-showcase-clip.mp4" type="video/mp4" />
-        </video>
+        />
         <div className={styles.heroOverlay} />
       </div>
 
       <div className={styles.inner}>
-        {/* Top Architectural Metadata Row */}
-        <div className={styles.topRow} data-hero-reveal>
-          <div className={styles.eyebrowGroup}>
-            <span className={styles.goldRule} aria-hidden="true" />
-            <span className={styles.eyebrow}>CONGRESS NAGAR · CAMP, AMRAVATI</span>
-          </div>
-
-          <p className={styles.asideCopy}>
-            {content.description}
-          </p>
-        </div>
-
-        {/* Bottom Monumental Display & Enquiry Actions */}
+        {/* Bottom Monumental Kinetic Display & Enquiry Actions */}
         <div className={styles.bottomDeck}>
-          <div className={styles.headlineWrap} data-hero-reveal>
-            <span className={styles.superTitle}>15-STOREY FLAGSHIP LANDMARK BY LIFESTYLE HOME SPACES</span>
+          <div className={styles.headlineWrap}>
             <h1 className={styles.headline}>
-              AURA BY LIFESTYLE
-              <span className={styles.headlineAccent}>SKYLINE RESIDENCES &amp; ROOFTOP OASIS</span>
+              <span className={styles.lineMask}>
+                <span className={styles.lineInner} data-hero-line>
+                  AURA BY LIFESTYLE
+                </span>
+              </span>
+              <span className={styles.lineMask}>
+                <span className={`${styles.lineInner} ${styles.headlineAccent}`} data-hero-line>
+                  SKYLINE RESIDENCES &amp; ROOFTOP OASIS
+                </span>
+              </span>
             </h1>
           </div>
 
           <div className={styles.divider} data-hero-rule />
 
-          <div className={styles.footerBar} data-hero-reveal>
+          <div className={styles.footerBar} data-hero-fade>
             <div className={styles.specList}>
               <div className={styles.specItem}>
                 <span className={styles.specKey}>Configurations</span>

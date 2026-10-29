@@ -31,12 +31,12 @@ export default function VslSection({
   preference = "Ready Possession 2 & 3 BHK",
   videoSrc,
   poster,
-  eyebrow = "Watch the 2-minute walkthrough",
+  eyebrow = "",
   headline,
   intro,
   points,
-  primaryCta = "Book Your Site Visit",
-  secondaryCta = "Get Project Details",
+  primaryCta = "Schedule Site Visit →",
+  secondaryCta = "Request Floor Kit",
 }: VslSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const autoTriggeredRef = useRef(false);
@@ -62,11 +62,9 @@ export default function VslSection({
 
     const onTimeUpdate = () => {
       if (!video.duration || !isFinite(video.duration)) return;
-      // Allow re-triggering if visitor rewinds back to the start
       if (video.currentTime < 1) {
         autoTriggeredRef.current = false;
       }
-      // Trigger enquiry popup once video reaches 30% playback
       if (video.currentTime / video.duration >= AUTO_POPUP_AT) {
         autoOpen();
       }
@@ -100,7 +98,7 @@ export default function VslSection({
   return (
     <section id={id} className={styles.section} aria-labelledby={`${id}-title`}>
       <div className={styles.inner}>
-        <div className={styles.videoCol}>
+        <div className={styles.videoCol} data-reveal>
           <div className={styles.videoFrame}>
             <video
               ref={videoRef}
@@ -116,8 +114,8 @@ export default function VslSection({
           </div>
         </div>
 
-        <div className={styles.copyCol}>
-          <span className={styles.eyebrow}>{eyebrow}</span>
+        <div className={styles.copyCol} data-reveal>
+          {eyebrow ? <span className={styles.eyebrow}>{eyebrow}</span> : null}
           <h2 id={`${id}-title`} className={styles.headline}>
             {headline}
           </h2>
@@ -132,23 +130,27 @@ export default function VslSection({
           <div className={styles.ctaRow}>
             <button
               type="button"
-              className={styles.primaryCta}
+              className={`${styles.primaryCta} roll-button`}
               onClick={() => openFromCta(preference)}
             >
-              {primaryCta}
+              <span className="roll-text" data-text={primaryCta}>
+                {primaryCta}
+              </span>
             </button>
             <button
               type="button"
-              className={styles.secondaryCta}
+              className={`${styles.secondaryCta} roll-button`}
               onClick={() => openFromCta("Floor Plans & Pricing Details")}
             >
-              {secondaryCta}
+              <span className="roll-text" data-text={secondaryCta}>
+                {secondaryCta}
+              </span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Official Lifestyle VIP CRM Enquiry Modal (Identical to Aura page) */}
+      {/* Official Lifestyle VIP CRM Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={handleClose}
@@ -158,4 +160,3 @@ export default function VslSection({
     </section>
   );
 }
-

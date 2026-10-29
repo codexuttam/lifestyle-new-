@@ -12,9 +12,9 @@ export const HOME_CONTENT: HomeContent = {
     description:
       "Life Beyond Imagination. 15-storey highrise tower featuring 2 & 3 BHK luxury residences, rooftop sky pool, multi-sports turf, and panoramic sky horizons at Camp, Amravati.",
     ctaLabel: "Explore Aura Residences",
-    backgroundVideo: "/videos/aura-building-clip-1.mp4",
+    backgroundVideo: "/videos/aura-showcase-clip.mp4",
     buildingImage: "/aura/real-aura.png",
-    infoImage: "/aura/luxury-master-bedroom.jpg",
+    infoImage: "/aura/modern-living-room.jpg",
     infoPrice: "Aura Residences",
     infoCaption: "2 & 3 BHK Luxury Suites · Camp, Amravati · MahaRERA: P5030002502915",
   },
@@ -25,7 +25,7 @@ export const HOME_CONTENT: HomeContent = {
     ctaLabel: "More About Us",
     cards: [
       {
-        img: "/aura/real-aura.png",
+        img: "/aura/aura-hero-clean-4k.jpg",
         alt: "Aura 15-Storey Tower 4K Elevation at Camp Amravati",
         prefix: "",
         target: 15,
@@ -34,7 +34,7 @@ export const HOME_CONTENT: HomeContent = {
         desc: "Amravati's landmark residential tower with 360-degree unobstructed sky views.",
       },
       {
-        img: "/aura/rooftop-amenities-3d.jpg",
+        img: "/videos/web-clip-thumb.png",
         alt: "Aura Rooftop Sky Oasis, Pool & Multi-Sports Turf",
         prefix: "+",
         target: 20,
@@ -43,7 +43,7 @@ export const HOME_CONTENT: HomeContent = {
         desc: "Rooftop swimming pool, kids pool, multi-sports turf, viewing deck, gym, and party area.",
       },
       {
-        img: "/aura/aura-brand-showcase.jpg",
+        img: "/aura/building-full-4k.jpg",
         alt: "Aura by Lifestyle MahaRERA Registered Development",
         prefix: "",
         target: 100,
@@ -57,7 +57,7 @@ export const HOME_CONTENT: HomeContent = {
     tag: "",
     headline:
       "Experience Life In The Sky — With A Rooftop Crafted For Adventure, Wellness, And Unrivalled Horizons Over Amravati.",
-    video: "/videos/aura-building-clip-1.mp4",
+    video: "/videos/aura-showcase-clip.mp4",
     overlayLabel: "Aura Sky Oasis",
     overlaySublabel: "Rooftop Pool & Sports Turf",
     progress: 95,
@@ -80,7 +80,7 @@ export const HOME_CONTENT: HomeContent = {
     label: "Lifestyle Portfolio",
     heading: "Explore Our Landmark Developments In Amravati",
     ctaLabel: "Browse all projects & floor plans",
-    bannerVideo: "/videos/aura-building-clip-1.mp4",
+    bannerVideo: "/videos/aura-showcase-clip.mp4",
   },
   testimonials: { badge: "Testimonial" },
   faq: {

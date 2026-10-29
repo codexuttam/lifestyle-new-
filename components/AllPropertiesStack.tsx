@@ -9,8 +9,8 @@ import styles from "./AllProperties.module.css";
 
 const ICON_PROPS = {
   xmlns: "http://www.w3.org/2000/svg",
-  width: 20,
-  height: 20,
+  width: 18,
+  height: 18,
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -56,12 +56,7 @@ function AreaIcon() {
 
 function CalendarIcon() {
   return (
-    <svg
-      {...ICON_PROPS}
-      width={16}
-      height={16}
-      className={styles.tourIcon}
-    >
+    <svg {...ICON_PROPS} width={15} height={15} className={styles.tourIcon}>
       <path d="M8 2v4" />
       <path d="M16 2v4" />
       <rect width="18" height="18" x="3" y="4" rx="2" />
@@ -83,10 +78,32 @@ export default function AllPropertiesStack({
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // ScrollTrigger refresh on mount to ensure accurate sticky calculation
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
+
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1024px)", () => {
+      cardRefs.current.forEach((card, idx) => {
+        const nextCard = cardRefs.current[idx + 1];
+        if (!card || !nextCard) return;
+
+        gsap.to(card, {
+          scale: 0.94,
+          filter: "brightness(0.72)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: nextCard,
+            start: "top 75%",
+            end: "top 22%",
+            scrub: 0.4,
+          },
+        });
+      });
+    });
+
     ScrollTrigger.refresh();
+    return () => mm.revert();
   }, [listings]);
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -96,8 +113,8 @@ export default function AllPropertiesStack({
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -5;
-    const rotateY = ((x - centerX) / centerX) * 5;
+    const rotateX = ((y - centerY) / centerY) * -4.5;
+    const rotateY = ((x - centerX) / centerX) * 4.5;
 
     card.style.setProperty("--mouse-x", `${x}px`);
     card.style.setProperty("--mouse-y", `${y}px`);
@@ -115,135 +132,127 @@ export default function AllPropertiesStack({
 
   return (
     <div className={styles.cardsStack} ref={containerRef}>
-      {listings.map((listing, i) => (
-        <div
-          className={styles.card}
-          key={listing.id}
-          ref={(el) => {
-            cardRefs.current[i] = el;
-          }}
-          style={{
-            top: 105 + i * 35,
-            zIndex: 10 + i,
-          }}
-          data-card-index={i}
-          onMouseMove={handleCardMouseMove}
-          onMouseLeave={handleCardMouseLeave}
-        >
-          {/* Dynamic Mouse Spotlight Glow */}
-          <div className={styles.cardSpotlight} aria-hidden="true" />
-          <div className={styles.cardBorderGlow} aria-hidden="true" />
+      {listings.map((listing, i) => {
+        const videoSrc =
+          listing.id === "aura"
+            ? "/videos/aura-showcase-clip.mp4"
+            : listing.id === "lifestyle-homes"
+            ? "/videos/lifestyle-showcase-clip.mp4"
+            : listing.video;
 
-          <div className={styles.cardHeader}>
-            <div className={styles.thumb}>
-              {listing.id === "aura" ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className={styles.thumbImg}
-                  aria-hidden="true"
-                >
-                  <source src="/videos/aura-showcase-clip.mp4" type="video/mp4" />
-                </video>
-              ) : listing.id === "lifestyle-homes" ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className={styles.thumbImg}
-                  aria-hidden="true"
-                >
-                  <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
-                </video>
-              ) : listing.video ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className={styles.thumbImg}
-                  aria-hidden="true"
-                >
-                  <source src={listing.video} type="video/mp4" />
-                </video>
-              ) : (
-                <img
-                  src={listing.img}
-                  alt={listing.title}
-                  className={styles.thumbImg}
-                />
-              )}
-            </div>
-            <div className={styles.headerText}>
-              <div className={styles.badgeRow}>
-                <span className={styles.categoryBadge}>{listing.category}</span>
-                <span className={styles.badge}>{listing.status}</span>
+        return (
+          <div
+            className={styles.card}
+            key={listing.id}
+            ref={(el) => {
+              cardRefs.current[i] = el;
+            }}
+            style={{
+              top: 106 + i * 32,
+              zIndex: 10 + i,
+            }}
+            data-card-index={i}
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={handleCardMouseLeave}
+          >
+            {/* Dynamic Gold Mouse Spotlight Glow */}
+            <div className={styles.cardSpotlight} aria-hidden="true" />
+            <div className={styles.cardBorderGlow} aria-hidden="true" />
+
+            <div className={styles.cardHeader}>
+              <div className={styles.thumb}>
+                {videoSrc ? (
+                  <video
+                    src={videoSrc}
+                    poster={listing.img}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className={styles.thumbImg}
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <img
+                    src={listing.img}
+                    alt={listing.title}
+                    className={styles.thumbImg}
+                    loading="lazy"
+                  />
+                )}
               </div>
-              <Link
-                href={
-                  listing.id === "lifestyle-homes"
-                    ? "/projects/lifestyle-homes"
-                    : listing.id === "lifestyle-retail-galleria"
-                    ? "/projects/lifestyle-homes#commercial-shops"
-                    : listing.id === "aura"
-                    ? "#floor-plans"
-                    : "/projects"
-                }
-                className={styles.cardTitleLink}
+              <div className={styles.headerText}>
+                <div className={styles.badgeRow}>
+                  <span className={styles.indexTag}>0{i + 1}</span>
+                  <span className={styles.categoryBadge}>{listing.category}</span>
+                  <span className={styles.badge}>{listing.status}</span>
+                </div>
+                <Link
+                  href={
+                    listing.id === "lifestyle-homes"
+                      ? "/projects/lifestyle-homes"
+                      : listing.id === "lifestyle-retail-galleria"
+                      ? "/projects/lifestyle-homes#commercial-shops"
+                      : listing.id === "aura"
+                      ? "#floor-plans"
+                      : "/projects"
+                  }
+                  className={styles.cardTitleLink}
+                >
+                  <h3 className={styles.cardTitle}>{listing.title}</h3>
+                </Link>
+              </div>
+            </div>
+
+            <div className={styles.divider} />
+
+            <div className={styles.specs}>
+              <div className={styles.spec}>
+                <div className={styles.specLabel}>
+                  <BedIcon />
+                  <span>Typology</span>
+                </div>
+                <span className={styles.specValue}>{listing.beds}</span>
+              </div>
+              <div className={styles.spec}>
+                <div className={styles.specLabel}>
+                  <BathIcon />
+                  <span>Baths / Suite</span>
+                </div>
+                <span className={styles.specValue}>{listing.baths}</span>
+              </div>
+              <div className={styles.spec}>
+                <div className={styles.specLabel}>
+                  <AreaIcon />
+                  <span>Area</span>
+                </div>
+                <span className={styles.specValue}>{listing.area}</span>
+              </div>
+            </div>
+
+            <div className={styles.divider} />
+
+            <div className={styles.actionRow}>
+              <div className={styles.priceBlock}>
+                <span className={styles.priceLabel}>Address</span>
+                <span className={styles.price}>{listing.location}</span>
+              </div>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.tourBtn} roll-button`}
               >
-                <h3 className={styles.cardTitle}>{listing.title}</h3>
-              </Link>
+                <CalendarIcon />
+                <span className="roll-text" data-text="Schedule Tour">
+                  Schedule Tour
+                </span>
+              </a>
             </div>
           </div>
-
-          <div className={styles.divider} />
-
-          <div className={styles.specs}>
-            <div className={styles.spec}>
-              <div className={styles.specLabel}>
-                <BedIcon />
-                <span>Beds</span>
-              </div>
-              <span className={styles.specValue}>{listing.beds}</span>
-            </div>
-            <div className={styles.spec}>
-              <div className={styles.specLabel}>
-                <BathIcon />
-                <span>Baths</span>
-              </div>
-              <span className={styles.specValue}>{listing.baths}</span>
-            </div>
-            <div className={styles.spec}>
-              <div className={styles.specLabel}>
-                <AreaIcon />
-                <span>Area</span>
-              </div>
-              <span className={styles.specValue}>{listing.area}</span>
-            </div>
-          </div>
-
-          <div className={styles.divider} />
-
-          <div className={styles.actionRow}>
-            <div className={styles.priceBlock}>
-              <span className={styles.priceLabel}>Location</span>
-              <span className={styles.price}>{listing.location}</span>
-            </div>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.tourBtn}
-            >
-              <CalendarIcon />
-              <span className={styles.tourText}>Schedule Tour</span>
-            </a>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
