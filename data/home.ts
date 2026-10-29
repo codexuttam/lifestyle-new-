@@ -71,10 +71,10 @@ export const HOME_CONTENT: HomeContent = {
     ctaLabel: "View all projects and floor plans",
   },
   services: {
-    heading: "What We Offer At Lifestyle Home Spaces",
+    heading: "ARCHITECTURAL EXCELLENCE & BENCHMARK LIVING",
     intro:
-      "From architectural design and structural engineering to luxury turnkey highrise construction, Lifestyle delivers excellence with transparency.",
-    ctaLabel: "Explore our capabilities",
+      "From seismic-grade structural engineering to luxury sky living on Congress Nagar Road, Aura redefines highrise living in Amravati with trust and uncompromised craftsmanship.",
+    ctaLabel: "Inspect Floor Plates",
   },
   allProperties: {
     label: "Lifestyle Portfolio",

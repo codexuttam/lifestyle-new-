@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { label: "Aura by Lifestyle (Flagship)", href: "/" },
   { label: "Lifestyle Home Spaces (DPS Rd)", href: "/projects/lifestyle-homes" },
   { label: "All Developments", href: "/projects" },
-  { label: "Capabilities & Care", href: "/services" },
+  { label: "Floor Plans & Cut-Sections", href: "/#floor-plans" },
   { label: "About Lifestyle", href: "/about" },
   { label: "Real Estate Insights", href: "/blogs" },
   { label: "Contact Advisory Desk", href: "/contact" },

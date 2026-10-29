@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ServiceIcon from "./ServiceIcons";
+import EnquiryModal from "@/components/EnquiryModal";
 import type { HomeRecord } from "@/lib/schemas/home";
 import type { ServiceRecord } from "@/lib/schemas/service";
+import type { ServiceIconKey } from "@/data/services";
 import styles from "./Services.module.css";
 
 const ARCHITECTURAL_PILLARS = [
@@ -27,15 +28,71 @@ const ARCHITECTURAL_PILLARS = [
   },
 ];
 
+interface ProjectPillarCard {
+  id: string;
+  category: string;
+  icon: ServiceIconKey;
+  title: string;
+  text: string;
+  meta: string;
+  preference: string;
+}
+
+const AURA_PROJECT_PILLARS: ProjectPillarCard[] = [
+  {
+    id: "skyline-tower",
+    category: "ARCHITECTURE",
+    icon: "layers",
+    title: "15-Storey Skyline Highrise",
+    text: "Amravati's signature 15-storey highrise in Camp with 360° panoramic horizon views, seismic-grade RCC engineering, and iconic entrance boulevard.",
+    meta: "SCALE · 15 STOREYS + SKY DECK",
+    preference: "15-Storey Tower Architecture & Structure",
+  },
+  {
+    id: "sky-suites",
+    category: "RESIDENCES",
+    icon: "house",
+    title: "2 & 3 BHK Luxury Residences",
+    text: "1,150 to 1,850 SQFT super built-up residences with 100% Vastu compliance, zero shared walls, cross-ventilated layouts, and grand private sit-out balconies.",
+    meta: "CONFIG · 1,150 – 1,850 SQFT",
+    preference: "2 & 3 BHK Luxury Residences",
+  },
+  {
+    id: "crown-oasis",
+    category: "SKYLINE LEISURE",
+    icon: "compass",
+    title: "Crown Level 15 Sky Oasis",
+    text: "Rooftop lap pool, kids splash pool, multi-sports turf, sky jogging loop, and open-air sunset deck positioned 15 storeys above street noise.",
+    meta: "AMENITIES · 20+ ROOFTOP SPACES",
+    preference: "Level 15 Rooftop Sky Oasis & Amenities",
+  },
+  {
+    id: "maharera-specs",
+    category: "ASSURANCE",
+    icon: "shield",
+    title: "MahaRERA & Grade-A Specs",
+    text: "MahaRERA Reg. P5030002502915. Finished with 800×1600mm vitrified slabs, concealed Jaquar fittings, 4 high-speed ARD lifts, and full generator power backup.",
+    meta: "MAHARERA · P5030002502915",
+    preference: "Official Specifications & MahaRERA Kit",
+  },
+];
+
 export default function Services({
   services,
   content,
 }: {
-  services: ServiceRecord[];
+  services?: ServiceRecord[];
   content: HomeRecord["services"];
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const colRuleRef = useRef<HTMLSpanElement>(null);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [selectedPreference, setSelectedPreference] = useState("2 & 3 BHK Luxury Residences");
+
+  const handleCardClick = (pref: string) => {
+    setSelectedPreference(pref);
+    setIsEnquiryOpen(true);
+  };
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -103,11 +160,11 @@ export default function Services({
           <div className={styles.stickyCol}>
             <h2 className={styles.heading}>{content.heading}</h2>
             <p className={styles.intro}>{content.intro}</p>
-            <Link href="/services" className={`${styles.viewAll} roll-button`}>
-              <span className="roll-text" data-text={`${content.ctaLabel} →`}>
-                {content.ctaLabel} →
+            <a href="#floor-plans" className={`${styles.viewAll} roll-button`}>
+              <span className="roll-text" data-text="INSPECT FLOOR PLATES →">
+                INSPECT FLOOR PLATES →
               </span>
-            </Link>
+            </a>
             <span className={styles.verticalProgressRule} ref={colRuleRef} aria-hidden="true" />
           </div>
 
@@ -124,37 +181,48 @@ export default function Services({
           </div>
         </div>
 
-        {/* 4 Core Engineering & Turnkey Capabilities */}
+        {/* 4 Core Aura Project Benchmark Pillars (Interactive Cards) */}
         <div className={styles.grid}>
-          {services.map((service, index) => (
-            <Link
-              href="/services"
-              key={service.id}
+          {AURA_PROJECT_PILLARS.map((pillar, index) => (
+            <button
+              type="button"
+              key={pillar.id}
               className={styles.card}
+              onClick={() => handleCardClick(pillar.preference)}
               data-service-card
+              aria-label={`Enquire about ${pillar.title}`}
             >
               <div className={styles.cardTop}>
                 <div className={styles.iconBadge}>
-                  <ServiceIcon name={service.icon} />
+                  <ServiceIcon name={pillar.icon} />
                 </div>
                 <span className={styles.categoryChip}>
-                  0{index + 1} · {service.category}
+                  0{index + 1} · {pillar.category}
                 </span>
               </div>
 
               <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>{service.title}</h3>
-                <p className={styles.cardText}>{service.text}</p>
+                <h3 className={styles.cardTitle}>{pillar.title}</h3>
+                <p className={styles.cardText}>{pillar.text}</p>
               </div>
 
               <div className={styles.cardFooter}>
-                <span className={styles.timelineMeta}>Timeline · {service.timeline}</span>
-                <span className={styles.learnMore} aria-hidden="true">→</span>
+                <span className={styles.timelineMeta}>{pillar.meta}</span>
+                <span className={styles.learnMore} aria-hidden="true">Enquire ↗</span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Official Aura Project VIP Enquiry Modal */}
+      <EnquiryModal
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        projectTitle="Aura by Lifestyle"
+        defaultPreference={selectedPreference}
+        source="Aura Project Pillars"
+      />
     </section>
   );
 }
