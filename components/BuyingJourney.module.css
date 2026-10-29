@@ -1,0 +1,224 @@
+/* ============ SECTION 8: HOMEBUYING & OWNERSHIP TIMELINE (WARM IVORY) ============ */
+
+.section {
+  background: var(--surface-ivory, #f6f1e7);
+  color: var(--ink-on-ivory, #0c0d0c);
+  padding: 120px 40px;
+  border-bottom: 1px solid rgba(12, 13, 12, 0.12);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.leftIntro {
+  position: sticky;
+  top: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rule {
+  width: 28px;
+  height: 1.5px;
+  background: #8f6b20;
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8f6b20;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.4vw, 4rem);
+  line-height: 0.94;
+  text-transform: uppercase;
+  color: #0c0d0c;
+}
+
+.heading span {
+  color: #8f6b20;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(12, 13, 12, 0.72);
+  max-width: 46ch;
+}
+
+.ctaBtn {
+  margin-top: 8px;
+  padding: 13px 26px;
+  border-radius: 9999px;
+  border: 1px solid #0c0d0c;
+  background: #0c0d0c;
+  color: #f7efdc;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.ctaBtn:hover {
+  background: #8f6b20;
+  border-color: #8f6b20;
+}
+
+/* Vertical Timeline Rail */
+.timelineCol {
+  position: relative;
+  border-left: 1px solid rgba(143, 107, 32, 0.34);
+  padding-left: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stepCard {
+  position: relative;
+  background: #faf7f1;
+  border: 1px solid rgba(12, 13, 12, 0.1);
+  border-radius: 22px;
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stepCardActive {
+  background: #ffffff;
+  border-color: #8f6b20;
+  box-shadow: 0 20px 44px rgba(12, 13, 12, 0.08);
+}
+
+.railMarker {
+  position: absolute;
+  left: -52px;
+  top: 28px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f6f1e7;
+  border: 1px solid rgba(143, 107, 32, 0.4);
+  color: rgba(143, 107, 32, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.stepCardActive .railMarker {
+  background: #bf953f;
+  border-color: #bf953f;
+  color: #080808;
+  transform: scale(1.1);
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepNum {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: #8f6b20;
+  font-variant-numeric: tabular-nums;
+}
+
+.stepPhase {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(12, 13, 12, 0.54);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: #0c0d0c;
+}
+
+.stepDesc {
+  font-size: 14px;
+  line-height: 1.68;
+  color: rgba(12, 13, 12, 0.72);
+}
+
+.stepDetail {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(12, 13, 12, 0.08);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8f6b20;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 88px 24px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .leftIntro {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 68px 16px;
+  }
+
+  .timelineCol {
+    padding-left: 24px;
+  }
+
+  .railMarker {
+    left: -38px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .stepCard {
+    padding: 22px 18px;
+  }
+}
+

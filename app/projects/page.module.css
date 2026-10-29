@@ -35,22 +35,22 @@
   gap: 10px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(194, 26, 34, 0.08);
-  border: 1px solid rgba(194, 26, 34, 0.3);
+  background: rgba(191, 149, 63, 0.08);
+  border: 1px solid rgba(191, 149, 63, 0.3);
 }
 
 .badgeDot {
   width: 8px;
   height: 8px;
   border-radius: 9999px;
-  background: #c21a22;
-  box-shadow: 0 0 10px rgba(194, 26, 34, 0.6);
+  background: #bf953f;
+  box-shadow: 0 0 10px rgba(191, 149, 63, 0.6);
 }
 
 .badgeText {
   font-family: var(--font-montserrat), sans-serif;
   font-weight: 600;
-  color: #c21a22;
+  color: #bf953f;
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -84,7 +84,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px;
-  background: rgba(10, 20, 40, 0.75);
+  background: rgba(12, 13, 12, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
   align-self: flex-start;
@@ -111,16 +111,16 @@
 }
 
 .filter:hover {
-  background: rgba(194, 26, 34, 0.12);
+  background: rgba(191, 149, 63, 0.12);
   color: #ffffff;
 }
 
 .filterActive,
 .filterActive:hover {
-  background: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
+  background: linear-gradient(135deg, #bf953f 0%, #967022 100%);
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 4px 16px rgba(194, 26, 34, 0.35);
+  box-shadow: 0 4px 16px rgba(191, 149, 63, 0.35);
 }
 
 .filterCount {
@@ -157,7 +157,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, rgba(16, 28, 54, 0.94) 0%, rgba(10, 20, 40, 0.98) 100%);
+  background: linear-gradient(180deg, rgba(16, 28, 54, 0.94) 0%, rgba(12, 13, 12, 0.98) 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 28px;
   overflow: hidden;
@@ -170,8 +170,8 @@
 
 .card:hover {
   transform: translateY(-8px);
-  border-color: rgba(194, 26, 34, 0.5);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 30px rgba(194, 26, 34, 0.25);
+  border-color: rgba(191, 149, 63, 0.5);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 30px rgba(191, 149, 63, 0.25);
 }
 
 .thumb {
@@ -242,7 +242,7 @@
 .categoryPill {
   left: 14px;
   background: rgba(15, 29, 56, 0.85);
-  border: 1px solid rgba(194, 26, 34, 0.4);
+  border: 1px solid rgba(191, 149, 63, 0.4);
   color: #ffffff;
 }
 
@@ -258,8 +258,8 @@
 }
 
 .statusOngoing {
-  background: rgba(194, 26, 34, 0.18);
-  border: 1px solid rgba(194, 26, 34, 0.55);
+  background: rgba(191, 149, 63, 0.18);
+  border: 1px solid rgba(191, 149, 63, 0.55);
   color: #ffffff;
 }
 
@@ -293,7 +293,7 @@
 }
 
 .card:hover .cardTitle {
-  filter: drop-shadow(0 0 12px rgba(194, 26, 34, 0.4));
+  filter: drop-shadow(0 0 12px rgba(191, 149, 63, 0.4));
 }
 
 .cardMeta {
@@ -366,7 +366,7 @@
   align-items: center;
   padding: 11px 20px;
   border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   color: #ffffff;
   font-family: var(--font-sans), "Montserrat", sans-serif;
   font-size: 12px;
@@ -375,14 +375,14 @@
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.35);
+  box-shadow: 0 4px 18px rgba(191, 149, 63, 0.35);
   transition: all 0.25s ease;
 }
 
 .btnExplore:hover {
   transform: translateY(-2px);
-  background: var(--color-wine-hover, #9e1218);
-  box-shadow: 0 6px 24px rgba(194, 26, 34, 0.55);
+  background: var(--color-wine-hover, #967022);
+  box-shadow: 0 6px 24px rgba(191, 149, 63, 0.55);
   filter: brightness(1.1);
 }
 
@@ -406,8 +406,8 @@
 }
 
 .btnTour:hover {
-  background: var(--color-wine, #c21a22);
-  border-color: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
+  border-color: var(--color-wine, #bf953f);
   color: #ffffff;
   transform: translateY(-2px);
 }

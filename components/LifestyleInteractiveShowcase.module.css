@@ -18,9 +18,9 @@
   gap: 0.5rem;
   padding: 0.4rem 1rem;
   border-radius: 999px;
-  background: var(--color-wine-light, rgba(194, 26, 34, 0.12));
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.35));
-  color: var(--color-wine, #c21a22);
+  background: var(--color-wine-light, rgba(191, 149, 63, 0.12));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.35));
+  color: var(--color-wine, #bf953f);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -32,8 +32,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-wine, #c21a22);
-  box-shadow: 0 0 10px var(--color-wine-glow, rgba(194, 26, 34, 0.6));
+  background: var(--color-wine, #bf953f);
+  box-shadow: 0 0 10px var(--color-wine-glow, rgba(191, 149, 63, 0.6));
 }
 
 .sectionTitle {
@@ -137,10 +137,10 @@
 }
 
 .unitTabActive {
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 16px var(--color-wine-glow, rgba(194, 26, 34, 0.4));
+  box-shadow: 0 4px 16px var(--color-wine-glow, rgba(191, 149, 63, 0.4));
 }
 
 .unitBadge {
@@ -215,7 +215,7 @@
   gap: 0.45rem;
   padding: 0.5rem 0.95rem;
   background: rgba(11, 17, 30, 0.9);
-  border: 1px solid rgba(194, 26, 34, 0.5);
+  border: 1px solid rgba(191, 149, 63, 0.5);
   border-radius: 999px;
   color: #ffffff;
   font-size: 0.78rem;
@@ -229,10 +229,10 @@
 }
 
 .zoomTrigger:hover {
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   border-color: #ff3b47;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(194, 26, 34, 0.45);
+  box-shadow: 0 6px 20px rgba(191, 149, 63, 0.45);
 }
 
 .unitInfoCol {
@@ -264,8 +264,8 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ff6b75;
-  background: rgba(194, 26, 34, 0.15);
-  border: 1px solid rgba(194, 26, 34, 0.4);
+  background: rgba(191, 149, 63, 0.15);
+  border: 1px solid rgba(191, 149, 63, 0.4);
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   margin-bottom: 0.5rem;
@@ -327,7 +327,7 @@
 
 .roomBox:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(194, 26, 34, 0.4);
+  border-color: rgba(191, 149, 63, 0.4);
   transform: translateY(-2px);
 }
 
@@ -388,21 +388,21 @@
   gap: 0.6rem;
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
+  background: linear-gradient(135deg, #bf953f 0%, #967022 100%);
   color: #ffffff;
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.4);
+  box-shadow: 0 4px 18px rgba(191, 149, 63, 0.4);
   transition: all 0.25s ease;
 }
 
 .unitWaBtn:hover {
   background: linear-gradient(135deg, #e0242d 0%, #b8141d 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(194, 26, 34, 0.6);
+  box-shadow: 0 8px 25px rgba(191, 149, 63, 0.6);
 }
 
 .unitSecondaryBtn,
@@ -452,7 +452,7 @@
   padding: 0.6rem 1.4rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.25));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.25));
   color: #94a3b8;
   font-size: 0.88rem;
   font-weight: 600;
@@ -462,16 +462,16 @@
 
 .filterBtn:hover {
   color: #ffffff;
-  background: var(--color-wine-light, rgba(194, 26, 34, 0.15));
-  border-color: var(--color-wine, #c21a22);
+  background: var(--color-wine-light, rgba(191, 149, 63, 0.15));
+  border-color: var(--color-wine, #bf953f);
 }
 
 .filterBtnActive {
-  background: var(--color-wine, #c21a22);
-  border-color: var(--color-wine-hover, #9e1218);
+  background: var(--color-wine, #bf953f);
+  border-color: var(--color-wine-hover, #967022);
   color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 0 15px var(--color-wine-glow, rgba(194, 26, 34, 0.4));
+  box-shadow: 0 0 15px var(--color-wine-glow, rgba(191, 149, 63, 0.4));
 }
 
 .galleryGrid {
@@ -486,15 +486,15 @@
   border-radius: 18px;
   overflow: hidden;
   background: #0d1a36;
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.25));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.25));
   cursor: pointer;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .galleryCard:hover {
   transform: translateY(-4px);
-  border-color: var(--color-wine, #c21a22);
-  box-shadow: 0 12px 30px var(--color-wine-glow, rgba(194, 26, 34, 0.35));
+  border-color: var(--color-wine, #bf953f);
+  box-shadow: 0 12px 30px var(--color-wine-glow, rgba(191, 149, 63, 0.35));
 }
 
 .galleryCardImg {
@@ -570,7 +570,7 @@
   border-radius: 50%;
   background: rgba(13, 26, 54, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.4));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.4));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -600,7 +600,7 @@
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 3.5rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(194, 26, 34, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(191, 149, 63, 0.15);
 }
 
 @media (max-width: 960px) {
@@ -642,10 +642,10 @@
   font-size: 1.15rem;
   font-weight: 800;
   color: #ffffff;
-  background: var(--color-wine-light, rgba(194, 26, 34, 0.15));
+  background: var(--color-wine-light, rgba(191, 149, 63, 0.15));
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.35));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.35));
 }
 
 .rangeSlider,
@@ -666,9 +666,9 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   cursor: pointer;
-  box-shadow: 0 0 12px var(--color-wine-glow, rgba(194, 26, 34, 0.7));
+  box-shadow: 0 0 12px var(--color-wine-glow, rgba(191, 149, 63, 0.7));
   border: 2px solid #ffffff;
   transition: transform 0.15s ease;
 }
@@ -688,14 +688,14 @@
 .calcResultsCol,
 .calcResultCol {
   background: #091326;
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.35));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.35));
   border-radius: 20px;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 25px rgba(194, 26, 34, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 25px rgba(191, 149, 63, 0.1);
 }
 
 .emiHighlightBox {
@@ -739,8 +739,8 @@
   font-size: 0.75rem;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  background: var(--color-wine-light, rgba(194, 26, 34, 0.18));
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.3));
+  background: var(--color-wine-light, rgba(191, 149, 63, 0.18));
+  border: 1px solid var(--color-wine-light-border, rgba(191, 149, 63, 0.3));
   color: #ffffff;
 }
 
@@ -777,19 +777,19 @@
   gap: 0.6rem;
   padding: 1rem 1.8rem;
   border-radius: 999px;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 6px 20px var(--color-wine-glow, rgba(194, 26, 34, 0.35));
+  box-shadow: 0 6px 20px var(--color-wine-glow, rgba(191, 149, 63, 0.35));
   transition: all 0.25s ease;
 }
 
 .calcCtaBtn:hover {
   transform: translateY(-2px);
-  background: var(--color-wine-hover, #9e1218);
-  box-shadow: 0 10px 30px var(--color-wine-glow, rgba(194, 26, 34, 0.55));
+  background: var(--color-wine-hover, #967022);
+  box-shadow: 0 10px 30px var(--color-wine-glow, rgba(191, 149, 63, 0.55));
 }
 
 /* ================= 4. 4K ULTRA-HD LIGHTBOX MODAL ================= */
@@ -817,11 +817,11 @@
   max-width: 1080px;
   width: 100%;
   max-height: 94vh;
-  background: #0a1428;
-  border: 1.5px solid rgba(194, 26, 34, 0.45);
+  background: #101210;
+  border: 1.5px solid rgba(191, 149, 63, 0.45);
   border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 60px rgba(194, 26, 34, 0.25);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 60px rgba(191, 149, 63, 0.25);
   display: flex;
   flex-direction: column;
 }
@@ -850,7 +850,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #ffffff;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -873,8 +873,8 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: rgba(194, 26, 34, 0.2);
-  border: 1.5px solid rgba(194, 26, 34, 0.5);
+  background: rgba(191, 149, 63, 0.2);
+  border: 1.5px solid rgba(191, 149, 63, 0.5);
   color: #ffffff;
   cursor: pointer;
   z-index: 10;
@@ -887,10 +887,10 @@
 
 .modalCloseBtn:hover,
 .modalClose:hover {
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   color: #ffffff;
   transform: rotate(90deg);
-  box-shadow: 0 0 15px rgba(194, 26, 34, 0.6);
+  box-shadow: 0 0 15px rgba(191, 149, 63, 0.6);
 }
 
 .modalImgWrapper {
@@ -975,7 +975,7 @@
   gap: 0.5rem;
   padding: 0.85rem 1.6rem;
   border-radius: 999px;
-  background: var(--color-wine, #c21a22);
+  background: var(--color-wine, #bf953f);
   border: 1.5px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   font-size: 0.9rem;
@@ -985,10 +985,10 @@
 }
 
 .modalCallBtn:hover {
-  background: var(--color-wine-hover, #9e1218);
+  background: var(--color-wine-hover, #967022);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(194, 26, 34, 0.4);
+  box-shadow: 0 4px 18px rgba(191, 149, 63, 0.4);
 }
 
 @media (max-width: 768px) {

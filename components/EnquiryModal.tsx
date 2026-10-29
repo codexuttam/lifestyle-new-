@@ -113,11 +113,11 @@ export default function EnquiryModal({
         style={{
           width: "100%",
           maxWidth: "480px",
-          background: "rgba(17, 21, 30, 0.98)",
+          background: "rgba(13, 15, 13, 0.98)",
           border: "1px solid rgba(255, 255, 255, 0.1)",
           borderRadius: "24px",
           padding: "2.25rem 2rem",
-          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(194, 26, 34, 0.15)",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(191, 149, 63, 0.15)",
           color: "#ffffff",
           position: "relative",
           animation: "modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -152,8 +152,8 @@ export default function EnquiryModal({
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#c21a22";
-            e.currentTarget.style.borderColor = "#c21a22";
+            e.currentTarget.style.background = "#bf953f";
+            e.currentTarget.style.borderColor = "#bf953f";
             e.currentTarget.style.color = "#ffffff";
             e.currentTarget.style.transform = "rotate(90deg)";
           }}
@@ -205,9 +205,9 @@ export default function EnquiryModal({
                 display: "inline-block",
                 padding: "0.45rem 1.25rem",
                 borderRadius: "8px",
-                background: "rgba(194, 26, 34, 0.12)",
-                border: "1px solid rgba(194, 26, 34, 0.3)",
-                color: "#c21a22",
+                background: "rgba(191, 149, 63, 0.12)",
+                border: "1px solid rgba(191, 149, 63, 0.3)",
+                color: "#bf953f",
                 fontWeight: 700,
                 letterSpacing: "1px",
                 marginBottom: "1.25rem",
@@ -273,9 +273,9 @@ export default function EnquiryModal({
                   display: "inline-block",
                   padding: "3px 10px",
                   borderRadius: "9999px",
-                  background: "rgba(194, 26, 34, 0.12)",
-                  border: "1px solid rgba(194, 26, 34, 0.25)",
-                  color: "#c21a22",
+                  background: "rgba(191, 149, 63, 0.12)",
+                  border: "1px solid rgba(191, 149, 63, 0.25)",
+                  color: "#bf953f",
                   fontSize: "9.5px",
                   fontWeight: 700,
                   letterSpacing: "0.25em",
@@ -318,7 +318,7 @@ export default function EnquiryModal({
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Full Name <span style={{ color: "#c21a22" }}>*</span>
+                  Full Name <span style={{ color: "#bf953f" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -339,8 +339,8 @@ export default function EnquiryModal({
                     transition: "all 0.2s ease",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#c21a22";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
+                    e.currentTarget.style.borderColor = "#bf953f";
+                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                   }}
                   onBlur={(e) => {
                     e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
@@ -362,7 +362,7 @@ export default function EnquiryModal({
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Mobile Number <span style={{ color: "#c21a22" }}>*</span>
+                  Mobile Number <span style={{ color: "#bf953f" }}>*</span>
                 </label>
                 <div style={{ display: "flex", gap: "0.5rem" }}>
                   <div
@@ -371,7 +371,7 @@ export default function EnquiryModal({
                       background: "rgba(255, 255, 255, 0.05)",
                       border: "1px solid rgba(255, 255, 255, 0.12)",
                       borderRadius: "12px",
-                      color: "#c21a22",
+                      color: "#bf953f",
                       fontWeight: 700,
                       fontSize: "0.88rem",
                       fontFamily: "var(--font-montserrat), sans-serif",
@@ -400,8 +400,8 @@ export default function EnquiryModal({
                       transition: "all 0.2s ease",
                     }}
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "#c21a22";
-                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
+                      e.currentTarget.style.borderColor = "#bf953f";
+                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                     }}
                     onBlur={(e) => {
                       e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
@@ -444,8 +444,8 @@ export default function EnquiryModal({
                     transition: "all 0.2s ease",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#c21a22";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
+                    e.currentTarget.style.borderColor = "#bf953f";
+                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                   }}
                   onBlur={(e) => {
                     e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
@@ -478,7 +478,7 @@ export default function EnquiryModal({
                   width: "100%",
                   padding: "12px 20px",
                   borderRadius: "12px",
-                  background: "#c21a22",
+                  background: "#bf953f",
                   color: "#ffffff",
                   fontFamily: "var(--font-montserrat), sans-serif",
                   fontWeight: 700,
@@ -487,19 +487,19 @@ export default function EnquiryModal({
                   letterSpacing: "0.15em",
                   border: "none",
                   cursor: isSubmitting ? "not-allowed" : "pointer",
-                  boxShadow: "0 8px 24px rgba(194, 26, 34, 0.3)",
+                  boxShadow: "0 8px 24px rgba(191, 149, 63, 0.3)",
                   opacity: isSubmitting ? 0.75 : 1,
                   transition: "all 0.2s ease",
                   marginTop: "0.25rem",
                 }}
                 onMouseEnter={(e) => {
                   if (!isSubmitting) {
-                    e.currentTarget.style.background = "#9e1218";
+                    e.currentTarget.style.background = "#967022";
                     e.currentTarget.style.transform = "translateY(-1px)";
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#c21a22";
+                  e.currentTarget.style.background = "#bf953f";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >

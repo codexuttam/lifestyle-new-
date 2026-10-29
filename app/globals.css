@@ -6,66 +6,65 @@
    stays legible over imagery.
    ========================================== */
 :root {
-    color-scheme: dark;
+    color-scheme: dark light;
 
-    /* Surfaces — Virtuaze Architectural Obsidian */
-    --bg-white-navy: linear-gradient(180deg, #050507 0%, #0a0a0d 40%, #050507 100%);
-    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #121217 0%, #08080a 50%, #050507 100%);
-    --bg: #050507;            /* pure obsidian background */
-    --surface: #0a0a0d;       /* architectural cards, surfaces */
-    --surface-alt: #101014;   /* elevated sections */
-    --surface-sunk: #040405;  /* wells, placeholders */
+    /* Surfaces — Architectural Charcoal & Ivory */
+    --bg-white-navy: linear-gradient(180deg, #080808 0%, #0d0e0d 45%, #080808 100%);
+    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #151715 0%, #0b0c0b 50%, #080808 100%);
+    --bg: var(--color-bg, #080808);
+    --surface: var(--color-bg-secondary, #0c0d0c);
+    --surface-alt: var(--color-bg-tertiary, #121412);
+    --surface-sunk: #050505;
 
     /* Ink */
-    --text: #ffffff;          /* primary text */
-    --text-ivory: #f7efdc;    /* luxury warm ivory */
+    --text: var(--color-text, #f7efdc);
+    --text-ivory: #f7efdc;
     --text-cream: #f5efe5;
-    --text-secondary: rgba(255, 255, 255, 0.72); /* body / secondary */
-    --text-muted: rgba(255, 255, 255, 0.44);    /* captions, subtle specs */
-    --text-on-dark: #ffffff;
-    --text-on-dark-secondary: rgba(255, 255, 255, 0.82);
+    --text-secondary: var(--color-text-secondary, rgba(247, 239, 220, 0.72));
+    --text-muted: var(--color-text-muted, rgba(247, 239, 220, 0.48));
+    --text-on-dark: #f7efdc;
+    --text-on-dark-secondary: rgba(247, 239, 220, 0.8);
 
-    /* Accent — Virtuaze Champagne Gold & Refined Bronze */
-    --accent-ink: #d4af37;
-    --accent: #d4af37;
-    --accent-strong: #b89130;
-    --accent-soft: rgba(212, 175, 55, 0.28);
-    --accent-wash: rgba(212, 175, 55, 0.08);
+    /* Accent — Muted Gold & Champagne */
+    --accent-ink: #bf953f;
+    --accent: #bf953f;
+    --accent-strong: #a67c2c;
+    --accent-soft: rgba(191, 149, 63, 0.28);
+    --accent-wash: rgba(191, 149, 63, 0.08);
 
     /* Champagne Gold Palette */
-    --gold: #d4af37;
+    --gold: #bf953f;
     --gold-light: #f7efdc;
-    --gold-dark: #b89130;
-    --gold-glow: rgba(212, 175, 55, 0.35);
-    --gold-gradient: linear-gradient(135deg, #f7efdc 0%, #d4af37 50%, #aa8222 100%);
+    --gold-dark: #967022;
+    --gold-glow: rgba(191, 149, 63, 0.3);
+    --gold-gradient: linear-gradient(135deg, #f7efdc 0%, #bf953f 52%, #8f6b20 100%);
 
-    /* Wine accent kept subtle for specific brand tags */
-    --wine: #c21a22;
-    --wine-hover: #9e1218;
-    --wine-light: rgba(194, 26, 34, 0.08);
-    --wine-glow: rgba(194, 26, 34, 0.35);
-    --wine-gradient: linear-gradient(135deg, #c21a22 0%, #9e1218 100%);
+    /* Legacy wine tokens harmonized to Muted Gold */
+    --wine: #bf953f;
+    --wine-hover: #967022;
+    --wine-light: rgba(191, 149, 63, 0.1);
+    --wine-glow: rgba(191, 149, 63, 0.3);
+    --wine-gradient: linear-gradient(135deg, #dfc285 0%, #bf953f 55%, #8f6b20 100%);
 
     /* Lines & elevation */
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.18);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
-    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.7);
-    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.85);
+    --border: var(--color-border, rgba(247, 239, 220, 0.1));
+    --border-strong: var(--color-border-strong, rgba(247, 239, 220, 0.22));
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.65);
+    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.8);
 
     /* Scrims over photography */
-    --scrim-strong: rgba(5, 5, 7, 0.92);
-    --scrim: rgba(5, 5, 7, 0.75);
+    --scrim-strong: rgba(8, 8, 8, 0.92);
+    --scrim: rgba(8, 8, 8, 0.74);
 
     /* Typography */
-    --font-sans: var(--font-montserrat, "Montserrat", sans-serif);
-    --font-inter: var(--font-montserrat, "Montserrat", sans-serif);
-    --font-big-shoulders: var(--font-montserrat, "Montserrat", sans-serif);
+    --font-playfair: var(--font-display);
+    --font-big-shoulders: var(--font-display);
 
     /* Utility */
-    --whatsapp: #128c4a;
-    --radius: 8px;
-    --radius-lg: 14px;
+    --whatsapp: #15803d;
+    --radius: 10px;
+    --radius-lg: 18px;
 }
 
 /* Reset and Base Styles */
@@ -82,15 +81,15 @@ html {
     overflow-x: clip;
     max-width: 100%;
     width: 100%;
-    font-family: var(--font-montserrat), "Montserrat", sans-serif;
+    font-family: var(--font-sans);
 }
 
 body {
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    background: #050507;
-    font-family: var(--font-montserrat), "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    background: var(--color-bg, #080808);
+    font-family: var(--font-sans) !important;
     color: var(--text);
     overflow-x: hidden;
     overflow-x: clip;
@@ -98,6 +97,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
+    transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 /* Visible focus for keyboard users on every interactive element */
@@ -1463,14 +1463,21 @@ a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
     }
 
     .call-btn {
-        background: linear-gradient(135deg, #c21a22 0%, #8a1318 100%);
-        border-top: 2px solid #c21a22;
-        color: #ffffff;
+        background: #bf953f;
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+        color: #080808 !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 12px !important;
     }
     .wa-btn {
-        background: #128c4a;
-        border-top: 2px solid rgba(255, 255, 255, 0.2);
-        color: #ffffff;
+        background: #101310;
+        border-top: 1px solid rgba(191, 149, 63, 0.4);
+        border-left: 1px solid rgba(191, 149, 63, 0.25);
+        color: #f7efdc !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 12px !important;
     }
 
     .custom-cursor { display: none; }

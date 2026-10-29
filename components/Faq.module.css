@@ -1,268 +1,157 @@
-/* ============ FAQ SECTION ============ */
+/* ============ SECTION 10: ACCESSIBLE HAIRLINE FAQ ACCORDION (WARM IVORY) ============ */
 
 .section {
-  width: 100%;
-  background: #050507;
-  padding: clamp(60px, 8vw, 120px) 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  background: var(--surface-ivory, #f6f1e7);
+  color: var(--ink-on-ivory, #0c0d0c);
+  padding: 120px 40px;
+  border-bottom: 1px solid rgba(12, 13, 12, 0.12);
 }
 
 .container {
-  width: 100%;
-  max-width: 1280px;
+  max-width: 920px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 14px;
-  border-radius: 9999px;
-  background: var(--color-wine-light, rgba(194, 26, 34, 0.08));
-  border: 1px solid var(--color-wine-light-border, rgba(194, 26, 34, 0.22));
-  flex-shrink: 0;
-}
-
-.badgeDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: var(--color-wine, #c21a22);
-  box-shadow: 0 0 10px rgba(194, 26, 34, 0.7);
-}
-
-.badgeText {
-  font-family: var(--font-sans), "Montserrat", sans-serif;
-  font-weight: 700;
-  color: var(--color-gold, #d4af37);
-  font-size: 10.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  line-height: normal;
+  gap: 52px;
 }
 
 .header {
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  max-width: 768px;
+  text-align: center;
+  gap: 14px;
+}
+
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flank {
+  width: 28px;
+  height: 1px;
+  background: rgba(143, 107, 32, 0.55);
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8f6b20;
 }
 
 .title {
-  font-family: var(--font-sans), "Montserrat", sans-serif;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 40%, #ffffff 80%, rgba(255, 255, 255, 0.7) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  font-size: clamp(28px, 4vw, 48px); font-weight: 500; letter-spacing: -0.03em; color: #f7efdc;
-  line-height: normal;
-  letter-spacing: normal;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  line-height: 0.96;
   text-transform: uppercase;
+  color: #0c0d0c;
 }
 
-/* --- Accordion --- */
 .list {
-  width: 100%;
-  max-width: 1152px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 16px;
+  border-top: 1px solid rgba(12, 13, 12, 0.16);
 }
 
 .item {
-  width: 100%;
-  background: rgba(14, 14, 18, 0.85);
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.item:hover {
-  background: rgba(20, 20, 26, 0.95);
-  border-color: rgba(212, 175, 55, 0.3);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-  transform: translateY(-2px);
+  border-bottom: 1px solid rgba(12, 13, 12, 0.16);
+  transition: background-color 0.25s ease;
 }
 
 .trigger {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 26px 30px;
-  cursor: pointer;
-  user-select: none;
-  text-align: left;
+  padding: 26px 8px;
   background: transparent;
   border: none;
+  display: grid;
+  grid-template-columns: 44px 1fr 36px;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
 }
 
-.trigger:focus-visible {
-  outline: 2px solid var(--color-wine, #c21a22);
-  outline-offset: -4px;
+.faqIndex {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: #8f6b20;
+  font-variant-numeric: tabular-nums;
 }
 
 .question {
-  font-family: var(--font-big-shoulders), sans-serif;
-  font-weight: 500;
-  color: #f9fafb;
-  font-size: 30px;
-  letter-spacing: -0.025em;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0c0d0c;
+}
+
+.plusBadge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(12, 13, 12, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   line-height: 1;
+  color: #0c0d0c;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
-.chevron {
-  color: var(--color-gold, #d4af37);
-  flex-shrink: 0;
-  margin-left: 16px;
-  display: flex;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+.plusBadgeOpen {
+  transform: rotate(45deg);
+  background: #bf953f;
+  border-color: #bf953f;
+  color: #080808;
 }
 
-.chevronOpen {
-  transform: rotate(180deg);
-}
-
-/* Animating grid rows from 0fr to 1fr expands to the content's natural
-   height without needing to measure it in JS. */
 .animator {
   display: grid;
   grid-template-rows: 0fr;
-  opacity: 0;
-  transition: grid-template-rows 0.35s ease, opacity 0.35s ease;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animatorOpen {
   grid-template-rows: 1fr;
-  opacity: 1;
 }
 
 .animatorInner {
   overflow: hidden;
 }
 
-.answerWrapper {
-  padding: 0 20px 20px;
-}
-
-.answerInner {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-}
-
 .answerText {
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 400;
-  color: #e2e8f0;
-  font-size: 17px;
-  line-height: 28px;
-  letter-spacing: -0.3px;
+  padding: 0 44px 26px 60px;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.72;
+  color: rgba(12, 13, 12, 0.72);
 }
 
-/* ============ RESPONSIVE ============ */
-
-@media (max-width: 1279px) {
+@media (max-width: 640px) {
   .section {
-    padding: 120px 64px;
-  }
-}
-
-@media (max-width: 1023px) {
-  .section {
-    padding: 80px 40px;
-  }
-
-  .title {
-    font-size: clamp(28px, 4vw, 48px); font-weight: 500; letter-spacing: -0.03em; color: #f7efdc;
-    color: #ffffff !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .section {
-    padding: 60px 16px;
-  }
-
-  .container {
-    gap: 32px;
-  }
-
-  .badgeText {
-    color: var(--color-wine, #c21a22) !important;
-  }
-
-  .title {
-    font-size: 36px;
-    color: #ffffff !important;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  }
-
-  .list {
-    gap: 16px;
+    padding: 68px 16px;
   }
 
   .trigger {
-    padding: 18px;
-  }
-
-  .question {
-    font-size: 19px;
-    color: #ffffff !important;
-    font-weight: 600;
-  }
-
-  .answerWrapper {
-    padding: 0 16px 16px;
-  }
-
-  .answerInner {
-    padding: 16px;
-    background: rgba(10, 20, 40, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    grid-template-columns: 32px 1fr 30px;
+    gap: 10px;
+    padding: 20px 4px;
   }
 
   .answerText {
-    font-size: 15px;
-    color: #e2e8f0 !important;
-    line-height: 1.6;
-    font-weight: 400;
+    padding: 0 8px 20px 42px;
+    font-size: 13.5px;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animator,
-  .chevron {
-    transition: none;
-  }
-}
-
-.faqIndex {
-  font-family: var(--font-sans), 'Montserrat', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--color-gold, #d4af37);
-  margin-right: 14px;
-  flex-shrink: 0;
 }

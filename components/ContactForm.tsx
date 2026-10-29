@@ -26,7 +26,6 @@ export default function ContactForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // Prevent duplicate submissions while a request is in progress
     if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
     setStatus("sending");
@@ -42,7 +41,6 @@ export default function ContactForm() {
         project: "Aura by Lifestyle",
         preference: "2 & 3 BHK Luxury Residences",
         source: "Contact Page Form",
-        // Hidden from real users; only a bot fills it in.
         website: String(form.get("website") ?? ""),
       });
 
@@ -52,7 +50,6 @@ export default function ContactForm() {
         return;
       }
 
-      // Meta "Lead" is fired inside submitLead, only after the CRM confirms the save.
       setReferenceId(result.referenceId || "LHS-2026-VIP");
       setValues(BLANK);
       setStatus("sent");
@@ -73,64 +70,63 @@ export default function ContactForm() {
         role="status"
         aria-live="polite"
         style={{
-          background: "rgba(17, 21, 30, 0.95)",
-          border: "1px solid rgba(194, 26, 34, 0.3)",
-          borderRadius: "20px",
-          padding: "2.5rem 2rem",
+          background: "#0d0f0d",
+          border: "1px solid rgba(191, 149, 63, 0.42)",
+          borderRadius: "22px",
+          padding: "2.4rem 2rem",
           textAlign: "center",
-          color: "#fff",
-          boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(194, 26, 34, 0.15)",
+          color: "#f7efdc",
         }}
       >
         <div
           style={{
-            width: "56px",
-            height: "56px",
-            margin: "0 auto 1.25rem",
+            width: "52px",
+            height: "52px",
+            margin: "0 auto 1.15rem",
             borderRadius: "50%",
-            background: "rgba(22, 163, 74, 0.15)",
-            border: "1px solid rgba(22, 163, 74, 0.35)",
-            color: "#16a34a",
+            background: "rgba(191, 149, 63, 0.14)",
+            border: "1px solid rgba(191, 149, 63, 0.45)",
+            color: "#d5bd87",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "1.6rem",
+            fontSize: "1.4rem",
           }}
         >
           ✓
         </div>
         <h3
           style={{
-            fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-            fontSize: "1.6rem",
-            fontWeight: 700,
-            color: "#ffffff",
-            marginBottom: "0.5rem",
+            fontFamily: "var(--font-display)",
+            fontSize: "2rem",
+            fontWeight: 600,
+            textTransform: "uppercase",
+            color: "#f7efdc",
+            marginBottom: "0.45rem",
           }}
         >
-          Enquiry Received!
+          Enquiry Registered
         </h3>
-        <p style={{ color: "#94a3b8", fontSize: "0.9rem", lineHeight: 1.6, marginBottom: "1rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
-          Your enquiry has been registered in our Real Estate CRM under Reference ID:
+        <p style={{ color: "rgba(247, 239, 220, 0.7)", fontSize: "0.9rem", lineHeight: 1.6, marginBottom: "1rem" }}>
+          Your request has been logged with our advisory desk under Reference ID:
         </p>
         <div
           style={{
             display: "inline-block",
             padding: "0.45rem 1.25rem",
-            borderRadius: "8px",
-            background: "rgba(194, 26, 34, 0.12)",
-            border: "1px solid rgba(194, 26, 34, 0.3)",
-            color: "#c21a22",
+            borderRadius: "9999px",
+            background: "rgba(191, 149, 63, 0.12)",
+            border: "1px solid rgba(191, 149, 63, 0.4)",
+            color: "#d5bd87",
             fontWeight: 700,
-            letterSpacing: "1px",
-            marginBottom: "1.5rem",
-            fontFamily: "var(--font-montserrat), sans-serif",
+            letterSpacing: "0.1em",
+            marginBottom: "1.35rem",
           }}
         >
           {referenceId}
         </div>
-        <p style={{ color: "#64748b", fontSize: "0.85rem", marginBottom: "1.5rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
-          Our sales director and engineering team will reach out to schedule your personalized site walkthrough.
+        <p style={{ color: "rgba(247, 239, 220, 0.55)", fontSize: "0.84rem", marginBottom: "1.4rem" }}>
+          Our senior property team will reach out shortly to coordinate your site walkthrough.
         </p>
         <a
           href={waUrl}
@@ -140,21 +136,19 @@ export default function ContactForm() {
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "0.6rem",
+            gap: "0.55rem",
             padding: "12px 24px",
-            borderRadius: "12px",
-            background: "#16a34a",
-            color: "#ffffff",
-            fontFamily: "var(--font-montserrat), sans-serif",
+            borderRadius: "9999px",
+            background: "#bf953f",
+            color: "#080808",
             fontWeight: 700,
             fontSize: "11px",
-            letterSpacing: "0.15em",
+            letterSpacing: "0.14em",
             textTransform: "uppercase",
             textDecoration: "none",
-            boxShadow: "0 8px 24px rgba(22, 163, 74, 0.3)",
           }}
         >
-          <i className="fa-brands fa-whatsapp" style={{ fontSize: "1rem" }} /> Chat on WhatsApp Now
+          <i className="fa-brands fa-whatsapp" style={{ fontSize: "1rem" }} /> Connect on WhatsApp
         </a>
       </div>
     );
@@ -162,7 +156,6 @@ export default function ContactForm() {
 
   return (
     <form id="booking-form" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
-      {/* Honeypot: off-screen and skipped by tab order, so only bots fill it. */}
       <input
         type="text"
         name="website"
@@ -172,22 +165,20 @@ export default function ContactForm() {
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
       />
 
-      {/* Field 1: Full Name (Required) */}
-      <div className="form-group">
+      <div className="form-group" style={{ marginBottom: 0 }}>
         <label
           htmlFor="name"
           style={{
             display: "block",
-            marginBottom: "0.4rem",
-            fontSize: "9.5px",
-            color: "#94a3b8",
-            fontWeight: 700,
+            marginBottom: "0.45rem",
+            fontSize: "10px",
+            color: "#d5bd87",
+            fontWeight: 600,
             textTransform: "uppercase",
-            letterSpacing: "0.15em",
-            fontFamily: "var(--font-montserrat), sans-serif",
+            letterSpacing: "0.18em",
           }}
         >
-          Full Name <span style={{ color: "#c21a22" }}>*</span>
+          Full Name <span style={{ color: "#bf953f" }}>*</span>
         </label>
         <input
           type="text"
@@ -198,55 +189,41 @@ export default function ContactForm() {
           required
           style={{
             width: "100%",
-            padding: "11px 14px",
-            background: "rgba(255, 255, 255, 0.05)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
+            padding: "12px 15px",
+            background: "rgba(247, 239, 220, 0.04)",
+            border: "1px solid rgba(247, 239, 220, 0.14)",
             borderRadius: "12px",
-            color: "#ffffff",
-            fontSize: "0.9rem",
-            fontFamily: "var(--font-montserrat), sans-serif",
-            outline: "none",
-            transition: "all 0.2s ease",
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "#c21a22";
-            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
-            e.currentTarget.style.boxShadow = "none";
+            color: "#f7efdc",
+            fontSize: "0.92rem",
           }}
         />
       </div>
 
-      {/* Field 2: Mobile Number (Required) */}
-      <div className="form-group">
+      <div className="form-group" style={{ marginBottom: 0 }}>
         <label
           htmlFor="phone"
           style={{
             display: "block",
-            marginBottom: "0.4rem",
-            fontSize: "9.5px",
-            color: "#94a3b8",
-            fontWeight: 700,
+            marginBottom: "0.45rem",
+            fontSize: "10px",
+            color: "#d5bd87",
+            fontWeight: 600,
             textTransform: "uppercase",
-            letterSpacing: "0.15em",
-            fontFamily: "var(--font-montserrat), sans-serif",
+            letterSpacing: "0.18em",
           }}
         >
-          Mobile Number <span style={{ color: "#c21a22" }}>*</span>
+          Mobile Number <span style={{ color: "#bf953f" }}>*</span>
         </label>
         <div style={{ display: "flex", gap: "0.5rem" }}>
           <div
             style={{
-              padding: "11px 12px",
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
+              padding: "12px 13px",
+              background: "rgba(191, 149, 63, 0.1)",
+              border: "1px solid rgba(191, 149, 63, 0.3)",
               borderRadius: "12px",
-              color: "#c21a22",
+              color: "#d5bd87",
               fontWeight: 700,
               fontSize: "0.88rem",
-              fontFamily: "var(--font-montserrat), sans-serif",
               display: "flex",
               alignItems: "center",
             }}
@@ -262,44 +239,31 @@ export default function ContactForm() {
             required
             style={{
               flex: 1,
-              padding: "11px 14px",
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
+              padding: "12px 15px",
+              background: "rgba(247, 239, 220, 0.04)",
+              border: "1px solid rgba(247, 239, 220, 0.14)",
               borderRadius: "12px",
-              color: "#ffffff",
-              fontSize: "0.9rem",
-              fontFamily: "var(--font-montserrat), sans-serif",
-              outline: "none",
-              transition: "all 0.2s ease",
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = "#c21a22";
-              e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
-              e.currentTarget.style.boxShadow = "none";
+              color: "#f7efdc",
+              fontSize: "0.92rem",
             }}
           />
         </div>
       </div>
 
-      {/* Field 3: Email Address (Optional) */}
-      <div className="form-group">
+      <div className="form-group" style={{ marginBottom: 0 }}>
         <label
           htmlFor="email"
           style={{
             display: "block",
-            marginBottom: "0.4rem",
-            fontSize: "9.5px",
-            color: "#94a3b8",
-            fontWeight: 700,
+            marginBottom: "0.45rem",
+            fontSize: "10px",
+            color: "#d5bd87",
+            fontWeight: 600,
             textTransform: "uppercase",
-            letterSpacing: "0.15em",
-            fontFamily: "var(--font-montserrat), sans-serif",
+            letterSpacing: "0.18em",
           }}
         >
-          Email Address <span style={{ color: "#64748b", textTransform: "none" }}>(Optional)</span>
+          Email Address <span style={{ color: "rgba(247, 239, 220, 0.45)", textTransform: "none" }}>(Optional)</span>
         </label>
         <input
           type="email"
@@ -309,23 +273,12 @@ export default function ContactForm() {
           onChange={(event) => set("email", event.target.value)}
           style={{
             width: "100%",
-            padding: "11px 14px",
-            background: "rgba(255, 255, 255, 0.05)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
+            padding: "12px 15px",
+            background: "rgba(247, 239, 220, 0.04)",
+            border: "1px solid rgba(247, 239, 220, 0.14)",
             borderRadius: "12px",
-            color: "#ffffff",
-            fontSize: "0.9rem",
-            fontFamily: "var(--font-montserrat), sans-serif",
-            outline: "none",
-            transition: "all 0.2s ease",
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "#c21a22";
-            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(194, 26, 34, 0.18)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
-            e.currentTarget.style.boxShadow = "none";
+            color: "#f7efdc",
+            fontSize: "0.92rem",
           }}
         />
       </div>
@@ -334,65 +287,55 @@ export default function ContactForm() {
         <div
           role="alert"
           style={{
-            padding: "8px 12px",
-            background: "rgba(239, 68, 68, 0.12)",
-            border: "1px solid rgba(239, 68, 68, 0.35)",
-            borderRadius: "8px",
-            color: "#ef4444",
+            padding: "10px 14px",
+            background: "rgba(229, 72, 77, 0.12)",
+            border: "1px solid rgba(229, 72, 77, 0.38)",
+            borderRadius: "10px",
+            color: "#f87171",
             fontSize: "0.85rem",
-            fontFamily: "var(--font-montserrat), sans-serif",
           }}
         >
           {error}
         </div>
       )}
 
-      {/* Lotlite SIEC Wine Primary CTA */}
       <button
         type="submit"
         disabled={status === "sending"}
+        className="roll-button"
         style={{
           width: "100%",
-          padding: "14px 20px",
-          borderRadius: "12px",
-          background: "#c21a22",
-          color: "#ffffff",
-          fontFamily: "var(--font-montserrat), sans-serif",
+          padding: "14px 22px",
+          borderRadius: "9999px",
+          background: "#bf953f",
+          color: "#080808",
           fontWeight: 700,
           fontSize: "11px",
           textTransform: "uppercase",
           letterSpacing: "0.15em",
-          border: "none",
+          border: "1px solid #d4af37",
           cursor: status === "sending" ? "not-allowed" : "pointer",
-          boxShadow: "0 8px 24px rgba(194, 26, 34, 0.3)",
-          transition: "all 0.2s ease",
-          opacity: status === "sending" ? 0.75 : 1,
-          marginTop: "0.25rem",
-        }}
-        onMouseEnter={(e) => {
-          if (status !== "sending") {
-            e.currentTarget.style.background = "#9e1218";
-            e.currentTarget.style.transform = "translateY(-1px)";
-          }
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = "#c21a22";
-          e.currentTarget.style.transform = "translateY(0)";
+          opacity: status === "sending" ? 0.72 : 1,
+          marginTop: "0.35rem",
         }}
       >
-        {status === "sending" ? "Submitting to CRM..." : "Request Exclusive Callback & Visit"}
+        <span
+          className="roll-text"
+          data-text={status === "sending" ? "Registering Enquiry..." : "Request Private Callback & Visit →"}
+        >
+          {status === "sending" ? "Registering Enquiry..." : "Request Private Callback & Visit →"}
+        </span>
       </button>
 
       <p
         style={{
-          marginTop: "0.4rem",
+          marginTop: "0.25rem",
           fontSize: "0.75rem",
-          color: "#64748b",
+          color: "rgba(247, 239, 220, 0.5)",
           textAlign: "center",
-          fontFamily: "var(--font-montserrat), sans-serif",
         }}
       >
-        🔒 Official MahaRERA Registered Developer. Your information is securely registered in our CRM.
+        MahaRERA Reg. No. P5030002502915 · Direct Developer Advisory Desk
       </p>
     </form>
   );

@@ -1,0 +1,181 @@
+/* ============ SECTION 11A: ARCHITECTURAL CONTACT & ENQUIRY SECTION ============ */
+
+.section {
+  position: relative;
+  background: #080808;
+  color: #f7efdc;
+  padding: 124px 40px;
+  border-bottom: 1px solid rgba(247, 239, 220, 0.08);
+  overflow: hidden;
+}
+
+.radialGlow {
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 100%);
+  height: 440px;
+  background: radial-gradient(ellipse at center, rgba(191, 149, 63, 0.16) 0%, rgba(191, 149, 63, 0) 70%);
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.eyebrow {
+  padding: 6px 12px;
+  border: 1px solid rgba(191, 149, 63, 0.36);
+  background: rgba(191, 149, 63, 0.08);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #d5bd87;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+  line-height: 0.94;
+  text-transform: uppercase;
+  color: #f7efdc;
+}
+
+.heading span {
+  color: #bf953f;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(247, 239, 220, 0.72);
+  max-width: 54ch;
+}
+
+.channelCards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.channelCard {
+  padding: 20px 24px;
+  border-radius: 18px;
+  background: #0d0f0d;
+  border: 1px solid rgba(247, 239, 220, 0.1);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.channelCard:hover {
+  border-color: #bf953f;
+  transform: translateX(4px);
+}
+
+.channelIndex {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #bf953f;
+}
+
+.channelValue {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 4.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f7efdc;
+  overflow-wrap: anywhere;
+}
+
+.channelHint {
+  font-size: 12.5px;
+  color: rgba(247, 239, 220, 0.6);
+  line-height: 1.5;
+}
+
+/* Form Card */
+.formCard {
+  background: #0d0f0d;
+  border: 1px solid rgba(191, 149, 63, 0.34);
+  border-radius: 26px;
+  padding: 36px 34px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(247, 239, 220, 0.08);
+}
+
+.formBadge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #bf953f;
+}
+
+.formTitle {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f7efdc;
+}
+
+.formSub {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(247, 239, 220, 0.64);
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 88px 24px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 68px 16px;
+  }
+
+  .formCard {
+    padding: 26px 20px;
+  }
+}

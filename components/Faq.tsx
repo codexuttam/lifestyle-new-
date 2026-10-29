@@ -5,28 +5,6 @@ import type { FaqRecord } from "@/lib/schemas/faq";
 import type { HomeRecord } from "@/lib/schemas/home";
 import styles from "./Faq.module.css";
 
-
-function ChevronDown({ open }: { open: boolean }) {
-  return (
-    <div className={`${styles.chevron}${open ? ` ${styles.chevronOpen}` : ""}`}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="30"
-        height="30"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="m6 9 6 6 6-6" />
-      </svg>
-    </div>
-  );
-}
-
 export default function Faq({
   faqs,
   content,
@@ -41,6 +19,11 @@ export default function Faq({
     <section className={styles.section} id="faq-section">
       <div className={styles.container}>
         <div className={styles.header}>
+          <div className={styles.eyebrowRow}>
+            <span className={styles.flank} aria-hidden="true" />
+            <span className={styles.eyebrow}>{content.badge || "FREQUENTLY ASKED"}</span>
+            <span className={styles.flank} aria-hidden="true" />
+          </div>
           <h2 className={styles.title}>{content.title}</h2>
         </div>
 
@@ -50,7 +33,7 @@ export default function Faq({
             const panelId = `${baseId}-panel-${i}`;
             const triggerId = `${baseId}-trigger-${i}`;
             return (
-              <div className={styles.item} key={faq.question}>
+              <div className={`${styles.item}${open ? ` ${styles.itemOpen}` : ""}`} key={faq.question}>
                 <button
                   type="button"
                   className={styles.trigger}
@@ -61,7 +44,9 @@ export default function Faq({
                 >
                   <span className={styles.faqIndex}>{String(i + 1).padStart(2, "0")}</span>
                   <span className={styles.question}>{faq.question}</span>
-                  <ChevronDown open={open} />
+                  <span className={`${styles.plusBadge}${open ? ` ${styles.plusBadgeOpen}` : ""}`} aria-hidden="true">
+                    +
+                  </span>
                 </button>
 
                 <div
@@ -71,11 +56,7 @@ export default function Faq({
                   aria-labelledby={triggerId}
                 >
                   <div className={styles.animatorInner}>
-                    <div className={styles.answerWrapper}>
-                      <div className={styles.answerInner}>
-                        <p className={styles.answerText}>{faq.answer}</p>
-                      </div>
-                    </div>
+                    <p className={styles.answerText}>{faq.answer}</p>
                   </div>
                 </div>
               </div>

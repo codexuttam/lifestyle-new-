@@ -1,47 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { HomeRecord } from "@/lib/schemas/home";
 import type { ProjectRecord } from "@/lib/schemas/project";
 import styles from "./Properties.module.css";
 
-function ChevronLeft() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m15 18-6-6 6-6" />
-    </svg>
-  );
-}
-
-function ChevronRight() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
-  );
+function getProjectHref(id: string) {
+  if (id === "lifestyle-homes") return "/projects/lifestyle-homes";
+  if (id === "lifestyle-retail-galleria") return "/projects/lifestyle-homes#commercial-shops";
+  if (id === "aura") return "#floor-plans";
+  return "/projects";
 }
 
 export default function Properties({
@@ -52,163 +21,201 @@ export default function Properties({
   content: HomeRecord["properties"];
 }) {
   const [index, setIndex] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const total = projects.length;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (video && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(video);
+    }
+    return () => observer?.disconnect();
+  }, [index]);
+
+  if (total === 0) return null;
+
+  const feature = projects[index % total];
+  const secondary = projects.filter((_, idx) => idx !== index % total);
 
   const step = (delta: number) =>
     setIndex((current) => (current + delta + total) % total);
 
-  // The layout needs a feature card plus two supporting cards.
-  if (total < 3) return null;
-
-  const feature = projects[index % total];
-  const secondary = [
-    projects[(index + 1) % total],
-    projects[(index + 2) % total],
-  ];
-
   return (
     <section className={styles.properties} id="properties-section">
-      <div className={styles.grid}>
-        <div className={styles.headingWrapper}>
-          <h2 className={styles.heading}>{content.heading}</h2>
-        </div>
-
-        <div className={styles.largeWrapper}>
-          <div className={styles.largeCard}>
-            {feature.video ? (
-              <video
-                key={feature.id}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className={styles.media}
-                aria-hidden="true"
-              >
-                <source src={feature.video} type="video/mp4" />
-              </video>
-            ) : (
-              <img
-                key={feature.id}
-                src={feature.img}
-                alt={feature.title}
-                className={styles.media}
-              />
-            )}
-            <div className={styles.largeScrim} />
-            <div className={styles.pills}>
-              <span className={styles.pill}>{feature.category}</span>
-              <span className={styles.pill}>{feature.status === "Delivered" ? "✓ Ready to Move" : "✦ Skyline Landmark"}</span>
-            </div>
-            <div className={styles.largeTitleRow}>
-              <h3 className={styles.largeTitle}>{feature.title}</h3>
-              <Link
-                href={
-                  feature.id === "lifestyle-homes"
-                    ? "/projects/lifestyle-homes"
-                    : feature.id === "lifestyle-retail-galleria"
-                    ? "/projects/lifestyle-homes#commercial-shops"
-                    : feature.id === "aura"
-                    ? "#floor-plans"
-                    : "/projects"
-                }
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.85rem",
-                  color: "var(--color-wine, #c21a22)",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  marginTop: "0.35rem",
-                }}
-              >
-                View Project Details →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.smallColumn}>
-          <div className={styles.smallRow}>
-            {secondary.map((property) => (
-              <div className={styles.smallCard} key={property.id}>
-                {property.video ? (
-                  <video
-                    key={property.id}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className={styles.media}
-                    aria-hidden="true"
-                  >
-                    <source src={property.video} type="video/mp4" />
-                  </video>
-                ) : (
-                  <img
-                    key={property.id}
-                    src={property.img}
-                    alt={property.title}
-                    className={styles.media}
-                  />
-                )}
-                <div className={styles.smallScrim} />
-                <span className={styles.smallPill}>{property.category}</span>
-                <div className={styles.smallTitleRow}>
-                  <h3 className={styles.smallTitle}>{property.title}</h3>
-                  <Link
-                    href={
-                      property.id === "lifestyle-homes"
-                        ? "/projects/lifestyle-homes"
-                        : property.id === "lifestyle-retail-galleria"
-                        ? "/projects/lifestyle-homes#commercial-shops"
-                        : property.id === "aura"
-                        ? "#floor-plans"
-                        : "/projects"
-                    }
-                    style={{
-                      display: "inline-block",
-                      fontSize: "0.75rem",
-                      color: "var(--color-wine, #c21a22)",
-                      textDecoration: "none",
-                      fontWeight: 600,
-                      marginTop: "0.2rem",
-                    }}
-                  >
-                    Explore →
-                  </Link>
-                </div>
-              </div>
-            ))}
+      <div className={styles.container}>
+        {/* Header + Numbered Selection Controls */}
+        <div className={styles.topHeader}>
+          <div className={styles.headingBlock}>
+            <span className={styles.eyebrow}>PORTFOLIO SHOWCASE · AMRAVATI</span>
+            <h2 className={styles.heading}>{content.heading}</h2>
+            <p className={styles.desc}>{content.description}</p>
           </div>
 
-          <div className={styles.bottomRow}>
-            <div className={styles.descBlock}>
-              <p className={styles.desc}>{content.description}</p>
-              <Link href="/projects" className={styles.viewAll}>
-                {content.ctaLabel}
-              </Link>
+          <div className={styles.controlsCluster}>
+            <div className={styles.pillSelectors} role="tablist" aria-label="Select landmark project">
+              {projects.map((proj, idx) => {
+                const isActive = idx === index % total;
+                return (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`${styles.selectPill}${isActive ? ` ${styles.selectPillActive}` : ""}`}
+                    onClick={() => setIndex(idx)}
+                  >
+                    <span className={styles.pillNum}>0{idx + 1}</span>
+                    <span>{proj.title}</span>
+                  </button>
+                );
+              })}
             </div>
-            <div className={styles.navButtons}>
+
+            <div className={styles.arrowGroup}>
               <button
                 type="button"
-                className={`${styles.navBtn} ${styles.navPrev}`}
-                aria-label="Previous property"
+                className={styles.arrowBtn}
+                aria-label="Previous project"
                 onClick={() => step(-1)}
               >
-                <ChevronLeft />
+                ←
               </button>
               <button
                 type="button"
-                className={`${styles.navBtn} ${styles.navNext}`}
-                aria-label="Next property"
+                className={styles.arrowBtn}
+                aria-label="Next project"
                 onClick={() => step(1)}
               >
-                <ChevronRight />
+                →
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Layered Primary Showcase + Supporting Cards */}
+        <div className={styles.showcaseGrid}>
+          <article className={styles.primaryCard}>
+            <div className={styles.primaryMediaWrap}>
+              {feature.video ? (
+                <video
+                  ref={videoRef}
+                  key={feature.id}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={feature.img}
+                  className={styles.media}
+                  aria-hidden="true"
+                >
+                  <source src={feature.video} type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  key={feature.id}
+                  src={feature.img}
+                  alt={feature.title}
+                  className={styles.media}
+                />
+              )}
+              <div className={styles.primaryScrim} />
+
+              <div className={styles.topBadges}>
+                <span className={styles.badgeCategory}>{feature.category}</span>
+                <span className={styles.badgeStatus}>
+                  {feature.status === "Delivered" ? "✓ Delivered & Ready" : "✦ Ongoing Landmark"}
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.primaryContent}>
+              <div className={styles.primaryMetaRow}>
+                <span className={styles.locationText}>{feature.location}</span>
+                <span className={styles.yearText}>Target / Year · {feature.year}</span>
+              </div>
+
+              <h3 className={styles.primaryTitle}>{feature.title}</h3>
+              <p className={styles.primarySummary}>{feature.summary}</p>
+
+              <div className={styles.metricsBar}>
+                <div className={styles.metricCell}>
+                  <span className={styles.metricKey}>Typology</span>
+                  <span className={styles.metricVal}>{feature.beds}</span>
+                </div>
+                <div className={styles.metricCell}>
+                  <span className={styles.metricKey}>Area Range</span>
+                  <span className={styles.metricVal}>{feature.area}</span>
+                </div>
+                <div className={styles.metricCell}>
+                  <span className={styles.metricKey}>Pricing</span>
+                  <span className={styles.metricVal}>{feature.price}</span>
+                </div>
+              </div>
+
+              <div className={styles.primaryActions}>
+                <Link
+                  href={getProjectHref(feature.id)}
+                  className={`${styles.btnPrimary} roll-button`}
+                >
+                  <span className="roll-text" data-text="Explore Development →">
+                    Explore Development →
+                  </span>
+                </Link>
+                <Link href="/projects" className={styles.viewAllLink}>
+                  {content.ctaLabel}
+                </Link>
+              </div>
+            </div>
+          </article>
+
+          <div className={styles.sideStack}>
+            {secondary.map((proj) => {
+              const originalIdx = projects.findIndex((p) => p.id === proj.id);
+              return (
+                <div
+                  key={proj.id}
+                  className={styles.secondaryCard}
+                  onClick={() => setIndex(originalIdx)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setIndex(originalIdx);
+                    }
+                  }}
+                  aria-label={`Preview ${proj.title}`}
+                >
+                  <img
+                    src={proj.img}
+                    alt={proj.title}
+                    className={styles.secondaryImg}
+                    loading="lazy"
+                  />
+                  <div className={styles.secondaryScrim} />
+                  <div className={styles.secondaryOverlay}>
+                    <div className={styles.secondaryTop}>
+                      <span className={styles.secondaryNum}>0{originalIdx + 1}</span>
+                      <span className={styles.secondaryStatus}>{proj.status}</span>
+                    </div>
+                    <div className={styles.secondaryBottom}>
+                      <span className={styles.secondaryLoc}>{proj.location}</span>
+                      <h4 className={styles.secondaryTitle}>{proj.title}</h4>
+                      <span className={styles.secondaryHint}>Select to inspect ↗</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

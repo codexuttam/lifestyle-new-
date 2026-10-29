@@ -1,13 +1,17 @@
 import SiteNav from "@/components/SiteNav";
 import Chatbot from "@/components/Chatbot";
 import Hero from "@/components/Hero";
+import TrustStrip from "@/components/TrustStrip";
+import About from "@/components/About";
+import Services from "@/components/Services";
 import ExploreSection from "@/components/ExploreSection";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
+import AuraFeatureSequence from "@/components/AuraFeatureSequence";
 import Properties from "@/components/Properties";
-import Services from "@/components/Services";
-import AllProperties from "@/components/AllProperties";
+import BuyingJourney from "@/components/BuyingJourney";
 import Testimonials from "@/components/Testimonials";
 import Faq from "@/components/Faq";
+import HomeContactSection from "@/components/HomeContactSection";
 import SiteFooter from "@/components/SiteFooter";
 import RevealAnimations from "@/components/RevealAnimations";
 import CustomCursor from "@/components/CustomCursor";
@@ -20,7 +24,6 @@ import { getFeaturedServices } from "@/lib/content/services";
 import { getTestimonials } from "@/lib/content/testimonials";
 
 export default async function Home() {
-  // Client components below cannot fetch, so the page reads once and passes down.
   const [
     home,
     settings,
@@ -40,49 +43,59 @@ export default async function Home() {
   ]);
 
   return (
-    <>
+    <main style={{ width: "100%", maxWidth: "100vw", overflowX: "clip" }}>
       <RevealAnimations />
       <SiteNav activeHref="/" />
+
+      {/* 01. Full-Screen Architectural Hero (Dark Charcoal) */}
       <Hero content={home.hero} />
 
-      {/* SECTION 1: EXPLORE 3D BUILDING */}
+      {/* 02. Verified Landmark Credentials & MahaRERA Strip (Warm Ivory) */}
+      <TrustStrip />
+
+      {/* 03. Architectural Spotlight & Brand Introduction (Dark Charcoal) */}
+      <About content={home.about} />
+
+      {/* 04. Scroll-Revealed Value & Engineering Craftsmanship (Warm Ivory) */}
+      <Services services={featuredServices} content={home.services} />
+
+      {/* 05. Interactive Tower & Floor-Plate Exploration (Dark Charcoal) */}
       <ExploreSection
         content={home.explore}
         projectTitle={
           exploreProject
-            ? `${exploreProject.title}, ${exploreProject.location}`
+            ? `${exploreProject.title} · ${exploreProject.location}`
             : ""
         }
       />
-
-      {/* SECTION 1bb: AURA ARCHITECTURAL PLANS, 3D CUT-SECTIONS & CONNECTIVITY */}
       <AuraFloorPlans />
 
-      {/* SECTION 1c: PROPERTIES */}
+      {/* 06. Pinned Desktop / Stacked Mobile Feature Sequence (Warm Ivory) */}
+      <AuraFeatureSequence />
+
+      {/* 07. Interactive Portfolio & Property Showcase (Deep Charcoal) */}
       <Properties projects={featuredProjects} content={home.properties} />
 
-      {/* SECTION 1d: SERVICES */}
-      <Services services={featuredServices} content={home.services} />
+      {/* 08. Homebuying & Possession Journey Timeline (Warm Ivory) */}
+      <BuyingJourney />
 
-      {/* SECTION 1e: ALL PROPERTIES */}
-      <AllProperties content={home.allProperties} />
-
-      {/* SECTION 1f: TESTIMONIALS */}
+      {/* 09. Real Project Clips & Resident Testimonials (Dark + Warm Ivory Split) */}
       <Testimonials testimonials={testimonials} badge={home.testimonials.badge} />
 
-      {/* SECTION 1g: FAQ */}
+      {/* 10. Accessible Hairline FAQ Accordion (Warm Ivory) */}
       <Faq faqs={faqs} content={home.faq} />
 
-      {/* SECTION 1h: FOOTER */}
+      {/* 11. Direct Developer Contact & Clean Architectural Footer (Dark Charcoal) */}
+      <HomeContactSection settings={settings} />
       <SiteFooter settings={settings} />
 
-      {/* Interactive AI Portfolio Concierge */}
+      {/* Interactive Portfolio Concierge */}
       <Chatbot />
 
-      {/* Mobile Sticky Bar */}
+      {/* Mobile Sticky Action Bar */}
       <div className="mobile-sticky-bar">
         <a href={telHref(settings)} className="call-btn">
-          <i className="fa-solid fa-phone" /> Call Now
+          <i className="fa-solid fa-phone" /> Call Desk
         </a>
         <a href={whatsappHref(settings)} className="wa-btn">
           <i className="fa-brands fa-whatsapp" /> WhatsApp
@@ -90,6 +103,6 @@ export default async function Home() {
       </div>
 
       <CustomCursor />
-    </>
+    </main>
   );
 }

@@ -1,7 +1,7 @@
 .section {
   position: relative;
   padding: 5rem 1.5rem;
-  background: radial-gradient(ellipse at top left, rgba(194, 26, 34, 0.12), transparent 55%), #050a16;
+  background: radial-gradient(ellipse at top left, rgba(191, 149, 63, 0.12), transparent 55%), #050a16;
   color: #ffffff;
   font-family: var(--font-sans), "Montserrat", sans-serif;
 }
@@ -20,7 +20,7 @@
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(194, 26, 34, 0.15);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(191, 149, 63, 0.15);
   background: #000;
   aspect-ratio: 16 / 9;
 }
@@ -38,9 +38,9 @@
   margin-bottom: 0.9rem;
   padding: 0.3rem 0.85rem;
   border-radius: 9999px;
-  background: rgba(194, 26, 34, 0.15);
-  border: 1px solid rgba(194, 26, 34, 0.4);
-  color: #ff8a8f;
+  background: rgba(191, 149, 63, 0.15);
+  border: 1px solid rgba(191, 149, 63, 0.4);
+  color: #f7efdc;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -83,7 +83,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: #c21a22;
+  color: #bf953f;
   font-weight: 800;
 }
 
@@ -107,13 +107,13 @@
 
 .primaryCta {
   border: none;
-  background: #c21a22;
+  background: #bf953f;
   color: #ffffff;
-  box-shadow: 0 8px 24px rgba(194, 26, 34, 0.35);
+  box-shadow: 0 8px 24px rgba(191, 149, 63, 0.35);
 }
 
 .primaryCta:hover {
-  background: #9e1218;
+  background: #967022;
   transform: translateY(-1px);
 }
 

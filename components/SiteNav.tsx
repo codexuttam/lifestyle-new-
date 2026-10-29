@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import styles from "./SiteNav.module.css";
 import AuthOtpModal from "@/components/AuthOtpModal";
@@ -9,55 +9,39 @@ import EnquiryModal from "@/components/EnquiryModal";
 import { VerifiedUser } from "@/lib/types/auth";
 
 const LIFESTYLE_MENU_ITEMS = [
-  { label: "Overview", href: "/projects/lifestyle-homes#hero-section" },
-  { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans" },
-  { label: "Amenities", href: "/projects/lifestyle-homes#amenities-lifestyle-section" },
-  { label: "Architecture", href: "/projects/lifestyle-homes#explore-site-section" },
-  { label: "All Projects", href: "/projects" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "About", href: "/projects/lifestyle-homes#about-lifestyle-section" },
+  { label: "Overview", href: "/projects/lifestyle-homes#hero-section", group: "left" },
+  { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans", group: "left" },
+  { label: "Amenities", href: "/projects/lifestyle-homes#amenities-lifestyle-section", group: "left" },
+  { label: "All Projects", href: "/projects", group: "left" },
+  { label: "Architecture", href: "/projects/lifestyle-homes#explore-site-section", group: "right" },
+  { label: "Blogs", href: "/blogs", group: "right" },
+  { label: "About", href: "/projects/lifestyle-homes#about-lifestyle-section", group: "right" },
 ];
 
 const DEFAULT_MENU_ITEMS = [
-  { label: "Overview", href: "/#hero-section" },
-  { label: "Floor Plans", href: "/#floor-plans" },
-  { label: "Amenities", href: "/#properties-section" },
-  { label: "Architecture", href: "/#explore-site-section" },
-  { label: "All Projects", href: "/projects" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "About", href: "/about" },
+  { label: "Overview", href: "/#hero-section", group: "left" },
+  { label: "Explore", href: "/#explore-site-section", group: "left" },
+  { label: "Floor Plans", href: "/#floor-plans", group: "left" },
+  { label: "Projects", href: "/projects", group: "left" },
+  { label: "Journey", href: "/#journey-section", group: "right" },
+  { label: "Stories", href: "/#testimonial-section", group: "right" },
+  { label: "Blogs", href: "/blogs", group: "right" },
+  { label: "About", href: "/about", group: "right" },
 ];
 
-// Track whether the visitor dismissed the login prompt during the current browser page load.
-// On every page refresh (F5 / Cmd+R) or new platform visit, this in-memory variable resets to false.
 let hasDismissedLoginThisLoad = false;
 
-/** Luxury Dark Glassmorphism Nav with Smooth Scroll Interception, WhatsApp OTP Auth & Short CRM Enquiry */
 export default function SiteNav({ activeHref }: { activeHref?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<VerifiedUser | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close user dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setUserMenuOpen(false);
-      }
-    }
-    if (userMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [userMenuOpen]);
-
   const pathname = usePathname();
-  const router = useRouter();
 
   const isLifestylePage =
     pathname === "/projects/lifestyle-homes" ||
@@ -65,11 +49,58 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     activeHref === "/projects/lifestyle-homes";
 
   const menuItems = isLifestylePage ? LIFESTYLE_MENU_ITEMS : DEFAULT_MENU_ITEMS;
+  const leftItems = menuItems.filter((item) => item.group === "left");
+  const rightItems = menuItems.filter((item) => item.group === "right");
 
-  // Listen to verified user session & auto-prompt login modal on platform visit or page refresh
+  // Sync scroll state and saved theme
   useEffect(() => {
-    let promptTimer: NodeJS.Timeout | null = null;
+    const onScroll = () => setScrolled(window.scrollY > 36);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
 
+    try {
+      const savedTheme = localStorage.getItem("aura_surface_theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    } catch {}
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("aura_surface_theme", next);
+    } catch {}
+  };
+
+  // Close user dropdown or mobile menu on Escape / outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setUserMenuOpen(false);
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  // Listen to verified user session & custom enquiry modal events
+  useEffect(() => {
     const checkAuth = () => {
       try {
         const saved = localStorage.getItem("lifestyle_verified_user");
@@ -77,47 +108,34 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           setCurrentUser(JSON.parse(saved));
         } else {
           setCurrentUser(null);
-          // If unauthenticated and not dismissed yet in this load, pop up the login modal
-          if (!hasDismissedLoginThisLoad) {
-            promptTimer = setTimeout(() => {
-              setIsAuthOpen(true);
-            }, 500);
-          }
         }
       } catch {
-        if (!hasDismissedLoginThisLoad) {
-          promptTimer = setTimeout(() => {
-            setIsAuthOpen(true);
-          }, 500);
-        }
+        setCurrentUser(null);
       }
     };
 
     checkAuth();
     window.addEventListener("lifestyle_auth_changed", checkAuth);
 
-    const handleOpenEnquiry = () => {
-      setIsEnquiryOpen(true);
-    };
+    const handleOpenEnquiry = () => setIsEnquiryOpen(true);
     window.addEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
 
     return () => {
-      if (promptTimer) clearTimeout(promptTimer);
       window.removeEventListener("lifestyle_auth_changed", checkAuth);
       window.removeEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
     };
   }, []);
 
-  // Handle smooth scroll on cross-page and in-page navigation
+  // Smooth scroll on cross-page and in-page navigation
   useEffect(() => {
     const handleHashScroll = () => {
       if (typeof window !== "undefined" && window.location.hash) {
         const hash = window.location.hash;
-        [100, 300, 600, 1000].forEach((delay) => {
+        [100, 350, 700].forEach((delay) => {
           setTimeout(() => {
             const target = document.querySelector(hash);
             if (target) {
-              const top = target.getBoundingClientRect().top + window.pageYOffset - 90;
+              const top = target.getBoundingClientRect().top + window.pageYOffset - 88;
               window.scrollTo({ top, behavior: "smooth" });
             }
           }, delay);
@@ -135,7 +153,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       e.preventDefault();
       const target = document.querySelector(href);
       if (target) {
-        const top = target.getBoundingClientRect().top + window.pageYOffset - 90;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - 88;
         window.scrollTo({ top, behavior: "smooth" });
         history.pushState(null, "", href);
       }
@@ -151,40 +169,72 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         e.preventDefault();
         const target = document.querySelector(`#${hash}`);
         if (target) {
-          const top = target.getBoundingClientRect().top + window.pageYOffset - 90;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - 88;
           window.scrollTo({ top, behavior: "smooth" });
           history.pushState(null, "", `#${hash}`);
         }
-        setMenuOpen(false);
-      } else {
-        setMenuOpen(false);
       }
+      setMenuOpen(false);
     } else {
       setMenuOpen(false);
     }
   };
 
+  const renderPillLink = (item: (typeof menuItems)[number]) => {
+    const isActive =
+      (isLifestylePage &&
+        item.label === "Overview" &&
+        (pathname === "/projects/lifestyle-homes" || activeHref === "/projects/lifestyle-homes")) ||
+      (!isLifestylePage && item.label === "Overview" && (pathname === "/" || activeHref === "/")) ||
+      (item.href === "/blogs" && pathname === "/blogs") ||
+      (item.href === "/projects" && pathname === "/projects") ||
+      (item.href === "/about" && pathname === "/about");
+
+    return (
+      <a
+        key={item.label}
+        href={item.href}
+        className={`${styles.navPill} roll-button${isActive ? ` ${styles.navPillActive}` : ""}`}
+        onClick={(e) => handleNavClick(e, item.href)}
+      >
+        <span className="roll-text" data-text={item.label}>
+          {item.label}
+        </span>
+      </a>
+    );
+  };
+
   return (
     <>
-      <nav className={styles.nav}>
+      <header
+        className={`${styles.nav}${scrolled ? ` ${styles.navScrolled}` : ""}${
+          theme === "light" && scrolled ? ` ${styles.navLight}` : ""
+        }`}
+      >
+        {/* Left Navigation Pills */}
+        <nav className={styles.leftLinks} aria-label="Primary sections">
+          {leftItems.map(renderPillLink)}
+        </nav>
+
+        {/* Centered Compact Brand Lockup */}
         <Link
           href={isLifestylePage ? "/projects/lifestyle-homes" : "/"}
           className={styles.logo}
-          aria-label={isLifestylePage ? "Lifestyle Homes — Home" : "Aura & Lifestyle — Home"}
+          aria-label={isLifestylePage ? "Lifestyle Home Spaces — Home" : "Aura by Lifestyle — Home"}
         >
           {isLifestylePage ? (
             <img
               src="/lifestyle-homes-logo.png"
-              alt="Lifestyle Homes"
+              alt="Lifestyle Home Spaces"
               className={styles.lifestyleLogoImg}
             />
           ) : (
             <>
               <img
                 src="/aura/aura-logo-official.png"
-                alt="Aura & Lifestyle Emblem"
-                width={46}
-                height={46}
+                alt="Aura by Lifestyle emblem"
+                width={38}
+                height={38}
                 className={styles.logoImg}
               />
               <span className={styles.logoLockup}>
@@ -195,263 +245,249 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           )}
         </Link>
 
-        <div className={styles.menuCapsule}>
-          {menuItems.map((item, idx) => {
-            const isActive =
-              (isLifestylePage && item.label === "Overview" && (pathname === "/projects/lifestyle-homes" || activeHref === "/projects/lifestyle-homes")) ||
-              (!isLifestylePage && item.label === "Overview" && (pathname === "/" || activeHref === "/")) ||
-              (item.href === "/blogs" && pathname === "/blogs") ||
-              (item.href === "/projects" && pathname === "/projects") ||
-              (item.href === "/about" && pathname === "/about");
-
-            const className = `${styles.menuItem}${isActive ? ` ${styles.menuItemActive}` : ""}`;
-
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                className={className}
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </a>
-            );
-          })}
-        </div>
-
+        {/* Right Navigation Pills + Enquiry + Theme & Member Controls */}
         <div className={styles.navActions}>
+          <div className={styles.rightLinks}>{rightItems.slice(0, 2).map(renderPillLink)}</div>
+
           {currentUser ? (
-            <>
-              {/* Button 1: Enquire */}
+            <div className={styles.userMenuWrapper} ref={userMenuRef}>
               <button
                 type="button"
-                className={styles.btnContact}
-                onClick={() => setIsEnquiryOpen(true)}
-                aria-label="Open project enquiry form"
+                className={`${styles.coolUserBtn} ${userMenuOpen ? styles.coolUserBtnActive : ""}`}
+                onClick={() => setUserMenuOpen((open) => !open)}
+                aria-expanded={userMenuOpen}
+                aria-label={`Member profile for ${currentUser.name || "Member"}`}
               >
-                Enquire
+                <span className={styles.coolAvatar}>
+                  {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
+                </span>
+                <span className={styles.coolUserName}>
+                  {currentUser.name ? currentUser.name.trim().split(" ")[0] : "Member"}
+                </span>
+                <span className={styles.coolStatusDot} aria-hidden="true" />
               </button>
 
-              {/* Button 2: Cool User Name Button with Interactive Profile Card */}
-              <div className={styles.userMenuWrapper} ref={userMenuRef}>
-                <button
-                  type="button"
-                  className={`${styles.coolUserBtn} ${userMenuOpen ? styles.coolUserBtnActive : ""}`}
-                  onClick={() => setUserMenuOpen((open) => !open)}
-                  aria-expanded={userMenuOpen}
-                  aria-label={`User menu for ${currentUser.name || "Member"}`}
-                  title={currentUser.name ? `Logged in as ${currentUser.name}` : "Member Profile"}
-                >
-                  <span className={styles.coolAvatar}>
-                    {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
-                  </span>
-                  <span className={styles.coolUserName}>
-                    {currentUser.name ? currentUser.name.trim().split(" ")[0] : "Member"}
-                  </span>
-                  <span className={styles.coolStatusDot} aria-hidden="true" />
-                  <svg
-                    className={`${styles.coolChevron} ${userMenuOpen ? styles.coolChevronOpen : ""}`}
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </button>
-
-                {/* Cool Luxury User Dropdown Card */}
-                {userMenuOpen && (
-                  <div className={styles.userDropdownCard}>
-                    <div className={styles.userDropdownHeader}>
-                      <div className={styles.userDropdownAvatarLarge}>
-                        {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
-                      </div>
-                      <div className={styles.userDropdownMeta}>
-                        <div className={styles.userDropdownFullName}>
-                          {currentUser.name || "Lifestyle Resident"}
-                        </div>
-                        {currentUser.phone && (
-                          <div className={styles.userDropdownPhone}>
-                            +91 {currentUser.phone.replace(/^(\+?91)/, "").replace(/(\d{5})(\d{5})/, "$1 $2")}
-                          </div>
-                        )}
-                        <span className={styles.userDropdownBadge}>
-                          ✦ Verified Member
-                        </span>
-                      </div>
+              {userMenuOpen && (
+                <div className={styles.userDropdownCard}>
+                  <div className={styles.userDropdownHeader}>
+                    <div className={styles.userDropdownAvatarLarge}>
+                      {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
                     </div>
-
-                    <div className={styles.userDropdownDivider} />
-
-                    <div className={styles.userDropdownActions}>
-                      <button
-                        type="button"
-                        className={styles.userDropdownItem}
-                        onClick={() => {
-                          setUserMenuOpen(false);
-                          setIsEnquiryOpen(true);
-                        }}
-                      >
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                        </svg>
-                        <span>Submit Online Enquiry</span>
-                      </button>
-
-                      <Link
-                        href="/projects"
-                        className={styles.userDropdownItem}
-                        onClick={() => setUserMenuOpen(false)}
-                      >
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        </svg>
-                        <span>Explore All Projects</span>
-                      </Link>
-
-                      <button
-                        type="button"
-                        className={`${styles.userDropdownItem} ${styles.userDropdownSignOut}`}
-                        onClick={() => {
-                          try {
-                            localStorage.removeItem("lifestyle_verified_user");
-                            hasDismissedLoginThisLoad = false;
-                            setCurrentUser(null);
-                            setUserMenuOpen(false);
-                            window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
-                          } catch {}
-                        }}
-                      >
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                          <polyline points="16 17 21 12 16 7" />
-                          <line x1="21" x2="9" y1="12" y2="12" />
-                        </svg>
-                        <span>Sign Out</span>
-                      </button>
+                    <div className={styles.userDropdownMeta}>
+                      <div className={styles.userDropdownFullName}>
+                        {currentUser.name || "Lifestyle Member"}
+                      </div>
+                      {currentUser.phone && (
+                        <div className={styles.userDropdownPhone}>
+                          +91 {currentUser.phone.replace(/^(\+?91)/, "").replace(/(\d{5})(\d{5})/, "$1 $2")}
+                        </div>
+                      )}
+                      <span className={styles.userDropdownBadge}>✦ Verified Member</span>
                     </div>
                   </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <>
-              {/* Unauthenticated: Sign In + Enquire Now */}
-              <button
-                type="button"
-                className={styles.btnSignIn}
-                onClick={() => setIsAuthOpen(true)}
-                title="Member Sign In via Mobile OTP"
-              >
-                Sign In
-              </button>
 
-              <button
-                type="button"
-                className={styles.btnContact}
-                onClick={() => setIsEnquiryOpen(true)}
-                aria-label="Open project enquiry form"
-              >
-                Enquire Now
-              </button>
-            </>
-          )}
+                  <div className={styles.userDropdownDivider} />
 
-          <button
-            className={styles.mobileToggle}
-            aria-label="Toggle navigation menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </svg>
-            )}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Drawer Menu */}
-      {menuOpen && (
-        <div className={styles.mobileMenu}>
-          {currentUser && (
-            <div className={styles.mobileUserCard}>
-              <div className={styles.coolAvatar}>
-                {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
-              </div>
-              <div className={styles.mobileUserMeta}>
-                <span className={styles.mobileUserName}>{currentUser.name || "Member"}</span>
-                <span className={styles.mobileUserBadge}>✓ Verified Resident</span>
-              </div>
-              <button
-                type="button"
-                className={styles.mobileSignOutBtn}
-                onClick={() => {
-                  try {
-                    localStorage.removeItem("lifestyle_verified_user");
-                    hasDismissedLoginThisLoad = false;
-                    setCurrentUser(null);
-                    setMenuOpen(false);
-                    window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
-                  } catch {}
-                }}
-              >
-                Sign Out
-              </button>
+                  <div className={styles.userDropdownActions}>
+                    <button
+                      type="button"
+                      className={styles.userDropdownItem}
+                      onClick={() => {
+                        setUserMenuOpen(false);
+                        setIsEnquiryOpen(true);
+                      }}
+                    >
+                      <span>Schedule Private Visit</span>
+                    </button>
+                    <Link
+                      href="/projects"
+                      className={styles.userDropdownItem}
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      <span>All Developments</span>
+                    </Link>
+                    <Link
+                      href="/about"
+                      className={styles.userDropdownItem}
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      <span>About Lifestyle</span>
+                    </Link>
+                    <button
+                      type="button"
+                      className={`${styles.userDropdownItem} ${styles.userDropdownSignOut}`}
+                      onClick={() => {
+                        try {
+                          localStorage.removeItem("lifestyle_verified_user");
+                          hasDismissedLoginThisLoad = false;
+                          setCurrentUser(null);
+                          setUserMenuOpen(false);
+                          window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
+                        } catch {}
+                      }}
+                    >
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-
-          {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-            >
-              {item.label}
-            </a>
-          ))}
-
-          {!currentUser && (
+          ) : (
             <button
               type="button"
-              className={styles.mobileSignInBtn}
-              onClick={() => {
-                setMenuOpen(false);
-                setIsAuthOpen(true);
-              }}
+              className={`${styles.btnSignIn} roll-button`}
+              onClick={() => setIsAuthOpen(true)}
             >
-              Sign In
+              <span className="roll-text" data-text="Sign In">
+                Sign In
+              </span>
             </button>
           )}
 
           <button
             type="button"
-            className={styles.mobileContactBtn}
-            onClick={() => {
-              setMenuOpen(false);
-              setIsEnquiryOpen(true);
-            }}
+            className={`${styles.btnContact} roll-button`}
+            onClick={() => setIsEnquiryOpen(true)}
+            aria-label="Open project enquiry form"
           >
-            Enquire Now
+            <span className="roll-text" data-text="Enquire Now">
+              Enquire Now
+            </span>
           </button>
+
+          <button
+            type="button"
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to warm ivory theme" : "Switch to charcoal dark theme"}
+            aria-pressed={theme === "light"}
+            title={theme === "dark" ? "Warm Ivory Theme" : "Charcoal Dark Theme"}
+          >
+            {theme === "dark" ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              </svg>
+            ) : (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              </svg>
+            )}
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileToggle}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <line x1="4" y1="8" x2="20" y2="8" />
+                <line x1="4" y1="16" x2="20" y2="16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Navigation Drawer */}
+      {menuOpen && (
+        <div className={styles.mobileBackdrop} onClick={() => setMenuOpen(false)}>
+          <div
+            className={styles.mobileMenu}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-label="Mobile Navigation"
+          >
+            <div className={styles.mobileMenuTop}>
+              <span className={styles.mobileEyebrow}>NAVIGATION · AMRAVATI</span>
+              <button
+                type="button"
+                className={styles.mobileThemeBtn}
+                onClick={toggleTheme}
+              >
+                {theme === "dark" ? "☀ Ivory Mode" : "☾ Dark Mode"}
+              </button>
+            </div>
+
+            {currentUser && (
+              <div className={styles.mobileUserCard}>
+                <div className={styles.coolAvatar}>
+                  {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
+                </div>
+                <div className={styles.mobileUserMeta}>
+                  <span className={styles.mobileUserName}>{currentUser.name || "Member"}</span>
+                  <span className={styles.mobileUserBadge}>✦ Verified Member</span>
+                </div>
+                <button
+                  type="button"
+                  className={styles.mobileSignOutBtn}
+                  onClick={() => {
+                    try {
+                      localStorage.removeItem("lifestyle_verified_user");
+                      hasDismissedLoginThisLoad = false;
+                      setCurrentUser(null);
+                      setMenuOpen(false);
+                      window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
+                    } catch {}
+                  }}
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+
+            <div className={styles.mobileLinkList}>
+              {menuItems.map((item, idx) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={styles.mobileLink}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                >
+                  <span className={styles.mobileLinkIndex}>0{idx + 1}</span>
+                  <span>{item.label}</span>
+                  <span className={styles.mobileLinkArrow} aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+
+            <div className={styles.mobileDrawerActions}>
+              {!currentUser && (
+                <button
+                  type="button"
+                  className={styles.mobileSignInBtn}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setIsAuthOpen(true);
+                  }}
+                >
+                  Member Sign In
+                </button>
+              )}
+
+              <button
+                type="button"
+                className={styles.mobileContactBtn}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setIsEnquiryOpen(true);
+                }}
+              >
+                Enquire Now →
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Global WhatsApp OTP Modal */}
       <AuthOtpModal
         isOpen={isAuthOpen}
         onClose={() => {
@@ -464,7 +500,6 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         }}
       />
 
-      {/* Global Short Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}

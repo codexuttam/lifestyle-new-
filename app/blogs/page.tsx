@@ -161,7 +161,7 @@ export default function BlogsPage() {
               fontSize: "clamp(2.1rem, 4.5vw, 3.4rem)",
               fontWeight: 800,
               lineHeight: 1.2,
-              background: "linear-gradient(135deg, #ffffff 50%, var(--color-wine, #c21a22) 100%)",
+              background: "linear-gradient(135deg, #ffffff 50%, var(--color-wine, #bf953f) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               marginBottom: "1.1rem",
@@ -203,13 +203,13 @@ export default function BlogsPage() {
                   gap: "0.65rem",
                   padding: "0.9rem 1.8rem",
                   borderRadius: "9999px",
-                  background: "var(--color-wine, #c21a22)",
+                  background: "var(--color-wine, #bf953f)",
                   color: "#ffffff",
                   fontWeight: 800,
                   fontSize: "0.92rem",
                   border: "none",
                   cursor: "pointer",
-                  boxShadow: "0 8px 24px rgba(194, 26, 34, 0.35)",
+                  boxShadow: "0 8px 24px rgba(191, 149, 63, 0.35)",
                   transition: "transform 0.2s ease, box-shadow 0.2s ease",
                   textTransform: "uppercase",
                   letterSpacing: "0.5px",
@@ -223,13 +223,13 @@ export default function BlogsPage() {
                   textAlign: "left",
                   fontSize: "0.78rem",
                   fontFamily: "monospace",
-                  borderLeft: "2px solid rgba(194, 26, 34, 0.4)",
+                  borderLeft: "2px solid rgba(191, 149, 63, 0.4)",
                   paddingLeft: "1rem",
                   color: "rgba(255, 255, 255, 0.75)",
                 }}
               >
                 <div style={{ color: "#ffffff", fontWeight: 700 }}>Administrator Session Active</div>
-                <div style={{ color: "#c21a22" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
+                <div style={{ color: "#bf953f" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
               </div>
 
               <button
@@ -276,8 +276,8 @@ export default function BlogsPage() {
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",
-                    backgroundColor: "#c21a22",
-                    boxShadow: "0 0 8px rgba(194, 26, 34, 0.7)",
+                    backgroundColor: "#bf953f",
+                    boxShadow: "0 0 8px rgba(191, 149, 63, 0.7)",
                   }}
                 />
                 Official Lifestyle Home Spaces Publications · MahaRERA Verified
@@ -334,10 +334,10 @@ export default function BlogsPage() {
                     padding: "0.45rem 1rem",
                     borderRadius: "9999px",
                     background: isActive
-                      ? "var(--color-wine, #c21a22)"
+                      ? "var(--color-wine, #bf953f)"
                       : "transparent",
                     border: isActive
-                      ? "1px solid var(--color-wine, #c21a22)"
+                      ? "1px solid var(--color-wine, #bf953f)"
                       : "1px solid rgba(255, 255, 255, 0.12)",
                     color: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.7)",
                     fontSize: "0.85rem",
@@ -427,8 +427,8 @@ export default function BlogsPage() {
               style={{
                 padding: "0.6rem 1.4rem",
                 borderRadius: "9999px",
-                background: "rgba(194, 26, 34, 0.2)",
-                border: "1px solid #c21a22",
+                background: "rgba(191, 149, 63, 0.2)",
+                border: "1px solid #bf953f",
                 color: "#ffffff",
                 fontWeight: 600,
                 cursor: "pointer",
@@ -463,8 +463,8 @@ export default function BlogsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.borderColor = "rgba(194, 26, 34, 0.6)";
-                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(194, 26, 34, 0.25)";
+                  e.currentTarget.style.borderColor = "rgba(191, 149, 63, 0.6)";
+                  e.currentTarget.style.boxShadow = "0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(191, 149, 63, 0.25)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
@@ -603,7 +603,7 @@ export default function BlogsPage() {
                       justifyContent: "space-between",
                       paddingTop: "1rem",
                       borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                      color: "var(--color-wine, #c21a22)",
+                      color: "var(--color-wine, #bf953f)",
                       fontWeight: 600,
                       fontSize: "0.88rem",
                     }}
@@ -647,11 +647,11 @@ export default function BlogsPage() {
             style={{
               width: "100%",
               maxWidth: "440px",
-              background: "linear-gradient(135deg, #0a1428 0%, #050a16 100%)",
-              border: "1px solid rgba(194, 26, 34, 0.4)",
+              background: "linear-gradient(135deg, #101210 0%, #050a16 100%)",
+              border: "1px solid rgba(191, 149, 63, 0.4)",
               borderRadius: "20px",
               padding: "2rem",
-              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(194, 26, 34, 0.2)",
+              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(191, 149, 63, 0.2)",
               color: "#ffffff",
               position: "relative",
             }}
@@ -686,14 +686,14 @@ export default function BlogsPage() {
                   width: "50px",
                   height: "50px",
                   borderRadius: "50%",
-                  background: "rgba(194, 26, 34, 0.15)",
-                  border: "1px solid rgba(194, 26, 34, 0.35)",
+                  background: "rgba(191, 149, 63, 0.15)",
+                  border: "1px solid rgba(191, 149, 63, 0.35)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: "1.4rem",
                   margin: "0 auto 0.8rem",
-                  color: "#c21a22",
+                  color: "#bf953f",
                 }}
               >
                 🔐
@@ -742,13 +742,13 @@ export default function BlogsPage() {
                 style={{
                   padding: "12px 20px",
                   borderRadius: "9999px",
-                  background: "var(--color-wine, #c21a22)",
+                  background: "var(--color-wine, #bf953f)",
                   color: "#ffffff",
                   fontWeight: 800,
                   fontSize: "0.92rem",
                   border: "none",
                   cursor: "pointer",
-                  boxShadow: "0 4px 18px rgba(194, 26, 34, 0.35)",
+                  boxShadow: "0 4px 18px rgba(191, 149, 63, 0.35)",
                   textTransform: "uppercase",
                   letterSpacing: "0.5px",
                 }}

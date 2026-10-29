@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AuraFloorPlans.module.css";
 
 const PLANS = [
   {
     id: "2bhk",
-    label: "2 BHK Luxury Cut Section",
+    index: "01",
+    label: "2 BHK Cut Section",
     badge: "1,150 SQFT",
     title: "2 BHK Smart Luxury Residence",
-    subtitle: "Commanding views, dual balconies & zero wasted circulation",
+    subtitle: "Commanding skyline views, dual balconies & zero wasted circulation",
     image: "/aura/plan-2bhk-cutsection.jpg",
     specs: [
       { room: "Living Room", dim: "11'0\" × 17'0\"" },
@@ -23,17 +24,18 @@ const PLANS = [
     ],
     features: [
       "Isometric 3D Cut Section & Top Architectural View",
-      "Private Master Suite with Dedicated Toilet (5'0\" x 9'0\")",
-      "3-Track Powder Coated Windows with MS Grills",
-      "Concealed Jaquar or Equivalent Fittings",
+      "Private Master Suite with Dedicated Toilet (5'0\" × 9'0\")",
+      "3-Track Powder Coated Windows with MS Safety Grills",
+      "Concealed Jaquar or Equivalent Designer Fittings",
     ],
   },
   {
     id: "3bhk",
+    index: "02",
     label: "3 BHK Royal Cut Section",
     badge: "1,650 SQFT",
     title: "3 BHK Royal Skyline Residence",
-    subtitle: "Grand multi-balcony suite designed for expansive hospitality",
+    subtitle: "Grand multi-balcony suite designed for expansive family hospitality",
     image: "/aura/plan-3bhk-cutsection.jpg",
     specs: [
       { room: "Grand Living Room", dim: "11'0\" × 18'6\"" },
@@ -48,16 +50,17 @@ const PLANS = [
     features: [
       "Palatial Living and Dining Core with Cross-Ventilation",
       "3 Well-Appointed Bathrooms with Anti-Skid Vitrified Tiles",
-      "Separate Washing and Utility Balcony (9'0\" x 5'6\")",
+      "Separate Washing and Utility Balcony (9'0\" × 5'6\")",
       "Provision for Inverter & Split AC in All Bedrooms",
     ],
   },
   {
     id: "rooftop",
+    index: "03",
     label: "Rooftop Sky Oasis",
-    badge: "SKY LEVEL",
+    badge: "LEVEL 15",
     title: "Skyline Leisure & Multi-Sports Deck",
-    subtitle: "Rooftop swimming, box cricket, and viewing promenade",
+    subtitle: "Rooftop lap pool, enclosed box cricket turf & sunset viewing promenade",
     image: "/aura/rooftop-sky-thrills-map.jpg",
     specs: [
       { room: "Swimming Pool", dim: "Lap & Leisure Pool" },
@@ -66,36 +69,37 @@ const PLANS = [
       { room: "Viewing Deck", dim: "Panoramic Skyline Seating" },
       { room: "Fitness Track", dim: "Rooftop Jogging Loop" },
       { room: "Party Lawn", dim: "Open-Air Gathering Zone" },
-      { room: "Solar Power", dim: "Common Area Renewable System" },
+      { room: "Solar Power", dim: "Common Area Renewable Grid" },
       { room: "Elevators", dim: "4 Elevators with Gen Backup" },
     ],
     features: [
-      "Stunning 360-Degree Views Across Amravati & Melghat Horizon",
-      "Dedicated Changing Rooms & Shower Areas",
-      "Acoustic Glass Railings for Maximum Sky Safety",
-      "Solar Panel System for Eco-Friendly Common Energy",
+      "Uninterrupted 360-Degree Views Across Amravati & Melghat Horizon",
+      "Dedicated Changing Rooms & Poolside Shower Suites",
+      "Safety Balustrades & Architectural Evening Lighting",
+      "Solar Panel System Powering Common Utilities",
     ],
   },
   {
     id: "typical",
-    label: "Typical Floor Plan",
-    badge: "LEVELS 1 - 14",
+    index: "04",
+    label: "Typical Floor Plate",
+    badge: "LEVELS 1 – 14",
     title: "Typical Architectural Floor Plate",
-    subtitle: "Optimum cross-ventilation, 4 high-speed elevators & wide designer lobbies",
+    subtitle: "Optimum cross-ventilation, 4 high-speed elevators & wide designer corridors",
     image: "/aura/typical-floor-plan.jpg",
     specs: [
       { room: "Floor Plate", dim: "Levels 1 to 14" },
       { room: "Configurations", dim: "2 & 3 BHK Luxury Suites" },
-      { room: "Circulation", dim: "Wide Lobbies & Safe Corridors" },
-      { room: "Lifts", dim: "4 High-Speed Passenger Elevators" },
-      { room: "Staircases", dim: "Dual Fire & Service Staircases" },
-      { room: "Ventilation", dim: "360° Open Air Cross-Ventilation" },
+      { room: "Circulation", dim: "Wide Lobbies & Corridors" },
+      { room: "Lifts", dim: "4 High-Speed Passenger Lifts" },
+      { room: "Staircases", dim: "Dual Fire & Service Stairs" },
+      { room: "Ventilation", dim: "360° Open Cross-Ventilation" },
       { room: "Balconies", dim: "Private Sit-Out Balconies" },
       { room: "Compliance", dim: "100% Vastu Compliant Layout" },
     ],
     features: [
       "Master Architectural Floor Layout for Floors 1 to 14",
-      "No Common Wall Sharing for Optimal Acoustic Privacy",
+      "No Common Wall Sharing for Superior Acoustic Privacy",
       "Dedicated Service Ducts and Concealed Fire-Fighting Network",
       "Emergency Evacuation Corridors & Stretcher Lift Access",
     ],
@@ -104,28 +108,41 @@ const PLANS = [
 
 export default function AuraFloorPlans() {
   const [activeTab, setActiveTab] = useState(0);
+  const [zoomOpen, setZoomOpen] = useState(false);
   const plan = PLANS[activeTab];
+
+  useEffect(() => {
+    if (!zoomOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoomOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoomOpen]);
 
   return (
     <section className={styles.section} id="floor-plans">
       <div className={styles.container}>
         <div className={styles.header}>
+          <span className={styles.eyebrow}>ARCHITECTURAL CUT-SECTIONS &amp; DIMENSIONS</span>
           <h2 className={styles.title}>
-            Masterfully Planned For <span>Identity & Distinction</span>
+            MASTERFULLY PLANNED FOR <span>IDENTITY &amp; DISTINCTION</span>
           </h2>
           <p className={styles.subtitle}>
-            Explore authentic cut-sections and dimensions straight from the official Aura brochure. Every layout is 100% Vastu-compliant with maximum light and cross-ventilation.
+            Inspect authentic isometric cut-sections and room dimensions from the official Aura brochure. Every residence is 100% Vastu-aligned for natural daylight and airflow.
           </p>
 
-          {/* Navigation Tabs */}
-          <div className={styles.tabs}>
+          <div className={styles.tabs} role="tablist" aria-label="Aura floor plans">
             {PLANS.map((item, idx) => (
               <button
                 key={item.id}
                 type="button"
-                className={`${styles.tabBtn} ${activeTab === idx ? styles.activeTab : ""}`}
+                role="tab"
+                aria-selected={activeTab === idx}
+                className={`${styles.tabBtn}${activeTab === idx ? ` ${styles.activeTab}` : ""}`}
                 onClick={() => setActiveTab(idx)}
               >
+                <span className={styles.tabIndex}>{item.index}</span>
                 <span>{item.label}</span>
                 <span className={styles.tabBadge}>{item.badge}</span>
               </button>
@@ -133,27 +150,33 @@ export default function AuraFloorPlans() {
           </div>
         </div>
 
-        {/* Plan Display Card */}
+        {/* Interactive Floor Plan Inspection Card */}
         <div className={styles.displayCard}>
           <div className={styles.imageCol}>
-            <div className={styles.imageWrapper}>
+            <button
+              type="button"
+              className={styles.imageWrapper}
+              onClick={() => setZoomOpen(true)}
+              aria-label={`Enlarge ${plan.title} architectural drawing`}
+            >
               <img
                 src={plan.image}
                 alt={plan.title}
                 className={styles.planImg}
+                loading="lazy"
               />
-              <div className={styles.imageTag}>{plan.badge}</div>
-            </div>
+              <span className={styles.imageTag}>{plan.badge}</span>
+              <span className={styles.zoomHint}>⊕ Tap to enlarge drawing</span>
+            </button>
           </div>
 
           <div className={styles.detailsCol}>
             <div className={styles.detailsHeader}>
-              <span className={styles.planCategory}>Official Cut Section</span>
+              <span className={styles.planCategory}>OFFICIAL BROCHURE PLATE · {plan.index}</span>
               <h3 className={styles.planTitle}>{plan.title}</h3>
               <p className={styles.planSubtitle}>{plan.subtitle}</p>
             </div>
 
-            {/* Room Dimensions Grid */}
             <div className={styles.specsGrid}>
               {plan.specs.map((s) => (
                 <div key={s.room} className={styles.specItem}>
@@ -163,15 +186,12 @@ export default function AuraFloorPlans() {
               ))}
             </div>
 
-            {/* Key Highlights */}
             <div className={styles.highlightsBox}>
-              <h4 className={styles.highlightsTitle}>Architectural Highlights</h4>
+              <h4 className={styles.highlightsTitle}>ARCHITECTURAL SPECIFICATIONS</h4>
               <ul className={styles.highlightsList}>
-                {plan.features.map((f, i) => (
-                  <li key={i}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-wine, #c21a22)" strokeWidth="2.5">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+                {plan.features.map((f) => (
+                  <li key={f}>
+                    <span className={styles.checkMark} aria-hidden="true">✦</span>
                     <span>{f}</span>
                   </li>
                 ))}
@@ -183,44 +203,57 @@ export default function AuraFloorPlans() {
                 href="https://wa.me/917498256708?text=Hello%20Lifestyle%20Homes,%20I%20am%20interested%20in%20Aura%20floor%20plans%20and%20pricing."
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.whatsappBtn}
+                className={`${styles.whatsappBtn} roll-button`}
               >
-                <span>Request Detailed Floor Plan PDF</span>
+                <span className="roll-text" data-text="Request Detailed Floor Plan PDF →">
+                  Request Detailed Floor Plan PDF →
+                </span>
               </a>
-              <a href="/contact" className={styles.visitBtn}>
-                Book Site Preview
-              </a>
+              <button
+                type="button"
+                className={`${styles.visitBtn} roll-button`}
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent("lifestyle_open_enquiry", {
+                      detail: { project: "Aura by Lifestyle", source: `Floor Plans - ${plan.title}` },
+                    })
+                  )
+                }
+              >
+                <span className="roll-text" data-text="Book Site Preview">
+                  Book Site Preview
+                </span>
+              </button>
             </div>
-          </div>
-        </div>
-
-        {/* Location & Connectivity Banner */}
-        <div className={styles.locationBanner}>
-          <div className={styles.locationContent}>
-            <h3 className={styles.locationTitle}>
-              Because Aura Connects You To Everything
-            </h3>
-            <p className={styles.locationDesc}>
-              Located in Congress Nagar, Aura places you at the center of convenience with seamless connectivity to schools, shopping malls, hospitals, and transit hubs.
-            </p>
-            <div className={styles.distanceChips}>
-              <span className={styles.chip}>🏥 Hospitals — 5 min</span>
-              <span className={styles.chip}>🎓 Colleges — 5 min</span>
-              <span className={styles.chip}>🏫 Schools — 6 min</span>
-              <span className={styles.chip}>🛍️ Shopping Malls & D-Mart — 7 min</span>
-              <span className={styles.chip}>🚆 Amravati Railway Station — 8 min</span>
-              <span className={styles.chip}>🌳 Oxygen Park — Walking Distance</span>
-            </div>
-          </div>
-          <div className={styles.locationMapWrapper}>
-            <img
-              src="/aura/location-connectivity-map.jpg"
-              alt="Aura Congress Nagar Location Map"
-              className={styles.mapImg}
-            />
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Drawing Lightbox */}
+      {zoomOpen && (
+        <div
+          className={styles.lightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={plan.title}
+          onClick={() => setZoomOpen(false)}
+        >
+          <button
+            type="button"
+            className={styles.lightboxClose}
+            onClick={() => setZoomOpen(false)}
+            aria-label="Close enlarged floor plan"
+          >
+            ✕ Close
+          </button>
+          <img
+            src={plan.image}
+            alt={plan.title}
+            className={styles.lightboxImg}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }

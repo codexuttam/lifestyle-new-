@@ -2,7 +2,7 @@
 
 .page {
   --bg: #050a16;
-  --surface: #0a1428;
+  --surface: #101210;
   --surface-alt: #1a335c;
   --surface-sunk: #050a16;
 
@@ -11,14 +11,14 @@
   --text-muted: #a0bee8;
 
   /* Ink states (active toggles, focus rings) go wine red, matching Lotlite SIEC theme */
-  --accent-ink: #c21a22;
-  --accent: #c21a22;
+  --accent-ink: #bf953f;
+  --accent: #bf953f;
   --accent-strong: #d32029;
-  --accent-soft: rgba(194, 26, 34, 0.4);
-  --accent-wash: rgba(194, 26, 34, 0.14);
+  --accent-soft: rgba(191, 149, 63, 0.4);
+  --accent-wash: rgba(191, 149, 63, 0.14);
 
   --border: rgba(255, 255, 255, 0.15);
-  --border-strong: rgba(194, 26, 34, 0.5);
+  --border-strong: rgba(191, 149, 63, 0.5);
 
   --radius: 14px;
   --radius-lg: 26px;
@@ -27,7 +27,7 @@
   --font-playfair: var(--font-montserrat);
 
   width: 100%;
-  background: var(--bg-white-navy, linear-gradient(180deg, #ffffff 0%, #eef4fc 8%, #a0bee8 24%, #1a335c 52%, #0a1428 78%, #050a16 100%));
+  background: var(--bg-white-navy, linear-gradient(180deg, #ffffff 0%, #eef4fc 8%, #a0bee8 24%, #1a335c 52%, #101210 78%, #050a16 100%));
   color: #f5f6f8;
   padding: 140px 120px 96px;
   min-height: 100vh;
@@ -57,22 +57,22 @@
   gap: 10px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(194, 26, 34, 0.08);
-  border: 1px solid rgba(194, 26, 34, 0.3);
+  background: rgba(191, 149, 63, 0.08);
+  border: 1px solid rgba(191, 149, 63, 0.3);
 }
 
 .badgeDot {
   width: 8px;
   height: 8px;
   border-radius: 9999px;
-  background: #c21a22;
-  box-shadow: 0 0 10px rgba(194, 26, 34, 0.6);
+  background: #bf953f;
+  box-shadow: 0 0 10px rgba(191, 149, 63, 0.6);
 }
 
 .badgeText {
   font-family: var(--font-montserrat), sans-serif;
   font-weight: 600;
-  color: #c21a22;
+  color: #bf953f;
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
