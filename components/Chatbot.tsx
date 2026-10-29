@@ -28,7 +28,6 @@ interface Message {
 interface Qualification {
   propertyType?: string;
   project?: string;
-  budget?: string;
   timeline?: string;
   contactMode?: "Callback" | "Site visit";
   preferredTime?: string;
@@ -72,7 +71,6 @@ function ChatLeadInlineForm({
 
     const preference = [
       qual.propertyType,
-      qual.budget ? `Budget: ${qual.budget}` : null,
       qual.timeline ? `Timeline: ${qual.timeline}` : null,
     ]
       .filter(Boolean)
@@ -81,7 +79,6 @@ function ChatLeadInlineForm({
     const message = [
       qual.contactMode ? `Mode: ${qual.contactMode}` : null,
       qual.preferredTime ? `Preferred Time: ${qual.preferredTime}` : null,
-      qual.budget ? `Budget: ${qual.budget}` : null,
       qual.timeline ? `Buying Timeline: ${qual.timeline}` : null,
     ]
       .filter(Boolean)
@@ -260,17 +257,6 @@ export default function Chatbot() {
   const selectProject = (project: string) => {
     qualRef.current.project = project;
     reply(project, {
-      text: "Great! What's your preferred budget?",
-      options: ["Under ₹40 lakh", "₹40–50 lakh", "₹50 lakh+", "Not decided yet"].map((b) => ({
-        label: b,
-        action: () => selectBudget(b),
-      })),
-    });
-  };
-
-  const selectBudget = (budget: string) => {
-    qualRef.current.budget = budget;
-    reply(budget, {
       text: "When are you planning to buy?",
       options: ["Immediately", "Within 3 months", "3–6 months", "Just exploring"].map((t) => ({
         label: t,
