@@ -9,6 +9,7 @@ interface EnquiryModalProps {
   onClose: () => void;
   projectTitle?: string;
   defaultPreference?: string;
+  source?: string;
 }
 
 export default function EnquiryModal({
@@ -16,6 +17,7 @@ export default function EnquiryModal({
   onClose,
   projectTitle = "Aura by Lifestyle",
   defaultPreference = "2 & 3 BHK Luxury Residences",
+  source = "Website Enquiry Form",
 }: EnquiryModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -69,7 +71,7 @@ export default function EnquiryModal({
         email: email.trim() || undefined,
         project: projectTitle,
         preference: defaultPreference,
-        source: "Website Enquiry Form",
+        source: source || "Website Enquiry Form",
       });
 
       if (!result.ok) {

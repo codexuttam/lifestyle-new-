@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import EnquiryModal from "@/components/EnquiryModal";
 import styles from "./VslSection.module.css";
 
@@ -29,6 +30,7 @@ export default function VslSection({
   id = "vsl",
   project = "Lifestyle Home Spaces",
   preference = "Ready Possession 2 & 3 BHK",
+  source,
   videoSrc,
   poster,
   eyebrow = "",
@@ -146,6 +148,14 @@ export default function VslSection({
                 {secondaryCta}
               </span>
             </button>
+            <Link
+              href="/contact"
+              className={`${styles.contactLinkCta} roll-button`}
+            >
+              <span className="roll-text" data-text="Contact Sales Desk →">
+                Contact Sales Desk →
+              </span>
+            </Link>
           </div>
         </div>
       </div>
@@ -156,6 +166,7 @@ export default function VslSection({
         onClose={handleClose}
         projectTitle={project}
         defaultPreference={activePreference}
+        source={source || `VSL Popup (${project})`}
       />
     </section>
   );
