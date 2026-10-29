@@ -181,17 +181,17 @@
   line-height: 0.96;
   text-transform: uppercase;
   color: #f7efdc;
-  animation: slideUpFade 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: diagonalRevealLeft 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes slideUpFade {
-  from {
-    opacity: 0.25;
-    transform: translateY(12px);
+@keyframes diagonalRevealLeft {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(-30px, 24px, 0);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -201,12 +201,14 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #bf953f;
+  animation: diagonalRevealLeft 0.52s 0.04s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .stageDesc {
   font-size: 14px;
   line-height: 1.65;
   color: rgba(247, 239, 220, 0.74);
+  animation: diagonalRevealLeft 0.56s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .factList {
@@ -215,6 +217,7 @@
   flex-direction: column;
   gap: 7px;
   padding-top: 2px;
+  animation: diagonalRevealLeft 0.62s 0.12s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .factList li {
@@ -317,7 +320,7 @@
   background: #121412;
   box-shadow: 0 28px 68px rgba(0, 0, 0, 0.72);
   cursor: pointer;
-  transform-origin: center bottom;
+  transform-origin: 80% 85%;
   transition:
     transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.5s ease,

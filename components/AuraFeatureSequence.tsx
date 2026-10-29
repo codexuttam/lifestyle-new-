@@ -83,29 +83,29 @@ function getDeckTransform(idx: number, activeIdx: number) {
   const diff = idx - activeIdx;
   if (diff === 0) {
     return {
-      transform: "translate3d(0px, 0px, 0px) scale(1)",
+      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
       opacity: 1,
       zIndex: 30,
       filter: "brightness(1)",
     };
   }
-  // Upcoming cards sit below, sliding from down to up
+  // Upcoming cards glide in diagonally from bottom-right with 3D tilt
   if (diff > 0) {
     const clamped = Math.min(diff, 3);
     return {
-      transform: `translate3d(0px, ${clamped * 44}px, ${-clamped * 20}px) scale(${1 - clamped * 0.045})`,
-      opacity: diff > 2 ? 0 : Math.max(0.24, 0.84 - diff * 0.26),
+      transform: `translate3d(${clamped * 32}px, ${clamped * 20}px, ${-clamped * 48}px) rotateZ(${clamped * 2.8}deg) scale(${1 - clamped * 0.052})`,
+      opacity: diff > 3 ? 0 : Math.max(0.24, 0.85 - diff * 0.2),
       zIndex: 30 - diff,
-      filter: "brightness(0.65)",
+      filter: "brightness(0.62)",
     };
   }
-  // Past cards scale down and dim into background stack
+  // Past cards slide diagonally up-left into the background stack
   const abs = Math.min(Math.abs(diff), 2);
   return {
-    transform: `translate3d(0px, ${-abs * 22}px, ${-abs * 40}px) scale(${1 - abs * 0.06})`,
-    opacity: abs > 2 ? 0 : 0.38,
+    transform: `translate3d(${-abs * 34}px, ${-abs * 16}px, ${-abs * 60}px) rotateZ(${-abs * 2.8}deg) scale(${1 - abs * 0.06})`,
+    opacity: Math.abs(diff) > 2 ? 0 : 0.36,
     zIndex: 20 - abs,
-    filter: "brightness(0.55)",
+    filter: "brightness(0.5)",
   };
 }
 
@@ -201,8 +201,8 @@ export default function AuraFeatureSequence() {
             </div>
 
             <div className={styles.stageCard}>
-              {/* Left Narrative Synced to Active 3D Card */}
-              <div className={styles.stageCopy}>
+              {/* Left Narrative Synced to Active 3D Card (Animated Diagonally on Scroll) */}
+              <div className={styles.stageCopy} key={current.index}>
                 <div className={styles.stageMeta}>
                   <span className={styles.stageNumber}>({current.index})</span>
                 </div>
