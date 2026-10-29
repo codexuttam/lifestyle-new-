@@ -12,18 +12,14 @@ const LIFESTYLE_DESKTOP_LINKS = [
   { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans" },
   { label: "Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const DEFAULT_DESKTOP_LINKS = [
   { label: "Floor Plans", href: "/#floor-plans" },
   { label: "Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const LIFESTYLE_MOBILE_LINKS = [
@@ -33,9 +29,7 @@ const LIFESTYLE_MOBILE_LINKS = [
   { label: "Specifications", href: "/projects/lifestyle-homes#specifications" },
   { label: "All Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const DEFAULT_MOBILE_LINKS = [
@@ -44,9 +38,7 @@ const DEFAULT_MOBILE_LINKS = [
   { label: "Floor Plans", href: "/#floor-plans" },
   { label: "Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 let hasDismissedLoginThisLoad = false;
