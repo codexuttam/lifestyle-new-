@@ -20,10 +20,6 @@ export default async function AllProperties({
     <section className={styles.section} id="properties-all-show-section">
       <div className={styles.grid}>
         <div className={styles.leftCol}>
-          <div className={styles.label}>
-            <span className={styles.dot} aria-hidden="true" />
-            <span className={styles.labelText}>{content.label}</span>
-          </div>
           <h2 className={styles.heading}>{content.heading}</h2>
           <p className={styles.subheading}>
             Discover signature luxury highrise residences and delivered landmarks crafted with precision across Amravati.

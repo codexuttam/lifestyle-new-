@@ -8,11 +8,6 @@ export default function About({ content }: { content: HomeRecord["about"] }) {
   return (
     <section className={styles.about} id="about-us-section">
       <div className={styles.headerRow}>
-        <div className={styles.label}>
-          <span className={styles.dot} aria-hidden="true" />
-          <span className={styles.labelText}>{content.label}</span>
-        </div>
-
         <div className={styles.statement}>
           <h2 className={styles.heading}>{content.statement}</h2>
           <Link href="/about" className={styles.btnMore}>

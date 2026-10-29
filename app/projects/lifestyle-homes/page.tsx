@@ -252,11 +252,6 @@ export default async function LifestyleHomesPage() {
         {/* ============ ABOUT LIFESTYLE HOMES (Identical Aura Architecture) ============ */}
         <section className={aboutStyles.about} id="about-lifestyle-section">
           <div className={aboutStyles.headerRow}>
-            <div className={aboutStyles.label}>
-              <span className={aboutStyles.dot} aria-hidden="true" />
-              <span className={aboutStyles.labelText}>LIFESTYLE HOME SPACES</span>
-            </div>
-
             <div className={aboutStyles.statement}>
               <h2 className={aboutStyles.heading}>
                 Crafted For Peaceful Urban Living. 2 &amp; 3 BHK Vastu Residences &amp; 24 High-Street Showrooms.

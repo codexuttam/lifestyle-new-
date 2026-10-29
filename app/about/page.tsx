@@ -96,13 +96,6 @@ export default async function AboutPage() {
           <section className={styles.heroSection}>
             <div className={styles.heroGrid}>
               <div className={styles.heroContent}>
-                <div className={styles.badge}>
-                  <span className={styles.badgeDot} aria-hidden="true" />
-                  <span className={styles.badgeText}>
-                    {copy.badge || "About Lifestyle Home Spaces • Amravati"}
-                  </span>
-                </div>
-
                 <h1 className={styles.title}>
                   Redefining Urban Living{" "}
                   <span className={styles.titleGradient}>in Amravati</span>

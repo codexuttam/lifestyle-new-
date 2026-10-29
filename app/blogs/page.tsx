@@ -156,23 +156,6 @@ export default function BlogsPage() {
         
         {/* Header Hero Section */}
         <div style={{ textAlign: "center", maxWidth: "860px", margin: "0 auto 3.5rem" }}>
-          <span
-            style={{
-              display: "inline-block",
-              padding: "0.35rem 1.1rem",
-              borderRadius: "9999px",
-              background: "rgba(194, 26, 34, 0.15)",
-              border: "1px solid rgba(194, 26, 34, 0.4)",
-              color: "#ffffff",
-              fontSize: "0.82rem",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "1.2px",
-              marginBottom: "1rem",
-            }}
-          >
-            Insights &amp; Research · 2026 Buyer Folios
-          </span>
           <h1
             style={{
               fontSize: "clamp(2.1rem, 4.5vw, 3.4rem)",

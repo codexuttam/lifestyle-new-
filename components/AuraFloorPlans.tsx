@@ -197,10 +197,6 @@ export default function AuraFloorPlans() {
         {/* Location & Connectivity Banner */}
         <div className={styles.locationBanner}>
           <div className={styles.locationContent}>
-            <div className={styles.locationBadge}>
-              <span className={styles.badgeDot} />
-              <span>PRIME AMRAVATI ADDRESS</span>
-            </div>
             <h3 className={styles.locationTitle}>
               Because Aura Connects You To Everything
             </h3>

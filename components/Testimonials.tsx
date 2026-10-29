@@ -23,11 +23,6 @@ export default function Testimonials({
   return (
     <section className={styles.section} id="testimonial-section">
       <div className={styles.container}>
-        <div className={styles.badge}>
-          <span className={styles.badgeDot} aria-hidden="true" />
-          <span className={styles.badgeText}>{badge}</span>
-        </div>
-
         <div className={styles.quoteBox}>
           <div className={styles.quoteInner}>
             <h2 className={styles.quoteText} key={active}>

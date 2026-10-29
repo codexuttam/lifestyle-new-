@@ -40,11 +40,6 @@ export default function Faq({
   return (
     <section className={styles.section} id="faq-section">
       <div className={styles.container}>
-        <div className={styles.badge}>
-          <span className={styles.badgeDot} aria-hidden="true" />
-          <span className={styles.badgeText}>{content.badge}</span>
-        </div>
-
         <div className={styles.header}>
           <h2 className={styles.title}>{content.title}</h2>
         </div>
