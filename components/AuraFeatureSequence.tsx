@@ -79,33 +79,34 @@ const PANELS: FeaturePanel[] = [
   },
 ];
 
-function getDeckTransform(idx: number, activeIdx: number) {
+function getSlideTransform(idx: number, activeIdx: number) {
   const diff = idx - activeIdx;
   if (diff === 0) {
     return {
-      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
+      transform: "translate3d(0, 0, 0) scale(1)",
       opacity: 1,
-      zIndex: 30,
-      filter: "brightness(1)",
+      zIndex: 5,
+      pointerEvents: "auto" as const,
+      visibility: "visible" as const,
     };
   }
-  // Upcoming cards glide in diagonally from bottom-right with 3D tilt
   if (diff > 0) {
-    const clamped = Math.min(diff, 3);
+    // Incoming slides rest slightly offset diagonally to the bottom-right
     return {
-      transform: `translate3d(${clamped * 32}px, ${clamped * 20}px, ${-clamped * 48}px) rotateZ(${clamped * 2.8}deg) scale(${1 - clamped * 0.052})`,
-      opacity: diff > 3 ? 0 : Math.max(0.24, 0.85 - diff * 0.2),
-      zIndex: 30 - diff,
-      filter: "brightness(0.62)",
+      transform: "translate3d(32px, 20px, 0) scale(0.97)",
+      opacity: 0,
+      zIndex: 1,
+      pointerEvents: "none" as const,
+      visibility: "hidden" as const,
     };
   }
-  // Past cards slide diagonally up-left into the background stack
-  const abs = Math.min(Math.abs(diff), 2);
+  // Exiting slides drift slightly to the top-left
   return {
-    transform: `translate3d(${-abs * 34}px, ${-abs * 16}px, ${-abs * 60}px) rotateZ(${-abs * 2.8}deg) scale(${1 - abs * 0.06})`,
-    opacity: Math.abs(diff) > 2 ? 0 : 0.36,
-    zIndex: 20 - abs,
-    filter: "brightness(0.5)",
+    transform: "translate3d(-28px, -16px, 0) scale(0.98)",
+    opacity: 0,
+    zIndex: 1,
+    pointerEvents: "none" as const,
+    visibility: "hidden" as const,
   };
 }
 
@@ -170,11 +171,13 @@ export default function AuraFeatureSequence() {
   const current = PANELS[activeIdx];
 
   return (
-    <section className={styles.section} id="feature-sequence-section">
+    <section className={styles.section} id="living-experience">
+      <div id="feature-sequence-section" style={{ position: "absolute", top: -88 }} />
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
+          <span className={styles.eyebrowTag}>LIVING EXPERIENCE · LEVEL 15 TO GROUND</span>
           <h2 className={styles.heading}>
-            SEE EVERYTHING. <span>EXAMINED IN MOTION.</span>
+            EVERY DETAIL. <span>A BETTER EXPERIENCE.</span>
           </h2>
         </div>
 
@@ -256,26 +259,16 @@ export default function AuraFeatureSequence() {
                 </div>
               </div>
 
-              {/* Right: 3D Fanning Video & Clean 4K Architectural Cards */}
+              {/* Right: Architectural Cinematic Preview with Smooth Diagonal Reveal */}
               <div className={styles.deckStage}>
                 {PANELS.map((panel, idx) => {
                   const isFront = idx === activeIdx;
-                  const styleObj = getDeckTransform(idx, activeIdx);
+                  const styleObj = getSlideTransform(idx, activeIdx);
                   return (
                     <div
                       key={panel.index}
                       className={`${styles.flyingCard}${isFront ? ` ${styles.flyingCardActive}` : ""}`}
                       style={styleObj}
-                      onClick={() => handleSelectPanel(idx)}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`Focus (${panel.index}) ${panel.title}`}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          handleSelectPanel(idx);
-                        }
-                      }}
                     >
                       {panel.video && isFront ? (
                         <video
@@ -302,7 +295,7 @@ export default function AuraFeatureSequence() {
                         <div className={styles.flyingIndexRow}>
                           <span className={styles.flyingLine} />
                           <span>({panel.index})</span>
-                          {panel.video && <span className={styles.videoChip}>LIVE CLIP</span>}
+                          {panel.video && <span className={styles.videoChip}>LIVE CINEMATIC CLIP</span>}
                         </div>
                         <h4 className={styles.flyingTitle}>{panel.title}</h4>
                       </div>

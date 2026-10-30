@@ -66,6 +66,15 @@
   color: var(--color-gold, #c5a880);
 }
 
+.devAttribution {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #AEA399;
+  font-weight: 500;
+}
+
 .addressBlock {
   max-width: 42ch;
   font-size: 13.5px;

@@ -1,11 +1,11 @@
 /* ============ SECTION 3: ARCHITECTURAL SPOTLIGHT INTRO (DARK CHARCOAL) ============ */
 
 .about {
-  background: #080808;
-  color: #f7efdc;
+  background: #201005;
+  color: #F8F5F3;
   padding: 120px 40px;
   position: relative;
-  border-bottom: 1px solid rgba(247, 239, 220, 0.08);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.14);
   overflow: hidden;
 }
 
@@ -28,24 +28,25 @@
 .eyebrowTag {
   display: inline-block;
   padding: 6px 14px;
-  border: 1px solid rgba(191, 149, 63, 0.36);
-  background: rgba(191, 149, 63, 0.07);
+  border: 1px solid rgba(184, 174, 166, 0.35);
+  background: rgba(184, 174, 166, 0.08);
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: #AEA399;
+  border-radius: 9999px;
 }
 
 .monumentTitle {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.35rem, 9vw, 8.2rem);
-  line-height: 0.88;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-size: clamp(2.35rem, 8.5vw, 7.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
-  color: #f7efdc;
+  color: #F8F5F3;
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -54,28 +55,31 @@
 }
 
 .monumentOutline {
-  color: #bf953f;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #AEA399;
 }
 
 .statement {
-  max-width: 680px;
+  max-width: 720px;
   font-family: var(--font-sans);
   font-size: clamp(1rem, 1.3vw, 1.15rem);
   line-height: 1.7;
-  color: rgba(247, 239, 220, 0.72);
+  color: rgba(248, 245, 243, 0.78);
 }
 
 /* 4-Column Hairline Spec Bar */
 .specBar {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid rgba(247, 239, 220, 0.12);
-  border-bottom: 1px solid rgba(247, 239, 220, 0.12);
+  border-top: 1px solid rgba(184, 174, 166, 0.16);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.16);
 }
 
 .specCol {
   padding: 20px 22px;
-  border-right: 1px solid rgba(247, 239, 220, 0.1);
+  border-right: 1px solid rgba(184, 174, 166, 0.12);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -91,7 +95,7 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #bf953f;
+  color: #B8AEA6;
 }
 
 .specVal {

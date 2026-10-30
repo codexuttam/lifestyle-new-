@@ -6,48 +6,48 @@
    stays legible over imagery.
    ========================================== */
 :root {
-    color-scheme: dark light;
+    color-scheme: dark;
 
-    /* Surfaces — Minimal Graphite Slate & Clean Alabaster */
-    --bg-white-navy: linear-gradient(180deg, #101216 0%, #15181f 45%, #101216 100%);
-    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #1c202a 0%, #14171e 50%, #101216 100%);
-    --bg: var(--color-bg, #101216);
-    --surface: var(--color-bg-secondary, #15181f);
-    --surface-alt: var(--color-bg-tertiary, #1b1f27);
-    --surface-sunk: #0a0b0e;
+    /* Surfaces — SOL HAUS Warm Neutral Espresso & Deep Walnut */
+    --bg-white-navy: linear-gradient(180deg, #201005 0%, #332418 50%, #201005 100%);
+    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #332418 0%, #201005 100%);
+    --bg: var(--color-bg, #201005);
+    --surface: var(--color-bg-secondary, #332418);
+    --surface-alt: var(--color-bg-tertiary, #413428);
+    --surface-sunk: #180c04;
 
     /* Ink */
-    --text: var(--color-text, #f7f4ee);
-    --text-ivory: #f7f4ee;
-    --text-cream: #f4efe6;
-    --text-secondary: var(--color-text-secondary, rgba(247, 244, 238, 0.72));
-    --text-muted: var(--color-text-muted, rgba(247, 244, 238, 0.46));
-    --text-on-dark: #f7f4ee;
-    --text-on-dark-secondary: rgba(247, 244, 238, 0.8);
+    --text: var(--color-text, #F8F5F3);
+    --text-ivory: #F8F5F3;
+    --text-cream: #F8F5F3;
+    --text-secondary: var(--color-text-secondary, #AEA399);
+    --text-muted: var(--color-text-muted, #7A7068);
+    --text-on-dark: #F8F5F3;
+    --text-on-dark-secondary: #B8AEA6;
 
-    /* Accent — Refined Champagne Bronze */
-    --accent-ink: #c5a880;
-    --accent: #c5a880;
-    --accent-strong: #9e815e;
-    --accent-soft: rgba(197, 168, 128, 0.25);
-    --accent-wash: rgba(197, 168, 128, 0.08);
+    /* Accent — Sand & Warm Taupe */
+    --accent-ink: #B8AEA6;
+    --accent: #B8AEA6;
+    --accent-strong: #7A7068;
+    --accent-soft: rgba(184, 174, 166, 0.25);
+    --accent-wash: rgba(184, 174, 166, 0.08);
 
-    /* Champagne Bronze Palette */
-    --gold: #c5a880;
-    --gold-light: #f7f4ee;
-    --gold-dark: #9e815e;
-    --gold-glow: rgba(197, 168, 128, 0.2);
-    --gold-gradient: linear-gradient(135deg, #f7f4ee 0%, #c5a880 52%, #9e815e 100%);
+    /* Sand & Warm Taupe Palette */
+    --gold: #B8AEA6;
+    --gold-light: #F8F5F3;
+    --gold-dark: #7A7068;
+    --gold-glow: rgba(184, 174, 166, 0.2);
+    --gold-gradient: linear-gradient(135deg, #F8F5F3 0%, #B8AEA6 52%, #7A7068 100%);
 
     /* Harmonized Accent Tokens */
-    --wine: #c5a880;
-    --wine-hover: #9e815e;
-    --wine-light: rgba(197, 168, 128, 0.1);
-    --wine-glow: rgba(197, 168, 128, 0.2);
-    --wine-gradient: linear-gradient(135deg, #d8c2a5 0%, #c5a880 55%, #9e815e 100%);
+    --wine: #B8AEA6;
+    --wine-hover: #AEA399;
+    --wine-light: rgba(184, 174, 166, 0.12);
+    --wine-glow: rgba(184, 174, 166, 0.2);
+    --wine-gradient: linear-gradient(135deg, #F8F5F3 0%, #B8AEA6 55%, #7A7068 100%);
 
     /* Lines & elevation */
-    --border: var(--color-border, rgba(247, 244, 238, 0.09));
+    --border: var(--color-border, rgba(184, 174, 166, 0.16));
     --border-strong: var(--color-border-strong, rgba(247, 244, 238, 0.2));
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
     --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);

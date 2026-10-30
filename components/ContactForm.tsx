@@ -10,6 +10,9 @@ const BLANK = {
   name: "",
   phone: "",
   email: "",
+  project: "Aura by Lifestyle",
+  configuration: "2 & 3 BHK Luxury Residences",
+  message: "",
 };
 
 export default function ContactForm() {
@@ -17,6 +20,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [referenceId, setReferenceId] = useState<string>("");
+  const [submitIntent, setSubmitIntent] = useState<"enquiry" | "visit">("enquiry");
   const isSubmittingRef = useRef(false);
 
   function set(key: keyof typeof BLANK, value: string) {
@@ -38,9 +42,9 @@ export default function ContactForm() {
         name: values.name.trim(),
         phone: values.phone.trim(),
         email: values.email.trim() || undefined,
-        project: "Aura by Lifestyle",
-        preference: "2 & 3 BHK Luxury Residences",
-        source: "Contact Page Form",
+        project: values.project,
+        preference: `${values.configuration}${values.message ? ` · Note: ${values.message.trim()}` : ""}`,
+        source: submitIntent === "visit" ? "Book A Site Visit Form" : "Enquire About Aura Form",
         website: String(form.get("website") ?? ""),
       });
 
@@ -50,7 +54,7 @@ export default function ContactForm() {
         return;
       }
 
-      setReferenceId(result.referenceId || "LHS-2026-VIP");
+      setReferenceId(result.referenceId || "AURA-2026-VIP");
       setValues(BLANK);
       setStatus("sent");
     } finally {
@@ -257,13 +261,13 @@ export default function ContactForm() {
             display: "block",
             marginBottom: "0.45rem",
             fontSize: "10px",
-            color: "#d5bd87",
+            color: "#AEA399",
             fontWeight: 600,
             textTransform: "uppercase",
             letterSpacing: "0.18em",
           }}
         >
-          Email Address <span style={{ color: "rgba(247, 239, 220, 0.45)", textTransform: "none" }}>(Optional)</span>
+          Email Address <span style={{ color: "rgba(248, 245, 243, 0.45)", textTransform: "none" }}>(Optional)</span>
         </label>
         <input
           type="email"
@@ -274,11 +278,116 @@ export default function ContactForm() {
           style={{
             width: "100%",
             padding: "12px 15px",
-            background: "rgba(247, 239, 220, 0.04)",
-            border: "1px solid rgba(247, 239, 220, 0.14)",
+            background: "rgba(248, 245, 243, 0.04)",
+            border: "1px solid rgba(184, 174, 166, 0.22)",
             borderRadius: "12px",
-            color: "#f7efdc",
+            color: "#F8F5F3",
             fontSize: "0.92rem",
+          }}
+        />
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+        <div className="form-group" style={{ marginBottom: 0 }}>
+          <label
+            htmlFor="project"
+            style={{
+              display: "block",
+              marginBottom: "0.45rem",
+              fontSize: "10px",
+              color: "#AEA399",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.18em",
+            }}
+          >
+            Interested Project
+          </label>
+          <select
+            id="project"
+            value={values.project}
+            onChange={(event) => set("project", event.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px 14px",
+              background: "#201005",
+              border: "1px solid rgba(184, 174, 166, 0.22)",
+              borderRadius: "12px",
+              color: "#F8F5F3",
+              fontSize: "0.88rem",
+            }}
+          >
+            <option value="Aura by Lifestyle">Aura by Lifestyle (Camp)</option>
+            <option value="Lifestyle Home Spaces">Lifestyle Home Spaces (DPS Rd)</option>
+          </select>
+        </div>
+
+        <div className="form-group" style={{ marginBottom: 0 }}>
+          <label
+            htmlFor="configuration"
+            style={{
+              display: "block",
+              marginBottom: "0.45rem",
+              fontSize: "10px",
+              color: "#AEA399",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.18em",
+            }}
+          >
+            Configuration
+          </label>
+          <select
+            id="configuration"
+            value={values.configuration}
+            onChange={(event) => set("configuration", event.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px 14px",
+              background: "#201005",
+              border: "1px solid rgba(184, 174, 166, 0.22)",
+              borderRadius: "12px",
+              color: "#F8F5F3",
+              fontSize: "0.88rem",
+            }}
+          >
+            <option value="2 BHK Luxury Residence">2 BHK Luxury Residence</option>
+            <option value="3 BHK Luxury Residence">3 BHK Luxury Residence</option>
+            <option value="Commercial / Retail Space">Commercial / Retail Space</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="form-group" style={{ marginBottom: 0 }}>
+        <label
+          htmlFor="message"
+          style={{
+            display: "block",
+            marginBottom: "0.45rem",
+            fontSize: "10px",
+            color: "#AEA399",
+            fontWeight: 600,
+            textTransform: "uppercase",
+            letterSpacing: "0.18em",
+          }}
+        >
+          Message / Requirement <span style={{ color: "rgba(248, 245, 243, 0.45)", textTransform: "none" }}>(Optional)</span>
+        </label>
+        <textarea
+          id="message"
+          rows={2}
+          placeholder="Preferred floor, move-in timeline, or specific questions..."
+          value={values.message}
+          onChange={(event) => set("message", event.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px 14px",
+            background: "rgba(248, 245, 243, 0.04)",
+            border: "1px solid rgba(184, 174, 166, 0.22)",
+            borderRadius: "12px",
+            color: "#F8F5F3",
+            fontSize: "0.88rem",
+            resize: "none",
           }}
         />
       </div>
@@ -299,43 +408,67 @@ export default function ContactForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="roll-button"
-        style={{
-          width: "100%",
-          padding: "14px 22px",
-          borderRadius: "9999px",
-          background: "#c5a880",
-          color: "#080808",
-          fontWeight: 700,
-          fontSize: "11px",
-          textTransform: "uppercase",
-          letterSpacing: "0.15em",
-          border: "1px solid #d4af37",
-          cursor: status === "sending" ? "not-allowed" : "pointer",
-          opacity: status === "sending" ? 0.72 : 1,
-          marginTop: "0.35rem",
-        }}
-      >
-        <span
-          className="roll-text"
-          data-text={status === "sending" ? "Registering Enquiry..." : "Request Private Callback & Visit →"}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginTop: "0.35rem" }}>
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          onClick={() => setSubmitIntent("enquiry")}
+          style={{
+            width: "100%",
+            padding: "13px 18px",
+            borderRadius: "9999px",
+            background: "#B8AEA6",
+            color: "#201005",
+            fontWeight: 700,
+            fontSize: "10.5px",
+            textTransform: "uppercase",
+            letterSpacing: "0.14em",
+            border: "1px solid #B8AEA6",
+            cursor: status === "sending" ? "not-allowed" : "pointer",
+            opacity: status === "sending" ? 0.72 : 1,
+            transition: "all 0.2s ease",
+          }}
         >
-          {status === "sending" ? "Registering Enquiry..." : "Request Private Callback & Visit →"}
-        </span>
-      </button>
+          {status === "sending" && submitIntent === "enquiry"
+            ? "Sending..."
+            : "Enquire About Aura →"}
+        </button>
+
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          onClick={() => setSubmitIntent("visit")}
+          style={{
+            width: "100%",
+            padding: "13px 18px",
+            borderRadius: "9999px",
+            background: "transparent",
+            color: "#F8F5F3",
+            fontWeight: 700,
+            fontSize: "10.5px",
+            textTransform: "uppercase",
+            letterSpacing: "0.14em",
+            border: "1px solid rgba(184, 174, 166, 0.4)",
+            cursor: status === "sending" ? "not-allowed" : "pointer",
+            opacity: status === "sending" ? 0.72 : 1,
+            transition: "all 0.2s ease",
+          }}
+        >
+          {status === "sending" && submitIntent === "visit"
+            ? "Scheduling..."
+            : "Book A Site Visit"}
+        </button>
+      </div>
 
       <p
         style={{
           marginTop: "0.25rem",
           fontSize: "0.75rem",
-          color: "rgba(247, 239, 220, 0.5)",
+          color: "#AEA399",
           textAlign: "center",
         }}
       >
-        MahaRERA Reg. No. P5030002502915 · Direct Developer Advisory Desk
+        MahaRERA Reg. No. P5030002502915 · Official Developer Advisory Desk
       </p>
     </form>
   );

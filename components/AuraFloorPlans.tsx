@@ -133,14 +133,16 @@ export default function AuraFloorPlans() {
   }, [zoomOpen]);
 
   return (
-    <section className={styles.section} id="floor-plans">
+    <section className={styles.section} id="the-project">
+      <div id="floor-plans" style={{ position: "absolute", top: -88 }} />
       <div className={styles.container}>
         <div className={styles.header}>
+          <span className={styles.eyebrowBadge}>THE RESIDENCES &amp; SPECIFICATIONS</span>
           <h2 className={styles.title}>
-            MASTERFULLY PLANNED FOR <span>IDENTITY &amp; DISTINCTION</span>
+            DISCOVER YOUR <span>AURA.</span>
           </h2>
           <p className={styles.subtitle}>
-            Inspect authentic isometric cut-sections and room dimensions from the official Aura brochure. Every residence is 100% Vastu-aligned for natural daylight and airflow.
+            Thoughtfully configured 2 &amp; 3 BHK luxury residences on Congress Nagar Road, Camp, Amravati. Featuring zero shared walls, private sit-out balconies, 100% Vastu compliance, and Level 15 rooftop sky leisure. MahaRERA Reg. P5030002502915.
           </p>
 
           <div className={styles.tabs} role="tablist" aria-label="Aura floor plans">

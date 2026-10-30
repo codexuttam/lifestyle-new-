@@ -16,10 +16,13 @@ const LIFESTYLE_DESKTOP_LINKS = [
 ];
 
 const DEFAULT_DESKTOP_LINKS = [
-  { label: "Floor Plans", href: "/#floor-plans" },
-  { label: "Projects", href: "/projects" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "About", href: "/about" },
+  { label: "Home", href: "/#hero-section" },
+  { label: "About", href: "/#about-aura" },
+  { label: "The Project", href: "/#the-project" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Lifestyle", href: "/#developer-lifestyle" },
+  { label: "Journal", href: "/blogs" },
+  { label: "Contact", href: "/#contact-section" },
 ];
 
 const LIFESTYLE_MOBILE_LINKS = [
@@ -27,18 +30,20 @@ const LIFESTYLE_MOBILE_LINKS = [
   { label: "Floor Plans", href: "/projects/lifestyle-homes#unit-plans" },
   { label: "Showrooms", href: "/projects/lifestyle-homes#commercial-shops" },
   { label: "Specifications", href: "/projects/lifestyle-homes#specifications" },
-  { label: "All Projects", href: "/projects" },
-  { label: "Blogs", href: "/blogs" },
+  { label: "Aura Landmark", href: "/" },
+  { label: "Journal", href: "/blogs" },
   { label: "About", href: "/about" },
 ];
 
 const DEFAULT_MOBILE_LINKS = [
-  { label: "Overview", href: "/#hero-section" },
-  { label: "Explore", href: "/#explore-site-section" },
-  { label: "Floor Plans", href: "/#floor-plans" },
-  { label: "Projects", href: "/projects" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "About", href: "/about" },
+  { label: "Home", href: "/#hero-section" },
+  { label: "About", href: "/#about-aura" },
+  { label: "The Project", href: "/#the-project" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Lifestyle (Developer)", href: "/#developer-lifestyle" },
+  { label: "Lifestyle Home Spaces", href: "/projects/lifestyle-homes" },
+  { label: "Journal", href: "/blogs" },
+  { label: "Contact", href: "/#contact-section" },
 ];
 
 let hasDismissedLoginThisLoad = false;
@@ -236,16 +241,19 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
               className={styles.lifestyleLogoImg}
             />
           ) : (
-            <>
+            <div className={styles.brandLockup}>
               <img
                 src="/aura/aura-logo-official.png"
                 alt="Aura by Lifestyle emblem"
-                width={34}
-                height={34}
+                width={32}
+                height={32}
                 className={styles.logoImg}
               />
-              <span className={styles.logoName}>AURA</span>
-            </>
+              <div className={styles.brandTextCol}>
+                <span className={styles.logoName}>AURA</span>
+                <span className={styles.logoDescriptor}>BY LIFESTYLE</span>
+              </div>
+            </div>
           )}
         </Link>
 

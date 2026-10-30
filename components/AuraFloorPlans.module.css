@@ -1,10 +1,10 @@
 /* ============ SECTION 5B: INTERACTIVE FLOOR PLANS & 3D CUT-SECTIONS ============ */
 
 .section {
-  background: #0b0c0b;
-  color: #f7efdc;
-  padding: 56px 40px 120px;
-  border-bottom: 1px solid rgba(247, 239, 220, 0.08);
+  background: #201005;
+  color: #F8F5F3;
+  padding: 80px 40px 120px;
+  border-bottom: 1px solid rgba(184, 174, 166, 0.2);
 }
 
 .container {
@@ -23,37 +23,41 @@
 }
 
 .eyebrow {
-  padding: 6px 12px;
-  border: 1px solid rgba(191, 149, 63, 0.36);
-  background: rgba(191, 149, 63, 0.07);
+  padding: 6px 14px;
+  border: 1px solid rgba(184, 174, 166, 0.35);
+  background: rgba(184, 174, 166, 0.08);
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: #AEA399;
+  border-radius: 9999px;
 }
 
 .title {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 500;
   font-size: clamp(2.4rem, 4.6vw, 4.2rem);
   line-height: 0.94;
   letter-spacing: -0.015em;
   text-transform: uppercase;
-  color: #f7efdc;
+  color: #F8F5F3;
 }
 
 .title span {
-  color: #bf953f;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #AEA399;
 }
 
 .subtitle {
   max-width: 68ch;
   font-family: var(--font-sans);
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: rgba(247, 239, 220, 0.7);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(248, 245, 243, 0.78);
 }
 
 .tabs {
@@ -67,38 +71,38 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 11px 18px;
+  padding: 10px 18px;
   border-radius: 9999px;
-  border: 1px solid rgba(247, 239, 220, 0.14);
-  background: #111311;
-  color: rgba(247, 239, 220, 0.78);
+  border: 1px solid rgba(184, 174, 166, 0.25);
+  background: rgba(184, 174, 166, 0.06);
+  color: #AEA399;
   font-family: var(--font-sans);
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .tabBtn:hover {
-  border-color: rgba(191, 149, 63, 0.5);
-  color: #f7efdc;
+  border-color: #B8AEA6;
+  color: #F8F5F3;
 }
 
 .activeTab {
-  background: #f6f1e7;
-  border-color: #f6f1e7;
-  color: #080808;
+  background: #B8AEA6;
+  border-color: #B8AEA6;
+  color: #201005;
 }
 
 .tabIndex {
   font-variant-numeric: tabular-nums;
-  color: #bf953f;
+  color: #AEA399;
 }
 
 .activeTab .tabIndex {
-  color: #8f6b20;
+  color: #201005;
 }
 
 .tabBadge {

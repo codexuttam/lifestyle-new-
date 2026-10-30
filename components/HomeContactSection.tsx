@@ -14,11 +14,12 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
 
       <div className={styles.container}>
         <div className={styles.leftCol}>
+          <span className={styles.eyebrow}>PROJECT ENQUIRY &amp; VISITS</span>
           <h2 className={styles.heading}>
-            RESERVE YOUR PRIVATE <span>SITE WALKTHROUGH</span>
+            YOUR NEXT CHAPTER <span>STARTS HERE.</span>
           </h2>
           <p className={styles.lead}>
-            Connect directly with Lifestyle Home Spaces to receive official 2 &amp; 3 BHK floor plan plates, unit orientation details, or a guided tour of Aura at Congress Nagar, Camp.
+            Connect directly with the development team to receive official 2 &amp; 3 BHK floor plates, pricing schedules, or to book a private site visit to Aura at Congress Nagar, Camp.
           </p>
 
           <div className={styles.channelCards}>
@@ -28,19 +29,19 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
               rel="noopener noreferrer"
               className={styles.channelCard}
             >
-              <span className={styles.channelIndex}>01 · DIRECT WHATSAPP CHAT 💬</span>
+              <span className={styles.channelIndex}>01 · WHATSAPP CONVERSATION</span>
               <span className={styles.channelValue}>+91 7498256708</span>
               <span className={styles.channelHint}>Instant Brochure &amp; Floor Plans ↗</span>
             </a>
 
             <a href={telHref(settings)} className={styles.channelCard}>
-              <span className={styles.channelIndex}>02 · SITE OFFICE PHONE 📞</span>
+              <span className={styles.channelIndex}>02 · DIRECT SITE DESK</span>
               <span className={styles.channelValue}>+91 7498256708</span>
-              <span className={styles.channelHint}>Direct Call With Sales Team →</span>
+              <span className={styles.channelHint}>Speak With Our Property Advisors →</span>
             </a>
 
             <a href={mailtoHref(settings)} className={styles.channelCard}>
-              <span className={styles.channelIndex}>03 · CAMP SALES OFFICE 📍</span>
+              <span className={styles.channelIndex}>03 · CAMP SALES OFFICE</span>
               <span className={styles.channelValue}>{settings.email}</span>
               <span className={styles.channelHint}>{settings.address}</span>
             </a>
@@ -49,9 +50,9 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
 
         <div className={styles.formCard}>
           <div className={styles.formHeader}>
-            <h3 className={styles.formTitle}>Schedule Callback Or Visit 🏢</h3>
+            <h3 className={styles.formTitle}>Direct Enquiry &amp; Site Visit</h3>
             <p className={styles.formSub}>
-              Leave your contact details and our Amravati sales team will connect with you promptly.
+              Share your details and our team will get back to you with confirmed availability.
             </p>
           </div>
           <ContactForm />

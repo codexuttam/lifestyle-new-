@@ -28,10 +28,10 @@
 
 .navScrolled {
   padding: 13px 40px;
-  background: rgba(8, 8, 8, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(191, 149, 63, 0.2);
+  background: rgba(32, 16, 5, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.18);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
 }
 
@@ -112,18 +112,44 @@
   display: block;
 }
 
+.brandLockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brandTextCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .logoName {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 24px;
-  letter-spacing: 0.2em;
+  font-size: 23px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #f7efdc;
+  color: #F8F5F3;
+  line-height: 1;
+}
+
+.logoDescriptor {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #AEA399;
   line-height: 1;
 }
 
 .navLight .logoName {
-  color: #080808;
+  color: #201005;
+}
+
+.navLight .logoDescriptor {
+  color: #5D534B;
 }
 
 .lifestyleLogoImg {

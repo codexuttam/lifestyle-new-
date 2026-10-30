@@ -4,14 +4,12 @@ import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
 import VslSection from "@/components/VslSection";
 import About from "@/components/About";
-import Services from "@/components/Services";
-import ExploreSection from "@/components/ExploreSection";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
 import AuraFeatureSequence from "@/components/AuraFeatureSequence";
-import Properties from "@/components/Properties";
-import AllProperties from "@/components/AllProperties";
-import BuyingJourney from "@/components/BuyingJourney";
-import Testimonials from "@/components/Testimonials";
+import GallerySection from "@/components/GallerySection";
+import DeveloperSection from "@/components/DeveloperSection";
+import OtherProjectsSection from "@/components/OtherProjectsSection";
+import JournalSection from "@/components/JournalSection";
 import Faq from "@/components/Faq";
 import HomeContactSection from "@/components/HomeContactSection";
 import SiteFooter from "@/components/SiteFooter";
@@ -21,26 +19,11 @@ import { getFaqs } from "@/lib/content/faqs";
 import { getHome } from "@/lib/content/home";
 import { getSettings } from "@/lib/content/settings";
 import { telHref, whatsappHref } from "@/lib/schemas/settings";
-import { getExploreProject, getFeaturedProjects } from "@/lib/content/projects";
-import { getFeaturedServices } from "@/lib/content/services";
-import { getTestimonials } from "@/lib/content/testimonials";
 
 export default async function Home() {
-  const [
-    home,
-    settings,
-    featuredProjects,
-    featuredServices,
-    exploreProject,
-    testimonials,
-    faqs,
-  ] = await Promise.all([
+  const [home, settings, faqs] = await Promise.all([
     getHome(),
     getSettings(),
-    getFeaturedProjects(),
-    getFeaturedServices(),
-    getExploreProject(),
-    getTestimonials(),
     getFaqs(),
   ]);
 
@@ -49,13 +32,13 @@ export default async function Home() {
       <RevealAnimations />
       <SiteNav activeHref="/" />
 
-      {/* 01. Full-Screen Architectural Hero with Scroll-Morphing Video Stage (Dark Charcoal) */}
+      {/* Section 1 — Hero: Immersive Architectural Hero (Dark Espresso #201005) */}
       <Hero content={home.hero} />
 
-      {/* 02. Verified Landmark Credentials & MahaRERA Strip (Warm Ivory) */}
+      {/* Verified Credentials & MahaRERA Strip */}
       <TrustStrip />
 
-      {/* 02b. Video Sales Letter Walkthrough + 30% Completion Contact Popup (Warm Ivory) */}
+      {/* Cinematic Walkthrough Film with 30% Auto-Contact Modal */}
       <VslSection
         id="aura-vsl"
         project="Aura by Lifestyle"
@@ -77,44 +60,37 @@ export default async function Home() {
         secondaryCta="Request VIP Floor Kit"
       />
 
-      {/* 03. Architectural Spotlight & Converging Monumental Title (Dark Charcoal) */}
+      {/* Section 2 — About Aura: More Than Four Walls. A Way of Living. */}
       <About content={home.about} />
 
-      {/* 04. 3D Perspective Grid & Scroll-Revealed Engineering Craftsmanship (Warm Ivory) */}
-      <Services services={featuredServices} content={home.services} />
-
-      {/* 05. Interactive Tower Hotspots & Floor-Plate Exploration (Dark Charcoal) */}
-      <ExploreSection
-        content={home.explore}
-        projectTitle={
-          exploreProject
-            ? `${exploreProject.title} · ${exploreProject.location}`
-            : ""
-        }
-      />
+      {/* Section 3 — The Project: Discover Your Aura (Floor Plans & Specs) */}
       <AuraFloorPlans />
 
-      {/* 06. Pinned 3D Fanning Video & Render Card Deck (Warm Ivory) */}
+      {/* Section 4 — Living Experience: Every Detail. A Better Experience (Deep Walnut #332418) */}
       <AuraFeatureSequence />
 
-      {/* 07. Interactive Portfolio Stage & Sticky 3D Dynamic Card Stack (Deep Charcoal) */}
-      <Properties projects={featuredProjects} content={home.properties} />
-      <AllProperties content={home.allProperties} />
+      {/* Section 5 — Gallery: Curated Moments & Architecture (Warm Off-White #F8F5F3) */}
+      <GallerySection />
 
-      {/* 08. Homebuying & Possession Journey Timeline with Blueprint SVGs (Warm Ivory) */}
-      <BuyingJourney />
+      {/* Section 6 — Lifestyle, The Developer: A Vision by Lifestyle (Deep Walnut #332418) */}
+      <DeveloperSection />
 
-      {/* 09. Real Project Clips & Resident Testimonials (Dark + Warm Ivory Split) */}
-      <Testimonials testimonials={testimonials} badge={home.testimonials.badge} />
+      {/* Section 7 — Other Projects: More Spaces. More Possibilities (Featuring Lifestyle Home Spaces) */}
+      <OtherProjectsSection />
 
-      {/* 10. Accessible Hairline FAQ Accordion (Warm Ivory) */}
+      {/* Section 8 — Journal: Thoughts on Better Living (Deep Walnut #332418) */}
+      <JournalSection />
+
+      {/* Verified FAQ Accordion */}
       <Faq faqs={faqs} content={home.faq} />
 
-      {/* 11. Direct Developer Contact & Clean Architectural Footer (Dark Charcoal) */}
+      {/* Section 9 — Contact: Your Next Chapter Starts Here (Dark Espresso #201005) */}
       <HomeContactSection settings={settings} />
+
+      {/* Section 10 — Footer: Aura by Lifestyle Primary Attribution */}
       <SiteFooter settings={settings} />
 
-      {/* Interactive Portfolio Concierge */}
+      {/* Real Estate Assistant */}
       <Chatbot />
 
       {/* Mobile Sticky Action Bar */}

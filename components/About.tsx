@@ -135,17 +135,20 @@ export default function About({ content }: { content: HomeRecord["about"] }) {
   };
 
   return (
-    <section className={styles.about} id="about-us-section" ref={sectionRef}>
+    <section className={styles.about} id="about-aura" ref={sectionRef}>
       <div className={styles.container}>
-        {/* Monumental Architectural Spotlight Intro */}
+        {/* Editorial Headline & Statement */}
         <div className={styles.topIntro}>
+          <span className={styles.eyebrowTag}>ABOUT AURA BY LIFESTYLE</span>
           <h2 className={styles.monumentTitle}>
-            <span data-monument-left>LIFE BEYOND</span>
+            <span data-monument-left>MORE THAN FOUR WALLS.</span>
             <span className={styles.monumentOutline} data-monument-right>
-              IMAGINATION
+              A WAY OF LIVING.
             </span>
           </h2>
-          <p className={styles.statement}>{content.statement}</p>
+          <p className={styles.statement}>
+            Thoughtfully designed spaces. Beautifully considered living. Discover an architectural sanctuary where every detail brings you closer to the life you imagine.
+          </p>
         </div>
 
         {/* 4-Column Specification Strip */}

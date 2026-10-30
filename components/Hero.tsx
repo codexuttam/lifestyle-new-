@@ -147,18 +147,29 @@ export default function Hero({ content: _content }: { content: HomeRecord["hero"
         {/* Bottom Monumental Kinetic Display & Enquiry Actions */}
         <div className={styles.bottomDeck}>
           <div className={styles.headlineWrap}>
+            <span className={styles.superTitle} data-hero-fade>
+              AURA BY LIFESTYLE · THE ART OF BETTER LIVING
+            </span>
             <h1 className={styles.headline}>
               <span className={styles.lineMask}>
                 <span className={styles.lineInner} data-hero-line>
-                  AURA BY LIFESTYLE
+                  A HOME.
+                </span>
+              </span>
+              <span className={styles.lineMask}>
+                <span className={styles.lineInner} data-hero-line>
+                  A FEELING.
                 </span>
               </span>
               <span className={styles.lineMask}>
                 <span className={`${styles.lineInner} ${styles.headlineAccent}`} data-hero-line>
-                  SKYLINE RESIDENCES &amp; ROOFTOP OASIS
+                  AN AURA.
                 </span>
               </span>
             </h1>
+            <p className={styles.supportingText} data-hero-fade>
+              Discover thoughtfully designed spaces where modern architecture meets the art of comfortable living.
+            </p>
           </div>
 
           <div className={styles.divider} data-hero-rule />
@@ -171,7 +182,7 @@ export default function Hero({ content: _content }: { content: HomeRecord["hero"
               </div>
               <div className={styles.specItem}>
                 <span className={styles.specKey}>Crown Level 15</span>
-                <span className={styles.specVal}>Sky Pool &amp; Multi-Sports Turf</span>
+                <span className={styles.specVal}>Sky Pool &amp; Sports Turf</span>
               </div>
               <div className={styles.specItem}>
                 <span className={styles.specKey}>MahaRERA Registered</span>
@@ -180,9 +191,9 @@ export default function Hero({ content: _content }: { content: HomeRecord["hero"
             </div>
 
             <div className={styles.btnGroup}>
-              <a href="#explore-site-section" className={`${styles.btnExplore} roll-button`}>
-                <span className="roll-text" data-text="Explore The Tower ↓">
-                  Explore The Tower ↓
+              <a href="#about-aura" className={`${styles.btnExplore} roll-button`}>
+                <span className="roll-text" data-text="Discover Aura ↓">
+                  Discover Aura ↓
                 </span>
               </a>
               <button
@@ -190,8 +201,8 @@ export default function Hero({ content: _content }: { content: HomeRecord["hero"
                 onClick={handleOpenEnquiry}
                 className={`${styles.btnSchedule} roll-button`}
               >
-                <span className="roll-text" data-text="Schedule Private Preview →">
-                  Schedule Private Preview →
+                <span className="roll-text" data-text="Enquire Now →">
+                  Enquire Now →
                 </span>
               </button>
             </div>

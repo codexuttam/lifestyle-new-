@@ -46,9 +46,13 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
               />
               <div className={styles.logoText}>
                 <span className={styles.logoTitle}>AURA</span>
-                <span className={styles.logoSub}>BY LIFESTYLE HOME SPACES</span>
+                <span className={styles.logoSub}>BY LIFESTYLE</span>
               </div>
             </Link>
+
+            <p className={styles.devAttribution}>
+              A project by Lifestyle
+            </p>
 
             <p className={styles.addressBlock}>{settings.address}</p>
 
@@ -103,7 +107,7 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
                 rel="noopener noreferrer"
                 className={styles.waLink}
               >
-                💬 WhatsApp Sales Desk ↗
+                WhatsApp Direct Desk ↗
               </a>
               {SOCIAL_LINKS.map((link) => (
                 <a
@@ -127,13 +131,13 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
           <div className={styles.newsletterText}>
             <span className={styles.kitEyebrow}>BROCHURE &amp; FLOOR PLATE KIT</span>
             <p className={styles.newsletterCopy}>
-              Receive official Aura &amp; Lifestyle Home Spaces cut-section drawings directly in your inbox.
+              Receive official Aura cut-section drawings and specifications directly in your inbox.
             </p>
           </div>
 
           {subscribed ? (
             <p className={styles.formNote} role="status">
-              ✓ Request noted — our sales team will share the official brochure kit shortly. 📋
+              ✓ Request noted — our property team will share the official brochure kit shortly.
             </p>
           ) : (
             <form className={styles.form} onSubmit={onSubmit}>
