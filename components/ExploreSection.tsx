@@ -86,29 +86,29 @@ function getDeckTransform(idx: number, activeIdx: number) {
   const diff = idx - activeIdx;
   if (diff === 0) {
     return {
-      transform: "translate3d(0px, 0px, 0px) scale(1)",
+      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
       opacity: 1,
-      zIndex: 30,
+      zIndex: 40,
       filter: "brightness(1)",
     };
   }
-  // Upcoming cards sit below, sliding from down to up
+  // Upcoming cards glide in smoothly along a luxury diagonal 3D trajectory
   if (diff > 0) {
     const clamped = Math.min(diff, 3);
     return {
-      transform: `translate3d(0px, ${clamped * 44}px, ${-clamped * 20}px) scale(${1 - clamped * 0.045})`,
-      opacity: diff > 2 ? 0 : Math.max(0.24, 0.84 - diff * 0.26),
-      zIndex: 30 - diff,
-      filter: "brightness(0.65)",
+      transform: `translate3d(${clamped * 34}px, ${clamped * 20}px, ${-clamped * 52}px) rotateZ(${clamped * 2.5}deg) scale(${1 - clamped * 0.052})`,
+      opacity: diff > 2 ? 0 : Math.max(0.25, 0.84 - diff * 0.24),
+      zIndex: 40 - diff,
+      filter: "brightness(0.62)",
     };
   }
-  // Past cards scale down and dim into background stack
+  // Past cards slide gracefully diagonally up-left into the background stack
   const abs = Math.min(Math.abs(diff), 2);
   return {
-    transform: `translate3d(0px, ${-abs * 22}px, ${-abs * 40}px) scale(${1 - abs * 0.06})`,
-    opacity: abs > 2 ? 0 : 0.38,
-    zIndex: 20 - abs,
-    filter: "brightness(0.55)",
+    transform: `translate3d(${-abs * 32}px, ${-abs * 18}px, ${-abs * 60}px) rotateZ(${-abs * 2.5}deg) scale(${1 - abs * 0.06})`,
+    opacity: abs > 2 ? 0 : 0.35,
+    zIndex: 30 - abs,
+    filter: "brightness(0.5)",
   };
 }
 
@@ -247,13 +247,13 @@ export default function ExploreSection({
             </div>
 
             <div className={styles.stageCard}>
-              <div className={styles.stageCopy}>
+              <div className={styles.stageCopy} key={current.id}>
                 <div className={styles.stageNumberRow}>
                   <span className={styles.stageNumber}>({current.index})</span>
                   <span className={styles.stageSubtitle}>{current.subtitle}</span>
                 </div>
 
-                <h3 className={styles.stageTitle} key={`t-${current.index}`}>
+                <h3 className={styles.stageTitle}>
                   {current.title}
                 </h3>
                 <p className={styles.stageDesc}>{current.description}</p>

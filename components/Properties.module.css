@@ -121,9 +121,9 @@
   display: grid;
   grid-template-columns: 0.96fr 1.04fr;
   gap: 40px;
-  background: #101210;
+  background: #101216;
   color: #f7efdc;
-  border: 1px solid rgba(191, 149, 63, 0.38);
+  border: 1px solid rgba(197, 168, 128, 0.28);
   border-radius: 28px;
   padding: 36px 40px;
   min-height: 460px;
@@ -140,18 +140,30 @@
   z-index: 2;
 }
 
+@keyframes diagonalRevealLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-24px, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .stageMetaRow {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  animation: diagonalRevealLeft 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .stageNumber {
   font-family: var(--font-display);
   font-size: 26px;
   font-weight: 600;
-  color: #c5a880;
+  color: var(--color-gold, #c5a880);
 }
 
 .stageLocation {
@@ -159,7 +171,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .stageTitle {
@@ -170,18 +182,7 @@
   text-transform: uppercase;
   color: #f7efdc;
   margin: 0;
-  animation: slideUpFade 0.42s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideUpFade {
-  from {
-    opacity: 0.25;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: diagonalRevealLeft 0.56s 0.04s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .stageSummary {
@@ -189,6 +190,7 @@
   line-height: 1.65;
   color: rgba(247, 239, 220, 0.72);
   margin: 0;
+  animation: diagonalRevealLeft 0.62s 0.08s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .metricsBar {
@@ -198,6 +200,7 @@
   padding: 12px 0;
   border-top: 1px solid rgba(247, 239, 220, 0.1);
   border-bottom: 1px solid rgba(247, 239, 220, 0.1);
+  animation: diagonalRevealLeft 0.68s 0.12s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .metricCell {
@@ -339,26 +342,26 @@
 
 .flyingCard {
   position: absolute;
-  width: min(86%, 460px);
+  width: min(88%, 465px);
   height: 374px;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.42);
-  background: #080808;
-  box-shadow: 0 28px 68px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(197, 168, 128, 0.32);
+  background: #15181f;
+  box-shadow: 0 28px 68px rgba(0, 0, 0, 0.72);
   cursor: pointer;
-  transform-origin: center bottom;
+  transform-origin: 80% 85%;
   transition:
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.5s ease,
-    filter 0.5s ease,
+    transform 0.72s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.55s ease,
+    filter 0.55s ease,
     border-color 0.35s ease;
   will-change: transform, opacity;
 }
 
 .flyingCardActive {
-  border-color: #c5a880;
-  box-shadow: 0 32px 84px rgba(0, 0, 0, 0.85), 0 0 32px rgba(191, 149, 63, 0.2);
+  border-color: var(--color-gold, #c5a880);
+  box-shadow: 0 32px 84px rgba(0, 0, 0, 0.85), 0 0 28px rgba(197, 168, 128, 0.16);
 }
 
 .flyingMedia {
@@ -383,6 +386,15 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.flyingCardActive .flyingCardCaption {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .flyingIndexRow {

@@ -19,29 +19,29 @@ function getDeckTransform(idx: number, activeIdx: number) {
   const diff = idx - activeIdx;
   if (diff === 0) {
     return {
-      transform: "translate3d(0px, 0px, 0px) scale(1)",
+      transform: "translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)",
       opacity: 1,
-      zIndex: 30,
+      zIndex: 40,
       filter: "brightness(1)",
     };
   }
-  // Upcoming cards sit below, sliding from down to up
+  // Upcoming cards fan out smoothly along a refined diagonal vector
   if (diff > 0) {
     const clamped = Math.min(diff, 2);
     return {
-      transform: `translate3d(0px, ${clamped * 44}px, ${-clamped * 20}px) scale(${1 - clamped * 0.045})`,
+      transform: `translate3d(${clamped * 34}px, ${clamped * 20}px, ${-clamped * 52}px) rotateZ(${clamped * 2.5}deg) scale(${1 - clamped * 0.052})`,
       opacity: Math.max(0.32, 0.85 - diff * 0.22),
-      zIndex: 30 - diff,
-      filter: "brightness(0.65)",
+      zIndex: 40 - diff,
+      filter: "brightness(0.62)",
     };
   }
-  // Past cards scale down and dim into background stack
+  // Past cards slide gracefully diagonally up-left into the background stack
   const abs = Math.min(Math.abs(diff), 2);
   return {
-    transform: `translate3d(0px, ${-abs * 22}px, ${-abs * 40}px) scale(${1 - abs * 0.06})`,
-    opacity: 0.36,
-    zIndex: 20 - abs,
-    filter: "brightness(0.55)",
+    transform: `translate3d(${-abs * 32}px, ${-abs * 18}px, ${-abs * 60}px) rotateZ(${-abs * 2.5}deg) scale(${1 - abs * 0.06})`,
+    opacity: 0.35,
+    zIndex: 30 - abs,
+    filter: "brightness(0.5)",
   };
 }
 
@@ -193,7 +193,7 @@ export default function Properties({
             </div>
 
             <div className={styles.stageCard}>
-              <div className={styles.stageCopy}>
+              <div className={styles.stageCopy} key={feature.id}>
                 <div className={styles.stageMetaRow}>
                   <span className={styles.stageNumber}>(0{(activeIdx % total) + 1})</span>
                   <span className={styles.stageLocation}>
@@ -201,7 +201,7 @@ export default function Properties({
                   </span>
                 </div>
 
-                <h3 className={styles.stageTitle} key={feature.id}>
+                <h3 className={styles.stageTitle}>
                   {feature.title}
                 </h3>
                 <p className={styles.stageSummary}>{feature.summary}</p>
