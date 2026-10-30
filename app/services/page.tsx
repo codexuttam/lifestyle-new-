@@ -1,52 +1,6 @@
-import type { Metadata } from "next";
-import SiteNav from "@/components/SiteNav";
-import RevealAnimations from "@/components/RevealAnimations";
-import { getSettings } from "@/lib/content/settings";
-import SiteFooter from "@/components/SiteFooter";
-import { getPages } from "@/lib/content/pages";
-import { getServices } from "@/lib/content/services";
-import ServicesExplorer from "./ServicesExplorer";
-import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { services } = await getPages();
-  return {
-    title: services.metaTitle,
-    description: services.metaDescription,
-    alternates: { canonical: "/services" },
-    openGraph: {
-      title: services.metaTitle,
-      description: services.metaDescription,
-      type: "website",
-    },
-  };
+export default function ServicesPage() {
+  redirect("/#floor-plans");
 }
 
-export default async function ServicesPage() {
-  const [services, settings, pages] = await Promise.all([
-    getServices(),
-    getSettings(),
-    getPages(),
-  ]);
-  const copy = pages.services;
-
-  return (
-    <>
-      <SiteNav activeHref="/services" />
-
-      <main className={styles.page}>
-        <div className={styles.inner}>
-          <header className={styles.header} data-reveal>
-            <h1 className={styles.title}>{copy.title}</h1>
-            <p className={styles.intro}>{copy.intro}</p>
-          </header>
-
-          <ServicesExplorer services={services} settings={settings} />
-        </div>
-      </main>
-
-      <SiteFooter settings={settings} />
-      <RevealAnimations />
-    </>
-  );
-}

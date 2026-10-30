@@ -108,12 +108,12 @@
   font-family: var(--font-sans);
   font-size: 10.5px;
   font-weight: 700;
-  color: #8f6b20;
+  color: var(--color-gold-deep, #9a7b54);
   font-variant-numeric: tabular-nums;
 }
 
 .railBtnActive .railIndex {
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .railLabel {
@@ -131,14 +131,14 @@
   display: grid;
   grid-template-columns: 0.94fr 1.06fr;
   gap: 40px;
-  background: #0b0c0b;
+  background: #101216;
   color: #f7efdc;
-  border: 1px solid rgba(191, 149, 63, 0.45);
+  border: 1px solid rgba(197, 168, 128, 0.28);
   border-radius: 28px;
   padding: 34px 40px;
   min-height: 460px;
   align-items: center;
-  box-shadow: 0 32px 72px rgba(12, 13, 12, 0.18);
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.35);
   overflow: hidden;
 }
 
@@ -160,18 +160,18 @@
   font-family: var(--font-display);
   font-size: 26px;
   font-weight: 600;
-  color: #bf953f;
+  color: var(--color-gold, #c5a880);
 }
 
 .stageTag {
   padding: 5px 12px;
   border-radius: 9999px;
-  border: 1px solid rgba(191, 149, 63, 0.36);
+  border: 1px solid rgba(197, 168, 128, 0.3);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .stageTitle {
@@ -200,7 +200,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #bf953f;
+  color: var(--color-gold, #c5a880);
   animation: diagonalRevealLeft 0.52s 0.04s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -230,7 +230,7 @@
 }
 
 .factList li span:first-child {
-  color: #bf953f;
+  color: var(--color-gold, #c5a880);
   font-size: 11px;
 }
 
@@ -261,14 +261,14 @@
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #bf953f, #fcf6ba);
+  background: linear-gradient(90deg, #c5a880, #d6be9f);
   transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .progressCount {
   font-size: 11px;
   font-weight: 600;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
   font-variant-numeric: tabular-nums;
 }
 
@@ -293,9 +293,9 @@
 }
 
 .deckStepBtn:hover {
-  border-color: #bf953f;
-  background: #bf953f;
-  color: #080808;
+  border-color: var(--color-gold, #c5a880);
+  background: var(--color-gold, #c5a880);
+  color: #101216;
 }
 
 /* 3D Fanning Card Stack Stage */
@@ -316,8 +316,8 @@
   height: 372px;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  background: #121412;
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  background: #15181f;
   box-shadow: 0 28px 68px rgba(0, 0, 0, 0.72);
   cursor: pointer;
   transform-origin: 80% 85%;
@@ -330,8 +330,8 @@
 }
 
 .flyingCardActive {
-  border-color: #d4af37;
-  box-shadow: 0 32px 84px rgba(0, 0, 0, 0.85), 0 0 32px rgba(191, 149, 63, 0.2);
+  border-color: var(--color-gold, #c5a880);
+  box-shadow: 0 32px 84px rgba(0, 0, 0, 0.85), 0 0 28px rgba(197, 168, 128, 0.18);
 }
 
 .flyingMedia {
@@ -365,22 +365,22 @@
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.18em;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .flyingLine {
   width: 24px;
   height: 1px;
-  background: #bf953f;
+  background: var(--color-gold, #c5a880);
 }
 
 .videoChip {
   margin-left: auto;
   padding: 3px 9px;
   border-radius: 9999px;
-  background: rgba(191, 149, 63, 0.24);
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  color: #fcf6ba;
+  background: rgba(197, 168, 128, 0.2);
+  border: 1px solid rgba(197, 168, 128, 0.45);
+  color: var(--color-gold-bright, #d6be9f);
   font-size: 9px;
   letter-spacing: 0.14em;
 }
@@ -441,9 +441,9 @@
     left: 14px;
     padding: 5px 11px;
     border-radius: 9999px;
-    background: rgba(8, 8, 8, 0.84);
-    border: 1px solid rgba(191, 149, 63, 0.4);
-    color: #d5bd87;
+    background: rgba(16, 18, 22, 0.88);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    color: var(--color-gold-bright, #d6be9f);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -470,7 +470,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #bf953f;
+    color: var(--color-gold, #c5a880);
   }
 
   .mobileDesc {

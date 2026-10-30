@@ -124,26 +124,27 @@
 }
 
 .primaryCta {
-  border: 1px solid #d4af37;
-  background: #bf953f;
-  color: #080808;
-  box-shadow: 0 6px 20px rgba(191, 149, 63, 0.22);
+  border: 1px solid var(--color-gold, #c5a880);
+  background: var(--color-gold, #c5a880);
+  color: #101216;
+  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.22);
 }
 
 .primaryCta:hover {
-  background: #d4af37;
+  background: var(--color-gold-bright, #d6be9f);
+  border-color: var(--color-gold-bright, #d6be9f);
   transform: translateY(-1px);
 }
 
 .secondaryCta {
-  border: 1px solid rgba(12, 13, 12, 0.26);
+  border: 1px solid rgba(16, 18, 22, 0.22);
   background: transparent;
-  color: #080808;
+  color: #101216;
 }
 
 .secondaryCta:hover {
-  border-color: #8f6b20;
-  color: #8f6b20;
+  border-color: var(--color-gold-deep, #9a7b54);
+  color: var(--color-gold-deep, #9a7b54);
   transform: translateY(-1px);
 }
 
@@ -157,18 +158,18 @@
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid rgba(150, 112, 34, 0.4);
-  background: rgba(191, 149, 63, 0.08);
-  color: #8f6b20;
+  border: 1px solid rgba(154, 123, 84, 0.35);
+  background: rgba(197, 168, 128, 0.12);
+  color: var(--color-gold-deep, #9a7b54);
   display: inline-flex;
   align-items: center;
   transition: background-color 0.25s ease, transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 .contactLinkCta:hover {
-  background: rgba(191, 149, 63, 0.18);
-  border-color: #8f6b20;
-  color: #6b4e12;
+  background: rgba(197, 168, 128, 0.22);
+  border-color: var(--color-gold-deep, #9a7b54);
+  color: #7a5e38;
   transform: translateY(-1px);
 }
 

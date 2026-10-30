@@ -54,7 +54,7 @@
 }
 
 .title span {
-  color: #bf953f;
+  color: #c5a880;
 }
 
 .intro {
@@ -105,7 +105,7 @@
 
 .filterActive,
 .filterActive:hover {
-  background: #bf953f;
+  background: #c5a880;
   color: #080808;
   font-weight: 700;
 }
@@ -363,7 +363,7 @@
   align-items: center;
   padding: 11px 22px;
   border-radius: 9999px;
-  background: #bf953f;
+  background: #c5a880;
   color: #080808;
   font-family: var(--font-sans);
   font-size: 11.5px;
@@ -400,7 +400,7 @@
 }
 
 .btnTour:hover {
-  border-color: #bf953f;
+  border-color: #c5a880;
   color: #e2c275;
   transform: translateY(-2px);
 }

@@ -8,10 +8,10 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #bf953f;
-  border: 1px solid rgba(247, 239, 220, 0.42);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65), 0 0 24px rgba(191, 149, 63, 0.35);
-  color: #080808;
+  background: #c5a880;
+  border: 1px solid rgba(247, 244, 238, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(197, 168, 128, 0.2);
+  color: #101216;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,8 +29,8 @@
 
 .floatingButton:hover {
   transform: scale(1.06) translateY(-2px);
-  background: #d5bd87;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 32px rgba(191, 149, 63, 0.55);
+  background: #d6be9f;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(197, 168, 128, 0.3);
 }
 
 .floatingButton:active {
@@ -41,7 +41,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1.5px solid rgba(191, 149, 63, 0.65);
+  border: 1.5px solid rgba(197, 168, 128, 0.5);
   animation: pulseAnimation 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
   pointer-events: none;
 }
@@ -66,9 +66,9 @@
   right: calc(100% + 14px);
   top: 50%;
   transform: translateY(-50%);
-  background: #101210;
-  border: 1px solid rgba(191, 149, 63, 0.4);
-  color: #f7efdc;
+  background: #15181f;
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  color: #f7f4ee;
   font-family: var(--font-sans), sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -76,7 +76,7 @@
   text-transform: uppercase;
   padding: 8px 14px;
   border-radius: 9999px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
@@ -99,15 +99,15 @@
   max-width: calc(100vw - 32px);
   height: 560px;
   max-height: calc(100vh - 48px);
-  background: #080808;
-  border: 1px solid rgba(191, 149, 63, 0.4);
+  background: #101216;
+  border: 1px solid rgba(197, 168, 128, 0.35);
   border-radius: 24px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 32px rgba(191, 149, 63, 0.16);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   font-family: var(--font-sans), sans-serif;
-  color: #f7efdc;
+  color: #f7f4ee;
   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -124,9 +124,9 @@
 
 /* Header */
 .chatHeader {
-  background: linear-gradient(135deg, #101210 0%, #171a16 100%);
+  background: linear-gradient(135deg, #15181f 0%, #1c202a 100%);
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(247, 239, 220, 0.12);
+  border-bottom: 1px solid rgba(247, 244, 238, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -142,12 +142,12 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(191, 149, 63, 0.16);
-  border: 1px solid rgba(191, 149, 63, 0.42);
+  background: rgba(197, 168, 128, 0.14);
+  border: 1px solid rgba(197, 168, 128, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #d5bd87;
+  color: #c5a880;
   flex-shrink: 0;
 }
 
@@ -163,7 +163,7 @@
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: uppercase;
-  color: #f7efdc;
+  color: #f7f4ee;
 }
 
 .chatStatus {
@@ -173,7 +173,7 @@
   font-size: 10.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: #c5a880;
   font-weight: 600;
   margin-top: 3px;
 }
@@ -220,9 +220,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: #080808;
+  background: #101216;
   scrollbar-width: thin;
-  scrollbar-color: rgba(191, 149, 63, 0.4) transparent;
+  scrollbar-color: rgba(197, 168, 128, 0.4) transparent;
 }
 
 .messageRow {
@@ -249,18 +249,18 @@
 }
 
 .botBubble {
-  background: #101210;
-  border: 1px solid rgba(247, 239, 220, 0.12);
-  color: rgba(247, 239, 220, 0.9);
+  background: #15181f;
+  border: 1px solid rgba(247, 244, 238, 0.08);
+  color: rgba(247, 244, 238, 0.92);
   border-bottom-left-radius: 4px;
 }
 
 .userBubble {
-  background: #bf953f;
-  color: #080808;
+  background: #c5a880;
+  color: #101216;
   font-weight: 600;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 4px 14px rgba(191, 149, 63, 0.3);
+  box-shadow: 0 4px 14px rgba(197, 168, 128, 0.22);
 }
 
 .optionsContainer {
@@ -274,9 +274,9 @@
 .optionPill {
   padding: 7px 14px;
   border-radius: 9999px;
-  background: #101210;
-  border: 1px solid rgba(191, 149, 63, 0.34);
-  color: #f7efdc;
+  background: #15181f;
+  border: 1px solid rgba(197, 168, 128, 0.28);
+  color: #f7f4ee;
   font-size: 11.5px;
   font-weight: 500;
   cursor: pointer;
@@ -288,9 +288,9 @@
 }
 
 .optionPill:hover {
-  background: rgba(191, 149, 63, 0.16);
-  border-color: #bf953f;
-  color: #f7efdc;
+  background: rgba(197, 168, 128, 0.15);
+  border-color: #c5a880;
+  color: #f7f4ee;
   transform: translateY(-1px);
 }
 
@@ -303,21 +303,21 @@
 .optionPillWhatsApp:hover {
   background: rgba(37, 211, 102, 0.24);
   border-color: #25d366;
-  color: #f7efdc;
+  color: #f7f4ee;
 }
 
 .optionPillEnquiry {
-  background: #bf953f;
-  border: 1px solid #d4af37;
-  color: #080808;
+  background: #c5a880;
+  border: 1px solid #d6be9f;
+  color: #101216;
   font-weight: 700;
-  box-shadow: 0 2px 10px rgba(191, 149, 63, 0.3);
+  box-shadow: 0 2px 10px rgba(197, 168, 128, 0.25);
 }
 
 .optionPillEnquiry:hover {
-  background: #d5bd87;
-  border-color: #d5bd87;
-  color: #080808;
+  background: #d6be9f;
+  border-color: #e5cfb5;
+  color: #101216;
   transform: translateY(-1px);
 }
 

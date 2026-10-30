@@ -413,7 +413,7 @@ export async function captureLeadInCRM(
       // The visitor still sees a friendly message, but callers must not treat this as a saved lead.
       success: false,
       referenceId,
-      message: `Enquiry received under Ref ID: ${referenceId}. Our concierge will connect with you.`,
+      message: `Enquiry received under Ref ID: ${referenceId}. Our sales team will connect with you.`,
     };
   }
 }

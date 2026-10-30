@@ -185,7 +185,7 @@ export default function PrivacyPage() {
               5. WhatsApp Communications &amp; OTP Verification
             </h2>
             <p>
-              By opting into our WhatsApp concierge or signing in via mobile OTP, you consent to receive authentic transactional updates, verification codes, and project brochures via the official Meta WhatsApp Business API. You may opt out of promotional messages at any time by simply replying &quot;STOP&quot; to our official WhatsApp channel.
+              By opting into our WhatsApp sales updates or signing in via mobile OTP, you consent to receive authentic transactional updates, verification codes, and project brochures via the official Meta WhatsApp Business API. You may opt out of promotional messages at any time by simply replying &quot;STOP&quot; to our official WhatsApp channel.
             </p>
           </section>
 

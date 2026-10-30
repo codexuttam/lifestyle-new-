@@ -28,19 +28,19 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
               rel="noopener noreferrer"
               className={styles.channelCard}
             >
-              <span className={styles.channelIndex}>01 · WHATSAPP CONCIERGE</span>
+              <span className={styles.channelIndex}>01 · DIRECT WHATSAPP CHAT 💬</span>
               <span className={styles.channelValue}>+91 7498256708</span>
-              <span className={styles.channelHint}>Instant Brochure &amp; Floor Plates ↗</span>
+              <span className={styles.channelHint}>Instant Brochure &amp; Floor Plans ↗</span>
             </a>
 
             <a href={telHref(settings)} className={styles.channelCard}>
-              <span className={styles.channelIndex}>02 · DIRECT BOOKING LINE</span>
+              <span className={styles.channelIndex}>02 · SITE OFFICE PHONE 📞</span>
               <span className={styles.channelValue}>+91 7498256708</span>
-              <span className={styles.channelHint}>Speak With Senior Property Advisor →</span>
+              <span className={styles.channelHint}>Direct Call With Sales Team →</span>
             </a>
 
             <a href={mailtoHref(settings)} className={styles.channelCard}>
-              <span className={styles.channelIndex}>03 · SITE OFFICE &amp; DESK</span>
+              <span className={styles.channelIndex}>03 · CAMP SALES OFFICE 📍</span>
               <span className={styles.channelValue}>{settings.email}</span>
               <span className={styles.channelHint}>{settings.address}</span>
             </a>
@@ -49,9 +49,9 @@ export default function HomeContactSection({ settings }: { settings: SettingsRec
 
         <div className={styles.formCard}>
           <div className={styles.formHeader}>
-            <h3 className={styles.formTitle}>Schedule Callback Or Visit</h3>
+            <h3 className={styles.formTitle}>Schedule Callback Or Visit 🏢</h3>
             <p className={styles.formSub}>
-              Leave your contact details and our Camp site office team will reach out promptly.
+              Leave your contact details and our Amravati sales team will connect with you promptly.
             </p>
           </div>
           <ContactForm />

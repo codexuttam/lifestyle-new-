@@ -79,7 +79,7 @@
 }
 
 .title span {
-  color: #bf953f;
+  color: #c5a880;
 }
 
 .sectionTitle {
@@ -133,7 +133,7 @@
   font-size: 15.5px;
   line-height: 1.72;
   color: rgba(247, 239, 220, 0.74);
-  border-left: 2px solid #bf953f;
+  border-left: 2px solid #c5a880;
   padding-left: 18px;
   margin: 0;
 }
@@ -170,8 +170,8 @@
   justify-content: center;
   padding: 13px 26px;
   border-radius: 9999px;
-  background: #bf953f;
-  border: 1px solid #d4af37;
+  background: #c5a880;
+  border: 1px solid #c5a880;
   color: #080808;
   font-family: var(--font-sans);
   font-size: 11px;
@@ -205,8 +205,8 @@
 }
 
 .secondaryBtn:hover {
-  border-color: #bf953f;
-  color: #fcf6ba;
+  border-color: #c5a880;
+  color: #d6be9f;
 }
 
 .secondaryBtnLight {
@@ -299,7 +299,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #d4af37;
+  background: #c5a880;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
 }
 
@@ -401,7 +401,7 @@
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
-  color: #bf953f;
+  color: #c5a880;
   font-variant-numeric: tabular-nums;
 }
 
@@ -433,7 +433,7 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.35rem;
-  color: #bf953f;
+  color: #c5a880;
   text-transform: uppercase;
 }
 
@@ -588,7 +588,7 @@
   font-weight: 600;
   font-size: 2.5rem;
   line-height: 0.95;
-  color: #bf953f;
+  color: #c5a880;
   font-variant-numeric: tabular-nums;
 }
 
@@ -643,7 +643,7 @@
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 11px;
-  color: #bf953f;
+  color: #c5a880;
   font-variant-numeric: tabular-nums;
 }
 

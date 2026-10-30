@@ -40,7 +40,7 @@
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: #bf953f;
+  background: #c5a880;
   box-shadow: 0 0 8px rgba(191, 149, 63, 0.6);
 }
 
@@ -136,16 +136,16 @@
 .formPanel :global(select:focus),
 .formPanel :global(textarea:focus) {
   outline: none;
-  border-color: #bf953f;
+  border-color: #c5a880;
   box-shadow: 0 0 0 3px rgba(191, 149, 63, 0.18);
 }
 
 .formPanel :global(.cta-button) {
   width: 100%;
   padding: 15px 26px;
-  border: 1px solid #d4af37;
+  border: 1px solid #c5a880;
   border-radius: 9999px;
-  background: #bf953f;
+  background: #c5a880;
   color: #080808;
   font-family: var(--font-sans), sans-serif;
   font-size: 11px;
@@ -223,7 +223,7 @@
 }
 
 a.detailRow:hover .detailValue {
-  color: #bf953f;
+  color: #c5a880;
 }
 
 /* ============ RESPONSIVE ============ */

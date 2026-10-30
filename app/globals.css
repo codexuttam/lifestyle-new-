@@ -8,54 +8,54 @@
 :root {
     color-scheme: dark light;
 
-    /* Surfaces — Architectural Charcoal & Ivory */
-    --bg-white-navy: linear-gradient(180deg, #080808 0%, #0d0e0d 45%, #080808 100%);
-    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #151715 0%, #0b0c0b 50%, #080808 100%);
-    --bg: var(--color-bg, #080808);
-    --surface: var(--color-bg-secondary, #0c0d0c);
-    --surface-alt: var(--color-bg-tertiary, #121412);
-    --surface-sunk: #050505;
+    /* Surfaces — Minimal Graphite Slate & Clean Alabaster */
+    --bg-white-navy: linear-gradient(180deg, #101216 0%, #15181f 45%, #101216 100%);
+    --bg-white-navy-radial: radial-gradient(ellipse 90% 60% at 50% 0%, #1c202a 0%, #14171e 50%, #101216 100%);
+    --bg: var(--color-bg, #101216);
+    --surface: var(--color-bg-secondary, #15181f);
+    --surface-alt: var(--color-bg-tertiary, #1b1f27);
+    --surface-sunk: #0a0b0e;
 
     /* Ink */
-    --text: var(--color-text, #f7efdc);
-    --text-ivory: #f7efdc;
-    --text-cream: #f5efe5;
-    --text-secondary: var(--color-text-secondary, rgba(247, 239, 220, 0.72));
-    --text-muted: var(--color-text-muted, rgba(247, 239, 220, 0.48));
-    --text-on-dark: #f7efdc;
-    --text-on-dark-secondary: rgba(247, 239, 220, 0.8);
+    --text: var(--color-text, #f7f4ee);
+    --text-ivory: #f7f4ee;
+    --text-cream: #f4efe6;
+    --text-secondary: var(--color-text-secondary, rgba(247, 244, 238, 0.72));
+    --text-muted: var(--color-text-muted, rgba(247, 244, 238, 0.46));
+    --text-on-dark: #f7f4ee;
+    --text-on-dark-secondary: rgba(247, 244, 238, 0.8);
 
-    /* Accent — Muted Gold & Champagne */
-    --accent-ink: #bf953f;
-    --accent: #bf953f;
-    --accent-strong: #a67c2c;
-    --accent-soft: rgba(191, 149, 63, 0.28);
-    --accent-wash: rgba(191, 149, 63, 0.08);
+    /* Accent — Refined Champagne Bronze */
+    --accent-ink: #c5a880;
+    --accent: #c5a880;
+    --accent-strong: #9e815e;
+    --accent-soft: rgba(197, 168, 128, 0.25);
+    --accent-wash: rgba(197, 168, 128, 0.08);
 
-    /* Champagne Gold Palette */
-    --gold: #bf953f;
-    --gold-light: #f7efdc;
-    --gold-dark: #967022;
-    --gold-glow: rgba(191, 149, 63, 0.3);
-    --gold-gradient: linear-gradient(135deg, #f7efdc 0%, #bf953f 52%, #8f6b20 100%);
+    /* Champagne Bronze Palette */
+    --gold: #c5a880;
+    --gold-light: #f7f4ee;
+    --gold-dark: #9e815e;
+    --gold-glow: rgba(197, 168, 128, 0.2);
+    --gold-gradient: linear-gradient(135deg, #f7f4ee 0%, #c5a880 52%, #9e815e 100%);
 
-    /* Legacy wine tokens harmonized to Muted Gold */
-    --wine: #bf953f;
-    --wine-hover: #967022;
-    --wine-light: rgba(191, 149, 63, 0.1);
-    --wine-glow: rgba(191, 149, 63, 0.3);
-    --wine-gradient: linear-gradient(135deg, #dfc285 0%, #bf953f 55%, #8f6b20 100%);
+    /* Harmonized Accent Tokens */
+    --wine: #c5a880;
+    --wine-hover: #9e815e;
+    --wine-light: rgba(197, 168, 128, 0.1);
+    --wine-glow: rgba(197, 168, 128, 0.2);
+    --wine-gradient: linear-gradient(135deg, #d8c2a5 0%, #c5a880 55%, #9e815e 100%);
 
     /* Lines & elevation */
-    --border: var(--color-border, rgba(247, 239, 220, 0.1));
-    --border-strong: var(--color-border-strong, rgba(247, 239, 220, 0.22));
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.65);
-    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.8);
+    --border: var(--color-border, rgba(247, 244, 238, 0.09));
+    --border-strong: var(--color-border-strong, rgba(247, 244, 238, 0.2));
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
 
     /* Scrims over photography */
-    --scrim-strong: rgba(8, 8, 8, 0.92);
-    --scrim: rgba(8, 8, 8, 0.74);
+    --scrim-strong: rgba(16, 18, 22, 0.9);
+    --scrim: rgba(16, 18, 22, 0.7);
 
     /* Typography */
     --font-playfair: var(--font-display);

@@ -263,11 +263,11 @@ export async function notifyOwnerOnWhatsApp(
 }
 
 /**
- * Generates direct click-to-chat WhatsApp link with Lifestyle Concierge
+ * Generates direct click-to-chat WhatsApp link with Lifestyle Sales Desk
  */
 export function getLifestyleConciergeWhatsAppUrl(customMessage?: string): string {
   const defaultText =
-    "Hello Lifestyle Team, I would like to schedule an exclusive VIP site visit and receive the architectural brochure.";
+    "Hello Lifestyle Homes team, I would like to schedule a site visit and receive the official brochure.";
   const text = encodeURIComponent(customMessage || defaultText);
   return `https://wa.me/${OFFICIAL_LIFESTYLE_WHATSAPP}?text=${text}`;
 }

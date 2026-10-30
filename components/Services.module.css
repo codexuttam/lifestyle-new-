@@ -85,7 +85,7 @@
   bottom: 0;
   width: 2px;
   transform-origin: top center;
-  background: linear-gradient(180deg, #8f6b20 0%, #bf953f 65%, transparent 100%);
+  background: linear-gradient(180deg, var(--color-gold-deep, #9a7b54) 0%, var(--color-gold, #c5a880) 65%, transparent 100%);
 }
 
 .eyebrowLine {
@@ -97,7 +97,7 @@
 .rule {
   width: 28px;
   height: 1.5px;
-  background: #8f6b20;
+  background: var(--color-gold-deep, #9a7b54);
 }
 
 .eyebrow {
@@ -106,7 +106,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8f6b20;
+  color: var(--color-gold-deep, #9a7b54);
 }
 
 .heading {
@@ -144,8 +144,8 @@
 }
 
 .viewAll:hover {
-  background: #8f6b20;
-  border-color: #8f6b20;
+  background: var(--color-gold-deep, #9a7b54);
+  border-color: var(--color-gold-deep, #9a7b54);
   color: #ffffff;
 }
 
@@ -215,7 +215,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8f6b20;
+  color: var(--color-gold-deep, #9a7b54);
   white-space: nowrap;
 }
 
@@ -251,7 +251,7 @@
 }
 
 .card:hover {
-  border-color: #8f6b20;
+  border-color: var(--color-gold, #c5a880);
   transform: translateY(-6px);
   box-shadow: 0 22px 48px rgba(12, 13, 12, 0.11);
 }
@@ -267,9 +267,9 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: rgba(191, 149, 63, 0.15);
-  border: 1px solid rgba(143, 107, 32, 0.32);
-  color: #8f6b20;
+  background: rgba(197, 168, 128, 0.16);
+  border: 1px solid rgba(154, 123, 84, 0.32);
+  color: var(--color-gold-deep, #9a7b54);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,7 +278,7 @@
 
 .card:hover .iconBadge {
   transform: scale(1.08);
-  background: #8f6b20;
+  background: var(--color-gold-deep, #9a7b54);
   color: #faf7f1;
 }
 
@@ -321,7 +321,7 @@
   justify-content: space-between;
   font-size: 11.5px;
   font-weight: 600;
-  color: #8f6b20;
+  color: var(--color-gold-deep, #9a7b54);
 }
 
 .timelineMeta {

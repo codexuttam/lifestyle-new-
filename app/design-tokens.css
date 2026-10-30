@@ -6,78 +6,79 @@
 
 :root {
   /* ==========================================================================
-     1. COLOR SYSTEM — CHARCOAL, WARM IVORY & MUTED GOLD
+     1. COLOR SYSTEM — MINIMAL GRAPHITE SLATE, CLEAN ALABASTER & WARM CHAMPAGNE
+     Subtle, smooth, architectural: avoids harsh pitch black and brassy yellow.
      ========================================================================== */
 
-  /* Primary Charcoal / Near-Black Canvas */
-  --color-bg: #080808;
-  --color-bg-secondary: #0c0d0c;
-  --color-bg-tertiary: #121412;
-  --color-bg-elevated: #171917;
+  /* Primary Deep Slate / Warm Graphite Canvas */
+  --color-bg: #101216;
+  --color-bg-secondary: #15181f;
+  --color-bg-tertiary: #1b1f27;
+  --color-bg-elevated: #222732;
 
-  /* Warm Ivory / Editorial Light Section Surfaces (Alternating Page Rhythm) */
-  --surface-ivory: #f6f1e7;
-  --surface-ivory-alt: #faf7f1;
-  --surface-ivory-card: #efe8d8;
-  --ink-on-ivory: #0c0d0c;
-  --ink-on-ivory-secondary: rgba(12, 13, 12, 0.72);
-  --ink-on-ivory-muted: rgba(12, 13, 12, 0.5);
-  --border-on-ivory: rgba(12, 13, 12, 0.11);
-  --border-gold-on-ivory: rgba(150, 112, 34, 0.34);
+  /* Warm Alabaster / Clean Architectural Light Surfaces */
+  --surface-ivory: #f8f7f4;
+  --surface-ivory-alt: #fdfdfc;
+  --surface-ivory-card: #f0ede6;
+  --ink-on-ivory: #121417;
+  --ink-on-ivory-secondary: rgba(18, 20, 23, 0.74);
+  --ink-on-ivory-muted: rgba(18, 20, 23, 0.48);
+  --border-on-ivory: rgba(18, 20, 23, 0.08);
+  --border-gold-on-ivory: rgba(197, 168, 128, 0.4);
 
   /* Glassmorphism & Card Surfaces */
-  --color-bg-card: rgba(18, 20, 18, 0.78);
-  --color-bg-card-hover: rgba(26, 28, 26, 0.92);
-  --color-bg-card-subtle: rgba(247, 239, 220, 0.03);
-  --color-bg-glass: rgba(8, 8, 8, 0.82);
-  --color-bg-glass-heavy: rgba(8, 8, 8, 0.94);
+  --color-bg-card: rgba(21, 24, 31, 0.82);
+  --color-bg-card-hover: rgba(27, 31, 39, 0.94);
+  --color-bg-card-subtle: rgba(247, 244, 238, 0.03);
+  --color-bg-glass: rgba(16, 18, 22, 0.85);
+  --color-bg-glass-heavy: rgba(16, 18, 22, 0.95);
 
   /* Inputs & Form Fields */
-  --color-bg-input: rgba(247, 239, 220, 0.04);
-  --color-bg-input-focus: rgba(247, 239, 220, 0.08);
+  --color-bg-input: rgba(247, 244, 238, 0.05);
+  --color-bg-input-focus: rgba(247, 244, 238, 0.09);
 
   /* Typography Colors */
-  --color-text: #f7efdc;
+  --color-text: #f7f4ee;
   --color-text-pure: #ffffff;
-  --color-text-ivory: #f7efdc;
-  --color-text-cream: #f5efe5;
-  --color-text-secondary: rgba(247, 239, 220, 0.72);
-  --color-text-muted: rgba(247, 239, 220, 0.48);
-  --color-text-subtle: rgba(247, 239, 220, 0.3);
-  --color-text-inverse: #080808;
+  --color-text-ivory: #f7f4ee;
+  --color-text-cream: #f4efe6;
+  --color-text-secondary: rgba(247, 244, 238, 0.72);
+  --color-text-muted: rgba(247, 244, 238, 0.46);
+  --color-text-subtle: rgba(247, 244, 238, 0.28);
+  --color-text-inverse: #101216;
 
-  /* Muted Gold & Champagne Accents */
-  --color-gold: #bf953f;
-  --color-gold-bright: #d4af37;
-  --color-gold-champagne: #d5bd87;
-  --color-gold-deep: #8f6b20;
-  --color-gold-light: #f7efdc;
-  --color-gold-shimmer: #fcf6ba;
-  --color-gold-muted: rgba(191, 149, 63, 0.42);
-  --color-gold-gradient: linear-gradient(90deg, #bf953f 0%, #dfc285 55%, #b38728 100%);
-  --color-gold-rule: linear-gradient(90deg, #bf953f 0%, #fcf6ba 60%, rgba(191, 149, 63, 0) 100%);
-  --color-gold-glow: rgba(191, 149, 63, 0.22);
+  /* Refined Champagne Bronze & Warm Sand Accents */
+  --color-gold: #c5a880;
+  --color-gold-bright: #d6be9f;
+  --color-gold-champagne: #e2ceb5;
+  --color-gold-deep: #9a7b54;
+  --color-gold-light: #f7f4ee;
+  --color-gold-shimmer: #ede1d1;
+  --color-gold-muted: rgba(197, 168, 128, 0.32);
+  --color-gold-gradient: linear-gradient(90deg, #c5a880 0%, #d8c2a5 55%, #b2936a 100%);
+  --color-gold-rule: linear-gradient(90deg, #c5a880 0%, #ede1d1 60%, rgba(197, 168, 128, 0) 100%);
+  --color-gold-glow: rgba(197, 168, 128, 0.16);
 
-  /* Remap legacy --color-wine tokens across inner pages to Muted Gold so the whole site stays unified */
-  --color-wine: #bf953f;
-  --color-wine-hover: #a67c2c;
-  --color-wine-light: rgba(191, 149, 63, 0.1);
-  --color-wine-light-border: rgba(191, 149, 63, 0.35);
-  --color-wine-glow: rgba(191, 149, 63, 0.28);
-  --wine-glow-rgb: 191, 149, 63;
+  /* Remap legacy --color-wine tokens across inner pages to Warm Sand Bronze */
+  --color-wine: #c5a880;
+  --color-wine-hover: #b2936a;
+  --color-wine-light: rgba(197, 168, 128, 0.1);
+  --color-wine-light-border: rgba(197, 168, 128, 0.32);
+  --color-wine-glow: rgba(197, 168, 128, 0.2);
+  --wine-glow-rgb: 197, 168, 128;
 
   /* Pure Architectural Gradients */
-  --bg-platform-gradient: linear-gradient(180deg, #080808 0%, #0d0f0d 45%, #080808 100%);
-  --bg-white-navy-radial: radial-gradient(ellipse 85% 55% at 50% 0%, rgba(191, 149, 63, 0.12) 0%, #0c0d0c 52%, #080808 100%);
-  --bg-navy-canvas: linear-gradient(180deg, #080808 0%, #0b0c0b 50%, #080808 100%);
-  --bg-navy-gradient: linear-gradient(135deg, #0c0d0c 0%, #141614 50%, #080808 100%);
+  --bg-platform-gradient: linear-gradient(180deg, #101216 0%, #15181f 45%, #101216 100%);
+  --bg-white-navy-radial: radial-gradient(ellipse 85% 55% at 50% 0%, rgba(197, 168, 128, 0.1) 0%, #14171d 52%, #101216 100%);
+  --bg-navy-canvas: linear-gradient(180deg, #101216 0%, #13161c 50%, #101216 100%);
+  --bg-navy-gradient: linear-gradient(135deg, #121419 0%, #1a1e26 50%, #101216 100%);
 
   /* Hairline Borders & Dividers */
-  --color-border: rgba(247, 239, 220, 0.1);
-  --color-border-subtle: rgba(247, 239, 220, 0.06);
-  --color-border-hover: rgba(191, 149, 63, 0.45);
-  --color-border-gold: rgba(191, 149, 63, 0.38);
-  --color-border-strong: rgba(247, 239, 220, 0.24);
+  --color-border: rgba(247, 244, 238, 0.09);
+  --color-border-subtle: rgba(247, 244, 238, 0.05);
+  --color-border-hover: rgba(197, 168, 128, 0.45);
+  --color-border-gold: rgba(197, 168, 128, 0.35);
+  --color-border-strong: rgba(247, 244, 238, 0.2);
 
   /* Status Tokens */
   --color-success: #18a957;

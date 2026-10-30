@@ -323,8 +323,8 @@ export default function AuthOtpModal({
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#bf953f";
-            e.currentTarget.style.borderColor = "#bf953f";
+            e.currentTarget.style.background = "#c5a880";
+            e.currentTarget.style.borderColor = "#c5a880";
             e.currentTarget.style.color = "#ffffff";
             e.currentTarget.style.transform = "rotate(90deg)";
           }}
@@ -399,7 +399,7 @@ export default function AuthOtpModal({
                 gap: "6px",
                 padding: "3px 10px",
                 borderRadius: "9999px",
-                background: "#bf953f",
+                background: "#c5a880",
                 color: "#ffffff",
                 fontSize: "8.5px",
                 fontWeight: 800,
@@ -432,7 +432,7 @@ export default function AuthOtpModal({
                 margin: 0,
               }}
             >
-              Amravati&apos;s 15-storey landmark in Congress Nagar. Sign in for verified floor plans &amp; direct concierge access.
+              Amravati&apos;s 15-storey landmark in Congress Nagar. Sign in for verified floor plans &amp; direct sales desk support. 🏢
             </p>
           </div>
         </div>
@@ -461,7 +461,7 @@ export default function AuthOtpModal({
                     borderRadius: "9999px",
                     background: "rgba(191, 149, 63, 0.12)",
                     border: "1px solid rgba(191, 149, 63, 0.25)",
-                    color: "#bf953f",
+                    color: "#c5a880",
                     fontSize: "9.5px",
                     fontWeight: 700,
                     letterSpacing: "0.25em",
@@ -512,7 +512,7 @@ export default function AuthOtpModal({
                         marginBottom: "0.4rem",
                       }}
                     >
-                      Full Name <span style={{ color: "#bf953f" }}>*</span>
+                      Full Name <span style={{ color: "#c5a880" }}>*</span>
                     </label>
                     <input
                       type="text"
@@ -534,7 +534,7 @@ export default function AuthOtpModal({
                         transition: "all 0.2s ease",
                       }}
                       onFocus={(e) => {
-                        e.currentTarget.style.borderColor = "#bf953f";
+                        e.currentTarget.style.borderColor = "#c5a880";
                         e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                       }}
                       onBlur={(e) => {
@@ -557,7 +557,7 @@ export default function AuthOtpModal({
                         marginBottom: "0.4rem",
                       }}
                     >
-                      WhatsApp Mobile Number <span style={{ color: "#bf953f" }}>*</span>
+                      WhatsApp Mobile Number <span style={{ color: "#c5a880" }}>*</span>
                     </label>
                     <div style={{ display: "flex", gap: "0.5rem" }}>
                       <div
@@ -566,7 +566,7 @@ export default function AuthOtpModal({
                           background: "rgba(255, 255, 255, 0.05)",
                           border: "1px solid rgba(255, 255, 255, 0.12)",
                           borderRadius: "12px",
-                          color: "#bf953f",
+                          color: "#c5a880",
                           fontWeight: 700,
                           fontSize: "0.88rem",
                           fontFamily: "var(--font-montserrat), sans-serif",
@@ -595,7 +595,7 @@ export default function AuthOtpModal({
                           transition: "all 0.2s ease",
                         }}
                         onFocus={(e) => {
-                          e.currentTarget.style.borderColor = "#bf953f";
+                          e.currentTarget.style.borderColor = "#c5a880";
                           e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                         }}
                         onBlur={(e) => {
@@ -639,7 +639,7 @@ export default function AuthOtpModal({
                         transition: "all 0.2s ease",
                       }}
                       onFocus={(e) => {
-                        e.currentTarget.style.borderColor = "#bf953f";
+                        e.currentTarget.style.borderColor = "#c5a880";
                         e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                       }}
                       onBlur={(e) => {
@@ -674,7 +674,7 @@ export default function AuthOtpModal({
                       width: "100%",
                       padding: "12px 20px",
                       borderRadius: "12px",
-                      background: "#bf953f",
+                      background: "#c5a880",
                       color: "#ffffff",
                       fontFamily: "var(--font-montserrat), sans-serif",
                       fontWeight: 700,
@@ -699,7 +699,7 @@ export default function AuthOtpModal({
                       }
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "#bf953f";
+                      e.currentTarget.style.background = "#c5a880";
                       e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
@@ -798,7 +798,7 @@ export default function AuthOtpModal({
                       width: "100%",
                       padding: "12px 20px",
                       borderRadius: "12px",
-                      background: "#bf953f",
+                      background: "#c5a880",
                       color: "#ffffff",
                       fontFamily: "var(--font-montserrat), sans-serif",
                       fontWeight: 700,
@@ -883,7 +883,7 @@ export default function AuthOtpModal({
                       padding: "14px",
                       borderRadius: "12px",
                       background: "rgba(255, 255, 255, 0.05)",
-                      border: "1.5px solid #bf953f",
+                      border: "1.5px solid #c5a880",
                       color: "#ffffff",
                       fontSize: "1.5rem",
                       fontWeight: 700,
@@ -915,7 +915,7 @@ export default function AuthOtpModal({
                     style={{
                       background: "transparent",
                       border: "none",
-                      color: otpTimer > 0 ? "rgba(255, 255, 255, 0.35)" : "#bf953f",
+                      color: otpTimer > 0 ? "rgba(255, 255, 255, 0.35)" : "#c5a880",
                       cursor: otpTimer > 0 ? "not-allowed" : "pointer",
                       textDecoration: otpTimer > 0 ? "none" : "underline",
                       fontWeight: 600,
@@ -947,7 +947,7 @@ export default function AuthOtpModal({
                     width: "100%",
                     padding: "12px 20px",
                     borderRadius: "12px",
-                    background: "#bf953f",
+                    background: "#c5a880",
                     color: "#ffffff",
                     fontFamily: "var(--font-montserrat), sans-serif",
                     fontWeight: 700,
@@ -991,14 +991,14 @@ export default function AuthOtpModal({
                   Welcome to Lifestyle Homes!
                 </h3>
                 <p style={{ color: "#94a3b8", fontSize: "0.82rem", marginTop: "0.35rem" }}>
-                  What should our concierge address you as?
+                  Please share your full name to personalize your visit 👤
                 </p>
               </div>
 
               <form onSubmit={handleSaveName} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <div>
                   <label style={{ display: "block", fontSize: "9.5px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.4rem" }}>
-                    Your Full Name <span style={{ color: "#bf953f" }}>*</span>
+                    Your Full Name <span style={{ color: "#c5a880" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -1026,7 +1026,7 @@ export default function AuthOtpModal({
                     width: "100%",
                     padding: "12px 20px",
                     borderRadius: "12px",
-                    background: "#bf953f",
+                    background: "#c5a880",
                     color: "#ffffff",
                     fontWeight: 700,
                     fontSize: "11px",

@@ -63,7 +63,7 @@
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #bf953f;
+  color: var(--color-gold, #c5a880);
 }
 
 .addressBlock {
@@ -90,7 +90,7 @@
 }
 
 .emailLink:hover {
-  color: #bf953f;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .emailSub {
@@ -100,27 +100,32 @@
 }
 
 .emailSub:hover {
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .reraLine {
   margin-top: 6px;
   font-size: 11.5px;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .enquireBtn {
   margin-top: 4px;
   padding: 11px 22px;
   border-radius: 9999px;
-  background: #bf953f;
-  border: 1px solid #d4af37;
-  color: #080808;
+  background: var(--color-gold, #c5a880);
+  border: 1px solid var(--color-gold, #c5a880);
+  color: #101216;
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.enquireBtn:hover {
+  background: var(--color-gold-bright, #d6be9f);
+  border-color: var(--color-gold-bright, #d6be9f);
 }
 
 .colLabel {
@@ -133,7 +138,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #bf953f;
+  background: var(--color-gold, #c5a880);
 }
 
 .colLabelText {
@@ -141,7 +146,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 .linkList {
@@ -196,7 +201,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #bf953f;
+  color: var(--color-gold, #c5a880);
 }
 
 .newsletterCopy {
@@ -219,7 +224,7 @@
 }
 
 .inputBox:focus-within {
-  border-bottom-color: #bf953f;
+  border-bottom-color: var(--color-gold, #c5a880);
 }
 
 .input {
@@ -239,8 +244,8 @@
 .subscribeBtn {
   padding: 11px 22px;
   border-radius: 9999px;
-  border: 1px solid rgba(191, 149, 63, 0.55);
-  background: rgba(191, 149, 63, 0.14);
+  border: 1px solid rgba(197, 168, 128, 0.55);
+  background: rgba(197, 168, 128, 0.14);
   color: #f7efdc;
   font-size: 10.5px;
   font-weight: 700;
@@ -250,13 +255,13 @@
 }
 
 .subscribeBtn:hover {
-  background: #bf953f;
-  color: #080808;
+  background: var(--color-gold, #c5a880);
+  color: #101216;
 }
 
 .formNote {
   font-size: 13.5px;
-  color: #d5bd87;
+  color: var(--color-gold-bright, #d6be9f);
 }
 
 /* Monumental Wordmark Frame */
@@ -264,7 +269,7 @@
   position: relative;
   padding: 68px 24px;
   border-radius: 22px;
-  border: 1px solid rgba(191, 149, 63, 0.24);
+  border: 1px solid rgba(197, 168, 128, 0.24);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -285,7 +290,7 @@
 .brandingOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(8, 8, 8, 0.35) 0%, rgba(5, 5, 5, 0.94) 85%);
+  background: radial-gradient(circle at center, rgba(16, 18, 22, 0.35) 0%, rgba(16, 18, 22, 0.94) 85%);
 }
 
 .corner {
@@ -297,29 +302,29 @@
 .cornerTl {
   top: 12px;
   left: 12px;
-  border-top: 1px solid rgba(191, 149, 63, 0.45);
-  border-left: 1px solid rgba(191, 149, 63, 0.45);
+  border-top: 1px solid rgba(197, 168, 128, 0.45);
+  border-left: 1px solid rgba(197, 168, 128, 0.45);
 }
 
 .cornerTr {
   top: 12px;
   right: 12px;
-  border-top: 1px solid rgba(191, 149, 63, 0.45);
-  border-right: 1px solid rgba(191, 149, 63, 0.45);
+  border-top: 1px solid rgba(197, 168, 128, 0.45);
+  border-right: 1px solid rgba(197, 168, 128, 0.45);
 }
 
 .cornerBl {
   bottom: 12px;
   left: 12px;
-  border-bottom: 1px solid rgba(191, 149, 63, 0.45);
-  border-left: 1px solid rgba(191, 149, 63, 0.45);
+  border-bottom: 1px solid rgba(197, 168, 128, 0.45);
+  border-left: 1px solid rgba(197, 168, 128, 0.45);
 }
 
 .cornerBr {
   bottom: 12px;
   right: 12px;
-  border-bottom: 1px solid rgba(191, 149, 63, 0.45);
-  border-right: 1px solid rgba(191, 149, 63, 0.45);
+  border-bottom: 1px solid rgba(197, 168, 128, 0.45);
+  border-right: 1px solid rgba(197, 168, 128, 0.45);
 }
 
 .giantTitle {
@@ -332,7 +337,7 @@
   line-height: 0.95;
   text-align: center;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #f7efdc 0%, #bf953f 65%, rgba(191, 149, 63, 0.15) 100%);
+  background: linear-gradient(180deg, #f7efdc 0%, #c5a880 65%, rgba(197, 168, 128, 0.15) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

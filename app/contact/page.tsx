@@ -42,22 +42,22 @@ export default async function ContactPage() {
               <h2 className={styles.detailsTitle}>{copy.sidebarTitle}</h2>
 
               <a className={styles.detailRow} href={whatsappHref(settings)}>
-                <span className={styles.detailLabel}>WhatsApp Concierge</span>
+                <span className={styles.detailLabel}>💬 WhatsApp Chat</span>
                 <span className={styles.detailValue}>{settings.phone}</span>
               </a>
 
               <a className={styles.detailRow} href={telHref(settings)}>
-                <span className={styles.detailLabel}>Direct Advisory Desk</span>
+                <span className={styles.detailLabel}>📞 Direct Phone &amp; Sales Desk</span>
                 <span className={styles.detailValue}>{settings.phone}</span>
               </a>
 
               <a className={styles.detailRow} href={mailtoHref(settings)}>
-                <span className={styles.detailLabel}>Official Email</span>
+                <span className={styles.detailLabel}>✉️ Official Email</span>
                 <span className={styles.detailValue}>{settings.email}</span>
               </a>
 
               <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Site &amp; Head Office</span>
+                <span className={styles.detailLabel}>📍 Camp Site Office</span>
                 <span className={styles.detailValue}>{settings.address}</span>
               </div>
             </aside>

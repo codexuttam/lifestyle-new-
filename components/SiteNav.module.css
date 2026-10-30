@@ -70,7 +70,7 @@
   right: 0;
   bottom: 0;
   height: 1.5px;
-  background: #bf953f;
+  background: #c5a880;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -157,9 +157,9 @@
   min-width: 112px;
   padding: 9px 20px;
   border-radius: 9999px;
-  background: #bf953f;
-  border: 1px solid #d4af37;
-  color: #080808;
+  background: #c5a880;
+  border: 1px solid #d6be9f;
+  color: #101216;
   font-family: var(--font-sans);
   font-size: 10.5px;
   font-weight: 700;
@@ -167,7 +167,7 @@
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(191, 149, 63, 0.24);
+  box-shadow: 0 4px 16px rgba(197, 168, 128, 0.2);
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
@@ -176,10 +176,10 @@
 }
 
 .btnAction:hover {
-  background: #d5bd87;
-  border-color: #e2c275;
+  background: #d6be9f;
+  border-color: #e5cfb5;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(191, 149, 63, 0.38);
+  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.3);
 }
 
 /* Member Profile Dropdown */
@@ -195,24 +195,24 @@
   gap: 8px;
   padding: 4px 14px 4px 5px;
   border-radius: 9999px;
-  background: #bf953f;
-  border: 1px solid #d4af37;
+  background: #c5a880;
+  border: 1px solid #d6be9f;
   cursor: pointer;
   transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .coolUserBtn:hover,
 .coolUserBtnActive {
-  background: #d5bd87;
-  border-color: #e2c275;
+  background: #d6be9f;
+  border-color: #e5cfb5;
 }
 
 .coolAvatar {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #080808;
-  color: #f7efdc;
+  background: #101216;
+  color: #f7f4ee;
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 12px;
@@ -266,8 +266,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #bf953f;
-  color: #080808;
+  background: #c5a880;
+  color: #101216;
   font-weight: 700;
   font-size: 16px;
   display: flex;
@@ -403,13 +403,13 @@
   font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #bf953f;
+  color: #c5a880;
 }
 
 .mobileThemeBtn {
-  background: rgba(191, 149, 63, 0.12);
-  border: 1px solid rgba(191, 149, 63, 0.34);
-  color: #f7efdc;
+  background: rgba(197, 168, 128, 0.12);
+  border: 1px solid rgba(197, 168, 128, 0.34);
+  color: #f7f4ee;
   border-radius: 9999px;
   padding: 5px 12px;
   font-size: 11px;
@@ -474,21 +474,21 @@
 }
 
 .mobileLink:hover {
-  color: #bf953f;
+  color: #c5a880;
   padding-left: 12px;
 }
 
 .mobileLinkIndex {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: #bf953f;
+  color: #c5a880;
   font-variant-numeric: tabular-nums;
 }
 
 .mobileLinkArrow {
   margin-left: auto;
   font-size: 15px;
-  color: rgba(247, 239, 220, 0.45);
+  color: rgba(247, 244, 238, 0.45);
 }
 
 .mobileDrawerActions {
@@ -501,9 +501,9 @@
 .mobileActionBtn {
   padding: 12px 16px;
   border-radius: 9999px;
-  border: 1px solid #d4af37;
-  background: #bf953f;
-  color: #080808;
+  border: 1px solid #d6be9f;
+  background: #c5a880;
+  color: #101216;
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
@@ -514,7 +514,7 @@
 }
 
 .mobileActionBtn:hover {
-  background: #d5bd87;
+  background: #d6be9f;
 }
 
 @media (max-width: 1200px) {

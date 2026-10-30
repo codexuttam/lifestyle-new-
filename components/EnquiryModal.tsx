@@ -154,9 +154,9 @@ export default function EnquiryModal({
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#bf953f";
-            e.currentTarget.style.borderColor = "#bf953f";
-            e.currentTarget.style.color = "#ffffff";
+            e.currentTarget.style.background = "#c5a880";
+            e.currentTarget.style.borderColor = "#c5a880";
+            e.currentTarget.style.color = "#101216";
             e.currentTarget.style.transform = "rotate(90deg)";
           }}
           onMouseLeave={(e) => {
@@ -207,9 +207,9 @@ export default function EnquiryModal({
                 display: "inline-block",
                 padding: "0.45rem 1.25rem",
                 borderRadius: "8px",
-                background: "rgba(191, 149, 63, 0.12)",
-                border: "1px solid rgba(191, 149, 63, 0.3)",
-                color: "#bf953f",
+                background: "rgba(197, 168, 128, 0.12)",
+                border: "1px solid rgba(197, 168, 128, 0.3)",
+                color: "#c5a880",
                 fontWeight: 700,
                 letterSpacing: "1px",
                 marginBottom: "1.25rem",
@@ -220,7 +220,7 @@ export default function EnquiryModal({
               {referenceId}
             </div>
             <p style={{ color: "#64748b", fontSize: "0.82rem", marginBottom: "1.5rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
-              Our sales concierge will connect with you shortly regarding {projectTitle}.
+              Our sales team will connect with you shortly regarding {projectTitle}. 🤝
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               <a
@@ -277,7 +277,7 @@ export default function EnquiryModal({
                   borderRadius: "9999px",
                   background: "rgba(191, 149, 63, 0.12)",
                   border: "1px solid rgba(191, 149, 63, 0.25)",
-                  color: "#bf953f",
+                  color: "#c5a880",
                   fontSize: "9.5px",
                   fontWeight: 700,
                   letterSpacing: "0.25em",
@@ -320,7 +320,7 @@ export default function EnquiryModal({
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Full Name <span style={{ color: "#bf953f" }}>*</span>
+                  Full Name <span style={{ color: "#c5a880" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -341,7 +341,7 @@ export default function EnquiryModal({
                     transition: "all 0.2s ease",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#bf953f";
+                    e.currentTarget.style.borderColor = "#c5a880";
                     e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
                   }}
                   onBlur={(e) => {
@@ -364,7 +364,7 @@ export default function EnquiryModal({
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Mobile Number <span style={{ color: "#bf953f" }}>*</span>
+                  Mobile Number <span style={{ color: "#c5a880" }}>*</span>
                 </label>
                 <div style={{ display: "flex", gap: "0.5rem" }}>
                   <div
@@ -373,7 +373,7 @@ export default function EnquiryModal({
                       background: "rgba(255, 255, 255, 0.05)",
                       border: "1px solid rgba(255, 255, 255, 0.12)",
                       borderRadius: "12px",
-                      color: "#bf953f",
+                      color: "#c5a880",
                       fontWeight: 700,
                       fontSize: "0.88rem",
                       fontFamily: "var(--font-montserrat), sans-serif",
@@ -402,8 +402,8 @@ export default function EnquiryModal({
                       transition: "all 0.2s ease",
                     }}
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "#bf953f";
-                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
+                      e.currentTarget.style.borderColor = "#c5a880";
+                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(197, 168, 128, 0.18)";
                     }}
                     onBlur={(e) => {
                       e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
@@ -446,8 +446,8 @@ export default function EnquiryModal({
                     transition: "all 0.2s ease",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#bf953f";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(191, 149, 63, 0.18)";
+                    e.currentTarget.style.borderColor = "#c5a880";
+                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(197, 168, 128, 0.18)";
                   }}
                   onBlur={(e) => {
                     e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
@@ -472,7 +472,7 @@ export default function EnquiryModal({
                 </div>
               )}
 
-              {/* Lotlite SIEC Wine Primary CTA */}
+              {/* Refined Champagne Bronze Primary CTA */}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -480,8 +480,8 @@ export default function EnquiryModal({
                   width: "100%",
                   padding: "12px 20px",
                   borderRadius: "12px",
-                  background: "#bf953f",
-                  color: "#ffffff",
+                  background: "#c5a880",
+                  color: "#101216",
                   fontFamily: "var(--font-montserrat), sans-serif",
                   fontWeight: 700,
                   fontSize: "11px",
@@ -489,23 +489,23 @@ export default function EnquiryModal({
                   letterSpacing: "0.15em",
                   border: "none",
                   cursor: isSubmitting ? "not-allowed" : "pointer",
-                  boxShadow: "0 8px 24px rgba(191, 149, 63, 0.3)",
+                  boxShadow: "0 8px 24px rgba(197, 168, 128, 0.25)",
                   opacity: isSubmitting ? 0.75 : 1,
                   transition: "all 0.2s ease",
                   marginTop: "0.25rem",
                 }}
                 onMouseEnter={(e) => {
                   if (!isSubmitting) {
-                    e.currentTarget.style.background = "#967022";
+                    e.currentTarget.style.background = "#d6be9f";
                     e.currentTarget.style.transform = "translateY(-1px)";
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#bf953f";
+                  e.currentTarget.style.background = "#c5a880";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                {isSubmitting ? "Submitting to CRM..." : "Submit Enquiry"}
+                {isSubmitting ? "Connecting to sales desk..." : "Submit Enquiry ↗"}
               </button>
 
               <p

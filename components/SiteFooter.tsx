@@ -17,7 +17,7 @@ const NAV_LINKS = [
   { label: "Floor Plans & Cut-Sections", href: "/#floor-plans" },
   { label: "About Lifestyle", href: "/about" },
   { label: "Real Estate Insights", href: "/blogs" },
-  { label: "Contact Advisory Desk", href: "/contact" },
+  { label: "Contact Sales Team 📞", href: "/contact" },
 ];
 
 export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
@@ -103,7 +103,7 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
                 rel="noopener noreferrer"
                 className={styles.waLink}
               >
-                WhatsApp Concierge ↗
+                💬 WhatsApp Sales Desk ↗
               </a>
               {SOCIAL_LINKS.map((link) => (
                 <a
@@ -133,7 +133,7 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
 
           {subscribed ? (
             <p className={styles.formNote} role="status">
-              ✓ Request noted — our advisory desk will share the official brochure kit shortly.
+              ✓ Request noted — our sales team will share the official brochure kit shortly. 📋
             </p>
           ) : (
             <form className={styles.form} onSubmit={onSubmit}>

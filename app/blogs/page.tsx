@@ -169,7 +169,7 @@ export default function BlogsPage() {
               letterSpacing: "-0.015em",
             }}
           >
-            LIFESTYLE ARTICLES &amp; <span style={{ color: "#bf953f" }}>BUYER FOLIOS</span>
+            LIFESTYLE ARTICLES &amp; <span style={{ color: "#c5a880" }}>BUYER FOLIOS</span>
           </h1>
           <p
             style={{
@@ -203,7 +203,7 @@ export default function BlogsPage() {
                   gap: "0.55rem",
                   padding: "13px 24px",
                   borderRadius: "9999px",
-                  background: "#bf953f",
+                  background: "#c5a880",
                   color: "#080808",
                   fontWeight: 700,
                   fontSize: "11px",
@@ -297,7 +297,7 @@ export default function BlogsPage() {
                   style={{
                     padding: "9px 16px",
                     borderRadius: "9999px",
-                    background: isActive ? "#bf953f" : "transparent",
+                    background: isActive ? "#c5a880" : "transparent",
                     border: isActive
                       ? "1px solid #d4af37"
                       : "1px solid rgba(247, 239, 220, 0.14)",
@@ -379,7 +379,7 @@ export default function BlogsPage() {
               style={{
                 padding: "11px 22px",
                 borderRadius: "9999px",
-                background: "#bf953f",
+                background: "#c5a880",
                 border: "1px solid #d4af37",
                 color: "#080808",
                 fontSize: "11px",
@@ -478,7 +478,7 @@ export default function BlogsPage() {
                         style={{
                           padding: "5px 11px",
                           borderRadius: "9999px",
-                          background: "#bf953f",
+                          background: "#c5a880",
                           color: "#080808",
                           fontSize: "10px",
                           fontWeight: 700,
@@ -558,7 +558,7 @@ export default function BlogsPage() {
                       justifyContent: "space-between",
                       paddingTop: "14px",
                       borderTop: "1px solid rgba(247, 239, 220, 0.09)",
-                      color: "#bf953f",
+                      color: "#c5a880",
                       fontWeight: 600,
                       fontSize: "11px",
                       letterSpacing: "0.14em",
@@ -707,7 +707,7 @@ export default function BlogsPage() {
                 style={{
                   padding: "13px 22px",
                   borderRadius: "9999px",
-                  background: "#bf953f",
+                  background: "#c5a880",
                   color: "#080808",
                   fontWeight: 700,
                   fontSize: "11px",

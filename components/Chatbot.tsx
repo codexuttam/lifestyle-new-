@@ -175,26 +175,26 @@ export default function Chatbot() {
           {
             id: "1",
             sender: "bot",
-            text: "Namaste! Welcome to Lifestyle Home Spaces.\n\nI am your digital portfolio concierge. Which landmark development in Amravati would you like to explore today?",
+            text: "Namaste! 🙏 Welcome to Lifestyle Home Spaces.\n\nWe are here to help you find your dream home or commercial space in Amravati. What would you like to explore today?",
             options: [
               {
-                label: "🤝 Request Callback / Site Visit",
+                label: "🤝 Schedule Site Visit / Callback",
                 action: () => startQualification(),
                 isEnquiry: true,
               },
               {
-                label: "📝 Submit Online Enquiry Form",
-                action: () => openEnquiry("Aura by Lifestyle", "General Concierge Enquiry"),
+                label: "📋 Request Brochure & Pricing",
+                action: () => openEnquiry("Aura by Lifestyle", "General Sales Enquiry"),
                 isEnquiry: true,
               },
-              { label: "✨ Aura by Lifestyle (Skyline Highrise)", action: () => handleOptionClick("Aura Details") },
-              { label: "🏛️ Lifestyle Homes (Delivered Landmark)", action: () => handleOptionClick("Lifestyle Homes Details") },
+              { label: "🏢 Aura by Lifestyle (Camp Highrise)", action: () => handleOptionClick("Aura Details") },
+              { label: "🏡 Lifestyle Homes (DPS Rd · Ready Possession)", action: () => handleOptionClick("Lifestyle Homes Details") },
               { label: "⚖️ Compare Both Projects", action: () => handleOptionClick("Compare Projects") },
-              { label: "📐 Floor Plans & Layouts", action: () => handleOptionClick("Aura Floor Plans") },
-              { label: "🛍️ Commercial Retail & Offices", action: () => handleOptionClick("Commercial Retail") },
-              { label: "📍 Locations & Connectivity", action: () => handleOptionClick("Locations") },
+              { label: "📐 2 & 3 BHK Floor Plans", action: () => handleOptionClick("Aura Floor Plans") },
+              { label: "🛍️ Commercial Shops & Showrooms", action: () => handleOptionClick("Commercial Retail") },
+              { label: "📍 Locations & How to Reach", action: () => handleOptionClick("Locations") },
               {
-                label: "💬 Talk to Sales on WhatsApp",
+                label: "💬 Chat Directly on WhatsApp",
                 action: () => handleOptionClick("Contact Sales"),
                 isWhatsApp: true,
               },
@@ -323,19 +323,20 @@ export default function Chatbot() {
       switch (optionLabel) {
         case "Submit Online Enquiry Form":
         case "Submit Enquiry Form":
+        case "Request Brochure & Pricing":
         case "Enquire Now":
-          openEnquiry("Aura by Lifestyle", "Concierge Chat Enquiry");
+          openEnquiry("Aura by Lifestyle", "Sales Desk Enquiry");
           botResponse = {
             sender: "bot",
-            text: "Opening our official VIP Enquiry Form for you.\n\nPlease enter your name and phone number in the form to register your enquiry directly in our Real Estate CRM.",
+            text: "Opening our official callback & enquiry form.\n\nPlease enter your name and phone number to connect directly with our Amravati sales team.",
             options: [
               {
-                label: "📝 Reopen Enquiry Form",
-                action: () => openEnquiry("Aura by Lifestyle", "Concierge Chat Enquiry"),
+                label: "📋 Reopen Enquiry Form",
+                action: () => openEnquiry("Aura by Lifestyle", "Sales Desk Enquiry"),
                 isEnquiry: true,
               },
               {
-                label: "💬 Talk to Sales on WhatsApp",
+                label: "💬 Chat on WhatsApp",
                 action: () => handleOptionClick("Contact Sales"),
                 isWhatsApp: true,
               },
@@ -516,25 +517,25 @@ export default function Chatbot() {
         case "Contact Sales":
           botResponse = {
             sender: "bot",
-            text: `Our official sales desk is available via Online Enquiry, WhatsApp & Direct Phone at +91 ${WHATSAPP_NUMBER}.\n\nChoose an option below to connect with our senior property advisory team:`,
+            text: `Our official sales desk is available via phone, WhatsApp & on-site at +91 ${WHATSAPP_NUMBER}.\n\nChoose an option below to connect directly with our sales team:`,
             options: [
               {
-                label: "📝 Submit Online Enquiry Form",
+                label: "📋 Submit Callback Enquiry",
                 action: () => openEnquiry("Aura by Lifestyle", "Sales Desk Enquiry"),
                 isEnquiry: true,
               },
               {
-                label: "💬 Open WhatsApp Concierge",
+                label: "💬 Chat on WhatsApp",
                 action: () => {
                   const message = encodeURIComponent(
-                    "Hello Lifestyle Team, I am interested in Lifestyle Home Spaces developments (Aura by Lifestyle & Lifestyle Homes in Amravati). Please share brochures and schedule a visit."
+                    "Hello Lifestyle Homes team, I am interested in your projects in Amravati (Aura by Lifestyle & Lifestyle Homes). Please share brochures and available layouts."
                   );
                   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
                 },
                 isWhatsApp: true,
               },
               {
-                label: "📞 Call +91 7498256708 Directly",
+                label: "📞 Call +91 7498256708",
                 action: () => {
                   window.location.href = `tel:${PHONE_NUMBER}`;
                 },
@@ -548,7 +549,7 @@ export default function Chatbot() {
         default:
           botResponse = {
             sender: "bot",
-            text: "How can I assist you further with Lifestyle Home Spaces portfolio?",
+            text: "How else can we help you regarding our Amravati developments?",
             options: [
               {
                 label: "🤝 Request Callback / Site Visit",
@@ -556,18 +557,18 @@ export default function Chatbot() {
                 isEnquiry: true,
               },
               {
-                label: "📝 Submit Online Enquiry Form",
-                action: () => openEnquiry("Aura by Lifestyle", "General Concierge Enquiry"),
+                label: "📋 Request Brochure & Pricing",
+                action: () => openEnquiry("Aura by Lifestyle", "General Sales Enquiry"),
                 isEnquiry: true,
               },
-              { label: "✨ Aura by Lifestyle", action: () => handleOptionClick("Aura Details") },
-              { label: "🏛️ Lifestyle Homes", action: () => handleOptionClick("Lifestyle Homes Details") },
+              { label: "🏢 Aura by Lifestyle", action: () => handleOptionClick("Aura Details") },
+              { label: "🏡 Lifestyle Homes", action: () => handleOptionClick("Lifestyle Homes Details") },
               { label: "⚖️ Compare Both Projects", action: () => handleOptionClick("Compare Projects") },
-              { label: "📐 Floor Plans", action: () => handleOptionClick("Aura Floor Plans") },
-              { label: "🛍️ Commercial Retail", action: () => handleOptionClick("Commercial Retail") },
-              { label: "📍 Locations & Maps", action: () => handleOptionClick("Locations") },
+              { label: "📐 2 & 3 BHK Floor Plans", action: () => handleOptionClick("Aura Floor Plans") },
+              { label: "🛍️ Commercial Shops & Showrooms", action: () => handleOptionClick("Commercial Retail") },
+              { label: "📍 Locations & Connectivity", action: () => handleOptionClick("Locations") },
               {
-                label: "💬 Talk to Sales on WhatsApp",
+                label: "💬 Chat on WhatsApp",
                 action: () => handleOptionClick("Contact Sales"),
                 isWhatsApp: true,
               },
@@ -582,44 +583,47 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Concierge Bubble */}
+      {/* Floating Sales Desk Bubble */}
       {!isOpen && (
         <button
           type="button"
           onClick={() => setIsOpen(true)}
           className={styles.floatingButton}
-          aria-label="Open Project Concierge"
+          aria-label="Open Sales Desk Chat"
         >
           <div className={styles.pulseRing} />
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
           <span className={styles.tooltip}>
-            ✨ Explore Aura &amp; Lifestyle Homes
+            💬 Chat with Sales Team
           </span>
         </button>
       )}
 
-      {/* Concierge Window */}
+      {/* Sales Desk Window */}
       {isOpen && (
         <div className={styles.chatWindow} role="dialog" aria-modal="true">
           {/* Header */}
           <div className={styles.chatHeader}>
             <div className={styles.headerInfo}>
               <div className={styles.avatar}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
-                  <rect x="4" y="8" width="16" height="12" rx="2" />
-                  <circle cx="9" cy="13" r="1" fill="currentColor" />
-                  <circle cx="15" cy="13" r="1" fill="currentColor" />
-                  <path d="M9 17h6" />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 21h18" />
+                  <path d="M9 8h1" />
+                  <path d="M9 12h1" />
+                  <path d="M9 16h1" />
+                  <path d="M14 8h1" />
+                  <path d="M14 12h1" />
+                  <path d="M14 16h1" />
+                  <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
                 </svg>
               </div>
               <div className={styles.titleArea}>
-                <span className={styles.chatTitle}>Lifestyle Concierge</span>
+                <span className={styles.chatTitle}>Lifestyle Sales Desk</span>
                 <span className={styles.chatStatus}>
                   <span className={styles.statusDot} />
-                  Portfolio Assistant Online
+                  Amravati Site Office · Online
                 </span>
               </div>
             </div>
@@ -628,7 +632,7 @@ export default function Chatbot() {
               type="button"
               onClick={() => setIsOpen(false)}
               className={styles.closeButton}
-              aria-label="Close Concierge"
+              aria-label="Close chat window"
             >
               ✕
             </button>

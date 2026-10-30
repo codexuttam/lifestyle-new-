@@ -139,7 +139,7 @@ export default function ContactForm() {
             gap: "0.55rem",
             padding: "12px 24px",
             borderRadius: "9999px",
-            background: "#bf953f",
+            background: "#c5a880",
             color: "#080808",
             fontWeight: 700,
             fontSize: "11px",
@@ -178,7 +178,7 @@ export default function ContactForm() {
             letterSpacing: "0.18em",
           }}
         >
-          Full Name <span style={{ color: "#bf953f" }}>*</span>
+          Full Name <span style={{ color: "#c5a880" }}>*</span>
         </label>
         <input
           type="text"
@@ -212,7 +212,7 @@ export default function ContactForm() {
             letterSpacing: "0.18em",
           }}
         >
-          Mobile Number <span style={{ color: "#bf953f" }}>*</span>
+          Mobile Number <span style={{ color: "#c5a880" }}>*</span>
         </label>
         <div style={{ display: "flex", gap: "0.5rem" }}>
           <div
@@ -307,7 +307,7 @@ export default function ContactForm() {
           width: "100%",
           padding: "14px 22px",
           borderRadius: "9999px",
-          background: "#bf953f",
+          background: "#c5a880",
           color: "#080808",
           fontWeight: 700,
           fontSize: "11px",
