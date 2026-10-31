@@ -1,65 +1,103 @@
-/* ============ MINIMAL ARCHITECTURAL HEADER & NAVIGATION ============ */
+/* ==========================================================================
+   SOL HAUS ARCHITECTURAL NAVIGATION
+   Framed Sticky Bar with Warm Neutral Palette & Understated Luxury
+   ========================================================================== */
 
 .nav {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
+  z-index: 100;
   width: 100%;
-  z-index: 1000;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 18px 40px;
-  background: linear-gradient(
-    180deg,
-    rgba(8, 8, 8, 0.78) 0%,
-    rgba(8, 8, 8, 0.22) 78%,
-    rgba(8, 8, 8, 0) 100%
-  );
-  border-bottom: 1px solid transparent;
+  justify-content: space-between;
+  padding: 22px 44px;
+  background: rgba(32, 23, 19, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition:
-    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .navScrolled {
-  padding: 13px 40px;
-  background: rgba(32, 16, 5, 0.94);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(184, 174, 166, 0.18);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  padding: 14px 44px;
+  background: rgba(32, 23, 19, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
 }
 
-.navLight {
-  background: rgba(246, 241, 231, 0.94);
-  border-bottom: 1px solid rgba(12, 13, 12, 0.12);
-  box-shadow: 0 10px 30px rgba(12, 13, 12, 0.08);
+@media (max-width: 960px) {
+  .nav {
+    padding: 16px 24px;
+  }
+  .navScrolled {
+    padding: 12px 24px;
+  }
 }
 
-/* Borderless Left Navigation Links */
-.leftLinks {
+/* ================= Left: Editorial Brand Lockup ================= */
+.brandLockup {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+  color: #F8F6F3;
+  transition: opacity 0.25s ease;
+}
+
+.brandLockup:hover {
+  opacity: 0.88;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #F8F6F3;
+  line-height: 1;
+}
+
+.brandDescriptor {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 243, 0.65);
+  line-height: 1;
+}
+
+/* ================= Center: Minimal Editorial Links ================= */
+.centerLinks {
   display: flex;
   align-items: center;
-  gap: 26px;
-  justify-self: start;
+  gap: 28px;
+}
+
+@media (max-width: 960px) {
+  .centerLinks {
+    display: none;
+  }
 }
 
 .navLink {
   position: relative;
-  padding: 6px 2px;
-  color: rgba(247, 239, 220, 0.84);
   font-family: var(--font-sans);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: rgba(248, 246, 243, 0.78);
   text-decoration: none;
-  white-space: nowrap;
+  padding: 4px 0;
   transition: color 0.25s ease;
 }
 
@@ -69,8 +107,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1.5px;
-  background: #c5a880;
+  height: 1px;
+  background-color: #B6AAA1;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -78,7 +116,7 @@
 
 .navLink:hover,
 .navLinkActive {
-  color: #f7efdc;
+  color: #F8F6F3;
 }
 
 .navLink:hover::after,
@@ -86,505 +124,297 @@
   transform: scaleX(1);
 }
 
-.navLight .navLink {
-  color: rgba(12, 13, 12, 0.78);
-}
-
-.navLight .navLink:hover,
-.navLight .navLinkActive {
-  color: #080808;
-}
-
-/* Centered Brand Mark */
-.logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-decoration: none;
-  justify-self: center;
-}
-
-.logoImg {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-  display: block;
-}
-
-.brandLockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-}
-
-.brandTextCol {
+/* ================= Right: Contact, Enquire, Account Actions ================= */
+.rightActions {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 20px;
 }
 
-.logoName {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 23px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #F8F5F3;
-  line-height: 1;
-}
-
-.logoDescriptor {
+.contactLink {
+  position: relative;
   font-family: var(--font-sans);
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #AEA399;
-  line-height: 1;
+  color: rgba(248, 246, 243, 0.78);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.25s ease;
 }
 
-.navLight .logoName {
-  color: #201005;
+.contactLink:hover {
+  color: #F8F6F3;
 }
 
-.navLight .logoDescriptor {
-  color: #5D534B;
+@media (max-width: 960px) {
+  .contactLink {
+    display: none;
+  }
 }
 
-.lifestyleLogoImg {
-  height: 36px;
-  width: auto;
-  max-width: 170px;
-  object-fit: contain;
-  display: block;
-  mix-blend-mode: screen;
-  border-radius: 6px;
-}
-
-.navLight .lifestyleLogoImg {
-  mix-blend-mode: normal;
-  background: #0c0d0c;
-  padding: 3px 8px;
-}
-
-/* Right Action Cluster — Unified Button Style for Sign In & Enquire */
-.navActions {
-  display: flex;
-  align-items: center;
-  justify-self: end;
-  gap: 10px;
-}
-
-.btnAction {
+.enquireBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 112px;
   padding: 9px 20px;
-  border-radius: 9999px;
-  background: #c5a880;
-  border: 1px solid #d6be9f;
-  color: #101216;
   font-family: var(--font-sans);
   font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(197, 168, 128, 0.2);
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.btnAction:hover {
-  background: #d6be9f;
-  border-color: #e5cfb5;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.3);
-}
-
-/* Member Profile Dropdown */
-.userMenuWrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.coolUserBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 14px 4px 5px;
+  color: #201713;
+  background-color: #F8F6F3;
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 9999px;
-  background: #c5a880;
-  border: 1px solid #d6be9f;
   cursor: pointer;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.coolUserBtn:hover,
-.coolUserBtnActive {
-  background: #d6be9f;
-  border-color: #e5cfb5;
+.enquireBtn:hover {
+  background-color: #B6AAA1;
+  color: #201713;
+  transform: translateY(-1px);
 }
 
-.coolAvatar {
-  width: 26px;
-  height: 26px;
+@media (max-width: 640px) {
+  .enquireBtn {
+    padding: 7px 14px;
+    font-size: 10px;
+  }
+}
+
+/* Account Trigger / Avatar Button */
+.accountBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: #101216;
-  color: #f7f4ee;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  color: #F8F6F3;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.accountBtn:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.userAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #B6AAA1;
+  color: #201713;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-
-.coolUserName {
   font-family: var(--font-sans);
-  color: #080808;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  max-width: 96px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.coolStatusDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #15803d;
-  flex-shrink: 0;
+/* User Dropdown */
+.userMenuWrapper {
+  position: relative;
 }
 
 .userDropdownCard {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 12px);
   right: 0;
-  width: 256px;
-  background: #0d0e0d;
-  border: 1px solid rgba(191, 149, 63, 0.38);
-  border-radius: 18px;
+  width: 260px;
+  background: rgba(32, 23, 19, 0.98);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
-  z-index: 1050;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.userDropdownHeader {
+.userMetaHeader {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.userDropdownAvatarLarge {
-  width: 40px;
-  height: 40px;
+.userMetaAvatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: #c5a880;
-  color: #101216;
-  font-weight: 700;
-  font-size: 16px;
+  background: #B6AAA1;
+  color: #201713;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-
-.userDropdownMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
-}
-
-.userDropdownFullName {
-  color: #f7efdc;
+  font-weight: 700;
   font-size: 14px;
+}
+
+.userName {
+  font-family: var(--font-sans);
+  font-size: 13px;
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #F8F6F3;
 }
 
-.userDropdownPhone {
-  color: rgba(247, 239, 220, 0.55);
-  font-size: 11.5px;
-}
-
-.userDropdownBadge {
-  display: inline-block;
-  margin-top: 3px;
-  font-size: 9.5px;
-  letter-spacing: 0.12em;
+.userBadge {
+  font-size: 10px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #d5bd87;
+  color: #B6AAA1;
 }
 
-.userDropdownDivider {
+.userDivider {
   height: 1px;
-  background: rgba(247, 239, 220, 0.1);
-  margin: 12px 0 8px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.userDropdownActions {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.userDropdownItem {
+.userActionBtn {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
-  padding: 9px 10px;
-  border-radius: 10px;
-  border: none;
+  padding: 8px 10px;
   background: transparent;
-  color: rgba(247, 239, 220, 0.84);
+  border: none;
+  color: rgba(248, 246, 243, 0.85);
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 500;
+  letter-spacing: 0.05em;
+  text-align: left;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
-  text-align: left;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.userDropdownItem:hover {
-  background: rgba(191, 149, 63, 0.14);
-  color: #fcf6ba;
+.userActionBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F8F6F3;
 }
 
-.userDropdownSignOut {
-  color: #f87171;
-  border-top: 1px solid rgba(247, 239, 220, 0.08);
-  margin-top: 4px;
-  padding-top: 10px;
+.signOutBtn {
+  color: #f28b82;
 }
 
-/* Mobile Toggle & Drawer */
+/* Mobile Toggle Hamburger */
 .mobileToggle {
   display: none;
-  width: 38px;
-  height: 38px;
-  border-radius: 9999px;
-  border: 1px solid rgba(191, 149, 63, 0.42);
-  background: rgba(8, 8, 8, 0.5);
-  color: #f7efdc;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #F8F6F3;
   cursor: pointer;
+  padding: 4px;
 }
 
-.navLight .mobileToggle {
-  background: rgba(12, 13, 12, 0.06);
-  color: #080808;
+@media (max-width: 960px) {
+  .mobileToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
+/* ================= Mobile Drawer ================= */
 .mobileBackdrop {
   position: fixed;
   inset: 0;
-  z-index: 1005;
-  background: rgba(5, 5, 5, 0.65);
+  background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .mobileMenu {
-  position: fixed;
-  top: 72px;
-  left: 14px;
-  right: 14px;
-  z-index: 1010;
-  border-radius: 22px;
-  background: #0b0c0b;
-  border: 1px solid rgba(191, 149, 63, 0.35);
-  padding: 20px 18px;
-  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.88);
+  width: 82%;
+  max-width: 380px;
+  height: 100%;
+  background: #201713;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-content: space-between;
+  overflow-y: auto;
 }
 
 .mobileMenuTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(247, 239, 220, 0.08);
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.mobileEyebrow {
-  font-size: 10px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #c5a880;
-}
-
-.mobileThemeBtn {
-  background: rgba(197, 168, 128, 0.12);
-  border: 1px solid rgba(197, 168, 128, 0.34);
-  color: #f7f4ee;
-  border-radius: 9999px;
-  padding: 5px 12px;
-  font-size: 11px;
-  cursor: pointer;
-}
-
-.mobileUserCard {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(191, 149, 63, 0.08);
-  border: 1px solid rgba(191, 149, 63, 0.25);
-}
-
-.mobileUserMeta {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.mobileUserName {
-  color: #f7efdc;
-  font-size: 13.5px;
-  font-weight: 600;
-}
-
-.mobileUserBadge {
-  color: #d5bd87;
-  font-size: 10.5px;
-}
-
-.mobileSignOutBtn {
+.mobileCloseBtn {
   background: transparent;
-  border: 1px solid rgba(248, 113, 113, 0.4);
-  color: #f87171;
-  border-radius: 9999px;
-  padding: 4px 10px;
-  font-size: 11px;
+  border: none;
+  color: #F8F6F3;
+  font-size: 20px;
   cursor: pointer;
 }
 
 .mobileLinkList {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  margin: 36px 0;
 }
 
-.mobileLink {
+.mobileDrawerLink {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 6px;
-  border-bottom: 1px solid rgba(247, 239, 220, 0.07);
-  color: #f7efdc;
-  text-decoration: none;
+  align-items: baseline;
+  justify-content: space-between;
   font-family: var(--font-display);
-  font-size: 21px;
-  letter-spacing: 0.04em;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: color 0.2s ease, padding-left 0.2s ease;
+  color: #F8F6F3;
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.mobileLink:hover {
-  color: #c5a880;
-  padding-left: 12px;
-}
-
-.mobileLinkIndex {
+.mobileDrawerIndex {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: #c5a880;
-  font-variant-numeric: tabular-nums;
-}
-
-.mobileLinkArrow {
-  margin-left: auto;
-  font-size: 15px;
-  color: rgba(247, 244, 238, 0.45);
+  color: #B6AAA1;
+  letter-spacing: 0.1em;
 }
 
 .mobileDrawerActions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.mobileActionBtn {
-  padding: 12px 16px;
-  border-radius: 9999px;
-  border: 1px solid #d6be9f;
-  background: #c5a880;
-  color: #101216;
+.mobileEnquireFullBtn {
+  width: 100%;
+  padding: 13px;
   font-family: var(--font-sans);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: #201713;
+  background-color: #F8F6F3;
+  border: none;
+  border-radius: 9999px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.mobileActionBtn:hover {
-  background: #d6be9f;
-}
-
-@media (max-width: 1200px) {
-  .leftLinks {
-    gap: 13px;
-  }
-  .navLink {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-  }
-}
-
-@media (max-width: 980px) {
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 20px;
-  }
-
-  .navScrolled {
-    padding: 11px 20px;
-  }
-
-  .leftLinks {
-    display: none;
-  }
-
-  .mobileToggle {
-    display: inline-flex;
-  }
-}
-
-@media (max-width: 640px) {
-  .nav {
-    padding: 12px 14px;
-  }
-
-  .btnAction {
-    min-width: 0;
-    padding: 8px 13px;
-    font-size: 10px;
-  }
-
-  .logoName {
-    font-size: 20px;
-  }
+  text-align: center;
 }

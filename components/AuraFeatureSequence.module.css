@@ -1,314 +1,316 @@
-/* ============ SECTION 4: LIVING EXPERIENCE (DEEP WALNUT #332418) ============ */
+/* ==========================================================================
+   AURA 15-STOREY TOWER FEATURE SEQUENCE
+   Interactive Architectural Dimension Deck with Smooth Diagonal Transitions
+   ========================================================================== */
 
 .section {
   position: relative;
-  z-index: 2;
-  background: #332418;
-  color: #F8F5F3;
-  padding: 108px 40px 120px;
-  border-bottom: 1px solid rgba(184, 174, 166, 0.16);
+  width: 100%;
+  background-color: var(--espresso, #201713);
+  color: #F8F6F3;
+  padding: 80px 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 56px 20px;
+  }
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 28px;
 }
 
-.sectionHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.eyebrowTag {
-  display: inline-block;
-  padding: 6px 14px;
-  border: 1px solid rgba(184, 174, 166, 0.35);
-  background: rgba(184, 174, 166, 0.08);
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #AEA399;
-  border-radius: 9999px;
-  width: fit-content;
-}
-
-.heading {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2.4rem, 4.4vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  color: #F8F5F3;
-}
-
-.heading span {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  color: #AEA399;
-}
-
-/* Native CSS Sticky Runway — Strictly In-Flow so Adjacent Sections Never Overlap */
-.desktopRunway {
-  position: relative;
-  height: 275vh;
-  min-height: 1650px;
-}
-
-.desktopSticky {
-  position: sticky;
-  top: 86px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
+/* ================= Top 4 Selector Rail Tabs ================= */
 .selectorRail {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .selectorRail {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
 }
 
 .railBtn {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(184, 174, 166, 0.22);
-  background: rgba(184, 174, 166, 0.08);
-  color: #AEA399;
-  display: flex;
-  align-items: center;
-  gap: 7px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(248, 246, 243, 0.65);
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .railBtn:hover {
-  border-color: #B8AEA6;
-  color: #F8F5F3;
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #F8F6F3;
 }
 
 .railBtnActive {
-  background: #201005;
-  border-color: #B8AEA6;
-  color: #F8F5F3;
+  background: #C5A880;
+  border-color: #C5A880;
+  color: #201713;
+  box-shadow: 0 8px 24px rgba(197, 168, 128, 0.25);
 }
 
-.railIndex {
-  font-family: var(--font-sans);
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #AEA399;
-  font-variant-numeric: tabular-nums;
-}
-
-.railBtnActive .railIndex {
-  color: #F8F5F3;
+.railBtnActive:hover {
+  background: #C5A880;
+  color: #201713;
 }
 
 .railLabel {
   font-family: var(--font-sans);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  display: block;
 }
 
+/* ================= Main Architectural Stage Card ================= */
 .stageCard {
   display: grid;
-  grid-template-columns: 0.94fr 1.06fr;
-  gap: 40px;
-  background: #201005;
-  color: #F8F5F3;
-  border: 1px solid rgba(184, 174, 166, 0.26);
-  border-radius: 28px;
-  padding: 34px 40px;
-  min-height: 460px;
+  grid-template-columns: 1fr 1.08fr;
+  gap: 48px;
+  background: #18110D;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 48px;
+  min-height: 520px;
   align-items: center;
-  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.5);
+  position: relative;
   overflow: hidden;
 }
 
+@media (max-width: 960px) {
+  .stageCard {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 28px 20px;
+  }
+}
+
+/* Left Narrative Column */
 .stageCopy {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 16px;
   position: relative;
   z-index: 2;
+  animation: stageFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.stageMeta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+@keyframes stageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.stageNumber {
-  font-family: var(--font-display);
-  font-size: 26px;
+.stageCategoryTag {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
   font-weight: 600;
-  color: #AEA399;
-}
-
-.stageTag {
-  padding: 5px 12px;
-  border-radius: 9999px;
-  border: 1px solid rgba(184, 174, 166, 0.3);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #AEA399;
+  color: #C5A880;
 }
 
 .stageTitle {
   font-family: var(--font-display);
-  font-size: clamp(1.95rem, 3vw, 2.85rem);
-  font-weight: 500;
-  line-height: 0.98;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #F8F5F3;
-  animation: diagonalRevealLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes diagonalRevealLeft {
-  0% {
-    opacity: 0;
-    transform: translate3d(-24px, 16px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.stageSubtitle {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #AEA399;
-  animation: diagonalRevealLeft 0.58s 0.04s cubic-bezier(0.16, 1, 0.3, 1) both;
+  color: #F8F6F3;
+  margin: 0;
 }
 
 .stageDesc {
-  font-size: 14px;
-  line-height: 1.65;
-  color: rgba(248, 245, 243, 0.78);
-  animation: diagonalRevealLeft 0.62s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: rgba(248, 246, 243, 0.78);
+  margin: 0;
 }
 
+/* Bullet Facts with ✦ */
 .factList {
   list-style: none;
+  padding: 0;
+  margin: 4px 0 8px;
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  padding-top: 2px;
-  animation: diagonalRevealLeft 0.66s 0.12s cubic-bezier(0.16, 1, 0.3, 1) both;
+  gap: 8px;
 }
 
 .factList li {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: var(--font-sans);
   font-size: 12.5px;
-  font-weight: 500;
-  color: #F8F5F3;
+  color: rgba(248, 246, 243, 0.9);
 }
 
-.factList li span:first-child {
-  color: #AEA399;
+.bulletDot {
+  color: #C5A880;
   font-size: 11px;
 }
 
-.bottomBar {
-  margin-top: 6px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(247, 239, 220, 0.1);
+/* CTAs: Inspect Floor Plans & Private Enquiry */
+.ctaRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
+  margin-top: 8px;
+  flex-wrap: wrap;
 }
 
-.progressFooter {
-  flex: 1;
-  display: flex;
+.floorPlansBtn {
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background-color: #C5A880;
+  color: #201713;
+  border: none;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floorPlansBtn:hover {
+  background-color: #F8F6F3;
+  transform: translateY(-1px);
+}
+
+.privateEnquiryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  background: transparent;
+  color: #F8F6F3;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.privateEnquiryBtn:hover {
+  color: #C5A880;
+  transform: translateX(3px);
+}
+
+/* Progress Footer & Prev/Next Controls */
+.bottomBar {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .progressTrack {
-  flex: 1;
-  height: 2.5px;
-  background: rgba(247, 239, 220, 0.14);
-  border-radius: 9999px;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #c5a880, #d6be9f);
+  background: #C5A880;
   transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.progressCount {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-gold-bright, #d6be9f);
-  font-variant-numeric: tabular-nums;
+.controlsCluster {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.deckControls {
+.counterText {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(248, 246, 243, 0.65);
+}
+
+.navButtons {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
 }
 
 .deckStepBtn {
-  padding: 7px 14px;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
-  border: 1px solid rgba(247, 239, 220, 0.18);
-  background: rgba(247, 239, 220, 0.04);
-  color: #f7efdc;
+  color: rgba(248, 246, 243, 0.85);
   font-family: var(--font-sans);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.14em;
   cursor: pointer;
-  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .deckStepBtn:hover {
-  border-color: var(--color-gold, #c5a880);
-  background: #B8AEA6;
-  border-color: #B8AEA6;
-  color: #201005;
+  border-color: #C5A880;
+  color: #C5A880;
 }
 
-/* Architectural Cinematic Stage with Fluid Diagonal Glide */
+/* ================= Right: Architectural Stage & Flying Cards ================= */
 .deckStage {
   position: relative;
   width: 100%;
-  height: 400px;
-  overflow: hidden;
-  border-radius: 20px;
+  height: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #140a03;
-  border: 1px solid rgba(184, 174, 166, 0.2);
+}
+
+@media (max-width: 960px) {
+  .deckStage {
+    height: 320px;
+  }
 }
 
 .flyingCard {
@@ -316,173 +318,92 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 14px;
   overflow: hidden;
-  background: #201005;
-  transition:
-    transform 0.68s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0.55s ease;
-  will-change: transform, opacity;
-}
-
-.flyingCardActive {
-  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .flyingMedia {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .flyingScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(32, 16, 5, 0.08) 0%, rgba(32, 16, 5, 0.35) 55%, rgba(32, 16, 5, 0.92) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(24, 17, 13, 0.88) 100%);
   pointer-events: none;
 }
 
 .flyingCardCaption {
   position: absolute;
+  bottom: 20px;
   left: 24px;
   right: 24px;
-  bottom: 24px;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  z-index: 3;
 }
 
 .flyingIndexRow {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #AEA399;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #C5A880;
+  text-transform: uppercase;
 }
 
 .flyingLine {
   width: 24px;
   height: 1px;
-  background: var(--color-gold, #c5a880);
-}
-
-.videoChip {
-  margin-left: auto;
-  padding: 3px 9px;
-  border-radius: 9999px;
-  background: rgba(184, 174, 166, 0.16);
-  border: 1px solid rgba(184, 174, 166, 0.35);
-  color: #F8F5F3;
-  font-size: 9px;
-  letter-spacing: 0.14em;
+  background-color: #C5A880;
 }
 
 .flyingTitle {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 1.05;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #F8F5F3;
+  color: #F8F6F3;
+  margin: 0;
 }
 
-/* Mobile / Tablet Stacked Deck */
-.mobileStack {
-  display: none;
+/* Next Slide Peek Underlay */
+.peekUnderlay {
+  position: absolute;
+  bottom: -16px;
+  left: 16px;
+  right: 16px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-@media (max-width: 1023px) {
-  .section {
-    padding: 84px 20px;
-  }
-
-  .desktopRunway {
-    display: none;
-  }
-
-  .mobileStack {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .mobileCard {
-    background: #201005;
-    color: #F8F5F3;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(184, 174, 166, 0.22);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .mobileImgWrap {
-    position: relative;
-    height: 240px;
-  }
-
-  .mobileImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .mobileBadge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    padding: 5px 11px;
-    border-radius: 9999px;
-    background: rgba(32, 16, 5, 0.88);
-    border: 1px solid rgba(184, 174, 166, 0.3);
-    color: #AEA399;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .mobileBody {
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .mobileTitle {
-    font-family: var(--font-display);
-    font-size: 26px;
-    line-height: 1.02;
-    text-transform: uppercase;
-    color: #F8F5F3;
-  }
-
-  .mobileSub {
-    font-size: 11.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #AEA399;
-  }
-
-  .mobileDesc {
-    font-size: 13.5px;
-    line-height: 1.65;
-    color: rgba(248, 245, 243, 0.76);
-  }
+.peekUnderlay:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width: 680px) {
-  .section {
-    padding: 68px 16px;
-  }
-
-  .mobileStack {
-    grid-template-columns: 1fr;
-  }
+.peekLabel {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 243, 0.5);
 }

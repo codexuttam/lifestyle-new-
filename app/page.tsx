@@ -2,7 +2,8 @@ import SolHausShell from "@/components/SolHausShell";
 import SiteNav from "@/components/SiteNav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import PortfolioSection from "@/components/PortfolioSection";
+import AuraFeatureSequence from "@/components/AuraFeatureSequence";
+import AuraFloorPlans from "@/components/AuraFloorPlans";
 import ExperienceSection from "@/components/ExperienceSection";
 import SecondaryProjectSection from "@/components/SecondaryProjectSection";
 import JournalSection from "@/components/JournalSection";
@@ -22,30 +23,35 @@ export default async function Home() {
   return (
     <SolHausShell>
       <RevealAnimations />
+
+      {/* Sleek SOL HAUS Header Navigation (Nested inside Framed Container) */}
       <SiteNav activeHref="/" />
 
-      {/* Hero: Minimal Nav + Dark Espresso Cinematic Architectural Stage */}
+      {/* Hero: 4K Aura Tower Facade, Full Screen Viewport Stage & Kinetic Typography */}
       <Hero content={home.hero} />
 
-      {/* Section A — About Us: Asymmetric Editorial Composition */}
+      {/* Section 1 — About Us: Asymmetric Editorial Composition & Animated Numbers */}
       <About content={home.about} />
 
-      {/* Section B — Portfolio: Impressions That Endure (3-Column Showcase) */}
-      <PortfolioSection />
+      {/* Section 2 — Aura Feature Sequence: Interactive Architectural 4-Tab Dimension Deck */}
+      <AuraFeatureSequence />
 
-      {/* Section C — Services / Living Experience: Dark Panel + 2x2 Floating White Cards */}
+      {/* Section 3 — Floor Plans & Cut-Sections: Interactive 2 & 3 BHK Layouts */}
+      <AuraFloorPlans />
+
+      {/* Section 4 — Living Experience: Level 15 Sky Oasis & 20+ Curated Amenities */}
       <ExperienceSection />
 
-      {/* Section D — Developer Portfolio: Lifestyle Home Spaces Landmark */}
+      {/* Section 5 — Developer Portfolio: Lifestyle Home Spaces Landmark on DPS Road */}
       <SecondaryProjectSection />
 
-      {/* Section E — Journal: Notes from the Studio (4 Staggered Editorial Blocks) */}
+      {/* Section 6 — Journal: Notes from the Studio & Construction Updates */}
       <JournalSection />
 
-      {/* Section F — Contact: Minimal Underline Conversation Form */}
+      {/* Section 7 — Contact: Minimal Underline Conversation Form */}
       <HomeContactSection settings={settings} />
 
-      {/* Section G — Footer: Warm Sand Band with Menu, Socials & Contact */}
+      {/* Section 8 — Footer: Warm Neutral Band with Brand Menu & Direct Dial */}
       <SiteFooter settings={settings} />
 
       {/* Discreet Assistant */}

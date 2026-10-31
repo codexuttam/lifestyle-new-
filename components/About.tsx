@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./About.module.css";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import type { HomeRecord } from "@/lib/schemas/home";
 
 export default function About({ content }: { content?: HomeRecord["about"] }) {
@@ -24,38 +25,55 @@ export default function About({ content }: { content?: HomeRecord["about"] }) {
             premier colleges, and Amravati Railway Station.
           </p>
 
-          {/* Genuine Verified Project Metric Chips */}
-          <div className={styles.metricsRow}>
-            <span className={styles.metricChip}>15 Storeys</span>
-            <span className={styles.metricChip}>2 &amp; 3 BHK Suites</span>
-            <span className={styles.metricChip}>Zero Shared Walls</span>
-            <span className={styles.metricChip}>Level 15 Sky Oasis</span>
-            <span className={styles.metricChip}>MahaRERA Registered</span>
+          {/* Dynamic Animated Metric Counters */}
+          <div className={styles.statsGrid}>
+            <div className={styles.statBox}>
+              <span className={styles.statNumber}>
+                <AnimatedCounter target={15} duration={1400} />
+              </span>
+              <span className={styles.statLabel}>Storeys High</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statNumber}>
+                <AnimatedCounter target={100} suffix="%" duration={1600} />
+              </span>
+              <span className={styles.statLabel}>Vastu Aligned</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statNumber}>
+                <AnimatedCounter target={20} suffix="+" duration={1500} />
+              </span>
+              <span className={styles.statLabel}>Sky Amenities</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statNumber}>0</span>
+              <span className={styles.statLabel}>Shared Walls</span>
+            </div>
           </div>
 
-          <Link href="#portfolio" className={styles.learnMoreBtn}>
-            <span>LEARN MORE</span>
+          <Link href="#tower-features" className={styles.learnMoreBtn}>
+            <span>EXPLORE THE TOWER</span>
             <span className={styles.arrow}>→</span>
           </Link>
         </div>
 
-        {/* Right: Asymmetric Image Composition */}
+        {/* Right: Asymmetric Image Composition with Subtle Overlap */}
         <div className={styles.mediaCol}>
           <div className={styles.primaryImgWrap}>
             <Image
               src="/aura/building-full-4k.jpg"
-              alt="Aura 15-Storey Tower Architecture"
+              alt="Aura 15-Storey Tower Architecture, Camp Amravati"
               fill
-              sizes="(max-width: 640px) 100vw, 300px"
+              sizes="(max-width: 640px) 100vw, 360px"
               className={styles.img}
             />
           </div>
           <div className={styles.secondaryImgWrap}>
             <Image
               src="/aura/sky-balcony-lifestyle.jpg"
-              alt="Aura Private Sit-out Balcony"
+              alt="Aura Private Sit-out Balcony with Sunset Views"
               fill
-              sizes="(max-width: 640px) 100vw, 220px"
+              sizes="(max-width: 640px) 100vw, 240px"
               className={styles.img}
             />
           </div>

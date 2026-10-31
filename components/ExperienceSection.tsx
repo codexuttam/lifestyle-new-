@@ -33,7 +33,7 @@ const CARDS: ServiceCard[] = [
   },
   {
     number: "04",
-    title: "BENCHMARK SPECS",
+    title: "20+ SKY AMENITIES",
     image: "/aura/cut-section-2bhk-3bhk.jpg",
     preference: "Official Specifications & MahaRERA Kit",
   },
@@ -41,7 +41,7 @@ const CARDS: ServiceCard[] = [
 
 export default function ExperienceSection() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
-  const [selectedPreference, setSelectedPreference] = useState("2 & 3 BHK Luxury Residences");
+  const [selectedPreference, setSelectedPreference] = useState("Level 15 Rooftop Sky Oasis & Amenities");
 
   const handleCardClick = (pref: string) => {
     setSelectedPreference(pref);
@@ -49,7 +49,7 @@ export default function ExperienceSection() {
   };
 
   return (
-    <section className={styles.experience} id="services" aria-label="Aura Living Experience">
+    <section className={styles.experience} id="services" aria-label="Aura Sky Amenities & Living Experience">
       {/* Background Architectural Underlay */}
       <div className={styles.bgImageWrap} aria-hidden="true">
         <Image
@@ -65,25 +65,26 @@ export default function ExperienceSection() {
       <div className={styles.contentGrid}>
         {/* Left Narrative Column */}
         <div className={styles.narrativeCol}>
-          <span className={styles.sectionLabel}>SERVICES</span>
+          <span className={styles.sectionLabel}>LIFESTYLE &amp; AMENITIES</span>
           <h2 className={styles.title}>
-            DESIGN THAT
+            SPACES THAT
             <br />
-            <span className={styles.swashInitial}>R</span>ESONATES
+            <span className={styles.swashInitial}>I</span>NSPIRE
           </h2>
           <p className={styles.bodyText}>
-            We offer more than design – we craft living experiences through clarity, texture,
-            intention, and thoughtful presence across 15 storeys.
+            Elevated high above the street noise of Congress Nagar, Level 15 hosts an unprecedented rooftop
+            recreation crown – featuring a panoramic infinity lap pool, kids splash deck, enclosed multi-sports
+            turf for box cricket and tennis, and sunset cabanas with Melghat views.
           </p>
           <button
             type="button"
             className={styles.ctaLine}
             onClick={() => {
-              setSelectedPreference("2 & 3 BHK Luxury Residences");
+              setSelectedPreference("Level 15 Rooftop Sky Oasis & Amenities");
               setIsEnquiryOpen(true);
             }}
           >
-            <span>GET IN TOUCH</span>
+            <span>DISCOVER SKY AMENITIES</span>
             <span className={styles.arrow}>→</span>
           </button>
         </div>
@@ -99,33 +100,33 @@ export default function ExperienceSection() {
                 onClick={() => handleCardClick(card.preference)}
                 aria-label={`Enquire about ${card.title}`}
               >
-                <span className={styles.cardNumber}>{card.number}</span>
-                <div className={styles.cardImgWrap}>
+                <div className={styles.cardHeader}>
+                  <span className={styles.cardNumber}>{card.number}</span>
+                  <span className={styles.cardArrow}>↗</span>
+                </div>
+                <h3 className={styles.cardTitle}>{card.title}</h3>
+                <div className={styles.cardImageWrap}>
                   <Image
                     src={card.image}
                     alt={card.title}
                     fill
-                    sizes="(max-width: 580px) 100vw, 240px"
-                    className={styles.cardImg}
+                    sizes="(max-width: 640px) 140px, 160px"
+                    className={styles.cardImage}
                   />
                 </div>
-                <h3 className={styles.cardTitle}>{card.title}</h3>
               </button>
             ))}
-          </div>
-          <div className={styles.bottomNote}>
-            Design services crafted for calm, intentional, and meaningful living.
           </div>
         </div>
       </div>
 
-      {/* Enquiry Modal */}
+      {/* Project Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
         projectTitle="Aura by Lifestyle"
         defaultPreference={selectedPreference}
-        source="Services Section"
+        source="Living Experience Section"
       />
     </section>
   );

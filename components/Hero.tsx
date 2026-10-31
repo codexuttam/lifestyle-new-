@@ -12,11 +12,11 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
 
   return (
     <section className={styles.hero} id="hero-section" aria-label="Aura Hero">
-      {/* Background Architectural 4K Building Media */}
+      {/* Background Architectural 4K Building Media with Slow Ken-Burns */}
       <div className={styles.mediaWrap}>
         <Image
           src="/aura/aura-hero-clean-4k.jpg"
-          alt="Aura 15-Storey Ultra-Luxury Landmark, Camp Amravati"
+          alt="Aura 15-Storey Architectural Landmark, Congress Nagar Road, Camp Amravati"
           fill
           priority
           sizes="(max-width: 1320px) 100vw, 1320px"
@@ -31,7 +31,7 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
         <div className={styles.headlineWrap}>
           <div className={styles.locationTag}>
             <span className={styles.locationDot} />
-            <span>CAMP, AMRAVATI · 15-STOREY LANDMARK</span>
+            <span>CAMP, AMRAVATI · 15-STOREY LANDMARK · LIMITED SKY SUITES</span>
           </div>
           <h1 className={styles.headlineLine}>MATERIAL.</h1>
           <h2 className={styles.headlineLine}>
@@ -99,13 +99,13 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
         </div>
       )}
 
-      {/* VIP Project Enquiry Modal */}
+      {/* Project Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
         projectTitle="Aura by Lifestyle"
-        defaultPreference="2 & 3 BHK Luxury Residences"
-        source="Hero Get in Touch"
+        defaultPreference="General Residence Enquiry"
+        source="Hero Section"
       />
     </section>
   );
