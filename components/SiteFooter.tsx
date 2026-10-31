@@ -1,187 +1,103 @@
-"use client";
-
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
-import {
-  mailtoHref,
-  telHref,
-  whatsappHref,
-  type SettingsRecord,
-} from "@/lib/schemas/settings";
 import styles from "./SiteFooter.module.css";
+import type { SettingsRecord } from "@/lib/schemas/settings";
 
-const NAV_LINKS = [
-  { label: "Aura by Lifestyle (Flagship)", href: "/" },
-  { label: "Lifestyle Home Spaces (DPS Rd)", href: "/projects/lifestyle-homes" },
-  { label: "All Developments", href: "/projects" },
-  { label: "Floor Plans & Cut-Sections", href: "/#floor-plans" },
-  { label: "About Lifestyle", href: "/about" },
-  { label: "Real Estate Insights", href: "/blogs" },
-  { label: "Contact Sales Team 📞", href: "/contact" },
-];
-
-export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
-  const SOCIAL_LINKS = settings.social;
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSubscribed(true);
-    setEmail("");
-  };
-
+export default function SiteFooter({ settings }: { settings?: SettingsRecord }) {
   return (
-    <footer className={styles.footer} id="footer-section">
-      <div className={styles.container}>
-        <div className={styles.topGrid}>
-          <div className={styles.col}>
-            <Link href="/" className={styles.logo} aria-label="Aura by Lifestyle — home">
-              <img
-                src="/aura/aura-logo-official.png"
-                alt="Aura by Lifestyle"
-                width={58}
-                height={58}
-                className={styles.logoImg}
-              />
-              <div className={styles.logoText}>
-                <span className={styles.logoTitle}>AURA</span>
-                <span className={styles.logoSub}>BY LIFESTYLE</span>
-              </div>
-            </Link>
-
-            <p className={styles.devAttribution}>
-              A project by Lifestyle
-            </p>
-
-            <p className={styles.addressBlock}>{settings.address}</p>
-
-            <div className={styles.contactInfo}>
-              <a href={telHref(settings)} className={styles.emailLink}>
-                +91 7498256708
-              </a>
-              <a href={mailtoHref(settings)} className={styles.emailSub}>
-                {settings.email}
-              </a>
-              <span className={styles.reraLine}>
-                MahaRERA Reg. No. {settings.reraNumber} · maharera.maharashtra.gov.in
-              </span>
-            </div>
-
-            <button
-              type="button"
-              className={`${styles.enquireBtn} roll-button`}
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent("lifestyle_open_enquiry"));
-              }}
-            >
-              <span className="roll-text" data-text="Open Online Enquiry →">
-                Open Online Enquiry →
-              </span>
-            </button>
-          </div>
-
-          <div className={styles.col}>
-            <div className={styles.colLabel}>
-              <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Developments &amp; Pages</span>
-            </div>
-            <div className={styles.linkList}>
-              {NAV_LINKS.map((link) => (
-                <Link key={link.label} href={link.href} className={styles.bigLink}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.col}>
-            <div className={styles.colLabel}>
-              <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Direct Channels &amp; Social</span>
-            </div>
-            <div className={styles.linkList}>
-              <a
-                href={whatsappHref(settings)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.waLink}
-              >
-                WhatsApp Direct Desk ↗
-              </a>
-              {SOCIAL_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.bigLink}
-                >
-                  {link.label} ↗
-                </a>
-              ))}
-              <Link href="/privacy" className={styles.bigLink}>
-                Privacy &amp; MahaRERA Disclaimer
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.newsletterRow}>
-          <div className={styles.newsletterText}>
-            <span className={styles.kitEyebrow}>BROCHURE &amp; FLOOR PLATE KIT</span>
-            <p className={styles.newsletterCopy}>
-              Receive official Aura cut-section drawings and specifications directly in your inbox.
-            </p>
-          </div>
-
-          {subscribed ? (
-            <p className={styles.formNote} role="status">
-              ✓ Request noted — our property team will share the official brochure kit shortly.
-            </p>
-          ) : (
-            <form className={styles.form} onSubmit={onSubmit}>
-              <div className={styles.inputBox}>
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email address"
-                  aria-label="Email address"
-                  className={styles.input}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <button type="submit" className={`${styles.subscribeBtn} roll-button`}>
-                <span className="roll-text" data-text="Request Kit">
-                  Request Kit
-                </span>
-              </button>
-            </form>
-          )}
-        </div>
-
-        <div className={styles.brandingPanel}>
-          <div className={`${styles.corner} ${styles.cornerTl}`} />
-          <div className={`${styles.corner} ${styles.cornerTr}`} />
-          <div className={`${styles.corner} ${styles.cornerBl}`} />
-          <div className={`${styles.corner} ${styles.cornerBr}`} />
-          <img
-            src="/aura/aura-hero-clean-4k.jpg"
-            alt="Aura 15-Storey Tower Landmark"
-            className={styles.brandingBgImage}
-            loading="lazy"
-          />
-          <div className={styles.brandingOverlay} />
-          <p className={styles.giantTitle} aria-hidden="true">
-            AURA BY LIFESTYLE
+    <footer className={styles.footer} role="contentinfo">
+      <div className={styles.grid}>
+        {/* Left: Brand Identity */}
+        <div className={styles.brandCol}>
+          <h3 className={styles.brandTitle}>AURA</h3>
+          <p className={styles.brandSub}>
+            BY LIFESTYLE · Amravati
+            <br />
+            A project by Lifestyle.
           </p>
+          <div className={styles.copyright}>
+            MahaRERA: P5030002502915
+            <br />
+            © {new Date().getFullYear()} Aura by Lifestyle. All rights reserved.
+          </div>
         </div>
 
-        <div className={styles.bottomBar}>
-          <span className={styles.bottomItem}>{settings.copyright}</span>
-          <span className={styles.bottomItem}>Congress Nagar, Camp &amp; DPS Road, Amravati</span>
+        {/* Col 1: Menu */}
+        <div className={styles.navCol}>
+          <span className={styles.colHeader}>MENU</span>
+          <Link href="/#about" className={styles.footerLink}>
+            ABOUT US
+          </Link>
+          <Link href="/#portfolio" className={styles.footerLink}>
+            PORTFOLIO
+          </Link>
+          <Link href="/#services" className={styles.footerLink}>
+            SERVICES
+          </Link>
+          <Link href="/projects/lifestyle-homes" className={styles.footerLink}>
+            LIFESTYLE HOMES
+          </Link>
+          <Link href="/blogs" className={styles.footerLink}>
+            JOURNAL
+          </Link>
         </div>
+
+        {/* Col 2: Follow Us */}
+        <div className={styles.navCol}>
+          <span className={styles.colHeader}>FOLLOW US</span>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.footerLink}
+          >
+            INSTAGRAM
+          </a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.footerLink}
+          >
+            FACEBOOK
+          </a>
+          <a
+            href="https://www.linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.footerLink}
+          >
+            LINKEDIN
+          </a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.footerLink}
+          >
+            YOUTUBE
+          </a>
+        </div>
+
+        {/* Col 3: Contact */}
+        <div className={styles.navCol}>
+          <span className={styles.colHeader}>CONTACT</span>
+          <div className={styles.contactText}>
+            Congress Nagar Road, Camp,
+            <br />
+            Amravati, Maharashtra 444602
+          </div>
+          <a href="mailto:sales@lifestylehomespaces.com" className={styles.contactLink}>
+            sales@lifestylehomespaces.com
+          </a>
+          <a href="tel:+917498256708" className={styles.contactLink}>
+            +91 74982 56708
+          </a>
+        </div>
+      </div>
+
+      {/* Faint Repeating Watermark Behind Footer */}
+      <div className={styles.watermarkRow} aria-hidden="true">
+        GET IN TOUCH · GET IN TOUCH · GET IN TOUCH
       </div>
     </footer>
   );

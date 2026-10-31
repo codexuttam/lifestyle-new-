@@ -1,269 +1,78 @@
 /**
- * Aura by Lifestyle — Architectural Design System & Tokens
- * SOL HAUS Inspired Premium Editorial Real Estate Design System
- * Warm neutral palette: Dark Espresso (#201005), Deep Walnut (#332418), Warm Beige (#AEA399), Off-White (#F8F5F3)
- * Typography: Cormorant Garamond (Editorial Serif Headlines) + Inter (Clean Modern Sans)
+ * AURA BY LIFESTYLE — SOL HAUS EDITORIAL ARCHITECTURAL DESIGN SYSTEM
+ * Exact replication of the SOL HAUS Reference Specification
  */
 
 :root {
   /* ==========================================================================
-     1. SOL HAUS WARM NEUTRAL COLOR PALETTE
+     1. SOL HAUS EXACT COLOR TOKENS
      ========================================================================== */
-  --color-espresso: #201005;
-  --color-walnut: #332418;
-  --color-earth: #413428;
-  --color-warm-brown: #50453A;
-  --color-taupe: #5D534B;
-  --color-stone: #7A7068;
-  --color-beige: #AEA399;
-  --color-sand: #B8AEA6;
-  --color-off-white: #F8F5F3;
+  --canvas: #B6AAA1;
+  --canvas-light: #C1B6AE;
+  --canvas-dark: #A5988F;
 
-  /* Primary Editorial Canvas */
-  --color-bg: #201005;
-  --color-bg-secondary: #332418;
-  --color-bg-tertiary: #413428;
-  --color-bg-elevated: #50453A;
+  --paper: #F8F6F3;
+  --paper-white: #FFFFFF;
+  --paper-alt: #F3EFEA;
+  --paper-footer: #EFECE7;
 
-  /* Warm Off-White / Alabaster Editorial Light Surfaces */
-  --surface-ivory: #F8F5F3;
-  --surface-ivory-alt: #F8F5F3;
-  --surface-ivory-card: #F8F5F3;
-  --ink-on-ivory: #201005;
-  --ink-on-ivory-secondary: #5D534B;
-  --ink-on-ivory-muted: #7A7068;
-  --border-on-ivory: rgba(65, 52, 40, 0.14);
-  --border-gold-on-ivory: rgba(184, 174, 166, 0.6);
+  --espresso: #201713;
+  --deep-brown: #30251F;
+  --walnut: #45362E;
 
-  /* Glassmorphism & Card Surfaces */
-  --color-bg-card: rgba(51, 36, 24, 0.88);
-  --color-bg-card-hover: rgba(65, 52, 40, 0.95);
-  --color-bg-card-subtle: rgba(248, 245, 243, 0.05);
-  --color-bg-glass: rgba(32, 16, 5, 0.88);
-  --color-bg-glass-heavy: rgba(32, 16, 5, 0.96);
+  --warm-grey: #81766E;
+  --muted-taupe: #9B8E84;
+  --soft-border: #D9D0C9;
+  --soft-border-light: rgba(255, 255, 255, 0.45);
+  --border-rule: rgba(36, 27, 23, 0.12);
 
-  /* Inputs & Form Fields */
-  --color-bg-input: rgba(248, 245, 243, 0.06);
-  --color-bg-input-focus: rgba(248, 245, 243, 0.12);
+  --heading: #241B17;
+  --body: #625750;
+  --light-text: #F8F6F3;
+  --light-text-muted: rgba(248, 246, 243, 0.72);
 
-  /* Typography Colors */
-  --color-text: #F8F5F3;
-  --color-text-pure: #ffffff;
-  --color-text-ivory: #F8F5F3;
-  --color-text-cream: #F8F5F3;
-  --color-text-secondary: #AEA399;
-  --color-text-muted: #7A7068;
-  --color-text-subtle: rgba(184, 174, 166, 0.5);
-  --color-text-inverse: #201005;
-
-  /* Sand & Warm Taupe Accents */
-  --color-gold: #B8AEA6;
-  --color-gold-bright: #AEA399;
-  --color-gold-champagne: #F8F5F3;
-  --color-gold-deep: #7A7068;
-  --color-gold-light: #F8F5F3;
-  --color-gold-shimmer: #F8F5F3;
-  --color-gold-muted: rgba(184, 174, 166, 0.4);
-  --color-gold-gradient: linear-gradient(90deg, #B8AEA6 0%, #AEA399 55%, #7A7068 100%);
-  --color-gold-rule: linear-gradient(90deg, #B8AEA6 0%, #F8F5F3 60%, rgba(184, 174, 166, 0) 100%);
-  --color-gold-glow: rgba(184, 174, 166, 0.2);
-
-  /* Remap legacy --color-wine tokens */
-  --color-wine: #B8AEA6;
-  --color-wine-hover: #AEA399;
-  --color-wine-light: rgba(184, 174, 166, 0.12);
-  --color-wine-light-border: rgba(184, 174, 166, 0.35);
-  --color-wine-glow: rgba(184, 174, 166, 0.2);
-  --wine-glow-rgb: 184, 174, 166;
-
-  /* Pure Architectural Gradients */
-  --bg-platform-gradient: linear-gradient(180deg, #201005 0%, #332418 50%, #201005 100%);
-  --bg-white-navy-radial: radial-gradient(ellipse 85% 55% at 50% 0%, rgba(184, 174, 166, 0.14) 0%, #332418 55%, #201005 100%);
-  --bg-navy-canvas: linear-gradient(180deg, #201005 0%, #332418 50%, #201005 100%);
-  --bg-navy-gradient: linear-gradient(135deg, #201005 0%, #332418 50%, #201005 100%);
-
-  /* Hairline Borders & Dividers */
-  --color-border: rgba(184, 174, 166, 0.16);
-  --color-border-subtle: rgba(184, 174, 166, 0.1);
-  --color-border-hover: rgba(184, 174, 166, 0.55);
-  --color-border-gold: rgba(184, 174, 166, 0.4);
-  --color-border-strong: rgba(184, 174, 166, 0.28);
-
-  /* Status Tokens */
-  --color-success: #18a957;
-  --color-success-bg: rgba(24, 169, 87, 0.12);
-  --color-warning: #d4af37;
-  --color-error: #e5484d;
-  --color-error-bg: rgba(229, 72, 77, 0.12);
-
-  /* Overlays & Backdrops */
-  --overlay-backdrop: rgba(32, 16, 5, 0.88);
-  --overlay-blur: 20px;
+  /* Legacy Compatibility Aliases */
+  --color-bg: var(--espresso);
+  --color-bg-secondary: var(--deep-brown);
+  --color-bg-tertiary: var(--walnut);
+  --color-espresso: var(--espresso);
+  --color-walnut: var(--walnut);
+  --color-sand: var(--soft-border);
+  --color-beige: var(--muted-taupe);
+  --color-off-white: var(--paper);
+  --color-text: var(--heading);
+  --color-text-secondary: var(--body);
+  --color-text-muted: var(--warm-grey);
+  --color-text-inverse: var(--paper);
+  --color-gold: var(--muted-taupe);
+  --color-gold-bright: var(--warm-grey);
 
   /* ==========================================================================
-     2. TYPOGRAPHY (Cormorant Garamond Editorial Serif + Inter Sans)
+     2. TYPOGRAPHY
      ========================================================================== */
   --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-inter: var(--font-sans);
-
-  /* Type Scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-  --text-6xl: 3.75rem;
-
-  /* Letter Spacing */
-  --tracking-tighter: -0.04em;
-  --tracking-tight: -0.02em;
-  --tracking-normal: 0em;
-  --tracking-wide: 0.06em;
-  --tracking-wider: 0.16em;
-  --tracking-widest: 0.28em;
+  --font-serif-italic: "Cormorant Garamond", Georgia, serif;
 
   /* ==========================================================================
-     3. RADII & SHADOWS
+     3. SPACING & SHADOWS
      ========================================================================== */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
-  --radius-xl: 22px;
-  --radius-2xl: 26px;
-  --radius-3xl: 32px;
-  --radius-full: 9999px;
+  --site-max-width: 1320px;
+  --site-frame-radius: 4px;
+  --shadow-frame: 0 32px 80px -12px rgba(32, 23, 19, 0.28);
+  --shadow-card: 0 16px 40px -8px rgba(32, 23, 19, 0.12);
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --shadow-sm: 0 6px 20px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 20px 48px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(247, 239, 220, 0.06);
-  --shadow-card-hover: 0 28px 64px rgba(0, 0, 0, 0.72), inset 0 1px 0 rgba(191, 149, 63, 0.22);
-  --shadow-modal: 0 32px 84px rgba(0, 0, 0, 0.88), 0 0 1px rgba(191, 149, 63, 0.3);
-  --shadow-button: 0 6px 22px rgba(191, 149, 63, 0.24);
-
-  /* ==========================================================================
-     4. TRANSITIONS & TIMING
-     ========================================================================== */
-  --duration-fast: 0.2s;
-  --duration-standard: 0.45s;
-  --duration-slow: 0.75s;
-  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  /* Transitions */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-editorial: 0.65s;
 }
 
-/* Optional Accessible Light Mode Override via Header Toggle */
-html[data-theme="light"] {
-  --color-bg: #f6f1e7;
-  --color-bg-secondary: #efe8d8;
-  --color-bg-tertiary: #e7decb;
-  --color-bg-elevated: #fbf8f2;
-  --color-bg-card: rgba(251, 248, 242, 0.9);
-  --color-bg-card-hover: #ffffff;
-  --color-bg-glass: rgba(246, 241, 231, 0.88);
-  --color-bg-glass-heavy: rgba(246, 241, 231, 0.96);
-  --color-text: #0c0d0c;
-  --color-text-pure: #080808;
-  --color-text-secondary: rgba(12, 13, 12, 0.74);
-  --color-text-muted: rgba(12, 13, 12, 0.52);
-  --color-border: rgba(12, 13, 12, 0.12);
-  --color-border-subtle: rgba(12, 13, 12, 0.07);
-  --color-border-strong: rgba(12, 13, 12, 0.24);
-  --color-gold: #9a7322;
-}
-
-/* ==========================================================================
-   5. INTERACTION PRIMITIVES (.roll-button, Eyebrow Tags, Marquee)
-   ========================================================================== */
-
-.roll-button {
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-}
-
-.roll-text {
-  position: relative;
+/* Swash / Decorative Initial glyphs */
+.swash {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
   display: inline-block;
-  line-height: 1.25;
-  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.roll-text::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 260%;
-  width: 100%;
-  white-space: nowrap;
-}
-
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .roll-button:hover .roll-text,
-  .roll-button:focus-visible .roll-text {
-    transform: translateY(-260%);
-  }
-}
-
-@keyframes marquee {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-
-@keyframes marquee-reverse {
-  0% { transform: translate3d(-50%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-
-@keyframes goldPulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.55; transform: scale(1.04); }
-}
-
-@keyframes modalSpringIn {
-  from {
-    opacity: 0;
-    transform: scale(0.97) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 38s linear infinite;
-}
-
-.animate-marquee-reverse {
-  animation: marquee-reverse 38s linear infinite;
-}
-
-.gold-glow {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(191, 149, 63, 0.14) 0%, rgba(191, 149, 63, 0) 70%);
-  filter: blur(110px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Accessibility Reduced Motion — pause continuous ambient loops while preserving interactive UI transitions */
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-reverse {
-    animation: none !important;
-  }
-  html {
-    scroll-behavior: auto !important;
-  }
+  transform: translateY(-0.02em);
+  padding-right: 0.04em;
 }

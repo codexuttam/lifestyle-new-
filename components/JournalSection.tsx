@@ -1,90 +1,77 @@
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./JournalSection.module.css";
 
-const ARTICLES = [
-  {
-    slug: "modern-architecture-amravati",
-    category: "ARCHITECTURE",
-    title: "How Contemporary Highrise Architecture Is Transforming Amravati",
-    excerpt: "Exploring the shift toward rectilinear facades, cross-ventilated suites, and why vertical living is redefining urban life in Camp.",
-    date: "OCTOBER 2026",
-    readTime: "4 MIN READ",
-    image: "/aura/building-full-4k.jpg",
-  },
-  {
-    slug: "choosing-right-home-ventilation",
-    category: "RESIDENTIAL DESIGN",
-    title: "Light, Breeze & Acoustic Isolation: Choosing a Home That Breathes",
-    excerpt: "Why zero shared walls and multi-orientation balconies are the single most significant factor in everyday mental well-being.",
-    date: "OCTOBER 2026",
-    readTime: "5 MIN READ",
-    image: "/aura/modern-living-room.jpg",
-  },
-  {
-    slug: "property-investment-camp-amravati",
-    category: "INVESTMENT",
-    title: "Capital Growth & Long-Term Value Along Congress Nagar Road",
-    excerpt: "An editorial analysis of Camp’s real estate trajectory, social infrastructure proximity, and rental appreciation yields.",
-    date: "OCTOBER 2026",
-    readTime: "6 MIN READ",
-    image: "/aura/sky-balcony-lifestyle.jpg",
-  },
-];
-
 export default function JournalSection() {
   return (
-    <section className={styles.section} id="journal">
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div className={styles.headerCopy}>
-            <span className={styles.eyebrow}>EDITORIAL ESSAYS &amp; INSIGHTS</span>
-            <h2 className={styles.heading}>
-              THOUGHTS ON <span>BETTER LIVING.</span>
-            </h2>
-            <p className={styles.sub}>
-              Curated perspectives on residential design, architectural craftsmanship, and thoughtful homeownership in Amravati.
+    <section className={styles.journal} id="journal" aria-label="Aura Journal">
+      {/* Centered Editorial Header */}
+      <div className={styles.header}>
+        <span className={styles.sectionLabel}>JOURNAL</span>
+        <h2 className={styles.title}>
+          NOTES FROM THE <span className={styles.swashInitial}>S</span>TUDIO
+        </h2>
+      </div>
+
+      {/* 4 Staggered Article Blocks */}
+      <div className={styles.grid}>
+        {/* Block 1: White Card */}
+        <Link href="/blogs" className={styles.cardBlock}>
+          <div>
+            <h3 className={styles.cardTitle}>SPACES THAT BREATHE</h3>
+            <p className={styles.cardExcerpt}>
+              Designing residences that invite slow living, gentle movement, mindful rituals, and
+              intentional presence across 15 storeys.
             </p>
           </div>
+          <div className={styles.cardAction}>
+            <span>READ MORE</span>
+            <span>→</span>
+          </div>
+        </Link>
 
-          <Link href="/blogs" className={styles.viewAllBtn}>
-            View All Articles →
-          </Link>
-        </div>
+        {/* Block 2: Textures of Stillness */}
+        <Link href="/blogs" className={styles.articleBlock}>
+          <div className={`${styles.imageWrap} ${styles.imageWrapSquare}`}>
+            <Image
+              src="/aura/luxury-bedroom-2.jpg"
+              alt="Textures of Stillness"
+              fill
+              sizes="(max-width: 1024px) 50vw, 280px"
+              className={styles.articleImg}
+            />
+          </div>
+          <h4 className={styles.articleTitle}>TEXTURES OF STILLNESS</h4>
+        </Link>
 
-        <div className={styles.articleGrid}>
-          {ARTICLES.map((art) => (
-            <article key={art.slug} className={styles.card}>
-              <Link href="/blogs" className={styles.imageLink} tabIndex={-1}>
-                <img
-                  src={art.image}
-                  alt={art.title}
-                  className={styles.image}
-                  loading="lazy"
-                />
-                <span className={styles.categoryBadge}>{art.category}</span>
-              </Link>
+        {/* Block 3: Light as a Material (Staggered Down) */}
+        <Link href="/blogs" className={`${styles.articleBlock} ${styles.staggerDown}`}>
+          <div className={`${styles.imageWrap} ${styles.imageWrapTall}`}>
+            <Image
+              src="/aura/sky-balcony-lifestyle.jpg"
+              alt="Light as a Material"
+              fill
+              sizes="(max-width: 1024px) 50vw, 280px"
+              className={styles.articleImg}
+            />
+          </div>
+          <h4 className={styles.articleTitle}>LIGHT AS A MATERIAL</h4>
+        </Link>
 
-              <div className={styles.cardBody}>
-                <div className={styles.metaRow}>
-                  <span>{art.date}</span>
-                  <span className={styles.dot}>·</span>
-                  <span>{art.readTime}</span>
-                </div>
-                <h3 className={styles.title}>
-                  <Link href="/blogs" className={styles.titleLink}>
-                    {art.title}
-                  </Link>
-                </h3>
-                <p className={styles.excerpt}>{art.excerpt}</p>
-                <Link href="/blogs" className={styles.readMore}>
-                  Read Article →
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        {/* Block 4: The Beauty of Restraint */}
+        <Link href="/blogs" className={styles.articleBlock}>
+          <div className={`${styles.imageWrap} ${styles.imageWrapDeep}`}>
+            <Image
+              src="/aura/building-full-4k.jpg"
+              alt="The Beauty of Restraint"
+              fill
+              sizes="(max-width: 1024px) 50vw, 280px"
+              className={styles.articleImg}
+            />
+          </div>
+          <h4 className={styles.articleTitle}>THE BEAUTY OF RESTRAINT</h4>
+        </Link>
       </div>
     </section>
   );
 }
-

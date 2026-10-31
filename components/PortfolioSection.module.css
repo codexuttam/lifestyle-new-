@@ -1,0 +1,223 @@
+/* ==========================================================================
+   SOL HAUS PORTFOLIO SECTION — 3-COLUMN ARCHITECTURAL SHOWCASE
+   Exact match to SOL HAUS Reference Screen Recording (frame_006_12s.jpg)
+   ========================================================================== */
+
+.portfolio {
+  position: relative;
+  width: 100%;
+  background-color: var(--paper-white, #FFFFFF);
+  padding: 96px 64px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-rule, rgba(36, 27, 23, 0.08));
+}
+
+@media (max-width: 900px) {
+  .portfolio {
+    padding: 64px 24px;
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.sectionLabel {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--muted-taupe, #9B8E84);
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--heading, #241B17);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.swashInitial {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  padding-right: 0.04em;
+}
+
+/* 3-Column Layout */
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr 0.65fr;
+  gap: 36px;
+  align-items: stretch;
+}
+
+@media (max-width: 960px) {
+  .showcaseGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Left: Featured Image */
+.mainMediaWrap {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  overflow: hidden;
+  background: #EFECE7;
+}
+
+@media (max-width: 640px) {
+  .mainMediaWrap {
+    height: 300px;
+  }
+}
+
+.mainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Middle: Description & Project Meta */
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.metaTop {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--muted-taupe, #9B8E84);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+
+.projectTitle {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--heading, #241B17);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 16px 0;
+}
+
+.projectDesc {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--body, #625750);
+  margin: 0;
+}
+
+.bottomCaption {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted-taupe, #9B8E84);
+  margin-top: 36px;
+}
+
+/* Right: Counter, Preview & Circular Controls */
+.navCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+
+.counter {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--heading, #241B17);
+  align-self: flex-end;
+}
+
+@media (max-width: 960px) {
+  .counter {
+    align-self: flex-start;
+  }
+}
+
+.previewWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.previewThumb {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #EFECE7;
+}
+
+.previewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.accentNote {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted-taupe, #9B8E84);
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  align-self: flex-end;
+}
+
+@media (max-width: 960px) {
+  .controlsRow {
+    align-self: flex-start;
+  }
+}
+
+.controlBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(36, 27, 23, 0.25);
+  background: transparent;
+  color: var(--heading, #241B17);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 14px;
+}
+
+.controlBtn:hover {
+  background: var(--heading, #241B17);
+  color: #FFFFFF;
+  border-color: var(--heading, #241B17);
+}
