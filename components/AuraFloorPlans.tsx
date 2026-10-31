@@ -16,7 +16,8 @@ const PLANS = [
     title: "2 BHK Luxury Sky Residence",
     subtitle: "Commanding skyline views, dual sit-out balconies & zero wasted circulation",
     blueprintImage: "/aura/aura-2bhk-floorplan.jpg",
-    cutsectionImage: "/aura/plan-2bhk-cutsection.jpg",
+    cutsectionImage: "/aura/plan-2bhk-3d-iso.jpg",
+    fullSheetImage: "/aura/plan-2bhk-cutsection.jpg",
     specs: [
       { room: "Living Room", dim: "11'0\" × 17'0\"" },
       { room: "Master Bedroom", dim: "11'0\" × 12'0\" (Ensuite)" },
@@ -43,7 +44,8 @@ const PLANS = [
     title: "3 BHK Royal Skyline Residence",
     subtitle: "Grand multi-balcony suite designed for expansive family hospitality",
     blueprintImage: "/aura/aura-3bhk-floorplan.jpg",
-    cutsectionImage: "/aura/plan-3bhk-cutsection.jpg",
+    cutsectionImage: "/aura/plan-3bhk-3d-iso.jpg",
+    fullSheetImage: "/aura/plan-3bhk-cutsection.jpg",
     specs: [
       { room: "Grand Living Room", dim: "11'0\" × 18'6\"" },
       { room: "Master Suite", dim: "17'0\" × 11'0\" (Ensuite)" },
@@ -119,13 +121,18 @@ const PLANS = [
 
 export default function AuraFloorPlans() {
   const [activeTab, setActiveTab] = useState(0);
-  const [viewMode, setViewMode] = useState<"blueprint" | "cutsection">("blueprint");
+  const [viewMode, setViewMode] = useState<"cutsection" | "blueprint" | "fullsheet">("cutsection");
   const [zoomOpen, setZoomOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const plan = PLANS[activeTab];
 
-  const currentImage = viewMode === "blueprint" ? plan.blueprintImage : plan.cutsectionImage;
+  const currentImage =
+    viewMode === "blueprint"
+      ? plan.blueprintImage
+      : viewMode === "fullsheet" && plan.fullSheetImage
+      ? plan.fullSheetImage
+      : plan.cutsectionImage;
 
   useEffect(() => {
     if (!cardRef.current) return;
@@ -174,6 +181,8 @@ export default function AuraFloorPlans() {
                   setActiveTab(idx);
                   if (!item.hasCutsection) {
                     setViewMode("blueprint");
+                  } else {
+                    setViewMode("cutsection");
                   }
                 }}
               >
@@ -193,41 +202,60 @@ export default function AuraFloorPlans() {
               <div className={styles.viewModeRow}>
                 <button
                   type="button"
-                  className={`${styles.viewPillBtn} ${viewMode === "blueprint" ? styles.viewPillBtnActive : ""}`}
-                  onClick={() => setViewMode("blueprint")}
-                >
-                  Architectural Blueprint
-                </button>
-                <button
-                  type="button"
                   className={`${styles.viewPillBtn} ${viewMode === "cutsection" ? styles.viewPillBtnActive : ""}`}
                   onClick={() => setViewMode("cutsection")}
                 >
-                  3D Cut-Section
+                  <span className={styles.viewPillIcon}>🏛️</span>
+                  <span>3D Isometric Model</span>
                 </button>
+                <button
+                  type="button"
+                  className={`${styles.viewPillBtn} ${viewMode === "blueprint" ? styles.viewPillBtnActive : ""}`}
+                  onClick={() => setViewMode("blueprint")}
+                >
+                  <span className={styles.viewPillIcon}>📐</span>
+                  <span>Architectural Blueprint</span>
+                </button>
+                {plan.fullSheetImage && (
+                  <button
+                    type="button"
+                    className={`${styles.viewPillBtn} ${viewMode === "fullsheet" ? styles.viewPillBtnActive : ""}`}
+                    onClick={() => setViewMode("fullsheet")}
+                  >
+                    <span>Full Drawing Sheet</span>
+                  </button>
+                )}
               </div>
             )}
 
             <div
-              className={styles.imageWrapper}
+              className={`${styles.imageWrapper}${
+                viewMode !== "blueprint" ? ` ${styles.imageWrapperDark}` : ""
+              }`}
               onClick={() => setZoomOpen(true)}
               role="button"
               tabIndex={0}
-              title="Click to inspect drawing"
+              title="Click to inspect drawing in high resolution"
             >
               <img
                 key={`${plan.id}-${viewMode}`}
                 src={currentImage}
                 alt={`${plan.title} - ${viewMode === "blueprint" ? "Floor Plan" : "3D View"}`}
-                className={styles.planImg}
+                className={`${styles.planImg}${viewMode !== "blueprint" ? ` ${styles.planImg3D}` : ""}`}
                 loading="lazy"
               />
+              <span className={styles.zoomPill}>⤢ Tap to Inspect in 4K</span>
             </div>
           </div>
 
           {/* Details Column with Verified Room Dimensions */}
           <div className={styles.detailsCol}>
             <div className={styles.detailsHeader} data-plan-anim>
+              {viewMode === "cutsection" && (
+                <span className={styles.modeEyebrow}>
+                  ✦ 3D ISOMETRIC CUT-SECTION · ZERO SHARED WALLS
+                </span>
+              )}
               <h3 className={styles.planTitle}>{plan.title}</h3>
               <p className={styles.planSubtitle}>{plan.subtitle}</p>
             </div>
