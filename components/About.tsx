@@ -57,25 +57,54 @@ export default function About({ content }: { content?: HomeRecord["about"] }) {
           </Link>
         </div>
 
-        {/* Right: Asymmetric Image Composition with Subtle Overlap */}
+        {/* Right: Architectural Multi-Asset Composition (Editorial Gallery) */}
         <div className={styles.mediaCol}>
-          <div className={styles.primaryImgWrap}>
-            <Image
-              src="/aura/exterior-elevation-day-hd.jpg"
-              alt="Aura 15-Storey Tower Architecture, Camp Amravati"
-              fill
-              sizes="(max-width: 640px) 100vw, 360px"
-              className={styles.img}
-            />
+          {/* Column 1 */}
+          <div className={styles.mediaSubCol}>
+            <div className={styles.primaryImgWrap}>
+              <Image
+                src="/aura/exterior-elevation-day-hd.jpg"
+                alt="Aura 15-Storey Tower Architecture, Camp Amravati"
+                fill
+                sizes="(max-width: 640px) 100vw, 300px"
+                className={styles.img}
+              />
+              <span className={styles.imgCaption}>15-Storey Facade</span>
+            </div>
+            <div className={styles.secondaryImgWrap}>
+              <Image
+                src="/aura/living-dining-suite-hd.jpg"
+                alt="Aura Luxury Living and Dining Suite"
+                fill
+                sizes="(max-width: 640px) 100vw, 300px"
+                className={styles.img}
+              />
+              <span className={styles.imgCaption}>Living & Dining Suite</span>
+            </div>
           </div>
-          <div className={styles.secondaryImgWrap}>
-            <Image
-              src="/aura/sitout-balcony-view-hd.jpg"
-              alt="Aura Private Sit-out Balcony with Sunset Views"
-              fill
-              sizes="(max-width: 640px) 100vw, 240px"
-              className={styles.img}
-            />
+
+          {/* Column 2 */}
+          <div className={`${styles.mediaSubCol} ${styles.mediaSubColOffset}`}>
+            <div className={styles.tertiaryImgWrap}>
+              <Image
+                src="/aura/rooftop-amenities-3d.jpg"
+                alt="Aura Level 15 Sky Pool and Amenities Deck"
+                fill
+                sizes="(max-width: 640px) 100vw, 300px"
+                className={styles.img}
+              />
+              <span className={styles.imgCaption}>Level 15 Sky Oasis</span>
+            </div>
+            <div className={styles.quaternaryImgWrap}>
+              <Image
+                src="/aura/grand-entrance-lobby-hd.jpg"
+                alt="Aura Grand Entrance Lobby & Arrival"
+                fill
+                sizes="(max-width: 640px) 100vw, 300px"
+                className={styles.img}
+              />
+              <span className={styles.imgCaption}>Grand Entrance Foyer</span>
+            </div>
           </div>
         </div>
       </div>

@@ -5,6 +5,12 @@ import Image from "next/image";
 import styles from "./AuraFeatureSequence.module.css";
 import EnquiryModal from "@/components/EnquiryModal";
 
+interface RoomImage {
+  name: string;
+  src: string;
+  desc: string;
+}
+
 interface FeaturePanel {
   index: string;
   tag: string;
@@ -15,6 +21,7 @@ interface FeaturePanel {
   description: string;
   image: string;
   video?: string;
+  roomGallery?: RoomImage[];
   facts: string[];
   preference: string;
 }
@@ -48,7 +55,6 @@ const PANELS: FeaturePanel[] = [
     description:
       "An elevated sanctuary featuring a panoramic infinity lap pool, kids splash deck, enclosed box-cricket and tennis turf, jogging loop, and sunset cabanas.",
     image: "/aura/rooftop-amenities-3d.jpg",
-    video: "/videos/aura-showcase-clip.mp4",
     facts: [
       "Panoramic Rooftop Lap & Kids Pool",
       "Enclosed Multi-Sports Box Turf",
@@ -66,6 +72,14 @@ const PANELS: FeaturePanel[] = [
     description:
       "Thoughtfully proportioned residences with dedicated dining alcoves, ensuite master suites, concealed Jaquar bathware, large-format 800×1600 vitrified slabs, and private sit-out balconies.",
     image: "/aura/master-bedroom-suite-hd.jpg",
+    roomGallery: [
+      { name: "Master Bedroom Suite", src: "/aura/master-bedroom-suite-hd.jpg", desc: "Private Ensuite Sanctuary" },
+      { name: "Living & Dining Suite", src: "/aura/living-dining-suite-hd.jpg", desc: "Cross-Ventilated Grand Hall" },
+      { name: "Kid's Bedroom Suite", src: "/aura/kids-bedroom-suite-hd.jpg", desc: "Light-Filled Study Alcove" },
+      { name: "Kitchen & Utility", src: "/aura/kitchen-utility-suite-hd.jpg", desc: "Granite Platform & Utility" },
+      { name: "Private Sit-Out Balcony", src: "/aura/sitout-balcony-view-hd.jpg", desc: "Panoramic Camp Skyline Views" },
+      { name: "Designer Bathware", src: "/aura/designer-bathware-suite-hd.jpg", desc: "Concealed Jaquar Bathware" },
+    ],
     facts: [
       "800×1600 mm Vitrified Large-Format Slabs",
       "Zero Shared Walls with Acoustic Separation",
@@ -75,21 +89,20 @@ const PANELS: FeaturePanel[] = [
   },
   {
     index: "04",
-    tag: "ARRIVAL & BOULEVARD",
-    tabLabel: "(04) ARRIVAL & BOULEVARD",
-    categoryTag: "(04) GROUND LEVEL GRAND ARRIVAL",
-    title: "DOUBLE-HEIGHT ARRIVAL & HIGH-SPEED LIFTS",
-    subtitle: "4 High-Speed Lifts · 24×7 Manned Security · Segregated Access",
+    tag: "AURA SIGNATURE",
+    tabLabel: "(04) AURA SIGNATURE BRAND",
+    categoryTag: "(04) FOR SELECTED FEW · AURA SIGNATURE",
+    title: "FOR SELECTED FEW — THE AURA SIGNATURE",
+    subtitle: "Crafted for Identity, Distinction & Aristocratic Living",
     description:
-      "Lower and upper ground commercial bays offer high-visibility Congress Nagar frontage while maintaining private residential lift cores, covered parking, and 24×7 security.",
-    image: "/aura/grand-entrance-lobby-hd.jpg",
-    video: "/videos/lifestyle-showcase-clip.mp4",
+      "Crafted for those who seek identity and distinction, Aura offers a lifestyle reserved for the chosen. A home designed exclusively for the select few who aspire to live above the ordinary.",
+    image: "/aura/aura-brand-showcase.jpg",
     facts: [
-      "Double-Height Granite Residential Lobby",
-      "4 High-Speed Lifts with ARD & Full Power Backup",
-      "Segregated Residential Circulation & Covered Parking",
+      "Reserved for the Chosen Few",
+      "Iconic Camp Amravati Address",
+      "Golden Lady Emblem & Aristocratic Heritage",
     ],
-    preference: "Arrival Foyer & Ground Boulevard",
+    preference: "Aura Signature & Brand Showcase",
   },
 ];
 
@@ -126,12 +139,25 @@ function getSlideTransform(idx: number, activeIdx: number) {
 
 export default function AuraFeatureSequence() {
   const [activeIdx, setActiveIdx] = useState(1); // Default to tab 02 as in user's screenshot
+  const [activeRoomIdx, setActiveRoomIdx] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const current = PANELS[activeIdx];
   const nextItem = PANELS[(activeIdx + 1) % PANELS.length];
 
+  // Auto-cycle room images when 2 & 3 BHK tab is active
+  useEffect(() => {
+    if (activeIdx !== 2) return;
+    const interval = setInterval(() => {
+      setActiveRoomIdx((prev) => (prev + 1) % (PANELS[2].roomGallery?.length || 1));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [activeIdx]);
+
   const handleSelectPanel = (idx: number) => {
     setActiveIdx(idx);
+    if (idx === 2) {
+      setActiveRoomIdx(0);
+    }
   };
 
   const handlePrev = () => {
@@ -140,6 +166,18 @@ export default function AuraFeatureSequence() {
 
   const handleNext = () => {
     setActiveIdx((prev) => (prev + 1) % PANELS.length);
+  };
+
+  const handlePrevRoom = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const len = PANELS[2].roomGallery?.length || 1;
+    setActiveRoomIdx((prev) => (prev - 1 + len) % len);
+  };
+
+  const handleNextRoom = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const len = PANELS[2].roomGallery?.length || 1;
+    setActiveRoomIdx((prev) => (prev + 1) % len);
   };
 
   const handleInspectFloorPlans = () => {
@@ -271,6 +309,54 @@ export default function AuraFeatureSequence() {
                       className={styles.flyingMedia}
                       aria-hidden="true"
                     />
+                  ) : panel.roomGallery && isFront ? (
+                    <div className={styles.roomGalleryStage}>
+                      <Image
+                        key={panel.roomGallery[activeRoomIdx].src}
+                        src={panel.roomGallery[activeRoomIdx].src}
+                        alt={panel.roomGallery[activeRoomIdx].name}
+                        fill
+                        sizes="(max-width: 960px) 100vw, 560px"
+                        className={styles.flyingMedia}
+                      />
+                      {/* Floating Interactive Room Switcher */}
+                      <div className={styles.roomToolbar} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.roomPillRow}>
+                          {panel.roomGallery.map((room, rIdx) => (
+                            <button
+                              key={room.name}
+                              type="button"
+                              className={`${styles.roomPill}${rIdx === activeRoomIdx ? ` ${styles.roomPillActive}` : ""}`}
+                              onClick={() => setActiveRoomIdx(rIdx)}
+                              title={room.name}
+                            >
+                              {room.name.replace(" Suite", "")}
+                            </button>
+                          ))}
+                        </div>
+                        <div className={styles.roomNavArrows}>
+                          <button
+                            type="button"
+                            className={styles.roomArrowBtn}
+                            onClick={handlePrevRoom}
+                            aria-label="Previous room"
+                          >
+                            ‹
+                          </button>
+                          <span className={styles.roomCounter}>
+                            0{activeRoomIdx + 1} / 0{panel.roomGallery.length}
+                          </span>
+                          <button
+                            type="button"
+                            className={styles.roomArrowBtn}
+                            onClick={handleNextRoom}
+                            aria-label="Next room"
+                          >
+                            ›
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   ) : (
                     <Image
                       src={panel.image}
@@ -291,9 +377,17 @@ export default function AuraFeatureSequence() {
                   >
                     <div className={styles.flyingIndexRow}>
                       <span className={styles.flyingLine} />
-                      <span>({panel.index})</span>
+                      <span>
+                        ({panel.index})
+                        {panel.index === "04" && " · GOLDEN LADY EMBLEM & AURA BRAND"}
+                        {panel.index === "02" && " · 3D ROOFTOP SKY POOL & TURF"}
+                      </span>
                     </div>
-                    <h4 className={styles.flyingTitle}>{panel.title}</h4>
+                    <h4 className={styles.flyingTitle}>
+                      {panel.roomGallery && isFront
+                        ? panel.roomGallery[activeRoomIdx].name
+                        : panel.title}
+                    </h4>
                   </div>
                 </div>
               );

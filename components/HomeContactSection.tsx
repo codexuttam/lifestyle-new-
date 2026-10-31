@@ -71,7 +71,9 @@ export default function HomeContactSection({ settings }: { settings?: SettingsRe
           <h2 className={styles.title}>
             LET&apos;S BEGIN A
             <br />
-            <span className={styles.swashInitial}>C</span>ONVERSATION
+            <span className={styles.nowrapWord}>
+              <span className={styles.swashInitial}>C</span>ONVERSATION
+            </span>
           </h2>
           <p className={styles.bodyText}>
             Tell us more about your ideal residence, your timeline, and your aspirations.
