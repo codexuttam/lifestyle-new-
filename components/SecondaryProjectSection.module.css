@@ -1,0 +1,215 @@
+/* ==========================================================================
+   SOL HAUS SECONDARY PROJECT SECTION — LIFESTYLE HOME SPACES
+   Editorial White Showcase of Developer Track Record with Interactive Tabs
+   ========================================================================== */
+
+.section {
+  position: relative;
+  width: 100%;
+  background-color: var(--paper-white, #FFFFFF);
+  padding: 104px 64px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-rule, rgba(36, 27, 23, 0.08));
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 64px 24px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 56px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 500px;
+}
+
+.sectionLabel {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--muted-taupe, #9B8E84);
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  color: var(--heading, #241B17);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.swashInitial {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  padding-right: 0.04em;
+}
+
+.desc {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.72;
+  color: var(--body, #625750);
+  margin: 0;
+}
+
+/* Category Filter Tabs */
+.toggleRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.toggleBtn {
+  background: transparent;
+  border: 1px solid rgba(36, 27, 23, 0.16);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--body, #625750);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleBtnActive {
+  background: var(--heading, #241B17);
+  color: #FFFFFF;
+  border-color: var(--heading, #241B17);
+}
+
+.factsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  padding: 16px 0;
+  border-top: 1px solid rgba(36, 27, 23, 0.08);
+  border-bottom: 1px solid rgba(36, 27, 23, 0.08);
+}
+
+.factItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.factNum {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--heading, #241B17);
+}
+
+.factLabel {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--muted-taupe, #9B8E84);
+  text-transform: uppercase;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--heading, #241B17);
+  padding: 0 0 6px 0;
+  color: var(--heading, #241B17);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.ctaBtn:hover {
+  opacity: 0.7;
+}
+
+.arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.ctaBtn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Image Visual with Subtle Parallax Zoom */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  background: #EFECE7;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .imageWrap {
+    height: 300px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imageWrap:hover .image {
+  transform: scale(1.04);
+}
+
+.imageCaption {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(32, 23, 19, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  color: #F8F6F3;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
