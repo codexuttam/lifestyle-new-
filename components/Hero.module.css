@@ -7,12 +7,16 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   height: 100vh;
+  height: 100dvh;
   background-color: var(--espresso, #201713);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding-top: 80px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 1024px) {
@@ -70,18 +74,19 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  padding: 0 52px 48px;
+  padding: 0 clamp(24px, 4vw, 52px) clamp(24px, 4.5vh, 44px);
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: flex-end;
-  gap: 48px;
+  gap: clamp(24px, 3.5vw, 48px);
+  box-sizing: border-box;
 }
 
 @media (max-width: 900px) {
   .contentGrid {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 0 24px 36px;
+    gap: clamp(16px, 2.5vh, 24px);
+    padding: 0 24px clamp(20px, 3.2vh, 32px);
   }
 }
 
@@ -93,7 +98,7 @@
 
 .headlineLine {
   font-family: var(--font-display);
-  font-size: clamp(3.6rem, 8.4vw, 7.6rem);
+  font-size: clamp(2.8rem, min(7.2vw, 10.5vh), 6.4rem);
   font-weight: 400;
   line-height: 0.92;
   letter-spacing: 0.01em;
@@ -101,6 +106,12 @@
   text-transform: uppercase;
   margin: 0;
   animation: heroLineEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (max-width: 900px) {
+  .headlineLine {
+    font-size: clamp(2.4rem, min(10.5vw, 8.2vh), 4.2rem);
+  }
 }
 
 .headlineLine:nth-child(1) {
@@ -163,7 +174,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 22px;
+  gap: clamp(14px, 2vh, 22px);
   max-width: 400px;
   animation: heroLineEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
