@@ -82,6 +82,34 @@ export default function VslSection({
     };
   }, [autoOpen]);
 
+  // Autoplay video smoothly when user scrolls into this section
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.muted = true;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(() => {});
+            }
+          } else {
+            if (!video.paused && !video.ended) {
+              video.pause();
+            }
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   const openFromCta = (pref: string) => {
     resumeOnCloseRef.current = false;
     videoRef.current?.pause();
@@ -108,8 +136,10 @@ export default function VslSection({
               src={videoSrc}
               poster={poster}
               controls
+              autoPlay
+              muted
               playsInline
-              preload="metadata"
+              preload="auto"
             >
               Your browser does not support HTML5 video.
             </video>

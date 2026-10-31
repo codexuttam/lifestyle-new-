@@ -12,12 +12,10 @@ const PLANS = [
     index: "01",
     label: "2 BHK Sky Suite",
     badge: "1,150 SQFT",
-    hasCutsection: true,
     title: "2 BHK Luxury Sky Residence",
     subtitle: "Commanding skyline views, dual sit-out balconies & zero wasted circulation",
-    blueprintImage: "/aura/aura-2bhk-floorplan.jpg",
-    cutsectionImage: "/aura/plan-2bhk-3d-iso.jpg",
-    fullSheetImage: "/aura/plan-2bhk-cutsection.jpg",
+    image: "/aura/plan-2bhk-3d-iso.jpg",
+    isDarkBg: true,
     specs: [
       { room: "Living Room", dim: "11'0\" × 17'0\"" },
       { room: "Master Bedroom", dim: "11'0\" × 12'0\" (Ensuite)" },
@@ -40,12 +38,10 @@ const PLANS = [
     index: "02",
     label: "3 BHK Royal Suite",
     badge: "1,650 SQFT",
-    hasCutsection: true,
     title: "3 BHK Royal Skyline Residence",
     subtitle: "Grand multi-balcony suite designed for expansive family hospitality",
-    blueprintImage: "/aura/aura-3bhk-floorplan.jpg",
-    cutsectionImage: "/aura/plan-3bhk-3d-iso.jpg",
-    fullSheetImage: "/aura/plan-3bhk-cutsection.jpg",
+    image: "/aura/plan-3bhk-3d-iso.jpg",
+    isDarkBg: true,
     specs: [
       { room: "Grand Living Room", dim: "11'0\" × 18'6\"" },
       { room: "Master Suite", dim: "17'0\" × 11'0\" (Ensuite)" },
@@ -68,11 +64,10 @@ const PLANS = [
     index: "03",
     label: "Rooftop Sky Oasis",
     badge: "LEVEL 15",
-    hasCutsection: false,
     title: "Level 15 Crown Leisure Deck",
     subtitle: "Rooftop lap pool, enclosed box cricket turf & sunset viewing promenade",
-    blueprintImage: "/aura/aura-terrace-plan.jpg",
-    cutsectionImage: "/aura/rooftop-amenities-3d.jpg",
+    image: "/aura/aura-terrace-plan.jpg",
+    isDarkBg: false,
     specs: [
       { room: "Swimming Pool", dim: "Lap & Leisure Pool" },
       { room: "Kids Pool", dim: "Safe Shallow Splash Zone" },
@@ -95,11 +90,10 @@ const PLANS = [
     index: "04",
     label: "Typical Floor Plate",
     badge: "LEVELS 1 – 14",
-    hasCutsection: false,
     title: "Typical Architectural Floor Plate",
     subtitle: "Optimum cross-ventilation, 4 high-speed elevators & wide designer corridors",
-    blueprintImage: "/aura/aura-typical-floorplan.jpg",
-    cutsectionImage: "/aura/building-full-4k.jpg",
+    image: "/aura/aura-typical-floorplan.jpg",
+    isDarkBg: false,
     specs: [
       { room: "Floor Plate", dim: "Levels 1 to 14" },
       { room: "Configurations", dim: "2 & 3 BHK Luxury Suites" },
@@ -121,18 +115,10 @@ const PLANS = [
 
 export default function AuraFloorPlans() {
   const [activeTab, setActiveTab] = useState(0);
-  const [viewMode, setViewMode] = useState<"cutsection" | "blueprint" | "fullsheet">("cutsection");
   const [zoomOpen, setZoomOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const plan = PLANS[activeTab];
-
-  const currentImage =
-    viewMode === "blueprint"
-      ? plan.blueprintImage
-      : viewMode === "fullsheet" && plan.fullSheetImage
-      ? plan.fullSheetImage
-      : plan.cutsectionImage;
 
   useEffect(() => {
     if (!cardRef.current) return;
@@ -142,7 +128,7 @@ export default function AuraFloorPlans() {
       { y: 16, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.45, stagger: 0.04, ease: "power3.out", clearProps: "transform" }
     );
-  }, [activeTab, viewMode]);
+  }, [activeTab]);
 
   useEffect(() => {
     if (!zoomOpen) return;
@@ -177,14 +163,7 @@ export default function AuraFloorPlans() {
                 role="tab"
                 aria-selected={isActive}
                 className={`${styles.tabBtn}${isActive ? ` ${styles.activeTab}` : ""}`}
-                onClick={() => {
-                  setActiveTab(idx);
-                  if (!item.hasCutsection) {
-                    setViewMode("blueprint");
-                  } else {
-                    setViewMode("cutsection");
-                  }
-                }}
+                onClick={() => setActiveTab(idx)}
               >
                 <span className={styles.tabIndex}>({item.index})</span>
                 <span>{item.label}</span>
@@ -196,41 +175,11 @@ export default function AuraFloorPlans() {
 
         {/* Interactive Drawing Card */}
         <div className={styles.displayCard} ref={cardRef}>
-          {/* Drawing Column with View Mode Toggle */}
+          {/* Drawing Column */}
           <div className={styles.imageCol}>
-            {plan.hasCutsection && (
-              <div className={styles.viewModeRow}>
-                <button
-                  type="button"
-                  className={`${styles.viewPillBtn} ${viewMode === "cutsection" ? styles.viewPillBtnActive : ""}`}
-                  onClick={() => setViewMode("cutsection")}
-                >
-                  <span className={styles.viewPillIcon}>🏛️</span>
-                  <span>3D Isometric Model</span>
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.viewPillBtn} ${viewMode === "blueprint" ? styles.viewPillBtnActive : ""}`}
-                  onClick={() => setViewMode("blueprint")}
-                >
-                  <span className={styles.viewPillIcon}>📐</span>
-                  <span>Architectural Blueprint</span>
-                </button>
-                {plan.fullSheetImage && (
-                  <button
-                    type="button"
-                    className={`${styles.viewPillBtn} ${viewMode === "fullsheet" ? styles.viewPillBtnActive : ""}`}
-                    onClick={() => setViewMode("fullsheet")}
-                  >
-                    <span>Full Drawing Sheet</span>
-                  </button>
-                )}
-              </div>
-            )}
-
             <div
               className={`${styles.imageWrapper}${
-                viewMode !== "blueprint" ? ` ${styles.imageWrapperDark}` : ""
+                plan.isDarkBg ? ` ${styles.imageWrapperDark}` : ""
               }`}
               onClick={() => setZoomOpen(true)}
               role="button"
@@ -238,10 +187,10 @@ export default function AuraFloorPlans() {
               title="Click to inspect drawing in high resolution"
             >
               <img
-                key={`${plan.id}-${viewMode}`}
-                src={currentImage}
-                alt={`${plan.title} - ${viewMode === "blueprint" ? "Floor Plan" : "3D View"}`}
-                className={`${styles.planImg}${viewMode !== "blueprint" ? ` ${styles.planImg3D}` : ""}`}
+                key={plan.id}
+                src={plan.image}
+                alt={plan.title}
+                className={`${styles.planImg}${plan.isDarkBg ? ` ${styles.planImg3D}` : ""}`}
                 loading="lazy"
               />
               <span className={styles.zoomPill}>⤢ Tap to Inspect in 4K</span>
@@ -251,7 +200,7 @@ export default function AuraFloorPlans() {
           {/* Details Column with Verified Room Dimensions */}
           <div className={styles.detailsCol}>
             <div className={styles.detailsHeader} data-plan-anim>
-              {viewMode === "cutsection" && (
+              {plan.isDarkBg && (
                 <span className={styles.modeEyebrow}>
                   ✦ 3D ISOMETRIC CUT-SECTION · ZERO SHARED WALLS
                 </span>
@@ -320,7 +269,7 @@ export default function AuraFloorPlans() {
             ✕ Close
           </button>
           <img
-            src={currentImage}
+            src={plan.image}
             alt={plan.title}
             className={styles.lightboxImg}
             onClick={(e) => e.stopPropagation()}

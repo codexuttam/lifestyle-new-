@@ -268,11 +268,12 @@ export default function LifestyleInteractiveShowcase({
         <span id="explore-lifestyle-section" className={styles.anchorAlias} aria-hidden="true" />
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader} data-reveal>
+            <span className={styles.eyebrow}>DELIVERED RESIDENCES &amp; ARCHITECTURE</span>
             <h2 className={styles.sectionTitle}>
-              LANDMARK EXPLORER &amp; <span>3D FLOOR LAYOUTS</span>
+              LANDMARK &amp; <span>3D LAYOUTS</span>
             </h2>
             <p className={styles.sectionSubtitle}>
-              Scroll through the delivered 8-storey landmark and official 3D isometric cut-sections—inspect room dimensions, Vastu alignment, and commercial floor plates in motion.
+              Explore delivered 2 &amp; 3 BHK residences, high-street retail plates, and ready-to-move specifications on DPS Road.
             </p>
           </div>
 
@@ -299,13 +300,13 @@ export default function LifestyleInteractiveShowcase({
               </div>
 
               <div className={styles.stageCard}>
-                <div className={styles.stageCopy}>
+                <div className={styles.stageCopy} key={activePlate.id}>
                   <div className={styles.stageMetaRow}>
                     <span className={styles.stageNumber}>({activePlate.index})</span>
                     <span className={styles.stageSub}>{activePlate.subtitle}</span>
                   </div>
 
-                  <h3 className={styles.unitTitle} key={activePlate.id}>
+                  <h3 className={styles.unitTitle}>
                     {activePlate.title}
                   </h3>
                   <p className={styles.unitSummary}>{activePlate.summary}</p>
@@ -315,17 +316,6 @@ export default function LifestyleInteractiveShowcase({
                       <div className={styles.roomBox} key={r.name}>
                         <span className={styles.roomName}>{r.name}</span>
                         <span className={styles.roomDim}>{r.dim}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className={styles.unitFeaturesList}>
-                    {activePlate.features.map((feat) => (
-                      <div className={styles.unitFeatureItem} key={feat}>
-                        <span className={styles.featureStar} aria-hidden="true">
-                          ✦
-                        </span>
-                        <span>{feat}</span>
                       </div>
                     ))}
                   </div>
