@@ -1,195 +1,175 @@
-/* ==========================================================================
-   SOL HAUS CONTACT SECTION — MINIMAL WHITE FORM
-   Exact match to SOL HAUS Reference Screen Recording (detail_26s.jpg)
-   ========================================================================== */
+/* ============ SECTION 9: CONTACT (DARK ESPRESSO #201005) ============ */
 
-.contact {
+.section {
   position: relative;
-  width: 100%;
-  background-color: var(--paper-white, #FFFFFF);
-  padding: 104px 64px;
+  background: #201005;
+  color: #F8F5F3;
+  padding: 124px 40px;
+  border-bottom: 1px solid rgba(184, 174, 166, 0.2);
   overflow: hidden;
-  border-bottom: 1px solid var(--border-rule, rgba(36, 27, 23, 0.08));
 }
 
-@media (max-width: 900px) {
-  .contact {
-    padding: 64px 24px;
-  }
+.radialGlow {
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 100%);
+  height: 440px;
+  background: radial-gradient(ellipse at center, rgba(184, 174, 166, 0.12) 0%, rgba(184, 174, 166, 0) 70%);
+  pointer-events: none;
 }
 
-.grid {
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
-  gap: 64px;
-  align-items: flex-start;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: start;
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-}
-
-/* Left Narrative Column */
-.narrativeCol {
+.leftCol {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
-  max-width: 440px;
+  gap: 20px;
 }
 
-.sectionLabel {
+.eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid rgba(184, 174, 166, 0.35);
+  background: rgba(184, 174, 166, 0.08);
   font-family: var(--font-sans);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.24em;
-  color: var(--muted-taupe, #9B8E84);
-  text-transform: uppercase;
-}
-
-.title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5.2vw, 4.4rem);
-  font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  color: var(--heading, #241B17);
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.swashInitial {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
-  display: inline-block;
-  padding-right: 0.04em;
-}
-
-.bodyText {
-  font-family: var(--font-sans);
-  font-size: 13.5px;
-  line-height: 1.75;
-  color: var(--body, #625750);
-  margin: 0;
-}
-
-/* Right Form */
-.formCol {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.lineInput {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(36, 27, 23, 0.22);
-  padding: 12px 0 10px;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--heading, #241B17);
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.lineInput:focus {
-  border-bottom-color: var(--heading, #241B17);
-}
-
-.lineInput::placeholder {
-  color: var(--muted-taupe, #9B8E84);
-  font-size: 12.5px;
-}
-
-.twoColRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-@media (max-width: 600px) {
-  .twoColRow {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-.textArea {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(36, 27, 23, 0.22);
-  padding: 14px 16px;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--heading, #241B17);
-  outline: none;
-  resize: vertical;
-  min-height: 100px;
-  transition: border-color 0.2s ease;
-}
-
-.textArea:focus {
-  border-color: var(--heading, #241B17);
-}
-
-.textArea::placeholder {
-  color: var(--muted-taupe, #9B8E84);
-  font-size: 12.5px;
-}
-
-.submitBtn {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 24px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--heading, #241B17);
-  padding: 0 0 6px 0;
-  color: var(--heading, #241B17);
-  font-family: var(--font-sans);
-  font-size: 10.5px;
-  font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
+  color: #AEA399;
+  border-radius: 9999px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+  line-height: 0.96;
+  text-transform: uppercase;
+  color: #F8F5F3;
+}
+
+.heading span {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #AEA399;
+}
+
+.lead {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(248, 245, 243, 0.78);
+  max-width: 54ch;
+}
+
+.channelCards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 8px;
 }
 
-.submitBtn:hover {
-  opacity: 0.7;
+.channelCard {
+  padding: 20px 24px;
+  border-radius: 18px;
+  background: #332418;
+  border: 1px solid rgba(184, 174, 166, 0.2);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
-.submitBtn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.arrow {
-  font-size: 12px;
-  transition: transform 0.2s ease;
-}
-
-.submitBtn:hover .arrow {
+.channelCard:hover {
+  border-color: #B8AEA6;
   transform: translateX(4px);
 }
 
-.successMsg {
-  padding: 14px 20px;
-  background: #EFECE7;
-  color: var(--heading, #241B17);
+.channelIndex {
   font-family: var(--font-sans);
-  font-size: 13px;
-  border-left: 2px solid var(--heading, #241B17);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #AEA399;
+  text-transform: uppercase;
 }
 
-.errorMsg {
-  color: #c53030;
+.channelValue {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: #F8F5F3;
+}
+
+.channelHint {
+  font-family: var(--font-sans);
   font-size: 12px;
+  color: rgba(248, 245, 243, 0.7);
+}
+
+.formCard {
+  background: #332418;
+  border: 1px solid rgba(184, 174, 166, 0.25);
+  border-radius: 28px;
+  padding: 36px;
+  box-shadow: 0 32px 72px rgba(16, 8, 3, 0.45);
+}
+
+.formHeader {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formTitle {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: #F8F5F3;
+  text-transform: uppercase;
+}
+
+.formSub {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(248, 245, 243, 0.72);
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 88px 24px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 68px 16px;
+  }
+
+  .formCard {
+    padding: 26px 20px;
+  }
 }

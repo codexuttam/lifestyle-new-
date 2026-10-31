@@ -1,134 +1,64 @@
-"use client";
-
-import { useState } from "react";
+import ContactForm from "@/components/ContactForm";
+import {
+  mailtoHref,
+  telHref,
+  whatsappHref,
+  type SettingsRecord,
+} from "@/lib/schemas/settings";
 import styles from "./HomeContactSection.module.css";
-import type { SettingsRecord } from "@/lib/schemas/settings";
 
-export default function HomeContactSection({ settings }: { settings?: SettingsRecord }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.phone.trim()) {
-      setErrorMsg("Please provide your name and phone number.");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setErrorMsg("");
-
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          project: "Aura by Lifestyle",
-          preference: "2 & 3 BHK Luxury Residences",
-          message: formData.message || "Enquiry from SOL HAUS Contact Section",
-          source: "SOL HAUS Contact Section",
-        }),
-      });
-
-      if (res.ok) {
-        setIsSuccess(true);
-        setFormData({ name: "", phone: "", email: "", message: "" });
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setErrorMsg(data.error || "Unable to submit enquiry. Please try again.");
-      }
-    } catch {
-      setErrorMsg("A network error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
+export default function HomeContactSection({ settings }: { settings: SettingsRecord }) {
   return (
-    <section className={styles.contact} id="contact" aria-label="Contact Aura by Lifestyle">
-      <div className={styles.grid}>
-        {/* Left: Narrative Column */}
-        <div className={styles.narrativeCol}>
-          <span className={styles.sectionLabel}>CONTACT US</span>
-          <h2 className={styles.title}>
-            LET&apos;S BEGIN A
-            <br />
-            <span className={styles.swashInitial}>C</span>ONVERSATION
+    <section className={styles.section} id="contact-section">
+      <div className={styles.radialGlow} aria-hidden="true" />
+
+      <div className={styles.container}>
+        <div className={styles.leftCol}>
+          <span className={styles.eyebrow}>PROJECT ENQUIRY &amp; VISITS</span>
+          <h2 className={styles.heading}>
+            YOUR NEXT CHAPTER <span>STARTS HERE.</span>
           </h2>
-          <p className={styles.bodyText}>
-            Tell us more about your ideal residence, your timeline, and your aspirations.
-            We&apos;ll guide you through the next steps with care and intention.
+          <p className={styles.lead}>
+            Connect directly with the development team to receive official 2 &amp; 3 BHK floor plates, pricing schedules, or to book a private site visit to Aura at Congress Nagar, Camp.
           </p>
+
+          <div className={styles.channelCards}>
+            <a
+              href={whatsappHref(settings)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.channelCard}
+            >
+              <span className={styles.channelIndex}>01 · WHATSAPP CONVERSATION</span>
+              <span className={styles.channelValue}>+91 7498256708</span>
+              <span className={styles.channelHint}>Instant Brochure &amp; Floor Plans ↗</span>
+            </a>
+
+            <a href={telHref(settings)} className={styles.channelCard}>
+              <span className={styles.channelIndex}>02 · DIRECT SITE DESK</span>
+              <span className={styles.channelValue}>+91 7498256708</span>
+              <span className={styles.channelHint}>Speak With Our Property Advisors →</span>
+            </a>
+
+            <a href={mailtoHref(settings)} className={styles.channelCard}>
+              <span className={styles.channelIndex}>03 · CAMP SALES OFFICE</span>
+              <span className={styles.channelValue}>{settings.email}</span>
+              <span className={styles.channelHint}>{settings.address}</span>
+            </a>
+          </div>
         </div>
 
-        {/* Right: Minimal Underline Form */}
-        <form onSubmit={handleSubmit} className={styles.formCol}>
-          {isSuccess ? (
-            <div className={styles.successMsg}>
-              Thank you. Your request has been received. Our team will reach out to you shortly.
-            </div>
-          ) : (
-            <>
-              <input
-                type="text"
-                placeholder="Name *"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className={styles.lineInput}
-                required
-              />
-
-              <div className={styles.twoColRow}>
-                <input
-                  type="tel"
-                  placeholder="Phone *"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className={styles.lineInput}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={styles.lineInput}
-                />
-              </div>
-
-              <textarea
-                placeholder="Message / Preferred Residence"
-                rows={3}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className={styles.textArea}
-              />
-
-              {errorMsg && <div className={styles.errorMsg}>{errorMsg}</div>}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={styles.submitBtn}
-                aria-label="Send Request"
-              >
-                <span>{isSubmitting ? "SENDING..." : "SEND REQUEST"}</span>
-                <span className={styles.arrow}>→</span>
-              </button>
-            </>
-          )}
-        </form>
+        <div className={styles.formCard}>
+          <div className={styles.formHeader}>
+            <h3 className={styles.formTitle}>Direct Enquiry &amp; Site Visit</h3>
+            <p className={styles.formSub}>
+              Share your details and our team will get back to you with confirmed availability.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
       </div>
     </section>
   );
 }
+
