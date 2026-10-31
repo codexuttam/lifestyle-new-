@@ -14,22 +14,39 @@ interface NavLinkItem {
   href: string;
 }
 
-const DESKTOP_LINKS: NavLinkItem[] = [
+const AURA_DESKTOP_LINKS: NavLinkItem[] = [
   { label: "ABOUT US", href: "/#about" },
   { label: "THE TOWER", href: "/#tower-features" },
   { label: "FLOOR PLANS", href: "/#floor-plans" },
-  { label: "LIFESTYLE HOMES", href: "/#developer" },
+  { label: "LIFESTYLE HOMES", href: "/projects/lifestyle-homes" },
   { label: "JOURNAL", href: "/blogs" },
 ];
 
-const MOBILE_LINKS: NavLinkItem[] = [
+const LIFESTYLE_DESKTOP_LINKS: NavLinkItem[] = [
+  { label: "OVERVIEW", href: "/projects/lifestyle-homes#hero-section" },
+  { label: "RESIDENCES", href: "/projects/lifestyle-homes#residences" },
+  { label: "SHOWROOMS", href: "/projects/lifestyle-homes#commercial" },
+  { label: "AURA (FLAGSHIP)", href: "/" },
+  { label: "JOURNAL", href: "/blogs" },
+];
+
+const AURA_MOBILE_LINKS: NavLinkItem[] = [
   { label: "Overview", href: "/#hero-section" },
   { label: "About Aura", href: "/#about" },
   { label: "15-Storey Tower", href: "/#tower-features" },
   { label: "Floor Plans", href: "/#floor-plans" },
-  { label: "Lifestyle Home Spaces", href: "/#developer" },
+  { label: "Lifestyle Home Spaces", href: "/projects/lifestyle-homes" },
   { label: "Journal & Updates", href: "/blogs" },
   { label: "Contact Studio", href: "/#contact-section" },
+];
+
+const LIFESTYLE_MOBILE_LINKS: NavLinkItem[] = [
+  { label: "Overview", href: "/projects/lifestyle-homes#hero-section" },
+  { label: "Residential Suites", href: "/projects/lifestyle-homes#residences" },
+  { label: "Commercial Showrooms", href: "/projects/lifestyle-homes#commercial" },
+  { label: "Aura Flagship", href: "/" },
+  { label: "Journal & Updates", href: "/blogs" },
+  { label: "Contact Sales", href: "/contact" },
 ];
 
 export default function SiteNav({ activeHref }: { activeHref?: string }) {
@@ -42,6 +59,14 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
+
+  const isLifestylePage =
+    pathname === "/projects/lifestyle-homes" ||
+    pathname === "/projects/lifestyle" ||
+    activeHref === "/projects/lifestyle-homes";
+
+  const desktopLinks = isLifestylePage ? LIFESTYLE_DESKTOP_LINKS : AURA_DESKTOP_LINKS;
+  const mobileLinks = isLifestylePage ? LIFESTYLE_MOBILE_LINKS : AURA_MOBILE_LINKS;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -133,43 +158,56 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
   return (
     <>
       <header className={`${styles.nav}${scrolled ? ` ${styles.navScrolled}` : ""}`}>
-        {/* Left: Minimal Editorial Brand Lockup with Both Aura & Lifestyle Logos */}
-        <Link
-          href="/"
-          className={styles.brandLockup}
-          aria-label="Aura by Lifestyle — Home"
-          onClick={(e) => {
-            if (pathname === "/") {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-        >
-          <Image
-            src="/aura/aura-gold-logo-transparent.png"
-            alt="Aura Logo"
-            width={30}
-            height={30}
-            className={styles.auraLogoImg}
-            priority
-          />
-          <div className={styles.brandNameWrap}>
-            <span className={styles.brandName}>AURA</span>
-            <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
-          </div>
-          <div className={styles.brandDivider} />
-          <Image
-            src="/assets/brand/lifestyle-logo.png"
-            alt="Lifestyle Developer Logo"
-            width={24}
-            height={24}
-            className={styles.lifestyleLogoImg}
-          />
-        </Link>
+        {/* Left: Dedicated Brand Logo — Only Aura on Aura page, Only Lifestyle on Lifestyle page */}
+        {isLifestylePage ? (
+          <Link
+            href="/projects/lifestyle-homes"
+            className={styles.brandLockup}
+            aria-label="Lifestyle Home Spaces"
+          >
+            <Image
+              src="/assets/brand/lifestyle-logo.png"
+              alt="Lifestyle Logo"
+              width={28}
+              height={28}
+              className={styles.lifestyleLogoOnly}
+              priority
+            />
+            <div className={styles.brandNameWrap}>
+              <span className={styles.brandName}>LIFESTYLE</span>
+              <span className={styles.brandDescriptor}>HOME SPACES</span>
+            </div>
+          </Link>
+        ) : (
+          <Link
+            href="/"
+            className={styles.brandLockup}
+            aria-label="Aura by Lifestyle"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
+            <Image
+              src="/aura/aura-gold-logo-transparent.png"
+              alt="Aura Logo"
+              width={32}
+              height={32}
+              className={styles.auraLogoImg}
+              priority
+            />
+            <div className={styles.brandNameWrap}>
+              <span className={styles.brandName}>AURA</span>
+              <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
+            </div>
+          </Link>
+        )}
 
         {/* Center: Minimal Section Links */}
         <nav className={styles.centerLinks} aria-label="Primary sections">
-          {DESKTOP_LINKS.map((item) => {
+          {desktopLinks.map((item) => {
             const isExact = pathname === item.href || activeHref === item.href;
             return (
               <Link
@@ -187,9 +225,13 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         {/* Right: Contact & Action Buttons */}
         <div className={styles.rightActions}>
           <Link
-            href="/#contact-section"
+            href={isLifestylePage ? "/contact" : "/#contact-section"}
             className={styles.contactLink}
-            onClick={(e) => handleNavClick(e, "/#contact-section")}
+            onClick={(e) => {
+              if (!isLifestylePage) {
+                handleNavClick(e, "/#contact-section");
+              }
+            }}
           >
             CONTACT
           </Link>
@@ -324,17 +366,35 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           <div className={styles.mobileMenu} onClick={(e) => e.stopPropagation()}>
             <div className={styles.mobileMenuTop}>
               <div className={styles.brandLockup}>
-                <Image
-                  src="/aura/aura-gold-logo-transparent.png"
-                  alt="Aura Logo"
-                  width={26}
-                  height={26}
-                  className={styles.auraLogoImg}
-                />
-                <div className={styles.brandNameWrap}>
-                  <span className={styles.brandName}>AURA</span>
-                  <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
-                </div>
+                {isLifestylePage ? (
+                  <>
+                    <Image
+                      src="/assets/brand/lifestyle-logo.png"
+                      alt="Lifestyle Logo"
+                      width={24}
+                      height={24}
+                      className={styles.lifestyleLogoOnly}
+                    />
+                    <div className={styles.brandNameWrap}>
+                      <span className={styles.brandName}>LIFESTYLE</span>
+                      <span className={styles.brandDescriptor}>HOME SPACES</span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      src="/aura/aura-gold-logo-transparent.png"
+                      alt="Aura Logo"
+                      width={26}
+                      height={26}
+                      className={styles.auraLogoImg}
+                    />
+                    <div className={styles.brandNameWrap}>
+                      <span className={styles.brandName}>AURA</span>
+                      <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
+                    </div>
+                  </>
+                )}
               </div>
               <button
                 type="button"
@@ -347,7 +407,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
             </div>
 
             <div className={styles.mobileLinkList}>
-              {MOBILE_LINKS.map((item, idx) => (
+              {mobileLinks.map((item, idx) => (
                 <Link
                   key={item.label}
                   href={item.href}
@@ -412,7 +472,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
-        projectTitle="Aura by Lifestyle"
+        projectTitle={isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle"}
       />
     </>
   );

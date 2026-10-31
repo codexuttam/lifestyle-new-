@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import AuraFeatureSequence from "@/components/AuraFeatureSequence";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
-import ExperienceSection from "@/components/ExperienceSection";
 import SecondaryProjectSection from "@/components/SecondaryProjectSection";
 import JournalSection from "@/components/JournalSection";
 import HomeContactSection from "@/components/HomeContactSection";
@@ -27,7 +26,7 @@ export default async function Home() {
       {/* Sleek SOL HAUS Header Navigation (Nested inside Framed Container) */}
       <SiteNav activeHref="/" />
 
-      {/* Hero: 4K Aura Tower Facade, Full Screen Viewport Stage & Kinetic Typography */}
+      {/* Hero: Light & Minimal Daytime Architectural Stage & Kinetic Typography */}
       <Hero content={home.hero} />
 
       {/* Section 1 — About Us: Asymmetric Editorial Composition & Animated Numbers */}
@@ -39,19 +38,16 @@ export default async function Home() {
       {/* Section 3 — Floor Plans & Cut-Sections: Interactive 2 & 3 BHK Layouts */}
       <AuraFloorPlans />
 
-      {/* Section 4 — Living Experience: Level 15 Sky Oasis & 20+ Curated Amenities */}
-      <ExperienceSection />
-
-      {/* Section 5 — Developer Portfolio: Lifestyle Home Spaces Landmark on DPS Road */}
+      {/* Section 4 — Developer Portfolio: Lifestyle Home Spaces Landmark on DPS Road */}
       <SecondaryProjectSection />
 
-      {/* Section 6 — Journal: Notes from the Studio & Construction Updates */}
+      {/* Section 5 — Journal: Notes from the Studio & Construction Updates */}
       <JournalSection />
 
-      {/* Section 7 — Contact: Minimal Underline Conversation Form */}
+      {/* Section 6 — Contact: Minimal Underline Conversation Form */}
       <HomeContactSection settings={settings} />
 
-      {/* Section 8 — Footer: Warm Neutral Band with Brand Menu & Direct Dial */}
+      {/* Section 7 — Footer: Warm Neutral Band with Brand Menu & Direct Dial */}
       <SiteFooter settings={settings} />
 
       {/* Discreet Assistant */}

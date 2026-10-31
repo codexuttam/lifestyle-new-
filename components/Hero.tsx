@@ -8,31 +8,26 @@ import type { HomeRecord } from "@/lib/schemas/home";
 
 export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
     <section className={styles.hero} id="hero-section" aria-label="Aura Hero">
-      {/* Background Architectural 4K Building Media with Slow Ken-Burns */}
+      {/* Light & Minimal Daytime Architectural Building Facade */}
       <div className={styles.mediaWrap}>
         <Image
-          src="/aura/aura-hero-clean-4k.jpg"
-          alt="Aura 15-Storey Architectural Landmark, Congress Nagar Road, Camp Amravati"
+          src="/aura/exterior-elevation-day-hd.jpg"
+          alt="Aura 15-Storey Daytime Architectural Landmark, Camp Amravati"
           fill
           priority
-          sizes="(max-width: 1320px) 100vw, 1320px"
+          sizes="100vw"
           className={styles.mediaImage}
         />
         <div className={styles.mediaOverlay} />
       </div>
 
-      {/* Hero Bottom Content Grid */}
+      {/* Hero Bottom Content Grid — Reduced & Minimal Editorial Typography */}
       <div className={styles.contentGrid}>
-        {/* Left: Editorial Serif Headline */}
+        {/* Left: Clean Minimal Editorial Headline */}
         <div className={styles.headlineWrap}>
-          <div className={styles.locationTag}>
-            <span className={styles.locationDot} />
-            <span>CAMP, AMRAVATI · 15-STOREY LANDMARK · LIMITED SKY SUITES</span>
-          </div>
           <h1 className={styles.headlineLine}>MATERIAL.</h1>
           <h2 className={styles.headlineLine}>
             <span className={styles.swashInitial}>M</span>EANING.
@@ -40,11 +35,10 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
           <h2 className={styles.headlineLine}>AURA.</h2>
         </div>
 
-        {/* Right: Narrative & Minimal Underlined CTA */}
+        {/* Right: Concise Subline & Minimal CTA */}
         <div className={styles.narrativeCol}>
           <p className={styles.description}>
-            Amravati&apos;s premier 15-storey architectural highrise featuring 2 &amp; 3 BHK luxury sky suites,
-            Level 15 rooftop infinity pool and sports turf, crafted with zero shared walls and 100% Vastu compliance.
+            Amravati&apos;s premier 15-storey architectural highrise.
           </p>
 
           <div className={styles.heroActions}>
@@ -57,47 +51,9 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
               <span>GET IN TOUCH</span>
               <span className={styles.arrow}>→</span>
             </button>
-
-            <button
-              type="button"
-              className={styles.videoPillBtn}
-              onClick={() => setIsVideoOpen(true)}
-              aria-label="Watch cinematic architectural film"
-            >
-              <span className={styles.playIcon}>▶</span>
-              <span>Watch Film</span>
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Cinematic Walkthrough Video Modal */}
-      {isVideoOpen && (
-        <div
-          className={styles.videoModal}
-          onClick={() => setIsVideoOpen(false)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className={styles.videoModalInner} onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className={styles.closeVideoBtn}
-              onClick={() => setIsVideoOpen(false)}
-              aria-label="Close video modal"
-            >
-              ✕
-            </button>
-            <video
-              src="/videos/aura-showcase-clip.mp4"
-              controls
-              autoPlay
-              playsInline
-              className={styles.modalVideo}
-            />
-          </div>
-        </div>
-      )}
 
       {/* Project Enquiry Modal */}
       <EnquiryModal

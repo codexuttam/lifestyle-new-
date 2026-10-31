@@ -47,7 +47,7 @@ const PANELS: FeaturePanel[] = [
     subtitle: "20+ Curated Wellness & Recreation Zones In The Sky",
     description:
       "An elevated sanctuary featuring a panoramic infinity lap pool, kids splash deck, enclosed box-cricket and tennis turf, jogging loop, and sunset cabanas.",
-    image: "/aura/rooftop-pool-turf-hd.jpg",
+    image: "/aura/rooftop-amenities-3d.jpg",
     video: "/videos/aura-showcase-clip.mp4",
     facts: [
       "Panoramic Rooftop Lap & Kids Pool",

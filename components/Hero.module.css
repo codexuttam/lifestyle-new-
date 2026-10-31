@@ -55,8 +55,13 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 95% 75% at 50% 25%, rgba(32, 23, 19, 0.22) 0%, rgba(32, 23, 19, 0.78) 100%),
-    linear-gradient(180deg, rgba(32, 23, 19, 0.55) 0%, rgba(32, 23, 19, 0.08) 38%, rgba(32, 23, 19, 0.88) 84%, rgba(32, 23, 19, 0.98) 100%);
+    linear-gradient(
+      180deg,
+      rgba(24, 18, 14, 0.45) 0%,
+      rgba(24, 18, 14, 0.08) 40%,
+      rgba(24, 18, 14, 0.58) 85%,
+      rgba(24, 18, 14, 0.72) 100%
+    );
   pointer-events: none;
 }
 

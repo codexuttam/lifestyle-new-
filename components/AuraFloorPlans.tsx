@@ -67,7 +67,7 @@ const PLANS = [
     title: "Level 15 Crown Leisure Deck",
     subtitle: "Rooftop lap pool, enclosed box cricket turf & sunset viewing promenade",
     blueprintImage: "/aura/aura-terrace-plan.jpg",
-    cutsectionImage: "/aura/rooftop-pool-turf-hd.jpg",
+    cutsectionImage: "/aura/rooftop-amenities-3d.jpg",
     specs: [
       { room: "Swimming Pool", dim: "Lap & Leisure Pool" },
       { room: "Kids Pool", dim: "Safe Shallow Splash Zone" },

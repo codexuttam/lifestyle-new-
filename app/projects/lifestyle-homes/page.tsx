@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -186,81 +187,42 @@ export default async function LifestyleHomesPage() {
       <SiteNav activeHref="/projects/lifestyle-homes" />
 
       <main className={styles.page}>
-        {/* ============ SECTION 1: CINEMATIC ARCHITECTURAL HERO (CHARCOAL) ============ */}
-        <section className={styles.hero} id="hero-section" data-hero-stage>
-          <div className={styles.videoContainer} data-hero-frame>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              poster="/videos/2nd-clip-thumb.png"
+        {/* ============ SECTION 1: LIGHT & MINIMAL ARCHITECTURAL HERO ============ */}
+        <section className={styles.hero} id="hero-section">
+          <div className={styles.videoContainer}>
+            <Image
+              src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
+              alt="Lifestyle Home Spaces Landmark, DPS Road, Amravati"
+              fill
+              priority
+              sizes="100vw"
               className={styles.heroVideo}
-              data-hero-video
-              aria-hidden="true"
-            >
-              <source src="/videos/lifestyle-showcase-clip.mp4" type="video/mp4" />
-            </video>
+            />
             <div className={styles.heroOverlay} />
           </div>
 
           <div className={styles.heroInner}>
-            <div className={styles.heroBottomDeck}>
+            <div className={styles.heroContentGrid}>
               <div className={styles.headlineWrap}>
-                <h1 className={styles.headline}>
-                  <span className={styles.lineMask}>
-                    <span className={styles.lineInner} data-hero-line>
-                      LIFESTYLE HOME SPACES
-                    </span>
-                  </span>
-                  <span className={styles.lineMask}>
-                    <span
-                      className={`${styles.lineInner} ${styles.headlineAccent}`}
-                      data-hero-line
-                    >
-                      2 &amp; 3 BHK RESIDENCES &amp; 24 SHOWROOMS
-                    </span>
-                  </span>
-                </h1>
+                <h1 className={styles.headlineLine}>DELIVERED.</h1>
+                <h2 className={styles.headlineLine}>
+                  <span className={styles.swashInitial}>S</span>PACES.
+                </h2>
+                <h2 className={styles.headlineLine}>LIFESTYLE.</h2>
               </div>
 
-              <div className={styles.heroDivider} data-hero-rule />
+              <div className={styles.narrativeCol}>
+                <p className={styles.description}>
+                  Ready-to-move 2 &amp; 3 BHK residences and 24 high-street showrooms on DPS Road, Amravati.
+                </p>
 
-              <div className={styles.heroFooterBar} data-hero-fade>
-                <div className={styles.heroSpecList}>
-                  <div className={styles.heroSpecItem}>
-                    <span className={styles.heroSpecKey}>Configurations</span>
-                    <span className={styles.heroSpecVal}>2 &amp; 3 BHK Vastu Homes</span>
-                  </div>
-                  <div className={styles.heroSpecItem}>
-                    <span className={styles.heroSpecKey}>High-Street Galleria</span>
-                    <span className={styles.heroSpecVal}>24 Retail Showrooms</span>
-                  </div>
-                  <div className={styles.heroSpecItem}>
-                    <span className={styles.heroSpecKey}>MahaRERA Registered</span>
-                    <span className={styles.heroSpecVal}>P50300054447</span>
-                  </div>
-                </div>
-
-                <div className={styles.heroBtnGroup}>
+                <div className={styles.heroActions}>
                   <a
                     href="#unit-plans"
-                    className={`${styles.btnExplore} roll-button`}
+                    className={styles.ctaLine}
                   >
-                    <span className="roll-text" data-text="Explore Landmark ↓">
-                      Explore Landmark ↓
-                    </span>
-                  </a>
-                  <a
-                    href={waVisitHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${styles.btnSchedule} roll-button`}
-                  >
-                    <span className="roll-text" data-text="Schedule Site Visit →">
-                      Schedule Site Visit →
-                    </span>
+                    <span>EXPLORE RESIDENCES</span>
+                    <span className={styles.arrow}>→</span>
                   </a>
                 </div>
               </div>

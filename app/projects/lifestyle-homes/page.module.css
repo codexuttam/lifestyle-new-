@@ -55,8 +55,14 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 75% 58% at 70% 28%, rgba(32, 16, 5, 0.08) 0%, rgba(32, 16, 5, 0.64) 100%),
-    linear-gradient(180deg, rgba(32, 16, 5, 0.72) 0%, rgba(32, 16, 5, 0.18) 38%, rgba(32, 16, 5, 0.88) 76%, #201005 100%);
+    linear-gradient(
+      180deg,
+      rgba(24, 18, 14, 0.45) 0%,
+      rgba(24, 18, 14, 0.08) 40%,
+      rgba(24, 18, 14, 0.58) 85%,
+      rgba(24, 18, 14, 0.72) 100%
+    );
+  pointer-events: none;
 }
 
 .heroInner {
@@ -66,11 +72,101 @@
   max-width: 1480px;
   min-height: 100dvh;
   margin: 0 auto;
-  padding: 106px 40px 42px;
+  padding: 106px 40px 48px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+/* Minimal Editorial Hero Grid matching Aura */
+.heroContentGrid {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: flex-end;
   gap: 48px;
+}
+
+@media (max-width: 900px) {
+  .heroContentGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.headlineLine {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 8.4vw, 7.6rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: #F8F6F3;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.swashInitial {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  padding-right: 0.04em;
+}
+
+.narrativeCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 440px;
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(248, 246, 243, 0.85);
+  margin: 0;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.ctaLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #F8F6F3;
+  padding: 0 0 6px 0;
+  color: #F8F6F3;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.ctaLine:hover {
+  opacity: 0.75;
+}
+
+.arrow {
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.ctaLine:hover .arrow {
+  transform: translateX(4px);
 }
 
 .heroTopRow {
