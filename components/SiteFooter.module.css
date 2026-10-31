@@ -37,6 +37,63 @@
   text-decoration: none;
 }
 
+.logosCluster {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footerBrandDivider {
+  width: 1px;
+  height: 38px;
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+.developerBrandLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.developerBrandLink:hover {
+  opacity: 0.85;
+}
+
+.developerLogoImg {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.developerText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.devTag {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #AEA399;
+}
+
+.devName {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F8F6F3;
+}
+
 .logoImg {
   width: 54px;
   height: 54px;

@@ -36,19 +36,37 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
       <div className={styles.container}>
         <div className={styles.topGrid}>
           <div className={styles.col}>
-            <Link href="/" className={styles.logo} aria-label="Aura by Lifestyle — home">
-              <img
-                src="/aura/aura-logo-official.png"
-                alt="Aura by Lifestyle"
-                width={58}
-                height={58}
-                className={styles.logoImg}
-              />
-              <div className={styles.logoText}>
-                <span className={styles.logoTitle}>AURA</span>
-                <span className={styles.logoSub}>BY LIFESTYLE</span>
-              </div>
-            </Link>
+            <div className={styles.logosCluster}>
+              <Link href="/" className={styles.logo} aria-label="Aura by Lifestyle — home">
+                <img
+                  src="/aura/aura-logo-official.png"
+                  alt="Aura by Lifestyle"
+                  width={56}
+                  height={56}
+                  className={styles.logoImg}
+                />
+                <div className={styles.logoText}>
+                  <span className={styles.logoTitle}>AURA</span>
+                  <span className={styles.logoSub}>BY LIFESTYLE</span>
+                </div>
+              </Link>
+
+              <div className={styles.footerBrandDivider} />
+
+              <Link href="/about" className={styles.developerBrandLink} aria-label="Lifestyle — Developer">
+                <img
+                  src="/assets/brand/lifestyle-logo.png"
+                  alt="Lifestyle Developer"
+                  width={40}
+                  height={40}
+                  className={styles.developerLogoImg}
+                />
+                <div className={styles.developerText}>
+                  <span className={styles.devTag}>DEVELOPED BY</span>
+                  <span className={styles.devName}>LIFESTYLE</span>
+                </div>
+              </Link>
+            </div>
 
             <p className={styles.devAttribution}>
               A project by Lifestyle

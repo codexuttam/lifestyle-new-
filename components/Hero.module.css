@@ -6,8 +6,8 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 88px);
-  height: calc(100vh - 88px);
+  min-height: 100vh;
+  height: 100vh;
   background-color: var(--espresso, #201713);
   overflow: hidden;
   display: flex;

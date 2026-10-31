@@ -16,25 +16,25 @@ const CARDS: ServiceCard[] = [
   {
     number: "01",
     title: "15-STOREY HIGHRISE",
-    image: "/aura/building-full-4k.jpg",
+    image: "/aura/exterior-elevation-day-hd.jpg",
     preference: "15-Storey Tower Architecture & Structure",
   },
   {
     number: "02",
     title: "SKY POOL & TURF",
-    image: "/aura/rooftop-amenities-3d.jpg",
+    image: "/aura/rooftop-pool-turf-hd.jpg",
     preference: "Level 15 Rooftop Sky Oasis & Amenities",
   },
   {
     number: "03",
     title: "VASTU SUITES",
-    image: "/aura/luxury-bedroom-2.jpg",
+    image: "/aura/master-bedroom-suite-hd.jpg",
     preference: "2 & 3 BHK Luxury Residences",
   },
   {
     number: "04",
     title: "20+ SKY AMENITIES",
-    image: "/aura/cut-section-2bhk-3bhk.jpg",
+    image: "/aura/grand-entrance-lobby-hd.jpg",
     preference: "Official Specifications & MahaRERA Kit",
   },
 ];

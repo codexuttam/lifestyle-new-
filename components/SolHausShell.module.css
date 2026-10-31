@@ -1,89 +1,30 @@
+/* ==========================================================================
+   SOL HAUS ARCHITECTURAL SHELL
+   Full-Bleed Viewport Canvas with Zero Awkward Margins
+   ========================================================================== */
+
 .outerCanvas {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background-color: var(--canvas, #B6AAA1);
+  background-color: var(--espresso, #201713);
   overflow-x: hidden;
-  padding: 44px 28px 80px;
+  padding: 0;
+  margin: 0;
 }
 
-@media (max-width: 1024px) {
-  .outerCanvas {
-    padding: 0;
-  }
-}
-
-/* Giant Subtle AURA Watermark Across Outer Canvas Top */
-.topWatermark {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-display);
-  font-size: clamp(7rem, 20vw, 24rem);
-  font-weight: 300;
-  letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.2);
-  line-height: 0.85;
-  text-transform: uppercase;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  white-space: nowrap;
-}
-
-@media (max-width: 1024px) {
-  .topWatermark {
-    display: none;
-  }
-}
-
-/* Centered Architectural Inset Frame */
+/* Centered Architectural Full-Width Container */
 .framedContainer {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   background-color: var(--paper-white, #FFFFFF);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 32px 80px -12px rgba(32, 23, 19, 0.28);
-  border-radius: 4px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   overflow: clip;
   display: flex;
   flex-direction: column;
 }
-
-@media (max-width: 1024px) {
-  .framedContainer {
-    max-width: 100%;
-    margin: 0;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-}
-
-/* Bottom Faint Watermark Text */
-.bottomWatermark {
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 7.5rem);
-  font-weight: 300;
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.22);
-  text-transform: uppercase;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  white-space: nowrap;
-}
-
-@media (max-width: 1024px) {
-  .bottomWatermark {
-    display: none;
-  }
-}
-

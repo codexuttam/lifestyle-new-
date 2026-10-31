@@ -61,7 +61,7 @@ export default function About({ content }: { content?: HomeRecord["about"] }) {
         <div className={styles.mediaCol}>
           <div className={styles.primaryImgWrap}>
             <Image
-              src="/aura/building-full-4k.jpg"
+              src="/aura/exterior-elevation-day-hd.jpg"
               alt="Aura 15-Storey Tower Architecture, Camp Amravati"
               fill
               sizes="(max-width: 640px) 100vw, 360px"
@@ -70,7 +70,7 @@ export default function About({ content }: { content?: HomeRecord["about"] }) {
           </div>
           <div className={styles.secondaryImgWrap}>
             <Image
-              src="/aura/sky-balcony-lifestyle.jpg"
+              src="/aura/sitout-balcony-view-hd.jpg"
               alt="Aura Private Sit-out Balcony with Sunset Views"
               fill
               sizes="(max-width: 640px) 100vw, 240px"

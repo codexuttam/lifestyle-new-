@@ -29,7 +29,7 @@ const PANELS: FeaturePanel[] = [
     subtitle: "Congress Nagar's Most Recognizable Contemporary Crown",
     description:
       "Clean rectilinear slab lines, recessed glass balcony balustrades, and warm evening facade illumination distinguish Aura across the Camp skyline.",
-    image: "/aura/building-full-4k.jpg",
+    image: "/aura/exterior-elevation-day-hd.jpg",
     video: "/videos/aura-showcase-clip.mp4",
     facts: [
       "15 Residential & Retail Levels",
@@ -47,7 +47,7 @@ const PANELS: FeaturePanel[] = [
     subtitle: "20+ Curated Wellness & Recreation Zones In The Sky",
     description:
       "An elevated sanctuary featuring a panoramic infinity lap pool, kids splash deck, enclosed box-cricket and tennis turf, jogging loop, and sunset cabanas.",
-    image: "/aura/rooftop-amenities-3d.jpg",
+    image: "/aura/rooftop-pool-turf-hd.jpg",
     video: "/videos/aura-showcase-clip.mp4",
     facts: [
       "Panoramic Rooftop Lap & Kids Pool",
@@ -65,7 +65,7 @@ const PANELS: FeaturePanel[] = [
     subtitle: "Zero Shared Walls · 100% Vastu · Up to 11'0\" × 6'0\" Balconies",
     description:
       "Thoughtfully proportioned residences with dedicated dining alcoves, ensuite master suites, concealed Jaquar bathware, large-format 800×1600 vitrified slabs, and private sit-out balconies.",
-    image: "/aura/luxury-master-bedroom.jpg",
+    image: "/aura/master-bedroom-suite-hd.jpg",
     facts: [
       "800×1600 mm Vitrified Large-Format Slabs",
       "Zero Shared Walls with Acoustic Separation",
@@ -82,7 +82,7 @@ const PANELS: FeaturePanel[] = [
     subtitle: "4 High-Speed Lifts · 24×7 Manned Security · Segregated Access",
     description:
       "Lower and upper ground commercial bays offer high-visibility Congress Nagar frontage while maintaining private residential lift cores, covered parking, and 24×7 security.",
-    image: "/aura/aura-hero-zoomed-out-4k.jpg",
+    image: "/aura/grand-entrance-lobby-hd.jpg",
     video: "/videos/lifestyle-showcase-clip.mp4",
     facts: [
       "Double-Height Granite Residential Lobby",

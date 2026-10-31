@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
@@ -132,7 +133,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
   return (
     <>
       <header className={`${styles.nav}${scrolled ? ` ${styles.navScrolled}` : ""}`}>
-        {/* Left: Minimal Editorial Brand Lockup */}
+        {/* Left: Minimal Editorial Brand Lockup with Both Aura & Lifestyle Logos */}
         <Link
           href="/"
           className={styles.brandLockup}
@@ -144,8 +145,26 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
             }
           }}
         >
-          <span className={styles.brandName}>AURA</span>
-          <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
+          <Image
+            src="/aura/aura-gold-logo-transparent.png"
+            alt="Aura Logo"
+            width={30}
+            height={30}
+            className={styles.auraLogoImg}
+            priority
+          />
+          <div className={styles.brandNameWrap}>
+            <span className={styles.brandName}>AURA</span>
+            <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
+          </div>
+          <div className={styles.brandDivider} />
+          <Image
+            src="/assets/brand/lifestyle-logo.png"
+            alt="Lifestyle Developer Logo"
+            width={24}
+            height={24}
+            className={styles.lifestyleLogoImg}
+          />
         </Link>
 
         {/* Center: Minimal Section Links */}
@@ -305,8 +324,17 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           <div className={styles.mobileMenu} onClick={(e) => e.stopPropagation()}>
             <div className={styles.mobileMenuTop}>
               <div className={styles.brandLockup}>
-                <span className={styles.brandName}>AURA</span>
-                <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
+                <Image
+                  src="/aura/aura-gold-logo-transparent.png"
+                  alt="Aura Logo"
+                  width={26}
+                  height={26}
+                  className={styles.auraLogoImg}
+                />
+                <div className={styles.brandNameWrap}>
+                  <span className={styles.brandName}>AURA</span>
+                  <span className={styles.brandDescriptor}>BY LIFESTYLE</span>
+                </div>
               </div>
               <button
                 type="button"

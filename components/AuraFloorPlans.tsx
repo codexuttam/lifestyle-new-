@@ -1,18 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import styles from "./AuraFloorPlans.module.css";
+import EnquiryModal from "@/components/EnquiryModal";
 
 const PLANS = [
   {
     id: "2bhk",
     index: "01",
-    label: "2 BHK Cut Section",
+    label: "2 BHK Sky Suite",
     badge: "1,150 SQFT",
-    title: "2 BHK Smart Luxury Residence",
-    subtitle: "Commanding skyline views, dual balconies & zero wasted circulation",
-    image: "/aura/plan-2bhk-cutsection.jpg",
+    title: "2 BHK Luxury Sky Residence",
+    subtitle: "Commanding skyline views, dual sit-out balconies & zero wasted circulation",
+    blueprintImage: "/aura/aura-2bhk-floorplan.jpg",
+    cutsectionImage: "/aura/plan-2bhk-cutsection.jpg",
     specs: [
       { room: "Living Room", dim: "11'0\" × 17'0\"" },
       { room: "Master Bedroom", dim: "11'0\" × 12'0\" (Ensuite)" },
@@ -24,8 +27,8 @@ const PLANS = [
       { room: "Flooring", dim: "800 × 1600 mm Vitrified" },
     ],
     features: [
-      "Isometric 3D Cut Section & Top Architectural View",
-      "Private Master Suite with Dedicated Toilet (5'0\" × 9'0\")",
+      "Zero Shared Walls with Private Acoustic Sanctuary",
+      "Private Master Suite with Dedicated Bath (5'0\" × 9'0\")",
       "3-Track Powder Coated Windows with MS Safety Grills",
       "Concealed Jaquar or Equivalent Designer Fittings",
     ],
@@ -33,11 +36,12 @@ const PLANS = [
   {
     id: "3bhk",
     index: "02",
-    label: "3 BHK Royal Cut Section",
+    label: "3 BHK Royal Suite",
     badge: "1,650 SQFT",
     title: "3 BHK Royal Skyline Residence",
     subtitle: "Grand multi-balcony suite designed for expansive family hospitality",
-    image: "/aura/plan-3bhk-cutsection.jpg",
+    blueprintImage: "/aura/aura-3bhk-floorplan.jpg",
+    cutsectionImage: "/aura/plan-3bhk-cutsection.jpg",
     specs: [
       { room: "Grand Living Room", dim: "11'0\" × 18'6\"" },
       { room: "Master Suite", dim: "17'0\" × 11'0\" (Ensuite)" },
@@ -60,9 +64,10 @@ const PLANS = [
     index: "03",
     label: "Rooftop Sky Oasis",
     badge: "LEVEL 15",
-    title: "Skyline Leisure & Multi-Sports Deck",
+    title: "Level 15 Crown Leisure Deck",
     subtitle: "Rooftop lap pool, enclosed box cricket turf & sunset viewing promenade",
-    image: "/aura/rooftop-sky-thrills-map.jpg",
+    blueprintImage: "/aura/aura-terrace-plan.jpg",
+    cutsectionImage: "/aura/rooftop-pool-turf-hd.jpg",
     specs: [
       { room: "Swimming Pool", dim: "Lap & Leisure Pool" },
       { room: "Kids Pool", dim: "Safe Shallow Splash Zone" },
@@ -87,7 +92,8 @@ const PLANS = [
     badge: "LEVELS 1 – 14",
     title: "Typical Architectural Floor Plate",
     subtitle: "Optimum cross-ventilation, 4 high-speed elevators & wide designer corridors",
-    image: "/aura/typical-floor-plan.jpg",
+    blueprintImage: "/aura/aura-typical-floorplan.jpg",
+    cutsectionImage: "/aura/building-full-4k.jpg",
     specs: [
       { room: "Floor Plate", dim: "Levels 1 to 14" },
       { room: "Configurations", dim: "2 & 3 BHK Luxury Suites" },
@@ -109,9 +115,13 @@ const PLANS = [
 
 export default function AuraFloorPlans() {
   const [activeTab, setActiveTab] = useState(0);
+  const [viewMode, setViewMode] = useState<"blueprint" | "cutsection">("blueprint");
   const [zoomOpen, setZoomOpen] = useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const plan = PLANS[activeTab];
+
+  const currentImage = viewMode === "blueprint" ? plan.blueprintImage : plan.cutsectionImage;
 
   useEffect(() => {
     if (!cardRef.current) return;
@@ -121,7 +131,7 @@ export default function AuraFloorPlans() {
       { y: 16, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.45, stagger: 0.04, ease: "power3.out", clearProps: "transform" }
     );
-  }, [activeTab]);
+  }, [activeTab, viewMode]);
 
   useEffect(() => {
     if (!zoomOpen) return;
@@ -133,57 +143,79 @@ export default function AuraFloorPlans() {
   }, [zoomOpen]);
 
   return (
-    <section className={styles.section} id="the-project">
-      <div id="floor-plans" style={{ position: "absolute", top: -88 }} />
+    <section className={styles.section} id="floor-plans" aria-label="Aura Floor Plans and Architectural Specifications">
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.eyebrowBadge}>THE RESIDENCES &amp; SPECIFICATIONS</span>
           <h2 className={styles.title}>
-            DISCOVER YOUR <span>AURA.</span>
+            SPATIAL <span>P</span>RECISION
           </h2>
           <p className={styles.subtitle}>
-            Thoughtfully configured 2 &amp; 3 BHK luxury residences on Congress Nagar Road, Camp, Amravati. Featuring zero shared walls, private sit-out balconies, 100% Vastu compliance, and Level 15 rooftop sky leisure. MahaRERA Reg. P5030002502915.
+            Every residence at Aura is crafted with zero common wall sharing, maximum cross-ventilation, and 100% Vastu compliance across 15 soaring storeys in Camp, Amravati.
           </p>
+        </div>
 
-          <div className={styles.tabs} role="tablist" aria-label="Aura floor plans">
-            {PLANS.map((item, idx) => (
+        {/* Configuration Tabs */}
+        <div className={styles.tabs} role="tablist" aria-label="Floor plan configurations">
+          {PLANS.map((item, idx) => {
+            const isActive = idx === activeTab;
+            return (
               <button
                 key={item.id}
                 type="button"
                 role="tab"
-                aria-selected={activeTab === idx}
-                className={`${styles.tabBtn}${activeTab === idx ? ` ${styles.activeTab}` : ""}`}
+                aria-selected={isActive}
+                className={`${styles.tabBtn}${isActive ? ` ${styles.activeTab}` : ""}`}
                 onClick={() => setActiveTab(idx)}
               >
-                <span className={styles.tabIndex}>{item.index}</span>
+                <span className={styles.tabIndex}>({item.index})</span>
                 <span>{item.label}</span>
                 <span className={styles.tabBadge}>{item.badge}</span>
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* Interactive Floor Plan Inspection Card */}
+        {/* Interactive Drawing Card */}
         <div className={styles.displayCard} ref={cardRef}>
-          <div className={styles.imageCol} data-plan-anim>
-            <button
-              type="button"
+          {/* Drawing Column with View Mode Toggle */}
+          <div className={styles.imageCol}>
+            <div className={styles.viewModeRow}>
+              <button
+                type="button"
+                className={`${styles.viewPillBtn} ${viewMode === "blueprint" ? styles.viewPillBtnActive : ""}`}
+                onClick={() => setViewMode("blueprint")}
+              >
+                Architectural Blueprint
+              </button>
+              <button
+                type="button"
+                className={`${styles.viewPillBtn} ${viewMode === "cutsection" ? styles.viewPillBtnActive : ""}`}
+                onClick={() => setViewMode("cutsection")}
+              >
+                3D Cut-Section
+              </button>
+            </div>
+
+            <div
               className={styles.imageWrapper}
               onClick={() => setZoomOpen(true)}
-              aria-label={`Enlarge ${plan.title} architectural drawing`}
+              role="button"
+              tabIndex={0}
+              title="Click to enlarge drawing"
             >
               <img
-                key={plan.image}
-                src={plan.image}
-                alt={plan.title}
+                src={currentImage}
+                alt={`${plan.title} - ${viewMode === "blueprint" ? "Floor Plan" : "3D View"}`}
                 className={styles.planImg}
                 loading="lazy"
               />
               <span className={styles.imageTag}>{plan.badge}</span>
-              <span className={styles.zoomHint}>⊕ Tap to enlarge drawing</span>
-            </button>
+              <span className={styles.zoomHint}>⊕ Tap to inspect high-res drawing</span>
+            </div>
           </div>
 
+          {/* Details Column with Verified Room Dimensions */}
           <div className={styles.detailsCol}>
             <div className={styles.detailsHeader} data-plan-anim>
               <h3 className={styles.planTitle}>{plan.title}</h3>
@@ -199,7 +231,7 @@ export default function AuraFloorPlans() {
               ))}
             </div>
 
-            <div className={styles.highlightsBox}>
+            <div className={styles.highlightsBox} data-plan-anim>
               <h4 className={styles.highlightsTitle}>ARCHITECTURAL SPECIFICATIONS</h4>
               <ul className={styles.highlightsList}>
                 {plan.features.map((f) => (
@@ -211,31 +243,21 @@ export default function AuraFloorPlans() {
               </ul>
             </div>
 
-            <div className={styles.actionRow}>
+            <div className={styles.actionRow} data-plan-anim>
               <a
                 href="https://wa.me/917498256708?text=Hello%20Lifestyle%20Homes,%20I%20am%20interested%20in%20Aura%20floor%20plans%20and%20pricing."
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.whatsappBtn} roll-button`}
+                className={styles.whatsappBtn}
               >
-                <span className="roll-text" data-text="Request Detailed Floor Plan PDF →">
-                  Request Detailed Floor Plan PDF →
-                </span>
+                <span>Request Detailed Floor Plan PDF →</span>
               </a>
               <button
                 type="button"
-                className={`${styles.visitBtn} roll-button`}
-                onClick={() =>
-                  window.dispatchEvent(
-                    new CustomEvent("lifestyle_open_enquiry", {
-                      detail: { project: "Aura by Lifestyle", source: `Floor Plans - ${plan.title}` },
-                    })
-                  )
-                }
+                className={styles.visitBtn}
+                onClick={() => setIsEnquiryOpen(true)}
               >
-                <span className="roll-text" data-text="Book Site Preview">
-                  Book Site Preview
-                </span>
+                <span>Book Site Preview</span>
               </button>
             </div>
           </div>
@@ -260,13 +282,22 @@ export default function AuraFloorPlans() {
             ✕ Close
           </button>
           <img
-            src={plan.image}
+            src={currentImage}
             alt={plan.title}
             className={styles.lightboxImg}
             onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
+
+      {/* Floor Plan Enquiry Modal */}
+      <EnquiryModal
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        projectTitle="Aura by Lifestyle"
+        defaultPreference={`Floor Plan Enquiry - ${plan.title}`}
+        source={`Floor Plans Section - ${plan.title}`}
+      />
     </section>
   );
 }

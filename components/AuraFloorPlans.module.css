@@ -153,6 +153,41 @@
 
 .imageCol {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.viewModeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.viewPillBtn {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(32, 23, 19, 0.16);
+  background: transparent;
+  color: #625750;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewPillBtn:hover {
+  border-color: #201713;
+  color: #201713;
+}
+
+.viewPillBtnActive {
+  background: #201713;
+  border-color: #201713;
+  color: #F8F6F3;
 }
 
 .imageWrapper {
