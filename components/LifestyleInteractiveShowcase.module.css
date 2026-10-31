@@ -125,13 +125,13 @@
 
 .desktopRunway {
   position: relative;
-  height: 255vh;
-  min-height: 1520px;
+  height: auto;
+  min-height: auto;
 }
 
 .desktopSticky {
-  position: sticky;
-  top: 86px;
+  position: relative;
+  top: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -915,11 +915,23 @@
 }
 
 /* ================= 4. 4K ULTRA-HD LIGHTBOX MODAL ================= */
+@keyframes modalZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 5, 0.92);
-  backdrop-filter: blur(14px);
+  background: rgba(14, 9, 6, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -929,24 +941,26 @@
 
 .modalContent {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1100px;
   max-height: 92vh;
-  background: #101210;
-  border: 1px solid rgba(191, 149, 63, 0.36);
-  border-radius: 26px;
+  background: #18120E;
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 36px 90px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(197, 168, 128, 0.15);
+  animation: modalZoomIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .modalHeader {
-  padding: 18px 26px;
-  border-bottom: 1px solid rgba(247, 239, 220, 0.1);
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(197, 168, 128, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  background: rgba(32, 23, 19, 0.6);
 }
 
 .modalHeaderInfo {
@@ -959,44 +973,47 @@
   font-family: var(--font-sans);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #c5a880;
+  color: #C5A880;
 }
 
 .modalTitle {
   font-family: var(--font-display);
-  font-size: 1.55rem;
-  font-weight: 600;
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #f7efdc;
+  color: #F8F5F3;
   margin: 0;
 }
 
 .modalCloseBtn {
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: 9999px;
-  border: 1px solid rgba(247, 239, 220, 0.22);
-  background: #080808;
-  color: #f7efdc;
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  background: rgba(32, 23, 19, 0.85);
+  color: #F8F5F3;
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .modalCloseBtn:hover {
-  border-color: #c5a880;
-  color: #d6be9f;
+  background: #C5A880;
+  border-color: #C5A880;
+  color: #18120E;
 }
 
 .modalImgWrapper {
   flex: 1;
   min-height: 0;
-  background: #faf7f1;
-  padding: 20px;
+  background: #0E0906;
+  padding: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1008,16 +1025,18 @@
   max-height: 62vh;
   object-fit: contain;
   border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
 .modalCaption {
-  padding: 18px 26px;
-  border-top: 1px solid rgba(247, 239, 220, 0.1);
+  padding: 20px 28px;
+  border-top: 1px solid rgba(197, 168, 128, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
+  background: rgba(32, 23, 19, 0.6);
 }
 
 .modalTextCol {

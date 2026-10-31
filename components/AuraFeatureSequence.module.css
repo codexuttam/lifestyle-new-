@@ -413,90 +413,219 @@
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.roomToolbar {
+.roomMainFrame {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.roomActiveBadge {
   position: absolute;
   top: 14px;
   left: 14px;
-  right: 14px;
   z-index: 4;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  pointer-events: auto;
-}
-
-.roomPillRow {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  max-width: 78%;
-}
-
-.roomPill {
-  padding: 4px 9px;
-  background: rgba(32, 23, 19, 0.78);
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(24, 17, 13, 0.82);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 6px 14px;
   border-radius: 9999px;
+  border: 1px solid rgba(197, 168, 128, 0.4);
+}
+
+.roomActiveBadge span {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: #F8F6F3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.roomActiveBadge small {
   font-family: var(--font-sans);
-  font-size: 8.5px;
-  font-weight: 600;
+  font-size: 9px;
+  color: #C5A880;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(248, 246, 243, 0.75);
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.roomPill:hover {
-  background: rgba(197, 168, 128, 0.35);
-  color: #FFFFFF;
-  border-color: #C5A880;
-}
-
-.roomPillActive {
-  background: #C5A880;
-  color: #201713;
-  border-color: #C5A880;
-  font-weight: 700;
-}
-
-.roomNavArrows {
-  display: flex;
-  align-items: center;
+/* Multi-Room Thumbnail Strip */
+.roomThumbnailStrip {
+  position: relative;
+  z-index: 4;
+  height: 92px;
+  background: rgba(18, 12, 9, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(197, 168, 128, 0.22);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 6px;
-  background: rgba(32, 23, 19, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 9999px;
-  padding: 2px 8px;
+  padding: 8px;
+  overflow-x: auto;
 }
 
-.roomArrowBtn {
-  background: transparent;
-  border: none;
-  color: #F8F6F3;
-  font-size: 15px;
-  line-height: 1;
-  padding: 2px 4px;
+.roomThumbCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #18110D;
   cursor: pointer;
-  transition: color 0.15s ease;
+  padding: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.roomArrowBtn:hover {
+.roomThumbCard:hover {
+  border-color: rgba(197, 168, 128, 0.7);
+  transform: translateY(-2px);
+}
+
+.roomThumbActive {
+  border-color: #C5A880;
+  box-shadow: 0 0 14px rgba(197, 168, 128, 0.45);
+}
+
+.roomThumbImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+  transition: opacity 0.25s ease;
+}
+
+.roomThumbActive .roomThumbImg,
+.roomThumbCard:hover .roomThumbImg {
+  opacity: 1;
+}
+
+.roomThumbLabel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 3px 2px;
+  background: linear-gradient(180deg, transparent, rgba(14, 9, 6, 0.95));
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 600;
+  color: #F8F5F3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.roomThumbActive .roomThumbLabel {
   color: #C5A880;
 }
 
-.roomCounter {
+/* ================= Brand Stage with Golden Lady Emblem ================= */
+@keyframes goldenGlow {
+  0% {
+    filter: drop-shadow(0 0 16px rgba(213, 189, 135, 0.4));
+    transform: scale(0.98);
+  }
+  100% {
+    filter: drop-shadow(0 0 32px rgba(213, 189, 135, 0.8));
+    transform: scale(1.02);
+  }
+}
+
+.brandEmblemStage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandBgMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.28) contrast(1.15);
+}
+
+.brandEmblemBackdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: radial-gradient(circle at center, rgba(32, 23, 19, 0.72) 0%, rgba(14, 9, 6, 0.92) 80%);
+  z-index: 3;
+}
+
+.brandEmblemGlowRing {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197, 168, 128, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.goldenLadyLogo {
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
+  animation: goldenGlow 3.5s ease-in-out infinite alternate;
+}
+
+.brandTextStack {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: #F8F5F3;
+  margin: 0;
+}
+
+.brandByline {
   font-family: var(--font-sans);
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: rgba(248, 246, 243, 0.85);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: #C5A880;
+  text-transform: uppercase;
+}
+
+.brandMotto {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: rgba(248, 245, 243, 0.6);
+  text-transform: uppercase;
+  margin-top: 4px;
 }

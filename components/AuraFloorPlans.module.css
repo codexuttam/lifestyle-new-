@@ -195,11 +195,14 @@
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
-  background: #F4F1EA;
+  background: #F8F6F3;
   border: 1px solid rgba(32, 23, 19, 0.08);
   padding: 16px;
   cursor: zoom-in;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
 }
 
 .planImg {
@@ -209,39 +212,23 @@
   object-fit: contain;
   display: block;
   border-radius: 8px;
+  animation: planFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes planFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .imageWrapper:hover .planImg {
   transform: scale(1.02);
-}
-
-.imageTag {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  background: #201713;
-  color: #F8F6F3;
-  font-family: var(--font-sans);
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.zoomHint {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  background: rgba(32, 23, 19, 0.88);
-  color: #F8F6F3;
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
 }
 
 /* Details Column */

@@ -22,6 +22,7 @@ interface FeaturePanel {
   image: string;
   video?: string;
   roomGallery?: RoomImage[];
+  isBrandCard?: boolean;
   facts: string[];
   preference: string;
 }
@@ -37,7 +38,6 @@ const PANELS: FeaturePanel[] = [
     description:
       "Clean rectilinear slab lines, recessed glass balcony balustrades, and warm evening facade illumination distinguish Aura across the Camp skyline.",
     image: "/aura/exterior-elevation-day-hd.jpg",
-    video: "/videos/aura-showcase-clip.mp4",
     facts: [
       "15 Residential & Retail Levels",
       "Weather-Shield Exterior Finish & Structural Glazing",
@@ -55,6 +55,7 @@ const PANELS: FeaturePanel[] = [
     description:
       "An elevated sanctuary featuring a panoramic infinity lap pool, kids splash deck, enclosed box-cricket and tennis turf, jogging loop, and sunset cabanas.",
     image: "/aura/rooftop-amenities-3d.jpg",
+    video: "/videos/aura-showcase-clip.mp4",
     facts: [
       "Panoramic Rooftop Lap & Kids Pool",
       "Enclosed Multi-Sports Box Turf",
@@ -97,6 +98,7 @@ const PANELS: FeaturePanel[] = [
     description:
       "Crafted for those who seek identity and distinction, Aura offers a lifestyle reserved for the chosen. A home designed exclusively for the select few who aspire to live above the ordinary.",
     image: "/aura/aura-brand-showcase.jpg",
+    isBrandCard: true,
     facts: [
       "Reserved for the Chosen Few",
       "Iconic Camp Amravati Address",
@@ -311,49 +313,65 @@ export default function AuraFeatureSequence() {
                     />
                   ) : panel.roomGallery && isFront ? (
                     <div className={styles.roomGalleryStage}>
-                      <Image
-                        key={panel.roomGallery[activeRoomIdx].src}
-                        src={panel.roomGallery[activeRoomIdx].src}
-                        alt={panel.roomGallery[activeRoomIdx].name}
-                        fill
-                        sizes="(max-width: 960px) 100vw, 560px"
-                        className={styles.flyingMedia}
-                      />
-                      {/* Floating Interactive Room Switcher */}
-                      <div className={styles.roomToolbar} onClick={(e) => e.stopPropagation()}>
-                        <div className={styles.roomPillRow}>
-                          {panel.roomGallery.map((room, rIdx) => (
+                      <div className={styles.roomMainFrame}>
+                        <Image
+                          key={panel.roomGallery[activeRoomIdx].src}
+                          src={panel.roomGallery[activeRoomIdx].src}
+                          alt={panel.roomGallery[activeRoomIdx].name}
+                          fill
+                          sizes="(max-width: 960px) 100vw, 560px"
+                          className={styles.flyingMedia}
+                        />
+                        <div className={styles.roomActiveBadge}>
+                          <span>{panel.roomGallery[activeRoomIdx].name}</span>
+                          <small>{panel.roomGallery[activeRoomIdx].desc}</small>
+                        </div>
+                      </div>
+
+                      {/* Multiple Room Images Strip */}
+                      <div className={styles.roomThumbnailStrip} onClick={(e) => e.stopPropagation()}>
+                        {panel.roomGallery.map((room, rIdx) => {
+                          const isRoomActive = rIdx === activeRoomIdx;
+                          return (
                             <button
                               key={room.name}
                               type="button"
-                              className={`${styles.roomPill}${rIdx === activeRoomIdx ? ` ${styles.roomPillActive}` : ""}`}
+                              className={`${styles.roomThumbCard}${isRoomActive ? ` ${styles.roomThumbActive}` : ""}`}
                               onClick={() => setActiveRoomIdx(rIdx)}
                               title={room.name}
                             >
-                              {room.name.replace(" Suite", "")}
+                              <img src={room.src} alt={room.name} className={styles.roomThumbImg} />
+                              <span className={styles.roomThumbLabel}>
+                                {room.name.replace(" Suite", "")}
+                              </span>
                             </button>
-                          ))}
-                        </div>
-                        <div className={styles.roomNavArrows}>
-                          <button
-                            type="button"
-                            className={styles.roomArrowBtn}
-                            onClick={handlePrevRoom}
-                            aria-label="Previous room"
-                          >
-                            ‹
-                          </button>
-                          <span className={styles.roomCounter}>
-                            0{activeRoomIdx + 1} / 0{panel.roomGallery.length}
-                          </span>
-                          <button
-                            type="button"
-                            className={styles.roomArrowBtn}
-                            onClick={handleNextRoom}
-                            aria-label="Next room"
-                          >
-                            ›
-                          </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : panel.isBrandCard && isFront ? (
+                    <div className={styles.brandEmblemStage}>
+                      <Image
+                        src="/aura/aura-brand-showcase.jpg"
+                        alt="Aura By Lifestyle"
+                        fill
+                        sizes="(max-width: 960px) 100vw, 560px"
+                        className={styles.brandBgMedia}
+                      />
+                      <div className={styles.brandEmblemBackdrop}>
+                        <div className={styles.brandEmblemGlowRing} />
+                        <Image
+                          src="/assets/projects/aura/brand/aura-emblem.png"
+                          alt="Aura Golden Lady Emblem"
+                          width={140}
+                          height={140}
+                          className={styles.goldenLadyLogo}
+                          priority
+                        />
+                        <div className={styles.brandTextStack}>
+                          <h4 className={styles.brandName}>AURA</h4>
+                          <span className={styles.brandByline}>BY LIFESTYLE</span>
+                          <span className={styles.brandMotto}>THE ART OF BETTER LIVING</span>
                         </div>
                       </div>
                     </div>

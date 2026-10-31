@@ -12,6 +12,7 @@ const PLANS = [
     index: "01",
     label: "2 BHK Sky Suite",
     badge: "1,150 SQFT",
+    hasCutsection: true,
     title: "2 BHK Luxury Sky Residence",
     subtitle: "Commanding skyline views, dual sit-out balconies & zero wasted circulation",
     blueprintImage: "/aura/aura-2bhk-floorplan.jpg",
@@ -38,6 +39,7 @@ const PLANS = [
     index: "02",
     label: "3 BHK Royal Suite",
     badge: "1,650 SQFT",
+    hasCutsection: true,
     title: "3 BHK Royal Skyline Residence",
     subtitle: "Grand multi-balcony suite designed for expansive family hospitality",
     blueprintImage: "/aura/aura-3bhk-floorplan.jpg",
@@ -64,6 +66,7 @@ const PLANS = [
     index: "03",
     label: "Rooftop Sky Oasis",
     badge: "LEVEL 15",
+    hasCutsection: false,
     title: "Level 15 Crown Leisure Deck",
     subtitle: "Rooftop lap pool, enclosed box cricket turf & sunset viewing promenade",
     blueprintImage: "/aura/aura-terrace-plan.jpg",
@@ -90,6 +93,7 @@ const PLANS = [
     index: "04",
     label: "Typical Floor Plate",
     badge: "LEVELS 1 – 14",
+    hasCutsection: false,
     title: "Typical Architectural Floor Plate",
     subtitle: "Optimum cross-ventilation, 4 high-speed elevators & wide designer corridors",
     blueprintImage: "/aura/aura-typical-floorplan.jpg",
@@ -166,7 +170,12 @@ export default function AuraFloorPlans() {
                 role="tab"
                 aria-selected={isActive}
                 className={`${styles.tabBtn}${isActive ? ` ${styles.activeTab}` : ""}`}
-                onClick={() => setActiveTab(idx)}
+                onClick={() => {
+                  setActiveTab(idx);
+                  if (!item.hasCutsection) {
+                    setViewMode("blueprint");
+                  }
+                }}
               >
                 <span className={styles.tabIndex}>({item.index})</span>
                 <span>{item.label}</span>
@@ -180,38 +189,39 @@ export default function AuraFloorPlans() {
         <div className={styles.displayCard} ref={cardRef}>
           {/* Drawing Column with View Mode Toggle */}
           <div className={styles.imageCol}>
-            <div className={styles.viewModeRow}>
-              <button
-                type="button"
-                className={`${styles.viewPillBtn} ${viewMode === "blueprint" ? styles.viewPillBtnActive : ""}`}
-                onClick={() => setViewMode("blueprint")}
-              >
-                Architectural Blueprint
-              </button>
-              <button
-                type="button"
-                className={`${styles.viewPillBtn} ${viewMode === "cutsection" ? styles.viewPillBtnActive : ""}`}
-                onClick={() => setViewMode("cutsection")}
-              >
-                3D Cut-Section
-              </button>
-            </div>
+            {plan.hasCutsection && (
+              <div className={styles.viewModeRow}>
+                <button
+                  type="button"
+                  className={`${styles.viewPillBtn} ${viewMode === "blueprint" ? styles.viewPillBtnActive : ""}`}
+                  onClick={() => setViewMode("blueprint")}
+                >
+                  Architectural Blueprint
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.viewPillBtn} ${viewMode === "cutsection" ? styles.viewPillBtnActive : ""}`}
+                  onClick={() => setViewMode("cutsection")}
+                >
+                  3D Cut-Section
+                </button>
+              </div>
+            )}
 
             <div
               className={styles.imageWrapper}
               onClick={() => setZoomOpen(true)}
               role="button"
               tabIndex={0}
-              title="Click to enlarge drawing"
+              title="Click to inspect drawing"
             >
               <img
+                key={`${plan.id}-${viewMode}`}
                 src={currentImage}
                 alt={`${plan.title} - ${viewMode === "blueprint" ? "Floor Plan" : "3D View"}`}
                 className={styles.planImg}
                 loading="lazy"
               />
-              <span className={styles.imageTag}>{plan.badge}</span>
-              <span className={styles.zoomHint}>⊕ Tap to inspect high-res drawing</span>
             </div>
           </div>
 

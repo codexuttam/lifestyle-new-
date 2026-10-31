@@ -191,7 +191,7 @@ export default async function LifestyleHomesPage() {
         <section className={styles.hero} id="hero-section">
           <div className={styles.videoContainer}>
             <Image
-              src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
+              src="/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-front.jpg"
               alt="Lifestyle Home Spaces Landmark, DPS Road, Amravati"
               fill
               priority

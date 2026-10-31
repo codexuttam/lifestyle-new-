@@ -25,7 +25,7 @@ const PLATES: UnifiedPlate[] = [
     tabLabel: "8-Storey Landmark",
     title: "Delivered 8-Storey Landmark",
     subtitle: "DPS Road, Parvati Nagar · 100% Ready Possession",
-    img: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    img: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-front.jpg",
     video: "/videos/lifestyle-showcase-clip.mp4",
     isBlueprint: false,
     summary:
@@ -174,50 +174,36 @@ const GALLERY_ITEMS = [
     id: 2,
     category: "Actual",
     title: "Active High-Street Retail Arcade",
-    desc: "Delivered shops with Dee Bakers, MORE Supermarket, and dedicated customer parking",
+    desc: "Operating retail front with Dee Bakers, MORE Supermarket & customer parking",
     src: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-angled.jpg",
   },
   {
     id: 3,
-    category: "Architecture",
-    title: "4K Architectural Elevation & Retail Galleria",
-    desc: "Corner geometry, cantilevered balconies, and double-storey high-street frontage on DPS Road",
-    src: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
+    category: "Interiors",
+    title: "Delivered Finished Living Room",
+    desc: "Finished 2 & 3 BHK living hall opening into a cross-ventilated sit-out balcony",
+    src: "/assets/projects/lifestyle-homes/interiors/living-room-polished.jpg",
   },
   {
     id: 4,
-    category: "Commercial",
-    title: "DPS Road Commercial Frontage",
-    desc: "24 road-facing retail showrooms across Ground and First levels with direct street bays",
-    src: "/assets/projects/lifestyle-homes/building/building-hero-polished.jpg",
-  },
-  {
-    id: 5,
     category: "Interiors",
     title: "Designer Chandelier & Wood-Paneled Lobby",
     desc: "Delivered arrival corridor with warm ceiling panelling and herringbone floor tiling",
     src: "/assets/projects/lifestyle-homes/interiors/night-view.jpg",
   },
   {
-    id: 6,
-    category: "Interiors",
-    title: "Delivered Finished Living Room",
-    desc: "Actual finished 2 & 3 BHK living hall opening into a cross-ventilated sit-out balcony",
-    src: "/assets/projects/lifestyle-homes/interiors/living-room-polished.jpg",
-  },
-  {
-    id: 7,
-    category: "Interiors",
-    title: "Corridor & Apartment Entrance",
-    desc: "Granite flooring, teak door frames, and double-coat smooth interior finishes",
-    src: "/assets/projects/lifestyle-homes/interiors/corridor-polished.jpg",
-  },
-  {
-    id: 8,
+    id: 5,
     category: "Interiors",
     title: "Dual Elevators Lobby & Stretcher Lift",
-    desc: "Equipped with automatic battery backup (ARD) ensuring seamless round-the-clock safety",
+    desc: "Passenger and stretcher lift with automatic battery rescue device (ARD)",
     src: "/assets/projects/lifestyle-homes/interiors/elevators-lobby.jpg",
+  },
+  {
+    id: 6,
+    category: "Commercial",
+    title: "DPS Road Commercial Frontage",
+    desc: "24 road-facing retail showrooms across Ground and First levels with direct street bays",
+    src: "/assets/projects/lifestyle-homes/building/building-hero-polished.jpg",
   },
 ];
 
@@ -251,58 +237,8 @@ export default function LifestyleInteractiveShowcase({
             : item.category === "Interiors" || item.category === "Location"
         );
 
-  // Sticky Scroll-Driven 3D Deck Progress across the 5 Landmark & Layout Plates
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let rafId = 0;
-    const updateFromScroll = () => {
-      rafId = 0;
-      if (window.innerWidth < 1024) return;
-      const runway = runwayRef.current;
-      if (!runway) return;
-
-      const rect = runway.getBoundingClientRect();
-      const stickyOffset = 88;
-      const scrollable = rect.height - (window.innerHeight - stickyOffset);
-      if (scrollable <= 0) return;
-
-      const scrolled = stickyOffset - rect.top;
-      const progress = Math.min(0.9999, Math.max(0, scrolled / scrollable));
-      const idx = Math.floor(progress * PLATES.length);
-      setActivePlateIdx((prev) => (prev === idx ? prev : idx));
-    };
-
-    const onScroll = () => {
-      if (!rafId) {
-        rafId = window.requestAnimationFrame(updateFromScroll);
-      }
-    };
-
-    updateFromScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-
-    return () => {
-      if (rafId) window.cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
   const handleSelectPlate = (idx: number) => {
     setActivePlateIdx(idx);
-    const runway = runwayRef.current;
-    if (runway && window.innerWidth >= 1024) {
-      const stickyOffset = 88;
-      const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
-      const scrollable = runway.offsetHeight - (window.innerHeight - stickyOffset);
-      if (scrollable > 0) {
-        const targetY =
-          runwayTop - stickyOffset + ((idx + 0.35) / PLATES.length) * scrollable;
-        window.scrollTo({ top: targetY, behavior: "smooth" });
-      }
-    }
   };
 
   useEffect(() => {
@@ -323,22 +259,6 @@ export default function LifestyleInteractiveShowcase({
       }
     );
   }, [galleryFilter]);
-
-  // Dynamic EMI Calculator
-  const [priceLakhs, setPriceLakhs] = useState(55);
-  const [downPercent, setDownPercent] = useState(20);
-  const [tenureYears, setTenureYears] = useState(20);
-  const interestRate = 8.5;
-
-  const principal = priceLakhs * 100000 * (1 - downPercent / 100);
-  const monthlyRate = interestRate / 12 / 100;
-  const numMonths = tenureYears * 12;
-  const emi = Math.round(
-    (principal * monthlyRate * Math.pow(1 + monthlyRate, numMonths)) /
-      (Math.pow(1 + monthlyRate, numMonths) - 1)
-  );
-  const totalPayment = emi * numMonths;
-  const totalInterest = totalPayment - principal;
 
   return (
     <div className={styles.wrapper}>
@@ -683,130 +603,6 @@ export default function LifestyleInteractiveShowcase({
                 </span>
               </button>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= 3. DYNAMIC EMI & AFFORDABILITY CALCULATOR (CHARCOAL) ================= */}
-      <section className={styles.calcSection} id="emi-calculator">
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader} data-reveal>
-            <h2 className={styles.sectionTitle}>
-              READY-POSSESSION <span>EMI &amp; LOAN CALCULATOR</span>
-            </h2>
-            <p className={styles.sectionSubtitle}>
-              Estimate monthly mortgage payments with pre-approved home loan rates from SBI, HDFC, ICICI, Axis Bank, and Bank of Baroda.
-            </p>
-          </div>
-
-          <div className={styles.calcCard} data-reveal>
-            <div className={styles.calcInputsCol}>
-              <div className={styles.sliderGroup}>
-                <div className={styles.sliderHeader}>
-                  <label htmlFor="flat-price">Property Value</label>
-                  <span className={styles.sliderValueBadge}>₹{priceLakhs} Lakhs</span>
-                </div>
-                <input
-                  id="flat-price"
-                  type="range"
-                  min="45"
-                  max="120"
-                  step="1"
-                  value={priceLakhs}
-                  onChange={(e) => setPriceLakhs(Number(e.target.value))}
-                  className={styles.rangeSlider}
-                />
-                <div className={styles.sliderMinMax}>
-                  <span>₹45 Lakhs (2 BHK)</span>
-                  <span>₹1.20 Cr (Grand 3 BHK)</span>
-                </div>
-              </div>
-
-              <div className={styles.sliderGroup}>
-                <div className={styles.sliderHeader}>
-                  <label htmlFor="down-payment">Down Payment</label>
-                  <span className={styles.sliderValueBadge}>
-                    {downPercent}% (₹{((priceLakhs * downPercent) / 100).toFixed(1)} L)
-                  </span>
-                </div>
-                <input
-                  id="down-payment"
-                  type="range"
-                  min="10"
-                  max="50"
-                  step="5"
-                  value={downPercent}
-                  onChange={(e) => setDownPercent(Number(e.target.value))}
-                  className={styles.rangeSlider}
-                />
-                <div className={styles.sliderMinMax}>
-                  <span>10% Minimum</span>
-                  <span>50% Maximum</span>
-                </div>
-              </div>
-
-              <div className={styles.sliderGroup}>
-                <div className={styles.sliderHeader}>
-                  <label htmlFor="loan-tenure">Loan Tenure</label>
-                  <span className={styles.sliderValueBadge}>{tenureYears} Years</span>
-                </div>
-                <input
-                  id="loan-tenure"
-                  type="range"
-                  min="5"
-                  max="30"
-                  step="1"
-                  value={tenureYears}
-                  onChange={(e) => setTenureYears(Number(e.target.value))}
-                  className={styles.rangeSlider}
-                />
-                <div className={styles.sliderMinMax}>
-                  <span>5 Years</span>
-                  <span>30 Years</span>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.calcResultsCol}>
-              <div className={styles.emiHighlightBox}>
-                <span className={styles.emiLabel}>ESTIMATED MONTHLY EMI</span>
-                <div className={styles.emiAmount}>
-                  ₹{emi.toLocaleString("en-IN")}
-                  <span className={styles.perMonth}>/ month</span>
-                </div>
-                <span className={styles.rateBadge}>
-                  @ {interestRate}% P.A. · Bank Pre-Approved
-                </span>
-              </div>
-
-              <div className={styles.breakdownList}>
-                <div className={styles.breakdownRow}>
-                  <span>Loan Principal Amount</span>
-                  <strong>₹{(principal / 100000).toFixed(2)} Lakhs</strong>
-                </div>
-                <div className={styles.breakdownRow}>
-                  <span>Total Interest Payable</span>
-                  <strong>₹{(totalInterest / 100000).toFixed(2)} Lakhs</strong>
-                </div>
-                <div className={styles.breakdownRow}>
-                  <span>Total Amount Payable</span>
-                  <strong>₹{(totalPayment / 100000).toFixed(2)} Lakhs</strong>
-                </div>
-              </div>
-
-              <a
-                href={`${whatsappHref}?text=${encodeURIComponent(
-                  `Hello Lifestyle Homes, I calculated an EMI of approx ₹${emi.toLocaleString("en-IN")}/month for a ₹${priceLakhs} Lakh unit. Please arrange bank loan assistance.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${styles.calcCtaBtn} roll-button`}
-              >
-                <span className="roll-text" data-text="Request Bank Loan Assistance →">
-                  Request Bank Loan Assistance →
-                </span>
-              </a>
-            </div>
           </div>
         </div>
       </section>

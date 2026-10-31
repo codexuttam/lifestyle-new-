@@ -175,15 +175,16 @@
   flex-direction: column;
   align-items: flex-start;
   gap: clamp(14px, 2vh, 22px);
-  max-width: 400px;
+  max-width: 440px;
   animation: heroLineEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  margin-bottom: clamp(20px, 3.5vh, 40px);
 }
 
 .description {
   font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.7;
-  color: rgba(248, 246, 243, 0.84);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(248, 246, 243, 0.92);
   margin: 0;
 }
 
@@ -197,25 +198,26 @@
 .ctaLine {
   display: inline-flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-  padding: 0 0 6px 0;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.85);
+  padding: 4px 0 8px 0;
   color: #F8F6F3;
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 0.25s ease, color 0.25s ease;
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .ctaLine:hover {
   border-color: #FFFFFF;
   color: #FFFFFF;
+  transform: translateX(3px);
 }
 
 .arrow {
