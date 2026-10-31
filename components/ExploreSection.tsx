@@ -366,7 +366,14 @@ export default function ExploreSection({
                         />
                       )}
                       <div className={styles.flyingScrim} />
-                      <div className={styles.flyingCardCaption}>
+                      <div
+                        className={styles.flyingCardCaption}
+                        style={{
+                          opacity: isFront ? 1 : 0,
+                          pointerEvents: isFront ? "auto" : "none",
+                          transition: "opacity 0.3s ease",
+                        }}
+                      >
                         <div className={styles.flyingIndexRow}>
                           <span className={styles.flyingLine} />
                           <span>({zone.index})</span>

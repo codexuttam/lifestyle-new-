@@ -1,11 +1,11 @@
-/* ============ SECTION 2: COMPACT TRUST & CREDENTIALS STRIP (WARM IVORY) ============ */
+/* ============ SECTION 2: COMPACT TRUST & CREDENTIALS STRIP (SOL HAUS OFF-WHITE) ============ */
 
 .section {
-  background: var(--surface-ivory, #f6f1e7);
-  color: var(--ink-on-ivory, #0c0d0c);
-  padding: 52px 0 56px;
-  border-top: 1px solid rgba(150, 112, 34, 0.24);
-  border-bottom: 1px solid rgba(12, 13, 12, 0.12);
+  background: #F8F5F3;
+  color: #201005;
+  padding: 50px 0 54px;
+  border-top: 1px solid rgba(184, 174, 166, 0.35);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.35);
   overflow: hidden;
 }
 
@@ -29,33 +29,33 @@
 .flankLine {
   width: 32px;
   height: 1px;
-  background: rgba(143, 107, 32, 0.55);
+  background: rgba(122, 112, 104, 0.5);
 }
 
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.26em;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8f6b20;
+  color: #7A7068;
 }
 
 .subhead {
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 2vw, 1.65rem);
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #0c0d0c;
+  color: #201005;
   max-width: 780px;
 }
 
 .marqueeBand {
   width: 100%;
-  border-top: 1px solid rgba(12, 13, 12, 0.12);
-  border-bottom: 1px solid rgba(12, 13, 12, 0.12);
-  background: var(--surface-ivory-alt, #faf7f1);
+  border-top: 1px solid rgba(184, 174, 166, 0.25);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.25);
+  background: #FAF7F5;
   overflow: hidden;
 }
 
@@ -83,12 +83,12 @@
   align-items: center;
   gap: 14px;
   padding: 20px 36px;
-  border-right: 1px solid rgba(12, 13, 12, 0.1);
+  border-right: 1px solid rgba(184, 174, 166, 0.25);
   flex-shrink: 0;
 }
 
 .diamond {
-  color: #8f6b20;
+  color: #7A7068;
   font-size: 12px;
 }
 
@@ -101,16 +101,16 @@
 .cellCode {
   font-family: var(--font-display);
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #0c0d0c;
+  color: #201005;
 }
 
 .cellLabel {
   font-family: var(--font-sans);
   font-size: 11.5px;
-  color: rgba(12, 13, 12, 0.66);
+  color: #5D534B;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -122,4 +122,3 @@
     animation: none !important;
   }
 }
-

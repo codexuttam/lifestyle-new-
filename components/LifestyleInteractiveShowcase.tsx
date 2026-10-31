@@ -547,6 +547,11 @@ export default function LifestyleInteractiveShowcase({
                           className={`${styles.flyingCardCaption}${
                             plate.isBlueprint ? ` ${styles.flyingCaptionDark}` : ""
                           }`}
+                          style={{
+                            opacity: isFront ? 1 : 0,
+                            pointerEvents: isFront ? "auto" : "none",
+                            transition: "opacity 0.3s ease",
+                          }}
                         >
                           <div className={styles.flyingIndexRow}>
                             <span className={styles.flyingLine} />

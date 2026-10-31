@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div style={{ backgroundColor: "#080808", color: "#f7efdc", minHeight: "100vh", fontFamily: "var(--font-sans), sans-serif" }}>
+    <div style={{ backgroundColor: "#201005", color: "#F8F5F3", minHeight: "100vh", fontFamily: "var(--font-sans), sans-serif" }}>
       <SiteNav activeHref="/privacy" />
 
       <main
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           data-reveal
           style={{
             marginBottom: "3rem",
-            borderBottom: "1px solid rgba(247, 239, 220, 0.12)",
+            borderBottom: "1px solid rgba(248, 245, 243, 0.12)",
             paddingBottom: "2rem",
           }}
         >
@@ -42,13 +42,13 @@ export default function PrivacyPage() {
               fontWeight: 600,
               lineHeight: 0.95,
               textTransform: "uppercase",
-              color: "#f7efdc",
+              color: "#F8F5F3",
               marginBottom: "0.85rem",
             }}
           >
             Privacy Policy &amp; Legal Disclaimer
           </h1>
-          <p style={{ color: "rgba(247, 239, 220, 0.68)", fontSize: "0.98rem", lineHeight: 1.65, margin: 0 }}>
+          <p style={{ color: "rgba(248, 245, 243, 0.68)", fontSize: "0.98rem", lineHeight: 1.65, margin: 0 }}>
             Official regulatory disclosures, MahaRERA compliance, and data protection policies for Lifestyle Home Spaces &amp; Aura by Lifestyle.
           </p>
           <div
@@ -59,9 +59,9 @@ export default function PrivacyPage() {
               alignItems: "center",
               gap: "1.25rem",
               fontSize: "0.82rem",
-              color: "#f7efdc",
-              background: "rgba(191, 149, 63, 0.1)",
-              border: "1px solid rgba(191, 149, 63, 0.35)",
+              color: "#F8F5F3",
+              background: "rgba(184, 174, 166, 0.1)",
+              border: "1px solid rgba(184, 174, 166, 0.35)",
               padding: "0.55rem 1.1rem",
               borderRadius: "9999px",
             }}
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
             display: "flex",
             flexDirection: "column",
             gap: "2.25rem",
-            color: "rgba(247, 239, 220, 0.78)",
+            color: "rgba(248, 245, 243, 0.78)",
             lineHeight: 1.8,
             fontSize: "0.95rem",
           }}
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.75rem",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 marginBottom: "0.65rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.75rem",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 marginBottom: "0.65rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -135,7 +135,7 @@ export default function PrivacyPage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.75rem",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 marginBottom: "0.65rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -158,7 +158,7 @@ export default function PrivacyPage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.75rem",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 marginBottom: "0.65rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -176,7 +176,7 @@ export default function PrivacyPage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.75rem",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 marginBottom: "0.65rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -194,7 +194,7 @@ export default function PrivacyPage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.75rem",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 marginBottom: "0.65rem",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -210,8 +210,8 @@ export default function PrivacyPage() {
                 marginTop: "0.85rem",
                 padding: "1.4rem",
                 borderRadius: "18px",
-                background: "#101210",
-                border: "1px solid rgba(247, 239, 220, 0.14)",
+                background: "#332418",
+                border: "1px solid rgba(248, 245, 243, 0.14)",
               }}
             >
               <p style={{ margin: "0 0 0.4rem" }}><strong style={{ color: "#d5bd87" }}>Entity:</strong> Lifestyle Home Spaces &amp; Aura by Lifestyle</p>

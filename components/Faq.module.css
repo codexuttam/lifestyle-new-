@@ -1,10 +1,10 @@
-/* ============ SECTION 10: ACCESSIBLE HAIRLINE FAQ ACCORDION (WARM IVORY) ============ */
+/* ============ SECTION 10: ACCESSIBLE HAIRLINE FAQ ACCORDION (SOL HAUS OFF-WHITE) ============ */
 
 .section {
-  background: var(--surface-ivory, #f6f1e7);
-  color: var(--ink-on-ivory, #0c0d0c);
-  padding: 120px 40px;
-  border-bottom: 1px solid rgba(12, 13, 12, 0.12);
+  background: #F8F5F3;
+  color: #201005;
+  padding: 110px 40px;
+  border-bottom: 1px solid rgba(184, 174, 166, 0.3);
 }
 
 .container {
@@ -12,7 +12,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 52px;
+  gap: 48px;
 }
 
 .header {
@@ -20,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .eyebrowRow {
@@ -32,40 +32,42 @@
 .flank {
   width: 28px;
   height: 1px;
-  background: rgba(143, 107, 32, 0.55);
+  background: rgba(122, 112, 104, 0.45);
 }
 
 .eyebrow {
-  font-size: 10.5px;
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8f6b20;
+  color: #7A7068;
 }
 
 .title {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 500;
   font-size: clamp(2.2rem, 4.4vw, 3.8rem);
-  line-height: 0.96;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
-  color: #0c0d0c;
+  color: #201005;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(12, 13, 12, 0.16);
+  border-top: 1px solid rgba(184, 174, 166, 0.35);
 }
 
 .item {
-  border-bottom: 1px solid rgba(12, 13, 12, 0.16);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.35);
   transition: background-color 0.25s ease;
 }
 
 .trigger {
   width: 100%;
-  padding: 26px 8px;
+  padding: 24px 8px;
   background: transparent;
   border: none;
   display: grid;
@@ -79,9 +81,9 @@
 
 .faqIndex {
   font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 700;
-  color: #8f6b20;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #7A7068;
   font-variant-numeric: tabular-nums;
 }
 
@@ -90,20 +92,20 @@
   font-size: clamp(1rem, 1.35vw, 1.2rem);
   font-weight: 600;
   line-height: 1.4;
-  color: #0c0d0c;
+  color: #201005;
 }
 
 .plusBadge {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(12, 13, 12, 0.25);
+  border: 1px solid rgba(184, 174, 166, 0.5);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1;
-  color: #0c0d0c;
+  color: #201005;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     background-color 0.25s ease,
     border-color 0.25s ease,
@@ -112,9 +114,9 @@
 
 .plusBadgeOpen {
   transform: rotate(45deg);
-  background: #bf953f;
-  border-color: #bf953f;
-  color: #080808;
+  background: #201005;
+  border-color: #201005;
+  color: #F8F5F3;
 }
 
 .animator {
@@ -132,11 +134,11 @@
 }
 
 .answerText {
-  padding: 0 44px 26px 60px;
+  padding: 0 44px 24px 60px;
   font-family: var(--font-sans);
   font-size: 14.5px;
-  line-height: 1.72;
-  color: rgba(12, 13, 12, 0.72);
+  line-height: 1.7;
+  color: #5D534B;
 }
 
 @media (max-width: 640px) {

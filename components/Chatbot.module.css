@@ -1,4 +1,4 @@
-/* ============ LIFESTYLE LUXURY DIGITAL CONCIERGE CHATBOT ============ */
+/* ============ LIFESTYLE LUXURY DIGITAL CONCIERGE CHATBOT (SOL HAUS PALETTE) ============ */
 
 .floatingButton {
   position: fixed;
@@ -8,10 +8,10 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #c5a880;
-  border: 1px solid rgba(247, 244, 238, 0.35);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(197, 168, 128, 0.2);
-  color: #101216;
+  background: #B8AEA6;
+  border: 1px solid rgba(248, 245, 243, 0.35);
+  box-shadow: 0 8px 24px rgba(32, 16, 5, 0.45);
+  color: #201005;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,8 +29,8 @@
 
 .floatingButton:hover {
   transform: scale(1.06) translateY(-2px);
-  background: #d6be9f;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(197, 168, 128, 0.3);
+  background: #F8F5F3;
+  box-shadow: 0 12px 32px rgba(32, 16, 5, 0.55);
 }
 
 .floatingButton:active {
@@ -41,7 +41,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1.5px solid rgba(197, 168, 128, 0.5);
+  border: 1.5px solid rgba(184, 174, 166, 0.5);
   animation: pulseAnimation 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
   pointer-events: none;
 }
@@ -66,9 +66,9 @@
   right: calc(100% + 14px);
   top: 50%;
   transform: translateY(-50%);
-  background: #15181f;
-  border: 1px solid rgba(197, 168, 128, 0.35);
-  color: #f7f4ee;
+  background: #201005;
+  border: 1px solid rgba(184, 174, 166, 0.35);
+  color: #F8F5F3;
   font-family: var(--font-sans), sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -99,15 +99,15 @@
   max-width: calc(100vw - 32px);
   height: 560px;
   max-height: calc(100vh - 48px);
-  background: #101216;
-  border: 1px solid rgba(197, 168, 128, 0.35);
+  background: #201005;
+  border: 1px solid rgba(184, 174, 166, 0.3);
   border-radius: 24px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   font-family: var(--font-sans), sans-serif;
-  color: #f7f4ee;
+  color: #F8F5F3;
   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -124,9 +124,9 @@
 
 /* Header */
 .chatHeader {
-  background: linear-gradient(135deg, #15181f 0%, #1c202a 100%);
+  background: #332418;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(247, 244, 238, 0.08);
+  border-bottom: 1px solid rgba(184, 174, 166, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -142,12 +142,12 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(197, 168, 128, 0.14);
-  border: 1px solid rgba(197, 168, 128, 0.35);
+  background: rgba(184, 174, 166, 0.12);
+  border: 1px solid rgba(184, 174, 166, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #c5a880;
+  color: #F8F5F3;
   flex-shrink: 0;
 }
 
@@ -159,21 +159,21 @@
 .chatTitle {
   font-family: var(--font-display), sans-serif;
   font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   line-height: 1;
   text-transform: uppercase;
-  color: #f7f4ee;
+  color: #F8F5F3;
 }
 
 .chatStatus {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #c5a880;
+  color: #AEA399;
   font-weight: 600;
   margin-top: 3px;
 }
@@ -193,9 +193,9 @@
 }
 
 .closeButton {
-  background: rgba(247, 239, 220, 0.06);
-  border: 1px solid rgba(247, 239, 220, 0.14);
-  color: rgba(247, 239, 220, 0.72);
+  background: rgba(184, 174, 166, 0.1);
+  border: 1px solid rgba(184, 174, 166, 0.2);
+  color: #AEA399;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -207,9 +207,9 @@
 }
 
 .closeButton:hover {
-  background: rgba(191, 149, 63, 0.16);
-  color: #f7efdc;
-  border-color: #bf953f;
+  background: #B8AEA6;
+  color: #201005;
+  border-color: #B8AEA6;
 }
 
 /* Feed */
@@ -220,9 +220,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: #101216;
+  background: #201005;
   scrollbar-width: thin;
-  scrollbar-color: rgba(197, 168, 128, 0.4) transparent;
+  scrollbar-color: rgba(184, 174, 166, 0.3) transparent;
 }
 
 .messageRow {
@@ -249,18 +249,18 @@
 }
 
 .botBubble {
-  background: #15181f;
-  border: 1px solid rgba(247, 244, 238, 0.08);
-  color: rgba(247, 244, 238, 0.92);
+  background: #332418;
+  border: 1px solid rgba(184, 174, 166, 0.16);
+  color: #F8F5F3;
   border-bottom-left-radius: 4px;
 }
 
 .userBubble {
-  background: #c5a880;
-  color: #101216;
+  background: #B8AEA6;
+  color: #201005;
   font-weight: 600;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 4px 14px rgba(197, 168, 128, 0.22);
+  box-shadow: 0 4px 14px rgba(32, 16, 5, 0.25);
 }
 
 .optionsContainer {
@@ -274,9 +274,9 @@
 .optionPill {
   padding: 7px 14px;
   border-radius: 9999px;
-  background: #15181f;
-  border: 1px solid rgba(197, 168, 128, 0.28);
-  color: #f7f4ee;
+  background: #332418;
+  border: 1px solid rgba(184, 174, 166, 0.25);
+  color: #F8F5F3;
   font-size: 11.5px;
   font-weight: 500;
   cursor: pointer;
@@ -288,9 +288,9 @@
 }
 
 .optionPill:hover {
-  background: rgba(197, 168, 128, 0.15);
-  border-color: #c5a880;
-  color: #f7f4ee;
+  background: rgba(184, 174, 166, 0.18);
+  border-color: #B8AEA6;
+  color: #F8F5F3;
   transform: translateY(-1px);
 }
 
@@ -303,38 +303,37 @@
 .optionPillWhatsApp:hover {
   background: rgba(37, 211, 102, 0.24);
   border-color: #25d366;
-  color: #f7f4ee;
+  color: #F8F5F3;
 }
 
 .optionPillEnquiry {
-  background: #c5a880;
-  border: 1px solid #d6be9f;
-  color: #101216;
-  font-weight: 700;
-  box-shadow: 0 2px 10px rgba(197, 168, 128, 0.25);
+  background: #B8AEA6;
+  border: 1px solid #B8AEA6;
+  color: #201005;
+  font-weight: 600;
 }
 
 .optionPillEnquiry:hover {
-  background: #d6be9f;
-  border-color: #e5cfb5;
-  color: #101216;
+  background: #F8F5F3;
+  border-color: #F8F5F3;
+  color: #201005;
   transform: translateY(-1px);
 }
 
 /* Footer / Quick Call */
 .chatFooter {
   padding: 12px 16px;
-  background: #0c0d0c;
-  border-top: 1px solid rgba(247, 239, 220, 0.1);
+  background: #140a03;
+  border-top: 1px solid rgba(184, 174, 166, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 11px;
-  color: rgba(247, 239, 220, 0.55);
+  color: #AEA399;
 }
 
 .deskLink {
-  color: #d5bd87;
+  color: #F8F5F3;
   text-decoration: none;
   font-weight: 600;
   display: inline-flex;
@@ -344,7 +343,7 @@
 }
 
 .deskLink:hover {
-  color: #f7efdc;
+  color: #AEA399;
 }
 
 @media (max-width: 768px) {
@@ -386,8 +385,8 @@
   margin-top: 10px;
   padding: 12px;
   border-radius: 14px;
-  background: rgba(247, 239, 220, 0.04);
-  border: 1px solid rgba(247, 239, 220, 0.12);
+  background: rgba(184, 174, 166, 0.06);
+  border: 1px solid rgba(184, 174, 166, 0.2);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -397,9 +396,9 @@
 .inChatInput {
   padding: 9px 12px;
   border-radius: 9px;
-  background: #080808;
-  border: 1px solid rgba(247, 239, 220, 0.16);
-  color: #f7efdc;
+  background: #140a03;
+  border: 1px solid rgba(184, 174, 166, 0.25);
+  color: #F8F5F3;
   font-size: 12px;
   font-family: inherit;
   outline: none;
@@ -407,7 +406,7 @@
 }
 
 .inChatInput:focus {
-  border-color: #bf953f;
+  border-color: #B8AEA6;
 }
 
 .inChatConsent {
@@ -416,14 +415,14 @@
   gap: 6px;
   font-size: 10.5px;
   line-height: 1.4;
-  color: rgba(247, 239, 220, 0.65);
+  color: #AEA399;
   cursor: pointer;
   margin-top: 2px;
 }
 
 .inChatConsent input {
   margin-top: 2px;
-  accent-color: #bf953f;
+  accent-color: #B8AEA6;
   flex-shrink: 0;
 }
 
@@ -431,30 +430,29 @@
   margin: 0;
   padding: 5px 8px;
   border-radius: 6px;
-  background: rgba(191, 149, 63, 0.14);
-  border: 1px solid rgba(191, 149, 63, 0.36);
-  color: #d5bd87;
+  background: rgba(229, 72, 77, 0.12);
+  border: 1px solid rgba(229, 72, 77, 0.35);
+  color: #f87171;
   font-size: 11px;
 }
 
 .inChatSubmit {
   padding: 10px 14px;
   border-radius: 9999px;
-  background: #bf953f;
-  border: 1px solid #d4af37;
-  color: #080808;
+  background: #B8AEA6;
+  border: 1px solid #B8AEA6;
+  color: #201005;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(191, 149, 63, 0.3);
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: all 0.2s ease;
   margin-top: 2px;
 }
 
 .inChatSubmit:hover:not(:disabled) {
-  background: #d5bd87;
+  background: #F8F5F3;
   transform: translateY(-1px);
 }
 

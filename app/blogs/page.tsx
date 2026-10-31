@@ -150,7 +150,7 @@ export default function BlogsPage() {
   };
 
   return (
-    <div style={{ backgroundColor: "#080808", color: "#f7efdc", minHeight: "100vh", fontFamily: "var(--font-sans)" }}>
+    <div style={{ backgroundColor: "#201005", color: "#F8F5F3", minHeight: "100vh", fontFamily: "var(--font-sans)" }}>
       <RevealAnimations />
       <SiteNav activeHref="/blogs" />
 
@@ -164,16 +164,16 @@ export default function BlogsPage() {
               fontWeight: 600,
               lineHeight: 0.94,
               textTransform: "uppercase",
-              color: "#f7efdc",
+              color: "#F8F5F3",
               marginBottom: "1rem",
               letterSpacing: "-0.015em",
             }}
           >
-            LIFESTYLE ARTICLES &amp; <span style={{ color: "#c5a880" }}>BUYER FOLIOS</span>
+            LIFESTYLE ARTICLES &amp; <span style={{ color: "#B8AEA6" }}>BUYER FOLIOS</span>
           </h1>
           <p
             style={{
-              color: "rgba(247, 239, 220, 0.72)",
+              color: "rgba(248, 245, 243, 0.72)",
               fontSize: "15.5px",
               lineHeight: 1.7,
               margin: 0,
@@ -203,8 +203,8 @@ export default function BlogsPage() {
                   gap: "0.55rem",
                   padding: "13px 24px",
                   borderRadius: "9999px",
-                  background: "#c5a880",
-                  color: "#080808",
+                  background: "#B8AEA6",
+                  color: "#201005",
                   fontWeight: 700,
                   fontSize: "11px",
                   border: "1px solid #d4af37",
@@ -220,12 +220,12 @@ export default function BlogsPage() {
                 style={{
                   textAlign: "left",
                   fontSize: "11.5px",
-                  borderLeft: "2px solid rgba(191, 149, 63, 0.45)",
+                  borderLeft: "2px solid rgba(184, 174, 166, 0.45)",
                   paddingLeft: "0.9rem",
-                  color: "rgba(247, 239, 220, 0.75)",
+                  color: "rgba(248, 245, 243, 0.75)",
                 }}
               >
-                <div style={{ color: "#f7efdc", fontWeight: 600 }}>Administrator Session Active</div>
+                <div style={{ color: "#F8F5F3", fontWeight: 600 }}>Administrator Session Active</div>
                 <div style={{ color: "#d5bd87" }}>Bitlance SEO &amp; GEO Generator Unlocked</div>
               </div>
 
@@ -234,8 +234,8 @@ export default function BlogsPage() {
                 onClick={handleAdminLogout}
                 style={{
                   background: "transparent",
-                  border: "1px solid rgba(247, 239, 220, 0.22)",
-                  color: "rgba(247, 239, 220, 0.75)",
+                  border: "1px solid rgba(248, 245, 243, 0.22)",
+                  color: "rgba(248, 245, 243, 0.75)",
                   padding: "8px 16px",
                   borderRadius: "9999px",
                   fontSize: "11px",
@@ -256,7 +256,7 @@ export default function BlogsPage() {
                 style={{
                   background: "transparent",
                   border: "none",
-                  color: "rgba(247, 239, 220, 0.42)",
+                  color: "rgba(248, 245, 243, 0.42)",
                   cursor: "pointer",
                   fontSize: "11px",
                   letterSpacing: "0.08em",
@@ -280,8 +280,8 @@ export default function BlogsPage() {
             gap: "1.25rem",
             marginBottom: "2.5rem",
             padding: "12px 16px",
-            background: "#101210",
-            border: "1px solid rgba(247, 239, 220, 0.12)",
+            background: "#332418",
+            border: "1px solid rgba(248, 245, 243, 0.12)",
             borderRadius: "20px",
           }}
         >
@@ -297,11 +297,11 @@ export default function BlogsPage() {
                   style={{
                     padding: "9px 16px",
                     borderRadius: "9999px",
-                    background: isActive ? "#c5a880" : "transparent",
+                    background: isActive ? "#B8AEA6" : "transparent",
                     border: isActive
                       ? "1px solid #d4af37"
-                      : "1px solid rgba(247, 239, 220, 0.14)",
-                    color: isActive ? "#080808" : "rgba(247, 239, 220, 0.72)",
+                      : "1px solid rgba(248, 245, 243, 0.14)",
+                    color: isActive ? "#201005" : "rgba(248, 245, 243, 0.72)",
                     fontSize: "11px",
                     fontWeight: isActive ? 700 : 600,
                     letterSpacing: "0.1em",
@@ -326,10 +326,10 @@ export default function BlogsPage() {
               style={{
                 width: "100%",
                 padding: "10px 34px 10px 16px",
-                background: "#080808",
-                border: "1px solid rgba(247, 239, 220, 0.16)",
+                background: "#201005",
+                border: "1px solid rgba(248, 245, 243, 0.16)",
                 borderRadius: "9999px",
-                color: "#f7efdc",
+                color: "#F8F5F3",
                 fontSize: "13px",
                 outline: "none",
               }}
@@ -345,7 +345,7 @@ export default function BlogsPage() {
                   transform: "translateY(-50%)",
                   background: "transparent",
                   border: "none",
-                  color: "rgba(247, 239, 220, 0.6)",
+                  color: "rgba(248, 245, 243, 0.6)",
                   cursor: "pointer",
                   fontSize: "13px",
                 }}
@@ -362,12 +362,12 @@ export default function BlogsPage() {
             style={{
               textAlign: "center",
               padding: "4rem 2rem",
-              background: "#101210",
+              background: "#332418",
               borderRadius: "22px",
-              border: "1px solid rgba(247, 239, 220, 0.1)",
+              border: "1px solid rgba(248, 245, 243, 0.1)",
             }}
           >
-            <p style={{ color: "rgba(247, 239, 220, 0.65)", fontSize: "1rem", marginBottom: "1.2rem" }}>
+            <p style={{ color: "rgba(248, 245, 243, 0.65)", fontSize: "1rem", marginBottom: "1.2rem" }}>
               No articles found matching &quot;{searchQuery || activeCategory}&quot;.
             </p>
             <button
@@ -379,9 +379,9 @@ export default function BlogsPage() {
               style={{
                 padding: "11px 22px",
                 borderRadius: "9999px",
-                background: "#c5a880",
+                background: "#B8AEA6",
                 border: "1px solid #d4af37",
-                color: "#080808",
+                color: "#201005",
                 fontSize: "11px",
                 fontWeight: 700,
                 letterSpacing: "0.12em",
@@ -406,8 +406,8 @@ export default function BlogsPage() {
                 key={blog.id}
                 onClick={() => setSelectedBlog(blog)}
                 style={{
-                  background: "#101210",
-                  border: "1px solid rgba(247, 239, 220, 0.12)",
+                  background: "#332418",
+                  border: "1px solid rgba(248, 245, 243, 0.12)",
                   borderRadius: "24px",
                   overflow: "hidden",
                   cursor: "pointer",
@@ -419,14 +419,14 @@ export default function BlogsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-5px)";
-                  e.currentTarget.style.borderColor = "rgba(191, 149, 63, 0.55)";
+                  e.currentTarget.style.borderColor = "rgba(184, 174, 166, 0.55)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = "rgba(247, 239, 220, 0.12)";
+                  e.currentTarget.style.borderColor = "rgba(248, 245, 243, 0.12)";
                 }}
               >
-                <div style={{ height: "230px", width: "100%", overflow: "hidden", position: "relative", background: "#080808" }}>
+                <div style={{ height: "230px", width: "100%", overflow: "hidden", position: "relative", background: "#201005" }}>
                   <img
                     src={blog.image || "/aura/aura-hero-clean-4k.jpg"}
                     alt={blog.title}
@@ -463,8 +463,8 @@ export default function BlogsPage() {
                         borderRadius: "9999px",
                         background: "rgba(8, 8, 8, 0.82)",
                         backdropFilter: "blur(8px)",
-                        border: "1px solid rgba(191, 149, 63, 0.42)",
-                        color: "#f7efdc",
+                        border: "1px solid rgba(184, 174, 166, 0.42)",
+                        color: "#F8F5F3",
                         fontSize: "10px",
                         fontWeight: 600,
                         letterSpacing: "0.14em",
@@ -478,8 +478,8 @@ export default function BlogsPage() {
                         style={{
                           padding: "5px 11px",
                           borderRadius: "9999px",
-                          background: "#c5a880",
-                          color: "#080808",
+                          background: "#B8AEA6",
+                          color: "#201005",
                           fontSize: "10px",
                           fontWeight: 700,
                           letterSpacing: "0.1em",
@@ -504,8 +504,8 @@ export default function BlogsPage() {
                         height: "32px",
                         borderRadius: "50%",
                         background: "rgba(8, 8, 8, 0.85)",
-                        border: "1px solid rgba(247, 239, 220, 0.3)",
-                        color: "#f7efdc",
+                        border: "1px solid rgba(248, 245, 243, 0.3)",
+                        color: "#F8F5F3",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
@@ -532,7 +532,7 @@ export default function BlogsPage() {
                       fontWeight: 600,
                       lineHeight: 1.04,
                       textTransform: "uppercase",
-                      color: "#f7efdc",
+                      color: "#F8F5F3",
                       marginBottom: "10px",
                     }}
                   >
@@ -541,7 +541,7 @@ export default function BlogsPage() {
 
                   <p
                     style={{
-                      color: "rgba(247, 239, 220, 0.7)",
+                      color: "rgba(248, 245, 243, 0.7)",
                       fontSize: "13.5px",
                       lineHeight: 1.65,
                       marginBottom: "20px",
@@ -557,8 +557,8 @@ export default function BlogsPage() {
                       alignItems: "center",
                       justifyContent: "space-between",
                       paddingTop: "14px",
-                      borderTop: "1px solid rgba(247, 239, 220, 0.09)",
-                      color: "#c5a880",
+                      borderTop: "1px solid rgba(248, 245, 243, 0.09)",
+                      color: "#B8AEA6",
                       fontWeight: 600,
                       fontSize: "11px",
                       letterSpacing: "0.14em",
@@ -567,7 +567,7 @@ export default function BlogsPage() {
                   >
                     <span>Read Full Article →</span>
                     {blog.relatedProject && (
-                      <span style={{ fontSize: "10.5px", color: "rgba(247, 239, 220, 0.45)" }}>
+                      <span style={{ fontSize: "10.5px", color: "rgba(248, 245, 243, 0.45)" }}>
                         {blog.relatedProject === "aura" ? "Aura Flagship" : "Lifestyle Homes"}
                       </span>
                     )}
@@ -604,12 +604,12 @@ export default function BlogsPage() {
             style={{
               width: "100%",
               maxWidth: "440px",
-              background: "#101210",
-              border: "1px solid rgba(191, 149, 63, 0.4)",
+              background: "#332418",
+              border: "1px solid rgba(184, 174, 166, 0.4)",
               borderRadius: "24px",
               padding: "2rem",
               boxShadow: "0 28px 70px rgba(0, 0, 0, 0.85)",
-              color: "#f7efdc",
+              color: "#F8F5F3",
               position: "relative",
             }}
           >
@@ -625,9 +625,9 @@ export default function BlogsPage() {
                 width: "32px",
                 height: "32px",
                 borderRadius: "50%",
-                background: "#080808",
-                border: "1px solid rgba(247, 239, 220, 0.18)",
-                color: "#f7efdc",
+                background: "#201005",
+                border: "1px solid rgba(248, 245, 243, 0.18)",
+                color: "#F8F5F3",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
@@ -643,7 +643,7 @@ export default function BlogsPage() {
                   display: "inline-block",
                   padding: "4px 12px",
                   borderRadius: "9999px",
-                  border: "1px solid rgba(191, 149, 63, 0.4)",
+                  border: "1px solid rgba(184, 174, 166, 0.4)",
                   color: "#d5bd87",
                   fontSize: "10px",
                   letterSpacing: "0.2em",
@@ -659,13 +659,13 @@ export default function BlogsPage() {
                   fontSize: "1.8rem",
                   fontWeight: 600,
                   textTransform: "uppercase",
-                  color: "#f7efdc",
+                  color: "#F8F5F3",
                   marginBottom: "0.4rem",
                 }}
               >
                 ADMINISTRATOR PASSCODE
               </h3>
-              <p style={{ fontSize: "13px", color: "rgba(247, 239, 220, 0.65)", margin: 0 }}>
+              <p style={{ fontSize: "13px", color: "rgba(248, 245, 243, 0.65)", margin: 0 }}>
                 Enter your executive master passcode to unlock the Bitlance AI Blog Generator.
               </p>
             </div>
@@ -686,11 +686,11 @@ export default function BlogsPage() {
                     width: "100%",
                     padding: "12px 16px",
                     borderRadius: "12px",
-                    background: "#080808",
+                    background: "#201005",
                     border: adminPasscodeError
                       ? "1px solid #d5bd87"
-                      : "1px solid rgba(247, 239, 220, 0.18)",
-                    color: "#f7efdc",
+                      : "1px solid rgba(248, 245, 243, 0.18)",
+                    color: "#F8F5F3",
                     fontSize: "0.95rem",
                     outline: "none",
                   }}
@@ -707,8 +707,8 @@ export default function BlogsPage() {
                 style={{
                   padding: "13px 22px",
                   borderRadius: "9999px",
-                  background: "#c5a880",
-                  color: "#080808",
+                  background: "#B8AEA6",
+                  color: "#201005",
                   fontWeight: 700,
                   fontSize: "11px",
                   border: "1px solid #d4af37",
