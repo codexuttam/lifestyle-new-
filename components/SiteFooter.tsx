@@ -10,18 +10,7 @@ import {
 } from "@/lib/schemas/settings";
 import styles from "./SiteFooter.module.css";
 
-const NAV_LINKS = [
-  { label: "Aura by Lifestyle (Flagship)", href: "/" },
-  { label: "Lifestyle Home Spaces (DPS Rd)", href: "/projects/lifestyle-homes" },
-  { label: "All Developments", href: "/projects" },
-  { label: "Floor Plans & Cut-Sections", href: "/#floor-plans" },
-  { label: "About Lifestyle", href: "/about" },
-  { label: "Real Estate Insights", href: "/blogs" },
-  { label: "Contact Sales Team 📞", href: "/contact" },
-];
-
 export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
-  const SOCIAL_LINKS = settings.social;
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -81,6 +70,15 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
               <a href={mailtoHref(settings)} className={styles.emailSub}>
                 {settings.email}
               </a>
+              <a
+                href={whatsappHref(settings)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.emailSub}
+                style={{ color: "#c5a880" }}
+              >
+                WhatsApp Direct Desk ↗
+              </a>
               <span className={styles.reraLine}>
                 MahaRERA Reg. No. {settings.reraNumber} · maharera.maharashtra.gov.in
               </span>
@@ -97,51 +95,6 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
                 Open Online Enquiry →
               </span>
             </button>
-          </div>
-
-          <div className={styles.col}>
-            <div className={styles.colLabel}>
-              <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Developments &amp; Pages</span>
-            </div>
-            <div className={styles.linkList}>
-              {NAV_LINKS.map((link) => (
-                <Link key={link.label} href={link.href} className={styles.bigLink}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.col}>
-            <div className={styles.colLabel}>
-              <span className={styles.colDot} aria-hidden="true" />
-              <span className={styles.colLabelText}>Direct Channels &amp; Social</span>
-            </div>
-            <div className={styles.linkList}>
-              <a
-                href={whatsappHref(settings)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.waLink}
-              >
-                WhatsApp Direct Desk ↗
-              </a>
-              {SOCIAL_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.bigLink}
-                >
-                  {link.label} ↗
-                </a>
-              ))}
-              <Link href="/privacy" className={styles.bigLink}>
-                Privacy &amp; MahaRERA Disclaimer
-              </Link>
-            </div>
           </div>
         </div>
 
@@ -199,6 +152,9 @@ export default function SiteFooter({ settings }: { settings: SettingsRecord }) {
         <div className={styles.bottomBar}>
           <span className={styles.bottomItem}>{settings.copyright}</span>
           <span className={styles.bottomItem}>Congress Nagar, Camp &amp; DPS Road, Amravati</span>
+          <Link href="/privacy" className={styles.bottomItem} style={{ textDecoration: "underline", opacity: 0.85 }}>
+            Privacy &amp; MahaRERA Disclaimer
+          </Link>
         </div>
       </div>
     </footer>

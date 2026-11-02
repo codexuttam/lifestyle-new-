@@ -18,9 +18,11 @@
 }
 
 .topGrid {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr 0.9fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 48px;
+  flex-wrap: wrap;
 }
 
 .col {
