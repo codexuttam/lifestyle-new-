@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import EnquiryModal from "@/components/EnquiryModal";
 import styles from "./VslSection.module.css";
 
@@ -169,23 +168,6 @@ export default function VslSection({
                 {primaryCta}
               </span>
             </button>
-            <button
-              type="button"
-              className={`${styles.secondaryCta} roll-button`}
-              onClick={() => openFromCta("Floor Plans & Pricing Details")}
-            >
-              <span className="roll-text" data-text={secondaryCta}>
-                {secondaryCta}
-              </span>
-            </button>
-            <Link
-              href="/contact"
-              className={`${styles.contactLinkCta} roll-button`}
-            >
-              <span className="roll-text" data-text="Contact Sales Desk →">
-                Contact Sales Desk →
-              </span>
-            </Link>
           </div>
         </div>
       </div>

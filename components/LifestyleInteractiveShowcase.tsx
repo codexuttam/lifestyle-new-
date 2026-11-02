@@ -171,13 +171,6 @@ const GALLERY_ITEMS = [
     src: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-front.jpg",
   },
   {
-    id: 2,
-    category: "Actual",
-    title: "Active High-Street Retail Arcade",
-    desc: "Operating retail front with Dee Bakers, MORE Supermarket & customer parking",
-    src: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-angled.jpg",
-  },
-  {
     id: 3,
     category: "Interiors",
     title: "Delivered Finished Living Room",
