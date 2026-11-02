@@ -308,13 +308,16 @@ export default async function LifestyleHomesPage() {
         </section>
 
         {/* ============ SECTION 4-6: UNIFIED LANDMARK EXPLORER & 3D LAYOUTS + GALLERY + EMI ============ */}
+        <div id="residences" style={{ scrollMarginTop: "90px" }} />
         <LifestyleInteractiveShowcase
           whatsappHref={whatsappHref(settings)}
           telHref={telHref(settings)}
         />
 
         {/* ============ SECTION 7: 24 COMMERCIAL SHOPS (WARM IVORY EDITORIAL) ============ */}
-        <section className={styles.commercialSection} id="commercial-shops">
+        <section className={styles.commercialSection} id="commercial" style={{ scrollMarginTop: "90px" }}>
+          <span id="showrooms" style={{ scrollMarginTop: "90px" }} aria-hidden="true" />
+          <span id="commercial-shops" style={{ scrollMarginTop: "90px" }} aria-hidden="true" />
           <div className={styles.sectionInner}>
             <div className={styles.sectionHeaderLight} data-reveal>
               <h2 className={styles.sectionTitleLight}>

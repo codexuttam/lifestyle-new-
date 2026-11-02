@@ -4,12 +4,7 @@ import { useState } from "react";
 import styles from "./HomeContactSection.module.css";
 import type { SettingsRecord } from "@/lib/schemas/settings";
 
-const PREFERENCES = [
-  "3 BHK Sky Suite (1,850 SQFT)",
-  "2 BHK Luxury Suite (1,150 SQFT)",
-  "Crown Level 15 Sky Oasis",
-  "Schedule Private Site Visit",
-];
+const DEFAULT_PREFERENCE = "Schedule Private Site Visit";
 
 export default function HomeContactSection({ settings }: { settings?: SettingsRecord }) {
   const [formData, setFormData] = useState({
@@ -18,7 +13,7 @@ export default function HomeContactSection({ settings }: { settings?: SettingsRe
     email: "",
     message: "",
   });
-  const [selectedPref, setSelectedPref] = useState(PREFERENCES[0]);
+  const [selectedPref] = useState(DEFAULT_PREFERENCE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -107,20 +102,10 @@ export default function HomeContactSection({ settings }: { settings?: SettingsRe
             </div>
           ) : (
             <>
-              {/* Configuration Quick Pills */}
-              <div className={styles.prefPillsRow} role="radiogroup" aria-label="Preferred Residence">
-                {PREFERENCES.map((pref) => (
-                  <button
-                    key={pref}
-                    type="button"
-                    role="radio"
-                    aria-checked={selectedPref === pref}
-                    className={`${styles.prefPill} ${selectedPref === pref ? styles.prefPillActive : ""}`}
-                    onClick={() => setSelectedPref(pref)}
-                  >
-                    {pref}
-                  </button>
-                ))}
+              {/* Form Heading: Schedule Private Site Visit with Luxury Typography */}
+              <div className={styles.formSectionHeader}>
+                <span className={styles.formEyebrow}>EXCLUSIVE SITE PREVIEW</span>
+                <h3 className={styles.formTitle}>Schedule Private Site Visit</h3>
               </div>
 
               <input

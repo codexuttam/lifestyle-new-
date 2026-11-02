@@ -77,9 +77,8 @@ const PANELS: FeaturePanel[] = [
       { name: "Living & Dining Suite", src: "/aura/living-dining-suite-hd.jpg", desc: "Cross-Ventilated Grand Hall" },
       { name: "Master Bedroom Suite", src: "/aura/master-bedroom-suite-hd.jpg", desc: "Private Ensuite Sanctuary" },
       { name: "Kid's Bedroom Suite", src: "/aura/kids-bedroom-suite-hd.jpg", desc: "Light-Filled Study Alcove" },
-      { name: "Kitchen & Utility", src: "/aura/kitchen-utility-suite-hd.jpg", desc: "Granite Platform & Utility" },
+      { name: "Kitchen & Dining Alcove", src: "/aura/kitchen-utility-suite-hd.jpg", desc: "Granite Platform & Dining Alcove" },
       { name: "Private Sit-Out Balcony", src: "/aura/sitout-balcony-view-hd.jpg", desc: "Panoramic Camp Skyline Views" },
-      { name: "Designer Bathware", src: "/aura/designer-bathware-suite-hd.jpg", desc: "Concealed Jaquar Bathware" },
     ],
     facts: [
       "800×1600 mm Vitrified Large-Format Slabs",
@@ -381,11 +380,6 @@ export default function AuraFeatureSequence() {
                 </div>
               );
             })}
-
-            {/* Subtle Next Slide Peek Below */}
-            <div className={styles.peekUnderlay} onClick={handleNext} title={`Next: ${nextItem.title}`}>
-              <span className={styles.peekLabel}>{nextItem.title}</span>
-            </div>
           </div>
         </div>
       </div>

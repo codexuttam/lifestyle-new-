@@ -135,14 +135,17 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       setMenuOpen(false);
     } else if (href.includes("#")) {
       const [pagePath, hash] = href.split("#");
-      const isCurrentPage =
-        pathname === pagePath ||
-        (pagePath === "/" && (pathname === "/" || pathname === "")) ||
-        (pagePath === "" && pathname === "/");
+      const normPath = (pathname || "").replace(/\/$/, "") || "/";
+      const normTarget = (pagePath || "").replace(/\/$/, "") || "/";
+      const isCurrentPage = normPath === normTarget;
 
       if (isCurrentPage && hash) {
         e.preventDefault();
-        const target = document.querySelector(`#${hash}`);
+        const target =
+          document.querySelector(`#${hash}`) ||
+          (hash === "residences" ? document.querySelector("#unit-plans, #explore-site-section, #explore-lifestyle-section") : null) ||
+          (hash === "commercial" || hash === "showrooms" ? document.querySelector("#commercial-shops, #commercial, #showrooms") : null);
+
         if (target) {
           const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
           window.scrollTo({ top, behavior: "smooth" });

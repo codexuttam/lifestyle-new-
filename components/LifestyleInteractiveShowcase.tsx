@@ -264,6 +264,7 @@ export default function LifestyleInteractiveShowcase({
     <div className={styles.wrapper}>
       {/* ================= 1. UNIFIED LANDMARK EXPLORER & 3D FLOOR LAYOUTS (STICKY SCROLL 3D DECK) ================= */}
       <section className={styles.unitSection} id="unit-plans">
+        <span id="residences" className={styles.anchorAlias} aria-hidden="true" />
         <span id="explore-site-section" className={styles.anchorAlias} aria-hidden="true" />
         <span id="explore-lifestyle-section" className={styles.anchorAlias} aria-hidden="true" />
         <div className={styles.sectionInner}>
