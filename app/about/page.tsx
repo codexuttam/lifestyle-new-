@@ -30,8 +30,8 @@ const STORY_IMAGES = [
     alt: "Aura by Lifestyle 15-Storey Tower in Congress Nagar, Amravati",
   },
   {
-    src: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
-    alt: "Lifestyle Home Spaces ready-for-possession landmark on DPS Road, Amravati",
+    src: "/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg",
+    alt: "Lifestyle Home Spaces delivered landmark on DPS Road, Amravati",
   },
   {
     src: "/videos/web-clip-thumb.png",

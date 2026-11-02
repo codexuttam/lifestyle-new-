@@ -97,7 +97,7 @@ export default function SecondaryProjectSection() {
           <Image
             src={
               activeTab === "residences"
-                ? "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
+                ? "/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg"
                 : "/assets/projects/lifestyle-homes/gallery/lifestyle-shops-commercial.jpg"
             }
             alt="Lifestyle Home Spaces Delivered Landmark, DPS Road Amravati"

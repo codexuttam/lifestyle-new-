@@ -72,10 +72,10 @@ const PANELS: FeaturePanel[] = [
     subtitle: "Zero Shared Walls · 100% Vastu · Up to 11'0\" × 6'0\" Balconies",
     description:
       "Thoughtfully proportioned residences with dedicated dining alcoves, ensuite master suites, concealed Jaquar bathware, large-format 800×1600 vitrified slabs, and private sit-out balconies.",
-    image: "/aura/master-bedroom-suite-hd.jpg",
+    image: "/aura/living-dining-suite-hd.jpg",
     roomGallery: [
-      { name: "Master Bedroom Suite", src: "/aura/master-bedroom-suite-hd.jpg", desc: "Private Ensuite Sanctuary" },
       { name: "Living & Dining Suite", src: "/aura/living-dining-suite-hd.jpg", desc: "Cross-Ventilated Grand Hall" },
+      { name: "Master Bedroom Suite", src: "/aura/master-bedroom-suite-hd.jpg", desc: "Private Ensuite Sanctuary" },
       { name: "Kid's Bedroom Suite", src: "/aura/kids-bedroom-suite-hd.jpg", desc: "Light-Filled Study Alcove" },
       { name: "Kitchen & Utility", src: "/aura/kitchen-utility-suite-hd.jpg", desc: "Granite Platform & Utility" },
       { name: "Private Sit-Out Balcony", src: "/aura/sitout-balcony-view-hd.jpg", desc: "Panoramic Camp Skyline Views" },
@@ -216,8 +216,6 @@ export default function AuraFeatureSequence() {
         <div className={styles.stageCard}>
           {/* Left: Narrative Column with Category, Heading, Bullets, and CTAs */}
           <div className={styles.stageCopy} key={current.index}>
-            <div className={styles.stageCategoryTag}>{current.categoryTag}</div>
-
             <h3 className={styles.stageTitle}>{current.title}</h3>
 
             <p className={styles.stageDesc}>{current.description}</p>
@@ -322,10 +320,6 @@ export default function AuraFeatureSequence() {
                           sizes="(max-width: 960px) 100vw, 560px"
                           className={styles.flyingMedia}
                         />
-                        <div className={styles.roomActiveBadge}>
-                          <span>{panel.roomGallery[activeRoomIdx].name}</span>
-                          <small>{panel.roomGallery[activeRoomIdx].desc}</small>
-                        </div>
                       </div>
 
                       {/* Multiple Room Images Strip */}
@@ -384,36 +378,13 @@ export default function AuraFeatureSequence() {
                       className={styles.flyingMedia}
                     />
                   )}
-                  <div className={styles.flyingScrim} />
-                  <div
-                    className={styles.flyingCardCaption}
-                    style={{
-                      opacity: isFront ? 1 : 0,
-                      pointerEvents: isFront ? "auto" : "none",
-                      transition: "opacity 0.3s ease",
-                    }}
-                  >
-                    <div className={styles.flyingIndexRow}>
-                      <span className={styles.flyingLine} />
-                      <span>
-                        ({panel.index})
-                        {panel.index === "04" && " · GOLDEN LADY EMBLEM & AURA BRAND"}
-                        {panel.index === "02" && " · 3D ROOFTOP SKY POOL & TURF"}
-                      </span>
-                    </div>
-                    <h4 className={styles.flyingTitle}>
-                      {panel.roomGallery && isFront
-                        ? panel.roomGallery[activeRoomIdx].name
-                        : panel.title}
-                    </h4>
-                  </div>
                 </div>
               );
             })}
 
             {/* Subtle Next Slide Peek Below */}
             <div className={styles.peekUnderlay} onClick={handleNext} title={`Next: ${nextItem.title}`}>
-              <span className={styles.peekLabel}>{nextItem.categoryTag}</span>
+              <span className={styles.peekLabel}>{nextItem.title}</span>
             </div>
           </div>
         </div>

@@ -200,11 +200,6 @@ export default function AuraFloorPlans() {
           {/* Details Column with Verified Room Dimensions */}
           <div className={styles.detailsCol}>
             <div className={styles.detailsHeader} data-plan-anim>
-              {plan.isDarkBg && (
-                <span className={styles.modeEyebrow}>
-                  ✦ 3D ISOMETRIC CUT-SECTION · ZERO SHARED WALLS
-                </span>
-              )}
               <h3 className={styles.planTitle}>{plan.title}</h3>
               <p className={styles.planSubtitle}>{plan.subtitle}</p>
             </div>

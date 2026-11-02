@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Lifestyle Home Spaces | Delivered 2 & 3 BHK Homes & 24 Shops, Amravati",
     description:
       "Ready for immediate possession. 30 residential suites and 24 commercial shops on DPS Road, Parvati Nagar, Amravati. MahaRERA: P50300054447.",
-    images: [{ url: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg" }],
+    images: [{ url: "/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg" }],
   },
 };
 
@@ -37,8 +37,8 @@ const SPOTLIGHT_SPECS = [
 
 const LIFESTYLE_ABOUT_CARDS = [
   {
-    img: "/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg",
-    alt: "8-Storey Highrise Architecture on DPS Road",
+    img: "/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg",
+    alt: "Delivered 8-Storey Highrise Architecture on DPS Road",
     prefix: "",
     target: 8,
     suffix: " Storeys",
@@ -191,8 +191,8 @@ export default async function LifestyleHomesPage() {
         <section className={styles.hero} id="hero-section">
           <div className={styles.videoContainer}>
             <Image
-              src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
-              alt="Lifestyle Home Spaces Landmark, DPS Road, Amravati"
+              src="/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg"
+              alt="Lifestyle Home Spaces Delivered Building, DPS Road, Amravati"
               fill
               priority
               sizes="100vw"
@@ -328,7 +328,7 @@ export default async function LifestyleHomesPage() {
             <div className={styles.commercialGrid}>
               <div className={styles.commercialImageCol} data-reveal>
                 <img
-                  src="/assets/projects/lifestyle-homes/building/lifestyle-hero-clean-4k.jpg"
+                  src="/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg"
                   alt="Lifestyle Home Spaces Commercial Galleria on DPS Road"
                   className={styles.commercialImg}
                 />
