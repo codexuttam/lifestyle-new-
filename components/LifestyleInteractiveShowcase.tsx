@@ -269,7 +269,6 @@ export default function LifestyleInteractiveShowcase({
         <span id="explore-lifestyle-section" className={styles.anchorAlias} aria-hidden="true" />
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader} data-reveal>
-            <span className={styles.eyebrow}>DELIVERED RESIDENCES &amp; ARCHITECTURE</span>
             <h2 className={styles.sectionTitle}>
               LANDMARK &amp; <span>3D LAYOUTS</span>
             </h2>
@@ -302,11 +301,6 @@ export default function LifestyleInteractiveShowcase({
 
               <div className={styles.stageCard}>
                 <div className={styles.stageCopy} key={activePlate.id}>
-                  <div className={styles.stageMetaRow}>
-                    <span className={styles.stageNumber}>({activePlate.index})</span>
-                    <span className={styles.stageSub}>{activePlate.subtitle}</span>
-                  </div>
-
                   <h3 className={styles.unitTitle}>
                     {activePlate.title}
                   </h3>
@@ -522,9 +516,6 @@ export default function LifestyleInteractiveShowcase({
                   )}
                 </button>
                 <div className={styles.mobilePlateBody}>
-                  <span className={styles.mobilePlateMeta}>
-                    ({plate.index}) · {plate.subtitle}
-                  </span>
                   <h3 className={styles.mobilePlateTitle}>{plate.title}</h3>
                   <p className={styles.unitSummary}>{plate.summary}</p>
                   <div className={styles.roomGrid}>
