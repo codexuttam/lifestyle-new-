@@ -57,6 +57,8 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
   const [currentUser, setCurrentUser] = useState<VerifiedUser | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const hasConvertedRef = useRef(false);
+  const tenSecTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const pathname = usePathname();
 
@@ -75,7 +77,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Listen to verified user session & custom enquiry modal events
+  // Listen to verified user session & custom modal trigger events
   useEffect(() => {
     const checkAuth = () => {
       try {
@@ -96,11 +98,87 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     const handleOpenEnquiry = () => setIsEnquiryOpen(true);
     window.addEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
 
+    const handleOpenAuth = () => setIsAuthOpen(true);
+    window.addEventListener("lifestyle_open_auth", handleOpenAuth);
+
     return () => {
       window.removeEventListener("lifestyle_auth_changed", checkAuth);
       window.removeEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
+      window.removeEventListener("lifestyle_open_auth", handleOpenAuth);
     };
   }, []);
+
+  // Auto-render contact form on site entry (Aura & Lifestyle pages)
+  // When rejected/closed, if user stays on site for 10s, auto-render sign-in form
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const isTargetPage =
+      pathname === "/" ||
+      pathname === "/projects/lifestyle-homes" ||
+      pathname === "/projects/lifestyle" ||
+      !pathname;
+
+    if (!isTargetPage) return;
+
+    try {
+      const isVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
+      if (isVerified) return;
+
+      const pageKey = pathname?.includes("lifestyle") ? "lifestyle" : "aura";
+      const sessionSeenKey = `lifestyle_auto_enquiry_shown_${pageKey}`;
+      if (sessionStorage.getItem(sessionSeenKey)) return;
+
+      const initialTimer = setTimeout(() => {
+        setIsEnquiryOpen(true);
+        try {
+          sessionStorage.setItem(sessionSeenKey, "1");
+        } catch {}
+      }, 1000);
+
+      return () => clearTimeout(initialTimer);
+    } catch {}
+  }, [pathname]);
+
+  // Clean up 10s timer on unmount
+  useEffect(() => {
+    return () => {
+      if (tenSecTimerRef.current) {
+        clearTimeout(tenSecTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleEnquirySubmitted = () => {
+    hasConvertedRef.current = true;
+    if (tenSecTimerRef.current) {
+      clearTimeout(tenSecTimerRef.current);
+      tenSecTimerRef.current = null;
+    }
+  };
+
+  const handleCloseEnquiry = () => {
+    setIsEnquiryOpen(false);
+
+    try {
+      const isVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
+      const isSubmitted = Boolean(localStorage.getItem("lifestyle_lead_submitted"));
+
+      if (!isVerified && !isSubmitted && !hasConvertedRef.current) {
+        if (tenSecTimerRef.current) {
+          clearTimeout(tenSecTimerRef.current);
+        }
+        // User rejected/closed contact form: wait 10s while staying on site, then show sign-in form
+        tenSecTimerRef.current = setTimeout(() => {
+          const currentVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
+          const currentSubmitted = Boolean(localStorage.getItem("lifestyle_lead_submitted"));
+          if (!currentVerified && !currentSubmitted && !hasConvertedRef.current) {
+            setIsAuthOpen(true);
+          }
+        }, 10000);
+      }
+    } catch {}
+  };
 
   // Click outside to close user dropdown
   useEffect(() => {
@@ -436,12 +514,18 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         onClose={() => setIsAuthOpen(false)}
         onSuccess={(user) => {
           setCurrentUser(user);
+          hasConvertedRef.current = true;
+          if (tenSecTimerRef.current) {
+            clearTimeout(tenSecTimerRef.current);
+            tenSecTimerRef.current = null;
+          }
         }}
       />
 
       <EnquiryModal
         isOpen={isEnquiryOpen}
-        onClose={() => setIsEnquiryOpen(false)}
+        onClose={handleCloseEnquiry}
+        onSubmitted={handleEnquirySubmitted}
         projectTitle={isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle"}
       />
     </>

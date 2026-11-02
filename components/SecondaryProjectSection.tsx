@@ -56,8 +56,8 @@ export default function SecondaryProjectSection() {
                   <span className={styles.factLabel}>2 BHK Residences</span>
                 </div>
                 <div className={styles.factItem}>
-                  <span className={styles.factNum}>₹48L*</span>
-                  <span className={styles.factLabel}>Starting Price</span>
+                  <span className={styles.factNum}>Ready</span>
+                  <span className={styles.factLabel}>Immediate Possession</span>
                 </div>
                 <div className={styles.factItem}>
                   <span className={styles.factNum}>RERA</span>

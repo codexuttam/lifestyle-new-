@@ -51,8 +51,8 @@ export default function OtherProjectsSection() {
                 <span className={styles.specLabel}>Commercial Shops</span>
               </div>
               <div className={styles.specItem}>
-                <span className={styles.specNumber}>₹48L*</span>
-                <span className={styles.specLabel}>Starting Price</span>
+                <span className={styles.specNumber}>Ready</span>
+                <span className={styles.specLabel}>Immediate Move-In</span>
               </div>
             </div>
 

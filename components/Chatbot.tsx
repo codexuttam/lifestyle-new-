@@ -707,6 +707,7 @@ export default function Chatbot() {
         onClose={() => setIsEnquiryOpen(false)}
         projectTitle={enquiryProject}
         defaultPreference={enquiryPreference}
+        source="Website Chatbot"
       />
     </>
   );

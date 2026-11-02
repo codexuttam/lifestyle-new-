@@ -7,6 +7,7 @@ import { submitLead } from "@/lib/leads/submitLead";
 interface EnquiryModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmitted?: () => void;
   projectTitle?: string;
   defaultPreference?: string;
   source?: string;
@@ -15,6 +16,7 @@ interface EnquiryModalProps {
 export default function EnquiryModal({
   isOpen,
   onClose,
+  onSubmitted,
   projectTitle = "Aura by Lifestyle",
   defaultPreference = "2 & 3 BHK Luxury Residences",
   source = "Website Enquiry Form",
@@ -81,6 +83,7 @@ export default function EnquiryModal({
 
       // Meta "Lead" is fired inside submitLead, only after the CRM confirms the save.
       setReferenceId(result.referenceId || "LHS-2026-VIP");
+      onSubmitted?.();
     } finally {
       isSubmittingRef.current = false;
       setIsSubmitting(false);

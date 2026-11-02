@@ -386,14 +386,6 @@ export default async function LifestyleHomesPage() {
                       Enquire For Available Shops →
                     </span>
                   </a>
-                  <a
-                    href={telHref(settings)}
-                    className={`${styles.commercialSecondaryBtn} roll-button`}
-                  >
-                    <span className="roll-text" data-text="Call: +91 70385 00084">
-                      Call: +91 70385 00084
-                    </span>
-                  </a>
                 </div>
               </div>
             </div>
