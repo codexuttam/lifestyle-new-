@@ -2,6 +2,7 @@ import SolHausShell from "@/components/SolHausShell";
 import SiteNav from "@/components/SiteNav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import VslSection from "@/components/VslSection";
 import AuraFeatureSequence from "@/components/AuraFeatureSequence";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
 import SecondaryProjectSection from "@/components/SecondaryProjectSection";
@@ -32,7 +33,29 @@ export default async function Home() {
       {/* Section 1 — About Us: Asymmetric Editorial Composition & Animated Numbers */}
       <About content={home.about} />
 
-      {/* Section 2 — Aura Feature Sequence: Interactive Architectural 4-Tab Dimension Deck */}
+      {/* Section 2 — Official Aura Film with 30% Auto-Enquiry Modal & Viewport AutoPlay */}
+      <VslSection
+        id="aura-vsl"
+        project="Aura by Lifestyle"
+        preference="2 & 3 BHK Luxury Residences"
+        source="VSL Popup (Aura by Lifestyle)"
+        videoSrc="/videos/aura-showcase-clip.mp4"
+        poster="/aura/rooftop-amenities-3d.jpg"
+        eyebrow="OFFICIAL ARCHITECTURAL FILM · CAMP, AMRAVATI"
+        headline="Aura by Lifestyle: 15-Storey Skyline Residences"
+        intro="Take a cinematic walkthrough of Amravati's premier 15-storey highrise tower. Discover 2 & 3 BHK luxury residences, Level 15 rooftop sky oasis with infinity pool, and panoramic horizons over Camp."
+        points={[
+          "15-Storey landmark highrise tower on Congress Nagar Road, Camp",
+          "1,150 to 1,850 SQFT 2 & 3 BHK luxury suites with 100% Vastu compliance",
+          "Crown Level 15: Rooftop sky pool, kids pool, multi-sports turf & sky deck",
+          "Double-height designer arrival lobby, 4 high-speed ARD elevators & generator backup",
+          "MahaRERA Registered (P5030002502915) with leading bank home loan approvals",
+        ]}
+        primaryCta="Schedule Private Preview →"
+        secondaryCta="Request VIP Floor Kit"
+      />
+
+      {/* Section 3 — Aura Feature Sequence: Interactive Architectural 4-Tab Dimension Deck */}
       <AuraFeatureSequence />
 
       {/* Section 3 — Floor Plans & Cut-Sections: Interactive 2 & 3 BHK Layouts */}

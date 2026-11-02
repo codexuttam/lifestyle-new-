@@ -142,7 +142,33 @@ export default function AuraFeatureSequence() {
   const [activeIdx, setActiveIdx] = useState(1); // Default to tab 02 as in user's screenshot
   const [activeRoomIdx, setActiveRoomIdx] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const current = PANELS[activeIdx];
+
+  // Autoplay video smoothly when user scrolls into this section or selects tab 02
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.muted = true;
+            video.play().catch(() => {});
+          } else {
+            if (!video.paused && !video.ended) {
+              video.pause();
+            }
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [activeIdx]);
   const nextItem = PANELS[(activeIdx + 1) % PANELS.length];
 
   // Auto-cycle room images when 2 & 3 BHK tab is active
@@ -298,6 +324,7 @@ export default function AuraFeatureSequence() {
                 >
                   {panel.video && isFront ? (
                     <video
+                      ref={videoRef}
                       src={panel.video}
                       poster={panel.image}
                       autoPlay
