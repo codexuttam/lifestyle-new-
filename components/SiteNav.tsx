@@ -227,17 +227,76 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
 
         {/* Right: Contact & Action Buttons */}
         <div className={styles.rightActions}>
-          <Link
-            href={isLifestylePage ? "/contact" : "/#contact-section"}
-            className={styles.contactLink}
-            onClick={(e) => {
-              if (!isLifestylePage) {
-                handleNavClick(e, "/#contact-section");
-              }
-            }}
-          >
-            CONTACT
-          </Link>
+          <div className={styles.contactWrapper} ref={userMenuRef}>
+            <button
+              type="button"
+              className={styles.contactLink}
+              onClick={() => {
+                if (currentUser) {
+                  setUserMenuOpen((prev) => !prev);
+                } else {
+                  setIsAuthOpen(true);
+                }
+              }}
+              aria-label="Contact Studio & Member Sign In"
+            >
+              CONTACT
+            </button>
+
+            {currentUser && userMenuOpen && (
+              <div className={styles.userDropdownCard}>
+                <div className={styles.userMetaHeader}>
+                  <div className={styles.userMetaAvatar}>
+                    {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
+                  </div>
+                  <div>
+                    <div className={styles.userName}>{currentUser.name || "Member"}</div>
+                    <div className={styles.userBadge}>✦ Verified Member</div>
+                  </div>
+                </div>
+
+                <div className={styles.userDivider} />
+
+                <button
+                  type="button"
+                  className={styles.userActionBtn}
+                  onClick={() => {
+                    setUserMenuOpen(false);
+                    setIsEnquiryOpen(true);
+                  }}
+                >
+                  <span>Schedule Private Visit</span>
+                  <span>→</span>
+                </button>
+
+                <Link
+                  href="/projects/lifestyle-homes"
+                  className={styles.userActionBtn}
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  <span>Lifestyle Home Spaces</span>
+                  <span>→</span>
+                </Link>
+
+                <div className={styles.userDivider} />
+
+                <button
+                  type="button"
+                  className={`${styles.userActionBtn} ${styles.signOutBtn}`}
+                  onClick={() => {
+                    try {
+                      localStorage.removeItem("lifestyle_verified_user");
+                      setCurrentUser(null);
+                      setUserMenuOpen(false);
+                      window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
+                    } catch {}
+                  }}
+                >
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            )}
+          </div>
 
           <button
             type="button"
@@ -247,98 +306,6 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
           >
             ENQUIRE
           </button>
-
-          {/* Member Profile or Sign In */}
-          {currentUser ? (
-            <div className={styles.userMenuWrapper} ref={userMenuRef}>
-              <button
-                type="button"
-                className={styles.accountBtn}
-                onClick={() => setUserMenuOpen((prev) => !prev)}
-                aria-label={`Member profile for ${currentUser.name || "Member"}`}
-              >
-                <span className={styles.userAvatar}>
-                  {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
-                </span>
-              </button>
-
-              {userMenuOpen && (
-                <div className={styles.userDropdownCard}>
-                  <div className={styles.userMetaHeader}>
-                    <div className={styles.userMetaAvatar}>
-                      {(currentUser.name?.trim().charAt(0) || "U").toUpperCase()}
-                    </div>
-                    <div>
-                      <div className={styles.userName}>{currentUser.name || "Member"}</div>
-                      <div className={styles.userBadge}>✦ Verified Member</div>
-                    </div>
-                  </div>
-
-                  <div className={styles.userDivider} />
-
-                  <button
-                    type="button"
-                    className={styles.userActionBtn}
-                    onClick={() => {
-                      setUserMenuOpen(false);
-                      setIsEnquiryOpen(true);
-                    }}
-                  >
-                    <span>Schedule Private Visit</span>
-                    <span>→</span>
-                  </button>
-
-                  <Link
-                    href="/projects/lifestyle-homes"
-                    className={styles.userActionBtn}
-                    onClick={() => setUserMenuOpen(false)}
-                  >
-                    <span>Lifestyle Home Spaces</span>
-                    <span>→</span>
-                  </Link>
-
-                  <div className={styles.userDivider} />
-
-                  <button
-                    type="button"
-                    className={`${styles.userActionBtn} ${styles.signOutBtn}`}
-                    onClick={() => {
-                      try {
-                        localStorage.removeItem("lifestyle_verified_user");
-                        setCurrentUser(null);
-                        setUserMenuOpen(false);
-                        window.dispatchEvent(new CustomEvent("lifestyle_auth_changed"));
-                      } catch {}
-                    }}
-                  >
-                    <span>Sign Out</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <button
-              type="button"
-              className={styles.accountBtn}
-              onClick={() => setIsAuthOpen(true)}
-              aria-label="Member Sign In"
-              title="Member Sign In"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </button>
-          )}
 
           {/* Mobile Menu Toggle Hamburger */}
           <button

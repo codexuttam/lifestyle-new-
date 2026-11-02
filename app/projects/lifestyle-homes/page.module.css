@@ -44,9 +44,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 32%;
-  filter: contrast(1.06) saturate(0.96);
-  transform: scale(1.02);
+  object-position: center 40%;
+  filter: contrast(1.04) saturate(1.02);
+  transform: scale(1.01);
   will-change: transform;
   display: block;
 }
