@@ -13,7 +13,6 @@ export interface GalleryMediaItem {
   typeBadge: MediaBadgeType;
   title: string;
   caption: string;
-  aspect?: "wide" | "standard" | "tall";
 }
 
 const GALLERY_MEDIA: GalleryMediaItem[] = [
@@ -24,7 +23,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "RENDER",
     title: "15-Storey Tower Elevation",
     caption: "Amravati's premier 15-storey highrise tower on Congress Nagar Road, Camp. Architectural visualization of facade.",
-    aspect: "wide",
   },
   {
     id: "lifestyle-homes-delivered-front",
@@ -33,7 +31,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "COMPLETED_PHOTO",
     title: "Delivered 8-Storey Landmark",
     caption: "Actual on-site photograph of the completed residential & commercial landmark on 24m DPS Road, Parvati Nagar.",
-    aspect: "standard",
   },
   {
     id: "aura-rooftop-pool-deck",
@@ -42,7 +39,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "RENDER",
     title: "Level 15 Crown Sky Oasis",
     caption: "Rooftop lap pool, kids splash zone, and enclosed box cricket turf 15 storeys above street level.",
-    aspect: "standard",
   },
   {
     id: "lifestyle-homes-real-building",
@@ -51,7 +47,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "COMPLETED_PHOTO",
     title: "Delivered Facade & Balconies",
     caption: "Actual on-site photograph of the delivered cantilever balconies and finished exterior structure on DPS Road.",
-    aspect: "standard",
   },
   {
     id: "aura-living-room",
@@ -60,7 +55,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "RENDER",
     title: "Living & Dining Alcove",
     caption: "Generous cross-ventilation, sit-out balcony connectivity, and 800×1600 mm vitrified floor finishes.",
-    aspect: "standard",
   },
   {
     id: "aura-master-suite",
@@ -69,7 +63,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "RENDER",
     title: "Master Bedroom Retreat",
     caption: "Private acoustic isolation, natural morning light, dedicated dressing niche, and attached luxury bath.",
-    aspect: "standard",
   },
   {
     id: "aura-grand-lobby",
@@ -78,7 +71,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "RENDER",
     title: "Double-Height Arrival Lobby",
     caption: "Segregated private residential entrance foyer with Italian marble flooring and 4 high-speed elevators.",
-    aspect: "standard",
   },
   {
     id: "aura-sky-balcony",
@@ -87,7 +79,6 @@ const GALLERY_MEDIA: GalleryMediaItem[] = [
     typeBadge: "RENDER",
     title: "Panoramic Skyline Balcony",
     caption: "Deep sit-out balcony providing expansive horizon views across Camp and the tranquil Melghat greens.",
-    aspect: "wide",
   },
 ];
 
@@ -162,7 +153,7 @@ export default function GallerySection() {
           {filteredItems.map((item, idx) => (
             <article
               key={item.id}
-              className={`${styles.galleryCard} ${item.aspect === "wide" ? styles.cardWide : ""}`}
+              className={styles.galleryCard}
               onClick={() => setLightboxIndex(idx)}
               role="button"
               tabIndex={0}

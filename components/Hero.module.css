@@ -81,66 +81,6 @@
   z-index: 2;
 }
 
-/* Top Floating Architectural Credentials Pill */
-.topCredentialPill {
-  position: absolute;
-  top: 96px;
-  left: clamp(24px, 4vw, 52px);
-  z-index: 10;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(32, 16, 5, 0.68);
-  border: 1px solid rgba(197, 168, 128, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 9999px;
-  padding: 6px 14px;
-  animation: heroLineEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
-}
-
-.credentialDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #c5a880;
-  box-shadow: 0 0 8px rgba(197, 168, 128, 0.8);
-}
-
-.credentialText {
-  font-family: var(--font-sans, sans-serif);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #f8f6f3;
-}
-
-.credentialDivider {
-  color: rgba(197, 168, 128, 0.5);
-  font-size: 11px;
-}
-
-.reraBadge {
-  font-family: var(--font-sans, sans-serif);
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: #c5a880;
-}
-
-@media (max-width: 768px) {
-  .topCredentialPill {
-    top: 84px;
-    left: 20px;
-    padding: 5px 10px;
-    gap: 6px;
-  }
-  .reraBadge {
-    display: none;
-  }
-}
-
 /* Hero Bottom Content Grid */
 .contentGrid {
   position: relative;
@@ -342,8 +282,7 @@
   }
   .headlineLine,
   .eyebrowTag,
-  .narrativeCol,
-  .topCredentialPill {
+  .narrativeCol {
     animation: none !important;
   }
 }

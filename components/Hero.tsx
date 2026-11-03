@@ -67,14 +67,6 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
         <div className={styles.bottomBlend} />
       </div>
 
-      {/* Floating Architectural Credentials Pill */}
-      <div className={styles.topCredentialPill}>
-        <span className={styles.credentialDot} aria-hidden="true" />
-        <span className={styles.credentialText}>15-STOREY ARCHITECTURAL HIGHRISE · CAMP, AMRAVATI</span>
-        <span className={styles.credentialDivider}>·</span>
-        <span className={styles.reraBadge}>MAHARERA: P5030002502915</span>
-      </div>
-
       {/* Hero Content Grid: High-contrast legible typography & accessible CTA */}
       <div className={styles.contentGrid}>
         {/* Left: Signature Editorial Headline */}

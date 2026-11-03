@@ -100,11 +100,12 @@
   box-shadow: 0 4px 16px rgba(197, 168, 128, 0.3);
 }
 
-/* Gallery Grid */
+/* Gallery Grid: Uniform & Balanced */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: clamp(20px, 3vw, 32px);
+  gap: clamp(20px, 2.5vw, 32px);
+  align-items: stretch;
 }
 
 @media (max-width: 768px) {
@@ -114,35 +115,31 @@
   }
 }
 
+/* Gallery Card: Image fills 100% of the div block */
 .galleryCard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(197, 168, 128, 0.18);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: #0f0a06;
+  border: 1px solid rgba(197, 168, 128, 0.22);
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .galleryCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(197, 168, 128, 0.5);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
-}
-
-.cardWide {
-  grid-column: span 2;
-}
-
-@media (max-width: 900px) {
-  .cardWide {
-    grid-column: span 1;
-  }
+  border-color: rgba(197, 168, 128, 0.55);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
 }
 
 .imageWrap {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: 100%;
   overflow: hidden;
   background: #0f0a06;
 }
@@ -151,6 +148,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -195,21 +194,21 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(20, 10, 5, 0.15) 0%,
-    rgba(20, 10, 5, 0.4) 50%,
+    rgba(20, 10, 5, 0.08) 0%,
+    rgba(20, 10, 5, 0.3) 45%,
     rgba(20, 10, 5, 0.94) 100%
   );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(16px, 2.5vh, 24px);
+  padding: clamp(14px, 2.2vh, 20px);
   box-sizing: border-box;
 }
 
 .overlayContent {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .overlayCategory {
@@ -223,17 +222,21 @@
 
 .overlayTitle {
   font-family: var(--font-display, "Playfair Display", Georgia, serif);
-  font-size: 18px;
+  font-size: 17.5px;
   font-weight: 400;
   color: #f8f6f3;
   margin: 0;
 }
 
 .overlayCaption {
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 11.5px;
+  line-height: 1.45;
   color: rgba(248, 246, 243, 0.78);
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .inspectPill {
