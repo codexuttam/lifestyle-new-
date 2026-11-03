@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import RevealAnimations from "@/components/RevealAnimations";
@@ -536,7 +537,12 @@ export default function BlogsPage() {
                       marginBottom: "10px",
                     }}
                   >
-                    {blog.title}
+                    <Link
+                      href={`/blogs/${blog.id}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      {blog.title}
+                    </Link>
                   </h3>
 
                   <p
@@ -565,7 +571,12 @@ export default function BlogsPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    <span>Read Full Article →</span>
+                    <Link
+                      href={`/blogs/${blog.id}`}
+                      style={{ color: "#d5bd87", textDecoration: "none" }}
+                    >
+                      Read Full Article →
+                    </Link>
                     {blog.relatedProject && (
                       <span style={{ fontSize: "10.5px", color: "rgba(248, 245, 243, 0.45)" }}>
                         {blog.relatedProject === "aura" ? "Aura Flagship" : "Lifestyle Homes"}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import EnquiryModal from "@/components/EnquiryModal";
@@ -8,11 +8,52 @@ import type { HomeRecord } from "@/lib/schemas/home";
 
 export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const imageWrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Respect user's motion preferences & skip heavy transforms on mobile
+    if (typeof window === "undefined") return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth <= 768;
+    if (prefersReducedMotion || isMobile) return;
+
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (heroRef.current && imageWrapRef.current) {
+            const rect = heroRef.current.getBoundingClientRect();
+            const scrollProgress = Math.max(0, -rect.top) / (rect.height || 1);
+            if (scrollProgress <= 1.2) {
+              // Gentle camera-like push & subtle vertical parallax
+              const translateY = scrollProgress * 50; // subtle 50px drift
+              const scale = 1.02 + scrollProgress * 0.04; // subtle 1.02 to 1.06 scale
+              imageWrapRef.current.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToNextSection = () => {
+    const target = document.getElementById("about") || document.getElementById("tower-features");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <section className={styles.hero} id="hero-section" aria-label="Aura Hero">
-      {/* Light & Minimal Daytime Architectural Building Facade */}
-      <div className={styles.mediaWrap}>
+    <section className={styles.hero} id="hero-section" ref={heroRef} aria-label="Aura Hero">
+      {/* Visual Anchor: Tower Render with Camera Scroll Motion */}
+      <div className={styles.mediaWrap} ref={imageWrapRef}>
         <Image
           src="/aura/exterior-elevation-day-hd.jpg"
           alt="Aura 15-Storey Daytime Architectural Landmark, Camp Amravati"
@@ -21,13 +62,24 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
           sizes="100vw"
           className={styles.mediaImage}
         />
+        {/* Cinematic Scrims: Multi-layer gradient ensuring headline readability and seamless blend into next section */}
         <div className={styles.mediaOverlay} />
+        <div className={styles.bottomBlend} />
       </div>
 
-      {/* Hero Bottom Content Grid — Reduced & Minimal Editorial Typography */}
+      {/* Floating Architectural Credentials Pill */}
+      <div className={styles.topCredentialPill}>
+        <span className={styles.credentialDot} aria-hidden="true" />
+        <span className={styles.credentialText}>15-STOREY ARCHITECTURAL HIGHRISE · CAMP, AMRAVATI</span>
+        <span className={styles.credentialDivider}>·</span>
+        <span className={styles.reraBadge}>MAHARERA: P5030002502915</span>
+      </div>
+
+      {/* Hero Content Grid: High-contrast legible typography & accessible CTA */}
       <div className={styles.contentGrid}>
-        {/* Left: Clean Minimal Editorial Headline */}
+        {/* Left: Signature Editorial Headline */}
         <div className={styles.headlineWrap}>
+          <span className={styles.eyebrowTag}>FLAGSHIP RESIDENTIAL LANDMARK</span>
           <h1 className={styles.headlineLine}>MATERIAL.</h1>
           <h2 className={styles.headlineLine}>
             <span className={styles.swashInitial}>M</span>EANING.
@@ -35,33 +87,43 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
           <h2 className={styles.headlineLine}>AURA.</h2>
         </div>
 
-        {/* Right: Concise Subline & Minimal CTA */}
+        {/* Right: Project Narrative, Verified Specifications & Primary CTAs */}
         <div className={styles.narrativeCol}>
           <p className={styles.description}>
-            Amravati&apos;s premier 15-storey architectural highrise.
+            Amravati&apos;s premier 15-storey architectural highrise featuring expansive 2 &amp; 3 BHK luxury residences, zero shared walls, and Level 15 rooftop infinity sky leisure deck.
           </p>
 
           <div className={styles.heroActions}>
             <button
               type="button"
-              className={styles.ctaLine}
+              className={styles.ctaPrimary}
               onClick={() => setIsEnquiryOpen(true)}
               aria-label="Enquire about Aura residences"
             >
               <span>GET IN TOUCH</span>
-              <span className={styles.arrow}>→</span>
+              <span className={styles.arrow} aria-hidden="true">→</span>
+            </button>
+
+            <button
+              type="button"
+              className={styles.ctaSecondary}
+              onClick={scrollToNextSection}
+              aria-label="Explore residences and tower features"
+            >
+              <span>EXPLORE RESIDENCES</span>
+              <span className={styles.downArrow} aria-hidden="true">↓</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Project Enquiry Modal */}
+      {/* Official Project Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
         projectTitle="Aura by Lifestyle"
         defaultPreference="General Residence Enquiry"
-        source="Hero Section"
+        source="Hero Section (Aura)"
       />
     </section>
   );

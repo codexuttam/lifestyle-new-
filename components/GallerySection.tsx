@@ -1,203 +1,285 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import styles from "./GallerySection.module.css";
 
-interface GalleryImage {
+export type MediaBadgeType = "RENDER" | "COMPLETED_PHOTO";
+
+export interface GalleryMediaItem {
+  id: string;
   src: string;
-  category: string;
+  category: "AURA (CAMP)" | "LIFESTYLE HOMES (DPS RD)" | "INTERIORS" | "ROOFTOP & AMENITIES";
+  typeBadge: MediaBadgeType;
   title: string;
   caption: string;
-  span?: string;
+  aspect?: "wide" | "standard" | "tall";
 }
 
-const GALLERY_ITEMS: GalleryImage[] = [
+const GALLERY_MEDIA: GalleryMediaItem[] = [
   {
-    src: "/aura/aura-hero-clean-4k.jpg",
-    category: "ARCHITECTURE",
-    title: "15-Storey Contemporary Crown",
-    caption: "Tower elevation rising gracefully over Congress Nagar Road, Camp.",
-    span: "featured",
+    id: "aura-tower-elevation",
+    src: "/aura/exterior-elevation-day-hd.jpg",
+    category: "AURA (CAMP)",
+    typeBadge: "RENDER",
+    title: "15-Storey Tower Elevation",
+    caption: "Amravati's premier 15-storey highrise tower on Congress Nagar Road, Camp. Architectural visualization of facade.",
+    aspect: "wide",
   },
   {
+    id: "lifestyle-homes-delivered-front",
+    src: "/assets/projects/lifestyle-homes/gallery/lifestyle-delivered-front.jpg",
+    category: "LIFESTYLE HOMES (DPS RD)",
+    typeBadge: "COMPLETED_PHOTO",
+    title: "Delivered 8-Storey Landmark",
+    caption: "Actual on-site photograph of the completed residential & commercial landmark on 24m DPS Road, Parvati Nagar.",
+    aspect: "standard",
+  },
+  {
+    id: "aura-rooftop-pool-deck",
+    src: "/aura/rooftop-pool-turf-hd.jpg",
+    category: "ROOFTOP & AMENITIES",
+    typeBadge: "RENDER",
+    title: "Level 15 Crown Sky Oasis",
+    caption: "Rooftop lap pool, kids splash zone, and enclosed box cricket turf 15 storeys above street level.",
+    aspect: "standard",
+  },
+  {
+    id: "lifestyle-homes-real-building",
+    src: "/assets/projects/lifestyle-homes/building/lifestyle-real-delivered-building.jpg",
+    category: "LIFESTYLE HOMES (DPS RD)",
+    typeBadge: "COMPLETED_PHOTO",
+    title: "Delivered Facade & Balconies",
+    caption: "Actual on-site photograph of the delivered cantilever balconies and finished exterior structure on DPS Road.",
+    aspect: "standard",
+  },
+  {
+    id: "aura-living-room",
     src: "/aura/modern-living-room.jpg",
     category: "INTERIORS",
-    title: "Light-Filled Living Alcoves",
-    caption: "Cross-ventilated layouts with private sit-out balconies and expansive glass.",
+    typeBadge: "RENDER",
+    title: "Living & Dining Alcove",
+    caption: "Generous cross-ventilation, sit-out balcony connectivity, and 800×1600 mm vitrified floor finishes.",
+    aspect: "standard",
   },
   {
-    src: "/videos/web-clip-thumb.png",
-    category: "SKY LEISURE",
-    title: "Level 15 Rooftop Infinity Pool",
-    caption: "Panoramic rooftop lap pool and enclosed multi-sports turf 15 storeys above street noise.",
+    id: "aura-master-suite",
+    src: "/aura/luxury-master-bedroom.jpg",
+    category: "INTERIORS",
+    typeBadge: "RENDER",
+    title: "Master Bedroom Retreat",
+    caption: "Private acoustic isolation, natural morning light, dedicated dressing niche, and attached luxury bath.",
+    aspect: "standard",
   },
   {
-    src: "/aura/luxury-bedroom-2.jpg",
-    category: "CRAFTSMANSHIP",
-    title: "Master Bedroom Sanctuaries",
-    caption: "800×1600 mm vitrified slabs with concealed Jaquar fittings and acoustic isolation.",
+    id: "aura-grand-lobby",
+    src: "/aura/grand-entrance-lobby-hd.jpg",
+    category: "AURA (CAMP)",
+    typeBadge: "RENDER",
+    title: "Double-Height Arrival Lobby",
+    caption: "Segregated private residential entrance foyer with Italian marble flooring and 4 high-speed elevators.",
+    aspect: "standard",
   },
   {
+    id: "aura-sky-balcony",
     src: "/aura/sky-balcony-lifestyle.jpg",
-    category: "HORIZONS",
-    title: "Deep Sit-Out Balconies",
-    caption: "Private open-air decks capturing morning daylight and tranquil Melghat horizons.",
-  },
-  {
-    src: "/aura/building-full-4k.jpg",
-    category: "BOULEVARD",
-    title: "Grand Arrival & Segregated Access",
-    caption: "Double-height designer lobby with dedicated residential entry portico.",
+    category: "ROOFTOP & AMENITIES",
+    typeBadge: "RENDER",
+    title: "Panoramic Skyline Balcony",
+    caption: "Deep sit-out balcony providing expansive horizon views across Camp and the tranquil Melghat greens.",
+    aspect: "wide",
   },
 ];
 
+const CATEGORIES = [
+  "ALL",
+  "AURA (CAMP)",
+  "LIFESTYLE HOMES (DPS RD)",
+  "INTERIORS",
+  "ROOFTOP & AMENITIES",
+] as const;
+
 export default function GallerySection() {
-  const [activeFilter, setActiveFilter] = useState("ALL");
+  const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const categories = ["ALL", "ARCHITECTURE", "INTERIORS", "SKY LEISURE", "CRAFTSMANSHIP"];
-
   const filteredItems =
-    activeFilter === "ALL"
-      ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
+    activeCategory === "ALL"
+      ? GALLERY_MEDIA
+      : GALLERY_MEDIA.filter((item) => item.category === activeCategory);
 
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index);
-  };
-
-  const closeLightbox = () => {
-    setLightboxIndex(null);
-  };
-
-  const nextLightbox = () => {
+  useEffect(() => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex + 1) % filteredItems.length);
-  };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxIndex(null);
+      if (e.key === "ArrowRight") setLightboxIndex((prev) => (prev !== null ? (prev + 1) % filteredItems.length : null));
+      if (e.key === "ArrowLeft") setLightboxIndex((prev) => (prev !== null ? (prev - 1 + filteredItems.length) % filteredItems.length : null));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, filteredItems.length]);
 
-  const prevLightbox = () => {
-    if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex - 1 + filteredItems.length) % filteredItems.length);
-  };
+  const activeMedia = lightboxIndex !== null ? filteredItems[lightboxIndex] : null;
 
   return (
-    <section className={styles.section} id="gallery">
+    <section className={styles.section} id="gallery" aria-label="Curated Architectural Gallery">
       <div className={styles.container}>
+        {/* Editorial Section Header */}
         <div className={styles.header}>
-          <div className={styles.headerCopy}>
-            <span className={styles.eyebrow}>CURATED ARCHITECTURAL PORTFOLIO</span>
-            <h2 className={styles.heading}>
-              CURATED MOMENTS &amp; <span>ARCHITECTURE.</span>
-            </h2>
-            <p className={styles.sub}>
-              Every angle of Aura has been planned with architectural restraint, generous natural illumination, and premium material finishes.
-            </p>
-          </div>
+          <span className={styles.eyebrow}>EDITORIAL VISUAL PORTFOLIO</span>
+          <h2 className={styles.title}>
+            MOMENTS &amp; <span>A</span>RCHITECTURE
+          </h2>
+          <p className={styles.subtitle}>
+            Explore on-site delivered photography from Lifestyle Home Spaces alongside verified architectural concept visualizations of our flagship highrise Aura.
+          </p>
 
-          <div className={styles.filterBar} role="tablist">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                className={`${styles.filterBtn}${activeFilter === cat ? ` ${styles.filterBtnActive}` : ""}`}
-                onClick={() => setActiveFilter(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* Category Filter Pills */}
+          <div className={styles.filterBar} role="tablist" aria-label="Gallery categories">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`${styles.filterBtn} ${isActive ? styles.filterBtnActive : ""}`}
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    setLightboxIndex(null);
+                  }}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        <div className={styles.masonryGrid}>
+        {/* Responsive Gallery Grid with Restrained Reveal */}
+        <div className={styles.galleryGrid} data-reveal-group>
           {filteredItems.map((item, idx) => (
             <article
-              key={item.src}
-              className={`${styles.card}${item.span === "featured" ? ` ${styles.cardFeatured}` : ""}`}
-              onClick={() => openLightbox(idx)}
+              key={item.id}
+              className={`${styles.galleryCard} ${item.aspect === "wide" ? styles.cardWide : ""}`}
+              onClick={() => setLightboxIndex(idx)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  openLightbox(idx);
+                  setLightboxIndex(idx);
                 }
               }}
+              aria-label={`View ${item.title}`}
             >
               <div className={styles.imageWrap}>
                 <img
                   src={item.src}
                   alt={item.title}
-                  className={styles.image}
+                  className={styles.cardImg}
                   loading="lazy"
                 />
-                <div className={styles.scrim} />
-              </div>
 
-              <div className={styles.captionOverlay}>
-                <span className={styles.cardCategory}>{item.category}</span>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
-                <p className={styles.cardText}>{item.caption}</p>
-                <span className={styles.zoomPill}>Expand Preview ↗</span>
+                {/* Clear distinction between completed photo vs render */}
+                <span
+                  className={`${styles.typeBadge} ${
+                    item.typeBadge === "COMPLETED_PHOTO"
+                      ? styles.badgeCompleted
+                      : styles.badgeRender
+                  }`}
+                >
+                  {item.typeBadge === "COMPLETED_PHOTO"
+                    ? "✓ COMPLETED ON-SITE PHOTO"
+                    : "✦ ARCHITECTURAL CONCEPT RENDER"}
+                </span>
+
+                <div className={styles.cardOverlay}>
+                  <div className={styles.overlayContent}>
+                    <span className={styles.overlayCategory}>{item.category}</span>
+                    <h3 className={styles.overlayTitle}>{item.title}</h3>
+                    <p className={styles.overlayCaption}>{item.caption}</p>
+                    <span className={styles.inspectPill}>⤢ Enlarge View</span>
+                  </div>
+                </div>
               </div>
             </article>
           ))}
         </div>
       </div>
 
-      {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
-        <div className={styles.lightbox} onClick={closeLightbox}>
-          <button
-            type="button"
-            className={styles.closeBtn}
-            onClick={closeLightbox}
-            aria-label="Close Preview"
-          >
-            ✕
-          </button>
-          <button
-            type="button"
-            className={styles.prevBtn}
-            onClick={(e) => {
-              e.stopPropagation();
-              prevLightbox();
-            }}
-            aria-label="Previous image"
-          >
-            ←
-          </button>
-          <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-            <img
-              src={filteredItems[lightboxIndex].src}
-              alt={filteredItems[lightboxIndex].title}
-              className={styles.lightboxImage}
-            />
+      {/* Enlarged Editorial Lightbox Modal */}
+      {activeMedia && (
+        <div
+          className={styles.lightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeMedia.title}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <div className={styles.lightboxTopBar}>
             <div className={styles.lightboxMeta}>
-              <span className={styles.lightboxCategory}>
-                {filteredItems[lightboxIndex].category}
+              <span
+                className={`${styles.typeBadge} ${
+                  activeMedia.typeBadge === "COMPLETED_PHOTO"
+                    ? styles.badgeCompleted
+                    : styles.badgeRender
+                }`}
+              >
+                {activeMedia.typeBadge === "COMPLETED_PHOTO"
+                  ? "✓ COMPLETED ON-SITE PHOTOGRAPH"
+                  : "✦ ARCHITECTURAL CONCEPT RENDER"}
               </span>
-              <h4 className={styles.lightboxTitle}>
-                {filteredItems[lightboxIndex].title}
-              </h4>
-              <p className={styles.lightboxCaption}>
-                {filteredItems[lightboxIndex].caption}
-              </p>
+              <strong className={styles.lightboxTitle}>{activeMedia.title}</strong>
             </div>
+
+            <button
+              type="button"
+              className={styles.closeBtn}
+              onClick={() => setLightboxIndex(null)}
+              aria-label="Close enlarged gallery image"
+            >
+              ✕ Close
+            </button>
           </div>
-          <button
-            type="button"
-            className={styles.nextBtn}
-            onClick={(e) => {
-              e.stopPropagation();
-              nextLightbox();
-            }}
-            aria-label="Next image"
-          >
-            →
-          </button>
+
+          <div className={styles.lightboxBody} onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className={`${styles.navBtn} ${styles.prevBtn}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((lightboxIndex! - 1 + filteredItems.length) % filteredItems.length);
+              }}
+              aria-label="Previous image"
+            >
+              ←
+            </button>
+
+            <div className={styles.lightboxMediaFrame}>
+              <img
+                src={activeMedia.src}
+                alt={activeMedia.title}
+                className={styles.lightboxImg}
+              />
+              <p className={styles.lightboxCaption}>{activeMedia.caption}</p>
+            </div>
+
+            <button
+              type="button"
+              className={`${styles.navBtn} ${styles.nextBtn}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((lightboxIndex! + 1) % filteredItems.length);
+              }}
+              aria-label="Next image"
+            >
+              →
+            </button>
+          </div>
         </div>
       )}
     </section>
   );
 }
-

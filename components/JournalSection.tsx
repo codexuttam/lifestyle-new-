@@ -3,37 +3,37 @@ import styles from "./JournalSection.module.css";
 
 const ARTICLES = [
   {
-    slug: "modern-architecture-amravati",
-    category: "ARCHITECTURE",
-    title: "How Contemporary Highrise Architecture Is Transforming Amravati",
-    excerpt: "Exploring the shift toward rectilinear facades, cross-ventilated suites, and why vertical living is redefining urban life in Camp.",
-    date: "OCTOBER 2026",
-    readTime: "4 MIN READ",
-    image: "/aura/building-full-4k.jpg",
+    slug: "luxury-real-estate-trends-amravati-2026",
+    category: "MARKET ANALYSIS",
+    title: "Luxury Real Estate Trends in Amravati: A Practical 2026 Buyer's Guide",
+    excerpt: "Explore shifting luxury preferences in Amravati, from prime Congress Nagar Road and DPS Road locations to MahaRERA verifications, rooftop sky amenities, and smart buying decisions.",
+    date: "JUNE 2026",
+    readTime: "9 MIN READ",
+    image: "/aura/aura-hero-clean-4k.jpg",
   },
   {
-    slug: "choosing-right-home-ventilation",
-    category: "RESIDENTIAL DESIGN",
-    title: "Light, Breeze & Acoustic Isolation: Choosing a Home That Breathes",
-    excerpt: "Why zero shared walls and multi-orientation balconies are the single most significant factor in everyday mental well-being.",
-    date: "OCTOBER 2026",
+    slug: "sample-flat-walkthrough-lifestyle-homes",
+    category: "ARCHITECTURE & CRAFTSMANSHIP",
+    title: "Inside the Finished Sample Residence: What Living at Lifestyle Homes Truly Feels Like",
+    excerpt: "A guided walkthrough of our fully furnished 2 & 3 BHK sample apartments on DPS Road, highlighting material choices, natural cross-ventilation, and interior elegance.",
+    date: "MAY 2026",
+    readTime: "3 MIN READ",
+    image: "/assets/interiors/bedroom-balcony-clean.jpg",
+  },
+  {
+    slug: "commercial-property-amravati",
+    category: "COMMERCIAL INVESTMENT",
+    title: "Why Investing in Commercial Property in Amravati is a Smart Move",
+    excerpt: "Explore high-visibility commercial corridors and prime retail arcade opportunities offering strong rental yields and footfall across Amravati.",
+    date: "APRIL 2026",
     readTime: "5 MIN READ",
-    image: "/aura/modern-living-room.jpg",
-  },
-  {
-    slug: "property-investment-camp-amravati",
-    category: "INVESTMENT",
-    title: "Capital Growth & Long-Term Value Along Congress Nagar Road",
-    excerpt: "An editorial analysis of Camp’s real estate trajectory, social infrastructure proximity, and rental appreciation yields.",
-    date: "OCTOBER 2026",
-    readTime: "6 MIN READ",
-    image: "/aura/sky-balcony-lifestyle.jpg",
+    image: "/aura/real-aura.png",
   },
 ];
 
 export default function JournalSection() {
   return (
-    <section className={styles.section} id="journal">
+    <section className={styles.section} id="journal" aria-label="Journal & Insights">
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.headerCopy}>
@@ -54,7 +54,7 @@ export default function JournalSection() {
         <div className={styles.articleGrid}>
           {ARTICLES.map((art) => (
             <article key={art.slug} className={styles.card}>
-              <Link href="/blogs" className={styles.imageLink} tabIndex={-1}>
+              <Link href={`/blogs/${art.slug}`} className={styles.imageLink} aria-label={art.title}>
                 <img
                   src={art.image}
                   alt={art.title}
@@ -71,13 +71,13 @@ export default function JournalSection() {
                   <span>{art.readTime}</span>
                 </div>
                 <h3 className={styles.title}>
-                  <Link href="/blogs" className={styles.titleLink}>
+                  <Link href={`/blogs/${art.slug}`} className={styles.titleLink}>
                     {art.title}
                   </Link>
                 </h3>
                 <p className={styles.excerpt}>{art.excerpt}</p>
-                <Link href="/blogs" className={styles.readMore}>
-                  Read Article →
+                <Link href={`/blogs/${art.slug}`} className={styles.readMore}>
+                  Read Full Article →
                 </Link>
               </div>
             </article>

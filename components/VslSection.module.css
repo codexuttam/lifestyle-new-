@@ -1,195 +1,285 @@
-/* ============ VSL WALKTHROUGH SECTION (SOL HAUS OFF-WHITE) ============ */
-
 .section {
   position: relative;
-  padding: 110px 40px;
-  background: #F8F5F3;
-  color: #201005;
-  border-bottom: 1px solid rgba(184, 174, 166, 0.35);
+  background-color: #201005;
+  color: #f8f6f3;
+  padding: clamp(64px, 8vh, 100px) 0;
+  border-top: 1px solid rgba(197, 168, 128, 0.18);
+  border-bottom: 1px solid rgba(197, 168, 128, 0.18);
+  overflow: hidden;
 }
 
 .inner {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-  gap: 52px;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 5vw, 64px);
   align-items: center;
+}
+
+@media (max-width: 980px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* Video Player Frame */
+.videoCol {
+  position: relative;
 }
 
 .videoFrame {
   position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(184, 174, 166, 0.35);
-  box-shadow: 0 24px 60px rgba(32, 16, 5, 0.12);
-  background: #201005;
+  width: 100%;
   aspect-ratio: 16 / 9;
+  background: #0d0805;
+  border: 1px solid rgba(197, 168, 128, 0.28);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 .video {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #201005;
+  display: block;
 }
 
+/* Custom Play Overlay */
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(20, 10, 5, 0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.playOverlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.playCircle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #c5a880;
+  border: 2px solid #f8f6f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.playCircle:hover {
+  transform: scale(1.08);
+  background: #d5bd87;
+}
+
+.playIcon {
+  color: #201005;
+  font-size: 20px;
+  margin-left: 3px;
+}
+
+.playLabel {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f8f6f3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Audio Toggle Button */
+.audioToggleBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  background: rgba(32, 16, 5, 0.75);
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  color: #f8f6f3;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.audioToggleBtn:hover {
+  background: rgba(197, 168, 128, 0.25);
+  border-color: #c5a880;
+}
+
+/* Fallback Container */
+.fallbackBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.fallbackImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+}
+
+.fallbackOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+}
+
+.fallbackText {
+  font-size: 13px;
+  color: #f8f6f3;
+  margin: 0;
+}
+
+.fallbackBtn {
+  background: #c5a880;
+  color: #201005;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Copy Column */
 .copyCol {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 16px;
 }
 
 .eyebrow {
-  display: inline-block;
-  padding: 5px 12px;
-  border: 1px solid rgba(184, 174, 166, 0.4);
-  background: rgba(184, 174, 166, 0.12);
-  color: #7A7068;
-  font-family: var(--font-sans);
-  font-size: 10px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: #c5a880;
 }
 
 .headline {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #f8f6f3;
   margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.1rem, 3.8vw, 3.4rem);
-  font-weight: 500;
-  line-height: 0.98;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: #201005;
 }
 
 .intro {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(248, 246, 243, 0.82);
   margin: 0;
-  color: #5D534B;
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.68;
 }
 
 .points {
   list-style: none;
-  margin: 4px 0 8px;
-  padding: 14px 0 0;
-  border-top: 1px solid rgba(184, 174, 166, 0.25);
+  padding: 0;
+  margin: 8px 0;
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  width: 100%;
+  gap: 10px;
 }
 
 .points li {
   position: relative;
   padding-left: 20px;
-  color: #413428;
-  font-family: var(--font-sans);
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1.55;
+  color: rgba(248, 246, 243, 0.88);
 }
 
 .points li::before {
   content: "✦";
   position: absolute;
   left: 0;
-  top: 2px;
-  color: #7A7068;
+  color: #c5a880;
   font-size: 10px;
+  top: 2px;
 }
 
 .ctaRow {
   display: flex;
+  align-items: center;
+  gap: 16px;
   flex-wrap: wrap;
-  gap: 12px;
-  padding-top: 6px;
-}
-
-.primaryCta,
-.secondaryCta {
-  padding: 12px 24px;
-  border-radius: 9999px;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s ease;
+  margin-top: 8px;
 }
 
 .primaryCta {
-  border: 1px solid #201005;
-  background: #201005;
-  color: #F8F5F3;
-  box-shadow: 0 4px 16px rgba(32, 16, 5, 0.15);
-}
-
-.primaryCta:hover {
-  background: #332418;
-  transform: translateY(-1px);
-}
-
-.secondaryCta {
-  border: 1px solid rgba(184, 174, 166, 0.45);
-  background: transparent;
+  background: #c5a880;
   color: #201005;
-}
-
-.secondaryCta:hover {
-  border-color: #201005;
-  transform: translateY(-1px);
-}
-
-.contactLinkCta {
-  padding: 12px 24px;
+  border: 1px solid #c5a880;
   border-radius: 9999px;
-  font-family: var(--font-sans);
+  padding: 12px 26px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11.5px;
   font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  text-decoration: none;
   cursor: pointer;
-  border: 1px solid rgba(184, 174, 166, 0.4);
-  background: rgba(184, 174, 166, 0.1);
-  color: #201005;
-  display: inline-flex;
-  align-items: center;
   transition: all 0.25s ease;
 }
 
-.contactLinkCta:hover {
-  background: #B8AEA6;
-  color: #201005;
-  transform: translateY(-1px);
+.primaryCta:hover {
+  background: #d5bd87;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
 }
 
-@media (max-width: 960px) {
-  .section {
-    padding: 80px 24px;
-  }
-
-  .inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
+.secondaryCta {
+  background: transparent;
+  color: #f8f6f3;
+  border: 1px solid rgba(248, 246, 243, 0.35);
+  border-radius: 9999px;
+  padding: 12px 22px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-@media (max-width: 640px) {
-  .section {
-    padding: 64px 16px;
-  }
-
-  .primaryCta,
-  .secondaryCta,
-  .contactLinkCta {
-    flex: 1 1 100%;
-    justify-content: center;
-  }
+.secondaryCta:hover {
+  border-color: #f8f6f3;
+  background: rgba(255, 255, 255, 0.05);
 }

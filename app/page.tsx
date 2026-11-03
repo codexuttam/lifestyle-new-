@@ -5,6 +5,7 @@ import About from "@/components/About";
 import VslSection from "@/components/VslSection";
 import AuraFeatureSequence from "@/components/AuraFeatureSequence";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
+import GallerySection from "@/components/GallerySection";
 import SecondaryProjectSection from "@/components/SecondaryProjectSection";
 import JournalSection from "@/components/JournalSection";
 import HomeContactSection from "@/components/HomeContactSection";
@@ -58,10 +59,13 @@ export default async function Home() {
       {/* Section 3 — Aura Feature Sequence: Interactive Architectural 4-Tab Dimension Deck */}
       <AuraFeatureSequence />
 
-      {/* Section 3 — Floor Plans & Cut-Sections: Interactive 2 & 3 BHK Layouts */}
+      {/* Section 4 — Floor Plans & Property Explorer: Interactive 2 & 3 BHK Layouts */}
       <AuraFloorPlans />
 
-      {/* Section 4 — Developer Portfolio: Lifestyle Home Spaces Landmark on DPS Road */}
+      {/* Section 5 — Curated Architectural Gallery: Verified Concept Renders & On-Site Photography */}
+      <GallerySection />
+
+      {/* Section 6 — Developer Portfolio: Lifestyle Home Spaces Landmark on DPS Road */}
       <SecondaryProjectSection />
 
       {/* Section 5 — Journal: Notes from the Studio & Construction Updates */}

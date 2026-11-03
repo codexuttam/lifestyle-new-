@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { PROJECT_CATEGORIES } from "@/data/projects";
 import type { ProjectCategory } from "@/data/projects";
@@ -205,7 +206,7 @@ export default function ProjectsExplorer({
               onMouseMove={handleCardMouseMove}
             >
               {/* Card Image / Live Video Banner */}
-              <a href={detailHref} className={styles.thumb} aria-label={project.title}>
+              <Link href={detailHref} className={styles.thumb} aria-label={project.title}>
                 <ProjectCardMedia project={project} />
 
                 {/* Category Pill */}
@@ -229,14 +230,14 @@ export default function ProjectsExplorer({
                     MahaRERA: {reraNumber}
                   </span>
                 </div>
-              </a>
+              </Link>
 
               {/* Card Body */}
               <div className={styles.cardBody}>
                 <div className={styles.cardHead}>
-                  <a href={detailHref} style={{ textDecoration: "none", color: "inherit" }}>
+                  <Link href={detailHref} style={{ textDecoration: "none", color: "inherit" }}>
                     <h2 className={styles.cardTitle}>{project.title}</h2>
-                  </a>
+                  </Link>
                   <p className={styles.cardMeta}>
                     {project.location} · {project.year}
                   </p>
@@ -263,11 +264,11 @@ export default function ProjectsExplorer({
                 {/* Card Actions */}
                 <div className={styles.actionRow}>
                   <div className={styles.btnGroup}>
-                    <a href={detailHref} className={`${styles.btnExplore} roll-button`}>
+                    <Link href={detailHref} className={`${styles.btnExplore} roll-button`}>
                       <span className="roll-text" data-text="Explore Details →">
                         Explore Details →
                       </span>
-                    </a>
+                    </Link>
                     <a
                       href={tourHref}
                       target="_blank"
