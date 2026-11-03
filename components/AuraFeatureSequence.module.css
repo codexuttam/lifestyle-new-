@@ -629,3 +629,75 @@
   text-transform: uppercase;
   margin-top: 4px;
 }
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 1100px) {
+  .stageCard {
+    gap: 32px;
+    padding: 36px 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .railBtn {
+    padding: 12px 14px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Full tab names stay readable instead of being clipped */
+  .railLabel {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.3;
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 960px) {
+  .stageCopy {
+    order: 2;
+  }
+
+  .deckStage {
+    order: 1;
+    height: clamp(240px, 62vw, 420px);
+  }
+}
+
+@media (max-width: 600px) {
+  .selectorRail {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stageCard {
+    padding: 20px 16px;
+    border-radius: 12px;
+    min-height: 0;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .floorPlansBtn,
+  .privateEnquiryBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 18px;
+  }
+
+  .privateEnquiryBtn {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 9999px;
+  }
+
+  .deckStepBtn {
+    padding: 10px 16px;
+    min-height: 44px;
+  }
+}

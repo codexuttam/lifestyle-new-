@@ -101,3 +101,32 @@
   }
 }
 
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 380px) {
+  .bar {
+    gap: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .whatsappBtn,
+  .visitBtn {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    padding: 0 10px;
+  }
+}
+
+/* Landscape phones: bar must not eat the viewport */
+@media (max-width: 900px) and (max-height: 480px) {
+  .bar {
+    padding-top: 6px;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .whatsappBtn,
+  .visitBtn {
+    height: 38px;
+  }
+}

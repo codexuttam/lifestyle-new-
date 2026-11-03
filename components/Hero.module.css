@@ -286,3 +286,54 @@
     animation: none !important;
   }
 }
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 1100px) {
+  .contentGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .narrativeCol {
+    max-width: 100%;
+  }
+
+  .heroActions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 72px;
+  }
+
+  .description {
+    font-size: 13.5px;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .ctaPrimary,
+  .ctaSecondary {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .headlineLine {
+    font-size: clamp(2rem, 8vh, 3rem);
+  }
+}

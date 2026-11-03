@@ -209,3 +209,11 @@
   }
 }
 
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.6rem 1.15rem 1.35rem;
+    border-radius: 18px;
+    max-height: 94dvh;
+  }
+}

@@ -283,3 +283,49 @@
   border-color: #f8f6f3;
   background: rgba(255, 255, 255, 0.05);
 }
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 1100px) {
+  .inner {
+    gap: 36px;
+  }
+}
+
+@media (max-width: 680px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .playCircle {
+    width: 56px;
+    height: 56px;
+  }
+
+  .playLabel {
+    font-size: 10px;
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  .audioToggleBtn {
+    top: 8px;
+    right: 8px;
+    min-height: 36px;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryCta,
+  .secondaryCta,
+  .fallbackBtn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .fallbackOverlay {
+    padding: 14px;
+  }
+}

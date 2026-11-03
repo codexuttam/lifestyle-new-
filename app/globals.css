@@ -1573,3 +1573,156 @@ a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
         display: none;
     }
 }
+
+
+/* ==========================================================================
+   RESPONSIVE FOUNDATION — all screens (phone, tablet, laptop, desktop, TV)
+   Breakpoints: 1440 (large desktop) · 1200 (laptop) · 1024 (tablet landscape)
+                768 (tablet portrait) · 600 (large phone) · 480 / 380 (phone)
+   ========================================================================== */
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+img,
+video,
+svg,
+canvas {
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+/* Never let long words/URLs break layouts */
+h1, h2, h3, h4, p, li, a {
+    overflow-wrap: break-word;
+}
+
+/* ---- Touch devices: comfortable 44px targets, no sticky hover, no tap flash ---- */
+@media (pointer: coarse) {
+    button,
+    [role="button"],
+    [role="tab"],
+    a[class*="btn" i],
+    a[class*="cta" i],
+    a[class*="Btn"] {
+        min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+        font-size: 16px !important; /* prevents iOS zoom-on-focus */
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]),
+    select {
+        min-height: 44px;
+    }
+}
+
+/* ---- Keyboard focus visible everywhere ---- */
+:focus-visible {
+    outline: 2px solid #c5a880;
+    outline-offset: 3px;
+}
+
+/* ---- Tablet landscape / small laptop ---- */
+@media (max-width: 1024px) {
+    section {
+        scroll-margin-top: 72px;
+    }
+}
+
+/* ---- Tablet portrait ---- */
+@media (max-width: 768px) {
+    section {
+        scroll-margin-top: 64px;
+    }
+
+    /* Button rows stack neatly and stretch full width */
+    [class*="ctaRow"],
+    [class*="actionRow"],
+    [class*="heroActions"],
+    [class*="bannerActions"],
+    [class*="btnGroup"] {
+        flex-direction: column;
+        align-items: stretch !important;
+        width: 100%;
+    }
+
+    [class*="ctaRow"] > *,
+    [class*="actionRow"] > *,
+    [class*="heroActions"] > *,
+    [class*="bannerActions"] > *,
+    [class*="btnGroup"] > * {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Keep the floating chat button and cookie/concierge bar clear of content */
+    body {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+}
+
+/* ---- Phones ---- */
+@media (max-width: 480px) {
+    h1 { font-size: clamp(2rem, 11vw, 3rem); }
+    h2 { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+
+    [class*="filterBar"],
+    [class*="tabs"] {
+        justify-content: flex-start !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+        margin-left: -4px;
+        margin-right: -4px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    [class*="filterBar"]::-webkit-scrollbar,
+    [class*="tabs"]::-webkit-scrollbar {
+        display: none;
+    }
+
+    [class*="filterBar"] > *,
+    [class*="tabs"] > * {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        white-space: nowrap;
+    }
+}
+
+/* ---- Short landscape phones: don't force 100vh heroes ---- */
+@media (max-height: 520px) and (orientation: landscape) {
+    [class*="hero" i] {
+        min-height: 520px !important;
+        height: auto !important;
+    }
+}
+
+/* ---- Hover only where hover exists ---- */
+@media (hover: none) {
+    [class*="card" i]:hover,
+    [class*="Card"]:hover {
+        transform: none !important;
+    }
+}

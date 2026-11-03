@@ -363,3 +363,63 @@
     display: none;
   }
 }
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 1100px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .galleryCard {
+    aspect-ratio: 4 / 3;
+  }
+
+  .typeBadge {
+    top: 10px;
+    left: 10px;
+    font-size: 8.5px;
+    padding: 4px 9px;
+  }
+
+  .filterBtn {
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .lightbox {
+    padding: 12px;
+  }
+
+  .lightboxTopBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .lightboxMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .lightboxMeta .typeBadge {
+    position: static;
+  }
+
+  .lightboxImg {
+    max-height: 62vh;
+  }
+}
+
+/* Touch screens show metadata without needing hover */
+@media (hover: none) {
+  .galleryCard:hover .cardImg {
+    transform: none;
+  }
+}

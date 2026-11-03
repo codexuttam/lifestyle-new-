@@ -115,9 +115,14 @@ export default function EnquiryModal({
       aria-modal="true"
     >
       <div
+        className="enquiry-modal-card"
         style={{
           width: "100%",
           maxWidth: "480px",
+          maxHeight: "94dvh",
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
+          overscrollBehavior: "contain",
           background: "#201005",
           border: "1px solid rgba(184, 174, 166, 0.28)",
           borderRadius: "24px",
@@ -132,6 +137,17 @@ export default function EnquiryModal({
           @keyframes modalFadeIn {
             from { opacity: 0; transform: scale(0.96) translateY(12px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
+          }
+          @media (max-width: 480px) {
+            .enquiry-modal-card {
+              padding: 1.75rem 1.25rem !important;
+              border-radius: 18px !important;
+            }
+          }
+          @media (max-height: 520px) and (orientation: landscape) {
+            .enquiry-modal-card {
+              padding: 1.25rem 1.5rem !important;
+            }
           }
         `}</style>
 

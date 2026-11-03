@@ -434,3 +434,37 @@
   text-transform: uppercase;
 }
 
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 680px) {
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shareRow {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .shareBtn {
+    min-height: 40px;
+  }
+
+  .heroMediaWrap {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+  }
+
+  .bannerActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .enquirePrimaryBtn,
+  .viewProjectBtn {
+    width: 100%;
+    min-height: 48px;
+    text-align: center;
+  }
+}

@@ -614,3 +614,80 @@
   object-fit: contain;
   border-radius: 4px;
 }
+
+/* ================= RESPONSIVE REFINEMENTS ================= */
+@media (max-width: 1200px) {
+  .displayCard {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabs {
+    gap: 8px;
+  }
+
+  .tabBtn {
+    padding: 10px 14px;
+    font-size: 11px;
+    min-height: 44px;
+  }
+
+  .viewToggleBar {
+    flex-direction: column;
+  }
+
+  .viewToggleBtn {
+    min-height: 44px;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  .inventoryStatusPill {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .metaBadgeRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .displayCard {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .zoomPill {
+    bottom: 8px;
+    right: 8px;
+    font-size: 9px;
+    padding: 5px 9px;
+  }
+
+  .whatsappBtn,
+  .visitBtn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .lightbox {
+    padding: 12px;
+  }
+
+  .lightboxHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .lightboxImg {
+    max-height: 70vh;
+  }
+}
