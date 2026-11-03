@@ -10,6 +10,7 @@ import LifestyleSpecsShowcase from "@/components/LifestyleSpecsShowcase";
 import RevealAnimations from "@/components/RevealAnimations";
 import CustomCursor from "@/components/CustomCursor";
 import Faq from "@/components/Faq";
+import MortgageCalculator from "@/components/MortgageCalculator";
 import { getSettings } from "@/lib/content/settings";
 import { telHref, whatsappHref } from "@/lib/schemas/settings";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -407,6 +408,9 @@ export default async function LifestyleHomesPage() {
             <LifestyleSpecsShowcase specs={OFFICIAL_SPECS} />
           </div>
         </section>
+
+        {/* ============ SECTION 8B: LUXURY EMI & INVESTMENT PLANNER ============ */}
+        <MortgageCalculator projectTitle="Lifestyle Home Spaces" defaultAmount={5500000} />
 
         {/* ============ SECTION 9: LOCATION & STRATEGIC CONNECTIVITY (WARM IVORY) ============ */}
         <section className={styles.locationSection} id="location-connectivity">

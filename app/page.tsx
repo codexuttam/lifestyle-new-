@@ -5,6 +5,7 @@ import About from "@/components/About";
 import VslSection from "@/components/VslSection";
 import AuraFeatureSequence from "@/components/AuraFeatureSequence";
 import AuraFloorPlans from "@/components/AuraFloorPlans";
+import MortgageCalculator from "@/components/MortgageCalculator";
 import SecondaryProjectSection from "@/components/SecondaryProjectSection";
 import JournalSection from "@/components/JournalSection";
 import HomeContactSection from "@/components/HomeContactSection";
@@ -60,6 +61,9 @@ export default async function Home() {
 
       {/* Section 3 — Floor Plans & Cut-Sections: Interactive 2 & 3 BHK Layouts */}
       <AuraFloorPlans />
+
+      {/* Section 3b — Luxury Home Loan & EMI Investment Calculator */}
+      <MortgageCalculator projectTitle="Aura by Lifestyle" defaultAmount={8500000} />
 
       {/* Section 4 — Developer Portfolio: Lifestyle Home Spaces Landmark on DPS Road */}
       <SecondaryProjectSection />

@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import styles from "./SiteNav.module.css";
 import AuthOtpModal from "@/components/AuthOtpModal";
 import EnquiryModal from "@/components/EnquiryModal";
+import MobileConciergeBar from "@/components/MobileConciergeBar";
 import { VerifiedUser } from "@/lib/types/auth";
 
 interface NavLinkItem {
@@ -54,6 +55,11 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [enquiryOverride, setEnquiryOverride] = useState<{
+    project?: string;
+    preference?: string;
+    source?: string;
+  } | null>(null);
   const [currentUser, setCurrentUser] = useState<VerifiedUser | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -95,7 +101,13 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     checkAuth();
     window.addEventListener("lifestyle_auth_changed", checkAuth);
 
-    const handleOpenEnquiry = () => setIsEnquiryOpen(true);
+    const handleOpenEnquiry = (e?: Event) => {
+      const custom = e as CustomEvent<{ project?: string; preference?: string; source?: string }>;
+      if (custom?.detail) {
+        setEnquiryOverride(custom.detail);
+      }
+      setIsEnquiryOpen(true);
+    };
     window.addEventListener("lifestyle_open_enquiry", handleOpenEnquiry);
 
     const handleOpenAuth = () => setIsAuthOpen(true);
@@ -107,6 +119,35 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       window.removeEventListener("lifestyle_open_auth", handleOpenAuth);
     };
   }, []);
+
+  // Desktop exit-intent trigger: offers 4K VIP floor kit before visitor leaves
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 15) {
+        try {
+          const isVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
+          const isSubmitted = Boolean(localStorage.getItem("lifestyle_lead_submitted"));
+          const exitTriggered = sessionStorage.getItem("lifestyle_exit_intent_shown");
+
+          if (!isVerified && !isSubmitted && !exitTriggered && !hasConvertedRef.current) {
+            sessionStorage.setItem("lifestyle_exit_intent_shown", "1");
+            setEnquiryOverride({
+              project: isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle",
+              preference: "Exit Intent - VIP 4K Floor Kit & Pricing Sheet",
+              source: "Desktop Exit Intent Modal",
+            });
+            setIsEnquiryOpen(true);
+          }
+        } catch {}
+      }
+    };
+
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+  }, [isLifestylePage]);
 
   // Auto-render contact form on site entry (Aura & Lifestyle pages)
   // When rejected/closed, if user stays on site for 10s, auto-render sign-in form
@@ -526,8 +567,13 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         isOpen={isEnquiryOpen}
         onClose={handleCloseEnquiry}
         onSubmitted={handleEnquirySubmitted}
-        projectTitle={isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle"}
+        projectTitle={enquiryOverride?.project || (isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle")}
+        defaultPreference={enquiryOverride?.preference || (isLifestylePage ? "Ready Possession 2 & 3 BHK" : "2 & 3 BHK Luxury Residences")}
+        source={enquiryOverride?.source || (isLifestylePage ? "Lifestyle Homes Page Form" : "Aura Page Form")}
       />
+
+      {/* Floating Sticky Mobile Concierge Bar */}
+      <MobileConciergeBar />
     </>
   );
 }

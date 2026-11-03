@@ -1,0 +1,102 @@
+/* ============ STICKY LUXURY MOBILE CONCIERGE BAR ============ */
+
+.bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99980;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: rgba(12, 9, 7, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(197, 168, 128, 0.32);
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.55);
+    animation: barSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .whatsappBtn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 9999px;
+    background: #1B8354;
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 14px rgba(27, 131, 84, 0.35);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .whatsappBtn:active {
+    transform: scale(0.97);
+    background: #146942;
+  }
+
+  .whatsappIcon {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+  }
+
+  .visitBtn {
+    flex: 1.25;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #c5a880 0%, #b8986c 100%);
+    color: #120B06;
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(197, 168, 128, 0.38);
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .visitBtn:active {
+    transform: scale(0.97);
+    filter: brightness(0.92);
+  }
+
+  .arrow {
+    font-size: 13px;
+    transition: transform 0.2s ease;
+  }
+}
+
+@keyframes barSlideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -225,15 +225,33 @@ export default function AuraFloorPlans() {
               </ul>
             </div>
 
+            {/* Live Inventory Status Pill */}
+            <div
+              className={styles.inventoryStatusPill}
+              onClick={() => setIsEnquiryOpen(true)}
+              role="button"
+              tabIndex={0}
+              data-plan-anim
+            >
+              <span className={styles.statusDot} aria-hidden="true" />
+              <span className={styles.statusText}>
+                {plan.index === "01"
+                  ? "Level 3–12 Residences · 6 Preferred East-Facing Units Available"
+                  : plan.index === "02"
+                  ? "Level 8–14 Sky Suites · 3 High-Floor Units Available"
+                  : "Crown Level 15 Sky Deck · Enquire for Private Viewing"}
+              </span>
+              <span className={styles.statusLink}>Check Availability →</span>
+            </div>
+
             <div className={styles.actionRow} data-plan-anim>
-              <a
-                href="https://wa.me/917498256708?text=Hello%20Lifestyle%20Homes,%20I%20am%20interested%20in%20Aura%20floor%20plans%20and%20pricing."
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
                 className={styles.whatsappBtn}
+                onClick={() => setIsEnquiryOpen(true)}
               >
                 <span>Request Detailed Floor Plan PDF →</span>
-              </a>
+              </button>
               <button
                 type="button"
                 className={styles.visitBtn}

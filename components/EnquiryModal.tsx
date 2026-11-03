@@ -305,6 +305,32 @@ export default function EnquiryModal({
               <p style={{ color: "#AEA399", fontSize: "0.82rem", marginTop: "0.35rem", fontFamily: "var(--font-sans)" }}>
                 For {projectTitle} &middot; Amravati
               </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "9px 12px",
+                  background: "rgba(27, 131, 84, 0.16)",
+                  border: "1px solid rgba(27, 131, 84, 0.38)",
+                  borderRadius: "10px",
+                  marginTop: "0.75rem",
+                }}
+              >
+                <span style={{ fontSize: "13px" }}>⚡</span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "11px",
+                    color: "#A3E6C5",
+                    lineHeight: 1.35,
+                    fontWeight: 500,
+                  }}
+                >
+                  Instant Delivery: 4K Floor Plans &amp; Pricing Kit sent to your WhatsApp in 30 seconds
+                </span>
+              </div>
             </div>
 
             {/* Exactly 3 Fields: Name (required), Phone (required), Email (optional) */}
@@ -497,7 +523,7 @@ export default function EnquiryModal({
                   e.currentTarget.style.background = "#B8AEA6";
                 }}
               >
-                {isSubmitting ? "Connecting to sales desk..." : "Submit Enquiry →"}
+                {isSubmitting ? "Connecting to sales desk..." : "Request Instant WhatsApp Brochure & Kit →"}
               </button>
 
               <p

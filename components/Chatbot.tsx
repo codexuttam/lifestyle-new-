@@ -151,9 +151,19 @@ export default function Chatbot() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquiryProject, setEnquiryProject] = useState("Aura by Lifestyle");
   const [enquiryPreference, setEnquiryPreference] = useState("2 & 3 BHK Luxury Residences");
+  const [showPromptBubble, setShowPromptBubble] = useState(false);
+  const [promptDismissed, setPromptDismissed] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageCounterRef = useRef(0);
   const qualRef = useRef<Qualification>({});
+
+  useEffect(() => {
+    if (isOpen || promptDismissed) return;
+    const timer = setTimeout(() => {
+      setShowPromptBubble(true);
+    }, 3800);
+    return () => clearTimeout(timer);
+  }, [isOpen, promptDismissed]);
 
   const openEnquiry = (project = "Aura by Lifestyle", preference = "2 & 3 BHK Luxury Residences") => {
     // Only open the chatbot's own modal. (Previously this also dispatched
@@ -583,22 +593,55 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Sales Desk Bubble */}
+      {/* Floating Sales Desk Bubble with Proactive Greeting Pill */}
       {!isOpen && (
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          className={styles.floatingButton}
-          aria-label="Open Sales Desk Chat"
-        >
-          <div className={styles.pulseRing} />
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-          <span className={styles.tooltip}>
-            💬 Chat with Sales Team
-          </span>
-        </button>
+        <div className={styles.triggerWrapper}>
+          {showPromptBubble && !promptDismissed && (
+            <div
+              className={styles.promptBubble}
+              onClick={() => {
+                setShowPromptBubble(false);
+                setIsOpen(true);
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              <span className={styles.promptText}>
+                👋 Looking for 2 &amp; 3 BHK in Amravati? <strong>Chat with Sales Desk</strong>
+              </span>
+              <button
+                type="button"
+                className={styles.promptDismiss}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPromptDismissed(true);
+                  setShowPromptBubble(false);
+                }}
+                aria-label="Dismiss message"
+              >
+                ✕
+              </button>
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={() => {
+              setShowPromptBubble(false);
+              setIsOpen(true);
+            }}
+            className={styles.floatingButton}
+            aria-label="Open Sales Desk Chat"
+          >
+            <div className={styles.pulseRing} />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <span className={styles.tooltip}>
+              💬 Chat with Sales Team
+            </span>
+          </button>
+        </div>
       )}
 
       {/* Sales Desk Window */}
