@@ -288,19 +288,42 @@
 }
 
 /* ================= RESPONSIVE REFINEMENTS ================= */
-@media (max-width: 1100px) {
+@media (min-width: 901px) and (max-width: 1100px) {
   .contentGrid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 900px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
   .narrativeCol {
     max-width: 100%;
+    width: 100%;
+    margin-bottom: 0;
   }
 
   .heroActions {
     width: 100%;
+  }
+
+  /* Keep the whole tower in frame on portrait screens */
+  .mediaImage {
+    object-fit: cover;
+    object-position: 68% 40%;
+  }
+
+  .mediaOverlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(24, 18, 14, 0.55) 0%,
+        rgba(24, 18, 14, 0.05) 28%,
+        rgba(24, 18, 14, 0.55) 58%,
+        rgba(24, 18, 14, 0.92) 100%
+      );
   }
 }
 
@@ -309,8 +332,25 @@
     padding-top: 72px;
   }
 
+  .mediaImage {
+    object-position: 72% 38%;
+  }
+
+  .eyebrowTag {
+    font-size: 10px;
+  }
+
+  .headlineLine {
+    font-size: clamp(2.3rem, 12.5vw, 3.4rem);
+  }
+
   .description {
-    font-size: 13.5px;
+    font-size: 13px;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .heroActions {

@@ -130,11 +130,25 @@ export default function VslSection({
     return () => observer.disconnect();
   }, []);
 
-  const togglePlay = () => {
+  const togglePlay = (e?: React.SyntheticEvent) => {
+    // Prevents the button click from also reaching the frame handler (double toggle = no playback)
+    e?.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
-    if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    if (video.paused || video.ended) {
+      video.muted = isMuted;
+      const p = video.play();
+      if (p !== undefined) {
+        p.then(() => setIsPlaying(true)).catch(() => {
+          // Autoplay/format failure: retry muted once, then show graceful fallback
+          video.muted = true;
+          setIsMuted(true);
+          video
+            .play()
+            .then(() => setIsPlaying(true))
+            .catch(() => setHasError(true));
+        });
+      }
     } else {
       video.pause();
       setIsPlaying(false);
@@ -170,7 +184,7 @@ export default function VslSection({
       <div className={styles.inner}>
         {/* Video Player Column with Obvious Play Control & Graceful Fallback */}
         <div className={styles.videoCol} data-reveal>
-          <div className={styles.videoFrame} onClick={!hasError ? togglePlay : undefined}>
+          <div className={styles.videoFrame} onClick={!hasError ? () => togglePlay() : undefined}>
             {!hasError ? (
               <>
                 <video

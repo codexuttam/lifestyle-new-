@@ -466,3 +466,59 @@
   cursor: pointer;
   text-align: center;
 }
+
+/* ================= SMALL-SCREEN HEADER REFINEMENTS ================= */
+@media (max-width: 640px) {
+  .nav,
+  .navScrolled {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 10px;
+  }
+
+  .brandLockup {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .auraLogoImg,
+  .lifestyleLogoOnly {
+    width: 26px;
+    height: 26px;
+  }
+
+  .brandName {
+    font-size: 17px;
+    letter-spacing: 0.08em;
+  }
+
+  .brandDescriptor {
+    font-size: 7.5px;
+    letter-spacing: 0.18em;
+  }
+
+  .rightActions {
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .enquireBtn {
+    padding: 8px 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    min-height: 36px;
+  }
+}
+
+@media (max-width: 360px) {
+  .brandDescriptor {
+    display: none;
+  }
+
+  .enquireBtn {
+    padding: 7px 11px;
+    letter-spacing: 0.08em;
+  }
+}

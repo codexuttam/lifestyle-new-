@@ -58,8 +58,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: rgba(20, 10, 5, 0.45);
-  backdrop-filter: blur(4px);
+  background: rgba(20, 10, 5, 0.28);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
