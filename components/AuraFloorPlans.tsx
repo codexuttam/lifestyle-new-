@@ -36,9 +36,9 @@ const PLANS: PlanConfig[] = [
     label: "2 BHK Sky Suite",
     badge: "1,150 SQFT",
     areaLabel: "1,150 SQFT",
-    areaType: "Super Built-Up Area (Brochure Specification · RERA carpet details upon request)",
+    areaType: "Super Built-Up Area · RERA Carpet on Request",
     title: "2 BHK Luxury Sky Residence",
-    subtitle: "Commanding skyline views, dual sit-out balconies & zero wasted circulation",
+    subtitle: "Dual sit-out balconies with panoramic skyline views",
     image3D: "/aura/plan-2bhk-3d-iso.jpg",
     image2D: "/aura/aura-2bhk-floorplan.jpg",
     hasViewToggle: true,
@@ -53,13 +53,13 @@ const PLANS: PlanConfig[] = [
       { room: "Flooring", dim: "800 × 1600 mm", note: "Glazed vitrified anti-skid porcelain slabs" },
     ],
     features: [
-      "Zero shared walls with neighboring residences for acoustic sanctuary",
-      "Private master bedroom suite with attached luxury bath",
-      "3-track powder-coated aluminium sliding windows with mosquito nets",
-      "Concealed Jaquar or equivalent luxury chrome-plated CP fittings",
-      "100% Vastu-compliant layout with balanced North/East orientation",
+      "Zero shared walls for complete acoustic privacy",
+      "Master bedroom suite with attached luxury bath",
+      "3-track sliding windows with mosquito mesh",
+      "Concealed Jaquar chrome-plated CP fittings",
+      "100% Vastu-compliant North/East layout",
     ],
-    inventoryStatus: "Level 3–12 Residences · 6 Preferred East-Facing Units Available",
+    inventoryStatus: "Level 3–12 · East-Facing Units Available",
   },
   {
     id: "3bhk",
@@ -67,9 +67,9 @@ const PLANS: PlanConfig[] = [
     label: "3 BHK Royal Suite",
     badge: "1,650 SQFT",
     areaLabel: "1,650 SQFT",
-    areaType: "Super Built-Up Area (Brochure Specification · RERA carpet details upon request)",
+    areaType: "Super Built-Up Area · RERA Carpet on Request",
     title: "3 BHK Royal Skyline Residence",
-    subtitle: "Grand multi-balcony suite designed for expansive family hospitality",
+    subtitle: "Expansive multi-balcony suite for luxury family living",
     image3D: "/aura/plan-3bhk-3d-iso.jpg",
     image2D: "/aura/aura-3bhk-floorplan.jpg",
     hasViewToggle: true,
@@ -84,13 +84,13 @@ const PLANS: PlanConfig[] = [
       { room: "Bed Balcony", dim: "11'0\" × 5'6\"", note: "Private morning coffee deck off master room" },
     ],
     features: [
-      "Palatial living and dining core designed for seamless entertaining",
-      "3 well-appointed bathrooms with anti-skid tiles & branded geyser points",
-      "Separate washing and utility balcony (9'0\" × 5'6\") keeping chores discreet",
-      "Dedicated electrical conduits for modular inverter & split ACs in all rooms",
-      "Superior sound attenuation with independent peripheral structural walls",
+      "Grand living & dining core for seamless entertaining",
+      "3 designer bathrooms with premium fixtures",
+      "Dedicated utility & washing balcony",
+      "Concealed conduits for modular inverter & split ACs",
+      "Independent structural walls for acoustic isolation",
     ],
-    inventoryStatus: "Level 8–14 Sky Suites · 3 High-Floor Units Available",
+    inventoryStatus: "Level 8–14 · High-Floor Units Available",
   },
   {
     id: "rooftop",
@@ -98,9 +98,9 @@ const PLANS: PlanConfig[] = [
     label: "Rooftop Sky Oasis",
     badge: "LEVEL 15",
     areaLabel: "FULL CROWN DECK",
-    areaType: "Rooftop Lifestyle Amenity Floor (Exclusive to Aura Residents)",
+    areaType: "Exclusive Resident Amenity Deck",
     title: "Level 15 Crown Leisure Deck",
-    subtitle: "Rooftop lap pool, enclosed box cricket turf & sunset viewing promenade",
+    subtitle: "Infinity lap pool, enclosed sports turf & sunset promenade",
     image3D: "/aura/aura-terrace-plan.jpg",
     hasViewToggle: false,
     specs: [
@@ -114,12 +114,12 @@ const PLANS: PlanConfig[] = [
       { room: "Elevator Lobby", dim: "4 High-Speed Lifts", note: "Direct elevator access with ARD & power backup" },
     ],
     features: [
-      "Uninterrupted 360-degree panorama across Camp green belt and Melghat horizon",
-      "Dedicated poolside changing cabins and private shower facilities",
-      "Structural safety balustrades and wind-resistant glass perimeter shielding",
-      "Common utilities powered by eco-friendly solar roof installation",
+      "360° panorama across Camp green belt & Melghat horizon",
+      "Infinity-edge lap pool with glass balustrade",
+      "Enclosed floodlit multi-sports box turf",
+      "Renewable solar rooftop for shared power",
     ],
-    inventoryStatus: "Crown Level 15 Sky Deck · Enquire for Private Viewing",
+    inventoryStatus: "Crown Level 15 · Enquire for Private Tour",
   },
   {
     id: "typical",
@@ -127,9 +127,9 @@ const PLANS: PlanConfig[] = [
     label: "Typical Floor Plate",
     badge: "LEVELS 1–14",
     areaLabel: "FLOORS 1 TO 14",
-    areaType: "Architectural Floor Plate (4 High-Speed Elevators & Dual Stairwells)",
-    title: "Typical Architectural Floor Plate",
-    subtitle: "Optimum cross-ventilation, 4 high-speed elevators & wide designer corridors",
+    areaType: "4 High-Speed Lifts · Dual Stairwells",
+    title: "Architectural Floor Plate",
+    subtitle: "Optimum cross-ventilation & wide designer corridors",
     image3D: "/aura/aura-typical-floorplan.jpg",
     hasViewToggle: false,
     specs: [
@@ -143,12 +143,12 @@ const PLANS: PlanConfig[] = [
       { room: "Vastu", dim: "100% Compliant", note: "Strictly aligned entries, kitchens, and master bedrooms" },
     ],
     features: [
-      "No common wall sharing between apartments for peerless acoustic privacy",
-      "Independent service utility ducts ensuring discreet plumbing maintenance",
-      "Heavy-duty fire-fighting wet risers, sprinklers, and emergency alarms",
-      "Double-height arrival foyer welcoming guests at ground level",
+      "Zero shared walls between residences for acoustic privacy",
+      "Independent service utility ducts for discreet maintenance",
+      "Heavy-duty fire-fighting wet risers & sprinklers",
+      "Double-height arrival foyer at ground level",
     ],
-    inventoryStatus: "Select High-Floor Residences Available · MahaRERA Approved",
+    inventoryStatus: "Select High-Floor Residences Available",
   },
 ];
 
@@ -195,12 +195,12 @@ export default function AuraFloorPlans() {
       <div className={styles.container}>
         {/* Section Header */}
         <div className={styles.header}>
-          <span className={styles.eyebrowBadge}>INTERACTIVE PROPERTY EXPLORER</span>
+          <span className={styles.eyebrowBadge}>PROPERTY EXPLORER</span>
           <h2 className={styles.title}>
             SPATIAL <span>P</span>RECISION
           </h2>
           <p className={styles.subtitle}>
-            Explore every residential configuration at Aura with complete architectural transparency. Inspect 3D isometric cut-sections, verified room dimensions, and 2D engineering blueprints.
+            Explore Aura residences with complete transparency. Inspect 3D cut-sections, verified room dimensions, and 2D engineering blueprints.
           </p>
         </div>
 
@@ -237,7 +237,7 @@ export default function AuraFloorPlans() {
         >
           {/* Left Column: Visual Drawing & Viewport Controls */}
           <div className={styles.imageCol}>
-            {/* View Mode Toggle: 3D Isometric vs 2D Blueprint (Available for 2 BHK & 3 BHK) */}
+            {/* View Mode Toggle: 3D Isometric vs 2D Blueprint */}
             {plan.hasViewToggle && (
               <div className={styles.viewToggleBar} role="group" aria-label="Drawing view mode">
                 <button
@@ -246,7 +246,7 @@ export default function AuraFloorPlans() {
                   onClick={() => setViewMode("3D")}
                 >
                   <span className={styles.toggleIcon} aria-hidden="true">◫</span>
-                  <span>3D Isometric Cut-Section</span>
+                  <span>3D Isometric</span>
                 </button>
                 <button
                   type="button"
@@ -254,7 +254,7 @@ export default function AuraFloorPlans() {
                   onClick={() => setViewMode("2D")}
                 >
                   <span className={styles.toggleIcon} aria-hidden="true">📐</span>
-                  <span>2D Architectural Blueprint</span>
+                  <span>2D Blueprint</span>
                 </button>
               </div>
             )}
@@ -283,7 +283,7 @@ export default function AuraFloorPlans() {
               />
               <span className={styles.zoomPill}>
                 <span className={styles.zoomIcon} aria-hidden="true">⤢</span>
-                <span>Enlarge &amp; Inspect in HD</span>
+                <span>Inspect in HD</span>
               </span>
             </div>
 
@@ -316,8 +316,7 @@ export default function AuraFloorPlans() {
             {/* Interactive Room Specification Chips */}
             <div className={styles.specsSection} data-plan-anim>
               <div className={styles.specsHeadingRow}>
-                <h4 className={styles.specsTitle}>VERIFIED ROOM SIZES &amp; DIMENSIONS</h4>
-                <span className={styles.specsHint}>Tap any room for notes</span>
+                <h4 className={styles.specsTitle}>ROOM SIZES &amp; DIMENSIONS</h4>
               </div>
 
               <div className={styles.specsGrid}>
@@ -341,7 +340,7 @@ export default function AuraFloorPlans() {
 
             {/* Architectural Highlights */}
             <div className={styles.highlightsBox} data-plan-anim>
-              <h4 className={styles.highlightsTitle}>ARCHITECTURAL HIGHLIGHTS</h4>
+              <h4 className={styles.highlightsTitle}>KEY HIGHLIGHTS</h4>
               <ul className={styles.highlightsList}>
                 {plan.features.map((f) => (
                   <li key={f} className={styles.featureItem}>
@@ -356,7 +355,7 @@ export default function AuraFloorPlans() {
             <p className={styles.areaDisclaimer} data-plan-anim>
               <span className={styles.infoIcon} aria-hidden="true">ℹ</span>
               <span>
-                Area figures reflect official brochure specifications. Exact unit-level RERA carpet demarcation &amp; balcony measurements confirmed during site visit.
+                Brochure specification. Exact unit RERA carpet verified during site visit.
               </span>
             </p>
 
@@ -370,7 +369,7 @@ export default function AuraFloorPlans() {
             >
               <span className={styles.statusDot} aria-hidden="true" />
               <span className={styles.statusText}>{plan.inventoryStatus}</span>
-              <span className={styles.statusLink}>Check Live Inventory →</span>
+              <span className={styles.statusLink}>Check Inventory →</span>
             </div>
 
             {/* Direct Enquiry Flow Actions */}
@@ -379,9 +378,9 @@ export default function AuraFloorPlans() {
                 type="button"
                 className={styles.whatsappBtn}
                 onClick={() => setIsEnquiryOpen(true)}
-                aria-label={`Request detailed floor plan PDF for ${plan.title}`}
+                aria-label={`Request floor plan PDF for ${plan.title}`}
               >
-                <span>Request Detailed Floor Kit PDF →</span>
+                <span>Request Floor Kit PDF →</span>
               </button>
               <button
                 type="button"
