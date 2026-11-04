@@ -456,47 +456,29 @@ export default function AuthOtpModal({
           {/* STEP 1: PHONE & NAME INPUT */}
           {step === "phone" && (
             <div>
-              <div style={{ marginBottom: "1.4rem" }}>
-                <span
-                  style={{
-                    display: "inline-block",
-                    padding: "3px 10px",
-                    borderRadius: "9999px",
-                    background: "rgba(197, 168, 128, 0.12)",
-                    border: "1px solid rgba(197, 168, 128, 0.28)",
-                    color: "#C5A880",
-                    fontSize: "8.5px",
-                    fontWeight: 700,
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    marginBottom: "0.45rem",
-                    fontFamily: "var(--font-montserrat), sans-serif",
-                  }}
-                >
-                  Verification
-                </span>
+              <div style={{ marginBottom: "1.1rem" }}>
                 <h3
                   style={{
                     fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif",
-                    fontSize: "1.45rem",
+                    fontSize: "1.35rem",
                     fontWeight: 700,
                     color: "#F8F5F3",
                     margin: 0,
                     lineHeight: 1.2,
                   }}
                 >
-                  Member Sign-In
+                  Sign In
                 </h3>
                 <p
                   style={{
                     fontFamily: "var(--font-montserrat), sans-serif",
                     color: "#BCA898",
-                    fontSize: "0.8rem",
-                    marginTop: "0.3rem",
-                    lineHeight: 1.45,
+                    fontSize: "0.78rem",
+                    marginTop: "0.25rem",
+                    lineHeight: 1.4,
                   }}
                 >
-                  Enter your details to receive a code on WhatsApp.
+                  Verify via WhatsApp OTP
                 </p>
               </div>
 
@@ -845,38 +827,20 @@ export default function AuthOtpModal({
           {/* STEP 2: ENTER OTP */}
           {step === "otp" && (
             <div>
-              <div style={{ marginBottom: "1.4rem" }}>
-                <span
-                  style={{
-                    display: "inline-block",
-                    padding: "3px 10px",
-                    borderRadius: "9999px",
-                    background: "rgba(197, 168, 128, 0.12)",
-                    border: "1px solid rgba(197, 168, 128, 0.28)",
-                    color: "#C5A880",
-                    fontSize: "8.5px",
-                    fontWeight: 700,
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    marginBottom: "0.45rem",
-                    fontFamily: "var(--font-montserrat), sans-serif",
-                  }}
-                >
-                  Code Sent
-                </span>
+              <div style={{ marginBottom: "1.1rem" }}>
                 <h3
                   style={{
                     fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif",
-                    fontSize: "1.45rem",
+                    fontSize: "1.35rem",
                     fontWeight: 700,
                     color: "#F8F5F3",
                     margin: 0,
                   }}
                 >
-                  Enter Verification Code
+                  Enter Code
                 </h3>
-                <p style={{ color: "#BCA898", fontSize: "0.8rem", marginTop: "0.3rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
-                  Code sent to <strong style={{ color: "#F8F5F3" }}>+91 {phone.replace(/\D/g, "").slice(-10)}</strong> via WhatsApp.
+                <p style={{ color: "#BCA898", fontSize: "0.78rem", marginTop: "0.25rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
+                  Sent to <strong style={{ color: "#F8F5F3" }}>+91 {phone.replace(/\D/g, "").slice(-10)}</strong> via WhatsApp
                 </p>
               </div>
 
