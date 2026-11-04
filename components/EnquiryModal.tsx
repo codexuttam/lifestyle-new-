@@ -55,6 +55,17 @@ export default function EnquiryModal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Tell the chatbot the dialog is done so it can open right after
+  const wasOpenRef = useRef(false);
+  useEffect(() => {
+    if (isOpen) {
+      wasOpenRef.current = true;
+    } else if (wasOpenRef.current) {
+      wasOpenRef.current = false;
+      window.dispatchEvent(new CustomEvent("lifestyle_enquiry_closed"));
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   async function handleSubmit(e: React.FormEvent) {
@@ -124,10 +135,10 @@ export default function EnquiryModal({
           WebkitOverflowScrolling: "touch",
           overscrollBehavior: "contain",
           background: "#201005",
-          border: "1px solid rgba(184, 174, 166, 0.28)",
+          border: "1px solid rgba(197, 168, 128, 0.28)",
           borderRadius: "24px",
           padding: "2.25rem 2rem",
-          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(184, 174, 166, 0.12)",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(197, 168, 128, 0.12)",
           color: "#F8F5F3",
           position: "relative",
           animation: "modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -163,9 +174,9 @@ export default function EnquiryModal({
             width: "36px",
             height: "36px",
             borderRadius: "50%",
-            background: "rgba(184, 174, 166, 0.08)",
-            border: "1px solid rgba(184, 174, 166, 0.2)",
-            color: "#AEA399",
+            background: "rgba(197, 168, 128, 0.08)",
+            border: "1px solid rgba(197, 168, 128, 0.2)",
+            color: "#D9C7A5",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -173,14 +184,14 @@ export default function EnquiryModal({
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#B8AEA6";
-            e.currentTarget.style.borderColor = "#B8AEA6";
+            e.currentTarget.style.background = "#C5A880";
+            e.currentTarget.style.borderColor = "#C5A880";
             e.currentTarget.style.color = "#201005";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(184, 174, 166, 0.08)";
-            e.currentTarget.style.borderColor = "rgba(184, 174, 166, 0.2)";
-            e.currentTarget.style.color = "#AEA399";
+            e.currentTarget.style.background = "rgba(197, 168, 128, 0.08)";
+            e.currentTarget.style.borderColor = "rgba(197, 168, 128, 0.2)";
+            e.currentTarget.style.color = "#D9C7A5";
           }}
         >
           ✕
@@ -194,8 +205,8 @@ export default function EnquiryModal({
                 height: "56px",
                 margin: "0 auto 1.25rem",
                 borderRadius: "50%",
-                background: "rgba(184, 174, 166, 0.15)",
-                border: "1px solid rgba(184, 174, 166, 0.35)",
+                background: "rgba(197, 168, 128, 0.15)",
+                border: "1px solid rgba(197, 168, 128, 0.35)",
                 color: "#F8F5F3",
                 display: "flex",
                 alignItems: "center",
@@ -217,7 +228,7 @@ export default function EnquiryModal({
             >
               Enquiry Received
             </h3>
-            <p style={{ color: "#AEA399", fontSize: "0.85rem", marginBottom: "1rem", fontFamily: "var(--font-sans)" }}>
+            <p style={{ color: "#D9C7A5", fontSize: "0.85rem", marginBottom: "1rem", fontFamily: "var(--font-sans)" }}>
               Your enquiry has been registered in our central real estate system under Reference ID:
             </p>
             <div
@@ -225,8 +236,8 @@ export default function EnquiryModal({
                 display: "inline-block",
                 padding: "0.45rem 1.25rem",
                 borderRadius: "8px",
-                background: "rgba(184, 174, 166, 0.12)",
-                border: "1px solid rgba(184, 174, 166, 0.3)",
+                background: "rgba(197, 168, 128, 0.12)",
+                border: "1px solid rgba(197, 168, 128, 0.3)",
                 color: "#F8F5F3",
                 fontWeight: 700,
                 letterSpacing: "1px",
@@ -252,7 +263,7 @@ export default function EnquiryModal({
                   gap: "0.5rem",
                   padding: "12px 20px",
                   borderRadius: "9999px",
-                  background: "#B8AEA6",
+                  background: "#C5A880",
                   color: "#201005",
                   fontFamily: "var(--font-sans)",
                   fontWeight: 600,
@@ -271,8 +282,8 @@ export default function EnquiryModal({
                   padding: "10px",
                   borderRadius: "9999px",
                   background: "transparent",
-                  border: "1px solid rgba(184, 174, 166, 0.25)",
-                  color: "#AEA399",
+                  border: "1px solid rgba(197, 168, 128, 0.25)",
+                  color: "#D9C7A5",
                   fontFamily: "var(--font-sans)",
                   fontSize: "11px",
                   letterSpacing: "0.1em",
@@ -286,67 +297,21 @@ export default function EnquiryModal({
           </div>
         ) : (
           <div>
-            <div style={{ marginBottom: "1.5rem" }}>
-              <span
-                style={{
-                  display: "inline-block",
-                  padding: "4px 12px",
-                  borderRadius: "9999px",
-                  background: "rgba(184, 174, 166, 0.12)",
-                  border: "1px solid rgba(184, 174, 166, 0.3)",
-                  color: "#AEA399",
-                  fontSize: "9.5px",
-                  fontWeight: 600,
-                  letterSpacing: "0.22em",
-                  textTransform: "uppercase",
-                  marginBottom: "0.5rem",
-                  fontFamily: "var(--font-sans)",
-                }}
-              >
-                Official Project Enquiry
-              </span>
+            <div style={{ marginBottom: "1.75rem", paddingRight: "2.5rem" }}>
               <h3
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: "1.6rem",
+                  fontSize: "clamp(1.55rem, 5.5vw, 1.95rem)",
                   fontWeight: 500,
                   color: "#F8F5F3",
                   margin: 0,
-                  lineHeight: 1.1,
+                  lineHeight: 1.12,
+                  letterSpacing: "0.02em",
                   textTransform: "uppercase",
                 }}
               >
-                Connect with Sales Team
+                Get Brochure <span style={{ color: "#C5A880", fontStyle: "italic" }}>On WhatsApp</span>
               </h3>
-              <p style={{ color: "#AEA399", fontSize: "0.82rem", marginTop: "0.35rem", fontFamily: "var(--font-sans)" }}>
-                For {projectTitle} &middot; Amravati
-              </p>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "9px 12px",
-                  background: "rgba(27, 131, 84, 0.16)",
-                  border: "1px solid rgba(27, 131, 84, 0.38)",
-                  borderRadius: "10px",
-                  marginTop: "0.75rem",
-                }}
-              >
-                <span style={{ fontSize: "13px" }}>⚡</span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "11px",
-                    color: "#A3E6C5",
-                    lineHeight: 1.35,
-                    fontWeight: 500,
-                  }}
-                >
-                  Instant Delivery: 4K Floor Plans &amp; Pricing Kit sent to your WhatsApp in 30 seconds
-                </span>
-              </div>
             </div>
 
             {/* Exactly 3 Fields: Name (required), Phone (required), Email (optional) */}
@@ -358,13 +323,13 @@ export default function EnquiryModal({
                     fontFamily: "var(--font-sans)",
                     fontSize: "9.5px",
                     fontWeight: 600,
-                    color: "#AEA399",
+                    color: "#D9C7A5",
                     textTransform: "uppercase",
                     letterSpacing: "0.15em",
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Full Name <span style={{ color: "#B8AEA6" }}>*</span>
+                  Full Name <span style={{ color: "#C5A880" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -377,7 +342,7 @@ export default function EnquiryModal({
                     padding: "10px 14px",
                     borderRadius: "12px",
                     background: "rgba(248, 245, 243, 0.05)",
-                    border: "1px solid rgba(184, 174, 166, 0.22)",
+                    border: "1px solid rgba(197, 168, 128, 0.22)",
                     color: "#F8F5F3",
                     fontSize: "0.88rem",
                     fontFamily: "var(--font-sans)",
@@ -385,10 +350,10 @@ export default function EnquiryModal({
                     transition: "all 0.2s ease",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#B8AEA6";
+                    e.currentTarget.style.borderColor = "#C5A880";
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(184, 174, 166, 0.22)";
+                    e.currentTarget.style.borderColor = "rgba(197, 168, 128, 0.22)";
                   }}
                 />
               </div>
@@ -400,22 +365,22 @@ export default function EnquiryModal({
                     fontFamily: "var(--font-sans)",
                     fontSize: "9.5px",
                     fontWeight: 600,
-                    color: "#AEA399",
+                    color: "#D9C7A5",
                     textTransform: "uppercase",
                     letterSpacing: "0.15em",
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Mobile Number <span style={{ color: "#B8AEA6" }}>*</span>
+                  Mobile Number <span style={{ color: "#C5A880" }}>*</span>
                 </label>
                 <div style={{ display: "flex", gap: "0.5rem" }}>
                   <div
                     style={{
                       padding: "10px 12px",
-                      background: "rgba(184, 174, 166, 0.08)",
-                      border: "1px solid rgba(184, 174, 166, 0.22)",
+                      background: "rgba(197, 168, 128, 0.08)",
+                      border: "1px solid rgba(197, 168, 128, 0.22)",
                       borderRadius: "12px",
-                      color: "#AEA399",
+                      color: "#D9C7A5",
                       fontWeight: 600,
                       fontSize: "0.88rem",
                       fontFamily: "var(--font-sans)",
@@ -436,7 +401,7 @@ export default function EnquiryModal({
                       padding: "10px 14px",
                       borderRadius: "12px",
                       background: "rgba(248, 245, 243, 0.05)",
-                      border: "1px solid rgba(184, 174, 166, 0.22)",
+                      border: "1px solid rgba(197, 168, 128, 0.22)",
                       color: "#F8F5F3",
                       fontSize: "0.88rem",
                       fontFamily: "var(--font-sans)",
@@ -444,10 +409,10 @@ export default function EnquiryModal({
                       transition: "all 0.2s ease",
                     }}
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "#B8AEA6";
+                      e.currentTarget.style.borderColor = "#C5A880";
                     }}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(184, 174, 166, 0.22)";
+                      e.currentTarget.style.borderColor = "rgba(197, 168, 128, 0.22)";
                     }}
                   />
                 </div>
@@ -460,7 +425,7 @@ export default function EnquiryModal({
                     fontFamily: "var(--font-sans)",
                     fontSize: "9.5px",
                     fontWeight: 600,
-                    color: "#AEA399",
+                    color: "#D9C7A5",
                     textTransform: "uppercase",
                     letterSpacing: "0.15em",
                     marginBottom: "0.4rem",
@@ -478,7 +443,7 @@ export default function EnquiryModal({
                     padding: "10px 14px",
                     borderRadius: "12px",
                     background: "rgba(248, 245, 243, 0.05)",
-                    border: "1px solid rgba(184, 174, 166, 0.22)",
+                    border: "1px solid rgba(197, 168, 128, 0.22)",
                     color: "#F8F5F3",
                     fontSize: "0.88rem",
                     fontFamily: "var(--font-sans)",
@@ -486,10 +451,10 @@ export default function EnquiryModal({
                     transition: "all 0.2s ease",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#B8AEA6";
+                    e.currentTarget.style.borderColor = "#C5A880";
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(184, 174, 166, 0.22)";
+                    e.currentTarget.style.borderColor = "rgba(197, 168, 128, 0.22)";
                   }}
                 />
               </div>
@@ -517,7 +482,7 @@ export default function EnquiryModal({
                   width: "100%",
                   padding: "13px 20px",
                   borderRadius: "9999px",
-                  background: "#B8AEA6",
+                  background: "#C5A880",
                   color: "#201005",
                   fontFamily: "var(--font-sans)",
                   fontWeight: 600,
@@ -536,23 +501,12 @@ export default function EnquiryModal({
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#B8AEA6";
+                  e.currentTarget.style.background = "#C5A880";
                 }}
               >
-                {isSubmitting ? "Connecting to sales desk..." : "Request Instant WhatsApp Brochure & Kit →"}
+                {isSubmitting ? "Sending..." : "Request Instant WhatsApp Brochure & Kit →"}
               </button>
 
-              <p
-                style={{
-                  marginTop: "0.4rem",
-                  fontSize: "0.74rem",
-                  color: "#AEA399",
-                  textAlign: "center",
-                  fontFamily: "var(--font-sans)",
-                }}
-              >
-                MahaRERA Registered. Your information is securely handled.
-              </p>
             </form>
           </div>
         )}
