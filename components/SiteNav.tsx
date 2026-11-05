@@ -189,10 +189,16 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       clearTimeout(tenSecTimerRef.current);
       tenSecTimerRef.current = null;
     }
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("lifestyle_enquiry_closed"));
+    }
   };
 
   const handleCloseEnquiry = () => {
     setIsEnquiryOpen(false);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("lifestyle_enquiry_closed"));
+    }
 
     try {
       const isVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));

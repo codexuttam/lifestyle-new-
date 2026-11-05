@@ -165,39 +165,34 @@ export default function Chatbot() {
     return () => clearTimeout(timer);
   }, [isOpen, promptDismissed]);
 
-  // Auto-open the chat once per session: right after the enquiry dialog is
-  // closed/submitted, or shortly after arrival if no dialog is showing.
+  // Auto-open the chat on initial entry and on refresh:
+  // Opens right after any modal dialog is closed/submitted,
+  // or after a short delay on arrival/refresh if no dialog is active.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const FLAG = "lifestyle_chat_auto_opened";
-    try {
-      if (sessionStorage.getItem(FLAG)) return;
-    } catch {}
 
     const openChat = () => {
-      try {
-        if (sessionStorage.getItem(FLAG)) return;
-        sessionStorage.setItem(FLAG, "1");
-      } catch {}
       setShowPromptBubble(false);
       setPromptDismissed(true);
       setIsOpen(true);
     };
 
     const onDialogClosed = () => {
-      window.setTimeout(openChat, 500);
+      window.setTimeout(openChat, 400);
     };
     window.addEventListener("lifestyle_enquiry_closed", onDialogClosed);
 
-    // No dialog on screen (e.g. returning verified visitor): open quickly anyway
-    const fallback = window.setTimeout(() => {
+    // Auto-open on site arrival / refresh
+    const autoOpenTimer = window.setTimeout(() => {
       const dialogOpen = document.querySelector('[role="dialog"][aria-modal="true"]');
-      if (!dialogOpen) openChat();
-    }, 3000);
+      if (!dialogOpen) {
+        openChat();
+      }
+    }, 2500);
 
     return () => {
       window.removeEventListener("lifestyle_enquiry_closed", onDialogClosed);
-      window.clearTimeout(fallback);
+      window.clearTimeout(autoOpenTimer);
     };
   }, []);
 
