@@ -102,22 +102,14 @@ export default function EnquiryModal({
   }
 
   const isVisit = (defaultPreference || "").toLowerCase().includes("visit");
-  const isBrochure =
-    (defaultPreference || "").toLowerCase().includes("brochure") ||
-    (defaultPreference || "").toLowerCase().includes("floor") ||
-    (defaultPreference || "").toLowerCase().includes("kit");
 
   const modalHeading = isVisit ? (
     <>
       Schedule <span style={{ color: "#C5A880", fontStyle: "italic" }}>Private Visit</span>
     </>
-  ) : isBrochure ? (
-    <>
-      Get Brochure <span style={{ color: "#C5A880", fontStyle: "italic" }}>On WhatsApp</span>
-    </>
   ) : (
     <>
-      Connect With <span style={{ color: "#C5A880", fontStyle: "italic" }}>Sales Desk</span>
+      Get Brochure <span style={{ color: "#C5A880", fontStyle: "italic" }}>On WhatsApp</span>
     </>
   );
 
@@ -125,16 +117,12 @@ export default function EnquiryModal({
     ? "Sending..."
     : isVisit
     ? "Schedule Private Visit →"
-    : isBrochure
-    ? "Request Instant WhatsApp Brochure →"
-    : "Submit Official Enquiry →";
+    : "Get Brochure on WhatsApp →";
 
   const waUrl = getLifestyleConciergeWhatsAppUrl(
     isVisit
       ? `Hi Lifestyle Homes, I would like to schedule a private visit for ${projectTitle} (Ref: ${referenceId || ""}).`
-      : isBrochure
-      ? `Hi Lifestyle Homes, please share the brochure and floor plans for ${projectTitle} (Ref: ${referenceId || ""}).`
-      : `Hi Lifestyle Homes, I enquired about ${projectTitle} (Ref: ${referenceId || ""}). Please share details.`
+      : `Hi Lifestyle Homes, please share the brochure and floor plans for ${projectTitle} (Ref: ${referenceId || ""}).`
   );
 
   return (
@@ -166,11 +154,11 @@ export default function EnquiryModal({
           overflowY: "auto",
           WebkitOverflowScrolling: "touch",
           overscrollBehavior: "contain",
-          background: "#201005",
-          border: "1px solid rgba(197, 168, 128, 0.28)",
+          background: "linear-gradient(155deg, #2b170c 0%, #1a0d05 100%)",
+          border: "1px solid rgba(197, 168, 128, 0.32)",
           borderRadius: "24px",
           padding: "2.25rem 2rem",
-          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(197, 168, 128, 0.12)",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(197, 168, 128, 0.14)",
           color: "#F8F5F3",
           position: "relative",
           animation: "modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -258,14 +246,12 @@ export default function EnquiryModal({
                 textTransform: "uppercase",
               }}
             >
-              {isVisit ? "Visit Request Confirmed" : isBrochure ? "Brochure Dispatched" : "Enquiry Received"}
+              {isVisit ? "Visit Request Confirmed" : "Brochure Dispatched"}
             </h3>
             <p style={{ color: "#D9C7A5", fontSize: "0.85rem", marginBottom: "1rem", fontFamily: "var(--font-sans)" }}>
               {isVisit
                 ? "Your private visit booking has been registered under Reference ID:"
-                : isBrochure
-                ? "Your brochure request has been registered and sent to your WhatsApp under Reference ID:"
-                : "Your enquiry has been registered in our central real estate system under Reference ID:"}
+                : "Your 4K brochure has been registered and dispatched to your WhatsApp under Reference ID:"}
             </p>
             <div
               style={{

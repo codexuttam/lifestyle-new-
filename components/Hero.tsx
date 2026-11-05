@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import EnquiryModal from "@/components/EnquiryModal";
+import AuthOtpModal from "@/components/AuthOtpModal";
 import type { HomeRecord } from "@/lib/schemas/home";
 
 export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const imageWrapRef = useRef<HTMLDivElement>(null);
 
@@ -89,8 +91,13 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
             <button
               type="button"
               className={styles.ctaPrimary}
-              onClick={() => setIsEnquiryOpen(true)}
-              aria-label="Enquire about Aura residences"
+              onClick={() => {
+                setIsAuthOpen(true);
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("lifestyle_open_auth"));
+                }
+              }}
+              aria-label="Sign in to get in touch with sales desk"
             >
               <span>GET IN TOUCH</span>
               <span className={styles.arrow} aria-hidden="true">→</span>
@@ -109,12 +116,18 @@ export default function Hero({ content }: { content?: HomeRecord["hero"] }) {
         </div>
       </div>
 
+      {/* Member Sign-In / Get in Touch Modal */}
+      <AuthOtpModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+      />
+
       {/* Official Project Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
         projectTitle="Aura by Lifestyle"
-        defaultPreference="General Residence Enquiry"
+        defaultPreference="Get Brochure on WhatsApp"
         source="Hero Section (Aura)"
       />
     </section>

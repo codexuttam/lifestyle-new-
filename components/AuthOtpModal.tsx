@@ -237,7 +237,7 @@ export default function AuthOtpModal({
     if (onSuccess) onSuccess(user);
     setTimeout(() => {
       onClose();
-    }, 1800);
+    }, 4500);
   }
 
   return (
@@ -1051,9 +1051,56 @@ export default function AuthOtpModal({
               >
                 Signed In Successfully
               </h3>
-              <p style={{ color: "#BCA898", fontSize: "0.82rem", fontFamily: "var(--font-montserrat), sans-serif" }}>
+              <p style={{ color: "#BCA898", fontSize: "0.82rem", fontFamily: "var(--font-montserrat), sans-serif", margin: 0 }}>
                 Welcome, {name || "Resident"}. Your verified session is active.
               </p>
+
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "6px 14px",
+                  background: "rgba(197, 168, 128, 0.12)",
+                  border: "1px solid rgba(197, 168, 128, 0.3)",
+                  borderRadius: "9999px",
+                  color: "#C5A880",
+                  fontSize: "10.5px",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  marginTop: "0.9rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                ✓ 4K Brochure Dispatched to WhatsApp
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "0.25rem" }}>
+                <a
+                  href="https://scymbepzlkfqtkkwnxne.supabase.co/storage/v1/object/public/brochures/Aura-by-Lifestyle-Brochure.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    width: "100%",
+                    padding: "11px 18px",
+                    borderRadius: "9999px",
+                    background: "#c5a880",
+                    color: "#201005",
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                  }}
+                >
+                  Download 4K Brochure PDF →
+                </a>
+              </div>
             </div>
           )}
         </div>

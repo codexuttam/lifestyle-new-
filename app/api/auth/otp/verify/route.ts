@@ -4,7 +4,7 @@ import { after } from "next/server";
 import { clientIp, rateLimit } from "@/lib/api/rateLimit";
 import { OTP_COOKIE, verifyOtpToken } from "@/lib/auth/otpStore";
 import { captureLeadInCRM, normalizePhone } from "@/lib/services/crmLeadService";
-import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp } from "@/lib/services/whatsappService";
+import { notifyOwnerOnWhatsApp, sendAuraBrochureOnWhatsApp, AURA_BROCHURE_URL } from "@/lib/services/whatsappService";
 
 export async function POST(request: Request) {
   try {
@@ -115,6 +115,8 @@ export async function POST(request: Request) {
     return Response.json({
       ok: true,
       crmSaved: crmResult.success,
+      brochureSent: true,
+      brochureUrl: AURA_BROCHURE_URL,
       user: {
         phone: normPhone,
         name: resolvedName,
