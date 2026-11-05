@@ -196,9 +196,14 @@
   color: #F8F6F3;
 }
 
+.desktopOnly {
+  display: flex;
+}
+
 @media (max-width: 960px) {
   .contactLink,
-  .contactWrapper {
+  .contactWrapper,
+  .desktopOnly {
     display: none !important;
   }
 }

@@ -147,8 +147,10 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [isLifestylePage]);
 
-  // Auto-render contact form on site entry (Aura & Lifestyle pages)
-  // When rejected/closed, if user stays on site for 10s, auto-render sign-in form
+  // Auto-render sequence on site entry & refresh (Aura & Lifestyle pages):
+  // 1. First block: Brochure Enquiry modal appears after 2.5s
+  // 2. Second block: Contact / Sign-In modal appears 4s after closing the first
+  // 3. Chatbot opens right after the modals are completed
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -164,22 +166,15 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       const isVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
       if (isVerified) return;
 
-      const pageKey = pathname?.includes("lifestyle") ? "lifestyle" : "aura";
-      const sessionSeenKey = `lifestyle_auto_enquiry_shown_${pageKey}`;
-      if (sessionStorage.getItem(sessionSeenKey)) return;
-
       const initialTimer = setTimeout(() => {
         setIsEnquiryOpen(true);
-        try {
-          sessionStorage.setItem(sessionSeenKey, "1");
-        } catch {}
-      }, 1000);
+      }, 2500);
 
       return () => clearTimeout(initialTimer);
     } catch {}
   }, [pathname]);
 
-  // Clean up 10s timer on unmount
+  // Clean up timer on unmount
   useEffect(() => {
     return () => {
       if (tenSecTimerRef.current) {
@@ -201,22 +196,28 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
 
     try {
       const isVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
-      const isSubmitted = Boolean(localStorage.getItem("lifestyle_lead_submitted"));
 
-      if (!isVerified && !isSubmitted && !hasConvertedRef.current) {
+      if (!isVerified && !hasConvertedRef.current) {
         if (tenSecTimerRef.current) {
           clearTimeout(tenSecTimerRef.current);
         }
-        // User rejected/closed contact form: wait 10s while staying on site, then show sign-in form
+        // Second block: wait 4s after brochure dialog, then auto-render contact / sign-in form
         tenSecTimerRef.current = setTimeout(() => {
           const currentVerified = Boolean(localStorage.getItem("lifestyle_verified_user"));
-          const currentSubmitted = Boolean(localStorage.getItem("lifestyle_lead_submitted"));
-          if (!currentVerified && !currentSubmitted && !hasConvertedRef.current) {
+          if (!currentVerified && !hasConvertedRef.current) {
             setIsAuthOpen(true);
           }
-        }, 10000);
+        }, 4000);
       }
     } catch {}
+  };
+
+  const handleCloseAuth = () => {
+    setIsAuthOpen(false);
+    // After both dialogs are completed, inform chatbot to assist
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("lifestyle_enquiry_closed"));
+    }
   };
 
   // Click outside to close user dropdown
@@ -344,7 +345,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
 
         {/* Right: Contact & Action Buttons */}
         <div className={styles.rightActions}>
-          <div className={styles.contactWrapper} ref={userMenuRef}>
+          <div className={`${styles.contactWrapper} ${styles.desktopOnly}`} ref={userMenuRef}>
             <button
               type="button"
               className={styles.contactLink}
@@ -352,14 +353,10 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                 if (currentUser) {
                   setUserMenuOpen((prev) => !prev);
                 } else {
-                  setEnquiryOverride({
-                    preference: "Get Brochure on WhatsApp",
-                    source: "Header Contact Button",
-                  });
-                  setIsEnquiryOpen(true);
+                  setIsAuthOpen(true);
                 }
               }}
-              aria-label="Contact Studio & Sales Desk"
+              aria-label="Member Sign In / Contact Studio"
             >
               CONTACT
             </button>
@@ -562,9 +559,10 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
       )}
 
       {/* Auth OTP & Enquiry Modals */}
+      {/* Member Sign-In / Contact Modal */}
       <AuthOtpModal
         isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
+        onClose={handleCloseAuth}
         onSuccess={(user) => {
           setCurrentUser(user);
           hasConvertedRef.current = true;

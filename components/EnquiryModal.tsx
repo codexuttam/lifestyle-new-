@@ -55,17 +55,6 @@ export default function EnquiryModal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Tell the chatbot the dialog is done so it can open right after
-  const wasOpenRef = useRef(false);
-  useEffect(() => {
-    if (isOpen) {
-      wasOpenRef.current = true;
-    } else if (wasOpenRef.current) {
-      wasOpenRef.current = false;
-      window.dispatchEvent(new CustomEvent("lifestyle_enquiry_closed"));
-    }
-  }, [isOpen]);
-
   if (!isOpen) return null;
 
   async function handleSubmit(e: React.FormEvent) {
