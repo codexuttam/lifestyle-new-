@@ -38,7 +38,6 @@ const AURA_MOBILE_LINKS: NavLinkItem[] = [
   { label: "Floor Plans", href: "/#floor-plans" },
   { label: "Lifestyle Home Spaces", href: "/projects/lifestyle-homes" },
   { label: "Journal & Updates", href: "/blogs" },
-  { label: "Contact Studio", href: "/#contact-section" },
 ];
 
 const LIFESTYLE_MOBILE_LINKS: NavLinkItem[] = [
@@ -47,7 +46,6 @@ const LIFESTYLE_MOBILE_LINKS: NavLinkItem[] = [
   { label: "Commercial Showrooms", href: "/projects/lifestyle-homes#commercial" },
   { label: "Aura Flagship", href: "/" },
   { label: "Journal & Updates", href: "/blogs" },
-  { label: "Contact Sales", href: "/contact" },
 ];
 
 export default function SiteNav({ activeHref }: { activeHref?: string }) {
@@ -582,7 +580,7 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
         onClose={handleCloseEnquiry}
         onSubmitted={handleEnquirySubmitted}
         projectTitle={enquiryOverride?.project || (isLifestylePage ? "Lifestyle Home Spaces" : "Aura by Lifestyle")}
-        defaultPreference={enquiryOverride?.preference || (isLifestylePage ? "Ready Possession 2 & 3 BHK" : "2 & 3 BHK Luxury Residences")}
+        defaultPreference={enquiryOverride?.preference || "Get Brochure on WhatsApp"}
         source={enquiryOverride?.source || (isLifestylePage ? "Lifestyle Homes Page Form" : "Aura Page Form")}
       />
 
