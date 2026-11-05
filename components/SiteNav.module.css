@@ -198,7 +198,30 @@
 
 @media (max-width: 960px) {
   .contactLink {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    color: #D9C7A5;
+    background: rgba(197, 168, 128, 0.08);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    transition: all 0.2s ease;
+  }
+
+  .contactLink:active {
+    background: rgba(197, 168, 128, 0.2);
+    color: #F8F5F3;
+  }
+}
+
+@media (max-width: 440px) {
+  .contactLink {
+    padding: 5px 9px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
   }
 }
 

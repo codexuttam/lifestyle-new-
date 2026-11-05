@@ -354,10 +354,14 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                 if (currentUser) {
                   setUserMenuOpen((prev) => !prev);
                 } else {
-                  setIsAuthOpen(true);
+                  setEnquiryOverride({
+                    preference: "Contact Sales Desk",
+                    source: "Header Contact Button",
+                  });
+                  setIsEnquiryOpen(true);
                 }
               }}
-              aria-label="Contact Studio & Member Sign In"
+              aria-label="Contact Studio & Sales Desk"
             >
               CONTACT
             </button>
@@ -519,6 +523,33 @@ export default function SiteNav({ activeHref }: { activeHref?: string }) {
                 }}
               >
                 Enquire Residences →
+              </button>
+
+              <button
+                type="button"
+                style={{
+                  background: "rgba(197, 168, 128, 0.12)",
+                  border: "1px solid rgba(197, 168, 128, 0.35)",
+                  color: "#D9C7A5",
+                  padding: "11px",
+                  borderRadius: "9999px",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setEnquiryOverride({
+                    preference: "Contact Sales Desk",
+                    source: "Mobile Drawer Contact Button",
+                  });
+                  setIsEnquiryOpen(true);
+                }}
+              >
+                Contact Sales Desk
               </button>
 
               {!currentUser && (

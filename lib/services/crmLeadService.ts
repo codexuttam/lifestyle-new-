@@ -215,7 +215,7 @@ export async function captureLeadInCRM(
     // True only when at least one CRM write (webhook or Supabase) actually succeeded.
     let savedToCrm = false;
 
-    // 1. Primary Ingestion via authenticated CRM Webhook
+    // 1. Primary Ingestion via authenticated CRM Webhook (Fast 2.5s Timeout)
     try {
       const webhookPayload = {
         organization_id: PRIMARY_ORG_ID,
@@ -240,19 +240,20 @@ export async function captureLeadInCRM(
           ...(CRM_WEBHOOK_SECRET ? { "x-webhook-secret": CRM_WEBHOOK_SECRET } : {}),
         },
         body: JSON.stringify(webhookPayload),
+        signal: AbortSignal.timeout(2500),
       });
 
       if (webhookRes.ok) {
         savedToCrm = true;
-        const webhookData = await webhookRes.json();
+        const webhookData = await webhookRes.json().catch(() => ({}));
         webhookLeadId = webhookData.leadId;
         isDeduped = !!webhookData.deduped;
       }
     } catch (whErr) {
-      console.warn("CRM Webhook delivery info (syncing directly to Supabase):", whErr);
+      console.warn("CRM Webhook skipped or timed out (syncing directly to Supabase):", whErr);
     }
 
-    // 2. Direct Supabase Ingestion (Dual-Org Sync & Fail-safe Guarantee)
+    // 2. Direct Supabase Ingestion (Fast Concurrent Execution with 2.5s Timeout)
     if (SERVICE_KEY && SUPABASE_URL) {
       const headers = {
         apikey: SERVICE_KEY,
@@ -266,17 +267,17 @@ export async function captureLeadInCRM(
       );
       const phoneLast10 = phone.replace(/\D/g, "").slice(-10);
 
-      for (const orgId of targetOrgs) {
+      const syncOrg = async (orgId: string): Promise<string | undefined> => {
         try {
           let existingLead: any = null;
 
           if (phoneLast10.length >= 7) {
             const searchRes = await fetch(
               `${SUPABASE_URL}/rest/v1/leads?organization_id=eq.${orgId}&phone=like.*${phoneLast10}*&limit=1`,
-              { headers }
+              { headers, signal: AbortSignal.timeout(2500) }
             );
             if (searchRes.ok) {
-              const matches = await searchRes.json();
+              const matches = await searchRes.json().catch(() => []);
               if (Array.isArray(matches) && matches.length > 0) {
                 existingLead = matches[0];
               }
@@ -297,7 +298,6 @@ export async function captureLeadInCRM(
               updated_at: new Date().toISOString(),
             };
 
-            // Update lead name whenever a genuine customer name is submitted
             const isPlaceholder =
               !firstName ||
               firstName.toLowerCase() === "lifestyle" ||
@@ -315,6 +315,7 @@ export async function captureLeadInCRM(
               method: "PATCH",
               headers,
               body: JSON.stringify(patchBody),
+              signal: AbortSignal.timeout(2500),
             });
             if (patchRes.ok) savedToCrm = true;
           } else {
@@ -337,22 +338,19 @@ export async function captureLeadInCRM(
               method: "POST",
               headers,
               body: JSON.stringify(insertPayload),
+              signal: AbortSignal.timeout(2500),
             });
 
             if (insertRes.ok) {
               savedToCrm = true;
-              const inserted = await insertRes.json();
+              const inserted = await insertRes.json().catch(() => []);
               leadId = Array.isArray(inserted) && inserted.length > 0 ? inserted[0]?.id : undefined;
             }
           }
 
-          if (!webhookLeadId) {
-            webhookLeadId = leadId;
-          }
-
-          // Log timeline activity inside CRM
-          try {
-            await fetch(`${SUPABASE_URL}/rest/v1/activities`, {
+          // Log timeline activity & notification in CRM (non-blocking)
+          if (leadId) {
+            fetch(`${SUPABASE_URL}/rest/v1/activities`, {
               method: "POST",
               headers,
               body: JSON.stringify({
@@ -367,14 +365,12 @@ export async function captureLeadInCRM(
                   lead_name: resolvedFullName,
                 },
               }),
-            });
-          } catch {}
+              signal: AbortSignal.timeout(2000),
+            }).catch(() => {});
 
-          // Create notification for sales team in CRM
-          if (orgId === PRIMARY_ORG_ID || orgId === TALDA_ORG_ID) {
-            try {
+            if (orgId === PRIMARY_ORG_ID || orgId === TALDA_ORG_ID) {
               if (CRM_AGENT_ID) {
-                await fetch(`${SUPABASE_URL}/rest/v1/notifications`, {
+                fetch(`${SUPABASE_URL}/rest/v1/notifications`, {
                   method: "POST",
                   headers,
                   body: JSON.stringify({
@@ -384,12 +380,24 @@ export async function captureLeadInCRM(
                     type: "lead_assigned",
                     message: `New Lead [${referenceId}]: ${resolvedFullName} (${phone}) for ${project} [${preference}]`,
                   }),
-                });
+                  signal: AbortSignal.timeout(2000),
+                }).catch(() => {});
               }
-            } catch {}
+            }
           }
-        } catch (orgSyncErr) {
-          console.warn(`Supabase sync failed for org ${orgId}:`, orgSyncErr);
+
+          return leadId;
+        } catch (orgErr) {
+          console.warn(`Supabase sync skipped for org ${orgId}:`, orgErr);
+          return undefined;
+        }
+      };
+
+      // Run target orgs concurrently rather than sequentially
+      const syncResults = await Promise.allSettled(targetOrgs.map((orgId) => syncOrg(orgId)));
+      for (const res of syncResults) {
+        if (res.status === "fulfilled" && res.value && !webhookLeadId) {
+          webhookLeadId = res.value;
         }
       }
     }
