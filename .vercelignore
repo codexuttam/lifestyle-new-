@@ -1,0 +1,8 @@
+*.mp4
+*.mov
+*.pdf
+!public/brochures/*.pdf
+brochure_ocr_results.txt
+scratch_brochure_text.txt
+.DS_Store
+*.log
